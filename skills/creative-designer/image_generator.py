@@ -187,31 +187,43 @@ def _generate_background_with_retry(variation_letter: str = "a") -> Image.Image:
 
 def _crop_blank_bottom(img: Image.Image) -> Image.Image:
     """
-    Remove flat/empty space from the bottom of a Gemini image.
-    Scans rows from the bottom upward. A row is 'blank' when the
-    standard deviation of pixel brightness across it is below 8
-    (i.e. all pixels are nearly the same flat colour).
-    Stops at the first row with meaningful content and crops there.
+    Two-stage approach:
+    1. Scan from the bottom in 50px blocks. A block is 'blank' when
+       avg brightness > 215 AND stdev < 8 (bright and near-uniform).
+       Crop at the first non-blank block boundary.
+    2. If no blank block found, fall back to a conservative 15% trim.
     Never crops more than 50% of the image height.
     """
     import statistics
-    w, h       = img.size
-    step       = max(1, w // 50)
-    min_height = h // 2
+    w, h    = img.size
+    block_h = 50
+    step    = max(1, w // 40)   # ~40 sample columns per block
+    min_h   = h // 2            # never crop more than 50%
 
-    content_bottom = h
-    for row in range(h - 1, min_height, -1):
-        pixels     = [img.getpixel((x, row)) for x in range(0, w, step)]
-        brightness = [sum(p[:3]) / 3 for p in pixels]
-        stdev      = statistics.stdev(brightness) if len(brightness) > 1 else 0
-        if stdev > 8:
-            content_bottom = row + 1
-            break
+    content_bottom = h          # default: no blank detected
+
+    for bottom in range(h, min_h, -block_h):
+        top     = max(0, bottom - block_h)
+        samples = [sum(img.getpixel((x, y))[:3]) / 3
+                   for y in range(top, bottom, 5)
+                   for x in range(0, w, step)]
+        if not samples:
+            continue
+        avg   = statistics.mean(samples)
+        stdev = statistics.stdev(samples) if len(samples) > 1 else 0
+        if avg > 215 and stdev < 8:
+            content_bottom = top   # block is blank — move boundary up
+        else:
+            break                  # real content found — stop scanning
 
     if content_bottom < h:
-        print(f"    [DEBUG] Blank bottom: cropping {h}px → {content_bottom}px")
+        print(f"    [DEBUG] Blank detected: {h}px → {content_bottom}px")
         return img.crop((0, 0, w, content_bottom))
-    return img
+
+    # Fallback: no blank detected — conservative 15% trim
+    fallback_h = int(h * 0.85)
+    print(f"    [DEBUG] No blank — fallback trim: {h}px → {fallback_h}px")
+    return img.crop((0, 0, w, fallback_h))
 
 
 def _placeholder_background(topic: str) -> Image.Image:
