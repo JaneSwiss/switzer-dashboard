@@ -104,6 +104,9 @@ def _build_gemini_prompt(variation_letter: str = "a",
     prompt = (
         "No text, no words, no letters, no numbers, no typography, "
         "no placeholder text, no lorem ipsum, no labels anywhere in the image. "
+        "Fill the entire frame with the scene - no empty areas, no blank space, "
+        "no negative space at the bottom. The subject and scene elements must "
+        "occupy the full frame from top to bottom. "
         f"{hint} "
         f"{_PHOTO_BASE} "
         "No text, no logos, no overlays in the image. "
@@ -180,6 +183,35 @@ def _generate_background_with_retry(variation_letter: str = "a") -> Image.Image:
     raise RuntimeError(f"All {MAX_ATTEMPTS} Gemini attempts failed: {last_err}")
 
 
+
+
+def _crop_blank_bottom(img: Image.Image) -> Image.Image:
+    """
+    Remove flat/empty space from the bottom of a Gemini image.
+    Scans rows from the bottom upward. A row is 'blank' when the
+    standard deviation of pixel brightness across it is below 8
+    (i.e. all pixels are nearly the same flat colour).
+    Stops at the first row with meaningful content and crops there.
+    Never crops more than 50% of the image height.
+    """
+    import statistics
+    w, h       = img.size
+    step       = max(1, w // 50)
+    min_height = h // 2
+
+    content_bottom = h
+    for row in range(h - 1, min_height, -1):
+        pixels     = [img.getpixel((x, row)) for x in range(0, w, step)]
+        brightness = [sum(p[:3]) / 3 for p in pixels]
+        stdev      = statistics.stdev(brightness) if len(brightness) > 1 else 0
+        if stdev > 8:
+            content_bottom = row + 1
+            break
+
+    if content_bottom < h:
+        print(f"    [DEBUG] Blank bottom: cropping {h}px → {content_bottom}px")
+        return img.crop((0, 0, w, content_bottom))
+    return img
 
 
 def _placeholder_background(topic: str) -> Image.Image:
@@ -420,6 +452,10 @@ def generate_pin_image(copy_data: dict, context: dict, fonts: dict) -> Path:
     except Exception as e:
         print(f"    All Gemini attempts failed: {e}")
         bg = _placeholder_background(copy_data.get("topic", ""))
+
+    print(f"    [DEBUG] Raw Gemini image: {bg.size[0]}x{bg.size[1]} px")
+    bg.save("/tmp/debug_raw_gemini.png")
+    bg = _crop_blank_bottom(bg)
 
     bg = ImageOps.fit(bg, (1000, 1500), Image.LANCZOS)
 
