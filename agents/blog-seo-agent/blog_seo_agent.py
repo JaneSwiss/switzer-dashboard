@@ -15,6 +15,7 @@ import re
 import time
 from datetime import date
 from pathlib import Path
+from typing import Optional
 
 import anthropic
 import requests
@@ -84,7 +85,7 @@ def log_error(stage: str, keyword: str, message: str) -> None:
     ERROR_LOG.write_text(json.dumps(errors, indent=2), encoding="utf-8")
 
 
-def read_context_files() -> tuple[str, str]:
+def read_context_files() -> "tuple[str, str]":
     brand_voice     = BRAND_VOICE_FILE.read_text(encoding="utf-8")
     style_examples  = STYLE_EXAMPLES_FILE.read_text(encoding="utf-8")
     return brand_voice, style_examples
@@ -92,7 +93,7 @@ def read_context_files() -> tuple[str, str]:
 
 # ── module 1: keyword loader ───────────────────────────────────────────────────
 
-def load_next_keyword() -> dict | None:
+def load_next_keyword() -> Optional[dict]:
     """
     Read the keyword masterlist CSV, skip any keyword whose slug already has
     a matching .txt in output/, sort remaining rows by Priority Tier
@@ -146,7 +147,7 @@ def load_next_keyword() -> dict | None:
 
 # ── module 2: competitor research ─────────────────────────────────────────────
 
-def fetch_serp(keyword: str) -> list[dict]:
+def fetch_serp(keyword: str) -> "list[dict]":
     """Call ValueSERP and return the organic_results list."""
     params = {
         "api_key": VALUESERP_API_KEY,
@@ -215,7 +216,7 @@ def fetch_page(url: str) -> dict:
     return result
 
 
-def research_competitors(keyword: str) -> list[dict]:
+def research_competitors(keyword: str) -> "list[dict]":
     """Run SERP lookup then page fetch for each organic result."""
     print(f"  Fetching SERP for: {keyword}")
     organic = fetch_serp(keyword)
@@ -243,7 +244,7 @@ def research_competitors(keyword: str) -> list[dict]:
 
 # ── module 3: blog post writer ─────────────────────────────────────────────────
 
-def _build_competitor_summary(competitors: list[dict]) -> str:
+def _build_competitor_summary(competitors: "list[dict]") -> str:
     lines = []
     for i, c in enumerate(competitors, 1):
         if c["status"] != "ok":
