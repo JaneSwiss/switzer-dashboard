@@ -1,0 +1,2130 @@
+{
+  "generated_at": "2026-04-30T20:06:33.765485",
+  "total_topics": 28,
+  "total_pin_variations": 140,
+  "intent_distribution": {
+    "?": 28
+  },
+  "variation_type_dist": {
+    "PRODUCT": 97,
+    "EDUCATIONAL": 43
+  },
+  "blog_posts_needed": 13,
+  "topics": [
+    {
+      "topic_id": 1,
+      "keyword": "coach websites",
+      "keyword_volume": 9900,
+      "final_score": 261.1,
+      "product_match": 2,
+      "maps_to_product": "Premade Wix Website",
+      "variation_split": "3 PRODUCT + 2 EDUCATIONAL",
+      "blog": {
+        "existing_post_likely": true,
+        "note": "check blog for existing post",
+        "blog_post_needed": false,
+        "brief_for_blog_agent": ""
+      },
+      "variations": [
+        {
+          "id": "1a",
+          "type": "PRODUCT",
+          "pin_headline": "Your website is working for you 24/7 - or it isn't",
+          "category_label": "COACH WEBSITES",
+          "seo_title": "Coach websites that win clients before the first call",
+          "seo_description": "Coach websites built on Wix give you a professional online presence without starting from scratch or hiring a developer. A premade design covers every page your business needs - services, about, contact, and booking - so clients can find you and trust you before they ever reach out. Click to browse!",
+          "design_brief": "BRIGHT AIRY WHITE. A woman in her late 20s to early 40s, dressed in a crisp white linen shirt, seated at a clean white desk near a floor-to-ceiling window. Bright natural daylight floods the scene from the left. She is writing in an open notebook with a fine-tipped pen, a small white ceramic mug to her right. The desk surface is white with almost no props. Composition is wide, showing the full desk and a sliver of greenery in soft focus behind her. Ultra-clean, editorial, minimal. Text overlay space in the upper-left third.",
+          "highlight_words": [
+            "working"
+          ],
+          "destination_url": "https://www.switzertemplates.com/premade-wix-website-templates-for-sale"
+        },
+        {
+          "id": "1b",
+          "type": "EDUCATIONAL",
+          "pin_headline": "What clients check before they book a discovery call",
+          "category_label": "COACH WEBSITES",
+          "seo_title": "Coach websites - what every page needs to convert visitors",
+          "seo_description": "Most coach websites lose potential clients because they're missing the basics - a clear service page, a strong about section, and a booking link that's easy to find. Get these three things right and your site works as a sales tool, not just a placeholder. Have a browse!",
+          "design_brief": "WARM DARK MOODY. Close-up of a woman's hands wrapped around a wide espresso-brown ceramic mug on a dark walnut table. A small open notebook lies beside the mug, one line of handwriting visible but illegible. Warm amber lamp light from the right casts a deep, dramatic shadow across the left side of the frame. The background is dark and blurred - a suggestion of a home office. Tight, intimate composition. Rich contrast between the warm light and the dark surface. Text overlay space in the upper-right corner.",
+          "highlight_words": [
+            "book"
+          ],
+          "destination_url": "https://www.switzertemplates.com/blog"
+        },
+        {
+          "id": "1c",
+          "type": "PRODUCT",
+          "pin_headline": "The gap between looking established and looking DIY is smaller than you think",
+          "category_label": "COACH WEBSITES",
+          "seo_title": "Coach websites ready to launch on Wix - no coding needed",
+          "seo_description": "A premade coach website on Wix means you get a professionally designed site - services page, about page, contact, and booking - ready to customise with your content in days. No developer, no months of back-and-forth, no blank canvas to stare at. Grab it in my Etsy store!",
+          "design_brief": "BEIGE NEUTRAL. Overhead flat lay shot directly above a sandy linen desk surface. A woman's hands are arranging three items: a small spiral notebook, a cream-coloured pen, and a single dried pampas stem. The surface is warm ivory with soft shadows. Afternoon light from a window off-frame to the right casts gentle, matte warmth across the scene. No screens, no tech - purely tactile, editorial objects. Composition is centred with generous negative space at the top for a text overlay.",
+          "highlight_words": [
+            "established"
+          ],
+          "destination_url": "https://www.switzertemplates.com/premade-wix-website-templates-for-sale"
+        },
+        {
+          "id": "1d",
+          "type": "EDUCATIONAL",
+          "pin_headline": "A scattered online presence is costing you clients quietly",
+          "category_label": "COACH WEBSITES",
+          "seo_title": "Coach websites - why yours isn't converting and how to fix it",
+          "seo_description": "Coach websites that look inconsistent or unfinished signal to potential clients that the business isn't established - even when the coaching itself is excellent. The fix isn't a rebrand from scratch. It's a cohesive site with the right pages and a clear message. Check it out -->",
+          "design_brief": "COOL GREY. A professional woman in her 30s standing in a wide, light-grey architectural corridor - polished concrete walls, overcast diffused light from a skylight above. She is holding a slim hardcover notebook against her chest with both hands, looking slightly off-camera with a calm, composed expression. She wears a tailored grey blazer and simple trousers. The mood is polished and editorial. Cool tones throughout - no warmth. Text overlay space along the left third of the frame.",
+          "highlight_words": [
+            "costing"
+          ],
+          "destination_url": "https://www.switzertemplates.com/blog"
+        },
+        {
+          "id": "1e",
+          "type": "PRODUCT",
+          "pin_headline": "Look professional online before your next discovery call",
+          "category_label": "COACH WEBSITES",
+          "seo_title": "Get your coach website live this week with a premade Wix design",
+          "seo_description": "Starting from scratch on a coach website takes weeks you don't have. A premade Wix template gives you a complete, professional site - every page designed and structured - so you can customise it with your content and go live fast. Click to have a look -->",
+          "design_brief": "EARTHY BROWN. A woman in her early 30s seated in a deep caramel leather armchair near a window, holding an open book in her lap and looking down at it thoughtfully. She wears a warm rust-toned knit jumper. The room has rich wooden shelving behind her, amber lamp light from a floor lamp to her left, and a small potted plant in soft focus in the foreground. The overall palette is deep brown, amber, and terracotta. Intimate, editorial, grounded. Text overlay space at the top of the frame above her head.",
+          "highlight_words": [
+            "professional"
+          ],
+          "destination_url": "https://www.switzertemplates.com/premade-wix-website-templates-for-sale"
+        }
+      ],
+      "topic": "Coach Websites",
+      "pt_ocr_best": 0.0055,
+      "data_sources": [
+        "KE",
+        "PT",
+        "OA"
+      ]
+    },
+    {
+      "topic_id": 2,
+      "keyword": "wix website for coaches",
+      "keyword_volume": 0,
+      "final_score": 261.1,
+      "product_match": 3,
+      "maps_to_product": "Premade Wix Website",
+      "variation_split": "4 PRODUCT + 1 EDUCATIONAL",
+      "blog": {
+        "existing_post_likely": false,
+        "note": "",
+        "blog_post_needed": true,
+        "brief_for_blog_agent": "Write a post titled 'How to choose the right Wix website for coaches' covering what pages to include, what design elements build trust, and how a premade template saves time. Link naturally to the premade Wix website product page."
+      },
+      "variations": [
+        {
+          "id": "2a",
+          "type": "PRODUCT",
+          "pin_headline": "Wix website for coaches that looks custom without the cost",
+          "category_label": "WIX WEBSITES",
+          "seo_title": "Wix website for coaches that looks custom without the cost",
+          "seo_description": "Get your wix website for coaches live this week without starting from scratch. Our premade Wix templates are fully designed with every page a coaching business needs - homepage, services, about, and contact - so you look established from day one. Click to browse! #wixwebsitetemplate #coachwebsite #premadewebsite",
+          "design_brief": "Laptop open on a warm linen surface showing a premium coaching website homepage with a bold hero section. Cream and sage green colour tones. Soft natural light from the left. Text overlay space in the upper-left third. Watermark bottom-right: switzertemplates.com. Category label top-left. Pin ratio 2:3 at 1000x1500px.",
+          "destination_url": "https://www.switzertemplates.com/premade-wix-website-templates-for-sale"
+        },
+        {
+          "id": "2b",
+          "type": "PRODUCT",
+          "pin_headline": "Wix website for coaches - no coding, no designer needed",
+          "category_label": "WIX WEBSITES",
+          "seo_title": "Wix website for coaches - no coding, no designer needed",
+          "seo_description": "A professional wix website for coaches doesn't have to take months or cost thousands. Our premade templates give you a fully designed site - swap your content in and publish without touching a single line of code. Grab it in my Etsy store! #wixtemplate #coachwebsite #smallbusinesstips",
+          "design_brief": "Phone mockup in hand showing a mobile coach website homepage with a clean editorial layout. Warm white and dusty pink colour tones. Soft light from the upper right. Text overlay space across the lower third. Watermark bottom-right: switzertemplates.com. Category label top-left. Pin ratio 2:3 at 1000x1500px.",
+          "destination_url": "https://www.switzertemplates.com/premade-wix-website-templates-for-sale"
+        },
+        {
+          "id": "2c",
+          "type": "PRODUCT",
+          "pin_headline": "Wix website for coaches that takes you from blank page to live site",
+          "category_label": "WIX WEBSITES",
+          "seo_title": "Wix website for coaches that takes you from blank page to live site",
+          "seo_description": "A premade wix website for coaches covers every page your business needs - already designed, already structured, just waiting for your words and photos. No guessing what to include, no paying a developer, no months of back-and-forth. Have a browse! #wixwebsitetemplate #premadewebsite #onlinebusiness",
+          "design_brief": "Tablet flat on a marble surface showing a split-screen view of a coach website before and after customisation. Cream and terracotta colour tones. Diffused natural light from the left. Text overlay space in the upper-right third. Watermark bottom-right: switzertemplates.com. Category label top-left. Pin ratio 2:3 at 1000x1500px.",
+          "destination_url": "https://www.switzertemplates.com/premade-wix-website-templates-for-sale"
+        },
+        {
+          "id": "2d",
+          "type": "PRODUCT",
+          "pin_headline": "Save time building your wix website for coaches with a premade design",
+          "category_label": "WIX WEBSITES",
+          "seo_title": "Save time building your wix website for coaches with a premade design",
+          "seo_description": "Starting your wix website for coaches from a blank canvas wastes weeks you could spend on clients. A premade Wix template gives you a professional structure and design on day one - so you can focus on your offer, not on figuring out page layouts. Check it out --> #wixtemplate #coachwebsite #servicebusiness",
+          "design_brief": "Laptop open on an oak desk surface showing a coaching website services page with clear sections and professional typography. Warm cream and sage tones. Soft natural light from the upper left. Text overlay space in the upper-left third. Watermark bottom-right: switzertemplates.com. Category label top-left. Pin ratio 2:3 at 1000x1500px.",
+          "destination_url": "https://www.switzertemplates.com/premade-wix-website-templates-for-sale"
+        },
+        {
+          "id": "2e",
+          "type": "EDUCATIONAL",
+          "pin_headline": "Wix website for coaches - what pages you actually need",
+          "category_label": "WEBSITE TIPS",
+          "seo_title": "Wix website for coaches - what pages you actually need",
+          "seo_description": "Building a wix website for coaches is simpler than most people think - but only if you know which pages matter. At minimum: a homepage with a clear headline, a services page, an about page, and a contact or booking page. Miss any of these and potential clients leave before they reach out. #coachwebsite #smallbusinesstips #wixtemplate",
+          "design_brief": "Clean flat-lay overhead shot of a notebook open to a hand-drawn site map sketch, beside a cup of coffee on a warm linen surface. Cream and dusty pink tones. Soft diffused natural light from the left. Bold text overlay across the top third. Watermark bottom-right: switzertemplates.com. Category label top-left. Pin ratio 2:3 at 1000x1500px.",
+          "destination_url": "https://www.switzertemplates.com/blog"
+        }
+      ],
+      "topic": "Wix Website For Coaches",
+      "pt_ocr_best": 0.0055,
+      "data_sources": [
+        "KE",
+        "PT",
+        "OA"
+      ]
+    },
+    {
+      "topic_id": 3,
+      "keyword": "wix website for life coaches",
+      "keyword_volume": 0,
+      "final_score": 261.1,
+      "product_match": 3,
+      "maps_to_product": "Premade Wix Website",
+      "variation_split": "4 PRODUCT + 1 EDUCATIONAL",
+      "blog": {
+        "existing_post_likely": false,
+        "note": "",
+        "blog_post_needed": true,
+        "brief_for_blog_agent": "Write a post titled 'What to include on your Wix website as a life coach' covering essential pages, trust-building elements, and how a premade template shortens the process. Link naturally to the premade Wix website product page."
+      },
+      "variations": [
+        {
+          "id": "3a",
+          "type": "PRODUCT",
+          "pin_headline": "Wix website for life coaches that looks established from day one",
+          "category_label": "WIX WEBSITES",
+          "seo_title": "Wix website for life coaches that looks established from day one",
+          "seo_description": "A premade wix website for life coaches gives you every page your business needs - homepage, about, services, and booking - fully designed and ready to customise. No developer, no months of delays, just a professional site that reflects the quality of your work. Click to browse! #wixwebsitetemplate #coachwebsite #premadewebsite",
+          "design_brief": "Laptop open on a marble desk surface showing a life coach website homepage with a warm, editorial hero section and clear navigation. Cream and dusty pink colour tones. Soft natural light from the upper left. Text overlay space in the upper-left third. Watermark bottom-right: switzertemplates.com. Category label top-left. Pin ratio 2:3 at 1000x1500px.",
+          "destination_url": "https://www.switzertemplates.com/premade-wix-website-templates-for-sale"
+        },
+        {
+          "id": "3b",
+          "type": "PRODUCT",
+          "pin_headline": "Wix website for life coaches - go live without hiring a developer",
+          "category_label": "WIX WEBSITES",
+          "seo_title": "Wix website for life coaches - go live without hiring a developer",
+          "seo_description": "Get your wix website for life coaches live this week by starting from a design that's already done. Our premade Wix templates are built for service providers - just add your content and publish, no tech skills needed. Grab it in my Etsy store! #wixtemplate #coachwebsite #smallbusinesstips",
+          "design_brief": "Phone mockup propped against a small potted plant on a warm linen surface showing a life coach mobile website with a soft editorial design. Warm white and sage green colour tones. Diffused natural light from the left. Text overlay space across the lower third. Watermark bottom-right: switzertemplates.com. Category label top-left. Pin ratio 2:3 at 1000x1500px.",
+          "destination_url": "https://www.switzertemplates.com/premade-wix-website-templates-for-sale"
+        },
+        {
+          "id": "3c",
+          "type": "PRODUCT",
+          "pin_headline": "Wix website for life coaches ready to customise and publish",
+          "category_label": "WIX WEBSITES",
+          "seo_title": "Wix website for life coaches ready to customise and publish",
+          "seo_description": "Building a wix website for life coaches from scratch takes time most coaches don't have. A premade Wix template gives you a complete, professional site structure on day one - swap your photos and words in and go live fast. Have a browse! #premadewebsite #wixwebsitetemplate #onlinebusiness",
+          "design_brief": "Tablet propped on an oak desk showing a life coach website with a clean about page and testimonials section visible. Cream and terracotta colour tones. Soft light from the right. Text overlay space in the upper-right third. Watermark bottom-right: switzertemplates.com. Category label top-left. Pin ratio 2:3 at 1000x1500px.",
+          "destination_url": "https://www.switzertemplates.com/premade-wix-website-templates-for-sale"
+        },
+        {
+          "id": "3d",
+          "type": "PRODUCT",
+          "pin_headline": "Get your wix website for life coaches live without the overwhelm",
+          "category_label": "WIX WEBSITES",
+          "seo_title": "Get your wix website for life coaches live without the overwhelm",
+          "seo_description": "A wix website for life coaches that feels generic is costing you clients before they even read your bio. Our premade templates are designed to feel premium and personal - built for coaches who want to look polished without spending months on it. Check it out --> #coachwebsite #wixtemplate #servicebusiness",
+          "design_brief": "Laptop open on a warm linen surface showing a life coach website contact and booking page with a minimal, airy design. Cream and sage green tones. Soft natural light from the left. Text overlay space in the upper-left third. Watermark bottom-right: switzertemplates.com. Category label top-left. Pin ratio 2:3 at 1000x1500px.",
+          "destination_url": "https://www.switzertemplates.com/premade-wix-website-templates-for-sale"
+        },
+        {
+          "id": "3e",
+          "type": "EDUCATIONAL",
+          "pin_headline": "Wix website for life coaches - what your homepage really needs",
+          "category_label": "WEBSITE TIPS",
+          "seo_title": "Wix website for life coaches - what your homepage really needs",
+          "seo_description": "Most wix websites for life coaches lose visitors on the homepage because the headline is vague. Your homepage needs to say who you help, what you help them achieve, and how to work with you - in that order, above the fold. Get this right and your site starts converting browsers into enquiries. #coachwebsite #smallbusinesstips #wixwebsitetemplate",
+          "design_brief": "Overhead flat-lay of a notebook with a simple homepage wireframe sketch on a warm linen surface beside a coffee cup. Cream and dusty pink tones. Soft diffused natural light from the upper left. Bold text overlay across the top quarter of the pin. Watermark bottom-right: switzertemplates.com. Category label top-left. Pin ratio 2:3 at 1000x1500px.",
+          "destination_url": "https://www.switzertemplates.com/blog"
+        }
+      ],
+      "topic": "Wix Website For Life Coaches",
+      "pt_ocr_best": 0.0055,
+      "data_sources": [
+        "KE",
+        "PT",
+        "OA"
+      ]
+    },
+    {
+      "topic_id": 4,
+      "keyword": "wix website for health coaches",
+      "keyword_volume": 0,
+      "final_score": 261.1,
+      "product_match": 3,
+      "maps_to_product": "Premade Wix Website",
+      "variation_split": "4 PRODUCT + 1 EDUCATIONAL",
+      "blog": {
+        "existing_post_likely": false,
+        "note": "",
+        "blog_post_needed": true,
+        "brief_for_blog_agent": "Write a post titled 'How to set up your Wix website as a health coach' covering essential pages, what builds credibility online, and how a premade template gets you live faster. Link naturally to the premade Wix website product page."
+      },
+      "variations": [
+        {
+          "id": "4a",
+          "type": "PRODUCT",
+          "pin_headline": "Wix website for health coaches that builds trust before the first call",
+          "category_label": "WIX WEBSITES",
+          "seo_title": "Wix website for health coaches that builds trust before the first call",
+          "seo_description": "A premade wix website for health coaches gives you a fully structured site - homepage, services, about, and booking - designed to look professional and credible from the moment someone lands on it. No developer needed, no blank-page overwhelm. Click to browse! #wixwebsitetemplate #coachwebsite #premadewebsite",
+          "design_brief": "Laptop open on a marble surface showing a health coach website homepage with a clean hero image and clear call-to-action section. Cream and sage green colour tones. Soft natural light from the left. Text overlay space in the upper-left third. Watermark bottom-right: switzertemplates.com. Category label top-left. Pin ratio 2:3 at 1000x1500px.",
+          "destination_url": "https://www.switzertemplates.com/premade-wix-website-templates-for-sale"
+        },
+        {
+          "id": "4b",
+          "type": "PRODUCT",
+          "pin_headline": "Wix website for health coaches - professional design, no coding",
+          "category_label": "WIX WEBSITES",
+          "seo_title": "Wix website for health coaches - professional design, no coding",
+          "seo_description": "Starting from scratch on your wix website for health coaches takes weeks you don't have. Our premade templates give you a complete, polished site structure on day one - swap your text and photos in and go live without touching a line of code. Grab it in my Etsy store! #wixtemplate #coachwebsite #smallbusinesstips",
+          "design_brief": "Phone mockup on a warm linen surface showing a health coach mobile website with a clean services section and soft editorial typography. Warm white and dusty pink colour tones. Diffused light from the right. Text overlay space in the lower-left third. Watermark bottom-right: switzertemplates.com. Category label top-left. Pin ratio 2:3 at 1000x1500px.",
+          "destination_url": "https://www.switzertemplates.com/premade-wix-website-templates-for-sale"
+        },
+        {
+          "id": "4c",
+          "type": "PRODUCT",
+          "pin_headline": "Wix website for health coaches ready to go live this week",
+          "category_label": "WIX WEBSITES",
+          "seo_title": "Wix website for health coaches ready to go live this week",
+          "seo_description": "A polished wix website for health coaches doesn't have to cost thousands or take months to build. Our premade Wix templates cover every page your business needs - already designed, already structured, ready for your content. Have a browse! #premadewebsite #wixwebsitetemplate #onlinebusiness",
+          "design_brief": "Tablet propped against a stack of books on an oak desk showing a health coach website about page with a warm editorial layout. Cream and terracotta colour tones. Soft natural light from the upper left. Text overlay space across the upper third. Watermark bottom-right: switzertemplates.com. Category label top-left. Pin ratio 2:3 at 1000x1500px.",
+          "destination_url": "https://www.switzertemplates.com/premade-wix-website-templates-for-sale"
+        },
+        {
+          "id": "4d",
+          "type": "PRODUCT",
+          "pin_headline": "Save time on your wix website for health coaches with a premade template",
+          "category_label": "WIX WEBSITES",
+          "seo_title": "Save time on your wix website for health coaches with a premade template",
+          "seo_description": "A wix website for health coaches that feels generic is turning away potential clients before they read a word. Our premade templates are designed to feel premium - every page considered, every section purposeful - so your site reflects the quality of your coaching. Check it out --> #coachwebsite #wixtemplate #servicebusiness",
+          "design_brief": "Laptop on a warm linen surface showing a health coach website homepage with a bold headline section and clean navigation. Sage green and cream colour tones. Soft light from the left. Text overlay space in the upper-right third. Watermark bottom-right: switzertemplates.com. Category label top-left. Pin ratio 2:3 at 1000x1500px.",
+          "destination_url": "https://www.switzertemplates.com/premade-wix-website-templates-for-sale"
+        },
+        {
+          "id": "4e",
+          "type": "EDUCATIONAL",
+          "pin_headline": "Wix website for health coaches - 4 pages you need before you launch",
+          "category_label": "WEBSITE TIPS",
+          "seo_title": "Wix website for health coaches - 4 pages you need before you launch",
+          "seo_description": "Every wix website for health coaches needs at least four pages to convert visitors: a homepage with a clear value statement, a services page, an about page with your credentials, and a contact or booking page. Launch without these and you're sending potential clients to competitors who have them. #coachwebsite #smallbusinesstips #wixwebsitetemplate",
+          "design_brief": "Clean overhead flat-lay of a notebook open to a numbered list of four website pages, on a warm marble surface beside a pen. Cream and soft sage tones. Diffused natural light from the left. Text overlay space at the top of the pin. Watermark bottom-right: switzertemplates.com. Category label top-left. Pin ratio 2:3 at 1000x1500px.",
+          "destination_url": "https://www.switzertemplates.com/blog"
+        }
+      ],
+      "topic": "Wix Website For Health Coaches",
+      "pt_ocr_best": 0.0055,
+      "data_sources": [
+        "KE",
+        "PT",
+        "OA"
+      ]
+    },
+    {
+      "topic_id": 5,
+      "keyword": "wix website for wellness coaches",
+      "keyword_volume": 0,
+      "final_score": 261.1,
+      "product_match": 3,
+      "maps_to_product": "Premade Wix Website",
+      "variation_split": "4 PRODUCT + 1 EDUCATIONAL",
+      "blog": {
+        "existing_post_likely": false,
+        "note": "",
+        "blog_post_needed": true,
+        "brief_for_blog_agent": "Write a post titled 'How to build a Wix website for your wellness coaching business' covering what makes a wellness coach site convert, essential pages, and how a premade template saves time. Link naturally to the premade Wix website product page."
+      },
+      "variations": [
+        {
+          "id": "5a",
+          "type": "PRODUCT",
+          "pin_headline": "Wix website for wellness coaches that looks polished and professional",
+          "category_label": "WIX WEBSITES",
+          "seo_title": "Wix website for wellness coaches that looks polished and professional",
+          "seo_description": "Get your wix website for wellness coaches live without starting from scratch. Our premade templates cover every page your business needs - services, about, booking, and contact - fully designed and ready to customise with your content. Click to browse! #wixwebsitetemplate #coachwebsite #premadewebsite",
+          "design_brief": "Laptop open on a warm linen surface showing a wellness coach website homepage with a soft, airy editorial design and botanical accent. Cream and sage green colour tones. Soft natural light from the upper left. Text overlay space in the upper-left third. Watermark bottom-right: switzertemplates.com. Category label top-left. Pin ratio 2:3 at 1000x1500px.",
+          "destination_url": "https://www.switzertemplates.com/premade-wix-website-templates-for-sale"
+        },
+        {
+          "id": "5b",
+          "type": "PRODUCT",
+          "pin_headline": "Wix website for wellness coaches - up and running in days, not months",
+          "category_label": "WIX WEBSITES",
+          "seo_title": "Wix website for wellness coaches - up and running in days, not months",
+          "seo_description": "A generic or missing wix website for wellness coaches is costing you enquiries every week. Our premade Wix templates give you a premium, editorial site structure on day one - built for wellness and service-based businesses who want to look established fast. Grab it in my Etsy store! #wixtemplate #coachwebsite #smallbusinesstips",
+          "design_brief": "Phone mockup resting on a soft sage linen fabric showing a mobile wellness coach website homepage with a botanical-inspired header. Warm white and dusty rose colour tones. Diffused light from the left. Text overlay space across the lower third. Watermark bottom-right: switzertemplates.com. Category label top-left. Pin ratio 2:3 at 1000x1500px.",
+          "destination_url": "https://www.switzertemplates.com/premade-wix-website-templates-for-sale"
+        },
+        {
+          "id": "5c",
+          "type": "PRODUCT",
+          "pin_headline": "Wix website for wellness coaches that converts visitors into clients",
+          "category_label": "WIX WEBSITES",
+          "seo_title": "Wix website for wellness coaches that converts visitors into clients",
+          "seo_description": "A premade wix website for wellness coaches gives you a complete, professional online presence without the months of back-and-forth with a designer. Every page is already structured and designed - just add your own words, photos, and offers. Have a browse! #premadewebsite #wixwebsitetemplate #onlinebusiness",
+          "design_brief": "Tablet flat on a marble surface showing a wellness coach website services page with a clean layout and soft typography. Cream and terracotta colour tones. Soft light from the right. Text overlay space in the upper-right third. Watermark bottom-right: switzertemplates.com. Category label top-left. Pin ratio 2:3 at 1000x1500px.",
+          "destination_url": "https://www.switzertemplates.com/premade-wix-website-templates-for-sale"
+        },
+        {
+          "id": "5d",
+          "type": "PRODUCT",
+          "pin_headline": "Wix website for wellness coaches ready to customise and publish today",
+          "category_label": "WIX WEBSITES",
+          "seo_title": "Wix website for wellness coaches ready to customise and publish today",
+          "seo_description": "Building your wix website for wellness coaches from zero takes weeks you could spend on actual clients. Our premade templates are fully designed and structured - swap your content in, connect your domain, and go live without a developer or a course to figure it out. Check it out --> #coachwebsite #wixtemplate #servicebusiness",
+          "design_brief": "Laptop open on an oak desk showing a wellness coach website about page with a warm, editorial two-column layout. Cream and sage colour tones. Soft natural light from the left. Text overlay space in the upper-left third. Watermark bottom-right: switzertemplates.com. Category label top-left. Pin ratio 2:3 at 1000x1500px.",
+          "destination_url": "https://www.switzertemplates.com/premade-wix-website-templates-for-sale"
+        },
+        {
+          "id": "5e",
+          "type": "EDUCATIONAL",
+          "pin_headline": "Wix website for wellness coaches - what makes one actually convert",
+          "category_label": "WEBSITE TIPS",
+          "seo_title": "Wix website for wellness coaches - what makes one actually convert",
+          "seo_description": "Most wix websites for wellness coaches look nice but don't convert - because they focus on aesthetics without a clear client journey. The difference is a homepage headline that speaks directly to the problem you solve, a services page with clear offers, and a booking page with zero friction. #coachwebsite #smallbusinesstips #wixwebsitetemplate",
+          "design_brief": "Clean flat-lay of an open planner with a simple website conversion checklist handwritten inside, on a warm linen surface with a pen nearby. Cream and dusty pink tones. Soft diffused light from the upper left. Text overlay at the top quarter of the pin. Watermark bottom-right: switzertemplates.com. Category label top-left. Pin ratio 2:3 at 1000x1500px.",
+          "destination_url": "https://www.switzertemplates.com/blog"
+        }
+      ],
+      "topic": "Wix Website For Wellness Coaches",
+      "pt_ocr_best": 0.0055,
+      "data_sources": [
+        "KE",
+        "PT",
+        "OA"
+      ]
+    },
+    {
+      "topic_id": 6,
+      "keyword": "wix website for therapists",
+      "keyword_volume": 0,
+      "final_score": 261.1,
+      "product_match": 3,
+      "maps_to_product": "Premade Wix Website",
+      "variation_split": "4 PRODUCT + 1 EDUCATIONAL",
+      "blog": {
+        "existing_post_likely": false,
+        "note": "",
+        "blog_post_needed": true,
+        "brief_for_blog_agent": "Write a post titled 'What to include on your Wix website as a therapist' covering trust-building pages, what clients look for before booking, and how a premade template shortens launch time. Link naturally to the premade Wix website product page."
+      },
+      "variations": [
+        {
+          "id": "6a",
+          "type": "PRODUCT",
+          "pin_headline": "Wix website for therapists that builds trust before the first session",
+          "category_label": "WIX WEBSITES",
+          "seo_title": "Wix website for therapists that builds trust before the first session",
+          "seo_description": "A premade wix website for therapists gives you a professionally designed site with every page your practice needs - about, services, FAQ, and contact - so potential clients feel confident reaching out. No coding, no developer, no months of delays. Click to browse! #wixwebsitetemplate #premadewebsite #smallbusinesstips",
+          "design_brief": "Laptop open on a marble surface showing a therapist website homepage with a calm, editorial layout and a clear headline. Warm cream and sage green colour tones. Soft natural light from the left. Text overlay space in the upper-left third. Watermark bottom-right: switzertemplates.com. Category label top-left. Pin ratio 2:3 at 1000x1500px.",
+          "destination_url": "https://www.switzertemplates.com/premade-wix-website-templates-for-sale"
+        },
+        {
+          "id": "6b",
+          "type": "PRODUCT",
+          "pin_headline": "Wix website for therapists - look credible online without a developer",
+          "category_label": "WIX WEBSITES",
+          "seo_title": "Wix website for therapists - look credible online without a developer",
+          "seo_description": "Get your wix website for therapists live this week using a fully designed premade template. Our Wix sites are built for service providers - structured to guide visitors from first landing to booking, without you needing to figure out layout or design from scratch. Grab it in my Etsy store! #wixtemplate #premadewebsite #onlinebusiness",
+          "design_brief": "Phone mockup on a warm linen surface showing a therapist mobile website with a soft, minimal homepage design and a visible booking button. Warm white and dusty pink colour tones. Diffused light from the right. Text overlay space in the lower-left third. Watermark bottom-right: switzertemplates.com. Category label top-left. Pin ratio 2:3 at 1000x1500px.",
+          "destination_url": "https://www.switzertemplates.com/premade-wix-website-templates-for-sale"
+        },
+        {
+          "id": "6c",
+          "type": "PRODUCT",
+          "pin_headline": "Wix website for therapists ready to publish without starting from scratch",
+          "category_label": "WIX WEBSITES",
+          "seo_title": "Wix website for therapists ready to publish without starting from scratch",
+          "seo_description": "A blank canvas wix website for therapists takes weeks to build and design. A premade template gives you a complete, polished site from day one - every section considered, every page in place - so you can go live fast and start getting enquiries. Have a browse! #wixwebsitetemplate #servicebusiness #premadewebsite",
+          "design_brief": "Tablet propped on an oak desk showing a therapist website about page with a warm two-column editorial layout and testimonials visible. Cream and terracotta colour tones. Soft light from the upper left. Text overlay space in the upper-right third. Watermark bottom-right: switzertemplates.com. Category label top-left. Pin ratio 2:3 at 1000x1500px.",
+          "destination_url": "https://www.switzertemplates.com/premade-wix-website-templates-for-sale"
+        },
+        {
+          "id": "6d",
+          "type": "PRODUCT",
+          "pin_headline": "Get your wix website for therapists live and working for your practice",
+          "category_label": "WIX WEBSITES",
+          "seo_title": "Get your wix website for therapists live and working for your practice",
+          "seo_description": "A wix website for therapists that looks dated or incomplete is losing you clients before they make contact. Our premade Wix templates give you a modern, credible site designed to convert visitors into enquiries - without the cost or timeline of a custom build. Check it out --> #wixtemplate #smallbusinesstips #coachwebsite",
+          "design_brief": "Laptop on a warm linen surface showing a therapist website contact page with a minimal, airy layout and soft brand colours. Cream and sage green tones. Soft natural light from the left. Text overlay space in the upper-left third. Watermark bottom-right: switzertemplates.com. Category label top-left. Pin ratio 2:3 at 1000x1500px.",
+          "destination_url": "https://www.switzertemplates.com/premade-wix-website-templates-for-sale"
+        },
+        {
+          "id": "6e",
+          "type": "EDUCATIONAL",
+          "pin_headline": "Wix website for therapists - what clients actually look for before booking",
+          "category_label": "WEBSITE TIPS",
+          "seo_title": "Wix website for therapists - what clients look for before booking",
+          "seo_description": "Most people looking for a therapist check three things on a website before reaching out: your approach and specialties, what a session actually involves, and how to get in touch easily. A wix website for therapists that answers these clearly - without jargon - converts far more visitors into enquiries. #smallbusinesstips #wixwebsitetemplate #servicebusiness",
+          "design_brief": "Overhead flat-lay of a notebook with a handwritten three-point checklist on a marble surface beside a cup of tea. Cream and sage tones. Soft diffused natural light from the upper left. Text overlay at the top of the pin. Watermark bottom-right: switzertemplates.com. Category label top-left. Pin ratio 2:3 at 1000x1500px.",
+          "destination_url": "https://www.switzertemplates.com/blog"
+        }
+      ],
+      "topic": "Wix Website For Therapists",
+      "pt_ocr_best": 0.0055,
+      "data_sources": [
+        "KE",
+        "PT",
+        "OA"
+      ]
+    },
+    {
+      "topic_id": 7,
+      "keyword": "wix website for consultants",
+      "keyword_volume": 0,
+      "final_score": 261.1,
+      "product_match": 3,
+      "maps_to_product": "Premade Wix Website",
+      "variation_split": "4 PRODUCT + 1 EDUCATIONAL",
+      "blog": {
+        "existing_post_likely": false,
+        "note": "",
+        "blog_post_needed": true,
+        "brief_for_blog_agent": "Write a post titled 'What every consultant needs on their Wix website' covering the pages that build authority and drive enquiries, and how a premade template gets you live faster. Link naturally to the premade Wix website product page."
+      },
+      "variations": [
+        {
+          "id": "7a",
+          "type": "PRODUCT",
+          "pin_headline": "Wix website for consultants that positions you as the expert",
+          "category_label": "WIX WEBSITES",
+          "seo_title": "Wix website for consultants that positions you as the expert",
+          "seo_description": "A premade wix website for consultants gives you a fully structured site with every page your business needs - services, case studies, about, and contact - designed to position you as credible and worth hiring before a call is even booked. Click to browse! #wixwebsitetemplate #premadewebsite #smallbusinesstips",
+          "design_brief": "Laptop open on a dark oak desk surface showing a consultant website homepage with a bold, editorial hero section and professional typography. Cream and warm charcoal colour tones. Soft natural light from the left. Text overlay space in the upper-left third. Watermark bottom-right: switzertemplates.com. Category label top-left. Pin ratio 2:3 at 1000x1500px.",
+          "destination_url": "https://www.switzertemplates.com/premade-wix-website-templates-for-sale"
+        },
+        {
+          "id": "7b",
+          "type": "PRODUCT",
+          "pin_headline": "Wix website for consultants - professional and live without a developer",
+          "category_label": "WIX WEBSITES",
+          "seo_title": "Wix website for consultants - professional and live without a developer",
+          "seo_description": "Building your wix website for consultants from scratch wastes time you could spend on clients. Our premade Wix templates are structured for service businesses - every page in place, every section designed - so you can add your content and publish without tech overwhelm. Grab it in my Etsy store! #wixtemplate #onlinebusiness #servicebusiness",
+          "design_brief": "Phone mockup on a marble surface showing a consultant mobile website homepage with a clean, minimal design and a clear services overview. Warm white and sage green colour tones. Diffused light from the right. Text overlay in the lower-right third. Watermark bottom-right: switzertemplates.com. Category label top-left. Pin ratio 2:3 at 1000x1500px.",
+          "destination_url": "https://www.switzertemplates.com/premade-wix-website-templates-for-sale"
+        },
+        {
+          "id": "7c",
+          "type": "PRODUCT",
+          "pin_headline": "Wix website for consultants ready to go live this week",
+          "category_label": "WIX WEBSITES",
+          "seo_title": "Wix website for consultants ready to go live this week",
+          "seo_description": "A weak or missing wix website for consultants is costing you clients who check your site before replying to your outreach. Our premade templates give you a complete, polished site from day one - fully designed, no coding needed, no blank page to figure out. Have a browse! #wixwebsitetemplate #premadewebsite #smallbusinesstips",
+          "design_brief": "Tablet propped against books on an oak surface showing a consultant website services page with a clean grid layout and sharp typography. Cream and terracotta colour tones. Soft natural light from the upper left. Text overlay space in the upper-right third. Watermark bottom-right: switzertemplates.com. Category label top-left. Pin ratio 2:3 at 1000x1500px.",
+          "destination_url": "https://www.switzertemplates.com/premade-wix-website-templates-for-sale"
+        },
+        {
+          "id": "7d",
+          "type": "PRODUCT",
+          "pin_headline": "Save time building your wix website for consultants with a premade design",
+          "category_label": "WIX WEBSITES",
+          "seo_title": "Save time building your wix website for consultants with a premade design",
+          "seo_description": "A wix website for consultants that takes you from no online presence to fully live in days - not months. Our premade templates are designed for service providers who want to look established without paying custom design rates. Swap your content in and go. Check it out --> #wixtemplate #coachwebsite #onlinebusiness",
+          "design_brief": "Laptop open on a warm linen surface showing a consultant website about page with a professional headshot placeholder and bold editorial layout. Cream and sage green tones. Soft light from the left. Text overlay space in the upper-left third. Watermark bottom-right: switzertemplates.com. Category label top-left. Pin ratio 2:3 at 1000x1500px.",
+          "destination_url": "https://www.switzertemplates.com/premade-wix-website-templates-for-sale"
+        },
+        {
+          "id": "7e",
+          "type": "EDUCATIONAL",
+          "pin_headline": "Wix website for consultants - 5 things the best ones always include",
+          "category_label": "WEBSITE TIPS",
+          "seo_title": "Wix website for consultants - 5 things the best ones always include",
+          "seo_description": "The best wix websites for consultants do five things well: a homepage headline that names the result you deliver, a services page with clear scope and pricing signals, social proof, a credibility section, and a frictionless contact page. Miss any of these and the site looks unfinished even if the design is good. #smallbusinesstips #wixwebsitetemplate #servicebusiness",
+          "design_brief": "Clean flat-lay overhead of a notebook open to a numbered list of five items on a marble surface beside a pen and small plant. Cream and dusty rose tones. Diffused natural light from the upper left. Bold text overlay across the top of the pin. Watermark bottom-right: switzertemplates.com. Category label top-left. Pin ratio 2:3 at 1000x1500px.",
+          "destination_url": "https://www.switzertemplates.com/blog"
+        }
+      ],
+      "topic": "Wix Website For Consultants",
+      "pt_ocr_best": 0.0055,
+      "data_sources": [
+        "KE",
+        "PT",
+        "OA"
+      ]
+    },
+    {
+      "topic_id": 8,
+      "keyword": "coach wix website template",
+      "keyword_volume": 0,
+      "final_score": 259.8,
+      "product_match": 3,
+      "maps_to_product": "Premade Wix Website",
+      "variation_split": "4 PRODUCT + 1 EDUCATIONAL",
+      "blog": {
+        "existing_post_likely": false,
+        "note": "",
+        "blog_post_needed": true,
+        "brief_for_blog_agent": "Write a post titled 'How to choose a coach Wix website template that actually converts' covering what separates a template that looks nice from one that drives enquiries. Link naturally to the premade Wix website product page."
+      },
+      "variations": [
+        {
+          "id": "8a",
+          "type": "PRODUCT",
+          "pin_headline": "Coach wix website template that looks custom from day one",
+          "category_label": "WIX WEBSITES",
+          "seo_title": "Coach wix website template that looks custom from day one",
+          "seo_description": "A premade coach wix website template gives you a fully designed site - every page structured, every section considered - so you look established online without paying custom design prices. Just swap your content in and go live. Click to browse! #wixwebsitetemplate #coachwebsite #premadewebsite",
+          "design_brief": "Laptop open on a warm linen surface showing a coach Wix website template homepage with a clean editorial layout and bold hero section. Cream and sage green colour tones. Soft natural light from the left. Text overlay space in the upper-left third. Watermark bottom-right: switzertemplates.com. Category label top-left. Pin ratio 2:3 at 1000x1500px.",
+          "destination_url": "https://www.switzertemplates.com/premade-wix-website-templates-for-sale"
+        },
+        {
+          "id": "8b",
+          "type": "PRODUCT",
+          "pin_headline": "Coach wix website template - go live this week without a developer",
+          "category_label": "WIX WEBSITES",
+          "seo_title": "Coach wix website template - go live this week without a developer",
+          "seo_description": "Get your coach wix website template live this week without starting from a blank page. Our premade templates are fully structured for coaching businesses - homepage, services, about, booking - ready for your content and publishable in days. Grab it in my Etsy store! #wixtemplate #coachwebsite #smallbusinesstips",
+          "design_brief": "Phone mockup propped on a marble surface showing a mobile coach website homepage from a Wix template with clear navigation and a professional headline. Warm white and terracotta colour tones. Diffused light from the right. Text overlay space in the lower-left third. Watermark bottom-right: switzertemplates.com. Category label top-left. Pin ratio 2:3 at 1000x1500px.",
+          "destination_url": "https://www.switzertemplates.com/premade-wix-website-templates-for-sale"
+        },
+        {
+          "id": "8c",
+          "type": "PRODUCT",
+          "pin_headline": "Coach wix website template ready to publish without the overwhelm",
+          "category_label": "WIX WEBSITES",
+          "seo_title": "Coach wix website template ready to publish without the overwhelm",
+          "seo_description": "A coach wix website template that feels generic is quietly costing you clients. Our templates are designed to feel premium - editorial layouts, considered typography, professional colour palettes - so your site reflects the quality of your coaching from the first visit. Have a browse! #premadewebsite #wixwebsitetemplate #onlinebusiness",
+          "design_brief": "Tablet flat on an oak desk showing a coach Wix website template with a services page open, clean grid layout and warm brand photography placeholders. Cream and dusty pink colour tones. Soft natural light from the upper left. Text overlay in the upper-right third. Watermark bottom-right: switzertemplates.com. Category label top-left. Pin ratio 2:3 at 1000x1500px.",
+          "destination_url": "https://www.switzertemplates.com/premade-wix-website-templates-for-sale"
+        },
+        {
+          "id": "8d",
+          "type": "PRODUCT",
+          "pin_headline": "Get your coach wix website template live and attracting clients",
+          "category_label": "WIX WEBSITES",
+          "seo_title": "Get your coach wix website template live and attracting clients",
+          "seo_description": "Building a coach wix website template from scratch takes weeks you don't have. A premade design gives you a complete, professional site structure on day one - every page already laid out, every section purposeful - so you can focus on your clients, not your tech stack. Check it out --> #coachwebsite #wixtemplate #servicebusiness",
+          "design_brief": "Laptop on a warm linen surface showing a coach Wix website template contact and booking page with a minimal, airy layout. Sage green and cream colour tones. Soft light from the left. Text overlay in the upper-left third. Watermark bottom-right: switzertemplates.com. Category label top-left. Pin ratio 2:3 at 1000x1500px.",
+          "destination_url": "https://www.switzertemplates.com/premade-wix-website-templates-for-sale"
+        },
+        {
+          "id": "8e",
+          "type": "EDUCATIONAL",
+          "pin_headline": "Coach wix website template - how to make it look like yours, not a template",
+          "category_label": "WEBSITE TIPS",
+          "seo_title": "Coach wix website template - how to make it feel completely custom",
+          "seo_description": "The fastest way to make a coach wix website template look custom is to update three things first: your hero headline, your brand photography, and your about page copy. These three changes do more for how your site feels than any design tweak - and they take less time than you think. #coachwebsite #smallbusinesstips #wixwebsitetemplate",
+          "design_brief": "Overhead flat-lay of a notebook with a three-step checklist handwritten on a warm linen surface beside a laptop showing a Wix website editor. Cream and sage tones. Diffused natural light from the upper left. Bold text overlay at the top quarter of the pin. Watermark bottom-right: switzertemplates.com. Category label top-left. Pin ratio 2:3 at 1000x1500px.",
+          "destination_url": "https://www.switzertemplates.com/blog"
+        }
+      ],
+      "topic": "Coach Wix Website Template",
+      "pt_ocr_best": 0.0055,
+      "data_sources": [
+        "KE",
+        "PT",
+        "OA"
+      ]
+    },
+    {
+      "topic_id": 9,
+      "keyword": "wix website template",
+      "keyword_volume": 40500,
+      "final_score": 255.8,
+      "product_match": 3,
+      "maps_to_product": "Premade Wix Website",
+      "variation_split": "4 PRODUCT + 1 EDUCATIONAL",
+      "blog": {
+        "existing_post_likely": true,
+        "note": "check blog for existing post",
+        "blog_post_needed": false,
+        "brief_for_blog_agent": ""
+      },
+      "variations": [
+        {
+          "id": "9a",
+          "type": "PRODUCT",
+          "pin_headline": "Wix website template to look professional and attract more clients",
+          "category_label": "WIX WEBSITES",
+          "seo_title": "Wix website template to look professional and attract more clients",
+          "seo_description": "A Wix website template designed for coaches and service providers gives you a fully structured site - services, about, contact, and booking pages included - ready to customise with your own text and photos. No coding, no designer, no months of setup. Click to browse!  #wixwebsitetemplate #premadewebsite #smallbusinesstips",
+          "design_brief": "BRIGHT AIRY WHITE. A woman at a large bright white desk, seated side-on to the camera, writing in a hardcover notebook. Pure white walls and a white surface fill most of the frame. One ceramic vase with a single dried stem sits at the edge of the desk. Bright window light floods the scene from the right. Shot at desk height from her left side, clean and minimal. No screens or devices. Text overlay space fills the left quarter of the frame.",
+          "highlight_words": [
+            "professional",
+            "clients"
+          ],
+          "destination_url": "https://www.switzertemplates.com/premade-wix-website-templates-for-sale"
+        },
+        {
+          "id": "9b",
+          "type": "PRODUCT",
+          "pin_headline": "Wix website template that makes your business look established from day one",
+          "category_label": "WIX WEBSITES",
+          "seo_title": "Wix website template that makes your business look established from day one",
+          "seo_description": "Starting from scratch on your website takes months when you're building from a blank page. A premade Wix website template gives you a design that already looks like a real business - every page structured, every section purposeful - so you go from nothing to live in days. Grab it in my Etsy store!  #wixwebsitetemplate #wixtemplate #onlinebusiness",
+          "design_brief": "WARM DARK MOODY. A woman standing at a dark wooden kitchen counter or sideboard, one hand resting on the surface, looking down at an open planner. Warm amber overhead light creates deep, dramatic shadows around her. She wears a dark camel or chocolate-toned blouse. The background is dark and rich - espresso, shadow, warmth. Shot from mid-distance slightly below her eyeline. No screens or devices. Text overlay space in the darker upper portion of the frame.",
+          "highlight_words": [
+            "established"
+          ],
+          "destination_url": "https://www.switzertemplates.com/premade-wix-website-templates-for-sale"
+        },
+        {
+          "id": "9c",
+          "type": "PRODUCT",
+          "pin_headline": "Wix website template for coaches - every page ready to customise",
+          "category_label": "WIX WEBSITES",
+          "seo_title": "Wix website template for coaches - every page ready to customise",
+          "seo_description": "A Wix website template built for coaches gives you a services page, an about page, a contact form, and a booking section - all designed to work together. Swap in your photos, update the copy, connect your domain. Your site goes live this week, not next quarter. Have a browse!  #wixwebsitetemplate #coachwebsite #premadewebsite",
+          "design_brief": "BEIGE NEUTRAL. An overhead flat lay on a warm sandy linen tablecloth. A spiral notebook open to a blank page, a rose-gold pen, a small round dish with paper clips, and a single dried flower sprig. Warm afternoon light from the upper right. Sandy beige and ivory tones throughout, soft matte shadows. Generous negative space at the top of the frame for a text overlay. Shot directly above. No screens or devices.",
+          "highlight_words": [
+            "ready",
+            "customise"
+          ],
+          "destination_url": "https://www.switzertemplates.com/premade-wix-website-templates-for-sale"
+        },
+        {
+          "id": "9d",
+          "type": "EDUCATIONAL",
+          "pin_headline": "Wix website template vs building from scratch - what actually saves time",
+          "category_label": "WEB TIPS",
+          "seo_title": "Wix website template vs building from scratch - what actually saves time",
+          "seo_description": "Building a Wix website from a blank canvas takes longer than most people expect - layout decisions, font pairings, spacing, page structure. A premade Wix website template removes every one of those decisions. You start with a finished design and only change what is specific to your business.  #wixwebsitetemplate #smallbusinesstips #servicebusiness",
+          "design_brief": "COOL GREY. A woman walking along a wide, minimalist indoor corridor or open-plan office space with grey polished concrete floors and floor-to-ceiling glass on one side. She carries a slim folder under one arm, striding purposefully with a composed expression. Cool overcast light from the glass panels. She wears a fitted grey or white outfit. Shot from slightly behind and to the side, capturing movement and direction. No screens or devices. Text overlay space in the upper left.",
+          "highlight_words": [
+            "saves",
+            "time"
+          ],
+          "destination_url": "https://www.switzertemplates.com/blog"
+        },
+        {
+          "id": "9e",
+          "type": "PRODUCT",
+          "pin_headline": "Save time with a Wix website template built for service businesses",
+          "category_label": "WIX WEBSITES",
+          "seo_title": "Save time with a Wix website template built for service businesses",
+          "seo_description": "A professional Wix website template designed for service providers gives you a complete site structure - no guessing what pages to include or how to lay them out. Every section is already in place so you spend your time on your business, not on learning web design. Check it out -->  #wixwebsitetemplate #premadewebsite #smallbusinessbranding",
+          "design_brief": "EARTHY BROWN. A close-up of a woman's hands on a rich dark oak table, one hand holding open a softcover notebook, the other pressing a pen to the page as if mid-sentence. Warm amber lamp light from the upper left. Brown leather notebook cover, a warm terracotta ceramic mug just visible at the right edge of the frame. Shot very close, low angle, warm and textured. No screens or devices. Text overlay space in the upper portion of the frame.",
+          "highlight_words": [
+            "save",
+            "time"
+          ],
+          "destination_url": "https://www.switzertemplates.com/premade-wix-website-templates-for-sale"
+        }
+      ],
+      "topic": "Wix Website Template",
+      "pt_ocr_best": 0.0055,
+      "data_sources": [
+        "KE",
+        "PT",
+        "OA"
+      ]
+    },
+    {
+      "topic_id": 10,
+      "keyword": "starting a business",
+      "keyword_volume": 27100,
+      "final_score": 222.0,
+      "product_match": 2,
+      "maps_to_product": "Audience — all products",
+      "variation_split": "3 PRODUCT + 2 EDUCATIONAL",
+      "blog": {
+        "existing_post_likely": true,
+        "note": "check blog for existing post",
+        "blog_post_needed": false,
+        "brief_for_blog_agent": ""
+      },
+      "variations": [
+        {
+          "id": "10a",
+          "type": "PRODUCT",
+          "pin_headline": "Starting a business and need a professional website fast",
+          "category_label": "START YOUR BUSINESS",
+          "seo_title": "Starting a business and need a professional website fast",
+          "seo_description": "Starting a business means a hundred decisions at once - but your website doesn't have to be the hard one. Our premade Wix templates give you a fully designed, professional site in days, not months, so you can launch without waiting on a developer. Click to browse! #wixwebsitetemplate #smallbusinesstips #onlinebusiness",
+          "design_brief": "Laptop open on a warm linen desk surface showing a clean Wix website homepage with a bold hero section and professional layout. Cream and sage green colour tones. Soft natural light from the left. Text overlay space in the upper-left third. Watermark bottom-right: switzertemplates.com. Category label top-left. Pin ratio 2:3 at 1000x1500px.",
+          "destination_url": "https://www.switzertemplates.com/premade-wix-website-templates-for-sale"
+        },
+        {
+          "id": "10b",
+          "type": "PRODUCT",
+          "pin_headline": "Starting a business - get your brand, website, and templates in one place",
+          "category_label": "START YOUR BUSINESS",
+          "seo_title": "Starting a business - get your brand, website, and templates in one place",
+          "seo_description": "Starting a business means you need a brand, a website, and social media templates - usually from three different places. Our 3-in-1 Business Bundle gives you all three in one cohesive design package, so every platform looks consistent from the start. Grab it in my Etsy store! #smallbusinessbranding #wixwebsitetemplate #brandingkit",
+          "design_brief": "Laptop open on an oak desk showing a business bundle overview - Wix website on screen, Canva branding templates visible on a second monitor in the background. Warm white and terracotta colour tones. Soft natural light from the upper left. Text overlay space across the upper third. Watermark bottom-right: switzertemplates.com. Category label top-left. Pin ratio 2:3 at 1000x1500px.",
+          "destination_url": "https://www.switzertemplates.com/business-template-bundles"
+        },
+        {
+          "id": "10c",
+          "type": "PRODUCT",
+          "pin_headline": "Starting a business - look professional online without hiring a designer",
+          "category_label": "START YOUR BUSINESS",
+          "seo_title": "Starting a business - look professional online without hiring a designer",
+          "seo_description": "A scattered brand is costing new businesses clients before they even reach the services page. Our premade branding kits give you a professional colour palette, logo, fonts, and 1,000+ Canva templates - fully designed and ready to use across every platform from day one. Have a browse! #smallbusinessbranding #brandingkit #premadebranding",
+          "design_brief": "Phone and tablet side by side on a marble surface showing a cohesive branding kit in action - social media posts, a logo, and a colour palette visible across both screens. Cream and dusty pink colour tones. Diffused natural light from the right. Text overlay space in the upper-right third. Watermark bottom-right: switzertemplates.com. Category label top-left. Pin ratio 2:3 at 1000x1500px.",
+          "destination_url": "https://www.switzertemplates.com/branding-packages"
+        },
+        {
+          "id": "10d",
+          "type": "EDUCATIONAL",
+          "pin_headline": "Starting a business - the 3 things you actually need online first",
+          "category_label": "BUSINESS TIPS",
+          "seo_title": "Starting a business - the 3 things you actually need online first",
+          "seo_description": "Most people starting a business try to do everything at once - social media, a website, email marketing, a logo. Start with three things and nothing else: a clear brand identity, a working website, and one social platform you'll show up on consistently. Everything else can come later. #smallbusinesstips #onlinebusiness #startabusiness",
+          "design_brief": "Clean overhead flat-lay of a notebook open to a numbered three-item list on a warm linen surface beside a coffee cup. Cream and sage tones. Soft diffused natural light from the upper left. Bold text overlay at the top quarter of the pin. Watermark bottom-right: switzertemplates.com. Category label top-left. Pin ratio 2:3 at 1000x1500px.",
+          "destination_url": "https://www.switzertemplates.com/blog"
+        },
+        {
+          "id": "10e",
+          "type": "EDUCATIONAL",
+          "pin_headline": "Starting a business - the branding mistake most new owners make",
+          "category_label": "BUSINESS TIPS",
+          "seo_title": "Starting a business - the branding mistake most new owners make",
+          "seo_description": "The most common mistake people make when starting a business is building a logo and calling it a brand. Without a consistent colour system, font pairing, and templates to apply them across every platform, your brand won't build recognition - and recognition is what turns browsers into buyers. Check it out --> #smallbusinessbranding #brandidentitytips #onlinebusiness",
+          "design_brief": "Laptop open on a warm linen surface showing a Canva branding template layout with a colour palette, typography specimens, and logo lockup visible on screen. Cream and terracotta tones. Soft natural light from the left. Text overlay space in the upper-left third. Watermark bottom-right: switzertemplates.com. Category label top-left. Pin ratio 2:3 at 1000x1500px.",
+          "destination_url": "https://www.switzertemplates.com/blog"
+        }
+      ],
+      "topic": "Starting A Business",
+      "pt_ocr_best": 0.0108,
+      "data_sources": [
+        "KE",
+        "PT",
+        "OA"
+      ]
+    },
+    {
+      "topic_id": 11,
+      "keyword": "small business marketing",
+      "keyword_volume": 2900,
+      "final_score": 214.1,
+      "product_match": 2,
+      "maps_to_product": "Audience — all products",
+      "variation_split": "3 PRODUCT + 2 EDUCATIONAL",
+      "blog": {
+        "existing_post_likely": true,
+        "note": "check blog for existing post",
+        "blog_post_needed": false,
+        "brief_for_blog_agent": ""
+      },
+      "variations": [
+        {
+          "id": "11a",
+          "type": "PRODUCT",
+          "pin_headline": "Small business marketing starts with a brand that looks the part",
+          "category_label": "BRANDING",
+          "seo_title": "Small business marketing starts with a brand that looks the part",
+          "seo_description": "Small business marketing only works when your brand looks credible enough for people to trust. A premade branding kit gives you 1,000+ Canva templates - social posts, stories, ebooks, and more - so every touchpoint looks consistent and professional. Click to browse! #smallbusinessmarketing #smallbusinessbranding #canvatemplates",
+          "design_brief": "Flat lay on a warm linen surface with a MacBook open showing a Canva branding dashboard, flanked by a small potted plant and a coffee mug. Colour tones: cream, warm white, and terracotta. Soft natural light from the left. Text overlay space in the upper-left third reading the pin headline in dark charcoal. Switzertemplates.com watermark bottom-right.",
+          "destination_url": "https://www.switzertemplates.com/branding-packages"
+        },
+        {
+          "id": "11b",
+          "type": "PRODUCT",
+          "pin_headline": "Small business marketing that looks professional from day one",
+          "category_label": "BUSINESS BUNDLE",
+          "seo_title": "Small business marketing that looks professional from day one",
+          "seo_description": "Small business marketing is harder when your brand, website, and content all look different. The 3-in-1 Business Bundle gives you a premade Wix website, a full branding kit, and a Canva landing page - designed to match - so every platform looks cohesive before you spend a cent on ads. Have a browse! #smallbusinessmarketing #onlinebusiness #premadebranding",
+          "design_brief": "Laptop open on a warm oak desk showing a premade Wix website homepage, with a phone beside it displaying a matching Instagram feed. Colour tones: sage green, warm white, and dusty pink. Soft natural light from the upper left. Text overlay space in the top-right third. Switzertemplates.com watermark bottom-right.",
+          "destination_url": "https://www.switzertemplates.com/business-template-bundles"
+        },
+        {
+          "id": "11c",
+          "type": "PRODUCT",
+          "pin_headline": "Small business marketing templates - save time and stay consistent",
+          "category_label": "TEMPLATES",
+          "seo_title": "Small business marketing templates - save time and stay consistent",
+          "seo_description": "Small business marketing breaks down when you run out of content ideas or your posts look inconsistent. Our Instagram template pack gives you ready-made Canva designs for posts, stories, and carousels - so you can show up every week without starting from scratch. Grab it in my Etsy store! #smallbusinessmarketing #instagramtemplates #socialmediatemplates",
+          "design_brief": "Phone mockup held in a hand against a cream and blush pink background, screen showing a colourful Instagram grid with consistent branding. Colour tones: blush pink, cream, and warm gold. Soft diffused natural light from the right. Text overlay space in the upper-left third. Switzertemplates.com watermark bottom-right.",
+          "destination_url": "https://www.switzertemplates.com/instagram-templates"
+        },
+        {
+          "id": "11d",
+          "type": "EDUCATIONAL",
+          "pin_headline": "Small business marketing mistakes that are costing you clients",
+          "category_label": "MARKETING TIPS",
+          "seo_title": "Small business marketing mistakes that are costing you clients",
+          "seo_description": "Small business marketing fails when your visuals don't match your message. If your Instagram looks different from your website and your website looks different from your emails, potential clients lose trust before they even contact you. Here's what a consistent brand actually covers - and how to get it without hiring a designer. #smallbusinessmarketing #smallbusinesstips #brandidentitytips",
+          "design_brief": "Clean flat lay on a white marble surface with an open notebook, a pen, and a tablet showing a brand mood board. Colour tones: white, slate grey, and warm gold accents. Soft natural light from the left. Bold text overlay in the upper half listing the pin headline. Switzertemplates.com watermark bottom-right.",
+          "destination_url": "https://www.switzertemplates.com/blog"
+        },
+        {
+          "id": "11e",
+          "type": "EDUCATIONAL",
+          "pin_headline": "Small business marketing: the 6 content types you should rotate",
+          "category_label": "CONTENT STRATEGY",
+          "seo_title": "Small business marketing: the 6 content types you should rotate",
+          "seo_description": "A scattered small business marketing strategy comes from not having a repeatable system. Rotate through these six content types each week - tip, result, product, story, repost, question - and you'll always know what to post without overthinking it. Save this for your next content planning session. #smallbusinessmarketing #contentstrategytips #socialmediatemplates",
+          "design_brief": "Styled desk scene with a laptop open to a Canva template, a small weekly planner, and a glass of water. Colour tones: dusty pink, cream, and warm white. Soft natural light from the upper left. Text overlay in the upper two-thirds listing the six content types in large readable font. Switzertemplates.com watermark bottom-right.",
+          "destination_url": "https://www.switzertemplates.com/blog"
+        }
+      ],
+      "topic": "Small Business Marketing",
+      "pt_ocr_best": 0.0055,
+      "data_sources": [
+        "KE",
+        "PT",
+        "OA"
+      ]
+    },
+    {
+      "topic_id": 12,
+      "keyword": "instagram templates for coaches",
+      "keyword_volume": 0,
+      "final_score": 210.6,
+      "product_match": 3,
+      "maps_to_product": "Instagram Template Pack",
+      "variation_split": "4 PRODUCT + 1 EDUCATIONAL",
+      "blog": {
+        "existing_post_likely": false,
+        "note": "",
+        "blog_post_needed": true,
+        "brief_for_blog_agent": "Write a post on how coaches can use Instagram templates to build a consistent, professional feed without spending hours on design. Cover what to look for in a template pack and how to customise it to fit a personal brand."
+      },
+      "variations": [
+        {
+          "id": "12a",
+          "type": "PRODUCT",
+          "pin_headline": "Instagram templates for coaches - look professional without the design stress",
+          "category_label": "INSTAGRAM TEMPLATES",
+          "seo_title": "Instagram templates for coaches - look professional without the design stress",
+          "seo_description": "Instagram templates for coaches give you a ready-made visual system so your feed looks intentional and on-brand every single week. Our Canva pack includes posts, stories, and carousels - all designed for service-based coaches who want a consistent feed without spending hours on Canva from scratch. Click to browse! #instagramtemplates #coachingbusiness #canvatemplates",
+          "design_brief": "Phone mockup on a warm linen surface showing a polished Instagram grid with consistent soft tones and coaching-style content. Colour tones: sage green, warm white, and dusty pink. Soft natural light from the left. Text overlay space in the upper-left third. Switzertemplates.com watermark bottom-right.",
+          "destination_url": "https://www.switzertemplates.com/instagram-templates"
+        },
+        {
+          "id": "12b",
+          "type": "PRODUCT",
+          "pin_headline": "Instagram templates for coaches that make your feed look established",
+          "category_label": "INSTAGRAM TEMPLATES",
+          "seo_title": "Instagram templates for coaches that make your feed look established",
+          "seo_description": "A generic-looking feed is costing coaches credibility before a potential client even reads the bio. Instagram templates for coaches give you a complete Canva design system - posts, stories, carousels, and highlights - so your content looks consistent and your brand feels established from the first scroll. Grab it in my Etsy store! #instagramtemplates #canvatemplates #servicebusiness",
+          "design_brief": "Tablet propped on a cream and terracotta styled desk showing a Canva Instagram template layout with coach-branded content. Colour tones: terracotta, cream, and warm white. Soft natural light from the upper right. Text overlay space at the top of the image. Switzertemplates.com watermark bottom-right.",
+          "destination_url": "https://www.switzertemplates.com/instagram-templates"
+        },
+        {
+          "id": "12c",
+          "type": "PRODUCT",
+          "pin_headline": "Get more clients using Instagram templates for coaches",
+          "category_label": "INSTAGRAM TEMPLATES",
+          "seo_title": "Get more clients using Instagram templates for coaches",
+          "seo_description": "Instagram templates for coaches take the guesswork out of what to post and how to make it look good. A professional Canva template pack gives you reusable designs across every format - so you can show up consistently, build trust faster, and spend less time on content and more time coaching. Check it out --> #instagramtemplates #coachingbusiness #smallbusinesstips",
+          "design_brief": "Laptop open on a warm oak desk showing a Canva template editor with a coaching Instagram post in progress. Colour tones: warm white, sage, and muted gold. Soft diffused light from the left. Text overlay space in the upper-right corner. Switzertemplates.com watermark bottom-right.",
+          "destination_url": "https://www.switzertemplates.com/instagram-templates"
+        },
+        {
+          "id": "12d",
+          "type": "PRODUCT",
+          "pin_headline": "Instagram templates for coaches - a complete Canva content kit",
+          "category_label": "INSTAGRAM TEMPLATES",
+          "seo_title": "Instagram templates for coaches - a complete Canva content kit",
+          "seo_description": "Save time building your content calendar by starting with Instagram templates for coaches that already have the layout, fonts, and colour palette sorted. Customise in Canva, add your content, and post - no design decisions needed. Works for life coaches, business coaches, and wellness coaches. Have a browse! #instagramtemplates #canvatemplates #coachingbusiness",
+          "design_brief": "Flat lay on a pale pink surface with a phone and printed Instagram grid mock-ups spread out alongside a coffee cup. Colour tones: blush pink, cream, and sage. Soft natural light from the left. Text overlay space in the upper-left third showing the headline clearly. Switzertemplates.com watermark bottom-right.",
+          "destination_url": "https://www.switzertemplates.com/instagram-templates"
+        },
+        {
+          "id": "12e",
+          "type": "EDUCATIONAL",
+          "pin_headline": "Instagram templates for coaches: what to post every week (save this)",
+          "category_label": "CONTENT TIPS",
+          "seo_title": "Instagram templates for coaches: what to post every week (save this)",
+          "seo_description": "Instagram templates for coaches work best when paired with a repeatable posting plan. Use this weekly rotation: one client result, one tip, one behind-the-scenes, one offer reminder. Four post types, done. A consistent template keeps the execution fast so the ideas stay fresh. #instagramtemplates #contentstrategytips #coachingbusiness",
+          "design_brief": "Clean styled desk scene with an open planner, a pen, and a phone displaying a coaching Instagram post. Colour tones: cream, warm white, and dusty rose. Soft natural light from the upper left. Bold text overlay in the upper two-thirds listing the four weekly content types. Switzertemplates.com watermark bottom-right.",
+          "destination_url": "https://www.switzertemplates.com/blog"
+        }
+      ],
+      "topic": "Instagram Templates For Coaches",
+      "pt_ocr_best": 0.0055,
+      "data_sources": [
+        "KE",
+        "PT",
+        "OA"
+      ]
+    },
+    {
+      "topic_id": 13,
+      "keyword": "instagram templates for therapists",
+      "keyword_volume": 0,
+      "final_score": 210.6,
+      "product_match": 3,
+      "maps_to_product": "Instagram Template Pack",
+      "variation_split": "4 PRODUCT + 1 EDUCATIONAL",
+      "blog": {
+        "existing_post_likely": false,
+        "note": "",
+        "blog_post_needed": true,
+        "brief_for_blog_agent": "Write a post on how therapists can use Instagram templates to build a warm, trustworthy online presence without spending time on design. Cover tone, consistency, and what to include in a weekly posting rotation."
+      },
+      "variations": [
+        {
+          "id": "13a",
+          "type": "PRODUCT",
+          "pin_headline": "Instagram templates for therapists - build trust with every post",
+          "category_label": "INSTAGRAM TEMPLATES",
+          "seo_title": "Instagram templates for therapists - build trust with every post",
+          "seo_description": "Instagram templates for therapists give you a calm, professional visual style that reflects the nature of your work - without spending hours in Canva. Our pack includes posts, stories, and carousels designed for service-based practitioners who want a consistent, trustworthy feed. Click to browse! #instagramtemplates #therapistmarketing #canvatemplates",
+          "design_brief": "Phone mockup resting on a warm linen surface beside a small plant and a candle, screen showing a soft, minimal Instagram feed with muted wellness tones. Colour tones: warm white, sage green, and soft terracotta. Soft natural light from the left. Text overlay space in the upper-left third. Switzertemplates.com watermark bottom-right.",
+          "destination_url": "https://www.switzertemplates.com/instagram-templates"
+        },
+        {
+          "id": "13b",
+          "type": "PRODUCT",
+          "pin_headline": "Instagram templates for therapists that make your practice look established",
+          "category_label": "INSTAGRAM TEMPLATES",
+          "seo_title": "Instagram templates for therapists that make your practice look established",
+          "seo_description": "A disjointed Instagram feed can undermine the trust a therapist needs to build with potential clients. Instagram templates for therapists give you a complete Canva design system - consistent fonts, colours, and layouts across every post type - so your practice looks professional and credible before someone even books a call. Grab it in my Etsy store! #instagramtemplates #therapistmarketing #smallbusinessbranding",
+          "design_brief": "Tablet on a marble desk surface showing a Canva template editor with a soft wellness-style Instagram post layout. Colour tones: white, dusty mauve, and sage. Soft diffused natural light from the right. Text overlay space at the top of the image. Switzertemplates.com watermark bottom-right.",
+          "destination_url": "https://www.switzertemplates.com/instagram-templates"
+        },
+        {
+          "id": "13c",
+          "type": "PRODUCT",
+          "pin_headline": "Save time with Instagram templates for therapists ready to customise",
+          "category_label": "INSTAGRAM TEMPLATES",
+          "seo_title": "Save time with Instagram templates for therapists ready to customise",
+          "seo_description": "Instagram templates for therapists remove the design decisions so you can focus on the content. Open in Canva, swap your text and photos, and post - every template is already styled for a warm, professional practice aesthetic. Works for psychologists, counsellors, and mental health coaches too. Check it out --> #instagramtemplates #canvatemplates #servicebusiness",
+          "design_brief": "Laptop on a warm oak desk showing the Canva editor with a therapist-branded Instagram post template open. Colour tones: warm white, muted sage, and blush pink. Soft natural light from the upper left. Text overlay space in the upper-right corner of the pin. Switzertemplates.com watermark bottom-right.",
+          "destination_url": "https://www.switzertemplates.com/instagram-templates"
+        },
+        {
+          "id": "13d",
+          "type": "PRODUCT",
+          "pin_headline": "Instagram templates for therapists - look consistent without the design work",
+          "category_label": "INSTAGRAM TEMPLATES",
+          "seo_title": "Instagram templates for therapists - look consistent without the design work",
+          "seo_description": "Starting from scratch on your Instagram content takes time that most therapists don't have. Instagram templates for therapists give you posts, stories, and carousels - all in one cohesive style - so your feed looks intentional and your content goes out on time, every week. Have a browse! #instagramtemplates #therapistmarketing #socialmediatemplates",
+          "design_brief": "Flat lay on a pale sage green surface with a phone showing a minimal Instagram grid, surrounded by small stationery items and a dried flower stem. Colour tones: sage green, cream, and warm white. Soft natural light from the left. Text overlay space in the upper-left third. Switzertemplates.com watermark bottom-right.",
+          "destination_url": "https://www.switzertemplates.com/instagram-templates"
+        },
+        {
+          "id": "13e",
+          "type": "EDUCATIONAL",
+          "pin_headline": "Instagram templates for therapists: 4 post ideas that attract the right clients",
+          "category_label": "CONTENT TIPS",
+          "seo_title": "Instagram templates for therapists: 4 post ideas that attract the right clients",
+          "seo_description": "Instagram templates for therapists are most effective when paired with content that builds genuine connection. Try rotating these four post types: one myth-bust, one client transformation story, one tip, one soft call to book. Consistent visuals plus the right content type is what turns followers into enquiries. #instagramtemplates #therapistmarketing #contentstrategytips",
+          "design_brief": "Styled desk flat lay with an open notebook showing a hand-written content plan, a cup of tea, and a phone displaying a wellness Instagram post. Colour tones: cream, dusty rose, and warm white. Soft natural light from the upper left. Text overlay in the upper two-thirds listing the four post types. Switzertemplates.com watermark bottom-right.",
+          "destination_url": "https://www.switzertemplates.com/blog"
+        }
+      ],
+      "topic": "Instagram Templates For Therapists",
+      "pt_ocr_best": 0.0055,
+      "data_sources": [
+        "KE",
+        "PT",
+        "OA"
+      ]
+    },
+    {
+      "topic_id": 14,
+      "keyword": "instagram templates for consultants",
+      "keyword_volume": 0,
+      "final_score": 210.6,
+      "product_match": 3,
+      "maps_to_product": "Instagram Template Pack",
+      "variation_split": "4 PRODUCT + 1 EDUCATIONAL",
+      "blog": {
+        "existing_post_likely": false,
+        "note": "",
+        "blog_post_needed": true,
+        "brief_for_blog_agent": "Write a post on how consultants can use Instagram templates to position themselves as credible experts and attract high-quality clients. Cover visual consistency, content types that work for consultants, and how to customise templates to reflect a personal brand."
+      },
+      "variations": [
+        {
+          "id": "14a",
+          "type": "PRODUCT",
+          "pin_headline": "Instagram templates for consultants that attract high-quality clients",
+          "category_label": "INSTAGRAM TEMPLATES",
+          "seo_title": "Instagram templates for consultants that attract high-quality clients",
+          "seo_description": "Instagram templates for consultants give your feed the polished, expert look that builds credibility with the clients you actually want to work with. Our Canva pack covers posts, stories, and carousels - all in a cohesive professional style - so your content reflects the quality of your work before anyone reaches out. Click to browse! #instagramtemplates #consultantmarketing #canvatemplates",
+          "design_brief": "Phone on a warm marble surface showing a sharp, editorial Instagram feed with consultant-style content. Colour tones: warm white, slate, and muted gold. Soft natural light from the left. Text overlay space in the upper-left third. Switzertemplates.com watermark bottom-right.",
+          "destination_url": "https://www.switzertemplates.com/instagram-templates"
+        },
+        {
+          "id": "14b",
+          "type": "PRODUCT",
+          "pin_headline": "Instagram templates for consultants - a premade Canva content kit",
+          "category_label": "INSTAGRAM TEMPLATES",
+          "seo_title": "Instagram templates for consultants - a premade Canva content kit",
+          "seo_description": "A scattered Instagram presence is costing consultants clients before they read a single word of the bio. Instagram templates for consultants give you a complete design system - consistent fonts, colours, and layouts across every post type - so your profile looks as professional as the service you deliver. Grab it in my Etsy store! #instagramtemplates #canvatemplates #servicebusiness",
+          "design_brief": "Laptop on a warm oak desk showing the Canva editor with a consultant-branded Instagram post open. Colour tones: warm white, charcoal, and sage green. Soft diffused light from the upper right. Text overlay space at the top of the pin. Switzertemplates.com watermark bottom-right.",
+          "destination_url": "https://www.switzertemplates.com/instagram-templates"
+        },
+        {
+          "id": "14c",
+          "type": "PRODUCT",
+          "pin_headline": "Get more clients using Instagram templates for consultants",
+          "category_label": "INSTAGRAM TEMPLATES",
+          "seo_title": "Get more clients using Instagram templates for consultants",
+          "seo_description": "Save time building your content by starting with Instagram templates for consultants that already have the layout and style sorted. Customise your text, swap your brand colours, and post - no design experience needed. Includes posts, stories, carousels, and more in one ready-to-use Canva pack. Check it out --> #instagramtemplates #socialmediatemplates #onlinebusiness",
+          "design_brief": "Tablet propped on a cream linen surface showing a Canva template pack preview with multiple consultant-branded Instagram layouts visible. Colour tones: cream, warm white, and dusty blue-grey. Soft natural light from the left. Text overlay space in the upper-right third. Switzertemplates.com watermark bottom-right.",
+          "destination_url": "https://www.switzertemplates.com/instagram-templates"
+        },
+        {
+          "id": "14d",
+          "type": "PRODUCT",
+          "pin_headline": "Instagram templates for consultants ready to post this week",
+          "category_label": "INSTAGRAM TEMPLATES",
+          "seo_title": "Instagram templates for consultants ready to post this week",
+          "seo_description": "Instagram templates for consultants take you from blank screen to a full week of content without the design stress. Every template opens in Canva - add your content, apply your colours, and post. Professional, consistent, and done in an hour instead of a day. Have a browse! #instagramtemplates #canvatemplates #smallbusinesstips",
+          "design_brief": "Phone mockup held in a hand against a clean warm-white background, screen showing a consultant-style Instagram post with bold typography and minimal layout. Colour tones: warm white, terracotta, and charcoal. Soft studio light from the upper left. Text overlay space in the upper-left corner. Switzertemplates.com watermark bottom-right.",
+          "destination_url": "https://www.switzertemplates.com/instagram-templates"
+        },
+        {
+          "id": "14e",
+          "type": "EDUCATIONAL",
+          "pin_headline": "Instagram templates for consultants: the content types that build authority",
+          "category_label": "CONTENT TIPS",
+          "seo_title": "Instagram templates for consultants: the content types that build authority",
+          "seo_description": "Instagram templates for consultants are most effective when the content matches the visual credibility. These are the post types that build authority fast: client results, process breakdowns, myth-busting, and direct offers. Pair a consistent template with these content types and your profile starts doing the selling for you. #instagramtemplates #consultantmarketing #contentstrategytips",
+          "design_brief": "Flat lay on a white marble surface with an open notebook, a pen, and a phone showing a polished Instagram post. Colour tones: white, warm gold, and sage. Soft natural light from the right. Text overlay in the upper two-thirds listing the four authority content types. Switzertemplates.com watermark bottom-right.",
+          "destination_url": "https://www.switzertemplates.com/blog"
+        }
+      ],
+      "topic": "Instagram Templates For Consultants",
+      "pt_ocr_best": 0.0055,
+      "data_sources": [
+        "KE",
+        "PT",
+        "OA"
+      ]
+    },
+    {
+      "topic_id": 15,
+      "keyword": "how to grow business",
+      "keyword_volume": 1300,
+      "final_score": 169.6,
+      "product_match": 2,
+      "maps_to_product": "Audience — all products",
+      "variation_split": "3 PRODUCT + 2 EDUCATIONAL",
+      "blog": {
+        "existing_post_likely": true,
+        "note": "check blog for existing post",
+        "blog_post_needed": false,
+        "brief_for_blog_agent": ""
+      },
+      "variations": [
+        {
+          "id": "15a",
+          "type": "PRODUCT",
+          "pin_headline": "How to grow your business faster with a professional online presence",
+          "category_label": "BUSINESS GROWTH",
+          "seo_title": "How to grow your business faster with a professional online presence",
+          "seo_description": "How to grow your business often comes down to one thing: how you look online before someone decides to reach out. A premade Wix website gives you a professional, fully designed site - services, about, contact, and booking pages included - so your online presence works for you around the clock. Click to browse! #smallbusinesstips #premadewebsite #onlinebusiness",
+          "design_brief": "Laptop on a warm oak desk showing a clean Wix website homepage with a professional service-based business layout. Colour tones: warm white, sage, and muted gold. Soft natural light from the left. Text overlay space in the upper-left third. Switzertemplates.com watermark bottom-right.",
+          "destination_url": "https://www.switzertemplates.com/premade-wix-website-templates-for-sale"
+        },
+        {
+          "id": "15b",
+          "type": "PRODUCT",
+          "pin_headline": "How to grow your business with branding that builds trust instantly",
+          "category_label": "BRANDING",
+          "seo_title": "How to grow your business with branding that builds trust instantly",
+          "seo_description": "How to grow your business becomes a lot clearer when your brand looks consistent everywhere a potential client finds you. Our branding kit gives you 1,000+ Canva templates across social media, email, print, and more - so every platform reflects the same professional standard and clients feel confident before they even reach out. Have a browse! #smallbusinessbranding #brandingkit #smallbusinesstips",
+          "design_brief": "Flat lay on a cream linen surface showing printed brand collateral - business card, social media mockups, and a phone displaying an Instagram feed, all in a matching palette. Colour tones: cream, terracotta, and warm white. Soft natural light from the upper left. Text overlay space at the top of the image. Switzertemplates.com watermark bottom-right.",
+          "destination_url": "https://www.switzertemplates.com/branding-packages"
+        },
+        {
+          "id": "15c",
+          "type": "PRODUCT",
+          "pin_headline": "How to grow your business online - brand, website, and content in one bundle",
+          "category_label": "BUSINESS BUNDLE",
+          "seo_title": "How to grow your business online - brand, website, and content in one bundle",
+          "seo_description": "A fragmented online presence is one of the biggest reasons service businesses struggle to grow. How to grow your business online starts with looking credible everywhere at once - and the 3-in-1 Business Bundle gives you a matching Wix website, branding kit, and landing page so every platform looks like it belongs together from day one. Grab it in my Etsy store! #smallbusinesstips #onlinebusiness #premadebranding",
+          "design_brief": "Laptop and phone side by side on a marble desk surface, laptop showing a Wix website homepage and phone showing a matching Instagram feed. Colour tones: white, dusty pink, and sage. Soft diffused light from the right. Text overlay space in the upper-left third. Switzertemplates.com watermark bottom-right.",
+          "destination_url": "https://www.switzertemplates.com/business-template-bundles"
+        },
+        {
+          "id": "15d",
+          "type": "EDUCATIONAL",
+          "pin_headline": "How to grow your business: the 3 things holding most service providers back",
+          "category_label": "BUSINESS TIPS",
+          "seo_title": "How to grow your business: the 3 things holding most service providers back",
+          "seo_description": "How to grow your business is not usually a strategy problem - it's a credibility problem. The three most common blockers: an inconsistent brand, a weak or missing website, and social media content that looks rushed. Fix those three and the strategy starts working. Here's what a complete, professional online presence actually looks like. #smallbusinesstips #onlinebusiness #brandidentitytips",
+          "design_brief": "Clean styled desk with an open laptop showing a notes document, a coffee cup, and a small succulent. Colour tones: warm white, sage, and cream. Soft natural light from the left. Bold text overlay in the upper half listing the three blockers clearly. Switzertemplates.com watermark bottom-right.",
+          "destination_url": "https://www.switzertemplates.com/blog"
+        },
+        {
+          "id": "15e",
+          "type": "EDUCATIONAL",
+          "pin_headline": "How to grow your business on Instagram without spending hours on content",
+          "category_label": "SOCIAL MEDIA TIPS",
+          "seo_title": "How to grow your business on Instagram without spending hours on content",
+          "seo_description": "Starting from scratch on your Instagram content every week is one of the biggest time drains for service business owners. How to grow your business on Instagram starts with a repeatable system - consistent templates, a weekly content rotation, and a posting schedule you can actually stick to. Save this as your starting framework. #smallbusinesstips #instagramtemplates #contentstrategytips",
+          "design_brief": "Phone propped on a warm cream desk showing an Instagram planning app with a styled grid preview. Colour tones: cream, blush pink, and warm white. Soft natural light from the upper right. Text overlay space in the upper-left third. Switzertemplates.com watermark bottom-right.",
+          "destination_url": "https://www.switzertemplates.com/blog"
+        }
+      ],
+      "topic": "How To Grow Business",
+      "pt_ocr_best": 0.0112,
+      "data_sources": [
+        "KE",
+        "PT",
+        "OA"
+      ]
+    },
+    {
+      "topic_id": 16,
+      "keyword": "online store template",
+      "keyword_volume": 1300,
+      "final_score": 164.6,
+      "product_match": 2,
+      "maps_to_product": "Premade Wix Website",
+      "variation_split": "3 PRODUCT + 2 EDUCATIONAL",
+      "blog": {
+        "existing_post_likely": true,
+        "note": "check blog for existing post",
+        "blog_post_needed": false,
+        "brief_for_blog_agent": ""
+      },
+      "variations": [
+        {
+          "id": "16a",
+          "type": "PRODUCT",
+          "pin_headline": "Online store template built on Wix - ready to launch this week",
+          "category_label": "WIX WEBSITE",
+          "seo_title": "Online store template built on Wix - ready to launch this week",
+          "seo_description": "An online store template that is already designed means you skip months of figuring out layout, fonts, and product pages from scratch. Our premade Wix website templates include a full shop setup - homepage, product pages, and checkout - so you can customise your content and go live fast, no coding needed. Click to browse! #wixwebsitetemplate #premadewebsite #onlinebusiness",
+          "design_brief": "Laptop on a warm oak desk showing a clean Wix eCommerce homepage with styled product imagery. Colour tones: warm white, terracotta, and sage. Soft natural light from the left. Text overlay space in the upper-left third. Switzertemplates.com watermark bottom-right.",
+          "destination_url": "https://www.switzertemplates.com/premade-wix-website-templates-for-sale"
+        },
+        {
+          "id": "16b",
+          "type": "PRODUCT",
+          "pin_headline": "Online store template that looks custom without the custom price tag",
+          "category_label": "WIX WEBSITE",
+          "seo_title": "Online store template that looks custom without the custom price tag",
+          "seo_description": "A generic-looking online store template costs you sales before a customer adds anything to the cart. Our premade Wix website templates are designed to look editorial and premium - hard to tell they started as templates. You get a complete shop layout, styled product pages, and an about section, all ready to customise. Have a browse! #wixwebsitetemplate #premadewebsite #wixtemplate",
+          "design_brief": "Phone and laptop side by side on a marble surface, both showing the same Wix online store in a cohesive editorial style. Colour tones: white, dusty pink, and warm gold. Soft diffused light from the upper left. Text overlay space at the top of the pin image. Switzertemplates.com watermark bottom-right.",
+          "destination_url": "https://www.switzertemplates.com/premade-wix-website-templates-for-sale"
+        },
+        {
+          "id": "16c",
+          "type": "PRODUCT",
+          "pin_headline": "Save time with an online store template that is already done for you",
+          "category_label": "WIX WEBSITE",
+          "seo_title": "Save time with an online store template that is already done for you",
+          "seo_description": "Building an online store from scratch on Wix takes weeks if you're designing as you go. An online store template gives you a fully built starting point - every page planned, every section placed - so you swap in your content and launch without the layout headaches. Grab it in my Etsy store! #wixwebsitetemplate #wixtemplate #onlinebusiness",
+          "design_brief": "Tablet on a cream linen surface showing a Wix store template with a clean product grid layout. Colour tones: cream, sage, and warm white. Soft natural light from the right. Text overlay space in the upper-right third. Switzertemplates.com watermark bottom-right.",
+          "destination_url": "https://www.switzertemplates.com/premade-wix-website-templates-for-sale"
+        },
+        {
+          "id": "16d",
+          "type": "EDUCATIONAL",
+          "pin_headline": "Online store template vs custom build: which one is right for you?",
+          "category_label": "WEBSITE TIPS",
+          "seo_title": "Online store template vs custom build: which one is right for you?",
+          "seo_description": "An online store template is not a compromise - it is a smarter starting point for most small businesses. Custom builds take months and cost thousands. A premade Wix template gives you a professional, fully functional store in days, with the flexibility to customise every section yourself. Here's how to decide which route makes sense for where your business is right now. #wixwebsitetemplate #smallbusinesstips #onlinebusiness",
+          "design_brief": "Clean flat lay on a white marble surface with a notebook open to a pros and cons list, a laptop in the background showing a website, and a coffee mug. Colour tones: white, slate grey, and warm gold. Soft natural light from the left. Text overlay in the upper half listing the pin headline. Switzertemplates.com watermark bottom-right.",
+          "destination_url": "https://www.switzertemplates.com/blog"
+        },
+        {
+          "id": "16e",
+          "type": "EDUCATIONAL",
+          "pin_headline": "Online store template checklist: every page your shop needs to convert",
+          "category_label": "WEBSITE TIPS",
+          "seo_title": "Online store template checklist: every page your shop needs to convert",
+          "seo_description": "Most online store templates miss at least one page that directly affects conversions. Before you launch, make sure yours has: a homepage with a clear offer, an about page that builds trust, product pages with strong descriptions, and a contact page. Save this checklist before you go live. #wixwebsitetemplate #premadewebsite #smallbusinesstips",
+          "design_brief": "Styled desk flat lay with an open checklist notebook, a pen, and a laptop showing a Wix store homepage in the background. Colour tones: cream, warm white, and dusty rose. Soft natural light from the upper left. Text overlay in the upper two-thirds listing the checklist items. Switzertemplates.com watermark bottom-right.",
+          "destination_url": "https://www.switzertemplates.com/blog"
+        }
+      ],
+      "topic": "Online Store Template",
+      "pt_ocr_best": 0.0055,
+      "data_sources": [
+        "KE",
+        "PT",
+        "OA"
+      ]
+    },
+    {
+      "topic_id": 17,
+      "keyword": "branding kit canva",
+      "keyword_volume": 1600,
+      "final_score": 158.9,
+      "product_match": 3,
+      "maps_to_product": "Full Branding Kit",
+      "variation_split": "4 PRODUCT + 1 EDUCATIONAL",
+      "blog": {
+        "existing_post_likely": true,
+        "note": "check blog for existing post",
+        "blog_post_needed": false,
+        "brief_for_blog_agent": ""
+      },
+      "variations": [
+        {
+          "id": "17a",
+          "type": "PRODUCT",
+          "pin_headline": "Branding kit Canva templates - 1,000+ designs ready to customise",
+          "category_label": "BRANDING KIT",
+          "seo_title": "Branding kit Canva templates - 1,000+ designs ready to customise",
+          "seo_description": "A branding kit Canva pack gives you a complete visual identity in one place - logo variations, colour palette, fonts, and 1,000+ templates across social media, email, print, and ebooks - so every platform looks consistent and your business feels established the moment you go live. Click to browse! #brandingkit #canvatemplates #smallbusinessbranding",
+          "design_brief": "Laptop on a warm cream desk showing a Canva branding kit template pack with multiple social media layouts visible. Colour tones: cream, terracotta, and warm white. Soft natural light from the left. Text overlay space in the upper-left third. Switzertemplates.com watermark bottom-right.",
+          "destination_url": "https://www.switzertemplates.com/branding-packages"
+        },
+        {
+          "id": "17b",
+          "type": "PRODUCT",
+          "pin_headline": "Branding kit Canva - look established from day one without hiring a designer",
+          "category_label": "BRANDING KIT",
+          "seo_title": "Branding kit Canva - look established from day one without hiring a designer",
+          "seo_description": "A scattered look across your platforms is costing you clients before they even read your offer. Our branding kit Canva pack gives you a cohesive visual system - logos, colour palette, fonts, and templates for every platform - already designed and ready to apply, so your brand looks intentional from the very first post. Grab it in my Etsy store! #brandingkit #premadebranding #canvatemplates",
+          "design_brief": "Flat lay on a marble surface with printed brand collateral - a business card, a social media mockup, and a colour palette swatch card - all in a matching warm editorial palette. Colour tones: warm white, blush pink, and gold. Soft diffused light from the upper left. Text overlay space at the top of the image. Switzertemplates.com watermark bottom-right.",
+          "destination_url": "https://www.switzertemplates.com/branding-packages"
+        },
+        {
+          "id": "17c",
+          "type": "PRODUCT",
+          "pin_headline": "Get a complete branding kit Canva system that covers every platform",
+          "category_label": "BRANDING KIT",
+          "seo_title": "Get a complete branding kit Canva system that covers every platform",
+          "seo_description": "Starting your branding from scratch in Canva takes weeks of design decisions you don't have time for. A premade branding kit Canva pack gives you a ready-built visual system - logo, palette, fonts, and 1,000+ templates for social media, email, print, and more - so you apply it once and look consistent everywhere. Check it out --> #brandingkit #canvatemplates #brandidentitytips",
+          "design_brief": "Phone and tablet side by side on a warm linen surface, showing matching Instagram and email newsletter designs from the same branding kit. Colour tones: sage green, warm white, and cream. Soft natural light from the right. Text overlay space in the upper-left third. Switzertemplates.com watermark bottom-right.",
+          "destination_url": "https://www.switzertemplates.com/branding-packages"
+        },
+        {
+          "id": "17d",
+          "type": "PRODUCT",
+          "pin_headline": "Branding kit Canva pack for coaches and service-based businesses",
+          "category_label": "BRANDING KIT",
+          "seo_title": "Branding kit Canva pack for coaches and service-based businesses",
+          "seo_description": "A professional branding kit Canva system gives coaches and service providers the visual foundation they need to attract the right clients - without spending months on brand design or thousands on a designer. Our pack includes logo variations, a full colour and font system, and 1,000+ templates across every format your business needs. Have a browse! #brandingkit #canvatemplates #coachingbusiness",
+          "design_brief": "Laptop open on a warm oak desk showing a Canva branding kit with a coach-branded Instagram post visible. Beside the laptop, a small plant and a notebook. Colour tones: warm white, sage, and dusty pink. Soft natural light from the upper left. Text overlay space in the upper-right corner. Switzertemplates.com watermark bottom-right.",
+          "destination_url": "https://www.switzertemplates.com/branding-packages"
+        },
+        {
+          "id": "17e",
+          "type": "EDUCATIONAL",
+          "pin_headline": "Branding kit Canva: what a complete brand actually includes (save this)",
+          "category_label": "BRANDING TIPS",
+          "seo_title": "Branding kit Canva: what a complete brand actually includes (save this)",
+          "seo_description": "Most people build a branding kit Canva setup by starting with a logo and stopping there. A complete brand system covers a logo suite, a colour palette, a font pairing, social media templates, email headers, and print collateral - so every platform looks like it belongs together. Without all of these, your brand won't build recognition no matter how good the logo is. #brandingkit #smallbusinessbranding #brandidentitytips",
+          "design_brief": "Clean desk scene with a notebook open to a brand checklist, a pen, and a laptop in the background showing a Canva branding dashboard. Colour tones: white, warm gold, and sage. Soft natural light from the left. Text overlay in the upper half listing the components of a complete brand. Switzertemplates.com watermark bottom-right.",
+          "destination_url": "https://www.switzertemplates.com/blog"
+        }
+      ],
+      "topic": "Branding Kit Canva",
+      "pt_ocr_best": 0.0055,
+      "data_sources": [
+        "KE",
+        "PT",
+        "OA"
+      ]
+    },
+    {
+      "topic_id": 18,
+      "keyword": "Pinterest for business",
+      "keyword_volume": 18100,
+      "final_score": 149.6,
+      "product_match": 2,
+      "maps_to_product": "Audience — all products",
+      "variation_split": "3 PRODUCT + 2 EDUCATIONAL",
+      "blog": {
+        "existing_post_likely": true,
+        "note": "check blog for existing post",
+        "blog_post_needed": false,
+        "brief_for_blog_agent": ""
+      },
+      "variations": [
+        {
+          "id": "18a",
+          "type": "EDUCATIONAL",
+          "pin_headline": "Pinterest is a search engine - are you using it like one",
+          "category_label": "PINTEREST TIPS",
+          "seo_title": "Pinterest for business - why it drives traffic long after you post",
+          "seo_description": "Pinterest for business works differently from every other platform. A single pin can drive traffic to your website for 6 to 18 months after it goes live - but only if it's optimised with the right keywords and a clear reason to click. Here's what that looks like in practice. Click to browse!",
+          "design_brief": "BRIGHT AIRY WHITE. A woman in her early 30s seated at a minimalist white desk, facing slightly away from camera, writing in a large open planner with a fine pen. Her posture is relaxed and focused. The desk is near a bright window - pure white daylight fills the frame. A small white ceramic plant pot and a single pen cup are the only props. Her clothing is cream and white. Ultra-clean, editorial composition. Wide shot showing desk, chair, and window. Text overlay space across the top quarter of the frame.",
+          "highlight_words": [
+            "search engine"
+          ],
+          "destination_url": "https://www.switzertemplates.com/blog"
+        },
+        {
+          "id": "18b",
+          "type": "PRODUCT",
+          "pin_headline": "Your Pinterest profile is the first thing clients judge you on",
+          "category_label": "PINTEREST TIPS",
+          "seo_title": "Pinterest for business works better when your brand looks consistent",
+          "seo_description": "Using Pinterest for business means every pin is a first impression. When your brand looks polished and consistent - same colours, same fonts, same visual feel - people save more and click through more. A branding kit gives you that consistency without building it from scratch. Grab it in my Etsy store!",
+          "design_brief": "WARM DARK MOODY. Portrait of a woman in her mid-30s seated at a dark oak desk, leaning back slightly in her chair with arms loosely crossed. She looks directly into camera with a calm, confident expression. She wears a deep burgundy blouse. The background is dark - shelving in deep shadow, warm amber light from a single desk lamp to her right. Low-key, dramatic lighting. Tight portrait crop from the waist up. Text overlay space in the upper-left corner of the frame.",
+          "highlight_words": [
+            "judge"
+          ],
+          "destination_url": "https://www.switzertemplates.com/branding-packages"
+        },
+        {
+          "id": "18c",
+          "type": "EDUCATIONAL",
+          "pin_headline": "Most business owners are wasting their time on Pinterest",
+          "category_label": "PINTEREST TIPS",
+          "seo_title": "Pinterest for business - the mistakes that stop your pins from ranking",
+          "seo_description": "Pinterest for business only compounds if your pins are built to be found. Missing keywords in the title, vague descriptions, and linking to the wrong page are the three most common reasons pins get impressions but no clicks. Fix these and the platform works the way it's supposed to. Have a browse!",
+          "design_brief": "BEIGE NEUTRAL. Close-up of a woman's hands resting on a sandy linen tablecloth, one hand holding a cream ceramic coffee cup and the other resting open beside it. A small open notebook with a few handwritten bullet points is visible at the edge of the frame. Warm afternoon light from the right. The palette is all ivory, sand, and warm white. Tight composition focused entirely on the hands and the objects - no face visible. Soft, matte, editorial. Text overlay space above the hands in the upper portion of the frame.",
+          "highlight_words": [
+            "wasting"
+          ],
+          "destination_url": "https://www.switzertemplates.com/blog"
+        },
+        {
+          "id": "18d",
+          "type": "PRODUCT",
+          "pin_headline": "Consistent branding is what makes Pinterest actually work for you",
+          "category_label": "PINTEREST TIPS",
+          "seo_title": "Pinterest for business - how branded templates make every pin stronger",
+          "seo_description": "Pinterest for business rewards accounts that look professional and consistent. When every pin you publish uses the same brand colours, fonts, and visual style, the platform builds trust with your audience faster - and so do the people who find you. Our Instagram templates give you that consistency from the first pin. Check it out -->",
+          "design_brief": "COOL GREY. Overhead flat lay on a smooth cool-grey surface. A woman's hands are visible from above, one hand holding a slim grey pen poised over a clean open notebook. Beside the notebook: a small succulent in a concrete pot and a folded grey linen napkin. Overcast, diffused light - no shadows, no warmth. Palette is entirely cool grey, white, and muted green. Top-down composition, tightly framed. Text overlay space in the upper-left quadrant.",
+          "highlight_words": [
+            "consistent"
+          ],
+          "destination_url": "https://www.switzertemplates.com/instagram-templates"
+        },
+        {
+          "id": "18e",
+          "type": "PRODUCT",
+          "pin_headline": "The business owners winning on Pinterest all have one thing in common",
+          "category_label": "PINTEREST TIPS",
+          "seo_title": "Pinterest for business - get the branding that makes your pins stand out",
+          "seo_description": "A professional brand is what separates the Pinterest accounts that drive real traffic from the ones that get ignored. Our 3-in-1 Business Bundle gives you a complete brand identity, a premade Wix website, and a Canva landing page - so every pin you publish leads somewhere that looks the part. Click to have a look -->",
+          "design_brief": "EARTHY BROWN. A woman in her late 20s walking along a wide outdoor path lined with autumn trees - warm amber and brown foliage blurred in the background. She is mid-stride, holding a structured tan leather tote bag over one shoulder, looking forward with quiet confidence. She wears a camel coat and ankle boots. Warm golden afternoon light from behind and to the right. The mood is purposeful, grounded, editorial. Three-quarter body shot, slightly low angle. Text overlay space in the sky or tree canopy at the top of the frame.",
+          "highlight_words": [
+            "winning"
+          ],
+          "destination_url": "https://www.switzertemplates.com/business-template-bundles"
+        }
+      ],
+      "topic": "Pinterest For Business",
+      "pt_ocr_best": 0.0,
+      "data_sources": [
+        "KE"
+      ]
+    },
+    {
+      "topic_id": 19,
+      "keyword": "small business templates",
+      "keyword_volume": 390,
+      "final_score": 142.8,
+      "product_match": 2,
+      "maps_to_product": "All Products",
+      "variation_split": "3 PRODUCT + 2 EDUCATIONAL",
+      "blog": {
+        "existing_post_likely": true,
+        "note": "check blog for existing post",
+        "blog_post_needed": false,
+        "brief_for_blog_agent": ""
+      },
+      "variations": [
+        {
+          "id": "19a",
+          "type": "PRODUCT",
+          "pin_headline": "Small business templates that cover your brand, website, and content",
+          "category_label": "BUSINESS BUNDLE",
+          "seo_title": "Small business templates that cover your brand, website, and content",
+          "seo_description": "Small business templates work best when they are designed to match. Our 3-in-1 Business Bundle gives you a premade Wix website, a full Canva branding kit with 1,000+ templates, and a landing page - all in one cohesive style - so your brand, website, and content all look like they belong together from day one. Click to browse! #smallbusinesstips #premadebranding #onlinebusiness",
+          "design_brief": "Laptop, phone, and tablet arranged on a warm oak desk showing matching website, Instagram feed, and landing page designs from the same template bundle. Colour tones: warm white, sage, and terracotta. Soft natural light from the left. Text overlay space in the upper-left third. Switzertemplates.com watermark bottom-right.",
+          "destination_url": "https://www.switzertemplates.com/business-template-bundles"
+        },
+        {
+          "id": "19b",
+          "type": "PRODUCT",
+          "pin_headline": "Small business templates for Instagram - ready to post this week",
+          "category_label": "INSTAGRAM TEMPLATES",
+          "seo_title": "Small business templates for Instagram - ready to post this week",
+          "seo_description": "A disjointed feed is costing small business owners credibility every time someone clicks their profile. Small business templates for Instagram give you posts, stories, and carousels in Canva - all pre-designed in a cohesive style - so your content looks consistent without spending hours on design every week. Have a browse! #instagramtemplates #canvatemplates #smallbusinesstips",
+          "design_brief": "Phone on a cream linen surface showing a polished Instagram grid with consistent small business branding. Colour tones: cream, dusty pink, and warm white. Soft natural light from the upper right. Text overlay space at the top of the image. Switzertemplates.com watermark bottom-right.",
+          "destination_url": "https://www.switzertemplates.com/instagram-templates"
+        },
+        {
+          "id": "19c",
+          "type": "PRODUCT",
+          "pin_headline": "Small business templates for branding - look professional across every platform",
+          "category_label": "BRANDING KIT",
+          "seo_title": "Small business templates for branding - look professional across every platform",
+          "seo_description": "Small business templates for branding give you a complete visual identity without hiring a designer. Our Canva branding kit includes logo variations, colour palette, font system, and 1,000+ templates for social media, email, print, and ebooks - so every platform looks consistent and your business feels established. Grab it in my Etsy store! #smallbusinessbranding #brandingkit #canvatemplates",
+          "design_brief": "Flat lay on a marble surface with a laptop showing a Canva branding kit, printed colour swatches, and a phone with a matching Instagram feed. Colour tones: white, warm gold, and sage. Soft diffused light from the left. Text overlay space in the upper-right third. Switzertemplates.com watermark bottom-right.",
+          "destination_url": "https://www.switzertemplates.com/branding-packages"
+        },
+        {
+          "id": "19d",
+          "type": "EDUCATIONAL",
+          "pin_headline": "Small business templates: the ones worth buying and the ones to skip",
+          "category_label": "BUSINESS TIPS",
+          "seo_title": "Small business templates: the ones worth buying and the ones to skip",
+          "seo_description": "Not all small business templates are worth your money. The ones that save the most time are cohesive template packs - where your website, branding, and social media templates are designed to match - rather than individual designs from multiple sources that never quite look consistent. Here's what to look for before you buy. #smallbusinesstips #brandidentitytips #onlinebusiness",
+          "design_brief": "Styled desk with an open notebook, a laptop showing a Canva template preview, and a cup of tea. Colour tones: warm white, cream, and sage. Soft natural light from the left. Text overlay in the upper two-thirds naming the comparison. Switzertemplates.com watermark bottom-right.",
+          "destination_url": "https://www.switzertemplates.com/blog"
+        },
+        {
+          "id": "19e",
+          "type": "EDUCATIONAL",
+          "pin_headline": "Small business templates: what your brand actually needs to look consistent",
+          "category_label": "BRANDING TIPS",
+          "seo_title": "Small business templates: what your brand actually needs to look consistent",
+          "seo_description": "Small business templates only build brand recognition when they are part of a complete visual system. You need a logo, a colour palette, a font pairing, and templates for every platform your business uses - not just one or two. Without that system, every post and page you publish looks like it came from a different business. Save this checklist. #smallbusinessbranding #brandidentitytips #smallbusinesstips",
+          "design_brief": "Clean flat lay on a cream surface with a printed brand checklist, a pen, and a phone showing an Instagram feed with mismatched post styles to illustrate the problem. Colour tones: cream, warm white, and slate. Soft natural light from the upper left. Bold text overlay in the upper half. Switzertemplates.com watermark bottom-right.",
+          "destination_url": "https://www.switzertemplates.com/blog"
+        }
+      ],
+      "topic": "Small Business Templates",
+      "pt_ocr_best": 0.0055,
+      "data_sources": [
+        "KE",
+        "PT",
+        "OA"
+      ]
+    },
+    {
+      "topic_id": 20,
+      "keyword": "social media templates for coaches",
+      "keyword_volume": 0,
+      "final_score": 141.8,
+      "product_match": 2,
+      "maps_to_product": "Full Branding Kit",
+      "variation_split": "3 PRODUCT + 2 EDUCATIONAL",
+      "blog": {
+        "existing_post_likely": false,
+        "note": "",
+        "blog_post_needed": true,
+        "brief_for_blog_agent": "Write a post on how coaches can use social media templates to build a consistent, credible online presence without spending hours on design each week. Cover what to include in a social media template pack, how to apply brand consistency, and what content types work best for coaches."
+      },
+      "variations": [
+        {
+          "id": "20a",
+          "type": "PRODUCT",
+          "pin_headline": "Social media templates for coaches - consistent, professional, and ready to post",
+          "category_label": "BRANDING KIT",
+          "seo_title": "Social media templates for coaches - consistent, professional, and ready to post",
+          "seo_description": "Social media templates for coaches give you a complete Canva design system - posts, stories, carousels, and more - so every piece of content you publish looks like it came from the same professional brand. Our branding kit includes 1,000+ templates across every format, designed for coaches who want to show up consistently without spending hours on design. Click to browse! #socialmediatemplates #canvatemplates #coachingbusiness",
+          "design_brief": "Laptop on a warm oak desk showing a Canva social media template pack with multiple coaching-branded layouts visible in a grid view. Colour tones: warm white, sage, and dusty pink. Soft natural light from the left. Text overlay space in the upper-left third. Switzertemplates.com watermark bottom-right.",
+          "destination_url": "https://www.switzertemplates.com/branding-packages"
+        },
+        {
+          "id": "20b",
+          "type": "PRODUCT",
+          "pin_headline": "Social media templates for coaches that make your content look intentional",
+          "category_label": "BRANDING KIT",
+          "seo_title": "Social media templates for coaches that make your content look intentional",
+          "seo_description": "Posting from a blank Canva page every week means your coaching content never builds a consistent look. Social media templates for coaches give you a pre-built design system - same colours, same fonts, same layout logic across every post - so your brand builds recognition and your content goes out faster. Have a browse! #socialmediatemplates #smallbusinessbranding #coachingbusiness",
+          "design_brief": "Phone showing a polished coaching Instagram feed with a cohesive grid style on a warm cream desk surface. Beside it, a laptop open to Canva with a matching template in the editor. Colour tones: cream, terracotta, and warm white. Soft diffused natural light from the upper right. Text overlay space at the top. Switzertemplates.com watermark bottom-right.",
+          "destination_url": "https://www.switzertemplates.com/branding-packages"
+        },
+        {
+          "id": "20c",
+          "type": "PRODUCT",
+          "pin_headline": "Get more clients using social media templates for coaches",
+          "category_label": "BRANDING KIT",
+          "seo_title": "Get more clients using social media templates for coaches",
+          "seo_description": "A disjointed social media presence is one of the most common reasons coaches struggle to convert followers into clients. Social media templates for coaches give you 1,000+ Canva designs across every platform and format - so your brand looks consistent everywhere a potential client finds you and your content reflects the quality of what you actually deliver. Grab it in my Etsy store! #socialmediatemplates #canvatemplates #brandingkit",
+          "design_brief": "Tablet on a sage green linen surface showing a full Canva branding kit preview with coach-branded social media templates in a clean editorial style. Colour tones: sage, cream, and warm gold. Soft natural light from the left. Text overlay space in the upper-right corner. Switzertemplates.com watermark bottom-right.",
+          "destination_url": "https://www.switzertemplates.com/branding-packages"
+        },
+        {
+          "id": "20d",
+          "type": "EDUCATIONAL",
+          "pin_headline": "Social media templates for coaches: the 4 post types that build trust fast",
+          "category_label": "CONTENT TIPS",
+          "seo_title": "Social media templates for coaches: the 4 post types that build trust fast",
+          "seo_description": "Social media templates for coaches are most valuable when paired with the right content strategy. These four post types build the fastest trust with potential clients: a client result, a personal story, a practical tip, and a direct offer. Rotate through these four every week with a consistent template and your content starts doing the selling for you. Check it out --> #socialmediatemplates #contentstrategytips #coachingbusiness",
+          "design_brief": "Styled flat lay on a cream surface with an open planner showing a weekly content calendar, a pen, and a phone displaying a coaching Instagram post. Colour tones: cream, blush pink, and warm white. Soft natural light from the upper left. Text overlay in the upper two-thirds listing the four post types. Switzertemplates.com watermark bottom-right.",
+          "destination_url": "https://www.switzertemplates.com/blog"
+        },
+        {
+          "id": "20e",
+          "type": "EDUCATIONAL",
+          "pin_headline": "Social media templates for coaches: why your feed isn't converting (and how to fix it)",
+          "category_label": "CONTENT TIPS",
+          "seo_title": "Social media templates for coaches: why your feed isn't converting",
+          "seo_description": "Starting from scratch on your coaching content every week is not the only problem. Social media templates for coaches fix the design inconsistency - but if your posts all look different, say different things, and link to a website that doesn't match your brand, the inconsistency breaks trust at every step. Here's what a cohesive brand system actually covers and why it matters. #socialmediatemplates #smallbusinessbranding #coachingbusiness",
+          "design_brief": "Clean desk scene with a laptop showing a before-and-after comparison of a disjointed versus cohesive coaching Instagram feed. Colour tones: warm white, slate, and sage. Soft natural light from the left. Text overlay in the upper half with the headline clearly readable. Switzertemplates.com watermark bottom-right.",
+          "destination_url": "https://www.switzertemplates.com/blog"
+        }
+      ],
+      "topic": "Social Media Templates For Coaches",
+      "pt_ocr_best": 0.0037,
+      "data_sources": [
+        "KE",
+        "PT",
+        "OA"
+      ]
+    },
+    {
+      "topic_id": 21,
+      "keyword": "social media templates for therapists",
+      "keyword_volume": 0,
+      "final_score": 141.8,
+      "product_match": 2,
+      "maps_to_product": "Full Branding Kit",
+      "variation_split": "3 PRODUCT + 2 EDUCATIONAL",
+      "blog": {
+        "existing_post_likely": false,
+        "note": "",
+        "blog_post_needed": true,
+        "brief_for_blog_agent": "Write a post covering why consistent social media branding matters for therapists in private practice. Show how premade social media templates solve the time and design problem without requiring any design skills."
+      },
+      "variations": [
+        {
+          "id": "21a",
+          "type": "PRODUCT",
+          "pin_headline": "Social media templates for therapists who want a professional online presence",
+          "category_label": "BRANDING KIT",
+          "seo_title": "Social media templates for therapists - look consistent and professional",
+          "seo_description": "Social media templates for therapists give you a done-for-you design system across posts, stories, and carousels - so every piece of content looks intentional and on-brand. Part of a full branding kit with 1,000+ Canva templates ready to customise. Click to browse! #socialmediatemplates #therapistbranding #canvatemplates",
+          "design_brief": "Laptop mockup open to a Canva template editor showing a calming social media post design in sage green and cream tones. Surface: warm linen flat lay with a small succulent plant to the side. Colour tones: sage, cream, and soft white. Soft natural light from the upper left. Text overlay space in the upper-left third of the image. Watermark bottom-right: switzertemplates.com. Category label top-left: BRANDING KIT.",
+          "destination_url": "https://www.switzertemplates.com/branding-packages"
+        },
+        {
+          "id": "21b",
+          "type": "PRODUCT",
+          "pin_headline": "Social media templates for therapists that make your content look polished every week",
+          "category_label": "BRANDING KIT",
+          "seo_title": "Social media templates for therapists that save hours every month",
+          "seo_description": "Starting from scratch on your social media templates for therapists takes time you don't have in a client-heavy week. This branding kit gives you 1,000+ Canva templates - posts, stories, and highlight covers - already designed in a cohesive style so you never stare at a blank canvas again. Grab it in my Etsy store! #therapistbranding #socialmediatemplates #smallbusinessbranding",
+          "design_brief": "Phone mockup displaying a grid of matching Instagram post templates in dusty pink and warm white. Surface: white marble desk with a soft cotton cloth folded in the corner. Colour tones: dusty pink, warm white, and muted taupe. Soft natural light from the right. Text overlay space in the upper-centre third. Watermark bottom-right: switzertemplates.com. Category label top-left: BRANDING KIT.",
+          "destination_url": "https://www.switzertemplates.com/branding-packages"
+        },
+        {
+          "id": "21c",
+          "type": "PRODUCT",
+          "pin_headline": "Social media templates for therapists - a complete Canva kit ready to use today",
+          "category_label": "BRANDING KIT",
+          "seo_title": "Social media templates for therapists - premade Canva kit, no design needed",
+          "seo_description": "A professional set of social media templates for therapists covers every format your practice needs - posts, stories, carousels, and highlight icons - all in one cohesive Canva branding kit. Customise with your colours and copy in minutes, so your feed looks established before a client even books a call. Have a browse! #canvatemplates #therapistbranding #premadebranding",
+          "design_brief": "Tablet mockup propped on an oak desk showing a carousel template layout in soft terracotta and cream. Surface: warm oak desk with a small open notebook beside the tablet. Colour tones: terracotta, cream, and sage. Natural light from the left casting a gentle shadow. Text overlay space in the lower-left third. Watermark bottom-right: switzertemplates.com. Category label top-left: BRANDING KIT.",
+          "destination_url": "https://www.switzertemplates.com/branding-packages"
+        },
+        {
+          "id": "21d",
+          "type": "EDUCATIONAL",
+          "pin_headline": "Why your social media templates for therapists should match your website",
+          "category_label": "BRANDING TIPS",
+          "seo_title": "Social media templates for therapists - why brand consistency builds trust",
+          "seo_description": "Social media templates for therapists that don't match your website create a fragmented impression - and potential clients notice. A consistent colour palette and font system across every platform signals professionalism before anyone reads your bio. Here's what a complete brand system covers and how to get it without hiring a designer. #therapistbranding #brandidentitytips #smallbusinessbranding",
+          "design_brief": "Text-only flat lay pin on a cream background with a bold single-line text overlay in dark charcoal. Supporting props: a small potted plant and a pen on a warm linen surface. Colour tones: cream, charcoal, and sage green accent. Soft diffused light from above. Text overlay positioned in the upper-centre third, large enough to read at thumbnail size. Watermark bottom-right: switzertemplates.com. Category label top-left: BRANDING TIPS.",
+          "destination_url": "https://www.switzertemplates.com/blog"
+        },
+        {
+          "id": "21e",
+          "type": "EDUCATIONAL",
+          "pin_headline": "Social media templates for therapists - what to post to attract ideal clients",
+          "category_label": "CONTENT TIPS",
+          "seo_title": "Social media templates for therapists - 5 content types that build trust",
+          "seo_description": "Social media templates for therapists work best when paired with a clear content rotation. The five types that consistently build trust: an educational tip, a client result story, a personal insight, a myth-bust, and a soft call to book. Rotate through these weekly so your feed builds credibility over time - not just pretty posts. #therapistbranding #socialmediacontentideas #smallbusinesstips",
+          "design_brief": "Flat lay of a printed content calendar on warm cream paper beside a phone showing a styled Instagram feed. Surface: warm linen with a few dried flowers in the top corner. Colour tones: cream, sage, and muted terracotta. Soft natural light from the upper right. Text overlay space in the upper-left third. Watermark bottom-right: switzertemplates.com. Category label top-left: CONTENT TIPS.",
+          "destination_url": "https://www.switzertemplates.com/blog"
+        }
+      ],
+      "topic": "Social Media Templates For Therapists",
+      "pt_ocr_best": 0.0037,
+      "data_sources": [
+        "KE",
+        "PT",
+        "OA"
+      ]
+    },
+    {
+      "topic_id": 22,
+      "keyword": "website for a coach",
+      "keyword_volume": 0,
+      "final_score": 136.7,
+      "product_match": 2,
+      "maps_to_product": "Audience — all products",
+      "variation_split": "3 PRODUCT + 2 EDUCATIONAL",
+      "blog": {
+        "existing_post_likely": true,
+        "note": "check blog for existing post",
+        "blog_post_needed": false,
+        "brief_for_blog_agent": ""
+      },
+      "variations": [
+        {
+          "id": "22a",
+          "type": "PRODUCT",
+          "pin_headline": "Website for a coach that's ready to publish without starting from scratch",
+          "category_label": "WIX WEBSITE",
+          "seo_title": "Website for a coach - premade Wix template ready to customise and publish",
+          "seo_description": "Get your website for a coach live this week without touching a line of code. These premade Wix templates are built with every page a coaching business needs - home, services, about, and booking - so you swap in your content and publish. Check it out --> #coachwebsite #wixwebsitetemplate #premadewebsite",
+          "design_brief": "Laptop mockup open to a clean coaching website homepage in cream and warm white tones. Surface: white marble desk with a small ceramic coffee cup to the right. Colour tones: cream, warm white, and charcoal text. Soft natural light from the left. Text overlay space in the upper-left third of the image. Watermark bottom-right: switzertemplates.com. Category label top-left: WIX WEBSITE.",
+          "destination_url": "https://www.switzertemplates.com/premade-wix-website-templates-for-sale"
+        },
+        {
+          "id": "22b",
+          "type": "PRODUCT",
+          "pin_headline": "Website for a coach that converts visitors into booked clients",
+          "category_label": "WIX WEBSITE",
+          "seo_title": "Website for a coach that converts - built on Wix, no coding needed",
+          "seo_description": "A website for a coach needs more than a homepage - it needs a clear services page, a compelling about section, and a booking flow that removes friction. Our premade Wix templates are structured to move visitors from curious to booked, so your site works for you around the clock. Grab it in my Etsy store! #coachwebsite #wixtemplate #premadewebsite",
+          "design_brief": "Phone and laptop dual mockup showing matching pages of a coaching website - the home screen on the laptop and the booking page on the phone. Surface: warm oak desk with a small notebook and pen. Colour tones: warm white, terracotta accent, and charcoal. Natural light from the upper left. Text overlay space in the upper-right third. Watermark bottom-right: switzertemplates.com. Category label top-left: WIX WEBSITE.",
+          "destination_url": "https://www.switzertemplates.com/premade-wix-website-templates-for-sale"
+        },
+        {
+          "id": "22c",
+          "type": "PRODUCT",
+          "pin_headline": "Website for a coach - everything your online presence needs in one place",
+          "category_label": "BUSINESS BUNDLE",
+          "seo_title": "Website for a coach plus branding kit - the complete business bundle",
+          "seo_description": "A complete website for a coach pairs a Wix website with a matching branding kit and landing page - so your whole online presence looks intentional from day one. Our 3-in-1 Business Bundle gives you all three in one cohesive design, for less than the cost of one hour with a freelance designer. Click to browse! #coachwebsite #smallbusinessbranding #businesstemplates",
+          "design_brief": "Laptop mockup showing a full coaching website homepage alongside a phone showing a matching Instagram post template in the same colour palette. Surface: warm linen flat lay with a small gold pen. Colour tones: cream, dusty rose, and warm charcoal. Soft diffused light from above. Text overlay space in the upper-left third. Watermark bottom-right: switzertemplates.com. Category label top-left: BUSINESS BUNDLE.",
+          "destination_url": "https://www.switzertemplates.com/business-template-bundles"
+        },
+        {
+          "id": "22d",
+          "type": "EDUCATIONAL",
+          "pin_headline": "Website for a coach - the 5 pages every coaching site actually needs",
+          "category_label": "WEBSITE TIPS",
+          "seo_title": "Website for a coach - 5 pages you need before you launch",
+          "seo_description": "Your website for a coach is losing potential clients if it's missing these five pages: a clear homepage that explains who you help, a services page with pricing or packages, an about page that builds trust, a booking or contact page, and a results or testimonials page. Miss any one and you're leaving decisions unmade. #coachwebsite #smallbusinesstips #onlinebusiness",
+          "design_brief": "Text-overlay pin on a warm cream background with a numbered list in clean sans-serif type. Supporting props: a small open notebook with handwritten notes on a warm linen surface beside the text. Colour tones: cream, charcoal, and a sage green accent line. Soft natural light from the upper right. Text overlay fills the upper two-thirds of the pin. Watermark bottom-right: switzertemplates.com. Category label top-left: WEBSITE TIPS.",
+          "destination_url": "https://www.switzertemplates.com/blog"
+        },
+        {
+          "id": "22e",
+          "type": "EDUCATIONAL",
+          "pin_headline": "Website for a coach - what makes someone book after landing on your site",
+          "category_label": "WEBSITE TIPS",
+          "seo_title": "Website for a coach - what actually makes visitors book a call",
+          "seo_description": "Most coaching websites lose clients not because they look bad but because the structure is wrong. A website for a coach needs a clear headline in the first scroll, a single next step, and social proof before the booking page. Fix those three things and your site starts doing the work for you. #coachwebsite #websitedesigntips #smallbusinesstips",
+          "design_brief": "Split-screen flat lay showing two phone mockups side by side - one showing a cluttered, unclear website and one showing a clean, structured coaching homepage. Surface: white marble with soft cotton cloth beneath the phones. Colour tones: warm white, sage, and charcoal. Soft natural light from the left. Text overlay space in the upper-centre third. Watermark bottom-right: switzertemplates.com. Category label top-left: WEBSITE TIPS.",
+          "destination_url": "https://www.switzertemplates.com/blog"
+        }
+      ],
+      "topic": "Website For A Coach",
+      "pt_ocr_best": 0.0033,
+      "data_sources": [
+        "KE",
+        "PT",
+        "OA"
+      ]
+    },
+    {
+      "topic_id": 23,
+      "keyword": "brand identity for coaches",
+      "keyword_volume": 0,
+      "final_score": 135.5,
+      "product_match": 2,
+      "maps_to_product": "Full Branding Kit",
+      "variation_split": "3 PRODUCT + 2 EDUCATIONAL",
+      "blog": {
+        "existing_post_likely": false,
+        "note": "",
+        "blog_post_needed": true,
+        "brief_for_blog_agent": "Write a post covering what a complete brand identity for coaches actually includes - logo, colour palette, type system, and template library - and why starting with just a logo is the most common mistake. Show how a premade branding kit solves this without hiring a custom designer."
+      },
+      "variations": [
+        {
+          "id": "23a",
+          "type": "PRODUCT",
+          "pin_headline": "Brand identity for coaches - a complete premade kit ready to use today",
+          "category_label": "BRANDING KIT",
+          "seo_title": "Brand identity for coaches - premade branding kit with 1,000+ templates",
+          "seo_description": "A complete brand identity for coaches covers more than a logo - it includes a colour palette, font system, and 1,000+ Canva templates across social media, email, and print so every platform looks consistent. Our premade branding kit gives you all of that without hiring a designer. Click to browse! #brandidentitytips #coachbranding #premadebranding",
+          "design_brief": "Laptop mockup showing a branding kit overview page with logo variations, colour swatches, and font pairings displayed on screen. Surface: warm oak desk with a small open notebook and a ceramic pen holder. Colour tones: warm white, terracotta, and charcoal. Soft natural light from the left. Text overlay space in the upper-left third. Watermark bottom-right: switzertemplates.com. Category label top-left: BRANDING KIT.",
+          "destination_url": "https://www.switzertemplates.com/branding-packages"
+        },
+        {
+          "id": "23b",
+          "type": "PRODUCT",
+          "pin_headline": "Brand identity for coaches that makes your business look established from day one",
+          "category_label": "BRANDING KIT",
+          "seo_title": "Brand identity for coaches that looks custom without the custom price tag",
+          "seo_description": "Brand identity for coaches that feels generic is costing you clients before they even read your bio. Our premade branding kit gives you a cohesive logo suite, colour palette, and Canva template library - all designed in one style so your brand feels intentional across every touchpoint. Have a browse! #coachbranding #brandidentitytips #smallbusinessbranding",
+          "design_brief": "Phone mockup showing a styled Instagram feed using a cohesive branding kit - matching posts, highlight covers, and story templates in dusty pink and cream. Surface: warm linen with a small dried flower arrangement in the upper corner. Colour tones: dusty pink, cream, and warm taupe. Natural light from the upper right. Text overlay space in the upper-left third. Watermark bottom-right: switzertemplates.com. Category label top-left: BRANDING KIT.",
+          "destination_url": "https://www.switzertemplates.com/branding-packages"
+        },
+        {
+          "id": "23c",
+          "type": "PRODUCT",
+          "pin_headline": "Brand identity for coaches - logo, colours, fonts, and templates in one kit",
+          "category_label": "BRANDING KIT",
+          "seo_title": "Brand identity for coaches - everything in one premade Canva branding kit",
+          "seo_description": "Save time building your brand identity for coaches by starting from a premade kit instead of blank Canva files. You get a logo suite, colour and font system, and 1,000+ templates spanning social media, email headers, and business cards - so you launch looking polished, not patched together. Grab it in my Etsy store! #premadebranding #coachbranding #canvatemplates",
+          "design_brief": "Flat lay of printed brand identity assets - logo cards, a colour palette swatch sheet, and a business card - arranged on a warm cream surface. Supporting props: a gold pen and a small cactus plant. Colour tones: cream, sage green, and warm charcoal. Soft diffused light from above. Text overlay space in the upper-right third. Watermark bottom-right: switzertemplates.com. Category label top-left: BRANDING KIT.",
+          "destination_url": "https://www.switzertemplates.com/branding-packages"
+        },
+        {
+          "id": "23d",
+          "type": "EDUCATIONAL",
+          "pin_headline": "Brand identity for coaches - what it actually includes (and what most people miss)",
+          "category_label": "BRANDING TIPS",
+          "seo_title": "Brand identity for coaches - what a complete brand system actually covers",
+          "seo_description": "Most coaches build a brand identity around a logo and stop there. But brand identity for coaches includes a colour system that works across print and digital, a font pairing that signals the right positioning, and a template library so every post, email, and document looks like it belongs together. Here's what the full picture looks like. #brandidentitytips #coachbranding #smallbusinessbranding",
+          "design_brief": "Text-overlay pin on a warm cream background with a bold checklist in clean sans-serif type listing brand identity components. Surface: cream paper texture with subtle warmth. Colour tones: cream, charcoal, and a terracotta accent. Soft even light from above. Text overlay fills the upper two-thirds of the pin, large enough to read at thumbnail size. Watermark bottom-right: switzertemplates.com. Category label top-left: BRANDING TIPS.",
+          "destination_url": "https://www.switzertemplates.com/blog"
+        },
+        {
+          "id": "23e",
+          "type": "EDUCATIONAL",
+          "pin_headline": "Brand identity for coaches - the mistake that makes your business look inconsistent",
+          "category_label": "BRANDING TIPS",
+          "seo_title": "Brand identity for coaches - why inconsistency is costing you trust",
+          "seo_description": "Brand identity for coaches that changes look from platform to platform tells potential clients you're still figuring it out - even if your work is exceptional. Consistent colours, fonts, and templates across your website, social media, and emails are what make a brand feel established. Here's how to fix it without starting from scratch. #coachbranding #brandidentitytips #premadebranding",
+          "design_brief": "Side-by-side phone mockups showing a mismatched Instagram profile versus a cohesive, branded one. Surface: white marble with a warm cotton cloth beneath. Colour tones: warm white, charcoal, and sage green. Natural light from the left. Text overlay space in the upper-centre third. Watermark bottom-right: switzertemplates.com. Category label top-left: BRANDING TIPS.",
+          "destination_url": "https://www.switzertemplates.com/blog"
+        }
+      ],
+      "topic": "Brand Identity For Coaches",
+      "pt_ocr_best": 0.0034,
+      "data_sources": [
+        "KE",
+        "PT",
+        "OA"
+      ]
+    },
+    {
+      "topic_id": 24,
+      "keyword": "branding design",
+      "keyword_volume": 22200,
+      "final_score": 134.9,
+      "product_match": 2,
+      "maps_to_product": "Full Branding Kit",
+      "variation_split": "3 PRODUCT + 2 EDUCATIONAL",
+      "blog": {
+        "existing_post_likely": true,
+        "note": "check blog for existing post",
+        "blog_post_needed": false,
+        "brief_for_blog_agent": ""
+      },
+      "variations": [
+        {
+          "id": "24a",
+          "type": "PRODUCT",
+          "pin_headline": "Branding design that takes you from no brand to fully launch-ready in days",
+          "category_label": "BRANDING KIT",
+          "seo_title": "Branding design - premade kit with logo, colours, fonts, and 1,000+ templates",
+          "seo_description": "Branding design that takes you from scattered files to a cohesive identity - without hiring a designer or spending months on it. Our premade branding kit gives you a logo suite, colour palette, font system, and 1,000+ Canva templates so every platform looks like it belongs to the same brand from day one. Click to browse! #brandingdesign #premadebranding #smallbusinessbranding",
+          "design_brief": "Laptop mockup showing a full branding kit layout on screen - logo variations, colour swatches, and a grid of social media templates. Surface: warm linen flat lay with a small ceramic bowl and pen. Colour tones: cream, warm taupe, and charcoal. Soft natural light from the upper left. Text overlay space in the upper-left third. Watermark bottom-right: switzertemplates.com. Category label top-left: BRANDING KIT.",
+          "destination_url": "https://www.switzertemplates.com/branding-packages"
+        },
+        {
+          "id": "24b",
+          "type": "PRODUCT",
+          "pin_headline": "Branding design for small businesses - premade and ready to customise today",
+          "category_label": "BRANDING KIT",
+          "seo_title": "Branding design for small businesses - premade Canva branding kit",
+          "seo_description": "A professional branding design for your small business doesn't have to cost thousands or take months. Our premade kits include a complete logo suite, colour and font system, and 1,000+ Canva templates - so you get a consistent, polished brand across social media, email, and print without touching a design tool from scratch. Have a browse! #brandingdesign #canvatemplates #brandidentitytips",
+          "design_brief": "Phone mockup displaying a branded Instagram feed with cohesive post templates, story frames, and highlight icons in sage green and cream. Surface: warm oak desk with a small potted succulent to the left. Colour tones: sage green, cream, and warm charcoal. Natural light from the right. Text overlay space in the upper-right third. Watermark bottom-right: switzertemplates.com. Category label top-left: BRANDING KIT.",
+          "destination_url": "https://www.switzertemplates.com/branding-packages"
+        },
+        {
+          "id": "24c",
+          "type": "PRODUCT",
+          "pin_headline": "Branding design that makes service businesses look established before the first call",
+          "category_label": "BRANDING KIT",
+          "seo_title": "Branding design that makes your service business look established from day one",
+          "seo_description": "Save time on your branding design by starting with a premade kit built for coaches, consultants, and service providers. You get a logo suite, a full Canva template library, and a colour and font system - all in one cohesive style so your brand looks intentional whether a client finds you on Instagram, your website, or in their inbox. Grab it in my Etsy store! #brandingdesign #premadebranding #servicebusiness",
+          "design_brief": "Tablet mockup propped on a white marble surface showing a branding kit template overview page - featuring a logo, colour palette chips, and a font pairing. Colour tones: warm white, dusty rose, and soft charcoal. Soft natural light from the left. Text overlay space in the lower-left third. Watermark bottom-right: switzertemplates.com. Category label top-left: BRANDING KIT.",
+          "destination_url": "https://www.switzertemplates.com/branding-packages"
+        },
+        {
+          "id": "24d",
+          "type": "EDUCATIONAL",
+          "pin_headline": "Branding design mistakes that make your business look like a side hustle",
+          "category_label": "BRANDING TIPS",
+          "seo_title": "Branding design mistakes most small business owners make without realising",
+          "seo_description": "The most common branding design mistake is building a visual identity that looks different on every platform. A mismatched Instagram, a clashing website, and an inconsistent email signature tell potential clients your business isn't quite put together yet - even if your work is excellent. Here's what a complete brand design system actually covers. #brandingdesign #brandidentitytips #smallbusinessbranding",
+          "design_brief": "Text-overlay pin on a warm cream background with a bold two-line statement in large sans-serif type. Supporting visual: a flat-lay notebook open to a blank page on a linen surface beside the text block. Colour tones: cream, charcoal, and a muted terracotta accent line. Soft even light from above. Text overlay in the upper-centre third, large enough to read as a thumbnail. Watermark bottom-right: switzertemplates.com. Category label top-left: BRANDING TIPS.",
+          "destination_url": "https://www.switzertemplates.com/blog"
+        },
+        {
+          "id": "24e",
+          "type": "EDUCATIONAL",
+          "pin_headline": "Branding design on a budget - how to look professional without hiring a designer",
+          "category_label": "BRANDING TIPS",
+          "seo_title": "Branding design on a budget - look professional without a custom designer",
+          "seo_description": "Branding design doesn't have to mean a four-figure custom project. A premade branding kit gives you a professionally designed colour palette, font system, and logo suite - all ready to apply in Canva - so your business looks polished across every platform without the wait or the price tag. Here's exactly what to look for in a premade kit. #brandingdesign #smallbusinesstips #premadebranding",
+          "design_brief": "Flat lay of a printed brand style guide sheet showing colour swatches, font samples, and a logo on a warm cream paper surface. Supporting props: a gold pen and a small dried flower sprig in the upper corner. Colour tones: cream, warm gold, and charcoal. Soft natural light from the upper right. Text overlay space in the upper-left third. Watermark bottom-right: switzertemplates.com. Category label top-left: BRANDING TIPS.",
+          "destination_url": "https://www.switzertemplates.com/blog"
+        }
+      ],
+      "topic": "Branding Design",
+      "pt_ocr_best": 0.0034,
+      "data_sources": [
+        "KE",
+        "PT",
+        "OA"
+      ]
+    },
+    {
+      "topic_id": 25,
+      "keyword": "branding kit",
+      "keyword_volume": 3600,
+      "final_score": 134.1,
+      "product_match": 3,
+      "maps_to_product": "Full Branding Kit",
+      "variation_split": "4 PRODUCT + 1 EDUCATIONAL",
+      "blog": {
+        "existing_post_likely": true,
+        "note": "check blog for existing post",
+        "blog_post_needed": false,
+        "brief_for_blog_agent": ""
+      },
+      "variations": [
+        {
+          "id": "25a",
+          "type": "PRODUCT",
+          "pin_headline": "Branding kit that covers every platform your business shows up on",
+          "category_label": "BRANDING KIT",
+          "seo_title": "Branding kit with 1,000+ Canva templates - premade and ready to use",
+          "seo_description": "Get your branding kit live this week without building from blank Canva files. Our premade kits include a logo suite, colour palette, font system, and 1,000+ templates across social media, email, and print - so your brand looks consistent whether a client finds you on Instagram, your website, or in a pitch deck. Click to browse! #brandingkit #premadebranding #canvatemplates",
+          "design_brief": "Laptop mockup showing a full branding kit product page with a logo, colour swatches, and a grid of social media template previews on screen. Surface: warm linen with a small ceramic coffee cup to the right. Colour tones: cream, warm taupe, and soft charcoal. Soft natural light from the upper left. Text overlay space in the upper-left third. Watermark bottom-right: switzertemplates.com. Category label top-left: BRANDING KIT.",
+          "destination_url": "https://www.switzertemplates.com/branding-packages"
+        },
+        {
+          "id": "25b",
+          "type": "PRODUCT",
+          "pin_headline": "Branding kit for coaches and service providers - look established from day one",
+          "category_label": "BRANDING KIT",
+          "seo_title": "Branding kit for coaches - premade logo, templates, and colour system",
+          "seo_description": "A scattered branding kit is costing you clients before they even reach your services page. Our premade branding kit for coaches and service providers gives you a cohesive logo suite, colour and font system, and 1,000+ Canva templates - so every post, email, and document looks like it belongs to the same professional brand. Have a browse! #brandingkit #coachbranding #smallbusinessbranding",
+          "design_brief": "Phone mockup displaying a branded Instagram feed in dusty rose and cream tones - cohesive post templates, story frames, and highlight icons all visible. Surface: white marble desk with a small gold ring dish and pen beside the phone. Colour tones: dusty rose, cream, and warm charcoal. Natural light from the left. Text overlay space in the upper-right third. Watermark bottom-right: switzertemplates.com. Category label top-left: BRANDING KIT.",
+          "destination_url": "https://www.switzertemplates.com/branding-packages"
+        },
+        {
+          "id": "25c",
+          "type": "PRODUCT",
+          "pin_headline": "Branding kit that makes your business look custom without the custom price",
+          "category_label": "BRANDING KIT",
+          "seo_title": "Branding kit - look custom and professional for a fraction of designer rates",
+          "seo_description": "A premade branding kit gives you a professionally designed visual identity - logo, colours, fonts, and 1,000+ templates - for less than the cost of one hour with a freelance designer. Designed in a modern, editorial style that's hard to tell apart from a custom brand, so your business looks established before you land your first client. Grab it in my Etsy store! #brandingkit #premadebranding #brandidentitytips",
+          "design_brief": "Flat lay of printed brand identity assets on a warm cream surface - logo card, colour swatch sheet, and a folded business card. Supporting props: a small succulent plant and a gold pen. Colour tones: cream, sage green, and warm gold. Soft diffused light from above. Text overlay space in the upper-left third. Watermark bottom-right: switzertemplates.com. Category label top-left: BRANDING KIT.",
+          "destination_url": "https://www.switzertemplates.com/branding-packages"
+        },
+        {
+          "id": "25d",
+          "type": "PRODUCT",
+          "pin_headline": "Branding kit that covers every format your business shows up in",
+          "category_label": "BUSINESS BUNDLE",
+          "seo_title": "Branding kit with social media, email, print, and ebook templates included",
+          "seo_description": "A complete branding kit does more than give you a logo - it gives you a visual system you can apply everywhere. Ours includes 1,000+ Canva templates across social posts, stories, email headers, business cards, and ebooks - all in one cohesive style - so your brand looks consistent whether a client finds you on Instagram, in their inbox, or on your website. Check it out --> #brandingkit #premadebranding #smallbusinessbranding",
+          "design_brief": "Dual mockup showing a laptop with a coaching website homepage and a phone beside it displaying matching Instagram post templates - both in the same colour palette. Surface: warm oak desk with a small open planner to the side. Colour tones: warm white, terracotta, and charcoal. Natural light from the upper left. Text overlay space in the upper-left third. Watermark bottom-right: switzertemplates.com. Category label top-left: BUSINESS BUNDLE.",
+          "destination_url": "https://www.switzertemplates.com/business-template-bundles"
+        },
+        {
+          "id": "25e",
+          "type": "EDUCATIONAL",
+          "pin_headline": "Branding kit - what's actually included and what you really need",
+          "category_label": "BRANDING TIPS",
+          "seo_title": "Branding kit - what a complete kit includes and what most people overlook",
+          "seo_description": "Most people expect a branding kit to come with a logo and a few colours. But a complete branding kit also includes a font pairing system, a template library covering social media posts, stories, email headers, and business cards, and guidelines for how to apply the brand consistently. Without those, your brand looks different everywhere you show up. #brandingkit #brandidentitytips #smallbusinessbranding",
+          "design_brief": "Text-overlay pin on a warm cream background with a bold checklist layout in clean sans-serif type showing what a full branding kit includes. Colour tones: cream, charcoal, and a soft sage green accent on the checklist ticks. Soft even natural light from above. Text overlay fills the upper two-thirds of the pin at thumbnail-readable size. Watermark bottom-right: switzertemplates.com. Category label top-left: BRANDING TIPS.",
+          "destination_url": "https://www.switzertemplates.com/blog"
+        }
+      ],
+      "topic": "Branding Kit",
+      "pt_ocr_best": 0.0191,
+      "data_sources": [
+        "KE",
+        "PT",
+        "OA"
+      ]
+    },
+    {
+      "topic_id": 26,
+      "keyword": "business templates",
+      "keyword_volume": 4400,
+      "final_score": 130.2,
+      "product_match": 2,
+      "maps_to_product": "All Products",
+      "variation_split": "3 PRODUCT + 2 EDUCATIONAL",
+      "blog": {
+        "existing_post_likely": true,
+        "note": "check blog for existing post",
+        "blog_post_needed": false,
+        "brief_for_blog_agent": ""
+      },
+      "variations": [
+        {
+          "id": "26a",
+          "type": "PRODUCT",
+          "pin_headline": "Business templates that cover your brand, website, and content in one place",
+          "category_label": "BUSINESS BUNDLE",
+          "seo_title": "Business templates - brand, website, and Canva content kit in one bundle",
+          "seo_description": "Business templates that take you from no online presence to fully launched - without piecing together tools from multiple sources. Our 3-in-1 Business Bundle gives you a premade Wix website, a full branding kit, and a Canva landing page - all designed to match so your whole business looks cohesive from day one. Click to browse! #businesstemplates #canvatemplates #smallbusinesstips",
+          "design_brief": "Laptop mockup showing a business bundle product overview page with three panels - website preview, branding kit swatches, and a landing page template. Surface: warm linen with a small potted plant and ceramic pen holder to the right. Colour tones: cream, warm taupe, and charcoal. Soft natural light from the upper left. Text overlay space in the upper-left third. Watermark bottom-right: switzertemplates.com. Category label top-left: BUSINESS BUNDLE.",
+          "destination_url": "https://www.switzertemplates.com/business-template-bundles"
+        },
+        {
+          "id": "26b",
+          "type": "PRODUCT",
+          "pin_headline": "Business templates for coaches and service providers - ready to customise today",
+          "category_label": "BRANDING KIT",
+          "seo_title": "Business templates for coaches - premade Canva branding and social media kit",
+          "seo_description": "Starting from scratch on your business templates takes weeks you don't have when you're building your client base at the same time. Our premade Canva branding kits give you 1,000+ templates across social media, email, and print - all in one cohesive design system so you can show up consistently without starting over each time. Have a browse! #businesstemplates #canvatemplates #coachbranding",
+          "design_brief": "Phone mockup showing a grid of Canva business templates - social posts, story frames, and email headers - displayed in a clean, modern sage and cream palette. Surface: warm oak desk with a small open notebook beside the phone. Colour tones: sage green, cream, and warm charcoal. Natural light from the right. Text overlay space in the upper-left third. Watermark bottom-right: switzertemplates.com. Category label top-left: BRANDING KIT.",
+          "destination_url": "https://www.switzertemplates.com/branding-packages"
+        },
+        {
+          "id": "26c",
+          "type": "PRODUCT",
+          "pin_headline": "Business templates that make your online presence look like you've been at this for years",
+          "category_label": "INSTAGRAM TEMPLATES",
+          "seo_title": "Business templates for social media - premade Canva pack for service providers",
+          "seo_description": "A professional set of business templates for social media gives you a repeatable format for posts, stories, and carousels - so your feed looks intentional every week without spending hours on design. Our Instagram template pack includes 1,000+ Canva designs built for coaches, consultants, and service providers. Grab it in my Etsy store! #businesstemplates #instagramtemplates #socialmediatemplates",
+          "design_brief": "Tablet mockup propped on a white marble surface showing a Canva Instagram template layout with post, story, and carousel previews in dusty pink and warm white. Supporting props: a small gold pen and a folded linen napkin. Colour tones: dusty pink, warm white, and soft gold. Natural light from the upper right. Text overlay space in the lower-left third. Watermark bottom-right: switzertemplates.com. Category label top-left: INSTAGRAM TEMPLATES.",
+          "destination_url": "https://www.switzertemplates.com/instagram-templates"
+        },
+        {
+          "id": "26d",
+          "type": "EDUCATIONAL",
+          "pin_headline": "Business templates - why starting from scratch is slowing your launch down",
+          "category_label": "BUSINESS TIPS",
+          "seo_title": "Business templates - why every service business needs them before launch",
+          "seo_description": "Business templates aren't just a time-saver - they're what make your brand look consistent enough for a stranger to trust you. Without a repeatable system for your social posts, emails, and documents, every piece of content becomes a design project. Here's what to get in place before you start marketing your business. #businesstemplates #smallbusinesstips #onlinebusiness",
+          "design_brief": "Text-overlay pin on a warm cream background with a bold single-line statement in large sans-serif type and a short three-point list beneath it. Colour tones: cream, charcoal, and a terracotta accent for the list bullets. Soft even light from above. Text overlay fills the upper two-thirds of the pin at thumbnail-readable size. Watermark bottom-right: switzertemplates.com. Category label top-left: BUSINESS TIPS.",
+          "destination_url": "https://www.switzertemplates.com/blog"
+        },
+        {
+          "id": "26e",
+          "type": "EDUCATIONAL",
+          "pin_headline": "Business templates - the 6 types every online service business actually needs",
+          "category_label": "BUSINESS TIPS",
+          "seo_title": "Business templates - 6 types every service business needs to look professional",
+          "seo_description": "The most useful business templates for a service business aren't just social media posts. A complete set covers social media content, an email header, a branded invoice, a proposal template, a pitch deck, and a website that matches the rest. When all six look like they belong together, your business builds recognition automatically. #businesstemplates #smallbusinesstips #brandidentitytips",
+          "design_brief": "Flat lay of six printed template sheets fanned out on a warm cream linen surface - showing a social post, email header, invoice, proposal cover, pitch deck slide, and a website screenshot printout. Colour tones: cream, sage green, and soft charcoal. Soft natural light from the upper left. Text overlay space in the upper-right third. Watermark bottom-right: switzertemplates.com. Category label top-left: BUSINESS TIPS.",
+          "destination_url": "https://www.switzertemplates.com/blog"
+        }
+      ],
+      "topic": "Business Templates",
+      "pt_ocr_best": 0.0055,
+      "data_sources": [
+        "KE",
+        "PT",
+        "OA"
+      ]
+    },
+    {
+      "topic_id": 27,
+      "keyword": "canva business templates",
+      "keyword_volume": 480,
+      "final_score": 112.3,
+      "product_match": 2,
+      "maps_to_product": "All Products",
+      "variation_split": "3 PRODUCT + 2 EDUCATIONAL",
+      "blog": {
+        "existing_post_likely": true,
+        "note": "check blog for existing post",
+        "blog_post_needed": false,
+        "brief_for_blog_agent": ""
+      },
+      "variations": [
+        {
+          "id": "27a",
+          "type": "PRODUCT",
+          "pin_headline": "Canva business templates that cover every platform your brand shows up on",
+          "category_label": "BRANDING KIT",
+          "seo_title": "Canva business templates - 1,000+ premade designs for coaches and service providers",
+          "seo_description": "Get your Canva business templates set up in one go rather than building each design from scratch. Our premade branding kits include 1,000+ Canva templates across social posts, stories, email headers, business cards, and more - all in a cohesive design system so your brand looks consistent everywhere. Click to browse! #canvabusinesstemplates #canvatemplates #premadebranding",
+          "design_brief": "Laptop mockup open to a Canva template library showing a grid of business template previews - social posts, email banners, and pitch deck slides - in a warm cream and terracotta colour system. Surface: warm linen with a small ceramic mug and pen beside the laptop. Colour tones: cream, terracotta, and charcoal. Soft natural light from the upper left. Text overlay space in the upper-left third. Watermark bottom-right: switzertemplates.com. Category label top-left: BRANDING KIT.",
+          "destination_url": "https://www.switzertemplates.com/branding-packages"
+        },
+        {
+          "id": "27b",
+          "type": "PRODUCT",
+          "pin_headline": "Canva business templates for coaches - brand, social, and email in one kit",
+          "category_label": "BUSINESS BUNDLE",
+          "seo_title": "Canva business templates for coaches - website, brand, and social media bundle",
+          "seo_description": "A complete set of Canva business templates for coaches gives you more than social posts - it gives you a full brand system. Our 3-in-1 Business Bundle pairs 1,000+ Canva templates with a matching premade Wix website and landing page, so your brand looks cohesive from Instagram to your booking page. Have a browse! #canvabusinesstemplates #coachbranding #businesstemplates",
+          "design_brief": "Dual mockup showing a laptop with a coaching website and a phone displaying matching Canva Instagram templates in the same colour palette. Surface: warm oak desk with a small succulent plant and a pen. Colour tones: warm white, sage green, and charcoal. Natural light from the left. Text overlay space in the upper-right third. Watermark bottom-right: switzertemplates.com. Category label top-left: BUSINESS BUNDLE.",
+          "destination_url": "https://www.switzertemplates.com/business-template-bundles"
+        },
+        {
+          "id": "27c",
+          "type": "PRODUCT",
+          "pin_headline": "Canva business templates that make your content look intentional every week",
+          "category_label": "INSTAGRAM TEMPLATES",
+          "seo_title": "Canva business templates for social media - premade pack for service providers",
+          "seo_description": "Canva business templates for social media give you a repeatable format for posts, stories, and carousels - so you stop rebuilding layouts from scratch every time you post. Our Instagram template pack includes 1,000+ designs built for coaches and service providers, ready to customise with your content in minutes. Grab it in my Etsy store! #canvabusinesstemplates #instagramtemplates #socialmediatemplates",
+          "design_brief": "Phone mockup displaying a Canva editing screen with a styled social media post template open in dusty pink and cream tones. Surface: white marble desk with a small open notebook and a gold pen to the left. Colour tones: dusty pink, cream, and soft gold. Natural light from the right. Text overlay space in the upper-left third. Watermark bottom-right: switzertemplates.com. Category label top-left: INSTAGRAM TEMPLATES.",
+          "destination_url": "https://www.switzertemplates.com/instagram-templates"
+        },
+        {
+          "id": "27d",
+          "type": "EDUCATIONAL",
+          "pin_headline": "Canva business templates - how to use them without looking like everyone else",
+          "category_label": "CANVA TIPS",
+          "seo_title": "Canva business templates - how to customise them so your brand stands out",
+          "seo_description": "Canva business templates look generic when you use them straight out of the box. The fix is simple: apply your own colour palette, swap the default font for your brand font, and replace the stock imagery with your own photos. Do those three things and a premade template looks completely custom. Here's how to do it in under 20 minutes. #canvabusinesstemplates #canvatips #smallbusinesstips",
+          "design_brief": "Screen-capture style flat lay of a phone showing a before-and-after Canva template customisation - the same layout in a generic default style on the left and a personalised branded version on the right. Surface: warm cream with a small pen and sticky note. Colour tones: warm cream, charcoal, and a sage green accent. Soft even light from above. Text overlay space in the upper-centre third. Watermark bottom-right: switzertemplates.com. Category label top-left: CANVA TIPS.",
+          "destination_url": "https://www.switzertemplates.com/blog"
+        },
+        {
+          "id": "27e",
+          "type": "EDUCATIONAL",
+          "pin_headline": "Canva business templates - the ones worth getting and the ones to skip",
+          "category_label": "CANVA TIPS",
+          "seo_title": "Canva business templates - which ones are worth buying for your business",
+          "seo_description": "Not all Canva business templates are worth the investment. The ones that save the most time are social media post packs with multiple format sizes, branded email header templates, and pitch or proposal decks - because these are the formats you use repeatedly. One-off designs like event flyers are rarely worth buying as templates. Here's what to prioritise. #canvabusinesstemplates #canvatips #smallbusinesstips",
+          "design_brief": "Flat lay of a printed checklist sheet on a warm cream linen surface with a few Canva template printouts fanned beside it. Supporting props: a gold pen and a small dried flower sprig. Colour tones: cream, warm gold, and charcoal. Soft natural light from the upper right. Text overlay space in the upper-left third. Watermark bottom-right: switzertemplates.com. Category label top-left: CANVA TIPS.",
+          "destination_url": "https://www.switzertemplates.com/blog"
+        }
+      ],
+      "topic": "Canva Business Templates",
+      "pt_ocr_best": 0.0,
+      "data_sources": [
+        "KE"
+      ]
+    },
+    {
+      "topic_id": 28,
+      "keyword": "personal branding",
+      "keyword_volume": 49500,
+      "final_score": 108.6,
+      "product_match": 2,
+      "maps_to_product": "Full Branding Kit",
+      "variation_split": "3 PRODUCT + 2 EDUCATIONAL",
+      "blog": {
+        "existing_post_likely": true,
+        "note": "check blog for existing post",
+        "blog_post_needed": false,
+        "brief_for_blog_agent": ""
+      },
+      "variations": [
+        {
+          "id": "28a",
+          "type": "PRODUCT",
+          "pin_headline": "Personal branding kit - logo, colours, fonts, and 1,000+ templates premade",
+          "category_label": "BRANDING KIT",
+          "seo_title": "Personal branding kit - premade and ready to use across every platform today",
+          "seo_description": "A complete personal branding kit covers more than a logo - it gives you a colour system, font pairing, and 1,000+ Canva templates across social media, email, and print so every platform looks like it belongs to the same intentional brand. Our premade kits are built for coaches, consultants, and service providers who want to look established fast. Click to browse! #personalbranding #brandingkit #premadebranding",
+          "design_brief": "Laptop mockup showing a personal branding kit product overview with logo suite, colour swatches, and a grid of social media template previews on screen. Surface: warm linen flat lay with a small ceramic bowl and a gold pen. Colour tones: cream, warm gold, and charcoal. Soft natural light from the upper left. Text overlay space in the upper-left third. Watermark bottom-right: switzertemplates.com. Category label top-left: BRANDING KIT.",
+          "destination_url": "https://www.switzertemplates.com/branding-packages"
+        },
+        {
+          "id": "28b",
+          "type": "PRODUCT",
+          "pin_headline": "Personal branding that makes potential clients trust you before you say a word",
+          "category_label": "BRANDING KIT",
+          "seo_title": "Personal branding kit for coaches - look professional and attract more clients",
+          "seo_description": "Personal branding that looks inconsistent across platforms signals to potential clients that your business isn't quite established - even when your work is exceptional. Our premade branding kit for coaches and service providers gives you a cohesive visual identity across every touchpoint so your brand builds trust before the first conversation. Have a browse! #personalbranding #coachbranding #brandidentitytips",
+          "design_brief": "Phone mockup showing a cohesive branded Instagram profile in sage and cream - matching post templates, story highlights, and a consistent grid. Surface: white marble desk with a small potted plant and folded linen cloth. Colour tones: sage green, cream, and soft charcoal. Natural light from the left. Text overlay space in the upper-right third. Watermark bottom-right: switzertemplates.com. Category label top-left: BRANDING KIT.",
+          "destination_url": "https://www.switzertemplates.com/branding-packages"
+        },
+        {
+          "id": "28c",
+          "type": "PRODUCT",
+          "pin_headline": "Personal branding plus website - get both with the 3-in-1 business bundle",
+          "category_label": "BUSINESS BUNDLE",
+          "seo_title": "Personal branding and Wix website - 3-in-1 bundle for coaches and consultants",
+          "seo_description": "Save weeks of setup time by getting your personal branding and website together in one cohesive bundle. Our 3-in-1 Business Bundle includes a full branding kit, a premade Wix website, and a Canva landing page - all designed to match so your brand looks intentional from Instagram to your booking page from day one. Grab it in my Etsy store! #personalbranding #coachwebsite #businesstemplates",
+          "design_brief": "Dual mockup showing a laptop with a personal brand website homepage and a phone beside it with matching Instagram post templates in terracotta and cream. Surface: warm oak desk with a small open planner. Colour tones: terracotta, cream, and charcoal. Natural light from the upper left. Text overlay space in the upper-left third. Watermark bottom-right: switzertemplates.com. Category label top-left: BUSINESS BUNDLE.",
+          "destination_url": "https://www.switzertemplates.com/business-template-bundles"
+        },
+        {
+          "id": "28d",
+          "type": "EDUCATIONAL",
+          "pin_headline": "Personal branding - what it actually means for a service business owner",
+          "category_label": "BRANDING TIPS",
+          "seo_title": "Personal branding for service businesses - what it is and where to start",
+          "seo_description": "Personal branding isn't about being famous - it's about being recognisable and consistent to the right people. For a service business, that means a clear visual identity, a consistent message, and a presence that tells potential clients exactly who you help and why you're the right fit - before they ever get on a call with you. Here's what to build first. #personalbranding #brandidentitytips #smallbusinessbranding",
+          "design_brief": "Text-overlay pin on a warm cream background with a single bold statement in large sans-serif type at the top, followed by a three-line explanation in smaller type. Colour tones: cream, charcoal, and a dusty rose accent line. Soft even light from above. Text overlay fills the upper two-thirds at thumbnail-readable size. Watermark bottom-right: switzertemplates.com. Category label top-left: BRANDING TIPS.",
+          "destination_url": "https://www.switzertemplates.com/blog"
+        },
+        {
+          "id": "28e",
+          "type": "EDUCATIONAL",
+          "pin_headline": "Personal branding mistakes that make your business look unprofessional online",
+          "category_label": "BRANDING TIPS",
+          "seo_title": "Personal branding mistakes most coaches and service providers make",
+          "seo_description": "The most common personal branding mistake isn't having bad design - it's having no design system at all. A different look on Instagram than on your website, a logo that doesn't scale, and inconsistent fonts across your content all add up to a brand that doesn't register. Here's what a complete personal brand system looks like and how to get there without starting from scratch. #personalbranding #brandidentitytips #smallbusinesstips",
+          "design_brief": "Side-by-side phone mockups showing a disjointed, inconsistent personal brand profile on the left versus a clean, cohesive one on the right. Surface: warm cream linen with a small pen and notebook corner visible at the bottom. Colour tones: warm cream, charcoal, and a soft sage green accent. Soft natural light from the upper right. Text overlay space in the upper-centre third. Watermark bottom-right: switzertemplates.com. Category label top-left: BRANDING TIPS.",
+          "destination_url": "https://www.switzertemplates.com/blog"
+        }
+      ],
+      "topic": "Personal Branding",
+      "pt_ocr_best": 0.0,
+      "data_sources": [
+        "KE"
+      ]
+    }
+  ]
+}

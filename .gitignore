@@ -1,0 +1,8 @@
+.env
+.DS_Store
+__pycache__/
+*.pyc
+*.pyo
+outputs/pins/review/
+outputs/pins/approved/
+data/pinterest-agent/search-pin-cache.json

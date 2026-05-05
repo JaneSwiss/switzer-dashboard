@@ -1,0 +1,27 @@
+# Switzertemplates — .claudeignore
+# Conservative version — only ignores junk files Claude never needs to read.
+# Do not add context/, skills/, or any data files you feed into Claude tasks.
+
+# Environment variables — never let Claude read this
+.env
+.env.local
+.env.*
+
+# Python cache — compiled bytecode, not useful to Claude
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# macOS system files
+.DS_Store
+
+# Node (if ever used)
+node_modules/
+
+# Logs — large and not useful for reasoning
+*.log
+logs/
+
+# Large data exports — add specific filenames here if needed
+# e.g. exports/competitor_data_april.csv

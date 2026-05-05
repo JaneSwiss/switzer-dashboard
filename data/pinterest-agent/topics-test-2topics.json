@@ -1,0 +1,163 @@
+{
+  "generated_at": "2026-04-30T20:06:33.765485",
+  "total_topics": 2,
+  "total_pin_variations": 10,
+  "intent_distribution": {
+    "?": 28
+  },
+  "variation_type_dist": {
+    "PRODUCT": 97,
+    "EDUCATIONAL": 43
+  },
+  "blog_posts_needed": 13,
+  "topics": [
+    {
+      "topic_id": 1,
+      "keyword": "coach websites",
+      "keyword_volume": 9900,
+      "final_score": 261.1,
+      "product_match": 2,
+      "maps_to_product": "Premade Wix Website",
+      "variation_split": "3 PRODUCT + 2 EDUCATIONAL",
+      "blog": {
+        "existing_post_likely": true,
+        "note": "check blog for existing post",
+        "blog_post_needed": false,
+        "brief_for_blog_agent": ""
+      },
+      "variations": [
+        {
+          "id": "1a",
+          "type": "PRODUCT",
+          "pin_headline": "Coach websites that win clients before you say a word",
+          "category_label": "WIX WEBSITES",
+          "seo_title": "Coach websites that win clients before you say a word",
+          "seo_description": "Coach websites built on Wix - premade, professionally designed, and ready to customise in a weekend. No coding, no months of back-and-forth with a developer, just a polished site that works for your business from day one. Click to browse! #coachwebsite #wixwebsitetemplate #smallbusinesstips",
+          "design_brief": "Laptop open on a warm linen desk surface showing a clean, editorial coach website homepage. Soft natural light from the left. Warm cream and sage green colour tones. Text overlay space in the upper-left third reading 'coach websites'. Watermark bottom-right: switzertemplates.com. Category label top-left. Pin ratio 2:3 at 1000x1500px.",
+          "destination_url": "https://www.switzertemplates.com/premade-wix-website-templates-for-sale"
+        },
+        {
+          "id": "1b",
+          "type": "PRODUCT",
+          "pin_headline": "Coach websites - look professional and attract more clients",
+          "category_label": "WIX WEBSITES",
+          "seo_title": "Coach websites - look professional and attract more clients",
+          "seo_description": "A scattered or missing website is costing coaches clients before a conversation even starts. Our premade coach websites on Wix give you every page your business needs - services, about, contact, and booking - already designed and ready to go. Grab it in my Etsy store! #coachwebsite #premadewebsite #wixtemplate",
+          "design_brief": "Phone screen mockup propped against a stack of white books on an oak desk, showing a mobile-optimised coach website homepage. Warm white and terracotta colour tones. Soft diffused light from the upper right. Text overlay space in the upper-right third. Watermark bottom-right: switzertemplates.com. Category label top-left. Pin ratio 2:3 at 1000x1500px.",
+          "destination_url": "https://www.switzertemplates.com/premade-wix-website-templates-for-sale"
+        },
+        {
+          "id": "1c",
+          "type": "PRODUCT",
+          "pin_headline": "Coach websites with every page already designed \u2014 just add your content",
+          "category_label": "WIX WEBSITES",
+          "seo_title": "Coach websites with every page already built and ready to go",
+          "seo_description": "A premade coach website on Wix means you never stare at a blank editor deciding what pages to include or how to lay them out. Homepage, services, about, and booking are all there - structured, designed, and waiting for your words and photos. Have a browse! #coachwebsite #wixwebsitetemplate #premadewebsite",
+          "design_brief": "Tablet propped on a marble surface showing a full coach website layout with multiple pages visible. Cream and dusty pink colour tones. Soft natural light from the left. Bold text overlay space across the upper third. Watermark bottom-right: switzertemplates.com. Category label top-left. Pin ratio 2:3 at 1000x1500px.",
+          "destination_url": "https://www.switzertemplates.com/premade-wix-website-templates-for-sale"
+        },
+        {
+          "id": "1d",
+          "type": "EDUCATIONAL",
+          "pin_headline": "What every coach website needs to convert visitors into clients",
+          "category_label": "WEBSITE TIPS",
+          "seo_title": "What every coach website needs to convert visitors into clients",
+          "seo_description": "Most coach websites lose potential clients because key pages are missing or unclear. Your site needs a services page that explains exactly what you offer, social proof that builds trust, and a booking or contact page that removes friction. Get these right and your website works for you 24/7. #coachwebsite #smallbusinesstips #servicebusiness",
+          "design_brief": "Clean flat-lay of a notebook with handwritten page outline sketch beside a laptop on a warm linen surface. Cream and sage tones. Soft natural light from the upper left. Bold single-line text overlay at the top third of the pin. Watermark bottom-right: switzertemplates.com. Category label top-left. Pin ratio 2:3 at 1000x1500px.",
+          "destination_url": "https://www.switzertemplates.com/blog"
+        },
+        {
+          "id": "1e",
+          "type": "EDUCATIONAL",
+          "pin_headline": "Coach websites - the 3 things yours is probably missing",
+          "category_label": "WEBSITE TIPS",
+          "seo_title": "Coach websites - the 3 things yours is probably missing",
+          "seo_description": "Coach websites that don't convert usually share the same three gaps: no clear headline on the homepage, no visible services page, and no easy way to book. Fix these three things and your site stops being a placeholder and starts doing real work for your business. Check it out --> #coachwebsite #smallbusinesstips #onlinebusiness",
+          "design_brief": "Laptop open on an oak desk showing a simple numbered list graphic on screen with a clean sans-serif font. Warm white and terracotta tones. Soft light from the left. Text overlay space in the lower-left third. Watermark bottom-right: switzertemplates.com. Category label top-left. Pin ratio 2:3 at 1000x1500px.",
+          "destination_url": "https://www.switzertemplates.com/blog"
+        }
+      ],
+      "topic": "Coach Websites",
+      "pt_ocr_best": 0.0055,
+      "data_sources": [
+        "KE",
+        "PT",
+        "OA"
+      ]
+    },
+    {
+      "topic_id": 2,
+      "keyword": "wix website for coaches",
+      "keyword_volume": 0,
+      "final_score": 261.1,
+      "product_match": 3,
+      "maps_to_product": "Premade Wix Website",
+      "variation_split": "4 PRODUCT + 1 EDUCATIONAL",
+      "blog": {
+        "existing_post_likely": false,
+        "note": "",
+        "blog_post_needed": true,
+        "brief_for_blog_agent": "Write a post titled 'How to choose the right Wix website for coaches' covering what pages to include, what design elements build trust, and how a premade template saves time. Link naturally to the premade Wix website product page."
+      },
+      "variations": [
+        {
+          "id": "2a",
+          "type": "PRODUCT",
+          "pin_headline": "Wix website for coaches that looks custom without the cost",
+          "category_label": "WIX WEBSITES",
+          "seo_title": "Wix website for coaches that looks custom without the cost",
+          "seo_description": "Get your wix website for coaches live this week without starting from scratch. Our premade Wix templates are fully designed with every page a coaching business needs - homepage, services, about, and contact - so you look established from day one. Click to browse! #wixwebsitetemplate #coachwebsite #premadewebsite",
+          "design_brief": "Laptop open on a warm linen surface showing a premium coaching website homepage with a bold hero section. Cream and sage green colour tones. Soft natural light from the left. Text overlay space in the upper-left third. Watermark bottom-right: switzertemplates.com. Category label top-left. Pin ratio 2:3 at 1000x1500px.",
+          "destination_url": "https://www.switzertemplates.com/premade-wix-website-templates-for-sale"
+        },
+        {
+          "id": "2b",
+          "type": "PRODUCT",
+          "pin_headline": "Wix website for coaches - no coding, no designer needed",
+          "category_label": "WIX WEBSITES",
+          "seo_title": "Wix website for coaches - no coding, no designer needed",
+          "seo_description": "A professional wix website for coaches doesn't have to take months or cost thousands. Our premade templates give you a fully designed site - swap your content in and publish without touching a single line of code. Grab it in my Etsy store! #wixtemplate #coachwebsite #smallbusinesstips",
+          "design_brief": "Phone mockup in hand showing a mobile coach website homepage with a clean editorial layout. Warm white and dusty pink colour tones. Soft light from the upper right. Text overlay space across the lower third. Watermark bottom-right: switzertemplates.com. Category label top-left. Pin ratio 2:3 at 1000x1500px.",
+          "destination_url": "https://www.switzertemplates.com/premade-wix-website-templates-for-sale"
+        },
+        {
+          "id": "2c",
+          "type": "PRODUCT",
+          "pin_headline": "Wix website for coaches that takes you from blank page to live site",
+          "category_label": "WIX WEBSITES",
+          "seo_title": "Wix website for coaches that takes you from blank page to live site",
+          "seo_description": "A premade wix website for coaches covers every page your business needs - already designed, already structured, just waiting for your words and photos. No guessing what to include, no paying a developer, no months of back-and-forth. Have a browse! #wixwebsitetemplate #premadewebsite #onlinebusiness",
+          "design_brief": "Tablet flat on a marble surface showing a split-screen view of a coach website before and after customisation. Cream and terracotta colour tones. Diffused natural light from the left. Text overlay space in the upper-right third. Watermark bottom-right: switzertemplates.com. Category label top-left. Pin ratio 2:3 at 1000x1500px.",
+          "destination_url": "https://www.switzertemplates.com/premade-wix-website-templates-for-sale"
+        },
+        {
+          "id": "2d",
+          "type": "PRODUCT",
+          "pin_headline": "Save time building your wix website for coaches with a premade design",
+          "category_label": "WIX WEBSITES",
+          "seo_title": "Save time building your wix website for coaches with a premade design",
+          "seo_description": "Starting your wix website for coaches from a blank canvas wastes weeks you could spend on clients. A premade Wix template gives you a professional structure and design on day one - so you can focus on your offer, not on figuring out page layouts. Check it out --> #wixtemplate #coachwebsite #servicebusiness",
+          "design_brief": "Laptop open on an oak desk surface showing a coaching website services page with clear sections and professional typography. Warm cream and sage tones. Soft natural light from the upper left. Text overlay space in the upper-left third. Watermark bottom-right: switzertemplates.com. Category label top-left. Pin ratio 2:3 at 1000x1500px.",
+          "destination_url": "https://www.switzertemplates.com/premade-wix-website-templates-for-sale"
+        },
+        {
+          "id": "2e",
+          "type": "EDUCATIONAL",
+          "pin_headline": "Wix website for coaches - what pages you actually need",
+          "category_label": "WEBSITE TIPS",
+          "seo_title": "Wix website for coaches - what pages you actually need",
+          "seo_description": "Building a wix website for coaches is simpler than most people think - but only if you know which pages matter. At minimum: a homepage with a clear headline, a services page, an about page, and a contact or booking page. Miss any of these and potential clients leave before they reach out. #coachwebsite #smallbusinesstips #wixtemplate",
+          "design_brief": "Clean flat-lay overhead shot of a notebook open to a hand-drawn site map sketch, beside a cup of coffee on a warm linen surface. Cream and dusty pink tones. Soft diffused natural light from the left. Bold text overlay across the top third. Watermark bottom-right: switzertemplates.com. Category label top-left. Pin ratio 2:3 at 1000x1500px.",
+          "destination_url": "https://www.switzertemplates.com/blog"
+        }
+      ],
+      "topic": "Wix Website For Coaches",
+      "pt_ocr_best": 0.0055,
+      "data_sources": [
+        "KE",
+        "PT",
+        "OA"
+      ]
+    }
+  ]
+}

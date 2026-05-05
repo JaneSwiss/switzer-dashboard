@@ -1,0 +1,1849 @@
+{
+  "generated_at": "2026-04-27T12:07:34.419374",
+  "total_topics": 28,
+  "total_pin_variations": 140,
+  "intent_distribution": {
+    "high": 14,
+    "mixed": 14
+  },
+  "variation_type_dist": {
+    "PRODUCT": 84,
+    "EDUCATIONAL": 56
+  },
+  "blog_posts_needed": 8,
+  "topics": [
+    {
+      "topic_id": 1,
+      "topic": "Brand identity design",
+      "keyword": "brand identity",
+      "keyword_volume": 301000,
+      "opportunity_score": 97.6,
+      "commercial_intent": "high",
+      "variation_split": "4 PRODUCT + 1 EDUCATIONAL",
+      "blog": null,
+      "variations": [
+        {
+          "id": "1a",
+          "type": "PRODUCT",
+          "pin_headline": "A complete brand identity ready in one afternoon.",
+          "category_label": "BRANDING KITS",
+          "seo_title": "Brand identity kit for coaches and small business owners",
+          "seo_description": "Get a full brand identity without hiring a designer. The Switzertemplates branding kit includes 1,000+ Canva templates - logos, social media, business cards, and more. Cohesive, professional, and ready to customise. Shop at switzertemplates.com",
+          "design_brief": "Flat lay on warm linen: open laptop showing a branded Instagram grid, a printed business card, and a logo mockup sheet. Text space top-left. Soft cream and terracotta tones. Clean, editorial feel.",
+          "destination_url": null
+        },
+        {
+          "id": "1b",
+          "type": "PRODUCT",
+          "pin_headline": "Your brand identity, website, and landing page - all matching.",
+          "category_label": "BUSINESS BUNDLE",
+          "seo_title": "Brand identity bundle - website, branding kit, and landing page",
+          "seo_description": "The 3-in-1 business bundle gives coaches and service providers a complete brand identity in one purchase. Wix website, 1,000+ Canva branding templates, and a landing page - all in one cohesive style. Shop at switzertemplates.com",
+          "design_brief": "Desk scene from above: MacBook open to a branded Wix site, phone showing matching Instagram posts, and a printed brand colour palette card. Warm white and sage tones. Text overlay space on the right side.",
+          "destination_url": null
+        },
+        {
+          "id": "1c",
+          "type": "PRODUCT",
+          "pin_headline": "Brand identity templates built for female business owners.",
+          "category_label": "BRANDING KITS",
+          "seo_title": "Brand identity Canva templates for women in business",
+          "seo_description": "Stop starting from scratch every time you post. The Switzertemplates branding kit gives you a consistent brand identity across social, print, and digital - 1,000+ templates ready to go. Shop at switzertemplates.com",
+          "design_brief": "Woman at a bright minimalist desk reviewing printed brand sheets and an open Canva screen on her laptop. Warm natural light. Dusty pink and white tones. Text space on upper third of image.",
+          "destination_url": null
+        },
+        {
+          "id": "1d",
+          "type": "PRODUCT",
+          "pin_headline": "Build a brand identity that looks like you hired a designer.",
+          "category_label": "BRANDING KITS",
+          "seo_title": "Professional brand identity kit - Canva templates for coaches",
+          "seo_description": "Your brand identity shapes how clients see you before they read a word. The Switzertemplates full branding kit includes logos, colour palettes, ebook templates, social posts, and more - all in Canva. Shop at switzertemplates.com",
+          "design_brief": "Close-up of a mood board pinned to a white wall: brand colour swatches, logo variations, and a printed social post mock. Warm neutral tones. Hand reaching in to point at the logo. Text space bottom-left.",
+          "destination_url": null
+        },
+        {
+          "id": "1e",
+          "type": "EDUCATIONAL",
+          "pin_headline": "Three things every small business brand identity needs.",
+          "category_label": "BRANDING TIPS",
+          "seo_title": "Brand identity checklist for small business owners",
+          "seo_description": "A strong brand identity is more than a logo. Coaches and service providers need consistent visuals across every platform to build trust fast. Here are three elements you cannot skip when building yours. Click to browse.",
+          "design_brief": "Woman sitting cross-legged on a cream sofa, notebook open, reviewing a printed brand checklist. Morning light, warm tones. Simple text overlay listing three points on the left side. Organic, real-life feel.",
+          "destination_url": null
+        }
+      ]
+    },
+    {
+      "topic_id": 2,
+      "topic": "Canva logo design",
+      "keyword": "canva logo",
+      "keyword_volume": 27100,
+      "opportunity_score": 92.0,
+      "commercial_intent": "high",
+      "variation_split": "4 PRODUCT + 1 EDUCATIONAL",
+      "blog": null,
+      "variations": [
+        {
+          "id": "2a",
+          "type": "PRODUCT",
+          "pin_headline": "A professional Canva logo that fits your whole brand.",
+          "category_label": "BRANDING KITS",
+          "seo_title": "Canva logo templates included in the Switzertemplates branding kit",
+          "seo_description": "Skip the logo struggle. The Switzertemplates full branding kit includes Canva logo templates you can customise in minutes - no design experience needed. Fonts, colours, and layouts all matched for you. Shop at switzertemplates.com",
+          "design_brief": "Tablet flat on a marble surface showing a Canva logo design screen with four logo variations displayed. A small succulent and coffee cup nearby. Bright, airy, white and warm beige tones. Text space top-right.",
+          "destination_url": null
+        },
+        {
+          "id": "2b",
+          "type": "PRODUCT",
+          "pin_headline": "Canva logo templates designed to match your full brand kit.",
+          "category_label": "BRANDING KITS",
+          "seo_title": "Canva logo and branding kit for coaches and service providers",
+          "seo_description": "Your logo should match your social posts, business cards, and website. The Switzertemplates branding kit gives you Canva logo templates plus 1,000+ matching brand assets in one place. Shop at switzertemplates.com",
+          "design_brief": "Styled desk with a printed logo sheet showing primary and secondary logo versions, next to a branded business card mockup. Cream linen background, natural light. Text overlay space along the bottom third.",
+          "destination_url": null
+        },
+        {
+          "id": "2c",
+          "type": "PRODUCT",
+          "pin_headline": "Get a Canva logo that connects to your whole online brand.",
+          "category_label": "BUSINESS BUNDLE",
+          "seo_title": "Canva logo plus website bundle for female small business owners",
+          "seo_description": "Your Canva logo is just the start. The 3-in-1 business bundle pairs your logo with a matching Wix website and landing page so your brand looks consistent everywhere clients find you. Shop at switzertemplates.com",
+          "design_brief": "Split-frame mockup: left side shows a Canva logo file open on a laptop, right side shows the same logo on a live Wix homepage. Warm white background. Clean, modern. Text space centred at top.",
+          "destination_url": null
+        },
+        {
+          "id": "2d",
+          "type": "PRODUCT",
+          "pin_headline": "Wellness coaches: a Canva logo that looks calm and professional.",
+          "category_label": "BRANDING KITS",
+          "seo_title": "Canva logo templates for wellness coaches and therapists",
+          "seo_description": "Wellness and health coaches need a logo that builds trust instantly. The Switzertemplates branding kit includes soft, clean Canva logo templates made for wellness and service-based businesses. Shop at switzertemplates.com",
+          "design_brief": "Close-up of a phone screen showing a wellness brand logo on a clean white Canva workspace. Dried botanicals and a crystal in the background. Sage green and warm beige tones. Text space top-left.",
+          "destination_url": null
+        },
+        {
+          "id": "2e",
+          "type": "EDUCATIONAL",
+          "pin_headline": "Why your Canva logo looks off - and how to fix it.",
+          "category_label": "BRANDING TIPS",
+          "seo_title": "How to make a Canva logo look professional for your small business",
+          "seo_description": "Most DIY Canva logos fail because of font pairing, colour contrast, or layout - not effort. Here are the common mistakes coaches and business owners make when designing their logo in Canva, and how to avoid them. Click to browse.",
+          "design_brief": "Before-and-after side-by-side mockup on a light background: one cluttered DIY logo concept on the left, a clean refined version on the right. Neutral warm tones. Bold text overlay pointing to the differences. Editorial style.",
+          "destination_url": null
+        }
+      ]
+    },
+    {
+      "topic_id": 3,
+      "topic": "Coaching business branding",
+      "keyword": "life coaches",
+      "keyword_volume": 60500,
+      "opportunity_score": 89.8,
+      "commercial_intent": "high",
+      "variation_split": "4 PRODUCT + 1 EDUCATIONAL",
+      "blog": null,
+      "variations": [
+        {
+          "id": "3a",
+          "type": "PRODUCT",
+          "pin_headline": "The Wix website built for life coaches who mean business.",
+          "category_label": "WIX WEBSITES",
+          "seo_title": "Premade Wix website template for life coaches",
+          "seo_description": "Life coaches need a website that converts visitors into discovery call bookings. The Switzertemplates premade Wix website is mobile-ready, one-click transfer, and designed specifically for coaches. Shop at switzertemplates.com",
+          "design_brief": "Woman in a bright, minimal home office space looking confidently at a laptop showing a clean coaching website homepage. Warm white and dusty rose tones. Natural light. Text space on the upper left third.",
+          "destination_url": null
+        },
+        {
+          "id": "3b",
+          "type": "PRODUCT",
+          "pin_headline": "Life coaches: get your brand, website, and landing page sorted.",
+          "category_label": "BUSINESS BUNDLE",
+          "seo_title": "Business bundle for life coaches - website, branding kit, landing page",
+          "seo_description": "Stop patching your online presence together. The 3-in-1 business bundle gives life coaches a complete Wix website, 1,000+ Canva branding templates, and a landing page - all matching, all done. Shop at switzertemplates.com",
+          "design_brief": "Overhead desk flat lay: open laptop showing a coaching website, printed social media templates, and a notebook with session notes. Warm terracotta and cream. Text space on the right side of the image.",
+          "destination_url": null
+        },
+        {
+          "id": "3c",
+          "type": "PRODUCT",
+          "pin_headline": "A branding kit that makes your coaching business look established.",
+          "category_label": "BRANDING KITS",
+          "seo_title": "Canva branding kit for life coaches and business coaches",
+          "seo_description": "Clients judge your credibility before they book. The Switzertemplates full branding kit gives life coaches 1,000+ Canva templates - logos, social posts, ebooks, and more - that make your business look polished from day one. Shop at switzertemplates.com",
+          "design_brief": "Confident woman in a casual linen outfit sitting at a styled desk, reviewing printed brand templates. Warm neutral background. Coffee and branded stationery visible. Text space along the top of the frame.",
+          "destination_url": null
+        },
+        {
+          "id": "3d",
+          "type": "PRODUCT",
+          "pin_headline": "Instagram templates that help life coaches grow their audience.",
+          "category_label": "INSTAGRAM TEMPLATES",
+          "seo_title": "Instagram templates for life coaches - Canva social media posts",
+          "seo_description": "Consistent content builds trust faster than one perfect post. The Switzertemplates Instagram template pack gives life coaches editorial Canva posts and carousels designed to attract ideal clients. Shop at switzertemplates.com",
+          "design_brief": "Phone mockup flat on a warm pink surface showing a polished Instagram feed grid with coaching content posts. Flowers and a journal nearby. Soft pink and white tones. Text space at the top.",
+          "destination_url": null
+        },
+        {
+          "id": "3e",
+          "type": "EDUCATIONAL",
+          "pin_headline": "What your coaching website needs on the home page.",
+          "category_label": "WEBSITE TIPS",
+          "seo_title": "What to put on a life coach website homepage - small business tips",
+          "seo_description": "Most coaching websites lose potential clients in the first ten seconds. These are the homepage sections that move visitors from curious to booked - and the common elements coaches forget to include. Click to browse.",
+          "design_brief": "Woman reviewing a coaching website on a laptop in a bright living room, annotating a printed page layout with a pen. Warm natural light, cream and sage tones. Text overlay with a numbered list on the right side.",
+          "destination_url": null
+        }
+      ]
+    },
+    {
+      "topic_id": 4,
+      "topic": "Social media marketing",
+      "keyword": "social media marketing",
+      "keyword_volume": 33100,
+      "opportunity_score": 89.0,
+      "commercial_intent": "high",
+      "variation_split": "4 PRODUCT + 1 EDUCATIONAL",
+      "blog": {
+        "existing_post_likely": true,
+        "note": "check blog for existing post at switzertemplates.com",
+        "blog_post_needed": false,
+        "brief_for_blog_agent": null
+      },
+      "variations": [
+        {
+          "id": "4a",
+          "type": "PRODUCT",
+          "pin_headline": "Social media marketing templates that save you hours every week.",
+          "category_label": "INSTAGRAM TEMPLATES",
+          "seo_title": "Social media marketing templates for small business owners - Canva",
+          "seo_description": "Spending hours on social every week is not a social media strategy. The Switzertemplates Instagram template pack gives you ready-made Canva posts and carousels for consistent, on-brand marketing. Shop at switzertemplates.com",
+          "design_brief": "Woman at a standing desk, phone in hand reviewing an Instagram feed, laptop open to Canva in the background. Bright modern space. Warm white and gold tones. Text space upper-right corner.",
+          "destination_url": null
+        },
+        {
+          "id": "4b",
+          "type": "PRODUCT",
+          "pin_headline": "Run your social media marketing with a consistent brand look.",
+          "category_label": "BRANDING KITS",
+          "seo_title": "Branding kit for consistent social media marketing - Canva templates",
+          "seo_description": "Inconsistent visuals undermine even the best content. The Switzertemplates full branding kit gives you 1,000+ matching Canva templates across social, email, and print so your marketing always looks cohesive. Shop at switzertemplates.com",
+          "design_brief": "Overhead shot of a desk with a printed social media content calendar, a tablet showing matching Instagram posts, and brand colour swatches. Warm blush and white tones. Text space on the left third.",
+          "destination_url": null
+        },
+        {
+          "id": "4c",
+          "type": "PRODUCT",
+          "pin_headline": "Beauty business owners: social media marketing made simple.",
+          "category_label": "BRANDING KITS",
+          "seo_title": "Social media marketing templates for beauty business owners",
+          "seo_description": "Beauty and wellness businesses need visuals that match the quality of their services. The Switzertemplates branding kit includes Canva social media templates built for beauty providers who want a polished feed. Shop at switzertemplates.com",
+          "design_brief": "Styled beauty flat lay: makeup products, flowers, and a phone showing a polished branded Instagram story. Warm dusty rose and cream tones. Soft natural light from the side. Text space in the upper half.",
+          "destination_url": null
+        },
+        {
+          "id": "4d",
+          "type": "PRODUCT",
+          "pin_headline": "Consultants: social media marketing content that builds credibility.",
+          "category_label": "INSTAGRAM TEMPLATES",
+          "seo_title": "Social media templates for consultants and service providers",
+          "seo_description": "Clients research consultants online before they make contact. The Switzertemplates Instagram template pack gives consultants editorial post and carousel designs that communicate expertise. Shop at switzertemplates.com",
+          "design_brief": "Professional woman in a tailored blazer looking at her phone in a minimal bright office. Clean white walls and a potted plant. Neutral warm tones. Text overlay space on the left side of the image.",
+          "destination_url": null
+        },
+        {
+          "id": "4e",
+          "type": "EDUCATIONAL",
+          "pin_headline": "Why your social media is not bringing in clients.",
+          "category_label": "MARKETING TIPS",
+          "seo_title": "Social media marketing tips for coaches and small business owners",
+          "seo_description": "Posting consistently is not enough if your visuals and messaging are scattered. Here is why most small business owners do not see results from social media - and the one shift that changes it. Click to browse.",
+          "design_brief": "Woman sitting at a kitchen table looking frustrated at a laptop screen showing a flat-performing Instagram page. Warm morning light. Neutral tones. Text overlay with a bold stat or single question in the top half.",
+          "destination_url": null
+        }
+      ]
+    },
+    {
+      "topic_id": 5,
+      "topic": "Canva templates for business",
+      "keyword": "canva templates",
+      "keyword_volume": 22200,
+      "opportunity_score": 86.6,
+      "commercial_intent": "high",
+      "variation_split": "4 PRODUCT + 1 EDUCATIONAL",
+      "blog": null,
+      "variations": [
+        {
+          "id": "5a",
+          "type": "PRODUCT",
+          "pin_headline": "Over 1,000 Canva templates - all in one branding kit.",
+          "category_label": "BRANDING KITS",
+          "seo_title": "1000+ Canva templates for small business owners - branding kit",
+          "seo_description": "Stop searching for individual Canva templates. The Switzertemplates full branding kit gives you 1,000+ templates covering social media, logos, ebooks, business cards, and more - all in one cohesive design. Shop at switzertemplates.com",
+          "design_brief": "Tablet screen showing a Canva folder grid with labelled template categories visible. Warm linen surface underneath, a pen and coffee cup to the side. Cream and warm beige tones. Text space at the top of the frame.",
+          "destination_url": null
+        },
+        {
+          "id": "5b",
+          "type": "PRODUCT",
+          "pin_headline": "Canva templates for coaches that cover every content need.",
+          "category_label": "INSTAGRAM TEMPLATES",
+          "seo_title": "Canva templates for coaches - Instagram posts, carousels and more",
+          "seo_description": "From Instagram carousels to email headers, coaches need Canva templates that cover every touchpoint. The Switzertemplates Instagram template pack gives you editorial, scroll-stopping content designed for your audience. Shop at switzertemplates.com",
+          "design_brief": "Phone screen showing a polished carousel template open in Canva, resting on a desk with a notebook and branded pen. Warm soft pink and white tones. Natural light. Text space in the upper-left corner.",
+          "destination_url": null
+        },
+        {
+          "id": "5c",
+          "type": "PRODUCT",
+          "pin_headline": "eCommerce sellers: Canva templates for every part of your brand.",
+          "category_label": "BRANDING KITS",
+          "seo_title": "Canva templates for eCommerce sellers and product businesses",
+          "seo_description": "Product businesses need Canva templates for packaging inserts, social posts, and promotional graphics. The Switzertemplates branding kit covers every format eCommerce sellers need - ready to customise. Shop at switzertemplates.com",
+          "design_brief": "Styled product flat lay on a cream surface: small boxes with branded labels, a phone showing a matching Instagram post, and a laptop in the background with Canva open. Warm terracotta and white tones. Text space right side.",
+          "destination_url": null
+        },
+        {
+          "id": "5d",
+          "type": "PRODUCT",
+          "pin_headline": "Canva templates that come with a matching Wix website.",
+          "category_label": "BUSINESS BUNDLE",
+          "seo_title": "Canva templates and Wix website bundle for small business owners",
+          "seo_description": "The best Canva templates are the ones that match your website. The 3-in-1 business bundle pairs 1,000+ Canva templates with a premade Wix site and landing page - all designed to look like one brand. Shop at switzertemplates.com",
+          "design_brief": "Side-by-side: laptop showing a Wix website on the left, tablet showing matching Canva social templates on the right. Clean white desk, bright natural light. Warm neutral tones. Text space centred at the top.",
+          "destination_url": null
+        },
+        {
+          "id": "5e",
+          "type": "EDUCATIONAL",
+          "pin_headline": "How to organise your Canva templates so you actually use them.",
+          "category_label": "CANVA TIPS",
+          "seo_title": "How to organise Canva templates for your small business brand",
+          "seo_description": "Most business owners download Canva templates and never open them again. Here is a simple folder system that makes it easy to find the right template fast - so you can post consistently without the stress. Click to browse.",
+          "design_brief": "Close-up of a laptop screen showing a tidy Canva folder structure with named brand folders. A hand hovers over the trackpad. Warm white and sage green tones. Clean, minimal. Text space along the top of the frame.",
+          "destination_url": null
+        }
+      ]
+    },
+    {
+      "topic_id": 6,
+      "topic": "Instagram templates for business",
+      "keyword": "Instagram templates",
+      "keyword_volume": 12100,
+      "opportunity_score": 84.2,
+      "commercial_intent": "high",
+      "variation_split": "4 PRODUCT + 1 EDUCATIONAL",
+      "blog": {
+        "existing_post_likely": true,
+        "note": "check blog for existing post at switzertemplates.com",
+        "blog_post_needed": false,
+        "brief_for_blog_agent": null
+      },
+      "variations": [
+        {
+          "id": "6a",
+          "type": "PRODUCT",
+          "pin_headline": "Free-looking Instagram templates that are actually premium.",
+          "category_label": "INSTAGRAM TEMPLATES",
+          "seo_title": "Premium Instagram templates for coaches and small business owners",
+          "seo_description": "Your Instagram feed is the first thing potential clients see. The Switzertemplates Instagram template pack gives coaches and entrepreneurs editorial Canva post and carousel designs that convert browsers into buyers. Shop at switzertemplates.com",
+          "design_brief": "Phone flat on a pink marble surface showing a styled, editorial Instagram grid with 9 cohesive posts visible. Small flowers and a ring dish nearby. Warm blush and white tones. Text space top of image.",
+          "destination_url": null
+        },
+        {
+          "id": "6b",
+          "type": "PRODUCT",
+          "pin_headline": "Therapists: Instagram templates built for your kind of business.",
+          "category_label": "INSTAGRAM TEMPLATES",
+          "seo_title": "Instagram templates for therapists and wellness professionals",
+          "seo_description": "Therapists and wellness providers need Instagram content that feels calm, credible, and inviting. The Switzertemplates Instagram template pack includes Canva designs built for health and wellness service providers. Shop at switzertemplates.com",
+          "design_brief": "Calm, minimal desk scene: phone propped showing a soft, clean Instagram post design for a therapy brand. Candle, dried flowers, and a journal nearby. Sage and warm beige tones. Text space upper-right corner.",
+          "destination_url": null
+        },
+        {
+          "id": "6c",
+          "type": "PRODUCT",
+          "pin_headline": "Instagram templates plus a full branding kit - everything matched.",
+          "category_label": "BRANDING KITS",
+          "seo_title": "Instagram templates included in the Switzertemplates full branding kit",
+          "seo_description": "Instagram templates work best when they match your logo, website, and business cards. The Switzertemplates full branding kit includes social media templates plus 1,000+ other Canva assets all in one cohesive style. Shop at switzertemplates.com",
+          "design_brief": "Desk flat lay showing a phone with Instagram posts next to a printed business card and a laptop showing a logo file in Canva. All items styled in one matching colour palette. Warm cream and dusty rose. Text space left side.",
+          "destination_url": null
+        },
+        {
+          "id": "6d",
+          "type": "PRODUCT",
+          "pin_headline": "Service providers: Instagram templates that attract paying clients.",
+          "category_label": "INSTAGRAM TEMPLATES",
+          "seo_title": "Instagram Canva templates for service-based business owners",
+          "seo_description": "Service providers need Instagram content that shows off expertise and builds trust - not just pretty posts. The Switzertemplates Instagram template pack is designed for coaches, consultants, and service businesses. Shop at switzertemplates.com",
+          "design_brief": "Woman at a white desk smiling at her phone showing a polished Instagram feed. Clean home office background with plants and a bookshelf. Warm neutral tones. Natural light from the left. Text space on the right third.",
+          "destination_url": null
+        },
+        {
+          "id": "6e",
+          "type": "EDUCATIONAL",
+          "pin_headline": "What makes an Instagram post actually drive sales.",
+          "category_label": "INSTAGRAM TIPS",
+          "seo_title": "Instagram post tips for small business owners - what drives sales",
+          "seo_description": "Most Instagram posts get saves but no sales. There is a difference between content that gets engagement and content that moves people to buy. Here is what the highest-converting small business posts have in common. Click to browse.",
+          "design_brief": "Close-up of a phone screen showing a high-performing Instagram post with strong call-to-action text visible. Hand holding the phone. Warm white background, minimal props. Bold text overlay listing three post elements. Bright, editorial.",
+          "destination_url": null
+        }
+      ]
+    },
+    {
+      "topic_id": 7,
+      "topic": "Pinterest for business",
+      "keyword": "pinterest for business",
+      "keyword_volume": 14800,
+      "opportunity_score": 83.6,
+      "commercial_intent": "high",
+      "variation_split": "4 PRODUCT + 1 EDUCATIONAL",
+      "blog": {
+        "existing_post_likely": true,
+        "note": "check blog for existing post at switzertemplates.com",
+        "blog_post_needed": false,
+        "brief_for_blog_agent": null
+      },
+      "variations": [
+        {
+          "id": "7a",
+          "type": "PRODUCT",
+          "pin_headline": "Pinterest for business starts with a brand that stands out.",
+          "category_label": "BRANDING KITS",
+          "seo_title": "Branding kit for Pinterest business accounts - Canva templates",
+          "seo_description": "Pinterest for business only works when your brand looks consistent and professional across every pin. The Switzertemplates branding kit gives you 1,000+ Canva templates to keep your visuals on-brand everywhere. Shop at switzertemplates.com",
+          "design_brief": "Woman at a bright desk reviewing Pinterest analytics on a laptop, with a printed brand colour sheet and content calendar nearby. Warm white and blush tones. Natural light from a window. Text space on the upper-left.",
+          "destination_url": null
+        },
+        {
+          "id": "7b",
+          "type": "PRODUCT",
+          "pin_headline": "Your Pinterest for business needs a website worth clicking through to.",
+          "category_label": "WIX WEBSITES",
+          "seo_title": "Premade Wix website for Pinterest business traffic - small business",
+          "seo_description": "Pinterest drives consistent traffic - but only if your website converts. The Switzertemplates premade Wix website is mobile-ready and built to turn Pinterest clicks into enquiries and sales. Shop at switzertemplates.com",
+          "design_brief": "Laptop on a clean white desk showing a polished Wix website homepage, with a phone beside it showing a Pinterest profile. Warm neutral tones. Minimal props. Text space centred at the top of the frame.",
+          "destination_url": null
+        },
+        {
+          "id": "7c",
+          "type": "PRODUCT",
+          "pin_headline": "Use Pinterest for business to sell digital products on autopilot.",
+          "category_label": "BUSINESS BUNDLE",
+          "seo_title": "Pinterest for business bundle - branding, website, and landing page",
+          "seo_description": "Pinterest for business works best when every pin leads to a branded, high-converting destination. The 3-in-1 business bundle gives you the website, branding kit, and landing page to make that happen. Shop at switzertemplates.com",
+          "design_brief": "Flat lay on a warm desk surface: open notebook with a Pinterest content plan, a laptop showing a landing page, and a phone with a Pinterest feed. Warm terracotta and white tones. Text space top-right.",
+          "destination_url": null
+        },
+        {
+          "id": "7d",
+          "type": "PRODUCT",
+          "pin_headline": "Coaches: Pinterest for business brings in leads while you sleep.",
+          "category_label": "WIX WEBSITES",
+          "seo_title": "Pinterest for business website template for coaches and consultants",
+          "seo_description": "Pinterest is a long-game search engine, not a social platform. Coaches who pair it with a professional website see consistent enquiries month after month. The Switzertemplates premade Wix website is your starting point. Shop at switzertemplates.com",
+          "design_brief": "Woman relaxing on a sofa with a coffee, phone showing Pinterest notifications and new website visits. Warm morning light, cream and dusty pink tones. Peaceful, aspirational feel. Text space in the upper half of the frame.",
+          "destination_url": null
+        },
+        {
+          "id": "7e",
+          "type": "EDUCATIONAL",
+          "pin_headline": "How to use Pinterest for business without posting every day.",
+          "category_label": "PINTEREST TIPS",
+          "seo_title": "Pinterest for business tips - how to drive traffic as a small business",
+          "seo_description": "Unlike Instagram, Pinterest keeps working for months after you post. Here is how small business owners can build a consistent Pinterest presence without needing to create new content every day. Click to browse.",
+          "design_brief": "Woman at a café table with a latte and a laptop open to a Pinterest board. Bright natural light, warm brown and cream tones. Relaxed, productive atmosphere. Bold text overlay on the right side with a key stat or tip.",
+          "destination_url": null
+        }
+      ]
+    },
+    {
+      "topic_id": 8,
+      "topic": "Branding examples for business",
+      "keyword": "example of branding",
+      "keyword_volume": 3600,
+      "opportunity_score": 82.7,
+      "commercial_intent": "mixed",
+      "variation_split": "2 PRODUCT + 3 EDUCATIONAL",
+      "blog": {
+        "existing_post_likely": false,
+        "blog_post_needed": true,
+        "brief_for_blog_agent": "Write a post titled 'Branding examples every small business owner should study' targeting the keyword 'example of branding'. Showcase 5-7 branding examples across different niches (coaching, beauty, eCommerce) and analyse what makes each effective - fonts, colour, consistency. Naturally mention the Switzertemplates full branding kit as a way for readers to apply the same principles to their own business."
+      },
+      "variations": [
+        {
+          "id": "8a",
+          "type": "PRODUCT",
+          "pin_headline": "This is what a strong small business branding example looks like.",
+          "category_label": "BRANDING KITS",
+          "seo_title": "Branding example for small business - Canva branding kit templates",
+          "seo_description": "The best branding examples have one thing in common: consistency across every touchpoint. The Switzertemplates full branding kit gives you 1,000+ Canva templates to achieve that same look - logos, social, print, and more. Shop at switzertemplates.com",
+          "design_brief": "Branded mockup spread across a flat lay: business card, Instagram post printout, logo sheet, and an ebook cover - all in the same palette. Clean white background. Warm tan and sage tones. Text space top of image.",
+          "destination_url": null
+        },
+        {
+          "id": "8b",
+          "type": "PRODUCT",
+          "pin_headline": "A branding example for coaches that works across every platform.",
+          "category_label": "BUSINESS BUNDLE",
+          "seo_title": "Branding example for coaches - 3-in-1 business bundle by Switzertemplates",
+          "seo_description": "Here is a real branding example: a coach with a matching Wix website, Canva social templates, and a landing page - all in one cohesive style. The 3-in-1 business bundle makes this the starting point, not the goal. Shop at switzertemplates.com",
+          "design_brief": "Triptych mockup: left panel shows a Wix coaching website, centre shows branded Instagram posts, right shows a landing page. All three in matching fonts and colours. Warm neutral background. Text space along the bottom.",
+          "destination_url": null
+        },
+        {
+          "id": "8c",
+          "type": "EDUCATIONAL",
+          "pin_headline": "Five branding examples that small businesses can actually learn from.",
+          "category_label": "BRANDING TIPS",
+          "seo_title": "Branding examples for small business owners - what works and why",
+          "seo_description": "Looking at real branding examples is the fastest way to see what consistent, professional branding actually looks like - and what your own brand might be missing. These five examples cover coaches, beauty, and service businesses. Click to browse.",
+          "design_brief": "Mood board flat lay with five branded business cards in different colour palettes spread across a cream linen surface. Small plant and a pen nearby. Warm overhead light. Editorial, minimal. Text space along the top.",
+          "destination_url": null
+        },
+        {
+          "id": "8d",
+          "type": "EDUCATIONAL",
+          "pin_headline": "What every strong branding example has that most small businesses miss.",
+          "category_label": "BRANDING TIPS",
+          "seo_title": "What makes a strong branding example - small business branding tips",
+          "seo_description": "When you look at a branding example that works, there are patterns. Consistent colour, intentional typography, and a clear visual voice - and most small business owners are missing at least one of these. Here is what to look for. Click to browse.",
+          "design_brief": "Close-up of two side-by-side brand mood boards pinned to a wall - one scattered and inconsistent, one clean and cohesive. Warm neutral background. Hand pointing to the stronger example. Text overlay labels the key difference.",
+          "destination_url": null
+        },
+        {
+          "id": "8e",
+          "type": "EDUCATIONAL",
+          "pin_headline": "Use branding examples to spot what your own business is missing.",
+          "category_label": "BRANDING TIPS",
+          "seo_title": "How to use branding examples to improve your own small business brand",
+          "seo_description": "Studying good branding examples is not about copying - it is about training your eye to see what consistent, professional branding looks like. Here is a simple audit you can run on your own brand in under ten minutes. Click to browse.",
+          "design_brief": "Woman sitting at a bright desk with a printed brand audit checklist, laptop open to a Pinterest board of brand inspiration. Warm cream and blush tones. Natural light. Text space right side with a list of audit questions.",
+          "destination_url": null
+        }
+      ]
+    },
+    {
+      "topic_id": 9,
+      "topic": "Personal branding for entrepreneurs",
+      "keyword": "personal branding",
+      "keyword_volume": 6600,
+      "opportunity_score": 82.6,
+      "commercial_intent": "high",
+      "variation_split": "4 PRODUCT + 1 EDUCATIONAL",
+      "blog": {
+        "existing_post_likely": true,
+        "note": "check blog for existing post at switzertemplates.com",
+        "blog_post_needed": false,
+        "brief_for_blog_agent": null
+      },
+      "variations": [
+        {
+          "id": "9a",
+          "type": "PRODUCT",
+          "pin_headline": "Personal branding templates that make your expertise visible.",
+          "category_label": "BRANDING KITS",
+          "seo_title": "Personal branding kit for coaches and consultants - Canva templates",
+          "seo_description": "Personal branding is how clients find you, trust you, and choose you over everyone else. The Switzertemplates full branding kit gives coaches and consultants 1,000+ Canva templates to build a personal brand that stands out. Shop at switzertemplates.com",
+          "design_brief": "Confident woman in a neutral linen blazer smiling slightly at the camera, seated at a styled minimal desk. Laptop open to a branded website in the background. Warm white and terracotta tones. Text space on the left half.",
+          "destination_url": null
+        },
+        {
+          "id": "9b",
+          "type": "PRODUCT",
+          "pin_headline": "Your personal brand needs a website that works as hard as you do.",
+          "category_label": "WIX WEBSITES",
+          "seo_title": "Personal branding website template for coaches - premade Wix site",
+          "seo_description": "A strong personal brand needs a professional home online. The Switzertemplates premade Wix website gives coaches and consultants a polished, mobile-ready site that reflects their personal brand - without the build time. Shop at switzertemplates.com",
+          "design_brief": "Laptop on a clean white desk showing a personal brand coaching website homepage with a hero image and clear headline. A phone beside it showing a matching Instagram post. Warm neutral tones. Text space upper-left.",
+          "destination_url": null
+        },
+        {
+          "id": "9c",
+          "type": "PRODUCT",
+          "pin_headline": "Build a personal brand presence across every platform at once.",
+          "category_label": "BUSINESS BUNDLE",
+          "seo_title": "Personal branding bundle - website, Canva kit, and landing page",
+          "seo_description": "Personal branding works when it is consistent everywhere - your website, social media, and lead capture pages all look like one professional brand. The 3-in-1 business bundle makes that happen in one purchase. Shop at switzertemplates.com",
+          "design_brief": "Overhead flat lay: business card, printed social media post, and a laptop showing a Wix homepage - all styled in the same colour palette. Warm cream and sage. Clean, editorial. Text space on the top third of the image.",
+          "destination_url": null
+        },
+        {
+          "id": "9d",
+          "type": "PRODUCT",
+          "pin_headline": "Personal branding content that shows up consistently on Instagram.",
+          "category_label": "INSTAGRAM TEMPLATES",
+          "seo_title": "Personal branding Instagram templates for coaches and entrepreneurs",
+          "seo_description": "Your personal brand lives on your Instagram feed. The Switzertemplates Instagram template pack gives coaches and entrepreneurs editorial Canva post templates designed to make personal brands look polished and consistent. Shop at switzertemplates.com",
+          "design_brief": "Phone propped on a warm wooden surface showing a nine-grid Instagram feed with editorial personal brand posts. A journal and pen beside it. Warm brown and blush tones. Natural light. Text space on the upper-right.",
+          "destination_url": null
+        },
+        {
+          "id": "9e",
+          "type": "EDUCATIONAL",
+          "pin_headline": "Personal branding mistakes that make clients scroll straight past you.",
+          "category_label": "BRANDING TIPS",
+          "seo_title": "Personal branding mistakes to avoid - tips for coaches and consultants",
+          "seo_description": "Most personal branding mistakes come down to inconsistency - different fonts here, different colours there, no clear message anywhere. Here are the patterns that make potential clients lose trust before they even read your bio. Click to browse.",
+          "design_brief": "Split image: left side shows a messy, inconsistent personal brand Instagram feed; right side shows a clean, cohesive one. Warm neutral framing. Bold text overlay across the centre labelling the difference. Minimal and editorial.",
+          "destination_url": null
+        }
+      ]
+    },
+    {
+      "topic_id": 10,
+      "topic": "Canva Instagram templates",
+      "keyword": "canva instagram templates",
+      "keyword_volume": 4400,
+      "opportunity_score": 82.1,
+      "commercial_intent": "high",
+      "variation_split": "4 PRODUCT + 1 EDUCATIONAL",
+      "blog": {
+        "existing_post_likely": true,
+        "note": "check blog for existing post at switzertemplates.com",
+        "blog_post_needed": false,
+        "brief_for_blog_agent": null
+      },
+      "variations": [
+        {
+          "id": "10a",
+          "type": "PRODUCT",
+          "pin_headline": "Canva Instagram templates for a feed that looks intentional.",
+          "category_label": "INSTAGRAM TEMPLATES",
+          "seo_title": "Canva Instagram templates for coaches and small business owners",
+          "seo_description": "A polished Instagram feed does not require a designer. The Switzertemplates Instagram template pack gives you Canva Instagram templates designed for coaches and entrepreneurs - posts, carousels, and stories all included. Shop at switzertemplates.com",
+          "design_brief": "Phone screen showing a Canva Instagram template open for editing with clear font and colour fields visible. Warm linen surface beneath, a small plant and coffee to the side. Cream and blush tones. Text space top of frame.",
+          "destination_url": null
+        },
+        {
+          "id": "10b",
+          "type": "PRODUCT",
+          "pin_headline": "Canva Instagram templates included in your full branding kit.",
+          "category_label": "BRANDING KITS",
+          "seo_title": "Canva Instagram templates included in the Switzertemplates branding kit",
+          "seo_description": "The best Canva Instagram templates match your logo, brand colours, and business cards. The Switzertemplates full branding kit includes social media templates as part of 1,000+ Canva assets all in one cohesive design. Shop at switzertemplates.com",
+          "design_brief": "Desk flat lay: phone showing a branded Instagram post next to a matching printed business card and a logo sheet on cream paper. Warm dusty pink and white tones. Overhead light, editorial styling. Text space left side.",
+          "destination_url": null
+        },
+        {
+          "id": "10c",
+          "type": "PRODUCT",
+          "pin_headline": "Virtual assistants: Canva Instagram templates for your clients.",
+          "category_label": "INSTAGRAM TEMPLATES",
+          "seo_title": "Canva Instagram templates for virtual assistants to use with clients",
+          "seo_description": "Virtual assistants managing client social accounts need Canva Instagram templates that are fast to customise and professional enough for any niche. The Switzertemplates Instagram template pack is built for exactly that. Shop at switzertemplates.com",
+          "design_brief": "Woman at a home office desk with two screens open - one showing Canva with an Instagram template, one showing a client content calendar. Warm neutral tones, tidy desk. Natural light. Text space on the upper-left of the image.",
+          "destination_url": null
+        },
+        {
+          "id": "10d",
+          "type": "PRODUCT",
+          "pin_headline": "Canva Instagram templates that convert browsers into enquiries.",
+          "category_label": "INSTAGRAM TEMPLATES",
+          "seo_title": "High-converting Canva Instagram templates for service businesses",
+          "seo_description": "Most Canva Instagram templates look nice but do not lead anywhere. The Switzertemplates Instagram template pack is designed for service providers who need posts and carousels that drive real enquiries, not just likes. Shop at switzertemplates.com",
+          "design_brief": "Close-up of a phone screen showing a bold, text-led Instagram carousel template open in Canva. The slide reads a strong value statement. Warm white desk surface, minimal props. Bright and editorial. Text space above the phone.",
+          "destination_url": null
+        },
+        {
+          "id": "10e",
+          "type": "EDUCATIONAL",
+          "pin_headline": "The Canva Instagram template settings most business owners skip.",
+          "category_label": "CANVA TIPS",
+          "seo_title": "Canva Instagram template setup tips for small business owners",
+          "seo_description": "Before you start editing your Canva Instagram templates, there are three setup steps that save hours every month. Most small business owners skip them - and end up re-doing the same branding edits over and over. Click to browse.",
+          "design_brief": "Laptop screen close-up showing Canva brand kit settings panel with colour palette and font selections visible. Warm wooden desk surface below. Minimal, clean aesthetic. Warm cream and white tones. Text space top-right corner.",
+          "destination_url": null
+        }
+      ]
+    },
+    {
+      "topic_id": 11,
+      "topic": "Wix website templates",
+      "keyword": "Wix website templates",
+      "keyword_volume": 9900,
+      "opportunity_score": 75.1,
+      "commercial_intent": "high",
+      "variation_split": "4 PRODUCT + 1 EDUCATIONAL",
+      "blog": {
+        "existing_post_likely": true,
+        "note": "check blog for existing post at switzertemplates.com",
+        "blog_post_needed": false,
+        "brief_for_blog_agent": null
+      },
+      "variations": [
+        {
+          "id": "11a",
+          "type": "PRODUCT",
+          "pin_headline": "A Wix website template ready to publish in one afternoon.",
+          "category_label": "WIX WEBSITES",
+          "seo_title": "Premade Wix website templates for coaches and service providers",
+          "seo_description": "Wix website templates from Switzertemplates come fully designed and ready to customise. One-click transfer, mobile-ready, and built for service businesses and coaches who need a professional site fast. Shop at switzertemplates.com",
+          "design_brief": "Laptop showing a clean, modern Wix website homepage with a coaching or service business layout. Bright natural light, minimal desk setup. Warm white and sage tones. Text space on the left side of the image.",
+          "destination_url": null
+        },
+        {
+          "id": "11b",
+          "type": "PRODUCT",
+          "pin_headline": "Wix website templates that come with a full branding kit.",
+          "category_label": "BUSINESS BUNDLE",
+          "seo_title": "Wix website template bundle with Canva branding kit - Switzertemplates",
+          "seo_description": "Most Wix website templates give you a site but nothing else. The 3-in-1 business bundle pairs your Wix website with a full Canva branding kit and landing page so everything matches from day one. Shop at switzertemplates.com",
+          "design_brief": "Two-device mockup: laptop showing a Wix homepage, tablet showing matching Canva templates. Warm neutral desk, a pen and small plant. Cream and terracotta tones. Clean and editorial. Text space centred along the top.",
+          "destination_url": null
+        },
+        {
+          "id": "11c",
+          "type": "PRODUCT",
+          "pin_headline": "eCommerce Wix website templates built for product-based businesses.",
+          "category_label": "WIX WEBSITES",
+          "seo_title": "eCommerce Wix website templates for product-based small businesses",
+          "seo_description": "Product-based businesses need a Wix website template that handles shop pages, product listings, and mobile browsing. The Switzertemplates premade Wix website is ready for eCommerce from day one. Shop at switzertemplates.com",
+          "design_brief": "Laptop on a styled surface showing a clean eCommerce Wix website with a product grid visible. Small packaged products and a branded bag styled nearby. Warm tan and white tones. Natural light. Text space upper-right.",
+          "destination_url": null
+        },
+        {
+          "id": "11d",
+          "type": "PRODUCT",
+          "pin_headline": "Beauty businesses: Wix website templates made for your services.",
+          "category_label": "WIX WEBSITES",
+          "seo_title": "Wix website templates for beauty businesses and salons",
+          "seo_description": "Beauty businesses need a Wix website that shows services clearly, books appointments, and looks as good as the work. The Switzertemplates premade Wix website is designed for beauty and wellness service providers. Shop at switzertemplates.com",
+          "design_brief": "Laptop on a marble surface showing a clean, editorial beauty brand Wix website. Flowers, a small candle, and beauty products styled beside the laptop. Warm blush and white tones. Soft light. Text space on the left side.",
+          "destination_url": null
+        },
+        {
+          "id": "11e",
+          "type": "EDUCATIONAL",
+          "pin_headline": "What to check before you publish your Wix website template.",
+          "category_label": "WEBSITE TIPS",
+          "seo_title": "Wix website template launch checklist for small business owners",
+          "seo_description": "Most business owners rush to publish their Wix website template without checking these five things first. Fixing them before launch means fewer lost leads and a site that works properly on every device. Click to browse.",
+          "design_brief": "Woman at a desk with a printed checklist beside a laptop showing a Wix website editor in review mode. Warm cream and white tones. Focused, productive atmosphere. Natural light. Text overlay with a numbered list on the right side.",
+          "destination_url": null
+        }
+      ]
+    },
+    {
+      "topic_id": 12,
+      "topic": "Branding strategies for small business",
+      "keyword": "canva website",
+      "keyword_volume": 12100,
+      "opportunity_score": 81.4,
+      "commercial_intent": "mixed",
+      "variation_split": "2 PRODUCT + 3 EDUCATIONAL",
+      "blog": {
+        "existing_post_likely": false,
+        "blog_post_needed": true,
+        "brief_for_blog_agent": "Write a post titled 'How to build a professional website for your coaching business' targeting the keyword 'canva website'. Cover what makes a credible service business website, the key pages every coach needs, and why a premade Wix template is the fastest path to looking established online. Include a natural mention of Switzertemplates premade Wix website templates as the done-for-you option."
+      },
+      "variations": [
+        {
+          "id": "12a",
+          "type": "PRODUCT",
+          "pin_headline": "The most effective branding strategy starts with consistent visuals.",
+          "category_label": "BRANDING KITS",
+          "seo_title": "Branding strategy kit for small business owners - Canva templates",
+          "seo_description": "The foundation of every strong branding strategy is visual consistency. The Switzertemplates full branding kit gives you 1,000+ Canva templates to apply that consistency across social media, your website, and print - in one go. Shop at switzertemplates.com",
+          "design_brief": "Overhead desk flat lay: brand colour palette card, printed social post, business card, and an open laptop showing a Canva dashboard. Warm cream and earthy brown tones. Clean and editorial. Text space across the top.",
+          "destination_url": null
+        },
+        {
+          "id": "12b",
+          "type": "PRODUCT",
+          "pin_headline": "A full branding strategy in one bundle - for under one hundred dollars.",
+          "category_label": "BUSINESS BUNDLE",
+          "seo_title": "Small business branding strategy bundle - website, kit, landing page",
+          "seo_description": "A complete branding strategy covers your website, social media, and lead capture - and they all need to match. The 3-in-1 business bundle gives you all three in one cohesive design for $82. Shop at switzertemplates.com",
+          "design_brief": "Styled desk scene: laptop showing a Wix homepage, phone showing a matching Instagram feed, and a branded lead magnet printout. Warm neutral and sage tones. Clean, professional feel. Text space on the upper-left.",
+          "destination_url": null
+        },
+        {
+          "id": "12c",
+          "type": "EDUCATIONAL",
+          "pin_headline": "Three branding strategies every small business should use first.",
+          "category_label": "BRANDING TIPS",
+          "seo_title": "Branding strategies for small business owners - where to start",
+          "seo_description": "Most small business branding strategies fail because owners try to do too much at once. Start with these three focused approaches to build a brand that attracts the right clients and looks credible from every angle. Click to browse.",
+          "design_brief": "Woman at a café with a notebook open and a latte, writing out a brand plan. Warm afternoon light. Rustic wooden table. Cream and brown tones. Bold text overlay listing three numbered strategies on the right side.",
+          "destination_url": null
+        },
+        {
+          "id": "12d",
+          "type": "EDUCATIONAL",
+          "pin_headline": "Why your branding strategy is not connecting with your ideal client.",
+          "category_label": "BRANDING TIPS",
+          "seo_title": "Why your branding strategy is not working - small business advice",
+          "seo_description": "A branding strategy that does not attract your ideal client is not a branding strategy - it is just decoration. Here are the three common disconnects between what business owners create and what their clients actually respond to. Click to browse.",
+          "design_brief": "Woman looking thoughtfully at a laptop screen showing her website, pen in hand, notebook open. Soft frustrated expression. Warm home office setting. Cream and blush tones. Text overlay with a bold question across the top.",
+          "destination_url": null
+        },
+        {
+          "id": "12e",
+          "type": "EDUCATIONAL",
+          "pin_headline": "How to audit your current branding strategy in ten minutes.",
+          "category_label": "BRANDING TIPS",
+          "seo_title": "Branding strategy audit for small business owners - quick guide",
+          "seo_description": "A fast brand audit tells you exactly where your current branding strategy is leaking potential clients. Run through this checklist on your website, social media, and print materials to find and fix the gaps. Click to browse.",
+          "design_brief": "Printed brand audit checklist on a light clipboard, resting on a styled desk with a laptop and pen. Clean, warm tones - cream, white, and pale green. Simple overhead angle. Text space listing audit questions on the right side.",
+          "destination_url": null
+        }
+      ]
+    },
+    {
+      "topic_id": 13,
+      "topic": "Virtual assistant business setup",
+      "keyword": "virtual assistant",
+      "keyword_volume": 60500,
+      "opportunity_score": 75.4,
+      "commercial_intent": "high",
+      "variation_split": "4 PRODUCT + 1 EDUCATIONAL",
+      "blog": {
+        "existing_post_likely": false,
+        "blog_post_needed": true,
+        "brief_for_blog_agent": "Write a post titled 'How to brand your virtual assistant business from day one' targeting the keyword 'virtual assistant'. Cover the essential brand and website elements a VA needs to attract premium clients - professional website, consistent social media, and a clear service offer. Naturally recommend the Switzertemplates 3-in-1 business bundle as the fastest way to get a complete, cohesive online presence without hiring a designer."
+      },
+      "variations": [
+        {
+          "id": "13a",
+          "type": "PRODUCT",
+          "pin_headline": "Virtual assistants: a professional website that wins clients.",
+          "category_label": "WIX WEBSITES",
+          "seo_title": "Premade Wix website template for virtual assistants",
+          "seo_description": "Virtual assistants need a website that lists services clearly and looks credible to high-value clients. The Switzertemplates premade Wix website gives VAs a polished, mobile-ready site ready to customise and publish fast. Shop at switzertemplates.com",
+          "design_brief": "Woman working at a dual-screen home office setup, one screen showing a clean VA business website. Tidy, professional space with a plant and branded mug. Warm neutral tones. Natural light. Text space upper-left corner.",
+          "destination_url": null
+        },
+        {
+          "id": "13b",
+          "type": "PRODUCT",
+          "pin_headline": "Launch your virtual assistant business with a complete brand.",
+          "category_label": "BUSINESS BUNDLE",
+          "seo_title": "Virtual assistant business bundle - website, branding kit, landing page",
+          "seo_description": "Starting a virtual assistant business means looking credible from day one. The 3-in-1 business bundle gives VAs a premade Wix website, 1,000+ Canva branding templates, and a landing page - all matching and ready to go. Shop at switzertemplates.com",
+          "design_brief": "Styled flat lay from above: laptop showing a VA brand website, printed business card, and a phone with a branded Instagram post. Warm cream and dusty blue tones. Clean editorial styling. Text space on the top third.",
+          "destination_url": null
+        },
+        {
+          "id": "13c",
+          "type": "PRODUCT",
+          "pin_headline": "Virtual assistant branding templates that attract premium clients.",
+          "category_label": "BRANDING KITS",
+          "seo_title": "Branding kit for virtual assistants - Canva templates for VAs",
+          "seo_description": "Premium clients expect a professional brand. The Switzertemplates full branding kit gives virtual assistants 1,000+ Canva templates covering social media, business cards, proposals, and more - all in one cohesive style. Shop at switzertemplates.com",
+          "design_brief": "Woman at a minimal white desk reviewing a printed brand sheet and a business card mockup. Laptop open in the background. Warm white and sage green tones. Focused, professional feel. Text space on the right side.",
+          "destination_url": null
+        },
+        {
+          "id": "13d",
+          "type": "PRODUCT",
+          "pin_headline": "Use Instagram to grow your virtual assistant business consistently.",
+          "category_label": "INSTAGRAM TEMPLATES",
+          "seo_title": "Instagram templates for virtual assistants - Canva social media posts",
+          "seo_description": "Virtual assistants who post consistently on Instagram attract more inbound enquiries. The Switzertemplates Instagram template pack gives VAs Canva post and carousel templates designed to showcase expertise and services. Shop at switzertemplates.com",
+          "design_brief": "Phone on a warm wooden desk showing a polished nine-grid Instagram feed with professional service-based posts. Notebook and a coffee nearby. Warm brown and cream tones. Soft light. Text space in the upper half of the image.",
+          "destination_url": null
+        },
+        {
+          "id": "13e",
+          "type": "EDUCATIONAL",
+          "pin_headline": "What your virtual assistant website needs to convert visitors.",
+          "category_label": "WEBSITE TIPS",
+          "seo_title": "Virtual assistant website tips - what to include to get more clients",
+          "seo_description": "Most virtual assistant websites lose potential clients because key information is buried or missing. These are the sections and elements that turn website visitors into discovery call bookings for VAs and service providers. Click to browse.",
+          "design_brief": "Woman at a laptop reviewing a VA website, annotating a printed page layout. Bright, calm home office. Warm white and blush tones. Natural light. Text overlay on the right side with a checklist of website sections.",
+          "destination_url": null
+        }
+      ]
+    },
+    {
+      "topic_id": 14,
+      "topic": "Logo design for small business",
+      "keyword": "how to build a personal brand",
+      "keyword_volume": 590,
+      "opportunity_score": 70.1,
+      "commercial_intent": "mixed",
+      "variation_split": "2 PRODUCT + 3 EDUCATIONAL",
+      "blog": {
+        "existing_post_likely": false,
+        "blog_post_needed": true,
+        "brief_for_blog_agent": "Write a post titled 'How to build a personal brand as a coach or service provider' targeting 'how to build a personal brand'. Cover the core visual elements every personal brand needs (logo, colour palette, website, social media), why consistency across platforms builds trust faster, and naturally position the Switzertemplates branding kit and Wix website as the tools that implement all of it at once."
+      },
+      "variations": [
+        {
+          "id": "14a",
+          "type": "PRODUCT",
+          "pin_headline": "Logo design templates that come with your whole brand kit.",
+          "category_label": "BRANDING KITS",
+          "seo_title": "Logo design templates for small business - Canva branding kit",
+          "seo_description": "Your logo design should not exist in isolation. The Switzertemplates full branding kit gives you Canva logo templates plus 1,000+ matching brand assets - so your logo, social media, and print all look like one cohesive brand. Shop at switzertemplates.com",
+          "design_brief": "Flat lay on a cream surface showing three printed logo variations - primary, secondary, and submark - arranged next to a matching business card and brand colour strip. Warm neutral tones. Overhead light, editorial. Text space top.",
+          "destination_url": null
+        },
+        {
+          "id": "14b",
+          "type": "PRODUCT",
+          "pin_headline": "Skip the logo design brief and get a professional result today.",
+          "category_label": "BRANDING KITS",
+          "seo_title": "DIY logo design kit for coaches and small business owners - Canva",
+          "seo_description": "Hiring a designer for logo design can cost hundreds - and take weeks. The Switzertemplates full branding kit gives you professional Canva logo templates you can customise yourself in hours, not months. Shop at switzertemplates.com",
+          "design_brief": "Woman at a bright desk smiling at her laptop screen showing a finished logo displayed in Canva. Printed brand sheet beside her. Warm cream and dusty pink tones. Relaxed, accomplished feel. Text space on the upper-left.",
+          "destination_url": null
+        },
+        {
+          "id": "14c",
+          "type": "EDUCATIONAL",
+          "pin_headline": "What a small business logo design actually needs to include.",
+          "category_label": "BRANDING TIPS",
+          "seo_title": "Logo design checklist for small business owners - what to include",
+          "seo_description": "Most small business logo designs are incomplete - they have a primary mark but nothing else. A full logo design suite needs a primary logo, secondary logo, and submark at minimum. Here is what each one is for. Click to browse.",
+          "design_brief": "Printed diagram on a light background showing the three logo types labelled - primary, secondary, submark - with clean arrows and annotations. Warm linen surface, a pen nearby. Minimal and instructional. Text space top of frame.",
+          "destination_url": null
+        },
+        {
+          "id": "14d",
+          "type": "EDUCATIONAL",
+          "pin_headline": "The logo design mistakes that make your business look amateur.",
+          "category_label": "BRANDING TIPS",
+          "seo_title": "Logo design mistakes small business owners make - and how to fix them",
+          "seo_description": "Logo design mistakes are easy to make and hard to see when you are too close to your own brand. Here are the most common issues coaches and small business owners create when designing their own logos - and how to fix them fast. Click to browse.",
+          "design_brief": "Side-by-side comparison of two logo designs: left version has font clutter and poor spacing, right version is clean and balanced. Neutral warm background. Bold text labels pointing to the differences. Editorial, direct, minimal.",
+          "destination_url": null
+        },
+        {
+          "id": "14e",
+          "type": "EDUCATIONAL",
+          "pin_headline": "How much should logo design cost for a small business owner.",
+          "category_label": "BRANDING TIPS",
+          "seo_title": "How much does logo design cost for small business - options compared",
+          "seo_description": "Logo design costs range from $0 to $5,000 depending on how you approach it. Here is a breakdown of the main options - DIY, template, freelancer, and agency - so you can make the right call for where your business is right now. Click to browse.",
+          "design_brief": "Simple comparison graphic on a warm cream background showing four logo design routes with price ranges listed. Clean icons or labels for each option. Minimal, editorial. Warm neutral tones. Text space across the top third.",
+          "destination_url": null
+        }
+      ]
+    },
+    {
+      "topic_id": 15,
+      "topic": "Canva business cards",
+      "keyword": "canva business cards",
+      "keyword_volume": 33100,
+      "opportunity_score": 73.4,
+      "commercial_intent": "mixed",
+      "variation_split": "2 PRODUCT + 3 EDUCATIONAL",
+      "blog": {
+        "existing_post_likely": true,
+        "note": "check blog for existing post at switzertemplates.com",
+        "blog_post_needed": false,
+        "brief_for_blog_agent": null
+      },
+      "variations": [
+        {
+          "id": "15a",
+          "type": "PRODUCT",
+          "pin_headline": "Professional business cards ready to print in minutes.",
+          "category_label": "BRANDING KIT",
+          "seo_title": "Canva Business Card Templates for Small Business Owners",
+          "seo_description": "Get 1,000+ Canva templates including business cards, logos, social media, and more. The full branding kit gives your business a polished, consistent look without hiring a designer. Shop at switzertemplates.com",
+          "design_brief": "Flat lay on warm cream linen surface: two printed business cards with clean minimal design, a gold pen resting beside them, soft natural window light from left, text overlay space at top right, earthy neutral palette.",
+          "destination_url": null
+        },
+        {
+          "id": "15b",
+          "type": "PRODUCT",
+          "pin_headline": "Your brand on every card, template, and social post.",
+          "category_label": "BRANDING KIT",
+          "seo_title": "Canva Branding Kit with Business Cards - Switzertemplates",
+          "seo_description": "One branding kit. Over 1,000 Canva templates designed to match - business cards, ebooks, flyers, stories, and more. Built for coaches and service providers who want a cohesive brand from day one. Shop at switzertemplates.com",
+          "design_brief": "Close-up editorial shot of a woman's hands laying out branded business cards on a light oak desk, laptop open in soft background blur, warm terracotta and cream tones, text space in upper left quadrant.",
+          "destination_url": null
+        },
+        {
+          "id": "15c",
+          "type": "EDUCATIONAL",
+          "pin_headline": "Your business card still matters - here is why.",
+          "category_label": "BRANDING TIPS",
+          "seo_title": "Why Business Cards Still Matter for Small Business Owners",
+          "seo_description": "In a digital world, a well-designed business card builds instant trust. Learn what to include, what to leave out, and how to make yours look intentional rather than rushed. Click to browse.",
+          "design_brief": "Lifestyle scene: woman at a coffee meeting handing a business card across a light marble table, second person's hands receiving it, warm afternoon light, blurred background, text overlay space at bottom third.",
+          "destination_url": null
+        },
+        {
+          "id": "15d",
+          "type": "EDUCATIONAL",
+          "pin_headline": "Five things your business card must include.",
+          "category_label": "BRANDING TIPS",
+          "seo_title": "What to Put on a Business Card - Tips for Small Businesses",
+          "seo_description": "Most small business owners overcrowd their cards or leave out what matters. Here are five essentials that make a business card work for you - and one thing you should stop including. Click to browse.",
+          "design_brief": "Clean flat lay on warm white surface with a single minimal business card centred, five small numbered annotation marks styled as editorial callouts, soft sage green props at edges, bright even lighting.",
+          "destination_url": null
+        },
+        {
+          "id": "15e",
+          "type": "EDUCATIONAL",
+          "pin_headline": "How to make Canva business cards look high-end.",
+          "category_label": "CANVA TIPS",
+          "seo_title": "How to Make Canva Business Cards Look Professional and Premium",
+          "seo_description": "Free Canva templates can look cheap if you don't know what to adjust. These simple design moves - font pairing, spacing, colour restraint - turn a basic card into something you'll actually want to hand out. Click to browse.",
+          "design_brief": "Split composition: left side shows a cluttered amateur-looking card design on screen, right side shows a clean refined version, warm desk environment, editorial overhead angle, muted warm tones, text space at top.",
+          "destination_url": null
+        }
+      ]
+    },
+    {
+      "topic_id": 16,
+      "topic": "Business coach branding",
+      "keyword": "business coach",
+      "keyword_volume": 12100,
+      "opportunity_score": 78.2,
+      "commercial_intent": "high",
+      "variation_split": "4 PRODUCT + 1 EDUCATIONAL",
+      "blog": null,
+      "variations": [
+        {
+          "id": "16a",
+          "type": "PRODUCT",
+          "pin_headline": "A complete brand and website built for business coaches.",
+          "category_label": "BUSINESS BUNDLE",
+          "seo_title": "Business Coach Branding Kit and Website - Switzertemplates",
+          "seo_description": "The 3-in-1 business bundle gives coaches a premade Wix website, 1,000+ Canva branding templates, and a Canva landing page - all in one cohesive design. No designer needed. Shop at switzertemplates.com",
+          "design_brief": "Lifestyle scene: confident woman at a bright minimal home office desk, laptop open, branded notebook beside it, warm ivory and terracotta tones, she's looking directly at camera, text overlay space at left third.",
+          "destination_url": null
+        },
+        {
+          "id": "16b",
+          "type": "PRODUCT",
+          "pin_headline": "Coaches: your website should be working while you sleep.",
+          "category_label": "WIX WEBSITE",
+          "seo_title": "Premade Wix Website Template for Business Coaches",
+          "seo_description": "This premade Wix website is built for coaches and consultants - mobile-ready, one-click transfer, and easy to customise. Go from no website to a professional online presence in a single afternoon. Shop at switzertemplates.com",
+          "design_brief": "Clean editorial shot of a Wix coaching website displayed on a laptop, laptop sitting on a warm oak desk with a small plant and coffee cup nearby, bright soft natural light, text space above the laptop screen area.",
+          "destination_url": null
+        },
+        {
+          "id": "16c",
+          "type": "PRODUCT",
+          "pin_headline": "Stop losing clients to a brand that does not reflect you.",
+          "category_label": "BRANDING KIT",
+          "seo_title": "Branding Kit for Business Coaches - Canva Templates",
+          "seo_description": "A mismatched brand costs you credibility before you even speak. Get 1,000+ Canva templates built for coaches - social media, ebooks, business cards, and more in one cohesive kit. Shop at switzertemplates.com",
+          "design_brief": "Close-up of a woman's hands scrolling on a phone showing a clean, cohesive Instagram grid, warm cream background, branded stationery items scattered softly nearby, editorial overhead angle, text overlay space at top.",
+          "destination_url": null
+        },
+        {
+          "id": "16d",
+          "type": "PRODUCT",
+          "pin_headline": "Launch your coaching business with a full brand this week.",
+          "category_label": "BUSINESS BUNDLE",
+          "seo_title": "Launch a Coaching Business Fast with a 3-in-1 Brand Bundle",
+          "seo_description": "Website, branding kit, and landing page - designed together, ready to customise. The 3-in-1 business bundle is built for coaches who want a professional presence without months of setup. Shop at switzertemplates.com",
+          "design_brief": "Bright airy office scene: woman on a video call on her laptop, a branded printed workbook open beside her, clean white and warm neutral tones, confident posture, camera-facing angle, text space at upper right.",
+          "destination_url": null
+        },
+        {
+          "id": "16e",
+          "type": "EDUCATIONAL",
+          "pin_headline": "What your coaching website needs on the homepage.",
+          "category_label": "WEBSITE TIPS",
+          "seo_title": "What Every Business Coach Website Needs on the Homepage",
+          "seo_description": "Most coaching websites lose potential clients in the first ten seconds. Find out what your homepage must communicate - and in what order - to turn visitors into enquiries without a complete redesign. Click to browse.",
+          "design_brief": "Editorial mockup of a clean coaching website homepage on a laptop screen, warm desk setting, small annotation-style text callouts pointing to key sections of the page, soft natural lighting, text space at top left.",
+          "destination_url": null
+        }
+      ]
+    },
+    {
+      "topic_id": 17,
+      "topic": "Email marketing small business",
+      "keyword": "canva website template",
+      "keyword_volume": 1600,
+      "opportunity_score": 60.9,
+      "commercial_intent": "mixed",
+      "variation_split": "2 PRODUCT + 3 EDUCATIONAL",
+      "blog": {
+        "existing_post_likely": false,
+        "blog_post_needed": true,
+        "brief_for_blog_agent": "Write a post titled 'How to choose the right website template for your service business' targeting 'canva website template'. Cover what to look for in a website template, which pages and sections matter most for coaches and service providers, and how to customise without rebuilding from scratch. Position Switzertemplates premade Wix websites as the option that eliminates template decision fatigue entirely."
+      },
+      "variations": [
+        {
+          "id": "17a",
+          "type": "PRODUCT",
+          "pin_headline": "On-brand email graphics your subscribers will actually open.",
+          "category_label": "BRANDING KIT",
+          "seo_title": "Canva Email and Newsletter Templates for Small Businesses",
+          "seo_description": "Stop sending emails that look nothing like your brand. The full branding kit includes Canva templates for social, ebooks, and graphics you can repurpose across every email and newsletter you send. Shop at switzertemplates.com",
+          "design_brief": "Lifestyle scene: woman at a desk reviewing an email newsletter on her laptop, warm cream and sage tones, branded coffee mug beside the laptop, afternoon light from the side, text overlay space at top right.",
+          "destination_url": null
+        },
+        {
+          "id": "17b",
+          "type": "PRODUCT",
+          "pin_headline": "Your lead magnet deserves a landing page that converts.",
+          "category_label": "BUSINESS BUNDLE",
+          "seo_title": "Canva Landing Page Template for Email List Lead Magnets",
+          "seo_description": "Growing an email list starts with a landing page people trust. The 3-in-1 business bundle includes a Canva landing page, Wix website, and full branding kit - everything you need to launch your list-building funnel. Shop at switzertemplates.com",
+          "design_brief": "Clean editorial flat lay on a warm white surface: a printed lead magnet workbook open beside a laptop showing a simple landing page, earthy neutral tones, minimal props, text overlay space in upper left third.",
+          "destination_url": null
+        },
+        {
+          "id": "17c",
+          "type": "EDUCATIONAL",
+          "pin_headline": "The email sequence every new small business needs first.",
+          "category_label": "EMAIL MARKETING",
+          "seo_title": "First Email Sequence for Small Business Owners - What to Send",
+          "seo_description": "Before you plan campaigns, you need one welcome sequence that works on autopilot. Here is exactly what to include in your first three emails - and what most small business owners get wrong from the start. Click to browse.",
+          "design_brief": "Overhead editorial shot of a notebook with a simple three-step email sequence sketched out, a laptop open in soft background, warm terracotta and cream tones, natural window light, text overlay space at the top half.",
+          "destination_url": null
+        },
+        {
+          "id": "17d",
+          "type": "EDUCATIONAL",
+          "pin_headline": "Why your email list beats social media every single time.",
+          "category_label": "EMAIL MARKETING",
+          "seo_title": "Why Email Marketing Beats Social Media for Small Businesses",
+          "seo_description": "An algorithm can cut your reach overnight. Your email list cannot be taken away. Here is the straightforward case for making email marketing your primary channel as a small business owner - even with a tiny list. Click to browse.",
+          "design_brief": "Split graphic: left shows a phone with a social media feed with a low-reach notification, right shows a clean inbox with a high open rate, warm editorial style, muted earthy tones, text overlay space centred at top.",
+          "destination_url": null
+        },
+        {
+          "id": "17e",
+          "type": "EDUCATIONAL",
+          "pin_headline": "How to grow an email list with zero paid ads.",
+          "category_label": "EMAIL MARKETING",
+          "seo_title": "How to Grow an Email List for Free as a Small Business Owner",
+          "seo_description": "You don't need a budget to build a list. You need a simple lead magnet, a landing page, and a consistent place to promote it. Here are five practical ways to get your first 500 subscribers without spending anything. Click to browse.",
+          "design_brief": "Lifestyle scene: woman at a bright cafe table with a laptop open showing a simple opt-in page, notebook open beside her with a list, warm natural light, blurred background patrons, text space at top left overlay area.",
+          "destination_url": null
+        }
+      ]
+    },
+    {
+      "topic_id": 18,
+      "topic": "Instagram post ideas",
+      "keyword": "instagram posts ideas",
+      "keyword_volume": 1600,
+      "opportunity_score": 77.7,
+      "commercial_intent": "mixed",
+      "variation_split": "2 PRODUCT + 3 EDUCATIONAL",
+      "blog": {
+        "existing_post_likely": true,
+        "note": "check blog for existing post at switzertemplates.com",
+        "blog_post_needed": false,
+        "brief_for_blog_agent": null
+      },
+      "variations": [
+        {
+          "id": "18a",
+          "type": "PRODUCT",
+          "pin_headline": "Thirty days of Instagram posts done before Monday morning.",
+          "category_label": "INSTAGRAM TEMPLATES",
+          "seo_title": "Instagram Post Templates for Coaches and Service Providers",
+          "seo_description": "Stop staring at a blank screen every week. These Instagram template packs include editorial posts and carousels built for coaches and entrepreneurs - just swap your text and publish in minutes. Shop at switzertemplates.com",
+          "design_brief": "Flat lay overhead: a phone displaying a clean Instagram grid with cohesive branded posts, warm linen surface, a small pot plant and gold pen beside it, bright soft light, text overlay space at upper right corner.",
+          "destination_url": null
+        },
+        {
+          "id": "18b",
+          "type": "PRODUCT",
+          "pin_headline": "Post consistently without spending hours on design.",
+          "category_label": "BRANDING KIT",
+          "seo_title": "Canva Instagram Templates for Small Business - 1,000+ Designs",
+          "seo_description": "The full branding kit includes 1,000+ Canva templates for Instagram posts, stories, carousels, and more. Built for coaches and service providers who want a consistent feed without starting from scratch every time. Shop at switzertemplates.com",
+          "design_brief": "Close-up of a woman's hands editing an Instagram post template in Canva on a tablet, warm cream desk surface, branded mug nearby, soft afternoon light from the left, text overlay space at the top of the composition.",
+          "destination_url": null
+        },
+        {
+          "id": "18c",
+          "type": "EDUCATIONAL",
+          "pin_headline": "Ten Instagram post types that actually bring in clients.",
+          "category_label": "INSTAGRAM TIPS",
+          "seo_title": "10 Instagram Post Ideas That Generate Enquiries for Service Businesses",
+          "seo_description": "Not every post needs to sell. But some post types consistently turn followers into buyers. Here are ten formats that work especially well for coaches, consultants, and service providers on Instagram. Click to browse.",
+          "design_brief": "Editorial grid mockup showing ten different styled Instagram post formats arranged in a 2x5 grid on a light background, warm cream tones, small numbered labels on each post, text overlay space at the very top.",
+          "destination_url": null
+        },
+        {
+          "id": "18d",
+          "type": "EDUCATIONAL",
+          "pin_headline": "Why your Instagram posts are not getting saved or shared.",
+          "category_label": "INSTAGRAM TIPS",
+          "seo_title": "Why Your Instagram Posts Are Not Getting Saved - And How to Fix It",
+          "seo_description": "Saves and shares are the metrics that tell Instagram your content is worth showing to more people. Most service providers are missing two simple things that make content worth saving. Here's what they are. Click to browse.",
+          "design_brief": "Close-up of a phone screen showing an Instagram post with low engagement stats, warm blurred desk background, slight sense of frustration - hand resting on chin just visible at edge, earthy muted tones, text at top third.",
+          "destination_url": null
+        },
+        {
+          "id": "18e",
+          "type": "EDUCATIONAL",
+          "pin_headline": "A content batching system for time-poor business owners.",
+          "category_label": "INSTAGRAM TIPS",
+          "seo_title": "How to Batch Instagram Content in Two Hours a Month",
+          "seo_description": "Creating content every day is not a sustainable plan. A simple monthly batching process lets you show up consistently without it taking over your schedule. Here is a step-by-step routine that works for solo business owners. Click to browse.",
+          "design_brief": "Lifestyle flat lay: a monthly content calendar printed and spread on a warm oak desk, phone face-up beside it showing a scheduled post queue, coffee cup nearby, bright morning light, text overlay space at upper left.",
+          "destination_url": null
+        }
+      ]
+    },
+    {
+      "topic_id": 19,
+      "topic": "Personal branding examples",
+      "keyword": "examples of personal branding",
+      "keyword_volume": 1900,
+      "opportunity_score": 77.3,
+      "commercial_intent": "mixed",
+      "variation_split": "2 PRODUCT + 3 EDUCATIONAL",
+      "blog": {
+        "existing_post_likely": true,
+        "note": "check blog for existing post at switzertemplates.com",
+        "blog_post_needed": false,
+        "brief_for_blog_agent": null
+      },
+      "variations": [
+        {
+          "id": "19a",
+          "type": "PRODUCT",
+          "pin_headline": "Build a personal brand that looks as good as you sound.",
+          "category_label": "BRANDING KIT",
+          "seo_title": "Personal Branding Templates in Canva for Coaches and Consultants",
+          "seo_description": "Your personal brand is your first impression in every room - online or offline. Get 1,000+ Canva templates designed for coaches and service providers who want a polished, consistent brand across every touchpoint. Shop at switzertemplates.com",
+          "design_brief": "Lifestyle scene: woman in neutral toned outfit standing near a white wall with a large branded mood board behind her, professional but warm feel, cream and dusty rose tones, natural light, text overlay space at the left third.",
+          "destination_url": null
+        },
+        {
+          "id": "19b",
+          "type": "PRODUCT",
+          "pin_headline": "A personal brand that sells your services before you speak.",
+          "category_label": "BUSINESS BUNDLE",
+          "seo_title": "Personal Brand Website and Branding Kit for Female Coaches",
+          "seo_description": "The 3-in-1 business bundle gives coaches and consultants a complete personal brand - Wix website, Canva branding kit, and landing page, all in one cohesive visual style. Built to make the right impression from day one. Shop at switzertemplates.com",
+          "design_brief": "Editorial close-up of a personal brand website displayed on a laptop screen on a warm cream desk, branded notebook and gold pen beside it, soft morning light, clean and confident composition, text space above the laptop.",
+          "destination_url": null
+        },
+        {
+          "id": "19c",
+          "type": "EDUCATIONAL",
+          "pin_headline": "What strong personal branding actually looks like in practice.",
+          "category_label": "BRANDING TIPS",
+          "seo_title": "Personal Branding Examples for Coaches and Service Providers",
+          "seo_description": "Personal branding is not a headshot and a tagline. It is every visual and written touchpoint someone experiences before they decide to work with you. Here are real examples of what it looks like when it works well. Click to browse.",
+          "design_brief": "Collage-style editorial flat lay showing printed brand materials - a business card, a social post printout, a mini ebook cover - all in a cohesive colour palette on a warm linen surface, soft natural light, top-down angle.",
+          "destination_url": null
+        },
+        {
+          "id": "19d",
+          "type": "EDUCATIONAL",
+          "pin_headline": "Three signs your personal brand is confusing potential clients.",
+          "category_label": "BRANDING TIPS",
+          "seo_title": "Signs Your Personal Brand Is Confusing Clients - Fix These First",
+          "seo_description": "When your brand looks different everywhere people find you, trust breaks down before you get a chance to prove your value. Here are three common personal branding problems that are quietly costing you enquiries. Click to browse.",
+          "design_brief": "Split editorial composition: left shows an inconsistent brand presence across three platforms on a phone screen, right shows a cohesive version, warm earthy desk background, numbered callouts, text overlay at the top.",
+          "destination_url": null
+        },
+        {
+          "id": "19e",
+          "type": "EDUCATIONAL",
+          "pin_headline": "How to define your personal brand in one afternoon.",
+          "category_label": "BRANDING TIPS",
+          "seo_title": "How to Define Your Personal Brand - A Simple Exercise for Coaches",
+          "seo_description": "Most coaches and consultants skip brand foundations and go straight to visual design. That is why their brand feels generic. This simple one-afternoon exercise gives you a clear foundation before you touch a template. Click to browse.",
+          "design_brief": "Overhead flat lay of an open notebook with a simple brand worksheet visible, a pen resting across it, small earthy props at the edges - a sprig of dried eucalyptus and a warm-toned mug, bright even natural light, top-down shot.",
+          "destination_url": null
+        }
+      ]
+    },
+    {
+      "topic_id": 20,
+      "topic": "Wix website builder",
+      "keyword": "website builder software",
+      "keyword_volume": 4400,
+      "opportunity_score": 72.9,
+      "commercial_intent": "high",
+      "variation_split": "4 PRODUCT + 1 EDUCATIONAL",
+      "blog": null,
+      "variations": [
+        {
+          "id": "20a",
+          "type": "PRODUCT",
+          "pin_headline": "A Wix website built for service businesses, ready to launch.",
+          "category_label": "WIX WEBSITE",
+          "seo_title": "Premade Wix Website Templates for Service-Based Small Businesses",
+          "seo_description": "Skip the blank canvas. These premade Wix websites are one-click transfer, mobile-ready, and built for service and eCommerce businesses. Customise your text and photos and you're live. Shop at switzertemplates.com",
+          "design_brief": "Clean editorial shot of a Wix website homepage displayed on a laptop and phone side by side, showing mobile responsiveness, warm oak desk surface, soft natural light, minimal props, text overlay space at top left.",
+          "destination_url": null
+        },
+        {
+          "id": "20b",
+          "type": "PRODUCT",
+          "pin_headline": "Go from no website to fully live in one afternoon.",
+          "category_label": "WIX WEBSITE",
+          "seo_title": "One-Click Wix Website Template - Launch Your Business Site Fast",
+          "seo_description": "You don't need to build a website from scratch or hire a developer. This premade Wix website transfers to your account in one click, so you can spend your afternoon customising instead of building. Shop at switzertemplates.com",
+          "design_brief": "Lifestyle scene: woman at a bright kitchen table with a laptop open showing a beautiful service business website, she's smiling, afternoon light, cream and sage green tones, relaxed home setting, text overlay at upper right.",
+          "destination_url": null
+        },
+        {
+          "id": "20c",
+          "type": "PRODUCT",
+          "pin_headline": "Your website, your brand, your landing page - all in one.",
+          "category_label": "BUSINESS BUNDLE",
+          "seo_title": "Wix Website and Branding Bundle for Female Small Business Owners",
+          "seo_description": "The 3-in-1 business bundle pairs a premade Wix website with a full Canva branding kit and landing page - all in one cohesive design. Everything matches, nothing misses, and it's ready to customise today. Shop at switzertemplates.com",
+          "design_brief": "Three-panel editorial flat lay showing a laptop with a Wix site, phone with matching social templates, and a printed business card - all in the same cohesive brand palette, warm neutral surface, top-down perspective, text at top.",
+          "destination_url": null
+        },
+        {
+          "id": "20d",
+          "type": "PRODUCT",
+          "pin_headline": "A therapist website that looks professional from day one.",
+          "category_label": "WIX WEBSITE",
+          "seo_title": "Premade Wix Website Template for Therapists and Wellness Providers",
+          "seo_description": "Your website should do the hard work of building trust before a client books. This premade Wix website is built for therapists, wellness providers, and consultants who want a calm, professional presence online. Shop at switzertemplates.com",
+          "design_brief": "Soft editorial scene: a calm, minimal home office space with a laptop open showing a wellness-themed Wix website, small plants on the desk, warm sage and cream tones, gentle natural light from a side window, text space at the left.",
+          "destination_url": null
+        },
+        {
+          "id": "20e",
+          "type": "EDUCATIONAL",
+          "pin_headline": "The five pages every service business website needs.",
+          "category_label": "WEBSITE TIPS",
+          "seo_title": "5 Pages Every Service Business Website Must Have to Get Clients",
+          "seo_description": "Most service business websites are missing at least one page that would convert visitors into paying clients. Here are the five non-negotiable pages and what each one needs to do its job properly. Click to browse.",
+          "design_brief": "Editorial graphic showing a simple website sitemap with five labelled pages as clean cards on a warm cream background, hand-lettered style numbering, earthy tones, minimal design, text overlay space across the top.",
+          "destination_url": null
+        }
+      ]
+    },
+    {
+      "topic_id": 21,
+      "topic": "Canva presentation templates",
+      "keyword": "canva presentation templates",
+      "keyword_volume": 5400,
+      "opportunity_score": 83.6,
+      "commercial_intent": "high",
+      "variation_split": "4 PRODUCT + 1 EDUCATIONAL",
+      "blog": null,
+      "variations": [
+        {
+          "id": "21a",
+          "type": "PRODUCT",
+          "pin_headline": "Canva presentations that make your offer look unmissable.",
+          "category_label": "BRANDING KIT",
+          "seo_title": "Canva Presentation and Ebook Templates for Coaches - 1,000+ Designs",
+          "seo_description": "The full branding kit includes Canva templates for ebooks, presentations, and client proposals - all in one cohesive brand style. Built for coaches and service providers who want professional materials without the effort. Shop at switzertemplates.com",
+          "design_brief": "Overhead editorial flat lay: a printed ebook or presentation document open on a warm linen surface beside a laptop, coordinating brand colours across both, soft natural light, earthy cream and terracotta tones, text space at top right.",
+          "destination_url": null
+        },
+        {
+          "id": "21b",
+          "type": "PRODUCT",
+          "pin_headline": "Send proposals that get a yes before the meeting ends.",
+          "category_label": "BRANDING KIT",
+          "seo_title": "Canva Proposal and Presentation Templates for Service Providers",
+          "seo_description": "A well-designed proposal signals professionalism before anyone reads a word. Get 1,000+ Canva templates including presentations, proposals, and client documents - all matching your brand perfectly. Shop at switzertemplates.com",
+          "design_brief": "Close-up editorial shot of a woman's hands holding a printed branded proposal document, clean white desk background, gold paper clip visible, soft studio-style light, coordinated stationery beside her, text overlay at top left.",
+          "destination_url": null
+        },
+        {
+          "id": "21c",
+          "type": "PRODUCT",
+          "pin_headline": "A lead magnet people will save, share, and come back to.",
+          "category_label": "BRANDING KIT",
+          "seo_title": "Canva Lead Magnet and Ebook Templates for Coaches and Consultants",
+          "seo_description": "Your lead magnet is often the first impression someone gets of your brand. Make it count with Canva ebook and workbook templates from the full branding kit - built to look polished with zero design experience. Shop at switzertemplates.com",
+          "design_brief": "Lifestyle scene: a digital mockup of a beautifully branded PDF ebook displayed on a tablet, warm cream desk with a coffee cup nearby, plant in soft background, afternoon light, text overlay space at top left of frame.",
+          "destination_url": null
+        },
+        {
+          "id": "21d",
+          "type": "PRODUCT",
+          "pin_headline": "Consistent branded materials across every client touchpoint.",
+          "category_label": "BUSINESS BUNDLE",
+          "seo_title": "Canva Templates for Coaches - Presentations, Ebooks, and More",
+          "seo_description": "When your presentations, social posts, and website all look like they belong together, clients notice. The 3-in-1 business bundle gives you every Canva template you need to present a cohesive brand from day one. Shop at switzertemplates.com",
+          "design_brief": "Three-item editorial flat lay: a printed presentation, a social media post printout, and a business card all in matching brand colours on a warm oak surface, natural window light from the side, top-down shot, text space at top.",
+          "destination_url": null
+        },
+        {
+          "id": "21e",
+          "type": "EDUCATIONAL",
+          "pin_headline": "What a great Canva presentation has that a basic one does not.",
+          "category_label": "CANVA TIPS",
+          "seo_title": "How to Make a Canva Presentation Look Professional - Design Tips",
+          "seo_description": "Most Canva presentations look homemade because of a few avoidable mistakes. Learn the specific design decisions - font hierarchy, white space, colour consistency - that separate a polished presentation from a forgettable one. Click to browse.",
+          "design_brief": "Before-and-after editorial split: left shows a text-heavy basic Canva slide, right shows a clean refined version with strong hierarchy, warm neutral background, both displayed on laptop screens on a desk, text overlay at top centre.",
+          "destination_url": null
+        }
+      ]
+    },
+    {
+      "topic_id": 22,
+      "topic": "Brand design for small business",
+      "keyword": "brand design",
+      "keyword_volume": 4400,
+      "opportunity_score": 73.7,
+      "commercial_intent": "mixed",
+      "variation_split": "2 PRODUCT + 3 EDUCATIONAL",
+      "blog": {
+        "existing_post_likely": true,
+        "note": "check blog for existing post at switzertemplates.com",
+        "blog_post_needed": false,
+        "brief_for_blog_agent": null
+      },
+      "variations": [
+        {
+          "id": "22a",
+          "type": "PRODUCT",
+          "pin_headline": "Professional brand design without the professional price tag.",
+          "category_label": "BRANDING KIT",
+          "seo_title": "Brand Design Templates for Small Business Owners - Canva Kit",
+          "seo_description": "Get a complete brand design in Canva - logo variations, colour palette, social templates, business cards, and more. The full branding kit includes 1,000+ templates built for female small business owners. Shop at switzertemplates.com",
+          "design_brief": "Editorial flat lay on warm cream surface: a brand style guide printed on two pages showing logo, colour swatches, and font pairings, a laptop open in the background, soft diffused light, text overlay space at upper right.",
+          "destination_url": null
+        },
+        {
+          "id": "22b",
+          "type": "PRODUCT",
+          "pin_headline": "Every brand asset your small business needs, ready to use.",
+          "category_label": "BUSINESS BUNDLE",
+          "seo_title": "Complete Brand Design Bundle for Small Business - Website Included",
+          "seo_description": "Brand design, website, and landing page in one place. The 3-in-1 business bundle gives small business owners a complete visual identity with no design skills required and no need to hire separately for each asset. Shop at switzertemplates.com",
+          "design_brief": "Clean overhead composition showing printed brand materials, a phone with matching social posts, and a laptop with a website open - all in the same visual style, warm earthy tones, oak surface, bright even light, text space at top.",
+          "destination_url": null
+        },
+        {
+          "id": "22c",
+          "type": "EDUCATIONAL",
+          "pin_headline": "Brand design on a small business budget - what to prioritise.",
+          "category_label": "BRANDING TIPS",
+          "seo_title": "Brand Design for Small Business - What to Do First on a Budget",
+          "seo_description": "When you're building a brand with limited time and money, every decision matters. Here is the order in which to tackle your brand design - and what you can safely leave until later without hurting your first impression. Click to browse.",
+          "design_brief": "Overhead editorial flat lay: a handwritten priority list in an open notebook beside a laptop showing brand design work in progress, warm terracotta and cream tones, small plant prop at the corner, bright natural light, text at top.",
+          "destination_url": null
+        },
+        {
+          "id": "22d",
+          "type": "EDUCATIONAL",
+          "pin_headline": "The difference between a logo and a brand - it matters.",
+          "category_label": "BRANDING TIPS",
+          "seo_title": "Logo vs Brand Design - What Small Business Owners Need to Know",
+          "seo_description": "A lot of business owners think they have a brand when they have a logo. A brand is the full experience someone has with your business at every touchpoint. Here is what that actually includes and why it changes how you show up. Click to browse.",
+          "design_brief": "Split editorial graphic: left half shows a simple logo on a white background labelled 'logo', right half shows a full cohesive brand spread labelled 'brand', warm earthy layout, clean sans-serif annotation style, text at the top.",
+          "destination_url": null
+        },
+        {
+          "id": "22e",
+          "type": "EDUCATIONAL",
+          "pin_headline": "Six brand design mistakes that make small businesses look amateur.",
+          "category_label": "BRANDING TIPS",
+          "seo_title": "Brand Design Mistakes Small Business Owners Make - How to Fix Them",
+          "seo_description": "Inconsistent fonts, clashing colours, and overloaded layouts are costing small businesses credibility. These six brand design mistakes are the most common - and all of them are fixable without starting from scratch. Click to browse.",
+          "design_brief": "Editorial graphic with six small labelled panels each showing a common brand mistake in a thumbnail format, red cross mark on each, warm neutral background, clean layout, numbered labels in earthy tones, text overlay at top.",
+          "destination_url": null
+        }
+      ]
+    },
+    {
+      "topic_id": 23,
+      "topic": "Life and career coaching",
+      "keyword": "life and career coach",
+      "keyword_volume": 1900,
+      "opportunity_score": 73.3,
+      "commercial_intent": "mixed",
+      "variation_split": "2 PRODUCT + 3 EDUCATIONAL",
+      "blog": {
+        "existing_post_likely": false,
+        "blog_post_needed": true,
+        "brief_for_blog_agent": "Write a practical guide on how life and career coaches can build a credible online presence that attracts clients - covering website essentials, brand consistency, and what potential clients look for before booking a discovery call. Mention the premade Wix website and 3-in-1 business bundle as a fast way to launch a professional coaching presence. Target keyword: life and career coach website."
+      },
+      "variations": [
+        {
+          "id": "23a",
+          "type": "PRODUCT",
+          "pin_headline": "A coaching website that builds trust before the first call.",
+          "category_label": "WIX WEBSITE",
+          "seo_title": "Premade Wix Website for Life and Career Coaches - Ready to Launch",
+          "seo_description": "Your website is where potential coaching clients decide if they trust you. This premade Wix website is built for life and career coaches - mobile-ready, easy to customise, and designed to convert visitors into booked calls. Shop at switzertemplates.com",
+          "design_brief": "Warm editorial lifestyle scene: a life coach sitting at a bright desk with a laptop open showing a clean coaching website, a small plant and branded notebook beside her, cream and dusty rose tones, camera-facing posture, text at left.",
+          "destination_url": null
+        },
+        {
+          "id": "23b",
+          "type": "PRODUCT",
+          "pin_headline": "Launch your coaching brand with everything in one place.",
+          "category_label": "BUSINESS BUNDLE",
+          "seo_title": "Coaching Business Brand Bundle - Website, Canva Kit, and Landing Page",
+          "seo_description": "The 3-in-1 business bundle gives life and career coaches a complete brand presence fast - a premade Wix website, 1,000+ Canva templates, and a landing page, all designed to work together from day one. Shop at switzertemplates.com",
+          "design_brief": "Close-up editorial of three brand touchpoints displayed together: a website on laptop, branded social post on phone, and printed business card, all in cohesive neutral tones, warm oak desk, natural light from above, text space at top.",
+          "destination_url": null
+        },
+        {
+          "id": "23c",
+          "type": "EDUCATIONAL",
+          "pin_headline": "What life coaching clients look for before they book you.",
+          "category_label": "COACHING TIPS",
+          "seo_title": "What Clients Look for When Choosing a Life or Career Coach Online",
+          "seo_description": "Before a client sends a single message, they've already checked your website, social media, and how you show up in search. Here is what they are actually looking for - and how to make sure your brand gives them the right signals. Click to browse.",
+          "design_brief": "Editorial lifestyle scene: a potential client scrolling a coaching website on a phone, warm cafe background blurred, her expression is interested and considered, earthy neutral tones, morning light, text overlay space at top third.",
+          "destination_url": null
+        },
+        {
+          "id": "23d",
+          "type": "EDUCATIONAL",
+          "pin_headline": "How to niche your coaching business without shrinking your audience.",
+          "category_label": "COACHING TIPS",
+          "seo_title": "How to Niche as a Life or Career Coach Without Limiting Yourself",
+          "seo_description": "Choosing a niche feels risky when you are starting out. But a specific position makes every part of your marketing - from your website to your social posts - easier to write and more effective at attracting the right clients. Click to browse.",
+          "design_brief": "Overhead flat lay of an open notebook with a coaching niche brainstorm visible, surrounded by small sticky notes with audience ideas, warm linen surface, earthy tones, soft natural light, text overlay space across the top half.",
+          "destination_url": null
+        },
+        {
+          "id": "23e",
+          "type": "EDUCATIONAL",
+          "pin_headline": "The one page on your coaching website doing the most work.",
+          "category_label": "WEBSITE TIPS",
+          "seo_title": "The Most Important Page on a Coaching Website - And What It Needs",
+          "seo_description": "Most coaching website visitors land on the homepage and leave within seconds if one thing isn't clear. Find out which single page converts the most coaching enquiries and exactly what it needs to include to do its job. Click to browse.",
+          "design_brief": "Editorial close-up of a laptop showing a coaching website services page with clear section structure visible, warm desk environment with cream and terracotta tones, afternoon light from the right, text overlay space at top left.",
+          "destination_url": null
+        }
+      ]
+    },
+    {
+      "topic_id": 24,
+      "topic": "Starting an online business",
+      "keyword": "how to start an online business",
+      "keyword_volume": 3600,
+      "opportunity_score": 64.3,
+      "commercial_intent": "mixed",
+      "variation_split": "2 PRODUCT + 3 EDUCATIONAL",
+      "blog": {
+        "existing_post_likely": true,
+        "note": "check blog for existing post at switzertemplates.com",
+        "blog_post_needed": false,
+        "brief_for_blog_agent": null
+      },
+      "variations": [
+        {
+          "id": "24a",
+          "type": "PRODUCT",
+          "pin_headline": "Start your online business with a brand that means business.",
+          "category_label": "BUSINESS BUNDLE",
+          "seo_title": "How to Start an Online Business with a Complete Brand from Day One",
+          "seo_description": "The biggest mistake new online business owners make is launching without a consistent brand presence. The 3-in-1 business bundle gives you a Wix website, branding kit, and landing page - everything you need to launch properly. Shop at switzertemplates.com",
+          "design_brief": "Aspirational lifestyle editorial: a woman at a clean minimal home office desk, laptop open with a website visible, a branded planner and coffee beside her, bright morning light, warm cream and sage tones, text space at upper left.",
+          "destination_url": null
+        },
+        {
+          "id": "24b",
+          "type": "PRODUCT",
+          "pin_headline": "Your first business website without the technical headache.",
+          "category_label": "WIX WEBSITE",
+          "seo_title": "Premade Wix Website for New Online Business Owners - Easy Setup",
+          "seo_description": "You don't need to know how to build a website to have a great one. This premade Wix website is one-click transfer and designed for new business owners who want to launch fast without getting stuck in tech. Shop at switzertemplates.com",
+          "design_brief": "Lifestyle scene: a first-time business owner smiling at her laptop in a bright living room space, website visible on screen, earthy warm tones, casual relaxed setting suggesting ease, natural light, text overlay space at top right.",
+          "destination_url": null
+        },
+        {
+          "id": "24c",
+          "type": "EDUCATIONAL",
+          "pin_headline": "The first five things to do when starting an online business.",
+          "category_label": "BUSINESS TIPS",
+          "seo_title": "How to Start an Online Business - 5 First Steps That Actually Matter",
+          "seo_description": "Most new online business owners start with the wrong things - and spend months fixing mistakes that could have been avoided. Here are the five actions that actually move you forward in the first thirty days. Click to browse.",
+          "design_brief": "Overhead flat lay of a checklist-style planner open on a warm oak desk, five items visible, a pen resting across it, small plant and coffee cup at the edge of frame, bright even natural light, text overlay space at the top.",
+          "destination_url": null
+        },
+        {
+          "id": "24d",
+          "type": "EDUCATIONAL",
+          "pin_headline": "What your online business actually needs before you launch.",
+          "category_label": "BUSINESS TIPS",
+          "seo_title": "What You Need Before Launching an Online Business - The Real List",
+          "seo_description": "There's a lot of noise about what you need to start an online business. The real list is shorter than you think - but what is on it really matters. Here is what you should have in place before you tell anyone you're open. Click to browse.",
+          "design_brief": "Minimal editorial composition: a single open notebook with a short handwritten list visible, clean warm cream and ivory tones, a single coffee cup in the frame corner, bright studio-style light, generous text overlay space at the top.",
+          "destination_url": null
+        },
+        {
+          "id": "24e",
+          "type": "EDUCATIONAL",
+          "pin_headline": "How to look established when your business is brand new.",
+          "category_label": "BRANDING TIPS",
+          "seo_title": "How to Make a New Online Business Look Professional and Established",
+          "seo_description": "Looking like a new business is one of the fastest ways to lose a potential client's trust. These design and brand moves make a brand new business look polished, intentional, and worth paying for - even in the first week. Click to browse.",
+          "design_brief": "Editorial split composition: left shows a scrappy new business social profile with inconsistent visuals, right shows a polished version of the same brand, warm earthy tones, phone screen format, text overlay at the top centre.",
+          "destination_url": null
+        }
+      ]
+    },
+    {
+      "topic_id": 25,
+      "topic": "Social media for small business",
+      "keyword": "small business social media marketing company",
+      "keyword_volume": 1000,
+      "opportunity_score": 67.6,
+      "commercial_intent": "mixed",
+      "variation_split": "2 PRODUCT + 3 EDUCATIONAL",
+      "blog": {
+        "existing_post_likely": true,
+        "note": "check blog for existing post at switzertemplates.com",
+        "blog_post_needed": false,
+        "brief_for_blog_agent": null
+      },
+      "variations": [
+        {
+          "id": "25a",
+          "type": "PRODUCT",
+          "pin_headline": "Social media templates that make your small business stand out.",
+          "category_label": "INSTAGRAM TEMPLATES",
+          "seo_title": "Social Media Templates for Small Business - Canva Instagram Packs",
+          "seo_description": "Stop using generic templates that look like everyone else's feed. These Instagram template packs are built for small business owners who want editorial, professional-looking posts without a marketing team or designer. Shop at switzertemplates.com",
+          "design_brief": "Flat lay editorial: a phone showing a clean Instagram feed of a small business, warm cream and terracotta tones, branded notebook open beside it, top-down angle, soft afternoon natural light, text overlay space in the upper half.",
+          "destination_url": null
+        },
+        {
+          "id": "25b",
+          "type": "PRODUCT",
+          "pin_headline": "One thousand Canva templates for your small business brand.",
+          "category_label": "BRANDING KIT",
+          "seo_title": "Canva Social Media Templates for Small Business - Full Branding Kit",
+          "seo_description": "Every social media post, story, and carousel template your small business needs - plus business cards, logos, ebooks, and more. The full branding kit puts over 1,000 Canva templates in your hands from day one. Shop at switzertemplates.com",
+          "design_brief": "Overhead editorial flat lay showing multiple printouts of branded social media posts spread out on a warm linen surface, each in a cohesive colour palette, laptop open in the background, bright window light, text space at the top.",
+          "destination_url": null
+        },
+        {
+          "id": "25c",
+          "type": "EDUCATIONAL",
+          "pin_headline": "How to manage social media without it consuming your week.",
+          "category_label": "SOCIAL MEDIA TIPS",
+          "seo_title": "Social Media for Small Business - How to Show Up Without Burnout",
+          "seo_description": "Social media is necessary but it doesn't need to take over your working week. Here is a realistic approach to social media for small business owners who are running everything themselves and need a system that lasts. Click to browse.",
+          "design_brief": "Lifestyle editorial: a small business owner at a tidy desk with a simple weekly content calendar visible on her laptop, relaxed posture, earthy sage and cream tones, morning light through a window, text overlay at upper left third.",
+          "destination_url": null
+        },
+        {
+          "id": "25d",
+          "type": "EDUCATIONAL",
+          "pin_headline": "Which social platform should your small business actually be on.",
+          "category_label": "SOCIAL MEDIA TIPS",
+          "seo_title": "Best Social Media Platform for Small Business Owners in 2024",
+          "seo_description": "You don't need to be everywhere. You need to be in the right place for your specific business and audience. Here is a plain-language breakdown of the main platforms and which type of small business gets the most from each one. Click to browse.",
+          "design_brief": "Editorial graphic showing four platform icons - Instagram, Pinterest, Facebook, LinkedIn - in a clean grid format on a warm cream background, small descriptive labels below each, earthy tones, text overlay space across the top.",
+          "destination_url": null
+        },
+        {
+          "id": "25e",
+          "type": "EDUCATIONAL",
+          "pin_headline": "Why your social posts are not turning followers into clients.",
+          "category_label": "SOCIAL MEDIA TIPS",
+          "seo_title": "Why Social Media Isn't Generating Clients for Your Small Business",
+          "seo_description": "Posting consistently but getting no enquiries is one of the most frustrating places to be as a small business owner. Here are the real reasons your social media isn't converting - and how to change it without starting again. Click to browse.",
+          "design_brief": "Lifestyle close-up of a woman holding a phone showing her Instagram analytics with flat engagement, looking slightly frustrated, blurred warm home background, earthy tones, natural light, text overlay space at the top third of frame.",
+          "destination_url": null
+        }
+      ]
+    },
+    {
+      "topic_id": 26,
+      "topic": "Canva social media templates",
+      "keyword": "canva social media templates",
+      "keyword_volume": 1300,
+      "opportunity_score": 69.4,
+      "commercial_intent": "mixed",
+      "variation_split": "2 PRODUCT + 3 EDUCATIONAL",
+      "blog": {
+        "existing_post_likely": true,
+        "note": "check blog for existing post at switzertemplates.com",
+        "blog_post_needed": false,
+        "brief_for_blog_agent": null
+      },
+      "variations": [
+        {
+          "id": "26a",
+          "type": "PRODUCT",
+          "pin_headline": "Canva social media templates that match your whole brand.",
+          "category_label": "BRANDING KIT",
+          "seo_title": "Canva Social Media Templates - Full Branding Kit for Small Business",
+          "seo_description": "Get social media templates that are actually designed to match your logos, business cards, and website. The full branding kit includes 1,000+ Canva templates across every format you need, all in one cohesive style. Shop at switzertemplates.com",
+          "design_brief": "Overhead flat lay of a phone showing a cohesive branded Instagram grid next to matching printed business cards and a branded sticker, warm cream and sage palette, natural overhead light, text overlay space at upper right quadrant.",
+          "destination_url": null
+        },
+        {
+          "id": "26b",
+          "type": "PRODUCT",
+          "pin_headline": "Instagram and social templates built for coaches and consultants.",
+          "category_label": "INSTAGRAM TEMPLATES",
+          "seo_title": "Canva Instagram Templates for Coaches, Consultants, and Entrepreneurs",
+          "seo_description": "Editorial posts, carousels, and story templates built for coaches and entrepreneurs - not generic business flyers. These Instagram template packs let you show up professionally on social without spending hours on design. Shop at switzertemplates.com",
+          "design_brief": "Editorial lifestyle scene: a female coach sitting cross-legged on a sofa with a tablet open to a Canva social template, editing in progress visible on screen, warm cream and blush tones, bright soft light, text overlay at upper left.",
+          "destination_url": null
+        },
+        {
+          "id": "26c",
+          "type": "EDUCATIONAL",
+          "pin_headline": "How to customise Canva templates without losing your brand.",
+          "category_label": "CANVA TIPS",
+          "seo_title": "How to Customise Canva Templates and Keep Your Brand Consistent",
+          "seo_description": "Canva templates are a starting point - not a finished product. Knowing what to change and what to leave alone is the difference between a feed that looks cohesive and one that looks like a patchwork of different brands. Click to browse.",
+          "design_brief": "Screen-style editorial showing a Canva template open on a laptop with branded font and colour adjustments highlighted by small annotation arrows, warm desk environment, earthy neutral tones, afternoon light, text space at top.",
+          "destination_url": null
+        },
+        {
+          "id": "26d",
+          "type": "EDUCATIONAL",
+          "pin_headline": "Why free Canva templates can hurt your brand over time.",
+          "category_label": "CANVA TIPS",
+          "seo_title": "Why Free Canva Templates Can Damage Your Brand Credibility",
+          "seo_description": "Free Canva templates are used by thousands of businesses simultaneously. When your posts look identical to someone else's, your brand stops being memorable. Here is what to do instead to make your templates feel uniquely yours. Click to browse.",
+          "design_brief": "Editorial graphic showing three identical free Canva templates side by side with different brand names applied, making the point visually, warm earthy tones, clean layout, small red annotation marks, text overlay at the top.",
+          "destination_url": null
+        },
+        {
+          "id": "26e",
+          "type": "EDUCATIONAL",
+          "pin_headline": "The Canva features most small business owners never use.",
+          "category_label": "CANVA TIPS",
+          "seo_title": "Canva Features Small Business Owners Should Be Using Right Now",
+          "seo_description": "Most small business owners use about ten percent of what Canva can do. These underused features save significant time, keep your brand consistent across every piece of content, and require no design background to master. Click to browse.",
+          "design_brief": "Lifestyle scene: woman at a bright desk looking at a Canva interface on her laptop screen, pointing at a specific feature with a stylus, warm cream and sage green tones, clean tidy desk setting, soft natural light, text at the top.",
+          "destination_url": null
+        }
+      ]
+    },
+    {
+      "topic_id": 27,
+      "topic": "Digital products for passive income",
+      "keyword": "personal branding tips",
+      "keyword_volume": 260,
+      "opportunity_score": 68.6,
+      "commercial_intent": "mixed",
+      "variation_split": "2 PRODUCT + 3 EDUCATIONAL",
+      "blog": {
+        "existing_post_likely": false,
+        "blog_post_needed": true,
+        "brief_for_blog_agent": "Write a post titled 'Personal branding tips for coaches who want to charge more' targeting 'personal branding tips'. Cover practical steps that make a personal brand look established: consistent visuals, a professional website, a strong Instagram presence, and a clear offer. Naturally mention the Switzertemplates branding kit and 3-in-1 bundle as the tools that implement most of these tips in one purchase."
+      },
+      "variations": [
+        {
+          "id": "27a",
+          "type": "PRODUCT",
+          "pin_headline": "Sell beautiful digital products with a brand people trust.",
+          "category_label": "BUSINESS BUNDLE",
+          "seo_title": "Brand and Website Templates for Selling Digital Products Online",
+          "seo_description": "If you're selling digital products, your brand needs to look as polished as what you're selling. The 3-in-1 business bundle gives you the website, branding kit, and landing page to launch and sell with confidence. Shop at switzertemplates.com",
+          "design_brief": "Editorial lifestyle flat lay: a digital product mockup on a tablet displayed next to a branded business card and laptop showing a shop page, warm cream and terracotta palette, overhead angle, soft studio light, text space at top right.",
+          "destination_url": null
+        },
+        {
+          "id": "27b",
+          "type": "PRODUCT",
+          "pin_headline": "Access every template you need for one monthly price.",
+          "category_label": "DESIGN VAULT",
+          "seo_title": "Design Vault Membership - Unlimited Canva Templates for Business",
+          "seo_description": "Get ongoing access to the full Switzertemplates library - social media, branding, websites, ebooks, and more. The Design Vault membership is built for business owners who want new templates every month without paying per pack. Shop at switzertemplates.com",
+          "design_brief": "Editorial scene: laptop screen showing a template library dashboard with multiple category folders visible, warm home office background, cream and sage tones, afternoon light, a coffee cup beside the laptop, text space at upper left.",
+          "destination_url": null
+        },
+        {
+          "id": "27c",
+          "type": "EDUCATIONAL",
+          "pin_headline": "The best digital products for small business owners to sell.",
+          "category_label": "BUSINESS TIPS",
+          "seo_title": "Best Digital Products for Small Business Owners to Create and Sell",
+          "seo_description": "Not all digital products are equal. Some take weeks to create and sell once. Others take a few hours and sell indefinitely. Here are the digital product types that work best for coaches, consultants, and service-based businesses. Click to browse.",
+          "design_brief": "Overhead editorial flat lay showing four digital product mockups - an ebook, a workbook, a template pack, and a mini course graphic - arranged neatly on a warm linen surface, earthy tones, bright natural light, text space at top.",
+          "destination_url": null
+        },
+        {
+          "id": "27d",
+          "type": "EDUCATIONAL",
+          "pin_headline": "How to turn your expertise into a digital product this month.",
+          "category_label": "BUSINESS TIPS",
+          "seo_title": "How to Create and Sell a Digital Product from Your Expertise",
+          "seo_description": "Most coaches and consultants are sitting on knowledge that could become a digital product someone would pay for today. Here is a step-by-step process to take your expertise from idea to a product ready to sell in under four weeks. Click to browse.",
+          "design_brief": "Lifestyle scene: woman at a desk writing in a notebook, a laptop open beside her showing a product creation planning document, warm cream and earthy tones, soft morning light, calm focused expression, text overlay at upper right.",
+          "destination_url": null
+        },
+        {
+          "id": "27e",
+          "type": "EDUCATIONAL",
+          "pin_headline": "Why most digital products don't sell - and what to fix.",
+          "category_label": "BUSINESS TIPS",
+          "seo_title": "Why Digital Products Don't Sell - Common Mistakes and How to Fix Them",
+          "seo_description": "A great idea doesn't guarantee sales. Most digital products fail to sell because of weak positioning, an unclear audience, or a brand that doesn't inspire trust. Here are the most common reasons and exactly how to address each one. Click to browse.",
+          "design_brief": "Editorial split graphic: left side shows a low-converting product listing with a cluttered presentation, right side shows a clean professional version of the same product, warm neutral tones, annotation-style labels, text at the top.",
+          "destination_url": null
+        }
+      ]
+    },
+    {
+      "topic_id": 28,
+      "topic": "Wellness business branding",
+      "keyword": "canva business plan",
+      "keyword_volume": 390,
+      "opportunity_score": 69.1,
+      "commercial_intent": "mixed",
+      "variation_split": "2 PRODUCT + 3 EDUCATIONAL",
+      "blog": {
+        "existing_post_likely": false,
+        "blog_post_needed": true,
+        "brief_for_blog_agent": "Write a post titled 'How to plan your coaching business brand from scratch' targeting 'canva business plan'. Cover the brand-first approach to launching a service business: choosing visual identity, building a website, and showing up consistently on social media. Use the Switzertemplates 3-in-1 bundle as the worked example of what a complete brand foundation looks like and costs."
+      },
+      "variations": [
+        {
+          "id": "28a",
+          "type": "PRODUCT",
+          "pin_headline": "A wellness brand that clients feel before they even contact you.",
+          "category_label": "BRANDING KIT",
+          "seo_title": "Canva Branding Templates for Wellness Coaches and Health Businesses",
+          "seo_description": "A calm, cohesive brand signals professionalism and puts wellness clients at ease. Get 1,000+ Canva templates designed for wellness businesses - social media, ebooks, business cards, logos, and more in one complete kit. Shop at switzertemplates.com",
+          "design_brief": "Soft lifestyle editorial: a female wellness coach at a calm minimal desk with a printed brand mood board visible behind her, sage green plants, cream tones, warm natural light from a wide window, text overlay space at the left third.",
+          "destination_url": null
+        },
+        {
+          "id": "28b",
+          "type": "PRODUCT",
+          "pin_headline": "Your wellness website should feel as good as your sessions do.",
+          "category_label": "WIX WEBSITE",
+          "seo_title": "Premade Wix Website for Wellness Coaches and Therapists",
+          "seo_description": "Your website is often the first place a potential client decides if they feel safe working with you. This premade Wix website for wellness and health professionals is calm, professional, and ready to customise in an afternoon. Shop at switzertemplates.com",
+          "design_brief": "Editorial close-up of a laptop on a clean calm desk showing a wellness-themed website homepage, small succulent plants framing the sides, sage and warm ivory tones, soft diffused natural light, text overlay at the top of frame.",
+          "destination_url": null
+        },
+        {
+          "id": "28c",
+          "type": "EDUCATIONAL",
+          "pin_headline": "What makes a wellness brand feel trustworthy to new clients.",
+          "category_label": "BRANDING TIPS",
+          "seo_title": "Wellness Business Branding - What Builds Client Trust Online",
+          "seo_description": "Wellness clients are choosing someone to trust with their health and wellbeing. Your brand plays a significant role in that decision before you ever speak to them. Here is what visual credibility looks like in the wellness space. Click to browse.",
+          "design_brief": "Calm lifestyle editorial: a potential wellness client browsing a beautifully branded coaching website on her phone, sitting in a bright relaxed space, sage and warm neutral tones, soft natural light, text overlay at the upper left.",
+          "destination_url": null
+        },
+        {
+          "id": "28d",
+          "type": "EDUCATIONAL",
+          "pin_headline": "Branding colours that work for wellness and health businesses.",
+          "category_label": "BRANDING TIPS",
+          "seo_title": "Best Brand Colours for Wellness Coaches and Health Businesses",
+          "seo_description": "Colour does more than make your brand look pretty - it signals the kind of experience someone will have with you. Here is how to choose a colour palette for a wellness or health business that communicates calm, trust, and credibility. Click to browse.",
+          "design_brief": "Editorial flat lay of five colour swatch cards in muted wellness tones - sage, warm ivory, dusty rose, soft terracotta, and stone - arranged on a linen surface with small dried botanical props, top-down angle, text space at the top.",
+          "destination_url": null
+        },
+        {
+          "id": "28e",
+          "type": "EDUCATIONAL",
+          "pin_headline": "How to attract the right coaching clients with your brand.",
+          "category_label": "COACHING TIPS",
+          "seo_title": "How Personal Coaching Businesses Attract Ideal Clients Through Branding",
+          "seo_description": "The right brand doesn't just look good - it filters in the clients you want to work with and quietly filters out those who are not a good fit. Here is how personal coaches can use their brand to do that work automatically. Click to browse.",
+          "design_brief": "Warm editorial lifestyle scene: a personal coach at a coffee shop reviewing her brand materials on a laptop, looking satisfied and confident, earthy cream and terracotta tones, blurred background, natural morning light, text at top right.",
+          "destination_url": null
+        }
+      ]
+    }
+  ]
+}
