@@ -383,10 +383,10 @@ def write_blog_post(keyword_row: dict, competitors: list[dict]) -> str:
     prompt = build_prompt(keyword_row, competitors, brand_voice, style_examples)
 
     client = anthropic.Anthropic(api_key=ANTHROPIC_API_KEY)
-    print("  Calling Claude (claude-opus-4-7) to write blog post...")
+    print("  Calling Claude (claude-opus-4-5) to write blog post...")
 
     initial = client.messages.create(
-        model="claude-opus-4-7",
+        model="claude-opus-4-5",
         max_tokens=4096,
         messages=[{"role": "user", "content": prompt}],
     )
@@ -403,7 +403,7 @@ def write_blog_post(keyword_row: dict, competitors: list[dict]) -> str:
             f"{post_text}"
         )
         revised = client.messages.create(
-            model="claude-opus-4-7",
+            model="claude-opus-4-5",
             max_tokens=4096,
             messages=[
                 {"role": "user", "content": prompt},
