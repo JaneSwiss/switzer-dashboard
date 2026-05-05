@@ -312,10 +312,12 @@ BLOG POST STRUCTURE:
    - Contains the exact keyword naturally
    - Benefit-led, not clickbait
    - Under 60 characters for SEO
-   - Sentence case only (capitalise first word and proper nouns only)
+   - Sentence case only (capitalize first word and proper nouns only)
+   - Always capitalize proper nouns and brand names exactly as they appear (e.g. Canva, Wix, Instagram, Pinterest, Etsy, Flodesk)
 
 2. Introduction (100-150 words)
    - Opens with the reader's real frustration or situation
+   - Must include the exact keyword naturally within the first paragraph
    - No "In this post I will..." or "Today we're going to cover..."
    - No grand opening statements
    - Start somewhere honest and move quickly to what the post delivers
@@ -336,6 +338,7 @@ BLOG POST STRUCTURE:
 5. Conclusion (100-150 words)
    - No "In conclusion" or "To wrap up"
    - Grounded, simple close — gives the reader something to do or think about
+   - Must include the exact keyword naturally within the conclusion
    - Ends with a final CTA linking to a relevant product or the Etsy shop
    - CTA is action-led and specific, not "click here" or "shop now"
 
@@ -349,7 +352,9 @@ NON-NEGOTIABLE VOICE RULES:
 - Use "you" and "your" constantly — this is always about the reader's business.
 - Regular dashes ( - ) only. Never em dashes ( — ).
 - Brackets for asides (like this) — never em dashes for asides.
-- Sentence case for all headings. Do not capitalise every word.
+- Sentence case for all headings. Do not capitalize every word.
+- Always capitalize proper nouns and brand names: Canva, Wix, Instagram, Pinterest, Etsy, Flodesk, Google, etc.
+- Use American English spelling throughout: color (not colour), recognize (not recognise), optimize (not optimise), customize (not customise), favorite (not favourite), center (not centre), etc.
 - No rhetorical question-then-answer patterns.
 - No "In today's post..." or "Let's talk about..." or "Let's dive in" openers.
 - No announcing what you are about to teach — just teach it.
