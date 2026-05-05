@@ -103,6 +103,7 @@ def load_next_keyword() -> dict | None:
         print(f"Keyword masterlist not found: {KEYWORDS_FILE}")
         return None
 
+    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
     written_slugs = {p.stem for p in OUTPUT_DIR.glob("*.txt")}
 
     rows = []
@@ -136,7 +137,7 @@ def load_next_keyword() -> dict | None:
 
     def tier_key(r):
         if tier_col:
-            return tier_order.get(r.get(tier_col, "P4").strip().upper(), 9)
+            return tier_order.get(r.get(tier_col, "P4").strip()[:2].upper(), 9)
         return 9
 
     rows.sort(key=tier_key)
