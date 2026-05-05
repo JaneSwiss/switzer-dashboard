@@ -185,45 +185,6 @@ def _generate_background_with_retry(variation_letter: str = "a") -> Image.Image:
 
 
 
-def _crop_blank_bottom(img: Image.Image) -> Image.Image:
-    """
-    Two-stage approach:
-    1. Scan from the bottom in 50px blocks. A block is 'blank' when
-       avg brightness > 215 AND stdev < 8 (bright and near-uniform).
-       Crop at the first non-blank block boundary.
-    2. If no blank block found, fall back to a conservative 15% trim.
-    Never crops more than 50% of the image height.
-    """
-    import statistics
-    w, h    = img.size
-    block_h = 50
-    step    = max(1, w // 40)   # ~40 sample columns per block
-    min_h   = h // 2            # never crop more than 50%
-
-    content_bottom = h          # default: no blank detected
-
-    for bottom in range(h, min_h, -block_h):
-        top     = max(0, bottom - block_h)
-        samples = [sum(img.getpixel((x, y))[:3]) / 3
-                   for y in range(top, bottom, 5)
-                   for x in range(0, w, step)]
-        if not samples:
-            continue
-        avg   = statistics.mean(samples)
-        stdev = statistics.stdev(samples) if len(samples) > 1 else 0
-        if avg > 215 and stdev < 8:
-            content_bottom = top   # block is blank — move boundary up
-        else:
-            break                  # real content found — stop scanning
-
-    if content_bottom < h:
-        print(f"    [DEBUG] Blank detected: {h}px → {content_bottom}px")
-        return img.crop((0, 0, w, content_bottom))
-
-    # Fallback: no blank detected — conservative 15% trim
-    fallback_h = int(h * 0.85)
-    print(f"    [DEBUG] No blank — fallback trim: {h}px → {fallback_h}px")
-    return img.crop((0, 0, w, fallback_h))
 
 
 def _placeholder_background(topic: str) -> Image.Image:
@@ -467,9 +428,8 @@ def generate_pin_image(copy_data: dict, context: dict, fonts: dict) -> Path:
 
     print(f"    [DEBUG] Raw Gemini image: {bg.size[0]}x{bg.size[1]} px")
     bg.save("/tmp/debug_raw_gemini.png")
-    bg = _crop_blank_bottom(bg)
 
-    bg = ImageOps.fit(bg, (1000, 1500), Image.LANCZOS)
+    bg = ImageOps.fit(bg, (PIN_W, PIN_H), Image.LANCZOS, centering=(0.5, 0.0))
 
     # No overlay — white box provides contrast
     bg = _composite_white_box(bg, copy_data, fonts, _has_cta_bar(copy_data))
