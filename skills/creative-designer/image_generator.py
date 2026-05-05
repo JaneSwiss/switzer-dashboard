@@ -429,7 +429,15 @@ def generate_pin_image(copy_data: dict, context: dict, fonts: dict) -> Path:
     print(f"    [DEBUG] Raw Gemini image: {bg.size[0]}x{bg.size[1]} px")
     bg.save("/tmp/debug_raw_gemini.png")
 
-    bg = ImageOps.fit(bg, (PIN_W, PIN_H), Image.LANCZOS, centering=(0.5, 0.0))
+    _centering = {
+        "a": (0.5, 0.0),  # close-up hands — content at top
+        "b": (0.5, 0.0),  # full portrait — face at top
+        "c": (0.5, 0.2),  # dark editorial — slightly above center
+        "d": (0.5, 0.5),  # flat lay overhead — content is centered
+        "e": (0.5, 0.3),  # airy workspace — slightly above center
+    }
+    bg = ImageOps.fit(bg, (PIN_W, PIN_H), Image.LANCZOS,
+                      centering=_centering.get(var_letter, (0.5, 0.0)))
 
     # No overlay — white box provides contrast
     bg = _composite_white_box(bg, copy_data, fonts, _has_cta_bar(copy_data))
