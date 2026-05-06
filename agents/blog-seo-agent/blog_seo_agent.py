@@ -444,14 +444,16 @@ All prompts must follow these rules exactly.
 
 BRAND COLOURS (use hex codes explicitly in every prompt):
 - Background: warm cream #F8F5F2
-- Chocolate brown (nodes, accents): #8D6E63
-- Dark charcoal (main headings): #383838
-- Warm taupe (numbers, secondary labels): #BBB0AA
+- Chocolate brown (numbers, nodes, accents): #8D6E63
+- Near-black (main headings): #262427
+- Dark charcoal (nodes): #383838
+- Warm taupe (supporting phrases, secondary labels): #BBB0AA
 - Muted sand (connecting lines): #A5988E
 
 BRAND FONTS (name these explicitly in every infographic prompt):
-- Headings: Noto Serif Display Light - lowercase, italic for one or two key words
-- Numbers and labels: Montserrat Regular - all caps, small size, generous letter spacing
+- Headings: Noto Serif Display Light - all caps, medium size, refined and elegant
+- Numbers and supporting phrases: Montserrat Regular - numbers in very small all caps
+  with generous letter spacing, supporting phrases in lowercase very small
 
 ---
 
@@ -487,7 +489,7 @@ STRICT TEXT RULES FOR PHOTOS:
 - All books and magazines are closed or show only abstract imagery
 - No readable typography on any object or surface
 
-Negative prompt to include in every photo prompt:
+Negative prompt to include at the end of every photo prompt:
 no text, no words, no writing, no labels, no bright colours, no gradients,
 no studio lighting, no stock photography look, no digital sharpening,
 no visible screens, no open notebooks with writing
@@ -500,29 +502,33 @@ INFOGRAPHIC RULES:
 
 Format: landscape, 16:9 ratio always. Never portrait.
 
-Layout: choose the most appropriate structure for the content:
-- Process or steps: horizontal timeline, thin line in muted sand #A5988E,
-  filled circle nodes in chocolate brown #8D6E63, numbered labels above
-  in Montserrat small all caps warm taupe #BBB0AA, headings below in
-  Noto Serif Display Light lowercase dark charcoal #383838 with italic
-  key words in chocolate brown #8D6E63
-- Framework or comparison: thin-line Venn diagram, no colour fill,
-  soft warm cream tint only in centre overlap
-- Journey or flow: single thin curved line left to right, circle nodes,
-  stage labels in Montserrat small all caps warm taupe, descriptions
-  in Noto Serif italic chocolate brown
-- List or grid: clean 3x2 grid, single-line outline icons in thin circles,
-  headings in Montserrat all caps charcoal, one-line descriptions in
-  Noto Serif italic chocolate brown
+Use this layout for all infographics unless the content specifically
+requires otherwise:
 
-Typography hierarchy:
-- Numbers: Montserrat Regular, small size, light weight, warm taupe
-  #BBB0AA - understated and secondary, never dominant
-- Headings: Noto Serif Display Light, lowercase, dark charcoal #383838,
-  with one or two key words in italic chocolate brown #8D6E63
-- Numbers are quiet. Headings are the main focus.
+HORIZONTAL ALTERNATING TIMELINE:
+- Background: warm cream #F8F5F2
+- A thin horizontal line in muted sand #A5988E runs across the exact
+  centre of the image
+- 5 small filled circle nodes in dark charcoal #383838 evenly spaced
+  along the line
+- Items 01, 03, 05 are centred above the line, node touching the
+  bottom of the text block
+- Items 02, 04 are centred below the line, node touching the top
+  of the text block
 
-Whitespace: generous throughout. Never cluttered. Items breathe.
+Each text block reads top to bottom in this exact order:
+1. Number: Montserrat Regular, very small, generous letter spacing,
+   chocolate brown #8D6E63 - strictly this colour, not blue, not grey
+2. Heading: Noto Serif Display Light, all caps, medium size,
+   near-black #262427 - strictly this colour, not blue, not charcoal
+3. Supporting phrase: Montserrat Regular, lowercase, very small,
+   warm taupe #BBB0AA, centred below the heading
+
+Numbers are small and secondary. Headings are the main focus.
+Supporting phrases are quiet and minimal.
+Each block is compact, centred, and well-proportioned.
+Generous horizontal spacing between the 5 nodes.
+Generous vertical space between text blocks and the centre line.
 
 Strictly forbidden in every infographic:
 - No gradients
@@ -532,10 +538,12 @@ Strictly forbidden in every infographic:
 - No clipart-style icons
 - No background patterns
 - No bold or heavy font weights
-- More than 2 font styles
-- Thick lines of any kind
+- No more than 2 font styles
+- No thick lines of any kind
+- No blue or grey tones in the numbers or headings
 
-Feels like: a page from a high-end design studio portfolio.
+Feels like: designed by a professional human graphic designer.
+Clean, spacious, refined, editorial.
 
 ---
 
@@ -552,7 +560,9 @@ SUPPORTING IMAGE 3 (optional):
 [prompt]
 
 INFOGRAPHIC:
-[prompt]
+[prompt - always use the horizontal alternating timeline layout,
+include the full content points extracted from the blog post,
+never use placeholder text like [your content here]]
 """
 
 
