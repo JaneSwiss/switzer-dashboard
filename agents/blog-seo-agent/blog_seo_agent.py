@@ -432,7 +432,8 @@ def write_blog_post(keyword_row: dict, competitors: list[dict]) -> str:
 
         still_hit = check_banned_words(post_text)
         if still_hit:
-            print(f"  Warning: banned words still present after revision: {still_hit}")
+            log_error("banned_words", keyword_row["_keyword"], f"Banned words remain after revision: {still_hit}")
+            print(f"  Banned words remain after revision: {still_hit} — logged and continuing.")
 
     return post_text
 
