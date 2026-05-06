@@ -591,7 +591,7 @@ def generate_image_prompts(keyword: str, post_html: str) -> str:
 
     response = client.messages.create(
         model="claude-opus-4-5",
-        max_tokens=1024,
+        max_tokens=2048,
         system=IMAGE_PROMPT_SYSTEM,
         messages=[{"role": "user", "content": user_prompt}],
     )
