@@ -105,7 +105,10 @@ def load_next_keyword() -> Optional[dict]:
         return None
 
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
-    written_slugs = {p.stem for p in OUTPUT_DIR.glob("*.txt")}
+    written_slugs = (
+        {p.stem for p in OUTPUT_DIR.glob("*.txt")}
+        | {p.stem for p in OUTPUT_DIR.glob("*.html")}
+    )
 
     rows = []
     with KEYWORDS_FILE.open(newline="", encoding="utf-8-sig") as f:
@@ -371,16 +374,23 @@ Also never use: "You've got this", "Level up", "Exciting news!", "Have you ever 
 
 OUTPUT FORMAT:
 
-Return ONLY the blog post. Start with the title on line 1.
-No preamble. No "Here is the blog post:". No meta-commentary at the start or end.
-Plain text only. No markdown bold (**) or italic (*).
-Blank line between every paragraph.
-H2 headings on their own line, preceded and followed by a blank line.
+Return ONLY the blog post as clean HTML body content.
+No preamble. No "Here is the HTML:". No meta-commentary at the start or end.
+No <html>, <head>, or <body> tags — just the content that goes inside <body>.
+
+Use these tags and no others:
+- <h1> for the post title (one only, on the first line)
+- <h2> for each section heading
+- <p> for every paragraph
+- <div class="cta"> for CTA blocks — any paragraph that mentions Switzertemplates products, links to the shop, or directs the reader to buy or browse
+
+No markdown. No inline styles. No extra attributes. Clean semantic HTML only.
 """
 
 
 def check_banned_words(text: str) -> list[str]:
-    lower = text.lower()
+    plain = re.sub(r"<[^>]+>", " ", text)
+    lower = plain.lower()
     return [w for w in BANNED_WORDS if w.lower() in lower]
 
 
@@ -429,21 +439,91 @@ def write_blog_post(keyword_row: dict, competitors: list[dict]) -> str:
 
 # ── module 4: output ───────────────────────────────────────────────────────────
 
-def save_output(keyword_row: dict, post_text: str) -> str:
+IMAGE_PROMPT_SYSTEM = """SwitzerTemplates brand style: modern, minimal, clean, editorial.
+Colour palette: warm beige, cream, chocolate brown, soft sage green, muted dusty blue, warm white.
+Never: bright colours, gradients, cartoonish styles, cluttered layouts, stock-photo-looking people.
+Rectangular images: landscape orientation, 16:9 ratio, clean negative space, professional.
+Infographic: minimalist layout, brand colours only, clean sans-serif typography, white or cream background, simple icons if needed, no more than 5-6 elements, professional and uncluttered."""
+
+
+def generate_image_prompts(keyword: str, post_html: str) -> str:
+    """Make a second Claude call to generate Nano Banana Pro image prompts for the post."""
+    client = anthropic.Anthropic(api_key=ANTHROPIC_API_KEY)
+    plain_text = re.sub(r"<[^>]+>", " ", post_html)
+
+    user_prompt = (
+        f'Generate image prompts for a blog post about "{keyword}".\n\n'
+        f"POST CONTENT:\n{plain_text[:3000]}\n\n"
+        f"Generate:\n"
+        f"- 1 hero image prompt (rectangular, landscape, 16:9)\n"
+        f"- 1-2 supporting image prompts (rectangular, landscape, 16:9)\n"
+        f"- 1 infographic prompt\n\n"
+        f"Each prompt must be specific to this post's topic, mood, and visual concept — not generic.\n"
+        f"Make each prompt detailed enough to paste directly into an AI image generator.\n\n"
+        f"Format your response exactly like this, with no preamble:\n\n"
+        f"HERO IMAGE:\n[detailed prompt]\n\n"
+        f"SUPPORTING IMAGE 2:\n[detailed prompt]\n\n"
+        f"SUPPORTING IMAGE 3 (optional):\n[detailed prompt]\n\n"
+        f"INFOGRAPHIC:\n[detailed prompt]"
+    )
+
+    response = client.messages.create(
+        model="claude-opus-4-5",
+        max_tokens=1024,
+        system=IMAGE_PROMPT_SYSTEM,
+        messages=[{"role": "user", "content": user_prompt}],
+    )
+    return response.content[0].text.strip()
+
+
+def _assemble_html(title: str, body_content: str, image_prompts: str) -> str:
+    safe_prompts = image_prompts.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+    return f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>{title}</title>
+<style>
+  body {{ font-family: Georgia, serif; max-width: 780px; margin: 60px auto; padding: 0 24px; color: #2d2d2d; line-height: 1.8; }}
+  h1 {{ font-size: 2em; margin-bottom: 8px; }}
+  h2 {{ font-size: 1.3em; margin-top: 48px; margin-bottom: 12px; border-bottom: 1px solid #e0d9d0; padding-bottom: 6px; }}
+  p {{ margin: 0 0 20px 0; }}
+  .cta {{ background: #f5f0ea; border-left: 3px solid #b5896a; padding: 16px 20px; margin: 32px 0; }}
+  .image-prompts {{ background: #f9f9f7; border: 1px solid #e0d9d0; padding: 24px; margin-top: 60px; font-family: monospace; font-size: 0.9em; line-height: 1.6; white-space: pre-wrap; }}
+  .image-prompts h3 {{ font-family: Georgia, serif; font-size: 1em; margin-bottom: 16px; color: #888; letter-spacing: 0.05em; text-transform: uppercase; }}
+</style>
+</head>
+<body>
+{body_content}
+<div class="image-prompts">
+<h3>Image Prompts for Nano Banana Pro</h3>
+{safe_prompts}
+</div>
+</body>
+</html>"""
+
+
+def save_output(keyword_row: dict, post_html: str, image_prompts: str) -> str:
     """
-    Write the post to output/<slug>.txt, append to completed.json,
+    Assemble and write the post to output/<slug>.html, append to completed.json,
     and print a terminal summary. Returns the output filename.
     """
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
     LOGS_DIR.mkdir(parents=True, exist_ok=True)
 
+    # extract title from the <h1> tag for the HTML <title> element
+    title_match = re.search(r"<h1[^>]*>(.*?)</h1>", post_html, re.IGNORECASE)
+    title = title_match.group(1) if title_match else keyword_row["_keyword"]
+
     slug     = keyword_row["_slug"]
-    filename = f"{slug}.txt"
+    filename = f"{slug}.html"
     out_path = OUTPUT_DIR / filename
 
-    out_path.write_text(post_text, encoding="utf-8")
+    full_html = _assemble_html(title, post_html, image_prompts)
+    out_path.write_text(full_html, encoding="utf-8")
 
-    word_count = len(post_text.split())
+    plain_text = re.sub(r"<[^>]+>", " ", post_html)
+    word_count = len(plain_text.split())
 
     completed = []
     if COMPLETED_LOG.exists():
@@ -453,10 +533,10 @@ def save_output(keyword_row: dict, post_text: str) -> str:
             pass
 
     completed.append({
-        "keyword":          keyword_row["_keyword"],
-        "date_written":     date.today().isoformat(),
-        "word_count":       word_count,
-        "output_filename":  filename,
+        "keyword":         keyword_row["_keyword"],
+        "date_written":    date.today().isoformat(),
+        "word_count":      word_count,
+        "output_filename": filename,
     })
     COMPLETED_LOG.write_text(json.dumps(completed, indent=2), encoding="utf-8")
 
@@ -502,22 +582,31 @@ def run():
     # module 3
     print("\n[3/4] Writing blog post...")
     try:
-        post_text = write_blog_post(keyword_row, competitors)
+        post_html = write_blog_post(keyword_row, competitors)
     except Exception as e:
         log_error("blog_writer", keyword, str(e))
         print(f"  Blog post writing failed: {e}")
         return
 
+    print("  Generating image prompts...")
+    try:
+        image_prompts = generate_image_prompts(keyword, post_html)
+    except Exception as e:
+        log_error("image_prompts", keyword, str(e))
+        print(f"  Image prompt generation failed: {e} — saving post without prompts.")
+        image_prompts = "(Image prompt generation failed.)"
+
     # module 4
     print("\n[4/4] Saving output...")
     try:
-        filename = save_output(keyword_row, post_text)
+        filename = save_output(keyword_row, post_html, image_prompts)
     except Exception as e:
         log_error("output", keyword, str(e))
         print(f"  Output save failed: {e}")
         return
 
-    word_count = len(post_text.split())
+    plain_text = re.sub(r"<[^>]+>", " ", post_html)
+    word_count = len(plain_text.split())
     print(f"\n{'=' * 50}")
     print(f"  Done.")
     print(f"  Keyword  : {keyword}")
