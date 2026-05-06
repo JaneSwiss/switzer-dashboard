@@ -509,8 +509,9 @@ HORIZONTAL ALTERNATING TIMELINE:
 - Background: warm cream #F8F5F2
 - A thin horizontal line in muted sand #A5988E runs across the exact
   centre of the image
-- 5 small filled circle nodes in dark charcoal #383838 evenly spaced
-  along the line
+- 5 small filled circle nodes in warm taupe #BBB0AA, small and
+  understated, evenly spaced along the line. Nodes are subtle
+  accents, not dominant shapes.
 - Items 01, 03, 05 are centred above the line, node touching the
   bottom of the text block
 - Items 02, 04 are centred below the line, node touching the top
@@ -519,8 +520,9 @@ HORIZONTAL ALTERNATING TIMELINE:
 Each text block reads top to bottom in this exact order:
 1. Number: Montserrat Regular, very small, generous letter spacing,
    chocolate brown #8D6E63 - strictly this colour, not blue, not grey
-2. Heading: Noto Serif Display Light, all caps, medium size,
-   near-black #262427 - strictly this colour, not blue, not charcoal
+2. Heading: elegant serif font, all caps, medium size,
+   near-black #262427 - strictly this colour, not blue, not charcoal.
+   Do not write the font name as text in the image.
 3. Supporting phrase: Montserrat Regular, lowercase, very small,
    warm taupe #BBB0AA, centred below the heading
 
