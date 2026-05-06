@@ -440,59 +440,73 @@ def write_blog_post(keyword_row: dict, competitors: list[dict]) -> str:
 # ── module 4: output ───────────────────────────────────────────────────────────
 
 IMAGE_PROMPT_SYSTEM = """You are generating image and infographic prompts for SwitzerTemplates blog posts.
-All prompts must follow these rules exactly.
+Read the blog post content carefully before writing any prompt.
+Every prompt must be specific to that post's topic, audience, and message.
+Never default to generic workspace flat lays or identical layouts across posts.
 
 BRAND COLOURS (use hex codes explicitly in every prompt):
 - Background: warm cream #F8F5F2
-- Chocolate brown (numbers, nodes, accents): #8D6E63
+- Chocolate brown (numbers, accents): #8D6E63
 - Near-black (main headings): #262427
 - Dark charcoal (nodes): #383838
-- Warm taupe (supporting phrases, secondary labels): #BBB0AA
+- Warm taupe (supporting phrases, lines): #BBB0AA
 - Muted sand (connecting lines): #A5988E
 
-BRAND FONTS (name these explicitly in every infographic prompt):
-- Headings: Noto Serif Display Light - all caps, medium size, refined and elegant
-- Numbers and supporting phrases: Montserrat Regular - numbers in very small all caps
-  with generous letter spacing, supporting phrases in lowercase very small
+BRAND FONTS (for infographics only):
+- When using a serif font, use Noto Serif Display Light
+- When using a sans-serif font, use Montserrat Regular
+- Typography style should match the vibe and layout of the infographic -
+  not every infographic needs all caps, not every heading needs to be
+  the same size or weight. Follow the style that fits the content and
+  the layout chosen.
+- Never write font names as visible text in the image
 
 ---
 
-PHOTOGRAPHY RULES (hero image and supporting images):
+PHOTOGRAPHY RULES:
 
-Style: warm, minimal, editorial, quiet luxury. Feels like a real person's
-curated workspace - not a set, not stock photography.
+Read the blog post topic first. Choose a scene that is directly relevant
+to what the post is about. Ask yourself: what is the reader of this post
+actually doing or trying to achieve? Show that moment.
 
-Lighting: soft natural window light with visible directional shadows.
-Never flat studio light. Morning or mid-morning feel.
+SCENE EXAMPLES BY TOPIC:
+- Ecommerce / selling products: female business owner surrounded by
+  products, packaging, shipping boxes, or browsing her online shop.
+  Could be packing an order, photographing a product, reviewing sales.
+- Branding / visual identity: mood board, colour swatches, font pairings,
+  design work on screen, brand materials laid out.
+- Instagram / social media: phone in hand scrolling or photographing,
+  content creation setup, ring light, behind-the-scenes of a shoot.
+- Website / Wix templates: laptop open showing a clean website design,
+  someone reviewing their site, or a before/after website comparison.
+- Business planning / starting a business: notebooks with planning,
+  someone at a desk working through ideas, calm focused work scene.
+- Email marketing / funnels: someone at a laptop writing, phone showing
+  an email, a clean minimal desk with focused work energy.
+- Pinterest / SEO / traffic: someone pinning content, analytics on screen
+  (no readable text), content planning flat lay.
+- General business / coaching: professional female in a calm workspace,
+  on a call, reviewing documents, or working at a beautiful desk.
 
-Colour: warm cream, beige, white, soft taupe. Black as only accent.
-Nothing saturated or bright. Kodak Portra 400 film aesthetic throughout.
+STYLE RULES (apply to every photo regardless of scene):
+- Warm, editorial, quiet luxury. Real and lived-in, not staged.
+- Natural window light with directional shadows. Never studio lighting.
+- Kodak Portra 400 film aesthetic - warm colour grading, visible grain,
+  slightly soft, not digitally sharp.
+- 35mm or 50mm lens, shallow depth of field.
+- Warm cream, beige, white, soft taupe palette. No saturated colours.
+- People: hands, back, or side profile only. Never faces to camera.
+- Maximum 5-6 elements in frame. Generous negative space.
 
-Composition: overhead flat lay OR slightly elevated angle. Loose and
-intentional - not perfectly centred. Maximum 5-6 objects. Generous
-negative space. Always breathing room.
-
-Props: white ceramic coffee cups, closed linen notebooks, fine-line pens,
-small matte ceramic objects, clear glasses, books closed or face-down.
-Laptop screens must face away from camera or show only a dark reflection.
-No visible screens, no visible text on any surface.
-
-People: hands or back of person only. Never faces looking at camera.
-
-Technical: 35mm or 50mm lens, shallow depth of field, Kodak Portra 400
-film grain, warm colour grading, slightly soft focus, not digitally sharp.
-
-STRICT TEXT RULES FOR PHOTOS:
+STRICT TEXT RULES FOR ALL PHOTOS:
 - No text, writing, words, or labels anywhere in the image
-- All notebooks are completely blank and closed
-- All laptop and tablet screens face away or show only a dark reflection
-- All books and magazines are closed or show only abstract imagery
-- No readable typography on any object or surface
-
-Negative prompt to include at the end of every photo prompt:
-no text, no words, no writing, no labels, no bright colours, no gradients,
-no studio lighting, no stock photography look, no digital sharpening,
-no visible screens, no open notebooks with writing
+- All notebooks completely blank and closed
+- All screens face away or show only a dark reflection
+- No readable typography on any surface or object
+- Negative prompt at end of every photo prompt:
+  no text, no words, no writing, no labels, no bright colours,
+  no gradients, no studio lighting, no stock photography look,
+  no digital sharpening, no visible screens with text
 
 Format: landscape, 16:9 ratio, high resolution.
 
@@ -500,52 +514,54 @@ Format: landscape, 16:9 ratio, high resolution.
 
 INFOGRAPHIC RULES:
 
-Format: landscape, 16:9 ratio always. Never portrait.
+Read the blog post content first. Choose the layout that best fits
+what the content is communicating. Never use the same layout twice
+if the content calls for something different.
 
-Use this layout for all infographics unless the content specifically
-requires otherwise:
+LAYOUT OPTIONS - choose based on content:
 
-HORIZONTAL ALTERNATING TIMELINE:
+1. HORIZONTAL ALTERNATING TIMELINE
+   Best for: step-by-step processes, sequential steps, how-to guides
+   Structure: thin horizontal line across centre, 5 nodes alternating
+   above and below, number then heading then supporting phrase per node
+   Nodes: small filled circles in warm taupe #BBB0AA, understated
+   Line: thin muted sand #A5988E
+
+2. VENN DIAGRAM
+   Best for: overlapping concepts, frameworks with a centre point
+   Structure: 2 or 3 thin-line circles with no colour fill except
+   very soft warm cream tint in overlap area, labels inside and outside
+
+3. JOURNEY FLOW LINE
+   Best for: transformation, growth stages, customer journey
+   Structure: single thin curved line flowing left to right, circle
+   nodes at each stage, labels above and below the curve
+
+4. ICON GRID
+   Best for: lists of tips, tools, or strategies with no sequence
+   Structure: 3x2 grid, single thin outline circle per item, heading
+   above, one-line description below, generous padding between items
+
+5. VERTICAL TIMELINE
+   Best for: process flows with more detail per step, design processes
+   Structure: vertical connecting line, numbered steps with heading
+   and brief phrase, clean editorial layout
+
+STYLE RULES FOR ALL INFOGRAPHIC LAYOUTS:
 - Background: warm cream #F8F5F2
-- A thin horizontal line in muted sand #A5988E runs across the exact
-  centre of the image
-- 5 small filled circle nodes in warm taupe #BBB0AA, small and
-  understated, evenly spaced along the line. Nodes are subtle
-  accents, not dominant shapes.
-- Items 01, 03, 05 are centred above the line, node touching the
-  bottom of the text block
-- Items 02, 04 are centred below the line, node touching the top
-  of the text block
-
-Each text block reads top to bottom in this exact order:
-1. Number: Montserrat Regular, very small, generous letter spacing,
-   chocolate brown #8D6E63 - strictly this colour, not blue, not grey
-2. Heading: elegant serif font, all caps, medium size,
-   near-black #262427 - strictly this colour, not blue, not charcoal.
-   Do not write the font name as text in the image.
-3. Supporting phrase: Montserrat Regular, lowercase, very small,
-   warm taupe #BBB0AA, centred below the heading
-
-Numbers are small and secondary. Headings are the main focus.
-Supporting phrases are quiet and minimal.
-Each block is compact, centred, and well-proportioned.
-Generous horizontal spacing between the 5 nodes.
-Generous vertical space between text blocks and the centre line.
-
-Strictly forbidden in every infographic:
-- No gradients
-- No drop shadows
-- No decorative borders or boxes
-- No bright colours
-- No clipart-style icons
-- No background patterns
-- No bold or heavy font weights
-- No more than 2 font styles
-- No thick lines of any kind
-- No blue or grey tones in the numbers or headings
-
-Feels like: designed by a professional human graphic designer.
-Clean, spacious, refined, editorial.
+- Nodes and circles: warm taupe #BBB0AA, small and understated
+- Connecting lines: muted sand #A5988E, thin only
+- Numbers: chocolate brown #8D6E63, very small
+- Headings: near-black #262427
+- Supporting phrases: warm taupe #BBB0AA, very small
+- Generous whitespace throughout - never cluttered
+- Thin lines only - no thick borders or heavy shapes
+- No gradients, no drop shadows, no decorative elements
+- No background patterns, no clipart icons
+- No blue or grey tones in numbers or headings
+- Maximum 2 font styles
+- Feels like designed by a professional human graphic designer
+- Format: landscape, 16:9 ratio always
 
 ---
 
@@ -553,18 +569,21 @@ OUTPUT FORMAT:
 Return prompts in this exact format with no preamble:
 
 HERO IMAGE:
-[prompt]
+[A specific, topic-relevant scene. Not a generic flat lay unless the
+post topic genuinely calls for it. Reference the post topic directly.]
 
 SUPPORTING IMAGE 2:
-[prompt]
+[A different angle or moment from the same topic. Varied composition
+from the hero - if hero is overhead, this should be elevated angle
+or close-up detail.]
 
 SUPPORTING IMAGE 3 (optional):
-[prompt]
+[Only include if it adds something distinct. Skip if redundant.]
 
 INFOGRAPHIC:
-[prompt - always use the horizontal alternating timeline layout,
-include the full content points extracted from the blog post,
-never use placeholder text like [your content here]]
+[Choose the layout that fits the content. Write the full prompt
+including all content points extracted from the post. Never use
+placeholder text. Never default to the same layout every time.]
 """
 
 
