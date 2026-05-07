@@ -8,725 +8,424 @@
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   :root {
-    --bg: #faf8f5;
-    --surface: #fff;
-    --surface2: #f3f0eb;
-    --border: rgba(0,0,0,0.1);
-    --border2: rgba(0,0,0,0.18);
-    --text: #1a1410;
-    --text2: #6b6058;
-    --text3: #a09488;
-    --choc: #3B2314;
-    --choc2: #2e1b0e;
-    --coral: #993C1D;
-    --teal-bg: #E1F5EE;
-    --teal-text: #085041;
-    --teal-mid: #1D9E75;
-    --amber-bg: #FAEEDA;
-    --amber-text: #633806;
-    --amber-mid: #BA7517;
-    --coral-bg: #FAECE7;
-    --coral-text: #712B13;
-    --red-bg: #FDECEA;
-    --red-text: #8B1A0E;
-    --red-mid: #C0392B;
+    --bg: #faf8f5; --surface: #fff; --surface2: #f3f0eb;
+    --border: rgba(0,0,0,0.1); --border2: rgba(0,0,0,0.18);
+    --text: #1a1410; --text2: #6b6058; --text3: #a09488;
+    --choc: #3B2314; --choc2: #2e1b0e; --coral: #993C1D;
+    --teal-bg: #E1F5EE; --teal-text: #085041; --teal-mid: #1D9E75;
+    --amber-bg: #FAEEDA; --amber-text: #633806; --amber-mid: #BA7517;
+    --coral-bg: #FAECE7; --coral-text: #712B13;
+    --red-bg: #FDECEA; --red-text: #8B1A0E; --red-mid: #C0392B;
     --serif: Georgia, 'Times New Roman', serif;
     --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    --radius: 10px;
-    --radius-sm: 6px;
+    --radius: 10px; --radius-sm: 6px;
   }
   body { font-family: var(--sans); background: var(--bg); color: var(--text); min-height: 100vh; }
-  .container { max-width: 880px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
-
-  /* Banner */
+  .container { max-width: 900px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
   .banner { background: var(--choc); border-radius: var(--radius); padding: 1.25rem 1.5rem; margin-bottom: 1.5rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
   .banner-sub { font-size: 11px; color: rgba(255,255,255,0.45); letter-spacing: .1em; text-transform: uppercase; margin-bottom: 4px; }
   .banner h1 { font-family: var(--serif); font-size: 22px; font-weight: normal; color: #fff; }
-  .banner-right { text-align: right; }
-  .banner-date { font-size: 13px; color: rgba(255,255,255,0.55); margin-bottom: 6px; }
-  .banner-sync { font-size: 12px; color: rgba(255,255,255,0.4); cursor: pointer; background: none; border: 1px solid rgba(255,255,255,0.2); border-radius: var(--radius-sm); padding: 3px 10px; color: rgba(255,255,255,0.6); font-family: var(--sans); }
-  .banner-sync:hover { background: rgba(255,255,255,0.1); }
-
-  /* CSV alert banner */
+  .banner-right { text-align: right; display: flex; flex-direction: column; align-items: flex-end; gap: 6px; }
+  .banner-date { font-size: 13px; color: rgba(255,255,255,0.55); }
+  .banner-btn { font-size: 12px; cursor: pointer; background: none; border: 1px solid rgba(255,255,255,0.2); border-radius: var(--radius-sm); padding: 4px 10px; color: rgba(255,255,255,0.65); font-family: var(--sans); display: inline-flex; align-items: center; gap: 4px; }
+  .banner-btn:hover { background: rgba(255,255,255,0.1); }
+  .save-msg { font-size: 11px; color: rgba(255,255,255,0.45); min-height: 16px; }
   .csv-banner { border-radius: var(--radius); padding: 1rem 1.25rem; margin-bottom: 1.25rem; display: flex; align-items: center; gap: 12px; }
-  .csv-banner.urgent { background: var(--red-bg); border: 1px solid #f5c6c2; }
+  .csv-banner.urgent  { background: var(--red-bg);   border: 1px solid #f5c6c2; }
   .csv-banner.warning { background: var(--amber-bg); border: 1px solid #f0d8a8; }
-  .csv-banner.ok { background: var(--teal-bg); border: 1px solid #a8dfc8; }
+  .csv-banner.ok      { background: var(--teal-bg);  border: 1px solid #a8dfc8; }
   .csv-banner i { font-size: 20px; flex-shrink: 0; }
-  .csv-banner.urgent i { color: var(--red-mid); }
+  .csv-banner.urgent  i { color: var(--red-mid); }
   .csv-banner.warning i { color: var(--amber-mid); }
-  .csv-banner.ok i { color: var(--teal-mid); }
-  .csv-banner-text p:first-child { font-size: 14px; font-weight: 500; }
-  .csv-banner.urgent .csv-banner-text p:first-child { color: var(--red-text); }
-  .csv-banner.warning .csv-banner-text p:first-child { color: var(--amber-text); }
-  .csv-banner.ok .csv-banner-text p:first-child { color: var(--teal-text); }
-  .csv-banner-text p:last-child { font-size: 12px; color: var(--text3); margin-top: 2px; }
-
-  /* Tabs */
-  .tab-nav { display: flex; border-bottom: 1px solid var(--border); margin-bottom: 1.5rem; }
-  .tab-btn { background: none; border: none; border-bottom: 2px solid transparent; padding: 10px 18px; font-size: 14px; font-weight: 500; cursor: pointer; color: var(--text2); font-family: var(--sans); transition: color .15s; display: flex; align-items: center; gap: 6px; }
+  .csv-banner.ok      i { color: var(--teal-mid); }
+  .csv-title { font-size: 14px; font-weight: 500; }
+  .csv-banner.urgent  .csv-title { color: var(--red-text); }
+  .csv-banner.warning .csv-title { color: var(--amber-text); }
+  .csv-banner.ok      .csv-title { color: var(--teal-text); }
+  .csv-sub { font-size: 12px; color: var(--text3); margin-top: 2px; }
+  .tab-nav { display: flex; border-bottom: 1px solid var(--border); margin-bottom: 1.5rem; overflow-x: auto; }
+  .tab-btn { background: none; border: none; border-bottom: 2px solid transparent; padding: 10px 18px; font-size: 14px; font-weight: 500; cursor: pointer; color: var(--text2); font-family: var(--sans); white-space: nowrap; display: flex; align-items: center; gap: 6px; }
   .tab-btn:hover { color: var(--text); }
   .tab-btn.active { color: var(--text); border-bottom-color: var(--choc); }
-  .tab-btn i { font-size: 15px; }
-
-  /* Cards */
   .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1rem 1.25rem; margin-bottom: 1rem; }
-  .card-accent-coral { border-left: 3px solid var(--coral); border-radius: 0 var(--radius) var(--radius) 0; }
+  .card-accent { border-left: 3px solid var(--coral); border-radius: 0 var(--radius) var(--radius) 0; }
   .stat-card { background: var(--surface2); border-radius: var(--radius); padding: 1rem; }
   .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin-bottom: 1.25rem; }
   .stat-label { font-size: 11px; color: var(--text3); letter-spacing: .09em; text-transform: uppercase; margin-bottom: 6px; }
   .stat-val { font-family: var(--serif); font-size: 20px; color: var(--text); margin-bottom: 4px; }
   .stat-sub { font-size: 12px; color: var(--text3); }
-  .stat-delta-up { font-size: 12px; color: var(--teal-mid); font-weight: 500; }
-  .stat-delta-down { font-size: 12px; color: var(--coral); font-weight: 500; }
-
-  /* Card header */
+  .delta-up   { font-size: 12px; color: var(--teal-mid); font-weight: 500; }
+  .delta-down { font-size: 12px; color: var(--coral); font-weight: 500; }
   .card-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; padding-bottom: 10px; border-bottom: 1px solid var(--border); }
   .card-title { font-family: var(--serif); font-size: 18px; font-weight: normal; color: var(--text); display: flex; align-items: center; gap: 8px; }
-  .card-title i { font-size: 18px; }
-
-  /* Badges */
   .badge { font-size: 11px; padding: 3px 9px; border-radius: 20px; font-weight: 500; white-space: nowrap; display: inline-block; }
-  .badge-teal { background: var(--teal-bg); color: var(--teal-text); }
+  .badge-teal  { background: var(--teal-bg);  color: var(--teal-text); }
   .badge-amber { background: var(--amber-bg); color: var(--amber-text); }
   .badge-coral { background: var(--coral-bg); color: var(--coral-text); }
-  .badge-gray { background: var(--surface2); color: var(--text2); }
-
-  /* Rows */
-  .task-row { display: flex; align-items: flex-start; gap: 10px; padding: 10px 0; border-bottom: 1px solid var(--border); }
-  .task-row:last-child { border-bottom: none; }
-  .task-row i { font-size: 16px; margin-top: 2px; flex-shrink: 0; }
-  .task-text { font-size: 13px; color: var(--text); flex: 1; }
-  .task-meta { font-size: 11px; color: var(--text3); margin-top: 3px; }
-  .task-priority { font-size: 11px; font-weight: 600; color: var(--text3); min-width: 20px; margin-top: 2px; flex-shrink: 0; }
-
-  /* Win items */
+  .badge-gray  { background: var(--surface2); color: var(--text2); }
+  .row { display: flex; align-items: flex-start; gap: 10px; padding: 10px 0; border-bottom: 1px solid var(--border); }
+  .row:last-child { border-bottom: none; }
+  .row-text { font-size: 13px; color: var(--text); flex: 1; }
+  .row-meta { font-size: 11px; color: var(--text3); margin-top: 3px; }
   .win-item { display: flex; align-items: flex-start; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--border); }
   .win-item:last-child { border-bottom: none; }
-  .win-text { font-size: 14px; color: var(--text); flex: 1; }
-  .win-del { background: none; border: none; cursor: pointer; padding: 0; color: var(--text3); font-size: 16px; flex-shrink: 0; line-height: 1; }
+  .win-del { background: none; border: none; cursor: pointer; padding: 0; color: var(--text3); font-size: 16px; }
   .win-del:hover { color: var(--text); }
-
-  /* Attention */
   .attn-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; margin-top: 5px; }
-  .done-btn { background: none; border: 1px solid var(--border2); border-radius: var(--radius-sm); cursor: pointer; font-size: 12px; padding: 3px 10px; color: var(--text2); font-family: var(--sans); white-space: nowrap; }
-  .done-btn:hover { background: var(--surface2); }
-
-  /* Add win */
   .add-row { display: flex; gap: 8px; margin-top: 12px; }
   .add-row input { flex: 1; font-size: 13px; padding: 8px 10px; border: 1px solid var(--border2); border-radius: var(--radius-sm); font-family: var(--sans); background: var(--surface); color: var(--text); outline: none; }
   .add-row input:focus { border-color: var(--choc); }
-  .add-row button { background: var(--choc); color: #fff; border: none; border-radius: var(--radius-sm); padding: 8px 14px; font-size: 13px; cursor: pointer; font-family: var(--sans); white-space: nowrap; }
+  .add-row button { background: var(--choc); color: #fff; border: none; border-radius: var(--radius-sm); padding: 8px 14px; font-size: 13px; cursor: pointer; font-family: var(--sans); }
   .add-row button:hover { background: var(--choc2); }
-
-  /* Table */
   .table-wrap { overflow-x: auto; }
   table { width: 100%; border-collapse: collapse; }
   th { font-size: 11px; font-weight: 500; color: var(--text3); letter-spacing: .07em; text-transform: uppercase; padding: 0 8px 10px; text-align: left; border-bottom: 1px solid var(--border); }
-  th.center { text-align: center; }
+  th.c { text-align: center; }
   td { padding: 10px 8px; font-size: 13px; border-bottom: 1px solid var(--border); vertical-align: middle; color: var(--text); }
-  td.center { text-align: center; }
+  td.c { text-align: center; }
   tr:last-child td { border-bottom: none; }
-  td.bold { font-weight: 500; }
   input[type="checkbox"] { width: 16px; height: 16px; cursor: pointer; accent-color: var(--choc); }
   input[type="checkbox"]:disabled { opacity: 0.35; cursor: not-allowed; }
-
-  /* Tab panels */
+  .filter-btn { background: var(--surface2); border: 1px solid var(--border); border-radius: 20px; padding: 4px 12px; font-size: 12px; font-weight: 500; cursor: pointer; color: var(--text2); font-family: var(--sans); white-space: nowrap; }
+  .filter-btn.active { background: var(--choc); color: #fff; border-color: var(--choc); }
   .tab-panel { display: none; }
   .tab-panel.active { display: block; }
-
-  /* Status dot */
-  .status-dot { width: 7px; height: 7px; border-radius: 50%; display: inline-block; flex-shrink: 0; }
-
-  /* Loading / empty */
-  .loading-msg { font-size: 13px; color: var(--text3); padding: 12px 0; }
-  .empty-msg { font-size: 13px; color: var(--text3); padding: 8px 0; }
-
-  @media (max-width: 540px) {
-    .tab-btn { padding: 10px 12px; font-size: 13px; }
-    .banner h1 { font-size: 18px; }
-    .stat-val { font-size: 18px; }
-  }
+  .status-dot { width: 7px; height: 7px; border-radius: 50%; display: inline-block; }
+  .empty { font-size: 13px; color: var(--text3); padding: 8px 0; }
 </style>
 </head>
 <body>
 <div class="container">
 
-  <!-- BANNER -->
-  <div class="banner">
-    <div>
-      <p class="banner-sub">Switzer Templates</p>
-      <h1>AI Agency Dashboard</h1>
+<div class="banner">
+  <div>
+    <p class="banner-sub">Switzer Templates</p>
+    <h1>AI Agency Dashboard</h1>
+  </div>
+  <div class="banner-right">
+    <p class="banner-date" id="dash-date"></p>
+    <button class="banner-btn" onclick="loadDashboard()"><i class="ti ti-refresh"></i>Refresh</button>
+    <p class="save-msg" id="save-msg"></p>
+  </div>
+</div>
+
+<div class="tab-nav">
+  <button class="tab-btn active" data-tab="overview"><i class="ti ti-layout-dashboard"></i>Overview</button>
+  <button class="tab-btn" data-tab="etsy"><i class="ti ti-shopping-bag"></i>Etsy Expert</button>
+  <button class="tab-btn" data-tab="blog"><i class="ti ti-file-text"></i>Blog SEO</button>
+</div>
+
+<!-- OVERVIEW -->
+<div class="tab-panel active" id="panel-overview">
+  <div id="ov-csv"></div>
+  <div class="stat-grid">
+    <div class="stat-card"><p class="stat-label">Etsy Expert</p><div style="display:flex;align-items:center;gap:6px;margin-bottom:4px;"><span class="status-dot" style="background:var(--teal-mid);"></span><p class="stat-val" style="margin:0;">Active</p></div><p class="stat-sub" id="ov-etsy-run">—</p></div>
+    <div class="stat-card"><p class="stat-label">Blog SEO</p><div style="display:flex;align-items:center;gap:6px;margin-bottom:4px;"><span class="status-dot" style="background:var(--teal-mid);"></span><p class="stat-val" style="margin:0;">Active</p></div><p class="stat-sub" id="ov-blog-run">—</p></div>
+    <div class="stat-card"><p class="stat-label">Pending tasks</p><p class="stat-val" id="ov-pending">—</p><p class="stat-sub">Need your input</p></div>
+    <div class="stat-card"><p class="stat-label">Posts this month</p><p class="stat-val" id="ov-posts">—</p><p class="stat-sub" id="ov-posts-sub">—</p></div>
+  </div>
+  <div class="card card-accent">
+    <div class="card-header">
+      <span class="card-title"><i class="ti ti-alert-circle" style="color:var(--coral);font-size:18px;"></i>Needs your attention</span>
+      <span class="badge badge-coral" id="attn-badge">—</span>
     </div>
-    <div class="banner-right">
-      <p class="banner-date" id="dash-date"></p>
-      <button class="banner-sync" onclick="loadDashboard()"><i class="ti ti-refresh" style="font-size:12px;margin-right:4px;"></i>Refresh data</button>
+    <div id="attn-list"><p class="empty">Loading...</p></div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <span class="card-title"><i class="ti ti-trophy" style="color:var(--amber-mid);font-size:18px;"></i>Monthly accomplishments</span>
+      <span class="badge badge-amber" id="wins-month"></span>
+    </div>
+    <div id="wins-list"></div>
+    <div class="add-row">
+      <input type="text" id="new-win" placeholder="Add an accomplishment..." />
+      <button onclick="addWin()">Add +</button>
     </div>
   </div>
+</div>
 
-  <!-- TABS -->
-  <div class="tab-nav">
-    <button class="tab-btn active" data-tab="overview"><i class="ti ti-layout-dashboard"></i>Overview</button>
-    <button class="tab-btn" data-tab="etsy"><i class="ti ti-shopping-bag"></i>Etsy Expert</button>
-    <button class="tab-btn" data-tab="blog"><i class="ti ti-file-text"></i>Blog SEO</button>
+<!-- ETSY -->
+<div class="tab-panel" id="panel-etsy">
+  <div id="etsy-csv"></div>
+  <div class="card">
+    <div class="card-header">
+      <span class="card-title"><i class="ti ti-chart-bar" style="color:var(--coral);font-size:18px;"></i>Shop snapshot</span>
+      <span class="badge badge-gray" id="etsy-date">—</span>
+    </div>
+    <div class="stat-grid" style="margin-bottom:0;" id="etsy-grid"><p class="empty">Loading...</p></div>
   </div>
-
-  <!-- ===================== OVERVIEW ===================== -->
-  <div class="tab-panel active" id="panel-overview">
-
-    <!-- CSV reminder on overview -->
-    <div id="overview-csv-banner"></div>
-
-    <!-- Stat cards -->
-    <div class="stat-grid">
-      <div class="stat-card">
-        <p class="stat-label">Etsy Expert</p>
-        <div style="display:flex;align-items:center;gap:6px;margin-bottom:4px;">
-          <span class="status-dot" style="background:var(--teal-mid);"></span>
-          <p class="stat-val" style="margin:0;">Active</p>
-        </div>
-        <p class="stat-sub" id="ov-etsy-lastrun">Loading...</p>
-      </div>
-      <div class="stat-card">
-        <p class="stat-label">Blog SEO</p>
-        <div style="display:flex;align-items:center;gap:6px;margin-bottom:4px;">
-          <span class="status-dot" style="background:var(--teal-mid);"></span>
-          <p class="stat-val" style="margin:0;">Active</p>
-        </div>
-        <p class="stat-sub" id="ov-blog-count">Loading...</p>
-      </div>
-      <div class="stat-card">
-        <p class="stat-label">Pending review</p>
-        <p class="stat-val" id="attn-count">—</p>
-        <p class="stat-sub">Tasks need your input</p>
-      </div>
-      <div class="stat-card">
-        <p class="stat-label">Posts this month</p>
-        <p class="stat-val" id="posts-count">—</p>
-        <p class="stat-sub" id="posts-sub">Loading...</p>
-      </div>
+  <div class="card">
+    <div class="card-header">
+      <span class="card-title"><i class="ti ti-list-numbers" style="color:var(--coral);font-size:18px;"></i>Priority tasks</span>
+      <span class="badge badge-coral" id="etsy-tasks-badge">—</span>
     </div>
-
-    <!-- Needs attention -->
-    <div class="card card-accent-coral">
-      <div class="card-header">
-        <span class="card-title"><i class="ti ti-alert-circle" style="color:var(--coral);"></i>Needs your attention</span>
-        <span class="badge badge-coral" id="attn-badge">—</span>
-      </div>
-      <div id="attn-list"><p class="loading-msg">Loading...</p></div>
-    </div>
-
-    <!-- Monthly wins -->
-    <div class="card">
-      <div class="card-header">
-        <span class="card-title"><i class="ti ti-trophy" style="color:var(--amber-mid);"></i>Monthly accomplishments</span>
-        <span class="badge badge-amber" id="wins-month"></span>
-      </div>
-      <div id="wins-list"></div>
-      <div class="add-row">
-        <input type="text" id="new-win" placeholder="Add an accomplishment..." />
-        <button onclick="addWin()">Add +</button>
-      </div>
-    </div>
-
+    <div id="etsy-tasks"><p class="empty">Loading...</p></div>
   </div>
-
-  <!-- ===================== ETSY EXPERT ===================== -->
-  <div class="tab-panel" id="panel-etsy">
-
-    <!-- CSV countdown banner -->
-    <div id="etsy-csv-banner"></div>
-
-    <!-- Snapshot -->
-    <div class="card">
-      <div class="card-header">
-        <span class="card-title"><i class="ti ti-chart-bar" style="color:var(--coral);"></i>Shop snapshot</span>
-        <span class="badge badge-gray" id="etsy-report-date">Loading...</span>
-      </div>
-      <div class="stat-grid" style="margin-bottom:0;" id="etsy-snapshot-grid">
-        <p class="loading-msg">Loading from Google Sheets...</p>
-      </div>
-    </div>
-
-    <!-- Priority tasks -->
-    <div class="card">
-      <div class="card-header">
-        <span class="card-title"><i class="ti ti-list-numbers" style="color:var(--coral);"></i>Priority tasks</span>
-        <span class="badge badge-coral" id="etsy-tasks-badge">—</span>
-      </div>
-      <div id="etsy-tasks-list"><p class="loading-msg">Loading...</p></div>
-    </div>
-
-    <!-- Keyword opportunities -->
-    <div class="card">
-      <div class="card-header">
-        <span class="card-title"><i class="ti ti-search" style="color:var(--amber-mid);"></i>Keyword opportunities</span>
-      </div>
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th>Keyword</th>
-              <th class="center">Monthly searches</th>
-              <th class="center">Competition</th>
-              <th class="center">Score</th>
-              <th>Notes</th>
-            </tr>
-          </thead>
-          <tbody id="etsy-keywords-tbody"><tr><td colspan="5" class="loading-msg">Loading...</td></tr></tbody>
-        </table>
-      </div>
-    </div>
-
-    <!-- Dead listings -->
-    <div class="card">
-      <div class="card-header">
-        <span class="card-title"><i class="ti ti-ban" style="color:var(--text3);"></i>Dead listings to fix</span>
-      </div>
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th>Listing</th>
-              <th class="center">Lifetime views</th>
-              <th>Issue</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody id="etsy-dead-tbody"><tr><td colspan="4" class="loading-msg">Loading...</td></tr></tbody>
-        </table>
-      </div>
-    </div>
-
+  <div class="card">
+    <div class="card-header"><span class="card-title"><i class="ti ti-search" style="color:var(--amber-mid);font-size:18px;"></i>Keyword opportunities</span></div>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Keyword</th><th class="c">Searches</th><th class="c">Competition</th><th class="c">Score</th><th>Notes</th></tr></thead>
+      <tbody id="etsy-kw"><tr><td colspan="5" class="empty">Loading...</td></tr></tbody>
+    </table></div>
   </div>
-
-  <!-- ===================== BLOG SEO ===================== -->
-  <div class="tab-panel" id="panel-blog">
-
-    <div class="card">
-      <div class="card-header">
-        <span class="card-title"><i class="ti ti-robot" style="color:var(--teal-mid);"></i>Blog SEO — post tracker</span>
-        <span class="badge badge-teal" id="blog-stats-badge">Loading...</span>
-      </div>
-      <p style="font-size:13px;color:var(--text2);margin-bottom:1rem;">Agent wrote = drafted by the Blog SEO agent. Published by you = you reviewed and published it to Wix. Tick the checkbox when you publish.</p>
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th style="min-width:200px;">Post title</th>
-              <th class="center">Agent wrote</th>
-              <th class="center">Published by you</th>
-              <th class="center">Date</th>
-              <th class="center">Status</th>
-            </tr>
-          </thead>
-          <tbody id="blog-tbody"><tr><td colspan="5" class="loading-msg">Loading from Google Sheets...</td></tr></tbody>
-        </table>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="card-header">
-        <span class="card-title"><i class="ti ti-clock" style="color:var(--amber-mid);"></i>Pending — your review needed</span>
-      </div>
-      <div id="blog-pending-list"><p class="loading-msg">Loading...</p></div>
-    </div>
-
+  <div class="card">
+    <div class="card-header"><span class="card-title"><i class="ti ti-ban" style="color:var(--text3);font-size:18px;"></i>Dead listings to fix</span></div>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Listing</th><th class="c">Lifetime views</th><th>Issue</th><th>Action</th></tr></thead>
+      <tbody id="etsy-dead"><tr><td colspan="4" class="empty">Loading...</td></tr></tbody>
+    </table></div>
   </div>
+</div>
 
-</div><!-- end container -->
+<!-- BLOG SEO -->
+<div class="tab-panel" id="panel-blog">
+  <div class="card">
+    <div class="card-header">
+      <span class="card-title"><i class="ti ti-robot" style="color:var(--teal-mid);font-size:18px;"></i>Post tracker</span>
+      <span class="badge badge-teal" id="blog-badge">—</span>
+    </div>
+    <p style="font-size:13px;color:var(--text2);margin-bottom:1rem;">Agent wrote = drafted by Blog SEO agent. Published by you = tick when you publish to Wix. Syncs across all devices.</p>
+    <div class="table-wrap"><table>
+      <thead><tr><th style="min-width:200px;">Post title</th><th class="c">Agent wrote</th><th class="c">Published by you</th><th class="c">Date</th><th class="c">Status</th></tr></thead>
+      <tbody id="blog-tbody"><tr><td colspan="5" class="empty">Loading...</td></tr></tbody>
+    </table></div>
+  </div>
+  <div class="card">
+    <div class="card-header"><span class="card-title"><i class="ti ti-clock" style="color:var(--amber-mid);font-size:18px;"></i>Pending — your review needed</span></div>
+    <div id="blog-pending"><p class="empty">Loading...</p></div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <span class="card-title"><i class="ti ti-tags" style="color:var(--choc);font-size:18px;"></i>Keyword masterlist</span>
+      <span class="badge badge-gray" id="kw-total">—</span>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:1rem;">
+      <input type="text" id="kw-search" placeholder="Search keywords..." oninput="filterKw()"
+        style="flex:1;min-width:150px;font-size:13px;padding:7px 10px;border:1px solid var(--border2);border-radius:var(--radius-sm);font-family:var(--sans);background:var(--surface);color:var(--text);outline:none;" />
+      <div style="display:flex;gap:6px;flex-wrap:wrap;">
+        <button class="filter-btn active" data-tier="all"  onclick="setKwTier('all')">All</button>
+        <button class="filter-btn"        data-tier="P1"   onclick="setKwTier('P1')">P1</button>
+        <button class="filter-btn"        data-tier="P2"   onclick="setKwTier('P2')">P2</button>
+        <button class="filter-btn"        data-tier="P3"   onclick="setKwTier('P3')">P3</button>
+        <button class="filter-btn"        data-tier="P4"   onclick="setKwTier('P4')">P4</button>
+      </div>
+    </div>
+    <div class="table-wrap"><table>
+      <thead><tr><th style="min-width:180px;">Keyword</th><th class="c">Search vol</th><th class="c">Competition</th><th class="c">Trend</th><th class="c">Score</th><th class="c">Pinterest</th><th>Pillar</th><th class="c">Tier</th></tr></thead>
+      <tbody id="kw-tbody"><tr><td colspan="8" class="empty">Loading...</td></tr></tbody>
+    </table></div>
+    <p style="font-size:12px;color:var(--text3);margin-top:10px;" id="kw-showing"></p>
+  </div>
+</div>
 
+</div>
 <script>
-// ─── CONFIG ─────────────────────────────────────────────────────────────
-const SHEET_ID       = '1aZpy-MC9GoidmRqOWi6rtUu_7iKtOk3uiC85vbSrOME';
-const API_KEY        = 'AIzaSyDbCKHhtiu4qJAE2lp1QmX49vt1hAtE06k';       // paste from your .env file
-const SCRIPT_URL     = 'https://script.google.com/macros/s/AKfycbxvnnew025ACAJyKzRZXFuu9s80EF6CxLa6N_LaxLD6NYOYDvXeagrs06WTgLOcK62F/exec';
-const ETSY_CYCLE     = 14;                           // days between Etsy agent runs
-// ────────────────────────────────────────────────────────────────────────
+// ── CONFIG ────────────────────────────────────────────────────────────────
+const GH_OWNER = 'janeswiss';
+const GH_REPO  = 'switzer-dashboard';
+const GH_FILE  = 'dashboard_data.json';
+const GH_TOKEN = 'YOUR_GITHUB_PAT';   // Create at github.com/settings/tokens — needs repo scope
+// ─────────────────────────────────────────────────────────────────────────
 
-// ─── DATE ───────────────────────────────────────────────────────────────
-document.getElementById('dash-date').textContent =
-  new Date().toLocaleDateString('en-AU',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+const RAW_URL = `https://raw.githubusercontent.com/${GH_OWNER}/${GH_REPO}/main/${GH_FILE}`;
+const API_URL = `https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${GH_FILE}`;
+let DATA = {};
+let KW_TIER = 'all';
 
-const monthName = new Date().toLocaleString('en-AU',{month:'long'});
-document.getElementById('wins-month').textContent = monthName;
-// ────────────────────────────────────────────────────────────────────────
+document.getElementById('dash-date').textContent = new Date().toLocaleDateString('en-AU',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+document.getElementById('wins-month').textContent = new Date().toLocaleString('en-AU',{month:'long'});
 
-// ─── TABS ────────────────────────────────────────────────────────────────
-document.querySelectorAll('.tab-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-    btn.classList.add('active');
-    document.getElementById('panel-' + btn.dataset.tab).classList.add('active');
-  });
-});
-// ────────────────────────────────────────────────────────────────────────
+// Tabs
+document.querySelectorAll('.tab-btn').forEach(btn => btn.addEventListener('click', () => {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('panel-'+btn.dataset.tab).classList.add('active');
+}));
 
-// ─── SHEETS FETCH ────────────────────────────────────────────────────────
-async function fetchTab(tabName, range) {
-  try {
-    const url = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${encodeURIComponent(tabName+'!'+range)}?key=${API_KEY}`;
-    const res = await fetch(url);
-    const data = await res.json();
-    return data.values || [];
-  } catch(e) {
-    console.error('Sheets fetch error:', e);
-    return [];
-  }
+// GitHub read
+async function loadData() {
+  const res = await fetch(RAW_URL+'?t='+Date.now());
+  DATA = await res.json();
 }
 
-async function writeCell(tab, row, col, value) {
+// GitHub write — reads current SHA then PUTs updated file
+async function saveData(msg) {
+  setSaveMsg('Saving...');
   try {
-    await fetch(SCRIPT_URL, {
-      method: 'POST',
-      mode: 'no-cors',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ tab, row, col, value })
+    const metaRes = await fetch(API_URL, { headers:{ 'Authorization':'token '+GH_TOKEN,'Accept':'application/vnd.github.v3+json' }});
+    const meta    = await metaRes.json();
+    const content = btoa(unescape(encodeURIComponent(JSON.stringify(DATA,null,2))));
+    await fetch(API_URL,{
+      method:'PUT',
+      headers:{'Authorization':'token '+GH_TOKEN,'Accept':'application/vnd.github.v3+json','Content-Type':'application/json'},
+      body:JSON.stringify({message:msg||'Dashboard update',content,sha:meta.sha})
     });
-  } catch(e) {
-    console.error('Write error:', e);
-  }
+    setSaveMsg('Saved ✓');
+    setTimeout(()=>setSaveMsg(''),3000);
+  } catch(e){ setSaveMsg('Save failed'); console.error(e); }
 }
-// ────────────────────────────────────────────────────────────────────────
+function setSaveMsg(m){ document.getElementById('save-msg').textContent=m; }
 
-// ─── CSV COUNTDOWN ───────────────────────────────────────────────────────
-function renderCsvBanner(containerId, lastRunStr, nextRunStr) {
-  const container = document.getElementById(containerId);
-  if (!container) return;
-
-  const today = new Date();
-  today.setHours(0,0,0,0);
-
-  let daysLeft = null;
-  let nextRun = null;
-
-  if (nextRunStr) {
-    nextRun = new Date(nextRunStr);
-    nextRun.setHours(0,0,0,0);
-    daysLeft = Math.round((nextRun - today) / (1000 * 60 * 60 * 24));
-  }
-
-  let cls, icon, title, sub;
-
-  if (daysLeft === null) {
-    cls = 'ok'; icon = 'ti-calendar-check';
-    title = 'Etsy agent schedule not set yet';
-    sub = 'The agent will populate next run date after first run.';
-  } else if (daysLeft <= 1) {
-    cls = 'urgent'; icon = 'ti-alert-triangle';
-    title = daysLeft <= 0 ? 'Etsy agent runs today — drop your Everbee CSV now' : 'Etsy agent runs tomorrow — drop your Everbee CSV now';
-    sub = `Next run: ${nextRun.toLocaleDateString('en-AU',{weekday:'long',day:'numeric',month:'long'})} · Last run: ${lastRunStr || 'not yet'}`;
-  } else if (daysLeft <= 4) {
-    cls = 'warning'; icon = 'ti-alert-circle';
-    title = `Etsy agent runs in ${daysLeft} days — get your Everbee CSV ready`;
-    sub = `Next run: ${nextRun.toLocaleDateString('en-AU',{weekday:'long',day:'numeric',month:'long'})} · Last run: ${lastRunStr || 'not yet'}`;
-  } else {
-    cls = 'ok'; icon = 'ti-calendar-check';
-    title = `Etsy agent runs in ${daysLeft} days — all good`;
-    sub = `Next run: ${nextRun.toLocaleDateString('en-AU',{weekday:'long',day:'numeric',month:'long'})} · Last run: ${lastRunStr || 'not yet'}`;
-  }
-
-  container.innerHTML = `
-    <div class="csv-banner ${cls}">
-      <i class="ti ${icon}"></i>
-      <div class="csv-banner-text">
-        <p>${title}</p>
-        <p>${sub}</p>
-      </div>
-    </div>`;
+// CSV countdown banner
+function csvBanner(id, lastRun, nextRun) {
+  const el = document.getElementById(id); if(!el) return;
+  const today = new Date(); today.setHours(0,0,0,0);
+  let days=null;
+  if(nextRun){ const d=new Date(nextRun); d.setHours(0,0,0,0); days=Math.round((d-today)/86400000); }
+  let cls,icon,title;
+  if(days===null)   { cls='ok';      icon='ti-calendar-check'; title='Etsy agent schedule not set yet'; }
+  else if(days<=1)  { cls='urgent';  icon='ti-alert-triangle'; title=days<=0?'Etsy agent runs today — drop your Everbee CSV now':'Etsy agent runs tomorrow — drop your Everbee CSV now'; }
+  else if(days<=4)  { cls='warning'; icon='ti-alert-circle';   title=`Etsy agent runs in ${days} days — get your Everbee CSV ready`; }
+  else              { cls='ok';      icon='ti-calendar-check'; title=`Etsy agent runs in ${days} days — all good`; }
+  el.innerHTML=`<div class="csv-banner ${cls}"><i class="ti ${icon}"></i><div><p class="csv-title">${title}</p><p class="csv-sub">Next run: ${nextRun||'TBD'} · Last run: ${lastRun||'not yet'}</p></div></div>`;
 }
-// ────────────────────────────────────────────────────────────────────────
 
-// ─── MONTHLY WINS ────────────────────────────────────────────────────────
-const WINS_KEY = 'switzer_wins_' + new Date().toISOString().slice(0,7);
-let wins = JSON.parse(localStorage.getItem(WINS_KEY) || '[]');
-if (!wins.length) wins = [
-  'Etsy Expert agent completed — all skills built and tested',
-  'Blog SEO agent completed',
-  'AI Agency Dashboard live on all devices'
-];
-
-function saveWins() { localStorage.setItem(WINS_KEY, JSON.stringify(wins)); }
-
-function renderWins() {
-  const el = document.getElementById('wins-list');
-  el.innerHTML = '';
-  if (!wins.length) {
-    el.innerHTML = '<p class="empty-msg">No accomplishments yet. Add your first one below.</p>';
-    return;
-  }
-  wins.forEach((w, i) => {
-    const d = document.createElement('div');
-    d.className = 'win-item';
-    d.innerHTML = `
-      <i class="ti ti-check" style="font-size:15px;color:var(--teal-mid);margin-top:2px;flex-shrink:0;"></i>
-      <span class="win-text">${w}</span>
-      <button class="win-del" onclick="removeWin(${i})" aria-label="Remove"><i class="ti ti-x"></i></button>`;
+// Overview
+function renderOverview(){
+  const etsy=DATA.etsy_agent||{}, blog=DATA.blog_seo_agent||{}, posts=blog.posts||[];
+  document.getElementById('ov-etsy-run').textContent = etsy.last_run?'Last run: '+etsy.last_run:'Not run yet';
+  document.getElementById('ov-blog-run').textContent = blog.last_run?'Last run: '+blog.last_run:'Not run yet';
+  const pub=posts.filter(p=>p.published).length, draft=posts.filter(p=>p.written&&!p.published).length;
+  document.getElementById('ov-posts').textContent    = posts.filter(p=>p.written||p.published).length;
+  document.getElementById('ov-posts-sub').textContent= `${pub} published · ${draft} drafted`;
+  csvBanner('ov-csv', etsy.last_run, etsy.next_run);
+  const tasks=(etsy.priority_tasks||[]).filter(t=>t.status!=='done');
+  const pending=(blog.pending_tasks||[]);
+  document.getElementById('ov-pending').textContent  = tasks.length;
+  const attn=[
+    ...tasks.slice(0,3).map(t=>({agent:'Etsy Expert',text:t.task,urgency:parseInt(t.priority)<=2?'high':'medium'})),
+    ...pending.map(t=>({agent:'Blog SEO',text:t.task,urgency:'medium'}))
+  ];
+  document.getElementById('attn-badge').textContent = attn.length+' item'+(attn.length!==1?'s':'');
+  const el=document.getElementById('attn-list'); el.innerHTML='';
+  if(!attn.length){ el.innerHTML='<p class="empty">All clear — nothing needs your attention.</p>'; return; }
+  attn.forEach(item=>{
+    const col=item.urgency==='high'?'var(--coral)':'var(--amber-mid)';
+    const d=document.createElement('div'); d.className='row';
+    d.innerHTML=`<div class="attn-dot" style="background:${col};"></div><div style="flex:1;"><p class="row-text">${item.text}</p><p class="row-meta">${item.agent}</p></div>`;
     el.appendChild(d);
   });
 }
 
-function addWin() {
-  const inp = document.getElementById('new-win');
-  if (inp.value.trim()) { wins.push(inp.value.trim()); inp.value = ''; saveWins(); renderWins(); }
-}
-
-function removeWin(i) { wins.splice(i,1); saveWins(); renderWins(); }
-
-document.getElementById('new-win').addEventListener('keydown', e => {
-  if (e.key === 'Enter') addWin();
-});
-
-renderWins();
-// ────────────────────────────────────────────────────────────────────────
-
-// ─── ATTENTION ITEMS (local, dismissable) ────────────────────────────────
-let attnItems = [];
-let attnDone  = [];
-
-function buildAttnFromData(etsyTasks, blogPending) {
-  attnItems = [];
-  etsyTasks.forEach(t => {
-    if ((t[2] || '').toLowerCase() !== 'done') {
-      attnItems.push({ agent:'Etsy Expert', text: t[1] || '', urgency: (t[0]==='1'||t[0]==='2') ? 'high' : 'medium' });
-    }
-  });
-  blogPending.forEach(t => {
-    attnItems.push({ agent:'Blog SEO', text: t[0] || '', urgency:'medium' });
-  });
-  attnDone = new Array(attnItems.length).fill(false);
-  renderAttn();
-}
-
-function renderAttn() {
-  const el   = document.getElementById('attn-list');
-  const remaining = attnItems.filter((_,i) => !attnDone[i]);
-  el.innerHTML = '';
-  document.getElementById('attn-count').textContent = remaining.length;
-  document.getElementById('attn-badge').textContent  = remaining.length + ' item' + (remaining.length!==1?'s':'');
-
-  if (!remaining.length) {
-    el.innerHTML = '<p class="empty-msg">All clear — nothing needs your attention right now.</p>';
-    return;
-  }
-  attnItems.forEach((item, i) => {
-    if (attnDone[i]) return;
-    const urgColor = item.urgency==='high' ? 'var(--coral)' : 'var(--amber-mid)';
-    const d = document.createElement('div');
-    d.className = 'task-row';
-    d.innerHTML = `
-      <div class="attn-dot" style="background:${urgColor};"></div>
-      <div style="flex:1;">
-        <p class="task-text">${item.text}</p>
-        <p class="task-meta">${item.agent}</p>
-      </div>
-      <button class="done-btn" onclick="dismissAttn(${i})">Done</button>`;
+// Wins
+function renderWins(){
+  const wins=DATA.monthly_wins||[], el=document.getElementById('wins-list'); el.innerHTML='';
+  if(!wins.length){ el.innerHTML='<p class="empty">No accomplishments yet. Add your first one below.</p>'; return; }
+  wins.forEach((w,i)=>{
+    const d=document.createElement('div'); d.className='win-item';
+    d.innerHTML=`<i class="ti ti-check" style="font-size:15px;color:var(--teal-mid);margin-top:2px;flex-shrink:0;"></i><span style="font-size:14px;flex:1;">${w}</span><button class="win-del" onclick="removeWin(${i})"><i class="ti ti-x"></i></button>`;
     el.appendChild(d);
   });
 }
+async function addWin(){ const inp=document.getElementById('new-win'); if(!inp.value.trim()) return; if(!DATA.monthly_wins) DATA.monthly_wins=[]; DATA.monthly_wins.push(inp.value.trim()); inp.value=''; renderWins(); await saveData('Add win'); }
+async function removeWin(i){ DATA.monthly_wins.splice(i,1); renderWins(); await saveData('Remove win'); }
+document.getElementById('new-win').addEventListener('keydown',e=>{ if(e.key==='Enter') addWin(); });
 
-function dismissAttn(i) { attnDone[i]=true; renderAttn(); }
-// ────────────────────────────────────────────────────────────────────────
-
-// ─── ETSY DATA ───────────────────────────────────────────────────────────
-async function loadEtsyData() {
-  // etsy_snapshot tab: row 1 = headers, row 2 = data
-  // Columns: Last Run Date | Next Run Date | Sales/Day | Sales/Day Prev | Monthly Revenue | Revenue Prev | CVR | CVR Prev
-  const snapshot = await fetchTab('etsy_snapshot','A1:H3');
-  const tasks    = await fetchTab('etsy_tasks','A2:C20');
-  const keywords = await fetchTab('etsy_keywords','A2:E20');
-  const dead     = await fetchTab('etsy_deadlistings','A2:D20');
-
+// Etsy
+function renderEtsy(){
+  const etsy=DATA.etsy_agent||{}, snap=etsy.snapshot||{};
+  document.getElementById('etsy-date').textContent=etsy.last_run?'Report: '+etsy.last_run:'No report yet';
+  csvBanner('etsy-csv', etsy.last_run, etsy.next_run);
   // Snapshot
-  const row = snapshot[1] || [];
-  const lastRunStr = row[0] || null;
-  const nextRunStr = row[1] || null;
-
-  document.getElementById('etsy-report-date').textContent = lastRunStr ? 'Report: ' + lastRunStr : 'No report yet';
-  document.getElementById('ov-etsy-lastrun').textContent  = lastRunStr ? 'Last run: ' + lastRunStr : 'Not run yet';
-
-  renderCsvBanner('etsy-csv-banner', lastRunStr, nextRunStr);
-  renderCsvBanner('overview-csv-banner', lastRunStr, nextRunStr);
-
-  const salesDay   = row[2] || '—';
-  const salesPrev  = row[3] || null;
-  const revenue    = row[4] || '—';
-  const revPrev    = row[5] || null;
-  const cvr        = row[6] || '—';
-  const cvrPrev    = row[7] || null;
-
-  const grid = document.getElementById('etsy-snapshot-grid');
-  grid.innerHTML = `
-    ${statCard('Sales / day', salesDay, salesPrev)}
-    ${statCard('Monthly revenue', revenue, revPrev, true)}
-    ${statCard('Avg CVR', cvr, cvrPrev)}
-    ${statCard('Next run', nextRunStr || 'TBD', null)}`;
-
+  const grid=document.getElementById('etsy-grid'); grid.innerHTML='';
+  [{label:'Sales / day',curr:snap.sales_per_day,prev:snap.sales_per_day_prev},
+   {label:'Monthly revenue',curr:snap.monthly_revenue,prev:snap.monthly_revenue_prev},
+   {label:'Avg CVR',curr:snap.cvr,prev:snap.cvr_prev},
+   {label:'Next run',curr:etsy.next_run||'TBD',prev:null}
+  ].forEach(m=>{
+    let delta='';
+    if(m.prev&&m.curr){ const c=parseFloat(String(m.curr).replace(/[^0-9.]/g,'')),p=parseFloat(String(m.prev).replace(/[^0-9.]/g,'')); if(!isNaN(c)&&!isNaN(p)&&p!==0){ const pct=((c-p)/p*100).toFixed(1),up=c>=p; delta=`<p class="${up?'delta-up':'delta-down'}">${up?'↑':'↓'} ${Math.abs(pct)}% vs last</p>`; } }
+    const card=document.createElement('div'); card.className='stat-card';
+    card.innerHTML=`<p class="stat-label">${m.label}</p><p class="stat-val">${m.curr||'—'}</p>${delta}`;
+    grid.appendChild(card);
+  });
   // Tasks
-  const taskEl = document.getElementById('etsy-tasks-list');
-  const remaining = tasks.filter(t => (t[2]||'').toLowerCase() !== 'done');
-  document.getElementById('etsy-tasks-badge').textContent = remaining.length + ' pending';
-  taskEl.innerHTML = '';
-  if (!tasks.length) { taskEl.innerHTML = '<p class="empty-msg">No tasks yet — agent will populate after next run.</p>'; }
-  tasks.forEach(t => {
-    const pri  = t[0] || '';
-    const text = t[1] || '';
-    const done = (t[2]||'').toLowerCase() === 'done';
-    const d = document.createElement('div');
-    d.className = 'task-row';
-    d.innerHTML = `
-      <span class="task-priority" style="color:${pri==='1'||pri==='2'?'var(--coral)':'var(--text3)'};">${pri}</span>
-      <i class="ti ${done?'ti-circle-check':'ti-circle'}" style="color:${done?'var(--teal-mid)':'var(--border2)'}; font-size:16px; margin-top:2px;"></i>
-      <p class="task-text" style="${done?'text-decoration:line-through;color:var(--text3);':''}">${text}</p>`;
+  const tasks=etsy.priority_tasks||[], taskEl=document.getElementById('etsy-tasks');
+  const pend=tasks.filter(t=>t.status!=='done');
+  document.getElementById('etsy-tasks-badge').textContent=pend.length+' pending';
+  taskEl.innerHTML='';
+  if(!tasks.length){ taskEl.innerHTML='<p class="empty">No tasks yet — agent will populate after next run.</p>'; }
+  tasks.forEach(t=>{
+    const done=t.status==='done', hiCol=parseInt(t.priority)<=2?'var(--coral)':'var(--text3)';
+    const d=document.createElement('div'); d.className='row';
+    d.innerHTML=`<span style="font-size:11px;font-weight:600;color:${hiCol};min-width:18px;margin-top:2px;">${t.priority}</span><i class="ti ${done?'ti-circle-check':'ti-circle'}" style="color:${done?'var(--teal-mid)':'var(--border2)'};font-size:16px;margin-top:2px;"></i><p class="row-text" style="${done?'text-decoration:line-through;color:var(--text3);':''}">${t.task}</p>`;
     taskEl.appendChild(d);
   });
-
   // Keywords
-  const kwTbody = document.getElementById('etsy-keywords-tbody');
-  kwTbody.innerHTML = '';
-  if (!keywords.length) { kwTbody.innerHTML = '<tr><td colspan="5" class="empty-msg">No keyword data yet.</td></tr>'; }
-  keywords.forEach(k => {
-    const score = parseInt(k[3]||'0');
-    const scoreBg = score >= 500 ? 'var(--teal-bg)' : score >= 200 ? 'var(--amber-bg)' : 'var(--surface2)';
-    const scoreCol = score >= 500 ? 'var(--teal-text)' : score >= 200 ? 'var(--amber-text)' : 'var(--text2)';
-    const tr = document.createElement('tr');
-    tr.innerHTML = `
-      <td class="bold">${k[0]||''}</td>
-      <td class="center">${k[1]||'—'}</td>
-      <td class="center">${k[2]||'—'}</td>
-      <td class="center"><span class="badge" style="background:${scoreBg};color:${scoreCol};">${k[3]||'—'}</span></td>
-      <td style="color:var(--text2);font-size:12px;">${k[4]||''}</td>`;
-    kwTbody.appendChild(tr);
-  });
-
-  // Dead listings
-  const deadTbody = document.getElementById('etsy-dead-tbody');
-  deadTbody.innerHTML = '';
-  if (!dead.length) { deadTbody.innerHTML = '<tr><td colspan="4" class="empty-msg">No dead listings flagged.</td></tr>'; }
-  dead.forEach(d => {
-    const tr = document.createElement('tr');
-    tr.innerHTML = `
-      <td class="bold">${d[0]||''}</td>
-      <td class="center">${d[1]||'—'}</td>
-      <td style="color:var(--coral);font-size:12px;">${d[2]||''}</td>
-      <td style="color:var(--text2);font-size:12px;">${d[3]||''}</td>`;
-    deadTbody.appendChild(tr);
-  });
-
-  return tasks;
+  const kwBody=document.getElementById('etsy-kw'); kwBody.innerHTML='';
+  const kws=etsy.keywords||[];
+  if(!kws.length){ kwBody.innerHTML='<tr><td colspan="5" class="empty">No keyword data yet.</td></tr>'; }
+  kws.forEach(k=>{ const s=parseInt(k.score||'0'),sBg=s>=500?'var(--teal-bg)':s>=200?'var(--amber-bg)':'var(--surface2)',sCol=s>=500?'var(--teal-text)':s>=200?'var(--amber-text)':'var(--text2)'; const tr=document.createElement('tr'); tr.innerHTML=`<td style="font-weight:500;">${k.keyword}</td><td class="c">${k.searches||'—'}</td><td class="c">${k.competition||'—'}</td><td class="c"><span class="badge" style="background:${sBg};color:${sCol};">${k.score}</span></td><td style="font-size:12px;color:var(--text2);">${k.notes||''}</td>`; kwBody.appendChild(tr); });
+  // Dead
+  const deadBody=document.getElementById('etsy-dead'); deadBody.innerHTML='';
+  const dead=etsy.dead_listings||[];
+  if(!dead.length){ deadBody.innerHTML='<tr><td colspan="4" class="empty">No dead listings flagged.</td></tr>'; }
+  dead.forEach(d=>{ const tr=document.createElement('tr'); tr.innerHTML=`<td style="font-weight:500;">${d.listing}</td><td class="c">${d.lifetime_views}</td><td style="color:var(--coral);font-size:12px;">${d.issue}</td><td style="color:var(--text2);font-size:12px;">${d.action}</td>`; deadBody.appendChild(tr); });
 }
 
-function statCard(label, val, prev, isMoney) {
-  let delta = '';
-  if (prev && val !== '—') {
-    const curr  = parseFloat(String(val).replace(/[^0-9.]/g,''));
-    const prevN = parseFloat(String(prev).replace(/[^0-9.]/g,''));
-    if (!isNaN(curr) && !isNaN(prevN) && prevN !== 0) {
-      const pct = ((curr - prevN) / prevN * 100).toFixed(1);
-      const up  = curr >= prevN;
-      delta = `<p class="${up?'stat-delta-up':'stat-delta-down'}">${up?'↑':'↓'} ${Math.abs(pct)}% vs last</p>`;
-    }
-  }
-  return `<div class="stat-card"><p class="stat-label">${label}</p><p class="stat-val">${val}</p>${delta}</div>`;
-}
-// ────────────────────────────────────────────────────────────────────────
-
-// ─── BLOG DATA ───────────────────────────────────────────────────────────
-// blog_posts tab columns: A=Title | B=Agent Wrote | C=Published | D=Date | E=Notes
-async function loadBlogData() {
-  const rows = await fetchTab('blog_posts','A2:E100');
-
-  const tbody = document.getElementById('blog-tbody');
-  tbody.innerHTML = '';
-
-  if (!rows.length) {
-    tbody.innerHTML = '<tr><td colspan="5" class="empty-msg">No posts yet — Blog SEO agent will add rows after each run.</td></tr>';
-    document.getElementById('blog-stats-badge').textContent = '0 posts';
-    document.getElementById('posts-count').textContent = '0';
-    document.getElementById('posts-sub').textContent = '0 published · 0 drafted';
-    document.getElementById('ov-blog-count').textContent = '0 posts';
-    return [];
-  }
-
-  let pubCount = 0, draftCount = 0;
-
-  rows.forEach((row, i) => {
-    const title     = row[0] || '';
-    const written   = (row[1]||'').toUpperCase() === 'TRUE';
-    const published = (row[2]||'').toUpperCase() === 'TRUE';
-    const date      = row[3] || '—';
-
-    if (published) pubCount++;
-    else if (written) draftCount++;
-
-    const status    = published ? 'Published' : written ? 'Ready to publish' : 'In progress';
-    const sBg       = published ? 'var(--teal-bg)' : written ? 'var(--amber-bg)' : 'var(--surface2)';
-    const sCol      = published ? 'var(--teal-text)' : written ? 'var(--amber-text)' : 'var(--text2)';
-    const wBg       = written ? 'var(--teal-bg)' : 'var(--surface2)';
-    const wCol      = written ? 'var(--teal-text)' : 'var(--text2)';
-
-    const tr = document.createElement('tr');
-    tr.innerHTML = `
-      <td class="bold">${title}</td>
-      <td class="center"><span class="badge" style="background:${wBg};color:${wCol};">${written?'Done':'Pending'}</span></td>
-      <td class="center">
-        <input type="checkbox" ${published?'checked':''} ${!written?'disabled':''}
-          onchange="togglePublished(${i+2}, this.checked)"
-          aria-label="Mark as published to Wix" />
-      </td>
-      <td class="center" style="font-size:12px;color:var(--text3);">${date}</td>
-      <td class="center"><span class="badge" style="background:${sBg};color:${sCol};">${status}</span></td>`;
+// Blog
+function renderBlog(){
+  const blog=DATA.blog_seo_agent||{}, posts=blog.posts||[];
+  const pub=posts.filter(p=>p.published).length, draft=posts.filter(p=>p.written&&!p.published).length;
+  document.getElementById('blog-badge').textContent=`${pub} published · ${draft} ready`;
+  const tbody=document.getElementById('blog-tbody'); tbody.innerHTML='';
+  if(!posts.length){ tbody.innerHTML='<tr><td colspan="5" class="empty">No posts yet.</td></tr>'; }
+  posts.forEach((post,i)=>{
+    const status=post.published?'Published':post.written?'Ready to publish':'In progress';
+    const sBg=post.published?'var(--teal-bg)':post.written?'var(--amber-bg)':'var(--surface2)';
+    const sCol=post.published?'var(--teal-text)':post.written?'var(--amber-text)':'var(--text2)';
+    const wBg=post.written?'var(--teal-bg)':'var(--surface2)', wCol=post.written?'var(--teal-text)':'var(--text2)';
+    const tr=document.createElement('tr');
+    tr.innerHTML=`<td style="font-weight:500;">${post.title}</td><td class="c"><span class="badge" style="background:${wBg};color:${wCol};">${post.written?'Done':'Pending'}</span></td><td class="c"><input type="checkbox" ${post.published?'checked':''} ${!post.written?'disabled':''} onchange="togglePub(${i},this.checked)" /></td><td class="c" style="font-size:12px;color:var(--text3);">${post.date||'—'}</td><td class="c"><span class="badge" style="background:${sBg};color:${sCol};">${status}</span></td>`;
     tbody.appendChild(tr);
   });
-
-  const total = rows.length;
-  document.getElementById('blog-stats-badge').textContent = `${pubCount} published · ${draftCount} ready`;
-  document.getElementById('posts-count').textContent = total;
-  document.getElementById('posts-sub').textContent = `${pubCount} published · ${draftCount} drafted`;
-  document.getElementById('ov-blog-count').textContent = `${pubCount} published, ${draftCount} ready`;
-
-  // Blog pending (unpublished but written)
-  const pendingEl = document.getElementById('blog-pending-list');
-  const pending = rows.filter(r => (r[1]||'').toUpperCase()==='TRUE' && (r[2]||'').toUpperCase()!=='TRUE');
-  pendingEl.innerHTML = '';
-  if (!pending.length) {
-    pendingEl.innerHTML = '<p class="empty-msg">No posts waiting for review.</p>';
-  } else {
-    pending.forEach(r => {
-      const d = document.createElement('div');
-      d.className = 'task-row';
-      d.innerHTML = `
-        <i class="ti ti-clock" style="color:var(--amber-mid);"></i>
-        <div style="flex:1;">
-          <p class="task-text">${r[0]||''}</p>
-          <p class="task-meta">Written ${r[3]||''} — ready to publish to Wix</p>
-        </div>`;
-      pendingEl.appendChild(d);
-    });
-  }
-
-  return pending;
+  const pendEl=document.getElementById('blog-pending'), pending=blog.pending_tasks||[];
+  pendEl.innerHTML='';
+  if(!pending.length){ pendEl.innerHTML='<p class="empty">No posts waiting for review.</p>'; return; }
+  pending.forEach(t=>{ const d=document.createElement('div'); d.className='row'; d.innerHTML=`<i class="ti ti-clock" style="color:var(--amber-mid);font-size:16px;margin-top:2px;flex-shrink:0;"></i><div style="flex:1;"><p class="row-text">${t.task}</p><p class="row-meta">${t.date||''}</p></div>`; pendEl.appendChild(d); });
+}
+async function togglePub(i,checked){
+  DATA.blog_seo_agent.posts[i].published=checked;
+  renderBlog(); renderOverview();
+  await saveData('Update published: '+DATA.blog_seo_agent.posts[i].title);
 }
 
-async function togglePublished(sheetRow, isChecked) {
-  await writeCell('blog_posts', sheetRow, 3, isChecked ? 'TRUE' : 'FALSE');
-  await loadBlogData();
+// Keywords
+function renderKeywords(){
+  const all=DATA.keyword_masterlist||[];
+  document.getElementById('kw-total').textContent=all.length+' keywords';
+  filterKw();
 }
-// ────────────────────────────────────────────────────────────────────────
-
-// ─── LOAD ALL ────────────────────────────────────────────────────────────
-async function loadDashboard() {
-  const [etsyTasks, blogPending] = await Promise.all([
-    loadEtsyData(),
-    loadBlogData()
-  ]);
-  const pending = (blogPending || []).map(r => [r[0]||'']);
-  buildAttnFromData(etsyTasks || [], pending);
+function setKwTier(tier){ KW_TIER=tier; document.querySelectorAll('.filter-btn').forEach(b=>b.classList.toggle('active',b.dataset.tier===tier)); filterKw(); }
+function filterKw(){
+  const search=(document.getElementById('kw-search').value||'').toLowerCase();
+  const all=DATA.keyword_masterlist||[];
+  const filtered=all.filter(k=>(!search||(k.keyword||'').toLowerCase().includes(search))&&(KW_TIER==='all'||(k.tier||'').startsWith(KW_TIER)));
+  const tbody=document.getElementById('kw-tbody'); tbody.innerHTML='';
+  if(!filtered.length){ tbody.innerHTML='<tr><td colspan="8" class="empty">No keywords match.</td></tr>'; document.getElementById('kw-showing').textContent=''; return; }
+  filtered.forEach(k=>{
+    const tp=(k.tier||'').split(' ')[0];
+    const tBg=tp==='P1'?'var(--teal-bg)':tp==='P2'?'var(--amber-bg)':'var(--surface2)';
+    const tCol=tp==='P1'?'var(--teal-text)':tp==='P2'?'var(--amber-text)':'var(--text2)';
+    const sBg=k.score>=70?'var(--teal-bg)':k.score>=50?'var(--amber-bg)':'var(--surface2)';
+    const sCol=k.score>=70?'var(--teal-text)':k.score>=50?'var(--amber-text)':'var(--text2)';
+    const trendCol=k.trend>0?'var(--teal-mid)':k.trend<0?'var(--coral)':'var(--text3)';
+    const trendStr=k.trend>0?'↑ '+k.trend+'%':k.trend<0?'↓ '+Math.abs(k.trend)+'%':'—';
+    const compCol=k.competition<=0.2?'var(--teal-mid)':k.competition<=0.5?'var(--amber-mid)':'var(--coral)';
+    const tr=document.createElement('tr');
+    tr.innerHTML=`<td style="font-weight:500;">${k.keyword}</td><td class="c">${k.search_vol||'—'}</td><td class="c" style="color:${compCol};font-weight:500;">${k.competition}</td><td class="c" style="color:${trendCol};font-weight:500;">${trendStr}</td><td class="c"><span class="badge" style="background:${sBg};color:${sCol};">${Math.round(k.score||0)}</span></td><td class="c" style="color:${k.pinterest_clicks>0?'var(--teal-mid)':'var(--text3)'};font-weight:${k.pinterest_clicks>0?'600':'400'};">${k.pinterest_clicks>0?k.pinterest_clicks.toLocaleString():'—'}</td><td style="font-size:12px;color:var(--text2);">${k.pillar||''}</td><td class="c"><span class="badge" style="background:${tBg};color:${tCol};">${tp}</span></td>`;
+    tbody.appendChild(tr);
+  });
+  document.getElementById('kw-showing').textContent=`Showing ${filtered.length} of ${all.length} keywords`;
 }
 
+// Load everything
+async function loadDashboard(){
+  await loadData();
+  renderOverview(); renderWins(); renderEtsy(); renderBlog(); renderKeywords();
+}
 loadDashboard();
-// ────────────────────────────────────────────────────────────────────────
 </script>
 </body>
 </html>

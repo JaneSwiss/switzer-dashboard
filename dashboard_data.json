@@ -1,0 +1,109 @@
+{
+  "last_updated": "2026-05-07",
+
+  "etsy_agent": {
+    "status": "active",
+    "last_run": "2026-05-05",
+    "next_run": "2026-05-19",
+    "snapshot": {
+      "sales_per_day": "11.9",
+      "sales_per_day_prev": "10.2",
+      "monthly_revenue": "AU$9,514",
+      "monthly_revenue_prev": "AU$8,900",
+      "cvr": "0.73%",
+      "cvr_prev": "0.68%"
+    },
+    "priority_tasks": [
+      { "priority": "1", "task": "Review keyword suggestions for listing: Social Media Templates Bundle", "status": "pending" },
+      { "priority": "2", "task": "Approve rewritten description: Pinterest Pin Pack Vol.3", "status": "pending" },
+      { "priority": "3", "task": "Confirm thumbnail A/B test results for top 5 listings", "status": "pending" },
+      { "priority": "4", "task": "Bundle 3-4 Instagram template packs into $38-45 mega-bundle listing", "status": "pending" },
+      { "priority": "5", "task": "Create new listing targeting keyword: digital marketer (score 710)", "status": "pending" },
+      { "priority": "6", "task": "Fix Full Branding Package listing (48k lifetime views, 0 recent sales)", "status": "pending" },
+      { "priority": "7", "task": "Update 1000 Branding Package listing title with new keyword targets", "status": "pending" },
+      { "priority": "8", "task": "Rewrite tags for 44 dead Wix listings with niche-specific keywords", "status": "pending" },
+      { "priority": "9", "task": "Create new listing targeting keyword: bold instagram post (score 130)", "status": "pending" },
+      { "priority": "10", "task": "Fix Nurse Injector Templates listing (28k lifetime views, low sales)", "status": "pending" }
+    ],
+    "keywords": [
+      { "keyword": "digital marketer", "searches": "1,111", "competition": "1,566", "score": "710", "notes": "#1 opportunity — no listing targeting this yet" },
+      { "keyword": "pinterest inspired", "searches": "—", "competition": "1,363", "score": "260", "notes": "Strong, low competition" },
+      { "keyword": "personal brand", "searches": "1,705", "competition": "9,195", "score": "190", "notes": "High volume" },
+      { "keyword": "smm instagram", "searches": "—", "competition": "832", "score": "190", "notes": "Low competition relative to score" },
+      { "keyword": "wix coaching website", "searches": "97", "competition": "540", "score": "180", "notes": "Best Wix-specific" },
+      { "keyword": "coaching post", "searches": "591", "competition": "3,924", "score": "150", "notes": "" },
+      { "keyword": "coaching instagram", "searches": "651", "competition": "5,145", "score": "130", "notes": "" },
+      { "keyword": "bold instagram post", "searches": "102", "competition": "768", "score": "130", "notes": "Gap — no listing" },
+      { "keyword": "aesthetic carousel", "searches": "105", "competition": "948", "score": "110", "notes": "" },
+      { "keyword": "business coach posts", "searches": "408", "competition": "4,238", "score": "100", "notes": "" },
+      { "keyword": "coaching website templates", "searches": "258", "competition": "3,336", "score": "80", "notes": "Best coaching website keyword" },
+      { "keyword": "wix website", "searches": "207", "competition": "5,399", "score": "40", "notes": "High competition" }
+    ],
+    "dead_listings": [
+      { "listing": "Full Branding Package DIY Branding Kit", "lifetime_views": "48,000", "issue": "0 recent sales", "action": "Rewrite tags + description" },
+      { "listing": "Nurse Injector Templates", "lifetime_views": "28,000", "issue": "Low recent sales", "action": "Niche keyword rewrite" }
+    ]
+  },
+
+  "blog_seo_agent": {
+    "status": "active",
+    "last_run": "2026-05-06",
+    "posts": [
+      { "title": "How to get your first Etsy sale", "written": true, "published": true, "date": "Apr 12" },
+      { "title": "10 Canva templates every small business needs", "written": true, "published": true, "date": "Apr 18" },
+      { "title": "Pinterest strategy for Etsy sellers in 2026", "written": true, "published": true, "date": "Apr 25" },
+      { "title": "How to write SEO titles that sell on Etsy", "written": true, "published": true, "date": "May 1" },
+      { "title": "Branding kit basics for small business owners", "written": true, "published": true, "date": "May 3" },
+      { "title": "How to use Etsy stats to grow your shop", "written": true, "published": false, "date": "May 6" },
+      { "title": "Social media templates that convert", "written": true, "published": false, "date": "May 6" },
+      { "title": "Best Canva fonts for small business branding", "written": false, "published": false, "date": "" }
+    ],
+    "pending_tasks": [
+      { "task": "Review draft: Best Canva fonts for small business branding", "date": "May 6" },
+      { "task": "Add internal links to: How to get your first Etsy sale", "date": "May 5" }
+    ]
+  },
+
+  "keyword_masterlist": [
+    { "keyword": "canva branding kit", "search_vol": 5400, "competition": 0.08, "trend": 61, "pillar": "Branding", "product": "Branding Kits", "tier": "P1 - Build first", "score": 101.6, "pinterest_clicks": 100 },
+    { "keyword": "starting a business plan template", "search_vol": 49500, "competition": 0.01, "trend": 47, "pillar": "Business Education", "product": "Courses + Ebooks", "tier": "P1 - Build first", "score": 77.8, "pinterest_clicks": 0 },
+    { "keyword": "e commerce business plan", "search_vol": 1900, "competition": 0.03, "trend": 59, "pillar": "Business Education", "product": "Courses + Ebooks", "tier": "P1 - Build first", "score": 76.7, "pinterest_clicks": 0 },
+    { "keyword": "branding for business", "search_vol": 4400, "competition": 0.25, "trend": 2, "pillar": "Branding", "product": "Branding Kits", "tier": "P1 - Build first", "score": 74.6, "pinterest_clicks": 0 },
+    { "keyword": "free instagram post templates", "search_vol": 390, "competition": 0.21, "trend": 25, "pillar": "Instagram", "product": "Instagram Templates", "tier": "P1 - Build first", "score": 73.1, "pinterest_clicks": 99 },
+    { "keyword": "ecommerce business ideas", "search_vol": 14800, "competition": 0.11, "trend": -67, "pillar": "Ecommerce", "product": "Digital Products + Bundles", "tier": "P1 - Build first", "score": 72.2, "pinterest_clicks": 0 },
+    { "keyword": "trending products to sell online", "search_vol": 590, "competition": 0.47, "trend": 2, "pillar": "Ecommerce", "product": "Digital Products + Bundles", "tier": "P1 - Build first", "score": 71.1, "pinterest_clicks": 2987 },
+    { "keyword": "website template for portfolio", "search_vol": 22200, "competition": 0.17, "trend": -6, "pillar": "Website Templates", "product": "Wix Templates (General)", "tier": "P1 - Build first", "score": 70.8, "pinterest_clicks": 0 },
+    { "keyword": "ecommerce business marketing", "search_vol": 90, "competition": 0.12, "trend": 57, "pillar": "Ecommerce", "product": "Digital Products + Bundles", "tier": "P2 - Build next", "score": 69.6, "pinterest_clicks": 0 },
+    { "keyword": "website template for ecommerce", "search_vol": 18100, "competition": 0.26, "trend": -16, "pillar": "Website Templates", "product": "Wix Templates (General)", "tier": "P2 - Build next", "score": 68.5, "pinterest_clicks": 0 },
+    { "keyword": "starting a business tips", "search_vol": 1600, "competition": 0.22, "trend": 12, "pillar": "Business Education", "product": "Courses + Ebooks", "tier": "P2 - Build next", "score": 68.3, "pinterest_clicks": 0 },
+    { "keyword": "website template for blogger", "search_vol": 3600, "competition": 0.17, "trend": -11, "pillar": "Website Templates", "product": "Wix Templates (General)", "tier": "P2 - Build next", "score": 67.8, "pinterest_clicks": 0 },
+    { "keyword": "website template for blog", "search_vol": 3600, "competition": 0.17, "trend": -11, "pillar": "Website Templates", "product": "Wix Templates (General)", "tier": "P2 - Build next", "score": 67.8, "pinterest_clicks": 0 },
+    { "keyword": "website template for photographer", "search_vol": 720, "competition": 0.39, "trend": 23, "pillar": "Website Templates", "product": "Wix Templates (General)", "tier": "P2 - Build next", "score": 65.9, "pinterest_clicks": 0 },
+    { "keyword": "free instagram templates", "search_vol": 720, "competition": 0.2, "trend": -27, "pillar": "Instagram", "product": "Instagram Templates", "tier": "P2 - Build next", "score": 65.7, "pinterest_clicks": 0 },
+    { "keyword": "how to start an ecommerce business", "search_vol": 8100, "competition": 0.4, "trend": -9, "pillar": "Ecommerce", "product": "Digital Products + Bundles", "tier": "P2 - Build next", "score": 65.0, "pinterest_clicks": 0 },
+    { "keyword": "starting a business ideas", "search_vol": 12100, "competition": 0.15, "trend": -17, "pillar": "Business Education", "product": "Courses + Ebooks", "tier": "P2 - Build next", "score": 64.2, "pinterest_clicks": 0 },
+    { "keyword": "website template for online store", "search_vol": 1900, "competition": 0.42, "trend": 7, "pillar": "Website Templates", "product": "Wix Templates (General)", "tier": "P2 - Build next", "score": 64.0, "pinterest_clicks": 0 },
+    { "keyword": "online business ideas", "search_vol": 33100, "competition": 0.21, "trend": -20, "pillar": "Business Education", "product": "Courses + Ebooks", "tier": "P2 - Build next", "score": 62.8, "pinterest_clicks": 0 },
+    { "keyword": "online business tips", "search_vol": 320, "competition": 0.16, "trend": 2, "pillar": "Business Education", "product": "Courses + Ebooks", "tier": "P2 - Build next", "score": 61.6, "pinterest_clicks": 0 },
+    { "keyword": "how to make instagram account look professional", "search_vol": 10, "competition": 0.3, "trend": -30, "pillar": "Instagram", "product": "Instagram Templates", "tier": "P2 - Build next", "score": 56.9, "pinterest_clicks": 847 },
+    { "keyword": "branding kit for small business", "search_vol": 0, "competition": 0.0, "trend": 0, "pillar": "Branding", "product": "Branding Kits", "tier": "P2 - Build next", "score": 55.0, "pinterest_clicks": 100 },
+    { "keyword": "canva branding kit for small business", "search_vol": 0, "competition": 0.0, "trend": 0, "pillar": "Branding", "product": "Branding Kits", "tier": "P2 - Build next", "score": 55.0, "pinterest_clicks": 100 },
+    { "keyword": "how to grow business online", "search_vol": 590, "competition": 0.42, "trend": -32, "pillar": "Business Education", "product": "Courses + Ebooks", "tier": "P3 - Build later", "score": 54.4, "pinterest_clicks": 0 },
+    { "keyword": "website template for events", "search_vol": 1000, "competition": 0.27, "trend": -6, "pillar": "Website Templates", "product": "Wix Templates (General)", "tier": "P3 - Build later", "score": 53.2, "pinterest_clicks": 0 },
+    { "keyword": "how to brand your small business", "search_vol": 10, "competition": 0.11, "trend": -40, "pillar": "Branding", "product": "Branding Kits", "tier": "P3 - Build later", "score": 51.6, "pinterest_clicks": 0 },
+    { "keyword": "website template for interior design", "search_vol": 1000, "competition": 0.38, "trend": -17, "pillar": "Website Templates", "product": "Wix Templates (General)", "tier": "P3 - Build later", "score": 50.5, "pinterest_clicks": 0 },
+    { "keyword": "website template for coaches", "search_vol": 0, "competition": 0.0, "trend": 0, "pillar": "Website Templates", "product": "Wix Templates (ST Niche)", "tier": "P3 - Build later", "score": 45.0, "pinterest_clicks": 0 },
+    { "keyword": "instagram templates for small business", "search_vol": 0, "competition": 0.0, "trend": 0, "pillar": "Instagram", "product": "Instagram Templates", "tier": "P3 - Build later", "score": 45.0, "pinterest_clicks": 0 },
+    { "keyword": "website template for personal trainer", "search_vol": 0, "competition": 0.0, "trend": 0, "pillar": "Website Templates", "product": "Wix Templates (ST Niche)", "tier": "P3 - Build later", "score": 45.0, "pinterest_clicks": 0 },
+    { "keyword": "small business branding ideas", "search_vol": 170, "competition": 0.82, "trend": -3, "pillar": "Branding", "product": "Branding Kits", "tier": "P4 - Low priority", "score": 44.6, "pinterest_clicks": 0 },
+    { "keyword": "instagram templates for business", "search_vol": 50, "competition": 0.75, "trend": -47, "pillar": "Instagram", "product": "Instagram Templates", "tier": "P4 - Low priority", "score": 41.6, "pinterest_clicks": 0 },
+    { "keyword": "website template for consulting company", "search_vol": 170, "competition": 0.55, "trend": -10, "pillar": "General", "product": "Wix Templates (General)", "tier": "P4 - Low priority", "score": 39.3, "pinterest_clicks": 0 },
+    { "keyword": "how to grow small business on instagram", "search_vol": 20, "competition": 0.33, "trend": 9, "pillar": "Business Education", "product": "Courses + Ebooks", "tier": "P4 - Low priority", "score": 36.7, "pinterest_clicks": 0 }
+  ],
+
+  "monthly_wins": [
+    "Etsy Expert agent completed — all skills built and tested",
+    "Blog SEO agent completed",
+    "AI Agency Dashboard live on all devices"
+  ]
+}
