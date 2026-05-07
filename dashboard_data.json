@@ -49,18 +49,75 @@
     "status": "active",
     "last_run": "2026-05-06",
     "posts": [
-      { "title": "How to get your first Etsy sale", "written": true, "published": true, "date": "Apr 12" },
-      { "title": "10 Canva templates every small business needs", "written": true, "published": true, "date": "Apr 18" },
-      { "title": "Pinterest strategy for Etsy sellers in 2026", "written": true, "published": true, "date": "Apr 25" },
-      { "title": "How to write SEO titles that sell on Etsy", "written": true, "published": true, "date": "May 1" },
-      { "title": "Branding kit basics for small business owners", "written": true, "published": true, "date": "May 3" },
-      { "title": "How to use Etsy stats to grow your shop", "written": true, "published": false, "date": "May 6" },
-      { "title": "Social media templates that convert", "written": true, "published": false, "date": "May 6" },
-      { "title": "Best Canva fonts for small business branding", "written": false, "published": false, "date": "" }
+      {
+        "title": "Canva branding kit: how to build a professional brand on a budget",
+        "keyword": "canva branding kit",
+        "written": true,
+        "published": false,
+        "date": "2026-05-05",
+        "url": null
+      },
+      {
+        "title": "Starting a business plan template: what to include and why",
+        "keyword": "starting a business plan template",
+        "written": true,
+        "published": false,
+        "date": "2026-05-05",
+        "url": null
+      },
+      {
+        "title": "Branding for business: how to build trust before anyone contacts you",
+        "keyword": "branding for business",
+        "written": true,
+        "published": false,
+        "date": "2026-05-06",
+        "url": "https://janeswiss.github.io/switzer-dashboard/posts/branding-for-business.html"
+      },
+      {
+        "title": "How to write an e commerce business plan that actually gets used",
+        "keyword": "e commerce business plan",
+        "written": true,
+        "published": false,
+        "date": "2026-05-06",
+        "url": "https://janeswiss.github.io/switzer-dashboard/posts/e-commerce-business-plan.html"
+      },
+      {
+        "title": "Ecommerce business ideas that actually work in 2026",
+        "keyword": "ecommerce business ideas",
+        "written": true,
+        "published": false,
+        "date": "2026-05-06",
+        "url": "https://janeswiss.github.io/switzer-dashboard/posts/ecommerce-business-ideas.html"
+      },
+      {
+        "title": "Free Instagram post templates that actually look professional",
+        "keyword": "free instagram post templates",
+        "written": true,
+        "published": false,
+        "date": "2026-05-06",
+        "url": "https://janeswiss.github.io/switzer-dashboard/posts/free-instagram-post-templates.html"
+      },
+      {
+        "title": "Trending products to sell online in 2026",
+        "keyword": "trending products to sell online",
+        "written": true,
+        "published": false,
+        "date": "2026-05-06",
+        "url": "https://janeswiss.github.io/switzer-dashboard/posts/trending-products-to-sell-online.html"
+      },
+      {
+        "title": "How to choose the right website template for portfolio success",
+        "keyword": "website template for portfolio",
+        "written": true,
+        "published": false,
+        "date": "2026-05-06",
+        "url": "https://janeswiss.github.io/switzer-dashboard/posts/website-template-for-portfolio.html"
+      }
     ],
     "pending_tasks": [
-      { "task": "Review draft: Best Canva fonts for small business branding", "date": "May 6" },
-      { "task": "Add internal links to: How to get your first Etsy sale", "date": "May 5" }
+      { "task": "Publish all 6 HTML posts to switzertemplates.com", "date": "2026-05-07" },
+      { "task": "Convert canva-branding-kit.txt to HTML and publish", "date": "2026-05-07" },
+      { "task": "Convert starting-a-business-plan-template.txt to HTML and publish", "date": "2026-05-07" }
     ]
   },
 
