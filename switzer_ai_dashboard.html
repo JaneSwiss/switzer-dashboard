@@ -209,7 +209,7 @@
     </div>
     <p style="font-size:13px;color:var(--text2);margin-bottom:1rem;">Agent wrote = drafted by Blog SEO agent. Published by you = tick when you publish to Wix. Syncs across all devices.</p>
     <div class="table-wrap"><table>
-      <thead><tr><th style="min-width:200px;">Post title</th><th class="c">Agent wrote</th><th class="c">Published by you</th><th class="c">Date</th><th class="c">Status</th></tr></thead>
+      <thead><tr><th style="min-width:200px;">Post title</th><th>Target keyword</th><th class="c">Agent wrote</th><th class="c">Published by you</th><th class="c">Date</th><th class="c">Status</th></tr></thead>
       <tbody id="blog-tbody"><tr><td colspan="5" class="empty">Loading...</td></tr></tbody>
     </table></div>
   </div>
@@ -400,7 +400,10 @@ function renderBlog(){
     const sCol=post.published?'var(--teal-text)':post.written?'var(--amber-text)':'var(--text2)';
     const wBg=post.written?'var(--teal-bg)':'var(--surface2)', wCol=post.written?'var(--teal-text)':'var(--text2)';
     const tr=document.createElement('tr');
-    tr.innerHTML=`<td style="font-weight:500;">${post.title}</td><td class="c"><span class="badge" style="background:${wBg};color:${wCol};">${post.written?'Done':'Pending'}</span></td><td class="c"><input type="checkbox" ${post.published?'checked':''} ${!post.written?'disabled':''} onchange="togglePub(${i},this.checked)" /></td><td class="c" style="font-size:12px;color:var(--text3);">${post.date||'—'}</td><td class="c"><span class="badge" style="background:${sBg};color:${sCol};">${status}</span></td>`;
+    const titleHtml = post.url
+      ? `<a href="${post.url}" target="_blank" style="color:var(--choc);text-decoration:none;font-weight:500;">${post.title}<i class="ti ti-external-link" style="font-size:11px;margin-left:4px;vertical-align:1px;"></i></a>`
+      : `<span style="font-weight:500;">${post.title}</span>`;
+    tr.innerHTML=`<td>${titleHtml}</td><td style="font-size:12px;color:var(--text2);">${post.keyword||'—'}</td><td class="c"><span class="badge" style="background:${wBg};color:${wCol};">${post.written?'Done':'Pending'}</span></td><td class="c"><input type="checkbox" ${post.published?'checked':''} ${!post.written?'disabled':''} onchange="togglePub(${i},this.checked)" /></td><td class="c" style="font-size:12px;color:var(--text3);">${post.date||'—'}</td><td class="c"><span class="badge" style="background:${sBg};color:${sCol};">${status}</span></td>`;
     tbody.appendChild(tr);
   });
   const pendEl=document.getElementById('blog-pending'), pending=blog.pending_tasks||[];
