@@ -22,6 +22,16 @@
   }
   body { font-family: var(--sans); background: var(--bg); color: var(--text); min-height: 100vh; }
   .container { max-width: 900px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
+  .token-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.55); display: flex; align-items: center; justify-content: center; z-index: 100; padding: 1.25rem; }
+  .token-box { background: var(--surface); border-radius: var(--radius); padding: 2rem; max-width: 440px; width: 100%; box-shadow: 0 8px 32px rgba(0,0,0,0.18); }
+  .token-box h2 { font-family: var(--serif); font-size: 20px; font-weight: normal; margin-bottom: 8px; }
+  .token-box p { font-size: 13px; color: var(--text2); margin-bottom: 1.25rem; line-height: 1.6; }
+  .token-box input { width: 100%; font-size: 13px; padding: 9px 12px; border: 1px solid var(--border2); border-radius: var(--radius-sm); font-family: var(--sans); color: var(--text); margin-bottom: 10px; outline: none; box-sizing: border-box; }
+  .token-box input:focus { border-color: var(--choc); }
+  .token-box button { width: 100%; background: var(--choc); color: #fff; border: none; border-radius: var(--radius-sm); padding: 10px; font-size: 14px; cursor: pointer; font-family: var(--sans); }
+  .token-box button:hover { background: var(--choc2); }
+  .token-step { font-size: 12px; color: var(--text3); margin-top: 12px; text-align: center; }
+  .token-step a { color: var(--choc); }
   .banner { background: var(--choc); border-radius: var(--radius); padding: 1.25rem 1.5rem; margin-bottom: 1.5rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
   .banner-sub { font-size: 11px; color: rgba(255,255,255,0.45); letter-spacing: .1em; text-transform: uppercase; margin-bottom: 4px; }
   .banner h1 { font-family: var(--serif); font-size: 22px; font-weight: normal; color: #fff; }
@@ -95,6 +105,19 @@
 </style>
 </head>
 <body>
+
+<!-- TOKEN SETUP OVERLAY -->
+<div class="token-overlay" id="token-overlay" style="display:none;">
+  <div class="token-box">
+    <h2>Welcome to your dashboard</h2>
+    <p>Enter your GitHub Personal Access Token to enable saving. This stays in your browser only — it never gets uploaded anywhere.</p>
+    <input type="password" id="token-input" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx" />
+    <button onclick="saveToken()">Save and open dashboard</button>
+    <p class="token-step">Don't have a token? <a href="https://github.com/settings/tokens" target="_blank">Create one here</a> with <strong>repo</strong> scope selected.</p>
+    <p class="token-step" style="margin-top:8px;"><a href="#" onclick="resetToken()" style="color:var(--text3);">Reset saved token</a></p>
+  </div>
+</div>
+
 <div class="container">
 
 <div class="banner">
@@ -224,7 +247,7 @@
 const GH_OWNER = 'janeswiss';
 const GH_REPO  = 'switzer-dashboard';
 const GH_FILE  = 'dashboard_data.json';
-const GH_TOKEN = 'YOUR_GITHUB_PAT';   // Create at github.com/settings/tokens — needs repo scope
+const GH_TOKEN = localStorage.getItem('switzer_gh_token') || '';
 // ─────────────────────────────────────────────────────────────────────────
 
 const RAW_URL = `https://raw.githubusercontent.com/${GH_OWNER}/${GH_REPO}/main/${GH_FILE}`;
@@ -419,6 +442,29 @@ function filterKw(){
   });
   document.getElementById('kw-showing').textContent=`Showing ${filtered.length} of ${all.length} keywords`;
 }
+
+// Token management
+function checkToken() {
+  const token = localStorage.getItem('switzer_gh_token');
+  if (!token) {
+    document.getElementById('token-overlay').style.display = 'flex';
+    return false;
+  }
+  return true;
+}
+function saveToken() {
+  const val = document.getElementById('token-input').value.trim();
+  if (!val) { alert('Please enter your token.'); return; }
+  localStorage.setItem('switzer_gh_token', val);
+  document.getElementById('token-overlay').style.display = 'none';
+  if (checkToken()) loadDashboard();
+}
+function resetToken() {
+  localStorage.removeItem('switzer_gh_token');
+  document.getElementById('token-input').value = '';
+  document.getElementById('token-overlay').style.display = 'flex';
+}
+document.getElementById('token-input').addEventListener('keydown', e => { if(e.key==='Enter') saveToken(); });
 
 // Load everything
 async function loadDashboard(){
