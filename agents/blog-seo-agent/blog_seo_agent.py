@@ -21,6 +21,8 @@ import anthropic
 import requests
 from bs4 import BeautifulSoup
 from dotenv import load_dotenv
+from google import genai
+from google.genai import types as genai_types
 
 
 # ── paths ─────────────────────────────────────────────────────────────────────
@@ -39,6 +41,8 @@ load_dotenv(ROOT / ".env")
 
 ANTHROPIC_API_KEY   = os.getenv("ANTHROPIC_API_KEY")
 VALUESERP_API_KEY   = os.getenv("VALUESERP_API_KEY")
+GOOGLE_API_KEY      = os.getenv("NANO_BANANA_API_KEY")
+IMAGE_OUTPUT_DIR    = AGENT_DIR / "output" / "images"
 
 BANNED_WORDS = [
     "certainly", "delve", "embark", "enlightening", "esteemed", "shed light",
@@ -590,7 +594,79 @@ def generate_image_prompts(keyword: str, post_html: str) -> str:
     return response.content[0].text.strip()
 
 
-def _assemble_html(title: str, post_html: str, image_prompts: str) -> str:
+def generate_images_from_prompts(prompt_text: str, slug: str) -> "list[str]":
+    """
+    Parse the 3 photo prompts from the image prompt text, generate images
+    via Gemini Imagen API, save as .jpg files in output/images/, and return
+    their relative paths for embedding in HTML.
+    Fails gracefully - if any image fails, it is skipped and the post
+    still saves with whatever images were generated.
+    """
+    IMAGE_OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+
+    # Parse the 3 photo prompts only - skip the infographic prompt
+    photo_prompts = []
+    for label in [
+        "PROMPT 1 - GENERAL LIFESTYLE:",
+        "PROMPT 2 - TOPIC SPECIFIC (props/objects):",
+        "PROMPT 3 - TOPIC SPECIFIC (person + action):",
+    ]:
+        start = prompt_text.find(label)
+        if start == -1:
+            continue
+        start += len(label)
+        next_prompt = prompt_text.find("PROMPT", start)
+        chunk = prompt_text[start:next_prompt].strip() if next_prompt != -1 else prompt_text[start:].strip()
+        if chunk:
+            photo_prompts.append(chunk)
+
+    if not photo_prompts:
+        log_error("image_generation", slug, "No photo prompts found in prompt text")
+        print("  No photo prompts parsed - skipping image generation.")
+        return []
+
+    image_paths = []
+    try:
+        client = genai.Client(api_key=GOOGLE_API_KEY)
+
+        for i, prompt in enumerate(photo_prompts[:3], 1):
+            print(f"  Generating image {i}/3...")
+            try:
+                response = client.models.generate_images(
+                    model="imagen-3.0-generate-002",
+                    prompt=prompt,
+                    config=genai_types.GenerateImagesConfig(
+                        number_of_images=1,
+                        aspect_ratio="16:9",
+                        safety_filter_level="block_some",
+                        person_generation="allow_adult",
+                    ),
+                )
+                if response.generated_images:
+                    img_filename = f"{slug}-image-{i}.jpg"
+                    img_path = IMAGE_OUTPUT_DIR / img_filename
+                    image_bytes = response.generated_images[0].image.image_bytes
+                    with open(img_path, "wb") as f:
+                        f.write(image_bytes)
+                    image_paths.append(f"images/{img_filename}")
+                    print(f"  Saved: {img_filename}")
+                else:
+                    print(f"  Image {i}: no image returned, skipping")
+                    log_error("image_generation", slug, f"No image returned for prompt {i}")
+            except Exception as e:
+                print(f"  Image {i} failed: {e}")
+                log_error("image_generation", slug, f"Prompt {i}: {str(e)}")
+                continue
+
+    except Exception as e:
+        log_error("image_generation", slug, f"Gemini client init failed: {str(e)}")
+        print(f"  Image generation failed entirely: {e} - post will save without images.")
+        return []
+
+    return image_paths
+
+
+def _assemble_html(title: str, post_html: str, image_prompts: str, image_paths: "list[str]" = None) -> str:
     css = """
     <style>
       * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -730,6 +806,14 @@ def _assemble_html(title: str, post_html: str, image_prompts: str) -> str:
 
     safe_prompts = image_prompts.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
 
+    # Build image block
+    image_block = ""
+    if image_paths:
+        imgs = ""
+        for path in image_paths:
+            imgs += f'<img src="{path}" alt="" style="width:100%;margin:0 0 1.75rem;border-radius:4px;display:block;">\n'
+        image_block = f'<div style="margin:0 0 2rem;">{imgs}</div>'
+
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -741,6 +825,7 @@ def _assemble_html(title: str, post_html: str, image_prompts: str) -> str:
 <body>
 <div class="post">
 <h1>{title}</h1>
+{image_block}
 {content}
 <hr>
 <p class="closing-note">Let me know in the comments below if you want me to cover any branding or marketing topics in more depth, and I'll make sure to create a blog post about it in the future.</p>
@@ -753,7 +838,7 @@ def _assemble_html(title: str, post_html: str, image_prompts: str) -> str:
 </html>"""
 
 
-def save_output(keyword_row: dict, post_html: str, image_prompts: str) -> str:
+def save_output(keyword_row: dict, post_html: str, image_prompts: str, image_paths: "list[str]" = None) -> str:
     """
     Assemble and write the post to output/<slug>.html, append to completed.json,
     and print a terminal summary. Returns the output filename.
@@ -769,7 +854,7 @@ def save_output(keyword_row: dict, post_html: str, image_prompts: str) -> str:
     filename = f"{slug}.html"
     out_path = OUTPUT_DIR / filename
 
-    full_html = _assemble_html(title, post_html, image_prompts)
+    full_html = _assemble_html(title, post_html, image_prompts, image_paths)
     out_path.write_text(full_html, encoding="utf-8")
 
     plain_text = re.sub(r"<[^>]+>", " ", post_html)
@@ -846,10 +931,22 @@ def run():
         print(f"  Image prompt generation failed: {e} — saving post without prompts.")
         image_prompts = "(Image prompt generation failed.)"
 
+    print("\n[3.5/4] Generating images via Gemini API...")
+    image_paths = []
+    try:
+        image_paths = generate_images_from_prompts(image_prompts, keyword_row["_slug"])
+        if image_paths:
+            print(f"  {len(image_paths)} image(s) generated successfully.")
+        else:
+            print(f"  No images generated - post will save without images.")
+    except Exception as e:
+        log_error("image_generation", keyword, str(e))
+        print(f"  Image generation failed: {e} - continuing without images.")
+
     # module 4
     print("\n[4/4] Saving output...")
     try:
-        filename = save_output(keyword_row, post_html, image_prompts)
+        filename = save_output(keyword_row, post_html, image_prompts, image_paths)
     except Exception as e:
         log_error("output", keyword, str(e))
         print(f"  Output save failed: {e}")
@@ -972,8 +1069,20 @@ EXISTING POST CONTENT:
         print(f"  Image prompt generation failed: {e}")
         return
 
+    print(f"  Generating images...")
+    image_paths = []
+    try:
+        image_paths = generate_images_from_prompts(image_prompts, slug)
+        if image_paths:
+            print(f"  {len(image_paths)} image(s) generated.")
+        else:
+            print(f"  No images generated - assembling without images.")
+    except Exception as e:
+        log_error("image_generation", slug, str(e))
+        print(f"  Image generation failed: {e} - assembling without images.")
+
     # Assemble with new HTML template
-    full_html = _assemble_html(title, formatted_body, image_prompts)
+    full_html = _assemble_html(title, formatted_body, image_prompts, image_paths)
 
     # Save as v2 — never overwrites original
     v2_path = OUTPUT_DIR / f"{slug}-v2.html"
