@@ -638,7 +638,7 @@ def generate_images_from_prompts(prompt_text: str, slug: str) -> "list[str]":
                     config=genai_types.GenerateImagesConfig(
                         number_of_images=1,
                         aspect_ratio="16:9",
-                        safety_filter_level="block_some",
+                        safety_filter_level="BLOCK_SOME",
                         person_generation="allow_adult",
                     ),
                 )
@@ -1092,4 +1092,4 @@ EXISTING POST CONTENT:
 
 
 if __name__ == "__main__":
-    reformat_existing_post("branding-for-business")
+    reformat_existing_post("e-commerce-business-plan")
