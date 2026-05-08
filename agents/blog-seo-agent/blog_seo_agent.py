@@ -311,29 +311,32 @@ COMPETITOR RESEARCH — understand what is already ranking, then write something
 
 FORMATTING RULES - apply these exactly:
 
-Title: Write in ALL CAPS. This becomes the <h1>.
+Title: Write in ALL CAPS literally. Example: HOW TO BUILD A BRAND THAT CONVERTS
 
-Section headings: Write in ALL CAPS. These become <h3>.
+Section headings: Write in ALL CAPS literally on their own line with a blank line
+before and after. Example: WHY MOST BUSINESS PLANS END UP IN A DRAWER
+Do NOT use ## or any markdown header symbols. Just the heading in capitals.
 
 Emphasis:
 - Use **bold** for important statements the reader must not miss
 - Use ***bold italic*** for the single most important insight in each section
 - Use *italic* for questions, callouts, and personal asides
 
-Questions: Format each question on its own line as *italic*, not in a paragraph.
+Standalone questions: each on its own line as *italic text*
+Example: *What does your customer have before they find you?*
 
-Emojis: Use 1-2 per post maximum, only where they feel completely natural inline.
-Example: 📥 before a download link, never at the start of a heading.
+Lists: when presenting 3 or more distinct items, format as HTML list:
+<ul><li>item one</li><li>item two</li><li>item three</li></ul>
+Only use for genuinely list-like content - not regular paragraphs.
 
-Lists: Use when listing 3+ distinct items. Format as plain lines with no bullet symbol -
-the HTML assembler will handle styling.
+Emojis: add 1-2 maximum where completely natural inline.
+Good: 📥 before a download link, ✅ before a key checklist item.
+Never at the start of a heading. Never forced.
 
-Personal examples: Weave in naturally using first person. Never use "Mine:" as a label.
-
-CTAs: Write naturally within text. Format the linked text as **bold**.
+CTAs: wrap the linked product or action phrase in **bold**
 
 Do not use em dashes. Do not use markdown headers (##).
-Write headings as plain ALL CAPS text - the assembler converts them.
+Write headings as plain ALL CAPS text on their own line.
 
 Structure:
 - Introduction (100-150 words): opens with the reader's real frustration or situation.
@@ -835,5 +838,119 @@ def run():
     print(f"{'=' * 50}\n")
 
 
+def reformat_existing_post(slug: str) -> None:
+    """
+    Reads an existing post HTML, runs a Claude formatting pass to add proper
+    formatting markers, generates new image prompts, reassembles with the new
+    _assemble_html template, and saves as output/<slug>-v2.html.
+    Does not touch completed.json or the original file.
+    """
+    original_path = OUTPUT_DIR / f"{slug}.html"
+    if not original_path.exists():
+        print(f"  File not found: {original_path}")
+        return
+
+    print(f"  Reading: {original_path}")
+    raw = original_path.read_text(encoding="utf-8")
+    soup = BeautifulSoup(raw, "html.parser")
+
+    # Extract title from <h1>
+    h1 = soup.find("h1")
+    title = h1.get_text(strip=True) if h1 else slug.replace("-", " ")
+    keyword = slug.replace("-", " ")
+
+    # Remove image-prompts div, h1, closing-note — collect remaining body HTML
+    body = soup.find("body")
+    if not body:
+        print("  Could not parse body content.")
+        return
+
+    for div in body.find_all("div", class_="image-prompts"):
+        div.decompose()
+    for div in body.find_all("div", class_="image-prompts-title"):
+        div.decompose()
+    for p in body.find_all("p", class_="closing-note"):
+        p.decompose()
+    if h1:
+        h1.decompose()
+
+    # Get plain text for the formatting call
+    body_text = body.get_text(separator="\n").strip()
+
+    # Claude pass 1: add formatting markers to the existing content
+    print(f"  Reformatting content for: {keyword}")
+    client = anthropic.Anthropic(api_key=ANTHROPIC_API_KEY)
+
+    formatting_prompt = f"""You are reformatting an existing SwitzerTemplates blog post to add proper formatting markers.
+
+The post is about: {slug.replace("-", " ")}
+
+FORMATTING RULES TO APPLY:
+
+- Section headings: rewrite every heading in ALL CAPS letters literally.
+  Example: "What branding means for small business" becomes
+  "WHAT BRANDING MEANS FOR SMALL BUSINESS".
+  No markdown symbols. Just the heading text written entirely in capital
+  letters on its own line, with a blank line before and after it.
+
+- Use **bold** for important statements the reader must not miss
+
+- Use ***bold italic*** for the single most important insight in each section
+
+- Use *italic* for questions, callouts, and personal asides
+
+- Standalone questions: format each on its own line as *italic text*
+  Example: *What does your customer have before they find you?*
+
+- Lists: where the post already has 3 or more items listed within a paragraph,
+  convert them to a proper HTML unordered list using <ul><li>item</li></ul> tags.
+  Only convert genuinely list-like content - not regular paragraphs.
+  Each list item should be concise - one line per item.
+
+- Emojis: add 1-2 maximum where they feel completely natural inline.
+  Good uses: 📥 before a download link, ✅ before a key checklist item.
+  Never at the start of a heading. Never forced.
+
+- CTAs: wrap the linked product name or action phrase in **bold**
+
+- Do NOT change the actual words, sentences, or meaning - only add formatting markers
+- Do NOT add new content - only format what is already there
+- Do NOT include the post title - only return the body content
+- Keep all paragraph breaks as they are
+
+Return only the reformatted post body. No preamble. No commentary. Just the body.
+
+EXISTING POST CONTENT:
+{body_text}"""
+
+    try:
+        fmt_response = client.messages.create(
+            model="claude-opus-4-5",
+            max_tokens=4096,
+            messages=[{"role": "user", "content": formatting_prompt}],
+        )
+        formatted_body = fmt_response.content[0].text.strip()
+    except Exception as e:
+        print(f"  Formatting pass failed: {e}")
+        return
+
+    # Claude pass 2: generate new image prompts
+    print(f"  Generating new image prompts for: {keyword}")
+    try:
+        image_prompts = generate_image_prompts(keyword, formatted_body)
+    except Exception as e:
+        print(f"  Image prompt generation failed: {e}")
+        return
+
+    # Assemble with new HTML template
+    full_html = _assemble_html(title, formatted_body, image_prompts)
+
+    # Save as v2 — never overwrites original
+    v2_path = OUTPUT_DIR / f"{slug}-v2.html"
+    v2_path.write_text(full_html, encoding="utf-8")
+    print(f"  Saved: {v2_path}")
+    print(f"  Done.")
+
+
 if __name__ == "__main__":
-    run()
+    reformat_existing_post("branding-for-business")
