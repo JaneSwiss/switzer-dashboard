@@ -693,7 +693,7 @@ def generate_images_from_prompts(prompt_text: str, slug: str) -> "list[str]":
 
             chat_client = genai_chat.Client(api_key=GOOGLE_API_KEY)
             response = chat_client.models.generate_content(
-                model="gemini-2.5-flash-preview-04-17",
+                model="gemini-2.5-flash-image",
                 contents=inf_prompt,
                 config=chat_types.GenerateContentConfig(
                     response_modalities=["IMAGE", "TEXT"],
