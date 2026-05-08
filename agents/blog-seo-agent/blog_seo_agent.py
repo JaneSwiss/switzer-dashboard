@@ -309,41 +309,41 @@ COMPETITOR RESEARCH — understand what is already ranking, then write something
 
 ---
 
-BLOG POST STRUCTURE:
+FORMATTING RULES - apply these exactly:
 
-1. Title
-   - Contains the exact keyword naturally
-   - Benefit-led, not clickbait
-   - Under 60 characters for SEO
-   - Sentence case only (capitalize first word and proper nouns only)
-   - Always capitalize proper nouns and brand names exactly as they appear (e.g. Canva, Wix, Instagram, Pinterest, Etsy, Flodesk)
+Title: Write in ALL CAPS. This becomes the <h1>.
 
-2. Introduction (100-150 words)
-   - Opens with the reader's real frustration or situation
-   - Must include the exact keyword naturally within the first paragraph
-   - No "In this post I will..." or "Today we're going to cover..."
-   - No grand opening statements
-   - Start somewhere honest and move quickly to what the post delivers
+Section headings: Write in ALL CAPS. These become <h3>.
 
-3. Body: 4-6 sections with H2 headings
-   - Each section: 150-250 words
-   - One idea per section, fully delivered before moving on
-   - Short sentences. One idea per sentence where possible.
-   - Personal examples woven in naturally where they fit — never forced
-   - H2 headings in sentence case
+Emphasis:
+- Use **bold** for important statements the reader must not miss
+- Use ***bold italic*** for the single most important insight in each section
+- Use *italic* for questions, callouts, and personal asides
 
-4. Mid-post CTA (one only)
-   - Appears inside the body section where it fits most naturally
-   - Tied directly to the problem that section is discussing
-   - Format: "If you want a done-for-you version, the Switzertemplates [product name] includes [what it includes] - [specific benefit]."
-   - Never a hard sell. Introduce it as a helpful option and move on.
+Questions: Format each question on its own line as *italic*, not in a paragraph.
 
-5. Conclusion (100-150 words)
-   - No "In conclusion" or "To wrap up"
-   - Grounded, simple close — gives the reader something to do or think about
-   - Must include the exact keyword naturally within the conclusion
-   - Ends with a final CTA linking to a relevant product or the Etsy shop
-   - CTA is action-led and specific, not "click here" or "shop now"
+Emojis: Use 1-2 per post maximum, only where they feel completely natural inline.
+Example: 📥 before a download link, never at the start of a heading.
+
+Lists: Use when listing 3+ distinct items. Format as plain lines with no bullet symbol -
+the HTML assembler will handle styling.
+
+Personal examples: Weave in naturally using first person. Never use "Mine:" as a label.
+
+CTAs: Write naturally within text. Format the linked text as **bold**.
+
+Do not use em dashes. Do not use markdown headers (##).
+Write headings as plain ALL CAPS text - the assembler converts them.
+
+Structure:
+- Introduction (100-150 words): opens with the reader's real frustration or situation.
+  Must include the exact keyword naturally. No "In this post I will..." openers.
+- Body: 4-6 sections, each 150-250 words, one idea per section fully delivered.
+  Personal examples woven in naturally.
+- Mid-post CTA: one only, tied to the problem the section is discussing.
+  Never a hard sell. Introduce it as a helpful option.
+- Conclusion (100-150 words): no "In conclusion". Must include the exact keyword.
+  Ends with a final CTA to a relevant product or the Etsy shop.
 
 TARGET LENGTH: 1,200-1,800 words total.
 
@@ -355,7 +355,6 @@ NON-NEGOTIABLE VOICE RULES:
 - Use "you" and "your" constantly — this is always about the reader's business.
 - Regular dashes ( - ) only. Never em dashes ( — ).
 - Brackets for asides (like this) — never em dashes for asides.
-- Sentence case for all headings. Do not capitalize every word.
 - Always capitalize proper nouns and brand names: Canva, Wix, Instagram, Pinterest, Etsy, Flodesk, Google, etc.
 - Use American English spelling throughout: color (not colour), recognize (not recognise), optimize (not optimise), customize (not customise), favorite (not favourite), center (not centre), etc.
 - No rhetorical question-then-answer patterns.
@@ -374,17 +373,11 @@ Also never use: "You've got this", "Level up", "Exciting news!", "Have you ever 
 
 OUTPUT FORMAT:
 
-Return ONLY the blog post as clean HTML body content.
-No preamble. No "Here is the HTML:". No meta-commentary at the start or end.
-No <html>, <head>, or <body> tags — just the content that goes inside <body>.
-
-Use these tags and no others:
-- <h1> for the post title (one only, on the first line)
-- <h2> for each section heading
-- <p> for every paragraph
-- <div class="cta"> for CTA blocks — any paragraph that mentions Switzertemplates products, links to the shop, or directs the reader to buy or browse
-
-No markdown. No inline styles. No extra attributes. Clean semantic HTML only.
+Return ONLY the blog post as plain text using the FORMATTING RULES above.
+No preamble. No "Here is the post:". No meta-commentary at the start or end.
+No HTML tags. Start with the title in ALL CAPS on the first line.
+Use markdown bold (**), bold italic (***), and italic (*) exactly as specified.
+Write section headings in ALL CAPS on their own line with a blank line before and after.
 """
 
 
@@ -440,244 +433,109 @@ def write_blog_post(keyword_row: dict, competitors: list[dict]) -> str:
 
 # ── module 4: output ───────────────────────────────────────────────────────────
 
-IMAGE_PROMPT_SYSTEM = """You are generating image and infographic prompts for SwitzerTemplates blog posts.
-Read the blog post content carefully before writing any prompt.
-Every prompt must be specific to that post's topic, audience, and message.
-Never default to the same scene or layout across posts.
+IMAGE_PROMPT_SYSTEM = """You are generating image prompts for SwitzerTemplates blog posts.
+Read the blog post content carefully. Every prompt must be specific to the post topic.
 
----
+THE FEMALE CHARACTER (when a person appears):
+- Always has long chocolate brown hair - this is non-negotiable
+- Face never visible - back, side profile only
+- Business outfits: oversized blazers, tailored coats, wide-leg trousers, high heels
+- Hands: long gel nails in nude or white French, gold jewellery - rings, bangles, watch
 
-BRAND COLOURS (use hex codes explicitly):
-- Background: warm cream #F8F5F2
-- Headings: near-black #262427
-- Nodes, accents, borders: chocolate brown #8D6E63
-- Connecting lines and rules: muted sand #A5988E
-- Supporting text and secondary labels: warm taupe #BBB0AA
+SETTING VARIETY - rotate between these, never use the same setting twice in one post:
+- White marble desk with gold accents, bright airy room
+- Warm beige travertine surface, soft natural light
+- Light grey minimal interior, large windows
+- Cream linen surface, warm morning light
+- Dark oak desk ONLY if explicitly relevant to the post topic - not the default
 
-BRAND FONTS (infographics only - never write font names as visible text in the image):
-- Headings and main labels: Noto Serif Display Light, sentence case
-- Numbers, secondary labels, supporting phrases: Montserrat Regular,
-  lowercase or small all caps with generous letter spacing
-
----
-
-PHOTOGRAPHY RULES:
-
-Read the blog post topic first. Choose a scene that directly reflects
-what the reader is doing or trying to achieve. Never default to a
-generic flat lay when the topic calls for something more specific.
-
-SCENE DIRECTION BY TOPIC:
-- Ecommerce / selling products: female entrepreneur packing orders,
-  photographing products, reviewing sales on laptop, surrounded by
-  packaging and product samples
-- Branding / visual identity: mood board work, colour swatches,
-  brand materials on desk, design work in progress
-- Instagram / social media: phone in hand, content creation setup,
-  scrolling or photographing
-- Website templates: laptop open showing clean website, someone
-  reviewing their site from behind or side
-- Business planning: focused work at a beautiful desk, notebooks,
-  planning materials
-- Email marketing / funnels: laptop work, focused and calm energy
-- Pinterest / SEO: content planning, analytics on screen (no
-  readable text), pinning content
-- General business: stylish female entrepreneur in a luxurious
-  interior, working, on a call, or reviewing documents
-
-PEOPLE - when including a person:
-- Always female, face never visible - back, side profile, or
-  hands and wrists only
-- Business outfits: oversized blazers, tailored coats, wide-leg
-  trousers, high heels
-- Hair polished - low bun, loose waves, or claw clip
-- When showing hands: long gel nails in nude, white French, or
-  deep toned. Gold jewellery - rings, bracelets, gold watch or
-  gold bangle
-
-SIGNATURE PROPS (use selectively, not all at once):
+SIGNATURE PROPS (use 2-3 per image, varied across the 3 photos):
 - Starbucks iced latte or matcha in clear cup with green straw
 - Apple MacBook in silver or space grey
-- Apple AirPods Max in silver or space grey
-- Productivity Planner by Intelligent Change - black linen hardcover
-  with gold foil title and yellow and grey ribbon bookmarks, OR
-  grey linen hardcover with silver foil title
-- Matcha latte or latte in a ceramic or glass cup
+- Apple AirPods Max in silver
+- Productivity Planner by Intelligent Change - black linen hardcover with gold foil
 - Gold jewellery as detail
-- Tortoiseshell claw clip or hair accessories
+- Tortoiseshell claw clip
 
-SURFACES AND INTERIORS:
-- Dark oak wood, marble, travertine, concrete - not always cream linen
-- Luxurious interiors: arched mirrors, bouclé chairs, statement desks,
-  large windows, clothes rails visible in background
-- Mix of light cream scenes and dark moody chocolate brown scenes
-
-PHOTOGRAPHY STYLE:
-- Warm, editorial, quiet luxury - real and lived-in, not staged
+PHOTOGRAPHY STYLE (all images):
+- Warm editorial quiet luxury - real and lived-in, not staged
+- Kodak Portra 400: warm colour grading, visible grain, slightly soft
 - Natural window light with directional shadows, never studio lighting
-- Kodak Portra 400 film aesthetic: warm colour grading, visible grain,
-  slightly soft, not digitally sharp
 - 35mm or 50mm lens, shallow depth of field
-- Intentionally imperfect: one object slightly overlapping another,
-  one element partially cropped at frame edge, uneven light with
-  one corner brighter, visible surface texture
-- Signs of real use: half-drunk coffee, pen rolled slightly off centre
-- Something blurry in the foreground pulling depth into the shot
-- Candid, not arranged - feels genuinely real
-
-STRICT TEXT RULES FOR ALL PHOTOS:
-- No text, writing, words, or labels anywhere in the image
-- All notebooks completely blank and closed
-- All screens face away or show only a dark reflection with no
-  readable content
-- No readable typography on any surface or object
-End every photo prompt with this line:
-no text, no words, no writing, no labels, no bright colours,
-no gradients, no studio lighting, no stock photography look,
-no digital sharpening, no visible screens with text.
-
-Format: landscape, 16:9 ratio, high resolution.
+- Intentionally imperfect: one element cropped at frame edge, uneven light,
+  visible surface texture, signs of real use
+- Format: landscape, 16:9 ratio, high resolution
 
 ---
 
-INFOGRAPHIC RULES:
+PROMPT 1 - GENERAL LIFESTYLE:
+A warm editorial scene relevant to the post theme but not too specific.
+The woman with long chocolate brown hair is present - back or side profile.
+Choose a setting from the variety list above - not dark oak.
+Include 2-3 signature props relevant to the mood of the post.
+End with: no text, no words, no writing, no labels, no bright colours,
+no gradients, no studio lighting, no stock photography look, no digital sharpening.
 
-Read the post content first. Choose the layout that best fits what
-the content is communicating. VARIETY IS MANDATORY - never use the
-same layout twice in a row. No two consecutive posts should have
-the same infographic structure. The layout must emerge from the
-content, not from a default template.
+PROMPT 2 - TOPIC SPECIFIC (prop/action focused):
+Directly illustrates what the post is about. No person needed - just the relevant
+objects and context. Examples by topic:
+- Branding post: colour swatches, font cards, mood board elements on a desk
+- Business plan post: printed A4 pages being written on, planner open
+- Ecommerce post: products being packaged, shipping materials, small product boxes
+- Instagram post: phone showing a clean Instagram feed, content creation setup
+- Website template post: laptop open showing a clean minimal website design
+- AI tools post: hands holding iPad showing an AI tool dashboard
+For this prompt, visible screen content and relevant graphics ARE allowed -
+they add context and relevance. No need to hide screens or blur content.
+Be specific about what is on the screen or in the scene.
 
-Ask yourself before choosing: what shape or structure makes this
-content clearest and most visually interesting?
+PROMPT 3 - TOPIC SPECIFIC (person + action):
+The woman with long chocolate brown hair doing something directly related to the post.
+Mid-action, not posed. Examples:
+- Branding post: woman arranging colour swatches or reviewing brand board on iPad
+- Business plan post: woman writing in a planner, pen in hand
+- Ecommerce post: woman with long brown hair packing small products at a desk
+- Instagram post: woman scrolling phone, content visible on screen
+- Website template post: woman reviewing website on MacBook from behind
+Back or side profile only. Include a relevant prop from the post topic.
+For this prompt, visible screen content IS allowed.
 
-LAYOUT MENU - choose freely based on content:
+PROMPT 4 - INFOGRAPHIC:
+Choose the layout that best fits the post content. VARIETY IS MANDATORY.
+Options: serpentine flow curve, vertical spine, Venn diagram, radial dot map,
+rounded pill list, two-column comparison, floating object grid,
+horizontal alternating timeline, pure typography grid.
+Never use the same layout as the previous post.
 
-1. SERPENTINE FLOW CURVE
-   When to use: journeys, discovery, evolution, things that rise
-   and fall, before and after
-   How: single thin S-curve or wave in muted sand #A5988E, small
-   filled dots in chocolate brown #8D6E63 at natural points,
-   labels alternating above and below. Noto Serif Display Light
-   headings, Montserrat supporting phrases in warm taupe.
+Brand colours:
+- Background: warm cream #F8F5F2
+- Headings: near-black #262427
+- Nodes/accents: chocolate brown #8D6E63
+- Lines: muted sand #A5988E
+- Supporting text: warm taupe #BBB0AA
 
-2. VERTICAL SPINE WITH ALTERNATING CONTENT
-   When to use: sequential steps, processes, design stages
-   How: thin vertical line in muted sand #A5988E down the centre,
-   content alternates left and right at each point. Small precise
-   dots as punctuation only - not large nodes. Numbers in Montserrat
-   small all caps warm taupe, headings in Noto Serif near-black.
-
-3. VENN DIAGRAM
-   When to use: overlapping concepts, frameworks, intersecting ideas
-   How: 2 or 3 thin hairline circles in muted sand #A5988E, no fill
-   except very soft warm tint in overlap, labels inside circles in
-   Noto Serif Display Light near-black, annotations outside in
-   Montserrat lowercase warm taupe.
-
-4. RADIAL DOT MAP
-   When to use: one central concept with surrounding related ideas,
-   word clusters, concept maps
-   How: central word or phrase in Noto Serif Display Light large,
-   thin hairline lines radiating outward in muted sand, small filled
-   dots in chocolate brown at line ends, labels in Montserrat small
-   all caps warm taupe.
-
-5. ROUNDED PILL LIST
-   When to use: lists of tips, steps, or items that benefit from
-   visual separation and a softer feel
-   How: items sit inside vertical or horizontal rounded rectangle
-   outlines, thin hairline border in muted sand #A5988E, no fill.
-   Number in Montserrat small warm taupe, heading in Noto Serif
-   near-black, phrase in Montserrat lowercase warm taupe inside
-   each pill.
-
-6. TWO COLUMN COMPARISON
-   When to use: contrasting two ideas, before vs after, myth vs truth
-   How: canvas divided into two halves by a thin hairline in muted
-   sand. Each half has its own heading in Noto Serif Display Light
-   and list items in Montserrat lowercase. Optional: one side on
-   cream, other side on deep sage or charcoal for contrast.
-
-7. STARBURST CENTREPIECE
-   When to use: a central concept that radiates outward, frameworks
-   with one core idea
-   How: thin decorative starburst or sunburst outline in muted sand
-   #A5988E at the centre, central label in Noto Serif Display Light
-   near-black, radiating labels in Montserrat small all caps
-   warm taupe around the outside.
-
-8. PYRAMID
-   When to use: hierarchies, priorities, levels of importance
-   How: thin hairline triangle in muted sand #A5988E divided into
-   horizontal sections by thin rules, labels inside each section
-   in Noto Serif Display Light near-black, secondary text in
-   Montserrat lowercase warm taupe.
-
-9. PURE TYPOGRAPHY GRID
-   When to use: lists or frameworks where the words themselves are
-   the strongest element, no visual anchor needed
-   How: clean 2 or 3 column grid, thin hairline rules in muted sand
-   dividing columns, each cell has number in Montserrat small warm
-   taupe, heading in Noto Serif Display Light near-black, phrase in
-   Montserrat lowercase warm taupe. Open negative space used
-   intentionally.
-
-10. HORIZONTAL ALTERNATING TIMELINE
-    When to use: step by step processes where rhythm and alternation
-    help the reader follow along
-    How: thin horizontal line in muted sand across centre, small
-    precise dots in chocolate brown at each point, odd items above,
-    even items below. Number in Montserrat small chocolate brown,
-    heading in Noto Serif Display Light near-black, phrase in
-    Montserrat lowercase warm taupe.
-
-RULES FOR ALL INFOGRAPHIC LAYOUTS:
-- No dominant title - headings and subheadings only
-- Noto Serif Display Light for all headings - sentence case,
-  light weight, never bold
-- Montserrat Regular for all numbers, labels, supporting phrases
-- Thin hairline strokes only - never thick lines or filled shapes
-  except small precise dots as punctuation
-- Background: warm cream #F8F5F2 with subtle paper texture
-  (deep sage or charcoal background acceptable when content calls
-  for it - Venn diagrams, comparison layouts)
-- Generous empty space - never fill the canvas entirely
-- No gradients, no drop shadows, no decorative frames or boxes
-  unless they are the chosen layout (rounded pills)
-- No bright colours, no clipart icons, no background patterns
-- No bold or heavy font weights anywhere
-- Maximum 2 font styles
-- Small dot or diamond ornaments between sections only when they
-  add rhythm - nothing else decorative
-- Feels like it was drawn by a thoughtful human designer, not
-  generated by AI
-- Format: landscape, 16:9 ratio always
+Fonts: Noto Serif Display Light for headings, Montserrat Regular for labels.
+Never write font names as visible text.
+Thin hairlines only. No gradients, no drop shadows, no bold fonts.
+Generous whitespace. Feels designed by a human, not generated.
+Format: landscape 16:9.
 
 ---
 
-OUTPUT FORMAT:
-Return prompts in this exact format with no preamble:
+OUTPUT FORMAT - return exactly this structure, no preamble:
 
-HERO IMAGE:
-[Topic-relevant scene using specific props and setting that match
-the post content. Not a generic flat lay unless the topic genuinely
-calls for it.]
+PROMPT 1 - GENERAL LIFESTYLE:
+[prompt]
 
-SUPPORTING IMAGE 2:
-[Different angle, moment, or mood from the same topic. Vary the
-composition from the hero - if hero is overhead, this should be
-elevated angle or close-up. Mix light and dark scenes.]
+PROMPT 2 - TOPIC SPECIFIC (props/objects):
+[prompt]
 
-SUPPORTING IMAGE 3 (optional):
-[Only include if it adds something genuinely distinct from the
-first two. Skip if redundant.]
+PROMPT 3 - TOPIC SPECIFIC (person + action):
+[prompt]
 
-INFOGRAPHIC:
-[State in one sentence which layout you chose and why. Then write
-the full prompt including exact content points from the post.
-Never use placeholder text. Never repeat the same layout as the
-previous infographic you generated.]
+PROMPT 4 - INFOGRAPHIC:
+[one sentence explaining layout choice and why]
+[full prompt with all content points from the post]
 """
 
 
@@ -689,17 +547,8 @@ def generate_image_prompts(keyword: str, post_html: str) -> str:
     user_prompt = (
         f'Generate image prompts for a blog post about "{keyword}".\n\n'
         f"POST CONTENT:\n{plain_text[:3000]}\n\n"
-        f"Generate:\n"
-        f"- 1 hero image prompt (rectangular, landscape, 16:9)\n"
-        f"- 1-2 supporting image prompts (rectangular, landscape, 16:9)\n"
-        f"- 1 infographic prompt\n\n"
-        f"Each prompt must be specific to this post's topic, mood, and visual concept — not generic.\n"
-        f"Make each prompt detailed enough to paste directly into an AI image generator.\n\n"
-        f"Format your response exactly like this, with no preamble:\n\n"
-        f"HERO IMAGE:\n[detailed prompt]\n\n"
-        f"SUPPORTING IMAGE 2:\n[detailed prompt]\n\n"
-        f"SUPPORTING IMAGE 3 (optional):\n[detailed prompt]\n\n"
-        f"INFOGRAPHIC:\n[detailed prompt]"
+        f"Read the post content carefully. Every prompt must be specific to this "
+        f"post's topic, audience, and message. Follow the output format exactly."
     )
 
     response = client.messages.create(
@@ -711,28 +560,164 @@ def generate_image_prompts(keyword: str, post_html: str) -> str:
     return response.content[0].text.strip()
 
 
-def _assemble_html(title: str, body_content: str, image_prompts: str) -> str:
+def _assemble_html(title: str, post_html: str, image_prompts: str) -> str:
+    css = """
+    <style>
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      body {
+        font-family: Georgia, 'Times New Roman', serif;
+        font-size: 17px;
+        line-height: 1.85;
+        color: #1a1a1a;
+        background: #ffffff;
+      }
+      .post {
+        max-width: 740px;
+        margin: 0 auto;
+        padding: 3.5rem 2rem 5rem;
+      }
+      h1 {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 22px;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        line-height: 1.3;
+        text-transform: uppercase;
+        margin: 0 0 2rem;
+        color: #1a1a1a;
+      }
+      h3 {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 14px;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        margin: 3rem 0 0.75rem;
+        color: #1a1a1a;
+      }
+      p {
+        margin: 0 0 1.25rem;
+      }
+      p:empty { display: none; }
+      strong { font-weight: 700; }
+      em { font-style: italic; }
+      a { color: #1a1a1a; text-decoration: underline; }
+      ul {
+        margin: 0 0 1.25rem 1.5rem;
+        padding: 0;
+      }
+      ul li {
+        margin-bottom: 0.4rem;
+      }
+      hr {
+        border: none;
+        border-top: 1px solid #e5e5e5;
+        margin: 2.5rem 0;
+      }
+      .cta-block {
+        background: #f7f5f2;
+        border-radius: 6px;
+        padding: 1.25rem 1.5rem;
+        margin: 2rem 0;
+        font-size: 16px;
+      }
+      .closing-note {
+        font-style: italic;
+        color: #666;
+        font-size: 15px;
+        margin-top: 2rem;
+      }
+      .image-prompts {
+        background: #f9f9f7;
+        border: 1px solid #e8e4de;
+        border-radius: 6px;
+        padding: 1.75rem 2rem;
+        margin-top: 4rem;
+        font-family: 'Courier New', monospace;
+        font-size: 13px;
+        line-height: 1.65;
+        white-space: pre-wrap;
+        color: #444;
+      }
+      .image-prompts-title {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: #999;
+        margin-bottom: 1.25rem;
+      }
+    </style>
+    """
+
+    # Process the post content
+    import re
+
+    content = post_html
+
+    # Convert ALL CAPS lines that are headings to h3
+    lines = content.split('\n')
+    processed = []
+    for line in lines:
+        stripped = line.strip()
+        # Detect ALL CAPS heading lines (not inside tags, not empty, mostly uppercase)
+        if (stripped and
+            not stripped.startswith('<') and
+            len(stripped) > 3 and
+            sum(1 for c in stripped if c.isupper()) / max(sum(1 for c in stripped if c.isalpha()), 1) > 0.8 and
+            not stripped.startswith('http')):
+            processed.append(f'<h3>{stripped}</h3>')
+        else:
+            processed.append(line)
+    content = '\n'.join(processed)
+
+    # Wrap loose paragraphs (lines not already in tags)
+    paragraphs = content.split('\n\n')
+    wrapped = []
+    for para in paragraphs:
+        para = para.strip()
+        if not para:
+            continue
+        if para.startswith('<'):
+            wrapped.append(para)
+        else:
+            # Handle line breaks within paragraph as separate <p> tags
+            sub_lines = [l.strip() for l in para.split('\n') if l.strip()]
+            for sub in sub_lines:
+                if sub.startswith('<'):
+                    wrapped.append(sub)
+                else:
+                    wrapped.append(f'<p>{sub}</p>')
+    content = '\n'.join(wrapped)
+
+    # Convert markdown bold-italic ***text*** to <strong><em>
+    content = re.sub(r'\*\*\*(.*?)\*\*\*', r'<strong><em>\1</em></strong>', content)
+    # Convert markdown bold **text** to <strong>
+    content = re.sub(r'\*\*(.*?)\*\*', r'<strong>\1</strong>', content)
+    # Convert markdown italic *text* to <em>
+    content = re.sub(r'\*(.*?)\*', r'<em>\1</em>', content)
+
     safe_prompts = image_prompts.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{title}</title>
-<style>
-  body {{ font-family: Georgia, serif; max-width: 780px; margin: 60px auto; padding: 0 24px; color: #2d2d2d; line-height: 1.8; }}
-  h1 {{ font-size: 2em; margin-bottom: 8px; }}
-  h2 {{ font-size: 1.3em; margin-top: 48px; margin-bottom: 12px; border-bottom: 1px solid #e0d9d0; padding-bottom: 6px; }}
-  p {{ margin: 0 0 20px 0; }}
-  .cta {{ background: #f5f0ea; border-left: 3px solid #b5896a; padding: 16px 20px; margin: 32px 0; }}
-  .image-prompts {{ background: #f9f9f7; border: 1px solid #e0d9d0; padding: 24px; margin-top: 60px; font-family: monospace; font-size: 0.9em; line-height: 1.6; white-space: pre-wrap; }}
-  .image-prompts h3 {{ font-family: Georgia, serif; font-size: 1em; margin-bottom: 16px; color: #888; letter-spacing: 0.05em; text-transform: uppercase; }}
-</style>
+{css}
 </head>
 <body>
-{body_content}
+<div class="post">
+<h1>{title}</h1>
+{content}
+<hr>
+<p class="closing-note">Let me know in the comments below if you want me to cover any branding or marketing topics in more depth, and I'll make sure to create a blog post about it in the future.</p>
 <div class="image-prompts">
-<h3>Image Prompts for Nano Banana Pro</h3>
+<div class="image-prompts-title">Image Prompts for Nano Banana Pro</div>
 {safe_prompts}
+</div>
 </div>
 </body>
 </html>"""
