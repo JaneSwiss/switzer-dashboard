@@ -527,6 +527,9 @@ Use a different drink or no drink.
 Screen content is allowed and encouraged - show relevant UI like Etsy dashboard,
 Canva, Pinterest feed, website template, AI tool - but slightly blurred so
 individual words are not readable. No handwritten text visible anywhere.
+Any printed materials, papers, or cards in the scene should show
+only abstract marks, lines, shapes, or textures - no readable words or
+font names visible on any surface.
 End with: No distorted AI text, no garbled words, no bright colours,
 no gradients, no studio lighting. Landscape 16:9, high resolution.
 
@@ -535,6 +538,9 @@ The woman with long chocolate brown hair doing something directly related to the
 Choose a completely different composition and setting from Prompts 1 and 2.
 Use a different outfit and different drink from Prompts 1 and 2.
 Mid-action, not posed. Back or side profile only.
+Any printed materials, papers, or cards in the scene should show
+only abstract marks, lines, shapes, or textures - no readable words or
+font names visible on any surface.
 End with: No text, no words, no writing, no labels, no readable typography
 anywhere in the image. If a screen is visible it shows only a softly blurred
 website UI - blurred enough that no text is readable. No distorted AI text.
