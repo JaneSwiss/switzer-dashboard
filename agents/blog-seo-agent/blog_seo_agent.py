@@ -485,10 +485,13 @@ A warm editorial scene relevant to the post theme but not too specific.
 The woman with long chocolate brown hair is present - back or side profile.
 Choose a setting from the variety list above - not dark oak.
 Include 2-3 signature props relevant to the mood of the post.
-End with: no text, no words, no writing, no labels, no readable
-typography on any surface, no distorted AI text anywhere in the image,
-no bright colours, no gradients, no studio lighting, no stock
-photography look, no digital sharpening.
+End every photo prompt with:
+No text, no words, no writing, no labels, no readable typography
+anywhere in the image. If a screen is visible, it shows only a
+softly blurred website UI, Canva dashboard, or Pinterest photo
+feed - blurred enough that no text is readable. No distorted AI
+text. No bright colours, no gradients, no studio lighting,
+no stock photography look, no digital sharpening.
 
 PROMPT 2 - TOPIC SPECIFIC (prop/action focused):
 Directly illustrates what the post is about. No person needed - just the relevant
@@ -499,11 +502,14 @@ objects and context. Examples by topic:
 - Instagram post: phone showing a clean Instagram feed, content creation setup
 - Website template post: laptop open showing a clean minimal website design
 - AI tools post: hands holding iPad showing an AI tool dashboard
-For this prompt, visible screen content and relevant graphics ARE allowed -
-they add context and relevance. No need to hide screens or blur content.
-Be specific about what is on the screen or in the scene.
-Note: visible screen graphics are allowed but any text on screens
-must look natural and readable - no distorted or garbled AI text.
+Be specific about what is in the scene.
+End every photo prompt with:
+No text, no words, no writing, no labels, no readable typography
+anywhere in the image. If a screen is visible, it shows only a
+softly blurred website UI, Canva dashboard, or Pinterest photo
+feed - blurred enough that no text is readable. No distorted AI
+text. No bright colours, no gradients, no studio lighting,
+no stock photography look, no digital sharpening.
 
 PROMPT 3 - TOPIC SPECIFIC (person + action):
 The woman with long chocolate brown hair doing something directly related to the post.
@@ -514,11 +520,13 @@ Mid-action, not posed. Examples:
 - Instagram post: woman scrolling phone, content visible on screen
 - Website template post: woman reviewing website on MacBook from behind
 Back or side profile only. Include a relevant prop from the post topic.
-For this prompt, visible screen content IS allowed.
-End with: no text, no words, no writing, no labels, no readable
-typography on any surface, no distorted AI text anywhere in the image,
-no bright colours, no gradients, no studio lighting, no stock
-photography look, no digital sharpening.
+End every photo prompt with:
+No text, no words, no writing, no labels, no readable typography
+anywhere in the image. If a screen is visible, it shows only a
+softly blurred website UI, Canva dashboard, or Pinterest photo
+feed - blurred enough that no text is readable. No distorted AI
+text. No bright colours, no gradients, no studio lighting,
+no stock photography look, no digital sharpening.
 
 PROMPT 4 - INFOGRAPHIC:
 Format: landscape, 16:9 ratio always. Never portrait.
@@ -539,18 +547,27 @@ HORIZONTAL ALTERNATING TIMELINE:
   of the text block
 
 Each text block reads top to bottom in this exact order:
-1. Number: Montserrat Regular, very small, generous letter spacing,
-   chocolate brown #8D6E63 - strictly this colour, not blue, not grey
-2. Heading: Noto Serif Display Light, all caps, medium size,
-   near-black #262427 - strictly this colour, not blue, not charcoal
-3. Supporting phrase: Montserrat Regular, lowercase, very small,
-   warm taupe #BBB0AA, centred below the heading
+1. Number: Montserrat Regular, small, all caps, warm taupe #BBB0AA
+2. Heading: Noto Serif Display Light, near-black #262427
+3. Supporting phrase: Montserrat Regular, lowercase, warm taupe #BBB0AA,
+   centred below the heading
 
 Numbers are small and secondary. Headings are the main focus.
 Supporting phrases are quiet and minimal.
 Each block is compact, centred, and well-proportioned.
 Generous horizontal spacing between the 5 nodes.
 Generous vertical space between text blocks and the centre line.
+
+FONT RULES FOR ALL INFOGRAPHIC LAYOUTS:
+- Any title or heading: Noto Serif Display Light, near-black #262427.
+  First word of each heading in italic. Only the first word of each
+  heading is capitalised, the rest lowercase.
+  Example: "Clear navigation" with "Clear" in italic.
+- Numbers: Montserrat Regular, small, all caps, warm taupe #BBB0AA
+- Supporting phrases: Montserrat Regular, lowercase, warm taupe #BBB0AA
+- Never write font names as visible text in the image
+- Never use all caps for full headings - only first word capitalised
+- Never bold any text
 
 Strictly forbidden in every infographic:
 - No gradients
@@ -674,43 +691,6 @@ def generate_images_from_prompts(prompt_text: str, slug: str) -> "list[str]":
         log_error("image_generation", slug, f"Gemini client init failed: {str(e)}")
         print(f"  Image generation failed entirely: {e} - post will save without images.")
         return []
-
-    # Generate infographic using Gemini Flash Image (handles text better)
-    infographic_label = "PROMPT 4 - INFOGRAPHIC:"
-    inf_start = prompt_text.find(infographic_label)
-    if inf_start != -1:
-        inf_start += len(infographic_label)
-        # Skip the one-sentence explanation line
-        inf_text = prompt_text[inf_start:].strip()
-        # Skip the first line (layout explanation)
-        inf_lines = inf_text.split('\n')
-        inf_prompt = '\n'.join(inf_lines[1:]).strip() if len(inf_lines) > 1 else inf_text
-
-        print(f"  Generating infographic...")
-        try:
-            from google import genai as genai_chat
-            from google.genai import types as chat_types
-
-            chat_client = genai_chat.Client(api_key=GOOGLE_API_KEY)
-            response = chat_client.models.generate_content(
-                model="gemini-2.5-flash-image",
-                contents=inf_prompt,
-                config=chat_types.GenerateContentConfig(
-                    response_modalities=["IMAGE", "TEXT"],
-                ),
-            )
-            for part in response.candidates[0].content.parts:
-                if part.inline_data and part.inline_data.mime_type.startswith("image/"):
-                    inf_filename = f"{slug}-infographic.jpg"
-                    inf_path = IMAGE_OUTPUT_DIR / inf_filename
-                    with open(inf_path, "wb") as f:
-                        f.write(part.inline_data.data)
-                    image_paths.append(f"images/{inf_filename}")
-                    print(f"  Saved: {inf_filename}")
-                    break
-        except Exception as e:
-            print(f"  Infographic generation failed: {e}")
-            log_error("image_generation", slug, f"Infographic: {str(e)}")
 
     return image_paths
 
@@ -1141,4 +1121,4 @@ EXISTING POST CONTENT:
 
 
 if __name__ == "__main__":
-    reformat_existing_post("e-commerce-business-plan")
+    reformat_existing_post("branding-for-business-v2")
