@@ -513,12 +513,19 @@ Never use the same layout as the previous post.
 Brand colours:
 - Background: warm cream #F8F5F2
 - Headings: near-black #262427
-- Nodes/accents: chocolate brown #8D6E63
+- Nodes (tiny dots only): chocolate brown #8D6E63
 - Lines: muted sand #A5988E
 - Supporting text: warm taupe #BBB0AA
 
-Fonts: Noto Serif Display Light for headings, Montserrat Regular for labels.
+Fonts:
+- Headings and main labels: Noto Serif Display Light, italic style
+- Numbers and supporting phrases: Montserrat Regular, lowercase
 Never write font names as visible text.
+If the infographic has a main title, write it in ALL CAPS.
+Example: THE FIVE ELEMENTS OF CONSISTENT BRANDING
+Nodes: tiny filled circles only - no larger than 8px equivalent.
+They are punctuation marks on the line, not dominant shapes.
+Small, restrained, understated. Never large or bold.
 Thin hairlines only. No gradients, no drop shadows, no bold fonts.
 Generous whitespace. Feels designed by a human, not generated.
 Format: landscape 16:9.
@@ -917,6 +924,11 @@ FORMATTING RULES TO APPLY:
 - Do NOT add new content - only format what is already there
 - Do NOT include the post title - only return the body content
 - Keep all paragraph breaks as they are
+
+PROMPT 4 - INFOGRAPHIC NOTES (context only - do not generate infographic here):
+- If there is a main title on the infographic, write it in ALL CAPS
+- Headings in Noto Serif Display Light italic style
+- Nodes must be tiny - small filled dots only, never large circles
 
 Return only the reformatted post body. No preamble. No commentary. Just the body.
 
