@@ -111,7 +111,7 @@ def load_next_keyword() -> Optional[dict]:
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
     written_slugs = (
         {p.stem for p in OUTPUT_DIR.glob("*.txt")}
-        | {p.stem for p in OUTPUT_DIR.glob("*.html")}
+        | {p.stem.replace("-v2", "") for p in OUTPUT_DIR.glob("*.html")}
     )
 
     rows = []
@@ -1135,4 +1135,4 @@ def reformat_all_posts() -> None:
 
 
 if __name__ == "__main__":
-    reformat_existing_post("branding-for-business")
+    run()
