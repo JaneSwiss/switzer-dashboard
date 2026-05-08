@@ -973,9 +973,21 @@ def run():
     print(f"\n{'=' * 50}")
     print(f"  Done.")
     print(f"  Keyword  : {keyword}")
-    print(f"  File     : agents/blog-seo-agent/output/{filename}")
+    print(f"  File     : posts/{filename}")
     print(f"  Words    : {word_count:,}")
     print(f"{'=' * 50}\n")
+
+    # Push to GitHub so dashboard updates automatically
+    print("\n  Pushing to GitHub...")
+    try:
+        import subprocess
+        subprocess.run(["git", "add", "-A"], cwd=ROOT, check=True)
+        subprocess.run(["git", "commit", "-m", f"add post: {keyword}"], cwd=ROOT, check=True)
+        subprocess.run(["git", "push", "origin", "main"], cwd=ROOT, check=True)
+        print("  GitHub updated successfully.")
+    except subprocess.CalledProcessError as e:
+        print(f"  GitHub push failed: {e} - post saved locally, push manually if needed.")
+        log_error("git_push", keyword, str(e))
 
 
 def reformat_existing_post(slug: str) -> None:
