@@ -633,13 +633,12 @@ def generate_images_from_prompts(prompt_text: str, slug: str) -> "list[str]":
             print(f"  Generating image {i}/3...")
             try:
                 response = client.models.generate_images(
-                    model="imagen-3.0-generate-002",
+                    model="imagen-4.0-generate-001",
                     prompt=prompt,
                     config=genai_types.GenerateImagesConfig(
                         number_of_images=1,
                         aspect_ratio="16:9",
-                        safety_filter_level="BLOCK_SOME",
-                        person_generation="allow_adult",
+                        output_mime_type="image/jpeg",
                     ),
                 )
                 if response.generated_images:
