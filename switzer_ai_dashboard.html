@@ -266,10 +266,16 @@ document.querySelectorAll('.tab-btn').forEach(btn => btn.addEventListener('click
   document.getElementById('panel-'+btn.dataset.tab).classList.add('active');
 }));
 
-// GitHub read
+// GitHub read — uses API to bypass CDN cache
 async function loadData() {
-  const res = await fetch(RAW_URL+'?t='+Date.now());
-  DATA = await res.json();
+  const res = await fetch(API_URL, {
+    headers: {
+      'Authorization': 'token ' + localStorage.getItem('switzer_gh_token'),
+      'Accept': 'application/vnd.github.v3+json'
+    }
+  });
+  const meta = await res.json();
+  DATA = JSON.parse(atob(meta.content.replace(/\n/g, '')));
 }
 
 // GitHub write — reads current SHA then PUTs updated file
