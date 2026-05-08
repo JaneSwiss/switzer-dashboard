@@ -504,31 +504,51 @@ Back or side profile only. Include a relevant prop from the post topic.
 For this prompt, visible screen content IS allowed.
 
 PROMPT 4 - INFOGRAPHIC:
-Choose the layout that best fits the post content. VARIETY IS MANDATORY.
-Options: serpentine flow curve, vertical spine, Venn diagram, radial dot map,
-rounded pill list, two-column comparison, floating object grid,
-horizontal alternating timeline, pure typography grid.
-Never use the same layout as the previous post.
+Format: landscape, 16:9 ratio always. Never portrait.
 
-Brand colours:
+Use this layout for all infographics unless the content specifically
+requires otherwise:
+
+HORIZONTAL ALTERNATING TIMELINE:
 - Background: warm cream #F8F5F2
-- Headings: near-black #262427
-- Nodes (tiny dots only): chocolate brown #8D6E63
-- Lines: muted sand #A5988E
-- Supporting text: warm taupe #BBB0AA
+- A thin horizontal line in muted sand #A5988E runs across the exact
+  centre of the image
+- Nodes: tiny filled circles only - no larger than 8px equivalent.
+  They are punctuation marks on the line, not dominant shapes.
+  Small, restrained, understated. Never large or bold.
+- Items 01, 03, 05 are centred above the line, node touching the
+  bottom of the text block
+- Items 02, 04 are centred below the line, node touching the top
+  of the text block
 
-Fonts:
-- Headings and main labels: Noto Serif Display Light, italic style
-- Numbers and supporting phrases: Montserrat Regular, lowercase
-Never write font names as visible text.
-If the infographic has a main title, write it in ALL CAPS.
-Example: THE FIVE ELEMENTS OF CONSISTENT BRANDING
-Nodes: tiny filled circles only - no larger than 8px equivalent.
-They are punctuation marks on the line, not dominant shapes.
-Small, restrained, understated. Never large or bold.
-Thin hairlines only. No gradients, no drop shadows, no bold fonts.
-Generous whitespace. Feels designed by a human, not generated.
-Format: landscape 16:9.
+Each text block reads top to bottom in this exact order:
+1. Number: Montserrat Regular, very small, generous letter spacing,
+   chocolate brown #8D6E63 - strictly this colour, not blue, not grey
+2. Heading: Noto Serif Display Light, all caps, medium size,
+   near-black #262427 - strictly this colour, not blue, not charcoal
+3. Supporting phrase: Montserrat Regular, lowercase, very small,
+   warm taupe #BBB0AA, centred below the heading
+
+Numbers are small and secondary. Headings are the main focus.
+Supporting phrases are quiet and minimal.
+Each block is compact, centred, and well-proportioned.
+Generous horizontal spacing between the 5 nodes.
+Generous vertical space between text blocks and the centre line.
+
+Strictly forbidden in every infographic:
+- No gradients
+- No drop shadows
+- No decorative borders or boxes
+- No bright colours
+- No clipart-style icons
+- No background patterns
+- No bold or heavy font weights
+- No more than 2 font styles
+- No thick lines of any kind
+- No blue or grey tones in the numbers or headings
+
+Feels like: designed by a professional human graphic designer.
+Clean, spacious, refined, editorial.
 
 ---
 
@@ -926,8 +946,6 @@ FORMATTING RULES TO APPLY:
 - Keep all paragraph breaks as they are
 
 PROMPT 4 - INFOGRAPHIC NOTES (context only - do not generate infographic here):
-- If there is a main title on the infographic, write it in ALL CAPS
-- Headings in Noto Serif Display Light italic style
 - Nodes must be tiny - small filled dots only, never large circles
 
 Return only the reformatted post body. No preamble. No commentary. Just the body.
