@@ -457,7 +457,12 @@ SETTING VARIETY - rotate between these, never use the same setting twice in one 
 - Dark oak desk ONLY if explicitly relevant to the post topic - not the default
 
 SIGNATURE PROPS (use 2-3 per image, varied across the 3 photos):
-- Starbucks iced latte or matcha in clear cup with green straw
+- Drinks - rotate variety, never repeat the same drink in one post:
+  Starbucks iced latte in clear cup with green straw, Starbucks matcha
+  in clear cup, regular espresso in a small ceramic cup, latte in a
+  ribbed glass, iced coffee in a clear glass, Stanley tumbler in cream
+  or sand tone, a pretty glass water bottle, matcha in a ceramic bowl.
+  Use a different drink in each of the 3 photo prompts.
 - Apple MacBook in silver or space grey
 - Apple AirPods Max in silver
 - Productivity Planner by Intelligent Change - black linen hardcover with gold foil
@@ -480,8 +485,10 @@ A warm editorial scene relevant to the post theme but not too specific.
 The woman with long chocolate brown hair is present - back or side profile.
 Choose a setting from the variety list above - not dark oak.
 Include 2-3 signature props relevant to the mood of the post.
-End with: no text, no words, no writing, no labels, no bright colours,
-no gradients, no studio lighting, no stock photography look, no digital sharpening.
+End with: no text, no words, no writing, no labels, no readable
+typography on any surface, no distorted AI text anywhere in the image,
+no bright colours, no gradients, no studio lighting, no stock
+photography look, no digital sharpening.
 
 PROMPT 2 - TOPIC SPECIFIC (prop/action focused):
 Directly illustrates what the post is about. No person needed - just the relevant
@@ -495,6 +502,8 @@ objects and context. Examples by topic:
 For this prompt, visible screen content and relevant graphics ARE allowed -
 they add context and relevance. No need to hide screens or blur content.
 Be specific about what is on the screen or in the scene.
+Note: visible screen graphics are allowed but any text on screens
+must look natural and readable - no distorted or garbled AI text.
 
 PROMPT 3 - TOPIC SPECIFIC (person + action):
 The woman with long chocolate brown hair doing something directly related to the post.
@@ -506,6 +515,10 @@ Mid-action, not posed. Examples:
 - Website template post: woman reviewing website on MacBook from behind
 Back or side profile only. Include a relevant prop from the post topic.
 For this prompt, visible screen content IS allowed.
+End with: no text, no words, no writing, no labels, no readable
+typography on any surface, no distorted AI text anywhere in the image,
+no bright colours, no gradients, no studio lighting, no stock
+photography look, no digital sharpening.
 
 PROMPT 4 - INFOGRAPHIC:
 Format: landscape, 16:9 ratio always. Never portrait.
@@ -661,6 +674,43 @@ def generate_images_from_prompts(prompt_text: str, slug: str) -> "list[str]":
         log_error("image_generation", slug, f"Gemini client init failed: {str(e)}")
         print(f"  Image generation failed entirely: {e} - post will save without images.")
         return []
+
+    # Generate infographic using Gemini Flash Image (handles text better)
+    infographic_label = "PROMPT 4 - INFOGRAPHIC:"
+    inf_start = prompt_text.find(infographic_label)
+    if inf_start != -1:
+        inf_start += len(infographic_label)
+        # Skip the one-sentence explanation line
+        inf_text = prompt_text[inf_start:].strip()
+        # Skip the first line (layout explanation)
+        inf_lines = inf_text.split('\n')
+        inf_prompt = '\n'.join(inf_lines[1:]).strip() if len(inf_lines) > 1 else inf_text
+
+        print(f"  Generating infographic...")
+        try:
+            from google import genai as genai_chat
+            from google.genai import types as chat_types
+
+            chat_client = genai_chat.Client(api_key=GOOGLE_API_KEY)
+            response = chat_client.models.generate_content(
+                model="gemini-2.5-flash-preview-04-17",
+                contents=inf_prompt,
+                config=chat_types.GenerateContentConfig(
+                    response_modalities=["IMAGE", "TEXT"],
+                ),
+            )
+            for part in response.candidates[0].content.parts:
+                if part.inline_data and part.inline_data.mime_type.startswith("image/"):
+                    inf_filename = f"{slug}-infographic.jpg"
+                    inf_path = IMAGE_OUTPUT_DIR / inf_filename
+                    with open(inf_path, "wb") as f:
+                        f.write(part.inline_data.data)
+                    image_paths.append(f"images/{inf_filename}")
+                    print(f"  Saved: {inf_filename}")
+                    break
+        except Exception as e:
+            print(f"  Infographic generation failed: {e}")
+            log_error("image_generation", slug, f"Infographic: {str(e)}")
 
     return image_paths
 
