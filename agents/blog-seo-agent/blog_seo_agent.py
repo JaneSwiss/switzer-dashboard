@@ -891,6 +891,36 @@ def save_output(keyword_row: dict, post_html: str, image_prompts: str, image_pat
     })
     COMPLETED_LOG.write_text(json.dumps(completed, indent=2), encoding="utf-8")
 
+    # Update dashboard_data.json
+    dashboard_file = ROOT / "dashboard_data.json"
+    try:
+        dashboard_data = json.loads(dashboard_file.read_text(encoding="utf-8"))
+        posts = dashboard_data.get("blog_seo_agent", {}).get("posts", [])
+        existing_keywords = [p.get("keyword", "").lower() for p in posts]
+
+        if keyword_row["_keyword"].lower() not in existing_keywords:
+            new_post = {
+                "title": title,
+                "keyword": keyword_row["_keyword"],
+                "written": True,
+                "published": False,
+                "date": date.today().isoformat(),
+                "url": f"https://janeswiss.github.io/switzer-dashboard/posts/{filename}"
+            }
+            posts.append(new_post)
+            dashboard_data["blog_seo_agent"]["posts"] = posts
+            dashboard_file.write_text(
+                json.dumps(dashboard_data, indent=2),
+                encoding="utf-8"
+            )
+            print(f"  Dashboard: added '{keyword_row['_keyword']}' to dashboard_data.json")
+        else:
+            print(f"  Dashboard: '{keyword_row['_keyword']}' already exists - skipping to preserve published status")
+
+    except Exception as e:
+        log_error("dashboard_update", keyword_row["_keyword"], str(e))
+        print(f"  Dashboard update failed: {e} - continuing anyway")
+
     print(f"  Saved  : {out_path}")
     print(f"  Words  : {word_count:,}")
     print(f"  Log    : {COMPLETED_LOG}")
