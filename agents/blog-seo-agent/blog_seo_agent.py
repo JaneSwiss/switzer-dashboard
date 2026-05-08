@@ -442,164 +442,144 @@ def write_blog_post(keyword_row: dict, competitors: list[dict]) -> str:
 
 IMAGE_PROMPT_SYSTEM = """You are generating image prompts for SwitzerTemplates blog posts.
 Read the blog post content carefully. Every prompt must be specific to the post topic.
+VARIETY IS MANDATORY across all 3 photo prompts - no two images in the same post
+should use the same angle, setting, outfit, or drink.
 
-THE FEMALE CHARACTER (when a person appears):
-- Always has long chocolate brown hair - this is non-negotiable
-- Face never visible - back, side profile only
-- Business outfits: oversized blazers, tailored coats, wide-leg trousers, high heels
-- Hands: long gel nails in nude or white French, gold jewellery - rings, bangles, watch
+THE FEMALE CHARACTER:
+- Always has long chocolate brown hair
+- Face never fully visible - back, side profile, or hands/wrists only
+- OUTFIT - rotate freely, never repeat in same post:
+  oversized cream knit jumper, camel oversized coat, white linen shirt,
+  chocolate brown blazer, black turtleneck, beige trench coat,
+  white oversized sweatshirt, rust coloured knit, grey blazer,
+  soft sage green cardigan
+- Hands when shown: long gel nails in nude or white French, gold jewellery -
+  rings, thin bangles, delicate chain bracelet, small gold hoop earrings visible
 
-SETTING VARIETY - rotate between these, never use the same setting twice in one post:
-- White marble desk with gold accents, bright airy room
-- Warm beige travertine surface, soft natural light
-- Light grey minimal interior, large windows
-- Cream linen surface, warm morning light
-- Dark oak desk ONLY if explicitly relevant to the post topic - not the default
+COMPOSITION - pick a different one for each of the 3 prompts, never repeat:
+1. Woman from behind at a desk, seated, slight 45-degree angle
+2. Overhead flat lay, no person, objects arranged loosely
+3. Close-up of hands only from above or side, mid-action
+4. Woman on sofa or floor with laptop on lap, legs crossed
+5. Woman at a café table outdoors or by a window, side profile
+6. Woman standing and leaning over a desk, action shot
+7. Low angle shot from desk level looking slightly up
+8. Wide room shot showing the full luxurious interior, woman small in frame
+9. Close-up of one hero object on a surface, blurred background
+10. Woman's back and side, looking out a large window, holding a drink
 
-SIGNATURE PROPS (use 2-3 per image, varied across the 3 photos):
-- Drinks - rotate variety, never repeat the same drink in one post:
-  Starbucks iced latte in clear cup with green straw, Starbucks matcha
-  in clear cup, regular espresso in a small ceramic cup, latte in a
-  ribbed glass, iced coffee in a clear glass, Stanley tumbler in cream
-  or sand tone, a pretty glass water bottle, matcha in a ceramic bowl.
-  Use a different drink in each of the 3 photo prompts.
+SETTINGS - pick a different one for each of the 3 prompts, never repeat:
+- White marble desk or table, bright airy room with gold accents
+- Dark oak oval desk, warm moody interior
+- Glass coffee table, cream bouclé sofa visible
+- Café table with rattan chairs, outdoors or large window behind
+- Travertine or concrete surface, minimal grey interior
+- Light grey minimal desk, large floor-to-ceiling windows
+- Cream linen surface on a bed or sofa
+- Stone or plaster surface, Mediterranean or European interior feel
+- Wooden floor, person seated or cross-legged with items around them
+
+DRINKS - pick a different one for each of the 3 prompts, never repeat:
+- Starbucks iced latte in clear cup with green straw
+- Starbucks matcha in clear cup with green straw
+- Latte in a ribbed clear glass
+- Espresso in a small ceramic cup on a saucer
+- Matcha in a ceramic bowl or small ceramic cup
+- Stanley tumbler in cream or sand tone
+- Iced coffee in a plain clear glass
+- Pretty glass water bottle with a straw
+- No drink at all - leave it out entirely
+
+SIGNATURE PROPS (use 1-2 per image, varied):
 - Apple MacBook in silver or space grey
 - Apple AirPods Max in silver
 - Productivity Planner by Intelligent Change - black linen hardcover with gold foil
-- Gold jewellery as detail
+- Gold jewellery pieces placed casually
 - Tortoiseshell claw clip
+- Fine-line pen
+- Small ceramic object in matte taupe or cream
 
 PHOTOGRAPHY STYLE (all images):
 - Warm editorial quiet luxury - real and lived-in, not staged
 - Kodak Portra 400: warm colour grading, visible grain, slightly soft
 - Natural window light with directional shadows, never studio lighting
-- 35mm or 50mm lens, shallow depth of field
-- Intentionally imperfect: one element cropped at frame edge, uneven light,
-  visible surface texture, signs of real use
-- Format: landscape, 16:9 ratio, high resolution
+- Shallow depth of field, something slightly blurred in foreground or background
+- Intentionally imperfect: one element cropped at frame edge,
+  uneven light, visible surface texture, signs of real use
+- Candid, not arranged - feels genuinely real
 
 ---
 
 PROMPT 1 - GENERAL LIFESTYLE:
-A warm editorial scene relevant to the post theme but not too specific.
-The woman with long chocolate brown hair is present - back or side profile.
-Choose a setting from the variety list above - not dark oak.
-Include 2-3 signature props relevant to the mood of the post.
-End every photo prompt with:
-No text, no words, no writing, no labels, no readable typography
-anywhere in the image. If a screen is visible, it shows only a
-softly blurred website UI, Canva dashboard, or Pinterest photo
-feed - blurred enough that no text is readable. No distorted AI
-text. No bright colours, no gradients, no studio lighting,
-no stock photography look, no digital sharpening.
+Choose one composition, one setting, one drink from the lists above.
+Scene should loosely relate to the post theme but not be too literal.
+The woman is present.
+End with: No text, no words, no writing, no labels, no readable typography
+anywhere in the image. If a screen is visible it shows only a softly blurred
+website UI or app - blurred enough that no text is readable. No distorted AI
+text. No bright colours, no gradients, no studio lighting, no stock photography
+look, no digital sharpening. Landscape 16:9, high resolution.
 
-PROMPT 2 - TOPIC SPECIFIC (prop/action focused):
-Directly illustrates what the post is about. No person needed - just the relevant
-objects and context. Examples by topic:
-- Branding post: colour swatches, font cards, mood board elements on a desk
-- Business plan post: printed A4 pages being written on, planner open
-- Ecommerce post: products being packaged, shipping materials, small product boxes
-- Instagram post: phone showing a clean Instagram feed, content creation setup
-- Website template post: laptop open showing a clean minimal website design
-- AI tools post: hands holding iPad showing an AI tool dashboard
-Be specific about what is in the scene.
-End every photo prompt with:
-No text, no words, no writing, no labels, no readable typography
-anywhere in the image. If a screen is visible, it shows only a
-softly blurred website UI, Canva dashboard, or Pinterest photo
-feed - blurred enough that no text is readable. No distorted AI
-text. No bright colours, no gradients, no studio lighting,
-no stock photography look, no digital sharpening.
+PROMPT 2 - TOPIC SPECIFIC (props/objects):
+Directly illustrates the post topic through objects and scene only - no person needed.
+Choose a completely different composition and setting from Prompt 1.
+Use a different drink or no drink.
+Screen content is allowed and encouraged - show relevant UI like Etsy dashboard,
+Canva, Pinterest feed, website template, AI tool - but slightly blurred so
+individual words are not readable. No handwritten text visible anywhere.
+End with: No distorted AI text, no garbled words, no bright colours,
+no gradients, no studio lighting. Landscape 16:9, high resolution.
 
 PROMPT 3 - TOPIC SPECIFIC (person + action):
 The woman with long chocolate brown hair doing something directly related to the post.
-Mid-action, not posed. Examples:
-- Branding post: woman arranging colour swatches or reviewing brand board on iPad
-- Business plan post: woman writing in a planner, pen in hand
-- Ecommerce post: woman with long brown hair packing small products at a desk
-- Instagram post: woman scrolling phone, content visible on screen
-- Website template post: woman reviewing website on MacBook from behind
-Back or side profile only. Include a relevant prop from the post topic.
-End every photo prompt with:
-No text, no words, no writing, no labels, no readable typography
-anywhere in the image. If a screen is visible, it shows only a
-softly blurred website UI, Canva dashboard, or Pinterest photo
-feed - blurred enough that no text is readable. No distorted AI
-text. No bright colours, no gradients, no studio lighting,
-no stock photography look, no digital sharpening.
+Choose a completely different composition and setting from Prompts 1 and 2.
+Use a different outfit and different drink from Prompts 1 and 2.
+Mid-action, not posed. Back or side profile only.
+End with: No text, no words, no writing, no labels, no readable typography
+anywhere in the image. If a screen is visible it shows only a softly blurred
+website UI - blurred enough that no text is readable. No distorted AI text.
+No bright colours, no gradients, no studio lighting, no stock photography
+look, no digital sharpening. Landscape 16:9, high resolution.
 
 PROMPT 4 - INFOGRAPHIC:
-Format: landscape, 16:9 ratio always. Never portrait.
+Choose the layout that best fits the post content. VARIETY IS MANDATORY.
+Options: serpentine flow curve, vertical spine, Venn diagram, radial dot map,
+rounded pill list, two-column comparison, floating object grid,
+horizontal alternating timeline, pure typography grid.
+Never use the same layout as the previous post.
 
-Use this layout for all infographics unless the content specifically
-requires otherwise:
-
-HORIZONTAL ALTERNATING TIMELINE:
+Brand colours:
 - Background: warm cream #F8F5F2
-- A thin horizontal line in muted sand #A5988E runs across the exact
-  centre of the image
-- Nodes: tiny filled circles only - no larger than 8px equivalent.
-  They are punctuation marks on the line, not dominant shapes.
-  Small, restrained, understated. Never large or bold.
-- Items 01, 03, 05 are centred above the line, node touching the
-  bottom of the text block
-- Items 02, 04 are centred below the line, node touching the top
-  of the text block
+- Headings: near-black #262427
+- Nodes/accents: chocolate brown #8D6E63
+- Lines: muted sand #A5988E
+- Supporting text: warm taupe #BBB0AA
 
-Each text block reads top to bottom in this exact order:
-1. Number: Montserrat Regular, small, all caps, warm taupe #BBB0AA
-2. Heading: Noto Serif Display Light, near-black #262427
-3. Supporting phrase: Montserrat Regular, lowercase, warm taupe #BBB0AA,
-   centred below the heading
-
-Numbers are small and secondary. Headings are the main focus.
-Supporting phrases are quiet and minimal.
-Each block is compact, centred, and well-proportioned.
-Generous horizontal spacing between the 5 nodes.
-Generous vertical space between text blocks and the centre line.
-
-FONT RULES FOR ALL INFOGRAPHIC LAYOUTS:
-- Any title or heading: Noto Serif Display Light, near-black #262427.
-  First word of each heading in italic. Only the first word of each
-  heading is capitalised, the rest lowercase.
-  Example: "Clear navigation" with "Clear" in italic.
+Font rules:
+- Headings: Noto Serif Display Light, near-black #262427.
+  First word of each heading in italic. Only first word capitalised, rest lowercase.
 - Numbers: Montserrat Regular, small, all caps, warm taupe #BBB0AA
 - Supporting phrases: Montserrat Regular, lowercase, warm taupe #BBB0AA
 - Never write font names as visible text in the image
-- Never use all caps for full headings - only first word capitalised
-- Never bold any text
-
-Strictly forbidden in every infographic:
-- No gradients
-- No drop shadows
-- No decorative borders or boxes
-- No bright colours
-- No clipart-style icons
-- No background patterns
-- No bold or heavy font weights
-- No more than 2 font styles
-- No thick lines of any kind
-- No blue or grey tones in the numbers or headings
-
-Feels like: designed by a professional human graphic designer.
-Clean, spacious, refined, editorial.
+- Never bold any text. Thin hairlines only. Generous whitespace.
+- Feels hand-designed and elegant, not generated. Landscape 16:9.
 
 ---
 
-OUTPUT FORMAT - return exactly this structure, no preamble:
+OUTPUT FORMAT - return exactly this, no preamble:
 
 PROMPT 1 - GENERAL LIFESTYLE:
-[prompt]
+[prompt - state which composition, setting and drink you chose]
 
 PROMPT 2 - TOPIC SPECIFIC (props/objects):
-[prompt]
+[prompt - state which composition and setting you chose]
 
 PROMPT 3 - TOPIC SPECIFIC (person + action):
-[prompt]
+[prompt - state which composition, setting, outfit and drink you chose]
 
 PROMPT 4 - INFOGRAPHIC:
-[one sentence explaining layout choice and why]
-[full prompt with all content points from the post]
+[one sentence: layout chosen and why]
+[full infographic prompt with all content points from the post]
 """
 
 
@@ -1149,4 +1129,4 @@ def reformat_all_posts() -> None:
 
 
 if __name__ == "__main__":
-    reformat_all_posts()
+    reformat_existing_post("branding-for-business")
