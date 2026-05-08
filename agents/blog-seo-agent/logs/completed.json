@@ -1,11 +1,5 @@
 [
   {
-    "keyword": "canva branding kit",
-    "date_written": "2026-05-05",
-    "word_count": 1603,
-    "output_filename": "canva-branding-kit.txt"
-  },
-  {
     "keyword": "starting a business plan template",
     "date_written": "2026-05-05",
     "word_count": 1440,
@@ -46,5 +40,23 @@
     "date_written": "2026-05-06",
     "word_count": 1814,
     "output_filename": "website-template-for-portfolio.html"
+  },
+  {
+    "keyword": "canva branding kit",
+    "date_written": "2026-05-08",
+    "word_count": 1797,
+    "output_filename": "canva-branding-kit.html"
+  },
+  {
+    "keyword": "ecommerce business marketing",
+    "date_written": "2026-05-08",
+    "word_count": 1580,
+    "output_filename": "ecommerce-business-marketing.html"
+  },
+  {
+    "keyword": "ecommerce business marketing",
+    "date_written": "2026-05-08",
+    "word_count": 1744,
+    "output_filename": "ecommerce-business-marketing.html"
   }
 ]

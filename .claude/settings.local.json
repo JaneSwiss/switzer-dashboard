@@ -129,11 +129,14 @@
       "Bash(mv free-instagram-post-templates-v2.html free-instagram-post-templates.html)",
       "Bash(rm trending-products-to-sell-online.html)",
       "Bash(cp /Users/janeair/Documents/AI/switzertemplates/agents/blog-seo-agent/output/*.html /Users/janeair/Documents/AI/switzertemplates/posts/)",
-      "Bash(cp -r /Users/janeair/Documents/AI/switzertemplates/agents/blog-seo-agent/output/images/ /Users/janeair/Documents/AI/switzertemplates/posts/images/)"
+      "Bash(cp -r /Users/janeair/Documents/AI/switzertemplates/agents/blog-seo-agent/output/images/ /Users/janeair/Documents/AI/switzertemplates/posts/images/)",
+      "Bash(awk 'NR>=443 && /^\"\"\"$/ && NR>443 {print NR; exit}' /Users/janeair/Documents/AI/switzertemplates/agents/blog-seo-agent/blog_seo_agent.py)",
+      "Bash(rm /Users/janeair/Documents/AI/switzertemplates/posts/canva-branding-kit.html && echo \"Deleted canva-branding-kit.html\" && rm -f /Users/janeair/Documents/AI/switzertemplates/posts/images/canva-branding-kit-image-*.jpg && echo \"Deleted canva images\")"
     ],
     "additionalDirectories": [
       "/Users/janeair/Documents/AI/switzertemplates/agents/blog-seo-agent/output",
-      "/private/tmp"
+      "/private/tmp",
+      "/Users/janeair/Documents/AI/switzertemplates/posts/images"
     ]
   }
 }

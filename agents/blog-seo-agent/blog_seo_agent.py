@@ -112,6 +112,7 @@ def load_next_keyword() -> Optional[dict]:
     written_slugs = (
         {p.stem for p in OUTPUT_DIR.glob("*.txt")}
         | {p.stem.replace("-v2", "") for p in OUTPUT_DIR.glob("*.html")}
+        | {"canva-branding-kit", "starting-a-business-plan-template"}
     )
 
     rows = []
