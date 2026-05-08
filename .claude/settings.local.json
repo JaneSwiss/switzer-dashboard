@@ -121,7 +121,13 @@
       "Bash(git ls-tree *)",
       "Bash(git log *)",
       "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); print\\(len\\(d\\), 'entries restored'\\)\")",
-      "Bash(pip install *)"
+      "Bash(pip install *)",
+      "Bash(git remote *)",
+      "Bash(rm ecommerce-business-ideas.html)",
+      "Bash(mv ecommerce-business-ideas-v2.html ecommerce-business-ideas.html)",
+      "Bash(rm free-instagram-post-templates.html)",
+      "Bash(mv free-instagram-post-templates-v2.html free-instagram-post-templates.html)",
+      "Bash(rm trending-products-to-sell-online.html)"
     ],
     "additionalDirectories": [
       "/Users/janeair/Documents/AI/switzertemplates/agents/blog-seo-agent/output",
