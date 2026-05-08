@@ -1120,5 +1120,33 @@ EXISTING POST CONTENT:
     print(f"  Done.")
 
 
+def reformat_all_posts() -> None:
+    """
+    Batch reformat all original posts in the output directory.
+    Skips any file whose stem ends with -v2 (already reformatted).
+    """
+    html_files = sorted([
+        f for f in OUTPUT_DIR.glob("*.html")
+        if not f.stem.endswith("-v2")
+    ])
+
+    if not html_files:
+        print("No posts to reformat.")
+        return
+
+    total = len(html_files)
+    print(f"Found {total} post(s) to reformat.\n")
+
+    for i, file in enumerate(html_files, 1):
+        slug = file.stem
+        print(f"Processing {i}/{total}: {slug}...")
+        try:
+            reformat_existing_post(slug)
+        except Exception as e:
+            log_error("reformat_all", slug, str(e))
+            print(f"  Failed: {e} — continuing to next post.")
+        print()
+
+
 if __name__ == "__main__":
-    reformat_existing_post("branding-for-business-v2")
+    reformat_all_posts()

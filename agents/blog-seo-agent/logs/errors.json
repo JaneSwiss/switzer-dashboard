@@ -1,0 +1,44 @@
+[
+  {
+    "date": "2026-05-08",
+    "stage": "image_generation",
+    "keyword": "e-commerce-business-plan",
+    "error": "Prompt 1: 403 PERMISSION_DENIED. {'error': {'code': 403, 'message': 'Your API key was reported as leaked. Please use another API key.', 'status': 'PERMISSION_DENIED'}}"
+  },
+  {
+    "date": "2026-05-08",
+    "stage": "image_generation",
+    "keyword": "e-commerce-business-plan",
+    "error": "Prompt 2: 403 PERMISSION_DENIED. {'error': {'code': 403, 'message': 'Your API key was reported as leaked. Please use another API key.', 'status': 'PERMISSION_DENIED'}}"
+  },
+  {
+    "date": "2026-05-08",
+    "stage": "image_generation",
+    "keyword": "e-commerce-business-plan",
+    "error": "Prompt 3: 403 PERMISSION_DENIED. {'error': {'code': 403, 'message': 'Your API key was reported as leaked. Please use another API key.', 'status': 'PERMISSION_DENIED'}}"
+  },
+  {
+    "date": "2026-05-08",
+    "stage": "image_generation",
+    "keyword": "e-commerce-business-plan",
+    "error": "Prompt 1: 404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/imagen-3.0-generate-002 is not found for API version v1beta, or is not supported for predict. Call ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
+  },
+  {
+    "date": "2026-05-08",
+    "stage": "image_generation",
+    "keyword": "e-commerce-business-plan",
+    "error": "Prompt 2: 404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/imagen-3.0-generate-002 is not found for API version v1beta, or is not supported for predict. Call ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
+  },
+  {
+    "date": "2026-05-08",
+    "stage": "image_generation",
+    "keyword": "e-commerce-business-plan",
+    "error": "Prompt 3: 404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/imagen-3.0-generate-002 is not found for API version v1beta, or is not supported for predict. Call ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
+  },
+  {
+    "date": "2026-05-08",
+    "stage": "image_generation",
+    "keyword": "e-commerce-business-plan",
+    "error": "Infographic: 404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-2.5-flash-preview-04-17 is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"
+  }
+]

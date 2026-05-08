@@ -103,7 +103,29 @@
       "Bash(mkdir -p /Users/janeair/Documents/AI/switzertemplates/agents/blog-seo-agent/keywords /Users/janeair/Documents/AI/switzertemplates/agents/blog-seo-agent/output /Users/janeair/Documents/AI/switzertemplates/agents/blog-seo-agent/logs)",
       "Bash(touch /Users/janeair/Documents/AI/switzertemplates/agents/blog-seo-agent/keywords/.gitkeep /Users/janeair/Documents/AI/switzertemplates/agents/blog-seo-agent/output/.gitkeep /Users/janeair/Documents/AI/switzertemplates/agents/blog-seo-agent/logs/.gitkeep)",
       "Bash(python agents/blog-seo-agent/blog_seo_agent.py)",
-      "Bash(python3 agents/blog-seo-agent/blog_seo_agent.py)"
+      "Bash(python3 agents/blog-seo-agent/blog_seo_agent.py)",
+      "Bash(git rebase *)",
+      "Bash(git stash *)",
+      "Bash(git fetch *)",
+      "Bash(git checkout *)",
+      "Bash(git pull *)",
+      "Bash(git restore *)",
+      "Bash(git push *)",
+      "Bash(mkdir -p /Users/janeair/Documents/AI/switzertemplates/posts && cp /Users/janeair/Documents/AI/switzertemplates/agents/blog-seo-agent/output/*.html /Users/janeair/Documents/AI/switzertemplates/posts/ && ls /Users/janeair/Documents/AI/switzertemplates/posts/)",
+      "Bash(GIT_EDITOR=true git rebase --continue)",
+      "Bash(GIT_EDITOR=\"true\" git rebase --continue)",
+      "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); print\\('blog_seo_agent posts count:', len\\(d.get\\('blog_seo_agent',{}\\).get\\('posts',d.get\\('blog_seo_agent',{}\\).get\\('posts',[]\\)\\)\\)\\); print\\('etsy_agent last_run:', d.get\\('etsy_agent',{}\\).get\\('last_run'\\)\\); print\\('keyword_masterlist count:', len\\(d.get\\('keyword_masterlist',[]\\)\\)\\)\")",
+      "Bash(cp /Users/janeair/Documents/AI/switzertemplates/dashboard_data.json /tmp/merged_dashboard.json)",
+      "Bash(git merge *)",
+      "Bash(cp /tmp/merged_dashboard.json *)",
+      "Bash(git ls-tree *)",
+      "Bash(git log *)",
+      "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); print\\(len\\(d\\), 'entries restored'\\)\")",
+      "Bash(pip install *)"
+    ],
+    "additionalDirectories": [
+      "/Users/janeair/Documents/AI/switzertemplates/agents/blog-seo-agent/output",
+      "/private/tmp"
     ]
   }
 }
