@@ -30,7 +30,7 @@ from google.genai import types as genai_types
 ROOT        = Path(__file__).resolve().parents[2]
 AGENT_DIR   = Path(__file__).resolve().parent
 KEYWORDS_FILE   = AGENT_DIR / "keywords" / "switzertemplates_keyword_masterlist.csv"
-OUTPUT_DIR      = AGENT_DIR / "output"
+OUTPUT_DIR      = ROOT / "posts"
 LOGS_DIR        = AGENT_DIR / "logs"
 COMPLETED_LOG   = LOGS_DIR / "completed.json"
 ERROR_LOG       = LOGS_DIR / "errors.json"
@@ -42,7 +42,7 @@ load_dotenv(ROOT / ".env")
 ANTHROPIC_API_KEY   = os.getenv("ANTHROPIC_API_KEY")
 VALUESERP_API_KEY   = os.getenv("VALUESERP_API_KEY")
 GOOGLE_API_KEY      = os.getenv("NANO_BANANA_API_KEY")
-IMAGE_OUTPUT_DIR    = AGENT_DIR / "output" / "images"
+IMAGE_OUTPUT_DIR    = ROOT / "posts" / "images"
 
 BANNED_WORDS = [
     "certainly", "delve", "embark", "enlightening", "esteemed", "shed light",
