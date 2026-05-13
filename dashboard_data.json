@@ -70,11 +70,11 @@
         "searches": "1,111",
         "competition": "1,566",
         "score": "710",
-        "notes": "#1 opportunity â no listing targeting this yet"
+        "notes": "#1 opportunity \u00e2\u0080\u0094 no listing targeting this yet"
       },
       {
         "keyword": "pinterest inspired",
-        "searches": "â",
+        "searches": "\u00e2\u0080\u0094",
         "competition": "1,363",
         "score": "260",
         "notes": "Strong, low competition"
@@ -88,7 +88,7 @@
       },
       {
         "keyword": "smm instagram",
-        "searches": "â",
+        "searches": "\u00e2\u0080\u0094",
         "competition": "832",
         "score": "190",
         "notes": "Low competition relative to score"
@@ -119,7 +119,7 @@
         "searches": "102",
         "competition": "768",
         "score": "130",
-        "notes": "Gap â no listing"
+        "notes": "Gap \u00e2\u0080\u0094 no listing"
       },
       {
         "keyword": "aesthetic carousel",
@@ -264,6 +264,14 @@
         "published": false,
         "date": "2026-05-14",
         "url": "https://janeswiss.github.io/switzer-dashboard/posts/website-template-for-blogger.html"
+      },
+      {
+        "title": "website template for blog",
+        "keyword": "website template for blog",
+        "written": true,
+        "published": false,
+        "date": "2026-05-14",
+        "url": "https://janeswiss.github.io/switzer-dashboard/posts/website-template-for-blog.html"
       }
     ],
     "pending_tasks": [
@@ -658,7 +666,7 @@
     }
   ],
   "monthly_wins": [
-    "Etsy Expert agent completed â all skills built and tested",
+    "Etsy Expert agent completed \u00e2\u0080\u0094 all skills built and tested",
     "Blog SEO agent completed",
     "AI Agency Dashboard live on all devices"
   ]
