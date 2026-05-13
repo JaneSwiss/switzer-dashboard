@@ -1,0 +1,187 @@
+{
+  "design_id": "DAHJa5-fxUQ",
+  "design_name": "Pinterest-Pins-01",
+  "note": "Element IDs sourced from transaction 5428466498690676169 (2026-05-13). Page 10 headline re-scanned 2026-05-13 (transaction 2817504635992380943). Roles assigned by Jane top-to-bottom. Watermark element excluded from all pages.",
+  "pages": {
+    "1": {
+      "page_id": "PBSZlXwzBrMTT7Jd",
+      "elements": {
+        "headline": "PBSZlXwzBrMTT7Jd-LBw59w6p7n59BnFz",
+        "body":     "PBSZlXwzBrMTT7Jd-LB4yQ7jsJ8x0XGrS",
+        "cta":      "PBSZlXwzBrMTT7Jd-LB9dL7fmsQSth6g4"
+      }
+    },
+    "2": {
+      "page_id": "PBgfJhgpfBD7WvZX",
+      "elements": {
+        "headline": "PBgfJhgpfBD7WvZX-LBJXQbSPLmPyblJ1",
+        "body":     "PBgfJhgpfBD7WvZX-LB9QDXcx7kdK7Wh6",
+        "cta":      "PBgfJhgpfBD7WvZX-LB1KmMB1KqKCrCTt"
+      }
+    },
+    "3": {
+      "page_id": "PBD0xHPfdnznq7sQ",
+      "elements": {
+        "headline": "PBD0xHPfdnznq7sQ-LB2NMj2J0TVP8jqK",
+        "body":     "PBD0xHPfdnznq7sQ-LBD6xgpNq6hsxsH7",
+        "cta":      "PBD0xHPfdnznq7sQ-LBNs8LtKdQ6wcctY"
+      }
+    },
+    "4": {
+      "page_id": "PBf65GRcP06wDZvq",
+      "elements": {
+        "headline": "PBf65GRcP06wDZvq-LB8MBRSgfcrvrDLQ",
+        "cta":      "PBf65GRcP06wDZvq-LBfX3XgP67pGWBHH"
+      }
+    },
+    "5": {
+      "page_id": "PB1PtPs9ksdH7Rr0",
+      "elements": {
+        "headline": "PB1PtPs9ksdH7Rr0-LBrKsYdNfVDXM9ws",
+        "body":     "PB1PtPs9ksdH7Rr0-LBddnHzGYTK0rVnm",
+        "cta":      "PB1PtPs9ksdH7Rr0-LB0BStd4jxqSxc7g"
+      }
+    },
+    "6": {
+      "page_id": "PBHGHw06cNXKgDpt",
+      "elements": {
+        "cta":      "PBHGHw06cNXKgDpt-LBnJGm66k6f0jCKC",
+        "headline": "PBHGHw06cNXKgDpt-LBJy8HGXcXBHrNFL"
+      }
+    },
+    "7": {
+      "page_id": "PBv24j6cCSGprvsg",
+      "elements": {
+        "headline": "PBv24j6cCSGprvsg-LBBx9TQNJ07GBC4p",
+        "body":     "PBv24j6cCSGprvsg-LBrv43tHbnP4Cc34",
+        "cta":      "PBv24j6cCSGprvsg-LBv1nx7BjhTpr95h"
+      }
+    },
+    "8": {
+      "page_id": "PBfkgYszpH2BKmfx",
+      "elements": {
+        "headline": "PBfkgYszpH2BKmfx-LBTQXr6kTfRTZXTg",
+        "cta":      "PBfkgYszpH2BKmfx-LBlmYjzzKG80L58f"
+      }
+    },
+    "9": {
+      "page_id": "PBnZxD66P80clrfJ",
+      "elements": {
+        "headline": "PBnZxD66P80clrfJ-LBK99l1k0qnJ24lC",
+        "cta":      "PBnZxD66P80clrfJ-LBTdMDj78XP39cPL"
+      }
+    },
+    "10": {
+      "page_id": "PB2vNn0Nv6P2N82b",
+      "elements": {
+        "headline": "PB2vNn0Nv6P2N82b-LBLp4NC0GkrKC154"
+      }
+    },
+    "11": {
+      "page_id": "PBCFGjsfkWWRWVyl",
+      "elements": {
+        "headline": "PBCFGjsfkWWRWVyl-LBlzRSvznGdBVPrM",
+        "body":     "PBCFGjsfkWWRWVyl-LBnWKY23NhvM6xml"
+      }
+    },
+    "12": {
+      "page_id": "PB64S5t8hY5jrpkt",
+      "elements": {
+        "headline": "PB64S5t8hY5jrpkt-LBx6Q8nD6tgcn4J9",
+        "body":     "PB64S5t8hY5jrpkt-LBWmRpB0rrhW62WL"
+      }
+    },
+    "13": {
+      "page_id": "PByxdXsk5dr4LkPK",
+      "elements": {
+        "body":     "PByxdXsk5dr4LkPK-LBGdcgBk883w25Vz",
+        "headline": "PByxdXsk5dr4LkPK-LBLhClfdd3WlqxJJ",
+        "cta":      "PByxdXsk5dr4LkPK-LBnzNr9BgR5WqTl6"
+      }
+    },
+    "14": {
+      "page_id": "PB9QcqL7yQZbfvC3",
+      "elements": {
+        "body":     "PB9QcqL7yQZbfvC3-LBQ7qvjHVTmDTz6M",
+        "headline": "PB9QcqL7yQZbfvC3-LBZqBwlr5FC7yFLM"
+      }
+    },
+    "15": {
+      "page_id": "PBxgCQzFB49KbHvg",
+      "elements": {
+        "body":     "PBxgCQzFB49KbHvg-LB0459JM5ysbl41J",
+        "headline": "PBxgCQzFB49KbHvg-LBGC6mqTWm0Vdt4Z"
+      }
+    },
+    "16": {
+      "page_id": "PBbrfvrqLKr28Zpc",
+      "elements": {
+        "body":     "PBbrfvrqLKr28Zpc-LBx8RHkSmbl9Kv2q",
+        "headline": "PBbrfvrqLKr28Zpc-LBD0QQrgkH9zpMsZ"
+      }
+    },
+    "17": {
+      "page_id": "PBvzwknWhY9QwMXh",
+      "elements": {
+        "body":     "PBvzwknWhY9QwMXh-LBdv1h9FnF7KPmrj",
+        "headline": "PBvzwknWhY9QwMXh-LBTykGwcqxRm5vb5"
+      }
+    },
+    "18": {
+      "page_id": "PBlHm4ksV9DFCb5N",
+      "elements": {
+        "body":     "PBlHm4ksV9DFCb5N-LBFDjX5znMpd343k",
+        "headline": "PBlHm4ksV9DFCb5N-LB3QNmxb5pbJ1RTT"
+      }
+    },
+    "19": {
+      "page_id": "PBGZ8XszybyT1HZn",
+      "elements": {
+        "body":     "PBGZ8XszybyT1HZn-LBYgGbF634zLsHtw",
+        "headline": "PBGZ8XszybyT1HZn-LBpwLBrRW1F8s0bT"
+      }
+    },
+    "20": {
+      "page_id": "PB5T2dR2zSJxcWy7",
+      "elements": {
+        "body":     "PB5T2dR2zSJxcWy7-LBDQcSF6wPCQJR7N",
+        "headline": "PB5T2dR2zSJxcWy7-LBvcSMTb33YSC2x6"
+      }
+    },
+    "21": {
+      "page_id": "PBXGgRwN5v8RsWcR",
+      "elements": {
+        "body":     "PBXGgRwN5v8RsWcR-LBMqBj0Y19145w1z",
+        "headline": "PBXGgRwN5v8RsWcR-LBB94LyMv8Q1XkgD"
+      }
+    },
+    "22": {
+      "page_id": "PBz2wc0M9rVHMFsC",
+      "elements": {
+        "body":     "PBz2wc0M9rVHMFsC-LBc9GcSrgDYJSkr3",
+        "headline": "PBz2wc0M9rVHMFsC-LBMqjFncFdXQWMWr"
+      }
+    },
+    "23": {
+      "page_id": "PB3vLpfllDBf3Wt2",
+      "elements": {
+        "body":     "PB3vLpfllDBf3Wt2-LBX2VSlbc7f9yZ1Y",
+        "headline": "PB3vLpfllDBf3Wt2-LBd3M7k0XVvd1QHp"
+      }
+    },
+    "24": {
+      "page_id": "PBkFGLcB99HnRZXS",
+      "elements": {
+        "headline": "PBkFGLcB99HnRZXS-LBZ3tmlFzndP3Ysl",
+        "cta":      "PBkFGLcB99HnRZXS-LBp3nNstTNF8z51K"
+      }
+    },
+    "25": {
+      "page_id": "PBDKCnMmSzwZ3tYT",
+      "elements": {
+        "headline": "PBDKCnMmSzwZ3tYT-LB6rrq9BBFgyzRM3",
+        "cta":      "PBDKCnMmSzwZ3tYT-LBlkCq6FrkLVWX0D"
+      }
+    }
+  }
+}

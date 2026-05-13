@@ -23,6 +23,10 @@ FONT_URLS = {
         "https://raw.githubusercontent.com/google/fonts/main/ofl/notoserifdisplay/"
         "static/NotoSerifDisplay-LightItalic.ttf"
     ),
+    "NotoSerifDisplay-Italic[wdth,wght].ttf": (
+        "https://raw.githubusercontent.com/google/fonts/main/ofl/notoserifdisplay/"
+        "NotoSerifDisplay-Italic%5Bwdth%2Cwght%5D.ttf"
+    ),
     "Montserrat-Regular.ttf": (
         "https://raw.githubusercontent.com/google/fonts/main/ofl/montserrat/"
         "static/Montserrat-Regular.ttf"
@@ -112,6 +116,16 @@ def setup_fonts() -> dict:
     else:
         fonts["serif_italic"] = fonts.get("serif")  # graceful fallback to regular
 
+    # --- Serif bold italic (variable font, wght=600 — for highlighted words) ---
+    serif_bi_name = "NotoSerifDisplay-Italic[wdth,wght].ttf"
+    serif_bi_path = FONTS_DIR / serif_bi_name
+    if not (serif_bi_path.exists() and serif_bi_path.stat().st_size > 10_000):
+        _download_font(serif_bi_name, FONT_URLS[serif_bi_name])
+    fonts["serif_bold_italic"] = (
+        str(serif_bi_path) if serif_bi_path.exists() and serif_bi_path.stat().st_size > 10_000
+        else fonts.get("serif_italic")
+    )
+
     # --- Sans (category label + watermark) ---
     sans_path = FONTS_DIR / "Montserrat-Regular.ttf"
     if not (sans_path.exists() and sans_path.stat().st_size > 10_000):
@@ -139,3 +153,16 @@ def load_font(path: str | None, size: int):
         except Exception:
             pass
     return ImageFont.load_default()
+
+
+def load_variable_font(path: str | None, size: int, wdth: float = 100, wght: float = 600):
+    """Load a variable font and set wdth/wght axes. Falls back to load_font on error."""
+    from PIL import ImageFont
+    if path:
+        try:
+            font = ImageFont.truetype(path, size)
+            font.set_variation_by_axes([wdth, wght])
+            return font
+        except Exception:
+            pass
+    return load_font(path, size)

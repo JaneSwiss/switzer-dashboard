@@ -70,6 +70,69 @@ For photo_concept:
   at a minimal white desk with a warm-toned neutral background, soft natural
   side lighting, laptop and a small plant visible, shallow depth of field,
   editorial magazine quality")
+
+For scene_type and photo_concept:
+- scene_type must be one of exactly: person, flat_lay, workspace, hands_only
+- Use the following as the structural foundation for every design brief.
+  Fill in only the topic-specific creative details (action, props, setting).
+  Keep the composition structure intact.
+
+person template:
+"[MOOD keyword first]. Medium-close editorial photograph for a Pinterest marketing pin.
+A woman [specific business-related action — working on a laptop, writing in a journal,
+on a phone call, reading documents, scrolling her phone] at [specific setting].
+Shot on an 85mm lens, tight chest-up framing. Her face and shoulders occupy the upper
+third of the frame. The lower portion of the frame is filled with [specific desk surface
+props — coffee cup, notebook, pen, planner etc.] — richly textured, styled, and detailed.
+Quiet luxury, feminine, sophisticated, magazine quality."
+
+flat_lay template:
+"[MOOD keyword first]. Strict 90-degree overhead top-down editorial photograph for a
+Pinterest marketing pin. A styled desk flat lay — [specific objects relevant to the topic,
+e.g. open notebook with gold pen, ceramic espresso cup, closed planner, dried pampas grass].
+Objects arranged across the entire frame edge to edge. Every corner filled with styled
+elements, nothing empty. No person, no hands. Warm cream tones, quiet luxury, feminine,
+magazine quality."
+
+workspace template:
+"[MOOD keyword first]. Medium-close editorial photograph for a Pinterest marketing pin.
+A styled home office corner shot from a slight low angle looking up. A warm cream wall
+behind the desk holds [specific wall element — framed minimalist art print, floating shelf
+with objects, trailing plant]. The desk surface has [specific props relevant to the topic].
+Props and styled elements fill the frame from the desk surface up to the wall element —
+nothing empty, no plain ceiling, no blank upper area. Quiet luxury, feminine, sophisticated,
+magazine quality."
+
+hands_only template:
+"[MOOD keyword first]. Macro close-up editorial photograph for a Pinterest marketing pin.
+Shot on an 85mm lens. A pair of female hands with neutral nails actively [specific action —
+writing in a notebook, typing on a keyboard, holding a ceramic coffee cup, turning a page].
+The desk surface beneath shows [specific surface texture and props]. The entire frame filled
+with hands, surface, and props — nothing empty. No face visible anywhere. Quiet luxury,
+feminine, sophisticated, magazine quality."
+
+Hard rules:
+- Never write a brief where the woman is simply standing, walking, or posing.
+  Every person scene must show active business behaviour.
+- Never describe what is on any screen or device.
+
+Distribution rule: Across the 5 variations in every topic, you must use each of these
+scene types at least once: person, flat_lay, workspace, hands_only. The 5th variation
+can be any type that best suits the topic.
+
+For layout:
+- One of exactly: A, B, C, D
+- A — subject on left third, text box on right. Use for person or hands_only scenes only.
+- B — subject on right third, text box on left. Use for person or hands_only scenes only.
+- C — flat lay overhead, text box centered. Use only for flat_lay scenes.
+- D — workspace shot, text box in upper third. Use only for workspace scenes.
+
+Layout assignment rule:
+- Variations a and b: assign A or B (alternate: if a=A then b=B, if a=B then b=A).
+  Never assign layout C or D to a person or hands_only scene.
+- Variation c: must always use layout C.
+- Variation d: must always use layout D.
+- Variation e: any layout that matches its scene type.
 """
 
 
@@ -145,48 +208,80 @@ Each object must have exactly these keys:
   "seo_title"        - Pinterest SEO title (50-100 chars)
   "seo_description"  - Pinterest description (150-300 chars, ends with CTA)
   "photo_concept"    - specific background photo scene for image generation
+  "scene_type"       - one of: person, flat_lay, workspace, hands_only
+  "layout"           - one of: A, B, C, D
 
 Vary the category_labels and headline angles across pins - no two should feel alike.
 """
 
-    response = client.messages.create(
-        model="claude-sonnet-4-6",
-        max_tokens=4096,
-        system=SYSTEM_PROMPT,
-        messages=[{"role": "user", "content": user_prompt}],
-    )
+    _REQUIRED_SCENE_TYPES = {"person", "flat_lay", "workspace", "hands_only"}
+    _MAX_RETRIES = 3
 
-    raw = response.content[0].text.strip()
+    for attempt in range(_MAX_RETRIES):
+        response = client.messages.create(
+            model="claude-sonnet-4-6",
+            max_tokens=4096,
+            system=SYSTEM_PROMPT,
+            messages=[{"role": "user", "content": user_prompt}],
+        )
 
-    # Strip markdown fences if present
-    raw = re.sub(r"^```(?:json)?\s*", "", raw)
-    raw = re.sub(r"\s*```$", "", raw)
+        raw = response.content[0].text.strip()
 
-    try:
-        results = json.loads(raw)
-    except json.JSONDecodeError as e:
-        # Try to extract JSON array from response
-        match = re.search(r"\[.*\]", raw, re.DOTALL)
-        if match:
-            results = json.loads(match.group())
-        else:
-            raise RuntimeError(
-                f"Claude returned invalid JSON.\nError: {e}\nRaw output:\n{raw[:500]}"
-            )
+        # Strip markdown fences if present
+        raw = re.sub(r"^```(?:json)?\s*", "", raw)
+        raw = re.sub(r"\s*```$", "", raw)
 
-    # Ensure we have one result per topic; pad with error entries if needed
-    if len(results) < len(topics):
-        for i in range(len(results), len(topics)):
-            results.append({
-                "topic": topics[i],
-                "category_label": "BUSINESS TIPS",
-                "pin_headline": topics[i],
-                "seo_title": topics[i][:100],
-                "seo_description": f"{topics[i]} - shop at switzertemplates.com",
-                "photo_concept": (
-                    "A woman working at a minimal desk, warm earthy tones, "
-                    "soft natural lighting, editorial style"
-                ),
-            })
+        try:
+            results = json.loads(raw)
+        except json.JSONDecodeError as e:
+            match = re.search(r"\[.*\]", raw, re.DOTALL)
+            if match:
+                try:
+                    results = json.loads(match.group())
+                except json.JSONDecodeError:
+                    if attempt < _MAX_RETRIES - 1:
+                        print(f"  JSON parse failed (attempt {attempt + 1}), retrying...")
+                        continue
+                    raise RuntimeError(
+                        f"Claude returned invalid JSON.\nError: {e}\nRaw output:\n{raw[:500]}"
+                    )
+            else:
+                if attempt < _MAX_RETRIES - 1:
+                    print(f"  JSON parse failed (attempt {attempt + 1}), retrying...")
+                    continue
+                raise RuntimeError(
+                    f"Claude returned invalid JSON.\nError: {e}\nRaw output:\n{raw[:500]}"
+                )
 
-    return results[:len(topics)]
+        # Scene type validation — only when generating a full 5-variation topic batch
+        if len(results) >= 4:
+            present = {r.get("scene_type", "") for r in results}
+            missing = _REQUIRED_SCENE_TYPES - present
+            if missing:
+                if attempt < _MAX_RETRIES - 1:
+                    print(f"  Scene type validation failed (attempt {attempt + 1}): "
+                          f"missing {missing}. Retrying...")
+                    continue
+                else:
+                    print(f"  Warning: scene types still missing after {_MAX_RETRIES} attempts: "
+                          f"{missing}. Using response as-is.")
+
+        # Ensure we have one result per topic; pad with error entries if needed
+        if len(results) < len(topics):
+            for i in range(len(results), len(topics)):
+                results.append({
+                    "topic": topics[i],
+                    "category_label": "BUSINESS TIPS",
+                    "pin_headline": topics[i],
+                    "seo_title": topics[i][:100],
+                    "seo_description": f"{topics[i]} - shop at switzertemplates.com",
+                    "photo_concept": (
+                        "A woman working at a minimal desk, warm earthy tones, "
+                        "soft natural lighting, editorial style"
+                    ),
+                    "scene_type": "person",
+                })
+
+        return results[:len(topics)]
+
+    raise RuntimeError(f"Failed to generate valid copy after {_MAX_RETRIES} attempts.")
