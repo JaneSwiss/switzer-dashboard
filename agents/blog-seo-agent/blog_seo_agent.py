@@ -1013,6 +1013,7 @@ def run():
         import subprocess
         subprocess.run(["git", "add", "-A"], cwd=ROOT, check=True)
         subprocess.run(["git", "commit", "-m", f"add post: {keyword}"], cwd=ROOT, check=True)
+        subprocess.run(["git", "pull", "--rebase", "origin", "main"], cwd=ROOT, check=True)
         subprocess.run(["git", "push", "origin", "main"], cwd=ROOT, check=True)
         print("  GitHub updated successfully.")
     except subprocess.CalledProcessError as e:
