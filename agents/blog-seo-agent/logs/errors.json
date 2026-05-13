@@ -46,5 +46,11 @@
     "stage": "git_push",
     "keyword": "website template for blogger",
     "error": "Command '['git', 'push', 'origin', 'main']' returned non-zero exit status 1."
+  },
+  {
+    "date": "2026-05-14",
+    "stage": "banned_words",
+    "keyword": "free instagram templates",
+    "error": "Banned words remain after revision: ['discover']"
   }
 ]
