@@ -709,16 +709,17 @@
     "pins_published": 0,
     "current_file": "Pinterest-Pins-01",
     "files_completed": 1,
-    "files_total": 6,
+    "files_total": 2,
     "pending_tasks": [
       {
-        "task": "Run images and copy for Pinterest-Pins-02 through 06",
-        "date": "2026-05-14"
+        "task": "Run images and copy for Pinterest-Pins-02",
+        "date": "2026-05-15"
       },
       {
         "task": "Review and publish drafted pins in Tailwind",
-        "date": "2026-05-14"
+        "date": "2026-05-15"
       }
-    ]
+    ],
+    "cadence": "50 pins every 2 weeks"
   }
 }

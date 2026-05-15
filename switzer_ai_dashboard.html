@@ -257,7 +257,7 @@
       <span class="card-title"><i class="ti ti-chart-bar" style="color:var(--coral);font-size:18px;"></i>Pin progress</span>
       <span class="badge badge-coral" id="pin-progress-badge">—</span>
     </div>
-    <p style="font-size:13px;color:var(--text2);margin-bottom:12px;">Total target: 6 design files × 25 pins = 150 pins</p>
+    <p style="font-size:13px;color:var(--text2);margin-bottom:12px;">Total target: 2 design files × 25 pins = 50 pins &nbsp;·&nbsp; Cadence: 50 pins every 2 weeks</p>
     <div style="background:var(--surface2);border-radius:6px;height:10px;overflow:hidden;margin-bottom:8px;">
       <div id="pin-progress-bar" style="height:100%;background:var(--choc);border-radius:6px;transition:width .4s;width:0%;"></div>
     </div>
@@ -494,7 +494,7 @@ function renderPinterest(){
   const grid=document.getElementById('pin-stat-grid'); grid.innerHTML='';
   [
     {label:'Current file',  val:pin.current_file||'—'},
-    {label:'Files done',    val:(pin.files_completed||0)+' / '+(pin.files_total||6)},
+    {label:'Files done',    val:(pin.files_completed||0)+' / '+(pin.files_total||2)},
     {label:'Pins drafted',  val:(pin.pins_drafted||0)+''},
     {label:'Pins published',val:(pin.pins_published||0)+''},
   ].forEach(m=>{
@@ -503,10 +503,11 @@ function renderPinterest(){
     grid.appendChild(card);
   });
   // Progress bar
-  const total=150, drafted=pin.pins_drafted||0, pct=Math.round(drafted/total*100);
+  const total=pin.files_total?pin.files_total*25:50, drafted=pin.pins_drafted||0, pct=Math.round(drafted/total*100);
   document.getElementById('pin-progress-bar').style.width=pct+'%';
   document.getElementById('pin-progress-badge').textContent=pct+'% complete';
-  document.getElementById('pin-progress-label').textContent=`${drafted} of ${total} pins drafted · ${pin.pins_published||0} published`;
+  document.getElementById('pin-progress-label').textContent=`${drafted} of ${total} pins drafted · ${pin.pins_published||0} published · ${pin.cadence||''}`;
+
   // Tasks
   const tasks=pin.pending_tasks||[], el=document.getElementById('pin-tasks');
   document.getElementById('pin-tasks-badge').textContent=tasks.length+' pending';
