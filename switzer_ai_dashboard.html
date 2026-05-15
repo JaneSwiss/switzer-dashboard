@@ -136,6 +136,7 @@
   <button class="tab-btn active" data-tab="overview"><i class="ti ti-layout-dashboard"></i>Overview</button>
   <button class="tab-btn" data-tab="etsy"><i class="ti ti-shopping-bag"></i>Etsy Expert</button>
   <button class="tab-btn" data-tab="blog"><i class="ti ti-file-text"></i>Blog SEO</button>
+  <button class="tab-btn" data-tab="pinterest"><i class="ti ti-brand-pinterest"></i>Pinterest</button>
 </div>
 
 <!-- OVERVIEW -->
@@ -144,6 +145,7 @@
   <div class="stat-grid">
     <div class="stat-card"><p class="stat-label">Etsy Expert</p><div style="display:flex;align-items:center;gap:6px;margin-bottom:4px;"><span class="status-dot" style="background:var(--teal-mid);"></span><p class="stat-val" style="margin:0;">Active</p></div><p class="stat-sub" id="ov-etsy-run">—</p></div>
     <div class="stat-card"><p class="stat-label">Blog SEO</p><div style="display:flex;align-items:center;gap:6px;margin-bottom:4px;"><span class="status-dot" style="background:var(--teal-mid);"></span><p class="stat-val" style="margin:0;">Active</p></div><p class="stat-sub" id="ov-blog-run">—</p></div>
+    <div class="stat-card"><p class="stat-label">Pinterest Agent</p><div style="display:flex;align-items:center;gap:6px;margin-bottom:4px;"><span class="status-dot" style="background:var(--teal-mid);"></span><p class="stat-val" style="margin:0;">Active</p></div><p class="stat-sub" id="ov-pinterest-run">—</p></div>
     <div class="stat-card"><p class="stat-label">Pending tasks</p><p class="stat-val" id="ov-pending">—</p><p class="stat-sub">Need your input</p></div>
     <div class="stat-card"><p class="stat-label">Posts this month</p><p class="stat-val" id="ov-posts">—</p><p class="stat-sub" id="ov-posts-sub">—</p></div>
   </div>
@@ -241,6 +243,35 @@
   </div>
 </div>
 
+<!-- PINTEREST -->
+<div class="tab-panel" id="panel-pinterest">
+  <div class="card">
+    <div class="card-header">
+      <span class="card-title"><i class="ti ti-brand-pinterest" style="color:#e60023;font-size:18px;"></i>Campaign status</span>
+      <span class="badge badge-gray" id="pin-date">—</span>
+    </div>
+    <div class="stat-grid" style="margin-bottom:0;" id="pin-stat-grid"><p class="empty">Loading...</p></div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <span class="card-title"><i class="ti ti-chart-bar" style="color:var(--coral);font-size:18px;"></i>Pin progress</span>
+      <span class="badge badge-coral" id="pin-progress-badge">—</span>
+    </div>
+    <p style="font-size:13px;color:var(--text2);margin-bottom:12px;">Total target: 6 design files × 25 pins = 150 pins</p>
+    <div style="background:var(--surface2);border-radius:6px;height:10px;overflow:hidden;margin-bottom:8px;">
+      <div id="pin-progress-bar" style="height:100%;background:var(--choc);border-radius:6px;transition:width .4s;width:0%;"></div>
+    </div>
+    <p style="font-size:12px;color:var(--text3);" id="pin-progress-label">—</p>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <span class="card-title"><i class="ti ti-clock" style="color:var(--amber-mid);font-size:18px;"></i>Pending — needs action</span>
+      <span class="badge badge-amber" id="pin-tasks-badge">—</span>
+    </div>
+    <div id="pin-tasks"><p class="empty">Loading...</p></div>
+  </div>
+</div>
+
 </div>
 <script>
 // ── CONFIG ────────────────────────────────────────────────────────────────
@@ -312,19 +343,22 @@ function csvBanner(id, lastRun, nextRun) {
 
 // Overview
 function renderOverview(){
-  const etsy=DATA.etsy_agent||{}, blog=DATA.blog_seo_agent||{}, posts=blog.posts||[];
+  const etsy=DATA.etsy_agent||{}, blog=DATA.blog_seo_agent||{}, posts=blog.posts||[], pin=DATA.pinterest_agent||{};
   document.getElementById('ov-etsy-run').textContent = etsy.last_run?'Last run: '+etsy.last_run:'Not run yet';
   document.getElementById('ov-blog-run').textContent = blog.last_run?'Last run: '+blog.last_run:'Not run yet';
+  document.getElementById('ov-pinterest-run').textContent = pin.last_run?'Last run: '+pin.last_run:'Not run yet';
   const pub=posts.filter(p=>p.published).length, draft=posts.filter(p=>p.written&&!p.published).length;
   document.getElementById('ov-posts').textContent    = posts.filter(p=>p.written||p.published).length;
   document.getElementById('ov-posts-sub').textContent= `${pub} published · ${draft} drafted`;
   csvBanner('ov-csv', etsy.last_run, etsy.next_run);
   const tasks=(etsy.priority_tasks||[]).filter(t=>t.status!=='done');
   const pending=(blog.pending_tasks||[]);
+  const pinPending=(pin.pending_tasks||[]);
   document.getElementById('ov-pending').textContent  = tasks.length;
   const attn=[
     ...tasks.slice(0,3).map(t=>({agent:'Etsy Expert',text:t.task,urgency:parseInt(t.priority)<=2?'high':'medium'})),
-    ...pending.map(t=>({agent:'Blog SEO',text:t.task,urgency:'medium'}))
+    ...pending.map(t=>({agent:'Blog SEO',text:t.task,urgency:'medium'})),
+    ...pinPending.map(t=>({agent:'Pinterest',text:t.task,urgency:'medium'}))
   ];
   document.getElementById('attn-badge').textContent = attn.length+' item'+(attn.length!==1?'s':'');
   const el=document.getElementById('attn-list'); el.innerHTML='';
@@ -452,6 +486,39 @@ function filterKw(){
   document.getElementById('kw-showing').textContent=`Showing ${filtered.length} of ${all.length} keywords`;
 }
 
+// Pinterest
+function renderPinterest(){
+  const pin=DATA.pinterest_agent||{};
+  document.getElementById('pin-date').textContent=pin.last_run?'Last run: '+pin.last_run:'Not run yet';
+  // Stat grid
+  const grid=document.getElementById('pin-stat-grid'); grid.innerHTML='';
+  [
+    {label:'Current file',  val:pin.current_file||'—'},
+    {label:'Files done',    val:(pin.files_completed||0)+' / '+(pin.files_total||6)},
+    {label:'Pins drafted',  val:(pin.pins_drafted||0)+''},
+    {label:'Pins published',val:(pin.pins_published||0)+''},
+  ].forEach(m=>{
+    const card=document.createElement('div'); card.className='stat-card';
+    card.innerHTML=`<p class="stat-label">${m.label}</p><p class="stat-val">${m.val}</p>`;
+    grid.appendChild(card);
+  });
+  // Progress bar
+  const total=150, drafted=pin.pins_drafted||0, pct=Math.round(drafted/total*100);
+  document.getElementById('pin-progress-bar').style.width=pct+'%';
+  document.getElementById('pin-progress-badge').textContent=pct+'% complete';
+  document.getElementById('pin-progress-label').textContent=`${drafted} of ${total} pins drafted · ${pin.pins_published||0} published`;
+  // Tasks
+  const tasks=pin.pending_tasks||[], el=document.getElementById('pin-tasks');
+  document.getElementById('pin-tasks-badge').textContent=tasks.length+' pending';
+  el.innerHTML='';
+  if(!tasks.length){ el.innerHTML='<p class="empty">No pending tasks.</p>'; return; }
+  tasks.forEach(t=>{
+    const d=document.createElement('div'); d.className='row';
+    d.innerHTML=`<i class="ti ti-clock" style="color:var(--amber-mid);font-size:16px;margin-top:2px;flex-shrink:0;"></i><div style="flex:1;"><p class="row-text">${t.task}</p><p class="row-meta">${t.date||''}</p></div>`;
+    el.appendChild(d);
+  });
+}
+
 // Token management
 function checkToken() {
   const token = localStorage.getItem('switzer_gh_token');
@@ -478,7 +545,7 @@ document.getElementById('token-input').addEventListener('keydown', e => { if(e.k
 // Load everything
 async function loadDashboard(){
   await loadData();
-  renderOverview(); renderWins(); renderEtsy(); renderBlog(); renderKeywords();
+  renderOverview(); renderWins(); renderEtsy(); renderBlog(); renderKeywords(); renderPinterest();
 }
 if (checkToken()) loadDashboard();
 </script>
