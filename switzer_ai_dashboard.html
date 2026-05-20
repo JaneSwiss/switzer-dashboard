@@ -211,13 +211,9 @@
     </div>
     <p style="font-size:13px;color:var(--text2);margin-bottom:1rem;">Agent wrote = drafted by Blog SEO agent. Published by you = tick when you publish to Wix. Syncs across all devices.</p>
     <div class="table-wrap"><table>
-      <thead><tr><th style="min-width:200px;">Post title</th><th>Target keyword</th><th class="c">Agent wrote</th><th class="c">Published by you</th><th class="c">Date</th><th class="c">Status</th></tr></thead>
-      <tbody id="blog-tbody"><tr><td colspan="5" class="empty">Loading...</td></tr></tbody>
+      <thead><tr><th style="min-width:200px;">Post title</th><th>Target keyword</th><th class="c">Agent wrote</th><th class="c">Published by you</th><th class="c">Date</th><th class="c">Status</th><th class="c">Source</th></tr></thead>
+      <tbody id="blog-tbody"><tr><td colspan="7" class="empty">Loading...</td></tr></tbody>
     </table></div>
-  </div>
-  <div class="card">
-    <div class="card-header"><span class="card-title"><i class="ti ti-clock" style="color:var(--amber-mid);font-size:18px;"></i>Pending — your review needed</span></div>
-    <div id="blog-pending"><p class="empty">Loading...</p></div>
   </div>
   <div class="card">
     <div class="card-header">
@@ -236,8 +232,8 @@
       </div>
     </div>
     <div class="table-wrap"><table>
-      <thead><tr><th style="min-width:180px;">Keyword</th><th class="c">Search vol</th><th class="c">Competition</th><th class="c">Trend</th><th class="c">Score</th><th class="c">Pinterest</th><th>Pillar</th><th class="c">Tier</th></tr></thead>
-      <tbody id="kw-tbody"><tr><td colspan="8" class="empty">Loading...</td></tr></tbody>
+      <thead><tr><th style="min-width:180px;">Keyword</th><th class="c">Search vol</th><th class="c">Competition</th><th class="c">Trend</th><th class="c">Score</th><th class="c">Pinterest vol</th><th class="c">Pin clicks</th><th>Pillar</th><th class="c">Tier</th><th class="c">Source</th></tr></thead>
+      <tbody id="kw-tbody"><tr><td colspan="10" class="empty">Loading...</td></tr></tbody>
     </table></div>
     <p style="font-size:12px;color:var(--text3);margin-top:10px;" id="kw-showing"></p>
   </div>
@@ -433,23 +429,21 @@ function renderBlog(){
   const pub=posts.filter(p=>p.published).length, draft=posts.filter(p=>p.written&&!p.published).length;
   document.getElementById('blog-badge').textContent=`${pub} published · ${draft} ready`;
   const tbody=document.getElementById('blog-tbody'); tbody.innerHTML='';
-  if(!posts.length){ tbody.innerHTML='<tr><td colspan="5" class="empty">No posts yet.</td></tr>'; }
+  if(!posts.length){ tbody.innerHTML='<tr><td colspan="7" class="empty">No posts yet.</td></tr>'; return; }
   posts.forEach((post,i)=>{
     const status=post.published?'Published':post.written?'Ready to publish':'In progress';
     const sBg=post.published?'var(--teal-bg)':post.written?'var(--amber-bg)':'var(--surface2)';
     const sCol=post.published?'var(--teal-text)':post.written?'var(--amber-text)':'var(--text2)';
     const wBg=post.written?'var(--teal-bg)':'var(--surface2)', wCol=post.written?'var(--teal-text)':'var(--text2)';
+    const src=post.source||'';
+    const srcHtml=src?`<span class="badge" style="background:var(--amber-bg);color:var(--amber-text);font-size:10px;">${src}</span>`:`<span style="color:var(--text3);font-size:12px;">—</span>`;
     const tr=document.createElement('tr');
     const titleHtml = post.url
       ? `<a href="${post.url}" target="_blank" style="color:var(--choc);text-decoration:none;font-weight:500;">${post.title}<i class="ti ti-external-link" style="font-size:11px;margin-left:4px;vertical-align:1px;"></i></a>`
       : `<span style="font-weight:500;">${post.title}</span>`;
-    tr.innerHTML=`<td>${titleHtml}</td><td style="font-size:12px;color:var(--text2);">${post.keyword||'—'}</td><td class="c"><span class="badge" style="background:${wBg};color:${wCol};">${post.written?'Done':'Pending'}</span></td><td class="c"><input type="checkbox" ${post.published?'checked':''} ${!post.written?'disabled':''} onchange="togglePub(${i},this.checked)" /></td><td class="c" style="font-size:12px;color:var(--text3);">${post.date||'—'}</td><td class="c"><span class="badge" style="background:${sBg};color:${sCol};">${status}</span></td>`;
+    tr.innerHTML=`<td>${titleHtml}</td><td style="font-size:12px;color:var(--text2);">${post.keyword||'—'}</td><td class="c"><span class="badge" style="background:${wBg};color:${wCol};">${post.written?'Done':'Pending'}</span></td><td class="c"><input type="checkbox" ${post.published?'checked':''} ${!post.written?'disabled':''} onchange="togglePub(${i},this.checked)" /></td><td class="c" style="font-size:12px;color:var(--text3);">${post.date||'—'}</td><td class="c"><span class="badge" style="background:${sBg};color:${sCol};">${status}</span></td><td class="c">${srcHtml}</td>`;
     tbody.appendChild(tr);
   });
-  const pendEl=document.getElementById('blog-pending'), pending=blog.pending_tasks||[];
-  pendEl.innerHTML='';
-  if(!pending.length){ pendEl.innerHTML='<p class="empty">No posts waiting for review.</p>'; return; }
-  pending.forEach(t=>{ const d=document.createElement('div'); d.className='row'; d.innerHTML=`<i class="ti ti-clock" style="color:var(--amber-mid);font-size:16px;margin-top:2px;flex-shrink:0;"></i><div style="flex:1;"><p class="row-text">${t.task}</p><p class="row-meta">${t.date||''}</p></div>`; pendEl.appendChild(d); });
 }
 async function togglePub(i,checked){
   DATA.blog_seo_agent.posts[i].published=checked;
@@ -467,20 +461,27 @@ function setKwTier(tier){ KW_TIER=tier; document.querySelectorAll('.filter-btn')
 function filterKw(){
   const search=(document.getElementById('kw-search').value||'').toLowerCase();
   const all=DATA.keyword_masterlist||[];
-  const filtered=all.filter(k=>(!search||(k.keyword||'').toLowerCase().includes(search))&&(KW_TIER==='all'||(k.tier||'').startsWith(KW_TIER)));
+  const filtered=all.filter(k=>(!search||(k.keyword||'').toLowerCase().includes(search))&&(KW_TIER==='all'||(k.priority_tier||k.tier||'').startsWith(KW_TIER)));
   const tbody=document.getElementById('kw-tbody'); tbody.innerHTML='';
-  if(!filtered.length){ tbody.innerHTML='<tr><td colspan="8" class="empty">No keywords match.</td></tr>'; document.getElementById('kw-showing').textContent=''; return; }
+  if(!filtered.length){ tbody.innerHTML='<tr><td colspan="10" class="empty">No keywords match.</td></tr>'; document.getElementById('kw-showing').textContent=''; return; }
   filtered.forEach(k=>{
-    const tp=(k.tier||'').split(' ')[0];
+    const tp=(k.priority_tier||k.tier||'').split(' ')[0];
     const tBg=tp==='P1'?'var(--teal-bg)':tp==='P2'?'var(--amber-bg)':'var(--surface2)';
     const tCol=tp==='P1'?'var(--teal-text)':tp==='P2'?'var(--amber-text)':'var(--text2)';
     const sBg=k.score>=70?'var(--teal-bg)':k.score>=50?'var(--amber-bg)':'var(--surface2)';
     const sCol=k.score>=70?'var(--teal-text)':k.score>=50?'var(--amber-text)':'var(--text2)';
-    const trendCol=k.trend>0?'var(--teal-mid)':k.trend<0?'var(--coral)':'var(--text3)';
-    const trendStr=k.trend>0?'↑ '+k.trend+'%':k.trend<0?'↓ '+Math.abs(k.trend)+'%':'—';
+    const trend=k.trend_pct||k.trend||0;
+    const trendCol=trend>0?'var(--teal-mid)':trend<0?'var(--coral)':'var(--text3)';
+    const trendStr=trend>0?'↑ '+trend+'%':trend<0?'↓ '+Math.abs(trend)+'%':'—';
     const compCol=k.competition<=0.2?'var(--teal-mid)':k.competition<=0.5?'var(--amber-mid)':'var(--coral)';
+    const pinVol=k.pinterest_vol||0;
+    const pinVolStr=pinVol>0?pinVol.toLocaleString():'—';
+    const pinVolCol=pinVol>=1000?'var(--teal-mid)':pinVol>0?'var(--amber-mid)':'var(--text3)';
+    const pinClicks=k.pinterest_clicks_proven||k.pinterest_clicks||0;
+    const srcHtml=k.source?`<span class="badge" style="background:var(--amber-bg);color:var(--amber-text);font-size:10px;">${k.source}</span>`:`<span style="color:var(--text3);">—</span>`;
+    const searchVol=k.monthly_search_vol||k.search_vol||0;
     const tr=document.createElement('tr');
-    tr.innerHTML=`<td style="font-weight:500;">${k.keyword}</td><td class="c">${k.search_vol||'—'}</td><td class="c" style="color:${compCol};font-weight:500;">${k.competition}</td><td class="c" style="color:${trendCol};font-weight:500;">${trendStr}</td><td class="c"><span class="badge" style="background:${sBg};color:${sCol};">${Math.round(k.score||0)}</span></td><td class="c" style="color:${k.pinterest_clicks>0?'var(--teal-mid)':'var(--text3)'};font-weight:${k.pinterest_clicks>0?'600':'400'};">${k.pinterest_clicks>0?k.pinterest_clicks.toLocaleString():'—'}</td><td style="font-size:12px;color:var(--text2);">${k.pillar||''}</td><td class="c"><span class="badge" style="background:${tBg};color:${tCol};">${tp}</span></td>`;
+    tr.innerHTML=`<td style="font-weight:500;">${k.keyword}</td><td class="c">${searchVol?searchVol.toLocaleString():'—'}</td><td class="c" style="color:${compCol};font-weight:500;">${k.competition}</td><td class="c" style="color:${trendCol};font-weight:500;">${trendStr}</td><td class="c"><span class="badge" style="background:${sBg};color:${sCol};">${Math.round(k.score||0)}</span></td><td class="c" style="color:${pinVolCol};font-weight:${pinVol>0?'600':'400'};">${pinVolStr}</td><td class="c" style="color:${pinClicks>0?'var(--teal-mid)':'var(--text3)'};font-weight:${pinClicks>0?'600':'400'};">${pinClicks>0?pinClicks.toLocaleString():'—'}</td><td style="font-size:12px;color:var(--text2);">${k.content_pillar||k.pillar||''}</td><td class="c"><span class="badge" style="background:${tBg};color:${tCol};">${tp}</span></td><td class="c">${srcHtml}</td>`;
     tbody.appendChild(tr);
   });
   document.getElementById('kw-showing').textContent=`Showing ${filtered.length} of ${all.length} keywords`;
