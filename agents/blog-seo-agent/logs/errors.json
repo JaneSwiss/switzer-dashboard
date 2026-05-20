@@ -70,5 +70,17 @@
     "stage": "git_push",
     "keyword": "pinterest marketing",
     "error": "Command '['git', 'pull', '--rebase', 'origin', 'main']' returned non-zero exit status 1."
+  },
+  {
+    "date": "2026-05-20",
+    "stage": "banned_words",
+    "keyword": "pinterest affiliate marketing",
+    "error": "Banned words remain after revision: ['discover']"
+  },
+  {
+    "date": "2026-05-20",
+    "stage": "image_generation",
+    "keyword": "pinterest-affiliate-marketing",
+    "error": "Prompt 4: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Unable to submit request because the service is temporarily out of capacity. Try again later.', 'status': 'RESOURCE_EXHAUSTED'}}"
   }
 ]

@@ -680,7 +680,7 @@ def write_blog_post(keyword_row: dict, competitors: list[dict]) -> str:
 
 IMAGE_PROMPT_SYSTEM = """You are generating image prompts for SwitzerTemplates blog posts.
 Read the blog post content carefully. Every prompt must be specific to the post topic.
-VARIETY IS MANDATORY across all 3 photo prompts - no two images in the same post
+VARIETY IS MANDATORY across all 5 photo prompts - no two images in the same post
 should use the same angle, setting, outfit, or drink.
 
 THE FEMALE CHARACTER:
@@ -785,7 +785,61 @@ website UI - blurred enough that no text is readable. No distorted AI text.
 No bright colours, no gradients, no studio lighting, no stock photography
 look, no digital sharpening. Landscape 16:9, high resolution.
 
-PROMPT 4 - INFOGRAPHIC:
+PROMPT 4 - TOPIC FOCUS:
+This image must directly and literally illustrate what the blog post is about.
+It must be completely different in type from Prompts 1, 2, and 3.
+Choose the image concept that makes the post topic immediately obvious to a viewer:
+
+- Post about a digital platform or tool (Pinterest, Instagram, Canva, Etsy, email marketing, AI):
+  Show an iMac, open MacBook, or phone with a relevant blurred interface on screen.
+  The device is the hero of the image. Place it on a styled desk or surface.
+  Screen shows recognisable but unreadable UI — a Pinterest feed grid, Canva workspace,
+  dashboard analytics, or email inbox layout. Blurred enough that no individual words
+  are readable.
+
+- Post about business strategy, coaching, planning, or content:
+  Show a flat lay of business tools directly relevant to the topic — open planner,
+  brand strategy notes, printed templates, colour swatches, mood board clippings,
+  sticky notes, or a structured workspace layout. Objects must clearly relate to the
+  specific topic, not generic stationery.
+
+- Post about branding, design, or visual identity:
+  Show brand identity materials laid out on a surface — logo mockup cards, colour
+  palette swatches, font samples on paper, or printed design assets. Styled and editorial.
+
+- Post about ecommerce, digital products, or online selling:
+  Show digital product packaging mockups, a product listing on screen, or a styled
+  arrangement of digital product previews printed and laid flat.
+
+No character required for this image. Focus entirely on the concept, tools, or environment.
+Choose a completely different setting and composition from Prompts 1, 2, and 3.
+Same warm editorial aesthetic — Kodak Portra 400, natural light, real and lived-in.
+End with: No text, no words, no writing, no labels, no readable typography anywhere
+in the image. Screens may show blurred UI but no readable words. No distorted AI text.
+No bright colours, no gradients, no studio lighting. Landscape 16:9, high resolution.
+
+PROMPT 5 - PINTEREST PIN:
+A portrait-format image designed specifically to be used as a Pinterest pin background.
+It must directly relate to the post topic — a viewer glancing at the pin should
+immediately understand the subject.
+
+Choose a composition that fills a tall portrait frame naturally:
+- Woman from behind at a styled desk, shot from mid-distance, vertical crop
+- A strong vertical flat lay — objects stacked or arranged top-to-bottom
+- A tall product or device shot — iMac on a styled desk filling the frame vertically
+- A person mid-action in a vertical interior scene — standing at a desk, at a window
+- An evocative scene — warm light, strong vertical lines, editorial feel
+
+The bottom third of the image should be relatively clear or softly blurred — text will
+be overlaid there. The top two thirds carry the visual weight.
+Same woman character rules apply if a person is included (long chocolate brown hair,
+back or side profile only, different outfit from all other prompts in this post).
+Same warm editorial aesthetic. Kodak Portra 400, natural window light.
+End with: No text, no words, no writing, no labels, no readable typography anywhere
+in the image. No distorted AI text. No bright colours, no gradients, no studio lighting.
+Portrait 9:16, high resolution.
+
+PROMPT 6 - INFOGRAPHIC:
 Choose the layout that best fits the post content. VARIETY IS MANDATORY.
 Options: serpentine flow curve, vertical spine, Venn diagram, radial dot map,
 rounded pill list, two-column comparison, floating object grid,
@@ -821,7 +875,13 @@ PROMPT 2 - TOPIC SPECIFIC (props/objects):
 PROMPT 3 - TOPIC SPECIFIC (person + action):
 [prompt - state which composition, setting, outfit and drink you chose]
 
-PROMPT 4 - INFOGRAPHIC:
+PROMPT 4 - TOPIC FOCUS:
+[prompt - state which concept type you chose and why it fits this post topic]
+
+PROMPT 5 - PINTEREST PIN:
+[prompt - state which composition you chose and describe the vertical framing]
+
+PROMPT 6 - INFOGRAPHIC:
 [one sentence: layout chosen and why]
 [full infographic prompt with all content points from the post]
 """
@@ -850,65 +910,84 @@ def generate_image_prompts(keyword: str, post_html: str) -> str:
 
 def generate_images_from_prompts(prompt_text: str, slug: str) -> "list[str]":
     """
-    Parse the 3 photo prompts from the image prompt text, generate images
-    via Gemini Imagen API, save as .jpg files in output/images/, and return
-    their relative paths for embedding in HTML.
-    Fails gracefully - if any image fails, it is skipped and the post
-    still saves with whatever images were generated.
+    Parse 5 photo prompts from the image prompt text and generate images via Gemini Imagen.
+    Prompts 1-4 are landscape 16:9. Prompt 5 (Pinterest pin) is portrait 9:16.
+    Prompt 6 (infographic) is text-only reference and is never generated here.
+    Saves .jpg files to output/images/ and returns relative paths for HTML embedding.
+    Fails gracefully — any failed image is skipped, the post still saves.
     """
     IMAGE_OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
-    # Parse the 3 photo prompts only - skip the infographic prompt
-    photo_prompts = []
-    for label in [
-        "PROMPT 1 - GENERAL LIFESTYLE:",
-        "PROMPT 2 - TOPIC SPECIFIC (props/objects):",
-        "PROMPT 3 - TOPIC SPECIFIC (person + action):",
-    ]:
+    # (label, aspect_ratio, filename_suffix)
+    # suffix None → numbered: {slug}-image-{n}.jpg
+    # suffix string → {slug}-{suffix}.jpg
+    PHOTO_CONFIGS = [
+        ("PROMPT 1 - GENERAL LIFESTYLE:",            "16:9", None),
+        ("PROMPT 2 - TOPIC SPECIFIC (props/objects):","16:9", None),
+        ("PROMPT 3 - TOPIC SPECIFIC (person + action):","16:9", None),
+        ("PROMPT 4 - TOPIC FOCUS:",                  "16:9", None),
+        ("PROMPT 5 - PINTEREST PIN:",                "9:16", "pinterest"),
+    ]
+
+    # Extract each prompt text by finding its label and slicing to the next label
+    parsed = []
+    for label, aspect, suffix in PHOTO_CONFIGS:
         start = prompt_text.find(label)
         if start == -1:
+            parsed.append((None, aspect, suffix))
             continue
         start += len(label)
-        next_prompt = prompt_text.find("PROMPT", start)
-        chunk = prompt_text[start:next_prompt].strip() if next_prompt != -1 else prompt_text[start:].strip()
-        if chunk:
-            photo_prompts.append(chunk)
+        next_label = prompt_text.find("PROMPT", start)
+        chunk = prompt_text[start:next_label].strip() if next_label != -1 else prompt_text[start:].strip()
+        parsed.append((chunk if chunk else None, aspect, suffix))
 
-    if not photo_prompts:
+    if not any(p for p, _, _ in parsed):
         log_error("image_generation", slug, "No photo prompts found in prompt text")
         print("  No photo prompts parsed - skipping image generation.")
         return []
 
     image_paths = []
+    landscape_count = 0  # counter for numbered landscape images
+
     try:
         client = genai.Client(api_key=GOOGLE_API_KEY)
+        total = sum(1 for p, _, _ in parsed if p)
 
-        for i, prompt in enumerate(photo_prompts[:3], 1):
-            print(f"  Generating image {i}/3...")
+        for idx, (prompt, aspect, suffix) in enumerate(parsed, 1):
+            if not prompt:
+                print(f"  Image {idx}: no prompt found, skipping")
+                continue
+
+            label_short = "Pinterest pin" if suffix == "pinterest" else f"image {idx}"
+            print(f"  Generating {label_short} ({aspect})... [{idx}/{total}]")
+
             try:
                 response = client.models.generate_images(
                     model="imagen-4.0-generate-001",
                     prompt=prompt,
                     config=genai_types.GenerateImagesConfig(
                         number_of_images=1,
-                        aspect_ratio="16:9",
+                        aspect_ratio=aspect,
                         output_mime_type="image/jpeg",
                     ),
                 )
                 if response.generated_images:
-                    img_filename = f"{slug}-image-{i}.jpg"
+                    if suffix:
+                        img_filename = f"{slug}-{suffix}.jpg"
+                    else:
+                        landscape_count += 1
+                        img_filename = f"{slug}-image-{landscape_count}.jpg"
                     img_path = IMAGE_OUTPUT_DIR / img_filename
-                    image_bytes = response.generated_images[0].image.image_bytes
                     with open(img_path, "wb") as f:
-                        f.write(image_bytes)
+                        f.write(response.generated_images[0].image.image_bytes)
                     image_paths.append(f"images/{img_filename}")
                     print(f"  Saved: {img_filename}")
                 else:
-                    print(f"  Image {i}: no image returned, skipping")
-                    log_error("image_generation", slug, f"No image returned for prompt {i}")
+                    print(f"  {label_short}: no image returned, skipping")
+                    log_error("image_generation", slug, f"No image returned for prompt {idx}")
             except Exception as e:
-                print(f"  Image {i} failed: {e}")
-                log_error("image_generation", slug, f"Prompt {i}: {str(e)}")
+                print(f"  {label_short} failed: {e}")
+                log_error("image_generation", slug, f"Prompt {idx}: {str(e)}")
                 continue
 
     except Exception as e:

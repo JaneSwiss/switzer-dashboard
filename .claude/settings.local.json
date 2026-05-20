@@ -196,7 +196,9 @@
       "Bash(python3 skills/etsy-competitor-research/main.py search \"branding kit\" --top 6 --save)",
       "Bash(python3 skills/etsy-competitor-research/main.py analyze --top 15)",
       "Bash(open /Users/janeair/Documents/AI/switzertemplates/data/competitors/competitor-analysis-20260520-1512.html)",
-      "Bash(python3 -c \"import json; json.load\\(open\\('dashboard_data.json'\\)\\); print\\('JSON valid'\\)\")"
+      "Bash(python3 -c \"import json; json.load\\(open\\('dashboard_data.json'\\)\\); print\\('JSON valid'\\)\")",
+      "Bash(open posts/pinterest-marketing.html)",
+      "Bash(python3 -c \"import ast; ast.parse\\(open\\('agents/blog-seo-agent/blog_seo_agent.py'\\).read\\(\\)\\); print\\('Syntax OK'\\)\")"
     ],
     "additionalDirectories": [
       "/Users/janeair/Documents/AI/switzertemplates/agents/blog-seo-agent/output",
