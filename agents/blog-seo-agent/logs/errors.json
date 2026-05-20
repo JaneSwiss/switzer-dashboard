@@ -52,5 +52,23 @@
     "stage": "banned_words",
     "keyword": "free instagram templates",
     "error": "Banned words remain after revision: ['discover']"
+  },
+  {
+    "date": "2026-05-20",
+    "stage": "research_synthesis",
+    "keyword": "pinterest marketing",
+    "error": "Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}, 'request_id': 'req_011CbDVktvu2aPxqufMiL6kB'}"
+  },
+  {
+    "date": "2026-05-20",
+    "stage": "blog_writer",
+    "keyword": "pinterest marketing",
+    "error": "Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}, 'request_id': 'req_011CbDVkvYtAvJ2E2AzpqxG5'}"
+  },
+  {
+    "date": "2026-05-20",
+    "stage": "git_push",
+    "keyword": "pinterest marketing",
+    "error": "Command '['git', 'pull', '--rebase', 'origin', 'main']' returned non-zero exit status 1."
   }
 ]

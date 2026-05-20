@@ -1,0 +1,3323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Etsy Competitor Intelligence — Switzertemplates</title>
+<style>
+:root {
+  --cream:      #f8f5f2;
+  --taupe:      #bbb0aa;
+  --sand:       #a5988e;
+  --brown:      #8d6e63;
+  --charcoal:   #383838;
+  --white:      #ffffff;
+  --badge-bs:   #c17c3a;
+  --badge-pn:   #5a8a5e;
+  --badge-bg-bs:#fdf0e0;
+  --badge-bg-pn:#e6f2e7;
+  --row-alt:    #faf8f6;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: var(--cream);
+  color: var(--charcoal);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.page-header {
+  background: var(--charcoal);
+  color: var(--cream);
+  padding: 32px 40px 24px;
+}
+.page-header h1 { font-size: 1.5rem; font-weight: 600; margin-bottom: 4px; }
+.page-header .meta { color: var(--taupe); font-size: 0.85rem; }
+
+.stats-bar {
+  display: flex;
+  gap: 16px;
+  padding: 20px 40px;
+  background: var(--white);
+  border-bottom: 1px solid var(--taupe);
+  flex-wrap: wrap;
+}
+.stat-card {
+  background: var(--cream);
+  border: 1px solid var(--taupe);
+  border-radius: 8px;
+  padding: 12px 20px;
+  min-width: 120px;
+  text-align: center;
+}
+.stat-card .num { font-size: 1.6rem; font-weight: 700; color: var(--brown); }
+.stat-card .label { font-size: 0.75rem; color: var(--sand); text-transform: uppercase;
+                    letter-spacing: 0.05em; margin-top: 2px; }
+
+.container { max-width: 1200px; margin: 0 auto; padding: 32px 40px; }
+
+h2 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--brown);
+  border-left: 4px solid var(--brown);
+  padding-left: 12px;
+  margin: 36px 0 16px;
+}
+h3 { font-size: 0.95rem; font-weight: 600; color: var(--charcoal); margin-bottom: 6px; }
+
+/* Tables */
+.table-wrap { overflow-x: auto; margin-bottom: 24px; }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--white);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+}
+thead th {
+  background: var(--charcoal);
+  color: var(--cream);
+  padding: 10px 14px;
+  text-align: left;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  white-space: nowrap;
+  user-select: none;
+}
+thead th:hover { background: var(--brown); }
+thead th.sorted-asc::after  { content: " ▲"; font-size: 0.7rem; }
+thead th.sorted-desc::after { content: " ▼"; font-size: 0.7rem; }
+tbody td {
+  padding: 10px 14px;
+  border-bottom: 1px solid #ede8e4;
+  vertical-align: top;
+}
+tbody tr:last-child td { border-bottom: none; }
+tbody tr:nth-child(even) td { background: var(--row-alt); }
+tbody tr:hover td { background: #f0ebe6; }
+
+/* Badges */
+.badge {
+  display: inline-block;
+  padding: 2px 9px;
+  border-radius: 20px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+.badge-bs { background: var(--badge-bg-bs); color: var(--badge-bs); border: 1px solid var(--badge-bs); }
+.badge-pn { background: var(--badge-bg-pn); color: var(--badge-pn); border: 1px solid var(--badge-pn); }
+.badge-none { color: #ccc; font-size: 0.7rem; }
+
+/* Listing cards */
+.listing-card {
+  background: var(--white);
+  border: 1px solid #e0d9d4;
+  border-radius: 10px;
+  padding: 16px 20px;
+  margin-bottom: 12px;
+}
+.listing-card.has-badge { border-left: 4px solid var(--badge-bs); }
+.listing-card.has-pn    { border-left: 4px solid var(--badge-pn); }
+.listing-title { font-size: 0.95rem; font-weight: 600; margin-bottom: 6px; }
+.listing-meta  { font-size: 0.82rem; color: var(--sand); display: flex; gap: 16px; flex-wrap: wrap; }
+.listing-meta span strong { color: var(--charcoal); }
+.listing-link  {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 0.8rem;
+  color: var(--brown);
+  text-decoration: none;
+  border-bottom: 1px solid var(--taupe);
+}
+.listing-link:hover { color: var(--charcoal); border-color: var(--charcoal); }
+
+/* Bar chart */
+.bar-row { display: flex; align-items: center; gap: 10px; margin-bottom: 5px; }
+.bar-label { width: 200px; font-size: 0.8rem; color: var(--charcoal); text-align: right;
+             white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.bar-track { flex: 1; background: #ede8e4; border-radius: 4px; height: 18px; }
+.bar-fill  { background: var(--brown); border-radius: 4px; height: 18px;
+             display: flex; align-items: center; justify-content: flex-end;
+             padding-right: 6px; }
+.bar-fill span { font-size: 0.7rem; color: var(--cream); font-weight: 600; white-space: nowrap; }
+.bar-fill.bar-phrase { background: var(--sand); }
+
+/* Nav */
+.nav {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+.nav a {
+  padding: 5px 14px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  text-decoration: none;
+  background: var(--white);
+  color: var(--brown);
+  border: 1px solid var(--taupe);
+}
+.nav a:hover { background: var(--brown); color: var(--cream); }
+
+/* Price chip */
+.price { font-weight: 700; color: var(--brown); }
+
+/* Keyword section grid */
+.kw-section { margin-bottom: 8px; }
+
+footer {
+  text-align: center;
+  padding: 24px;
+  font-size: 0.78rem;
+  color: var(--sand);
+  border-top: 1px solid var(--taupe);
+  margin-top: 48px;
+}
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <h1>Etsy Competitor Intelligence Report</h1>
+  <div class="meta">Switzertemplates &nbsp;·&nbsp; Generated 20 May 2026 15:12 &nbsp;·&nbsp;
+    220 digital listings &nbsp;·&nbsp;
+    24 keywords</div>
+</div>
+
+
+<div class="stats-bar">
+  <div class="stat-card"><div class="num">24</div><div class="label">Keywords</div></div>
+  <div class="stat-card"><div class="num">220</div><div class="label">Listings</div></div>
+  <div class="stat-card"><div class="num">21</div><div class="label">Bestsellers</div></div>
+  <div class="stat-card"><div class="num">13</div><div class="label">Popular Now</div></div>
+  <div class="stat-card"><div class="num">$79.50</div><div class="label">Avg Price</div></div>
+  <div class="stat-card"><div class="num">218</div><div class="label">With Price</div></div>
+</div>
+
+<div class="container">
+  <div class="nav"><a href="#summary">Summary</a><a href="#bestsellers">Bestsellers</a><a href="#popular-now">Popular Now</a><a href="#by-keyword">By Keyword</a><a href="#keywords">Title Keywords</a><a href="#expand">Next Searches</a></div>
+  <h2 id="summary">Summary by Keyword</h2>
+<div class="table-wrap">
+<table class="sortable">
+  <thead>
+    <tr>
+      <th>Keyword</th>
+      <th>Listings</th>
+      <th>Bestseller</th>
+      <th>Popular Now</th>
+      <th>Avg Price</th>
+      <th>Min Price</th>
+      <th>Max Price</th>
+    </tr>
+  </thead>
+  <tbody><tr>
+  <td><a href="#wix-website" style="color:var(--brown);text-decoration:none;">wix website</a></td>
+  <td data-val="9">9</td>
+  <td data-val="0">0</td>
+  <td data-val="0">0</td>
+  <td data-val="128.8188888888889">$128.82</td>
+  <td>$16.98</td>
+  <td>$299.00</td>
+</tr><tr>
+  <td><a href="#coach-website" style="color:var(--brown);text-decoration:none;">coach website</a></td>
+  <td data-val="10">10</td>
+  <td data-val="0">0</td>
+  <td data-val="0">0</td>
+  <td data-val="93.26500000000001">$93.27</td>
+  <td>$6.76</td>
+  <td>$297.00</td>
+</tr><tr>
+  <td><a href="#wix-website-template" style="color:var(--brown);text-decoration:none;">wix website template</a></td>
+  <td data-val="8">8</td>
+  <td data-val="0">0</td>
+  <td data-val="0">0</td>
+  <td data-val="128.5675">$128.57</td>
+  <td>$16.98</td>
+  <td>$299.00</td>
+</tr><tr>
+  <td><a href="#website-templates" style="color:var(--brown);text-decoration:none;">website templates</a></td>
+  <td data-val="10">10</td>
+  <td data-val="0">0</td>
+  <td data-val="2"><span class="badge badge-pn">2</span></td>
+  <td data-val="76.487">$76.49</td>
+  <td>$1.50</td>
+  <td>$251.35</td>
+</tr><tr>
+  <td><a href="#ecommerce-website" style="color:var(--brown);text-decoration:none;">ecommerce website</a></td>
+  <td data-val="10">10</td>
+  <td data-val="0">0</td>
+  <td data-val="0">0</td>
+  <td data-val="94.84299999999999">$94.84</td>
+  <td>$1.80</td>
+  <td>$340.00</td>
+</tr><tr>
+  <td><a href="#landing-page" style="color:var(--brown);text-decoration:none;">landing page</a></td>
+  <td data-val="11">11</td>
+  <td data-val="1"><span class="badge badge-bs">1</span></td>
+  <td data-val="0">0</td>
+  <td data-val="59.53272727272727">$59.53</td>
+  <td>$7.63</td>
+  <td>$280.00</td>
+</tr><tr>
+  <td><a href="#branding-kit" style="color:var(--brown);text-decoration:none;">branding kit</a></td>
+  <td data-val="8">8</td>
+  <td data-val="2"><span class="badge badge-bs">2</span></td>
+  <td data-val="0">0</td>
+  <td data-val="134.46125">$134.46</td>
+  <td>$0.99</td>
+  <td>$850.00</td>
+</tr><tr>
+  <td><a href="#branding-package" style="color:var(--brown);text-decoration:none;">branding package</a></td>
+  <td data-val="7">7</td>
+  <td data-val="0">0</td>
+  <td data-val="0">0</td>
+  <td data-val="192.49285714285716">$192.49</td>
+  <td>$15.60</td>
+  <td>$850.00</td>
+</tr><tr>
+  <td><a href="#branding-bundle" style="color:var(--brown);text-decoration:none;">branding bundle</a></td>
+  <td data-val="10">10</td>
+  <td data-val="0">0</td>
+  <td data-val="0">0</td>
+  <td data-val="98.71">$98.71</td>
+  <td>$1.22</td>
+  <td>$850.00</td>
+</tr><tr>
+  <td><a href="#branding-template" style="color:var(--brown);text-decoration:none;">branding template</a></td>
+  <td data-val="10">10</td>
+  <td data-val="1"><span class="badge badge-bs">1</span></td>
+  <td data-val="0">0</td>
+  <td data-val="15.068999999999999">$15.07</td>
+  <td>$2.80</td>
+  <td>$33.00</td>
+</tr><tr>
+  <td><a href="#coaching-templates" style="color:var(--brown);text-decoration:none;">coaching templates</a></td>
+  <td data-val="11">11</td>
+  <td data-val="3"><span class="badge badge-bs">3</span></td>
+  <td data-val="0">0</td>
+  <td data-val="15.332727272727272">$15.33</td>
+  <td>$5.25</td>
+  <td>$27.45</td>
+</tr><tr>
+  <td><a href="#coaching-business" style="color:var(--brown);text-decoration:none;">coaching business</a></td>
+  <td data-val="11">11</td>
+  <td data-val="0">0</td>
+  <td data-val="0">0</td>
+  <td data-val="13.78090909090909">$13.78</td>
+  <td>$1.32</td>
+  <td>$36.39</td>
+</tr><tr>
+  <td><a href="#coaching-bundle" style="color:var(--brown);text-decoration:none;">coaching bundle</a></td>
+  <td data-val="9">9</td>
+  <td data-val="1"><span class="badge badge-bs">1</span></td>
+  <td data-val="0">0</td>
+  <td data-val="115.38777777777779">$115.39</td>
+  <td>$3.67</td>
+  <td>$674.94</td>
+</tr><tr>
+  <td><a href="#social-media-templates" style="color:var(--brown);text-decoration:none;">social media templates</a></td>
+  <td data-val="10">10</td>
+  <td data-val="1"><span class="badge badge-bs">1</span></td>
+  <td data-val="1"><span class="badge badge-pn">1</span></td>
+  <td data-val="10.34">$10.34</td>
+  <td>$2.55</td>
+  <td>$32.75</td>
+</tr><tr>
+  <td><a href="#website-template-expanded" style="color:var(--brown);text-decoration:none;">website template (expanded)</a></td>
+  <td data-val="9">9</td>
+  <td data-val="2"><span class="badge badge-bs">2</span></td>
+  <td data-val="1"><span class="badge badge-pn">1</span></td>
+  <td data-val="104.47">$104.47</td>
+  <td>$1.83</td>
+  <td>$280.00</td>
+</tr><tr>
+  <td><a href="#social-media-expanded" style="color:var(--brown);text-decoration:none;">social media (expanded)</a></td>
+  <td data-val="9">9</td>
+  <td data-val="2"><span class="badge badge-bs">2</span></td>
+  <td data-val="3"><span class="badge badge-pn">3</span></td>
+  <td data-val="10.6">$10.60</td>
+  <td>$2.80</td>
+  <td>$20.99</td>
+</tr><tr>
+  <td><a href="#site-web-expanded" style="color:var(--brown);text-decoration:none;">site web (expanded)</a></td>
+  <td data-val="10">10</td>
+  <td data-val="0">0</td>
+  <td data-val="0">0</td>
+  <td data-val="189.73777777777778">$189.74</td>
+  <td>$6.76</td>
+  <td>$496.51</td>
+</tr><tr>
+  <td><a href="#wix-studio-expanded" style="color:var(--brown);text-decoration:none;">wix studio (expanded)</a></td>
+  <td data-val="9">9</td>
+  <td data-val="0">0</td>
+  <td data-val="0">0</td>
+  <td data-val="134.16444444444446">$134.16</td>
+  <td>$10.50</td>
+  <td>$299.00</td>
+</tr><tr>
+  <td><a href="#sitio-web-expanded" style="color:var(--brown);text-decoration:none;">sitio web (expanded)</a></td>
+  <td data-val="9">9</td>
+  <td data-val="0">0</td>
+  <td data-val="0">0</td>
+  <td data-val="113.83555555555556">$113.84</td>
+  <td>$10.31</td>
+  <td>$299.00</td>
+</tr><tr>
+  <td><a href="#canva-template-expanded" style="color:var(--brown);text-decoration:none;">canva template (expanded)</a></td>
+  <td data-val="10">10</td>
+  <td data-val="4"><span class="badge badge-bs">4</span></td>
+  <td data-val="2"><span class="badge badge-pn">2</span></td>
+  <td data-val="5.43">$5.43</td>
+  <td>$0.97</td>
+  <td>$24.26</td>
+</tr><tr>
+  <td><a href="#canva-templates-expanded" style="color:var(--brown);text-decoration:none;">canva templates (expanded)</a></td>
+  <td data-val="10">10</td>
+  <td data-val="3"><span class="badge badge-bs">3</span></td>
+  <td data-val="4"><span class="badge badge-pn">4</span></td>
+  <td data-val="3.001">$3.00</td>
+  <td>$0.97</td>
+  <td>$6.05</td>
+</tr><tr>
+  <td><a href="#sales-page-expanded" style="color:var(--brown);text-decoration:none;">sales page (expanded)</a></td>
+  <td data-val="9">9</td>
+  <td data-val="1"><span class="badge badge-bs">1</span></td>
+  <td data-val="0">0</td>
+  <td data-val="58.15666666666667">$58.16</td>
+  <td>$3.88</td>
+  <td>$174.67</td>
+</tr><tr>
+  <td><a href="#coaching-website-expanded" style="color:var(--brown);text-decoration:none;">coaching website (expanded)</a></td>
+  <td data-val="9">9</td>
+  <td data-val="0">0</td>
+  <td data-val="0">0</td>
+  <td data-val="126.23222222222222">$126.23</td>
+  <td>$6.76</td>
+  <td>$674.94</td>
+</tr><tr>
+  <td><a href="#mod-les-expanded" style="color:var(--brown);text-decoration:none;">mod les (expanded)</a></td>
+  <td data-val="2">2</td>
+  <td data-val="0">0</td>
+  <td data-val="0">0</td>
+  <td data-val="101.14">$101.14</td>
+  <td>$101.14</td>
+  <td>$101.14</td>
+</tr></tbody>
+</table>
+</div>
+  <h2 id="bestsellers">Bestseller Listings (21)</h2>
+<div class="listing-card has-badge">
+  <div class="listing-title">Plantilla de Canva para la página de ventas de Stan Store Beacons para entrenadores y creadores de cursos. Enlace en la biografía. Página de destino <span class="badge badge-bs">Bestseller</span></div>
+  <div class="listing-meta">
+    <span><strong>Shop:</strong> CreativeStudioAmber</span>
+    <span><strong>Price:</strong> <span class="price">$17.47</span></span>
+    <span><strong>Reviews:</strong> 5</span>
+    <span><strong>Sales:</strong> Unknown</span>
+  </div>
+  <p style="font-size:0.82rem;color:#666;margin-top:8px;">✨ Plantilla de página de ventas de Canva para entrenadores y creadores de cursos. Enlace de alta conversión en Bio Funnel para Stan Store y Beacons. Lanza tu curso, programa de coaching o producto digital de forma atractiva con esta plantilla de página de ventas móvil creada en Canva. Diseñada para …</p>
+  <a class="listing-link" href="https://www.etsy.com/listing/4419856764/stan-store-beacons-sales-page-canva" target="_blank" rel="noopener">
+    Open on Etsy &rarr;
+  </a>
+</div>
+<div class="listing-card has-badge">
+  <div class="listing-title">Custom Branding & Logo Design Package: Unique Business Identity, Professional Logo, Brand Kit, Visual Identity <span class="badge badge-bs">Bestseller</span></div>
+  <div class="listing-meta">
+    <span><strong>Shop:</strong> OliviaCreativeStudio</span>
+    <span><strong>Price:</strong> <span class="price">$164.54</span></span>
+    <span><strong>Reviews:</strong> 5</span>
+    <span><strong>Sales:</strong> Unknown</span>
+  </div>
+  <p style="font-size:0.82rem;color:#666;margin-top:8px;">I will create your Custom Business Logo Design and Complete Branding Package with Professional Logo, Brand Kit, Visual Identity, Logo Design ✦ Stand out with a sleek starter branding kit designed to give your business a professional edge. This package includes a custom logo design, a simple brand co…</p>
+  <a class="listing-link" href="https://www.etsy.com/listing/4381656044/custom-branding-logo-design-package" target="_blank" rel="noopener">
+    Open on Etsy &rarr;
+  </a>
+</div>
+<div class="listing-card has-badge">
+  <div class="listing-title">Branding Board Template, DIY Branding Kit, Business Branding Kit, DIY Logo Designs, Mood Board, Editable in Canva <span class="badge badge-bs">Bestseller</span></div>
+  <div class="listing-meta">
+    <span><strong>Shop:</strong> CoachTemplateDesign</span>
+    <span><strong>Price:</strong> <span class="price">$5.04</span></span>
+    <span><strong>Reviews:</strong> 5</span>
+    <span><strong>Sales:</strong> Unknown</span>
+  </div>
+  <p style="font-size:0.82rem;color:#666;margin-top:8px;">GET INSTANT ACCESS TO 61 BRAND BOARDS AND 14 BONUS BRAND BOARDS. Enhance visibility of your brand with these unique templates for branding and logo design. FULLY EDITABLE IN CANVA ✓ Upload your images to Canva, and drag and drop them to templates to replace existing ones ✓ Add or change any text ✓ C…</p>
+  <a class="listing-link" href="https://www.etsy.com/listing/1440615410/branding-board-template-diy-branding-kit" target="_blank" rel="noopener">
+    Open on Etsy &rarr;
+  </a>
+</div>
+<div class="listing-card has-badge">
+  <div class="listing-title">Branding Board Template, DIY Branding Kit, Business Branding Kit, DIY Logo Designs, Mood Board, Editable in Canva <span class="badge badge-bs">Bestseller</span></div>
+  <div class="listing-meta">
+    <span><strong>Shop:</strong> CoachTemplateDesign</span>
+    <span><strong>Price:</strong> <span class="price">$5.04</span></span>
+    <span><strong>Reviews:</strong> 5</span>
+    <span><strong>Sales:</strong> Unknown</span>
+  </div>
+  <p style="font-size:0.82rem;color:#666;margin-top:8px;">GET INSTANT ACCESS TO 61 BRAND BOARDS AND 14 BONUS BRAND BOARDS. Enhance visibility of your brand with these unique templates for branding and logo design. FULLY EDITABLE IN CANVA ✓ Upload your images to Canva, and drag and drop them to templates to replace existing ones ✓ Add or change any text ✓ C…</p>
+  <a class="listing-link" href="https://www.etsy.com/listing/1440615410/branding-board-template-diy-branding-kit" target="_blank" rel="noopener">
+    Open on Etsy &rarr;
+  </a>
+</div>
+<div class="listing-card has-badge">
+  <div class="listing-title">Life Coaching Branding Toolkit, Canva Templates, Coaching Tools and Resources, Client Forms, Instagram Posts, Therapy Worksheets & Workbooks <span class="badge badge-bs">Bestseller</span></div>
+  <div class="listing-meta">
+    <span><strong>Shop:</strong> SimplifyMySocials</span>
+    <span><strong>Price:</strong> <span class="price">$25.20</span></span>
+    <span><strong>Reviews:</strong> 5</span>
+    <span><strong>Sales:</strong> Unknown</span>
+  </div>
+  <p style="font-size:0.82rem;color:#666;margin-top:8px;">👉 Get FULL ACCESS to this product and ALL OF OUR OTHER Canva templates from my shop with the Ultimate Canva Vault membership here: https://www.etsy.com/listing/1540730612/life-coaching-and-therapy-vault-coaching 👈 The Ultimate Life Coaching Branding Toolkit – Fully Pre-Written & Ready to Use! Are yo…</p>
+  <a class="listing-link" href="https://www.etsy.com/listing/1862168494/life-coaching-branding-toolkit-canva" target="_blank" rel="noopener">
+    Open on Etsy &rarr;
+  </a>
+</div>
+<div class="listing-card has-badge">
+  <div class="listing-title">Instagram Coach Templates, Social Media Manager Posts, Digital Marketer Content Creation, Luxury Instagram Story, Carousel Templates Canva <span class="badge badge-bs">Bestseller</span></div>
+  <div class="listing-meta">
+    <span><strong>Shop:</strong> GridGirlsCreative</span>
+    <span><strong>Price:</strong> <span class="price">$27.45</span></span>
+    <span><strong>Reviews:</strong> 5</span>
+    <span><strong>Sales:</strong> Unknown</span>
+  </div>
+  <p style="font-size:0.82rem;color:#666;margin-top:8px;">❤️ CANVA INSTAGRAM TEMPLATE BUNDLE FOR COACHES, SOCIAL MEDIA MANAGERS, DIGITAL MARKETERS & CONTENT CREATORS ❤️ Elevate your small business Instagram presence with a rich burgundy luxury aesthetic designed for online entrepreneurs and social media professionals who want their content to feel polished…</p>
+  <a class="listing-link" href="https://www.etsy.com/listing/4466372019/instagram-coach-templates-social-media" target="_blank" rel="noopener">
+    Open on Etsy &rarr;
+  </a>
+</div>
+<div class="listing-card has-badge">
+  <div class="listing-title">130 Page Ebook Template | Coaching Course Template | For Freelancers, Coaches, Course Creators | Canva Workbook Template <span class="badge badge-bs">Bestseller</span></div>
+  <div class="listing-meta">
+    <span><strong>Shop:</strong> ShopRShop</span>
+    <span><strong>Price:</strong> <span class="price">$5.25</span></span>
+    <span><strong>Reviews:</strong> 5</span>
+    <span><strong>Sales:</strong> Unknown</span>
+  </div>
+  <p style="font-size:0.82rem;color:#666;margin-top:8px;">🌟130-Page Editable Ebook & Workbook Template Our coaching workbook and Ebook templates are easy to customize and easily market your brand. It is perfect for creating workshop handbooks, online course workbooks, webinar action guides, challenges, social media guides, assessment opt-in freebies, resou…</p>
+  <a class="listing-link" href="https://www.etsy.com/listing/1708542305/130-page-ebook-template-coaching-course" target="_blank" rel="noopener">
+    Open on Etsy &rarr;
+  </a>
+</div>
+<div class="listing-card has-badge">
+  <div class="listing-title">Life Coaching Branding Toolkit, Canva Templates, Coaching Tools and Resources, Client Forms, Instagram Posts, Therapy Worksheets & Workbooks <span class="badge badge-bs">Bestseller</span></div>
+  <div class="listing-meta">
+    <span><strong>Shop:</strong> SimplifyMySocials</span>
+    <span><strong>Price:</strong> <span class="price">$25.20</span></span>
+    <span><strong>Reviews:</strong> 5</span>
+    <span><strong>Sales:</strong> Unknown</span>
+  </div>
+  <p style="font-size:0.82rem;color:#666;margin-top:8px;">👉 Get FULL ACCESS to this product and ALL OF OUR OTHER Canva templates from my shop with the Ultimate Canva Vault membership here: https://www.etsy.com/listing/1540730612/life-coaching-and-therapy-vault-coaching 👈 The Ultimate Life Coaching Branding Toolkit – Fully Pre-Written & Ready to Use! Are yo…</p>
+  <a class="listing-link" href="https://www.etsy.com/listing/1862168494/life-coaching-branding-toolkit-canva" target="_blank" rel="noopener">
+    Open on Etsy &rarr;
+  </a>
+</div>
+<div class="listing-card has-badge">
+  <div class="listing-title">Modèles Instagram bleu foncé Canva | Trousse de marque aux bleuets pour petite entreprise | Pack de contenu pour les réseaux sociaux <span class="badge badge-bs">Bestseller</span></div>
+  <div class="listing-meta">
+    <span><strong>Shop:</strong> DisegnoBianco</span>
+    <span><strong>Price:</strong> <span class="price">$5.82</span></span>
+    <span><strong>Reviews:</strong> 5</span>
+    <span><strong>Sales:</strong> Unknown</span>
+  </div>
+  <p style="font-size:0.82rem;color:#666;margin-top:8px;">Inspirée des tons bleuets riches et bleu profond, cette collection de modèles Instagram modernes et minimalistes est conçue pour rehausser la présence visuelle de votre marque avec une esthétique raffinée et soignée. Parfait pour créer facilement un flux Instagram cohérent et professionnel. Il s'agi…</p>
+  <a class="listing-link" href="https://www.etsy.com/listing/4428514195/deep-blue-instagram-templates-canva" target="_blank" rel="noopener">
+    Open on Etsy &rarr;
+  </a>
+</div>
+<div class="listing-card has-badge">
+  <div class="listing-title">Clara WordPress Theme | Elementor Website Template for Coaches, Agencies <span class="badge badge-bs">Bestseller</span></div>
+  <div class="listing-meta">
+    <span><strong>Shop:</strong> MauveStudioShop</span>
+    <span><strong>Price:</strong> <span class="price">$60.04</span></span>
+    <span><strong>Reviews:</strong> 5</span>
+    <span><strong>Sales:</strong> Unknown</span>
+  </div>
+  <p style="font-size:0.82rem;color:#666;margin-top:8px;">Clara is a custom WordPress theme designed for coaches, creative entrepreneurs, marketing agencies, bloggers, ecommerce brands, podcasters, and service-based businesses. It works with the Elementor page builder and helps you build a professional, mobile-friendly website in minutes—no coding needed. …</p>
+  <a class="listing-link" href="https://www.etsy.com/listing/1895675663/clara-wordpress-theme-elementor-website" target="_blank" rel="noopener">
+    Open on Etsy &rarr;
+  </a>
+</div>
+<div class="listing-card has-badge">
+  <div class="listing-title">Modern Aesthetic Canva Website Template Social Media Manager Portfolio Marketing Pinterest Inspired Instagram Landing Page Content Creator <span class="badge badge-bs">Bestseller</span></div>
+  <div class="listing-meta">
+    <span><strong>Shop:</strong> DigitalNookStudioCo</span>
+    <span><strong>Price:</strong> <span class="price">$17.71</span></span>
+    <span><strong>Reviews:</strong> 5</span>
+    <span><strong>Sales:</strong> Unknown</span>
+  </div>
+  <p style="font-size:0.82rem;color:#666;margin-top:8px;">Modern Aesthetic Canva Website Template | Social Media Manager Portfolio, UGC Creator Landing Page | Pinterest & Instagram Inspired This is a DIGITAL FILE, no physical products will be shipped. The template is INSTANT DOWNLOAD and FULLY EDITABLE. Get this template to skip the hassle of creating ever…</p>
+  <a class="listing-link" href="https://www.etsy.com/listing/4426311051/modern-aesthetic-canva-website-template" target="_blank" rel="noopener">
+    Open on Etsy &rarr;
+  </a>
+</div>
+<div class="listing-card has-badge">
+  <div class="listing-title">Deep Blue Instagram Templates Canva | Blueberry Branding Kit for Small Business | Social Media Content Pack <span class="badge badge-bs">Bestseller</span></div>
+  <div class="listing-meta">
+    <span><strong>Shop:</strong> DisegnoBianco</span>
+    <span><strong>Price:</strong> <span class="price">$5.82</span></span>
+    <span><strong>Reviews:</strong> 5</span>
+    <span><strong>Sales:</strong> Unknown</span>
+  </div>
+  <p style="font-size:0.82rem;color:#666;margin-top:8px;">Inspired by rich blueberry and deep blue tones, this modern and minimal Instagram template collection is designed to elevate your brand’s visual presence with a refined, polished aesthetic. Perfect for creating a cohesive and professional Instagram feed with ease. This is a DIGITAL PRODUCT — no phys…</p>
+  <a class="listing-link" href="https://www.etsy.com/listing/4428514195/deep-blue-instagram-templates-canva" target="_blank" rel="noopener">
+    Open on Etsy &rarr;
+  </a>
+</div>
+<div class="listing-card has-badge">
+  <div class="listing-title">Plantilla de Canva para kit de medios de 2 páginas / Kit de medios de Instagram / Plantilla de hoja de tarifas para influencers / Kit de prensa para <span class="badge badge-bs">Bestseller</span></div>
+  <div class="listing-meta">
+    <span><strong>Shop:</strong> ShopRShop</span>
+    <span><strong>Price:</strong> <span class="price">$2.80</span></span>
+    <span><strong>Reviews:</strong> 5</span>
+    <span><strong>Sales:</strong> Unknown</span>
+  </div>
+  <p style="font-size:0.82rem;color:#666;margin-top:8px;">Si eres un influencer de las redes sociales, un bloguero, un fotógrafo, etc., sabes lo importante que es destacar y causar una excelente primera impresión ante las marcas potenciales con las que quieres colaborar. ¡Esta plantilla de kit de medios le permite conectar y jugar con sus propias fotos, es…</p>
+  <a class="listing-link" href="https://www.etsy.com/listing/1163108441/2-page-media-kit-canva-template" target="_blank" rel="noopener">
+    Open on Etsy &rarr;
+  </a>
+</div>
+<div class="listing-card has-badge">
+  <div class="listing-title">1800 Neutral Instagram Post Templates - Engagement - Story Templates - Canva Blogger Template - Business - Coach - Reels - Beige Feed - Boho <span class="badge badge-bs">Bestseller</span></div>
+  <div class="listing-meta">
+    <span><strong>Shop:</strong> ParsimoniaDesigns</span>
+    <span><strong>Price:</strong> <span class="price">$4.50</span></span>
+    <span><strong>Reviews:</strong> 5</span>
+    <span><strong>Sales:</strong> Unknown</span>
+  </div>
+  <p style="font-size:0.82rem;color:#666;margin-top:8px;">Streamline your creative process for your personal or business account with dynamic, ready to use templates for Instagram. Using these you' ll be able to focus on what matters the most: creating content! Check out our vintage Film Instagram templates: https://www.etsy.com/listing/1251681216/200-film…</p>
+  <a class="listing-link" href="https://www.etsy.com/listing/1211161810/1800-neutral-instagram-post-templates" target="_blank" rel="noopener">
+    Open on Etsy &rarr;
+  </a>
+</div>
+<div class="listing-card has-badge">
+  <div class="listing-title">Beige Instagram Post Templates, Social Media Manager Canva Templates, Community Manager Posts, Business Instagram Kit <span class="badge badge-bs">Bestseller</span></div>
+  <div class="listing-meta">
+    <span><strong>Shop:</strong> StudiosPulseWeb</span>
+    <span><strong>Price:</strong> <span class="price">$2.55</span></span>
+    <span><strong>Reviews:</strong> 5</span>
+    <span><strong>Sales:</strong> Unknown</span>
+  </div>
+  <p style="font-size:0.82rem;color:#666;margin-top:8px;">Beige Instagram Post Templates for Social Media Managers | Canva Business Post Pack Give your Instagram account a polished, professional, and cohesive look in just a few minutes. This set of 80 Instagram post templates in elegant beige tones is perfect for social media managers, community managers, …</p>
+  <a class="listing-link" href="https://www.etsy.com/listing/4468572996/beige-instagram-post-templates-social" target="_blank" rel="noopener">
+    Open on Etsy &rarr;
+  </a>
+</div>
+<div class="listing-card has-badge">
+  <div class="listing-title">Instagram Template Bundle for Coaches: Neon Green Canva Social Media Kit (Digital Download) D3 <span class="badge badge-bs">Bestseller</span></div>
+  <div class="listing-meta">
+    <span><strong>Shop:</strong> FigolaCreative</span>
+    <span><strong>Price:</strong> <span class="price">$3.97</span></span>
+    <span><strong>Reviews:</strong> 5</span>
+    <span><strong>Sales:</strong> Unknown</span>
+  </div>
+  <p style="font-size:0.82rem;color:#666;margin-top:8px;">Transform your social media presence with this all-in-one Canva Instagram template bundle. Featuring bold post designs, story templates, 7-slide carousels, and scroll-stopping highlight covers, this kit is perfect for coaches, creators, and small business owners. Build a cohesive, professional brand…</p>
+  <a class="listing-link" href="https://www.etsy.com/listing/4323160206/instagram-template-bundle-for-coaches" target="_blank" rel="noopener">
+    Open on Etsy &rarr;
+  </a>
+</div>
+<div class="listing-card has-badge">
+  <div class="listing-title">Neutral Instagram Templates for Business | 500+ Canva Social Media Posts, Stories & Reels | Branding Kit <span class="badge badge-bs">Bestseller</span></div>
+  <div class="listing-meta">
+    <span><strong>Shop:</strong> DisegnoBianco</span>
+    <span><strong>Price:</strong> <span class="price">$7.28</span></span>
+    <span><strong>Reviews:</strong> 5</span>
+    <span><strong>Sales:</strong> Unknown</span>
+  </div>
+  <p style="font-size:0.82rem;color:#666;margin-top:8px;">This modern and minimal Instagram template collection is designed to elevate your brand’s visual presence with a refined, polished aesthetic. Perfect for creating a cohesive and professional Instagram feed with ease. This is a DIGITAL PRODUCT — no physical items will be shipped. Take your Instagram …</p>
+  <a class="listing-link" href="https://www.etsy.com/listing/4449738701/neutral-instagram-templates-for-business" target="_blank" rel="noopener">
+    Open on Etsy &rarr;
+  </a>
+</div>
+<div class="listing-card has-badge">
+  <div class="listing-title">Deep Blue Instagram Templates Canva | Blueberry Branding Kit for Small Business | Social Media Content Pack <span class="badge badge-bs">Bestseller</span></div>
+  <div class="listing-meta">
+    <span><strong>Shop:</strong> DisegnoBianco</span>
+    <span><strong>Price:</strong> <span class="price">$5.82</span></span>
+    <span><strong>Reviews:</strong> 5</span>
+    <span><strong>Sales:</strong> Unknown</span>
+  </div>
+  <p style="font-size:0.82rem;color:#666;margin-top:8px;">Inspired by rich blueberry and deep blue tones, this modern and minimal Instagram template collection is designed to elevate your brand’s visual presence with a refined, polished aesthetic. Perfect for creating a cohesive and professional Instagram feed with ease. This is a DIGITAL PRODUCT — no phys…</p>
+  <a class="listing-link" href="https://www.etsy.com/listing/4428514195/deep-blue-instagram-templates-canva" target="_blank" rel="noopener">
+    Open on Etsy &rarr;
+  </a>
+</div>
+<div class="listing-card has-badge">
+  <div class="listing-title">1800 Neutral Instagram Post Templates - Engagement - Story Templates - Canva Blogger Template - Business - Coach - Reels - Beige Feed - Boho <span class="badge badge-bs">Bestseller</span></div>
+  <div class="listing-meta">
+    <span><strong>Shop:</strong> ParsimoniaDesigns</span>
+    <span><strong>Price:</strong> <span class="price">$4.50</span></span>
+    <span><strong>Reviews:</strong> 5</span>
+    <span><strong>Sales:</strong> Unknown</span>
+  </div>
+  <p style="font-size:0.82rem;color:#666;margin-top:8px;">Streamline your creative process for your personal or business account with dynamic, ready to use templates for Instagram. Using these you' ll be able to focus on what matters the most: creating content! Check out our vintage Film Instagram templates: https://www.etsy.com/listing/1251681216/200-film…</p>
+  <a class="listing-link" href="https://www.etsy.com/listing/1211161810/1800-neutral-instagram-post-templates" target="_blank" rel="noopener">
+    Open on Etsy &rarr;
+  </a>
+</div>
+<div class="listing-card has-badge">
+  <div class="listing-title">Canva Pro Account, Lifetime Access, 400,000+ Templates (Digital Delivery) <span class="badge badge-bs">Bestseller</span></div>
+  <div class="listing-meta">
+    <span><strong>Shop:</strong> VorkesCreations</span>
+    <span><strong>Price:</strong> <span class="price">$3.66</span></span>
+    <span><strong>Reviews:</strong> 5</span>
+    <span><strong>Sales:</strong> ,</span>
+  </div>
+  <p style="font-size:0.82rem;color:#666;margin-top:8px;">contact me , activate your account) Join the Ultimate Collaborative Creator Space. 🚀 Stop struggling with limited design options. This listing gives you instant access to our exclusive Digital Creator Hub. By joining our private workspace team, you instantly unlock thousands of premium templates, ad…</p>
+  <a class="listing-link" href="https://www.etsy.com/listing/4501671966/canva-pro-get-canva-pro-for-free-how-to" target="_blank" rel="noopener">
+    Open on Etsy &rarr;
+  </a>
+</div>
+<div class="listing-card has-badge">
+  <div class="listing-title">Canva Sales Page Template PLR for Stan Store & Beacons, Digital Product Sales Funnel, Link in Bio Page Template for Coaches and Courses <span class="badge badge-bs">Bestseller</span></div>
+  <div class="listing-meta">
+    <span><strong>Shop:</strong> BibliothequeDigitale</span>
+    <span><strong>Price:</strong> <span class="price">$3.88</span></span>
+    <span><strong>Reviews:</strong> 4</span>
+    <span><strong>Sales:</strong> Unknown</span>
+  </div>
+  <p style="font-size:0.82rem;color:#666;margin-top:8px;">Template de Page de Vente Canva PLR pour Stan Store & Beacons : Créez une page de vente pour produit digital qui convertit en quelques minutes Si vous vendez des produits digitaux, formations, coaching ou offres d’affiliation via Stan Store, Beacons ou toute autre plateforme de type link in bio, vou…</p>
+  <a class="listing-link" href="https://www.etsy.com/listing/4472507873/canva-sales-page-template-plr-for-stan" target="_blank" rel="noopener">
+    Open on Etsy &rarr;
+  </a>
+</div>
+  <h2 id="popular-now">Popular Now Listings (13)</h2>
+<div class="listing-card has-pn">
+  <div class="listing-title">Plantillas minimalistas de Acuity Plantilla de programación de pestañas Acuity Sitio web de tecnología de pestañas Plantilla comercial de Acuity <span class="badge badge-pn">Popular Now</span></div>
+  <div class="listing-meta">
+    <span><strong>Shop:</strong> EqualsCoffee</span>
+    <span><strong>Price:</strong> <span class="price">$1.83</span></span>
+    <span><strong>Reviews:</strong> 5</span>
+    <span><strong>Sales:</strong> Unknown</span>
+  </div>
+  <p style="font-size:0.82rem;color:#666;margin-top:8px;">Plantilla de agudeza minimalista para técnicos o estilistas de pestañas Mejora tu sitio web de reservas con este diseño de plantilla en blanco y negro de Acuity: perfecto para llamar la atención y mantenerlo funcional. ¿No tienes diseñador gráfico? No hay problema. Esta plantilla de programación de …</p>
+  <a class="listing-link" href="https://www.etsy.com/listing/4383312465/minimalist-acuity-templates-lash-acuity" target="_blank" rel="noopener">
+    Open on Etsy &rarr;
+  </a>
+</div>
+<div class="listing-card has-pn">
+  <div class="listing-title">Plantilla de programación de Acuity Hair, sitio web de reservas de peluqueros DIY, sitio web de Acuity Hair morado editable en Canva, programación de <span class="badge badge-pn">Popular Now</span></div>
+  <div class="listing-meta">
+    <span><strong>Shop:</strong> FlyershopTreasures</span>
+    <span><strong>Price:</strong> <span class="price">$1.50</span></span>
+    <span><strong>Reviews:</strong> 4</span>
+    <span><strong>Sales:</strong> Unknown</span>
+  </div>
+  <p style="font-size:0.82rem;color:#666;margin-top:8px;">Plantilla de agenda para peluquerías, sitio web de reservas de peluquerías DIY, sitio web editable de Canva para peluquerías, agenda para peluquerías en negro y dorado, descarga digital Ten en cuenta: Algunos gráficos, fotos o fuentes utilizados en esta plantilla pueden ser elementos de Canva Pro. S…</p>
+  <a class="listing-link" href="https://www.etsy.com/listing/4456014196/hair-acuity-scheduling-template-diy" target="_blank" rel="noopener">
+    Open on Etsy &rarr;
+  </a>
+</div>
+<div class="listing-card has-pn">
+  <div class="listing-title">Dark Social Media Templates, Business Instagram Templates, Social Media Manager Template, Modern Instagram Template <span class="badge badge-pn">Popular Now</span></div>
+  <div class="listing-meta">
+    <span><strong>Shop:</strong> StudiosPulseWeb</span>
+    <span><strong>Price:</strong> <span class="price">$2.55</span></span>
+    <span><strong>Reviews:</strong> 5</span>
+    <span><strong>Sales:</strong> Unknown</span>
+  </div>
+  <p style="font-size:0.82rem;color:#666;margin-top:8px;">Canva Business Instagram Templates | Pack of 50 Black & Beige Posts for Women Entrepreneurs Give your Instagram account the look of a high-end brand in just a few minutes. This set of 50 Instagram post templates in black and beige tones is ideal for women entrepreneurs, coaches, content creators and…</p>
+  <a class="listing-link" href="https://www.etsy.com/listing/4409378032/dark-social-media-templates-business" target="_blank" rel="noopener">
+    Open on Etsy &rarr;
+  </a>
+</div>
+<div class="listing-card has-pn">
+  <div class="listing-title">Minimalist Acuity Templates Lash Acuity Scheduling Template Lash Tech Website Acuity Business Template Lashes Booking Site White Acuity Site <span class="badge badge-pn">Popular Now</span></div>
+  <div class="listing-meta">
+    <span><strong>Shop:</strong> EqualsCoffee</span>
+    <span><strong>Price:</strong> <span class="price">$1.83</span></span>
+    <span><strong>Reviews:</strong> 5</span>
+    <span><strong>Sales:</strong> Unknown</span>
+  </div>
+  <p style="font-size:0.82rem;color:#666;margin-top:8px;">🟰Minimalist Acuity Template for Lash Tech or Lash Stylist 🟰 Enhance your booking website with this black and white acuity template design— perfect for turning heads while keeping it functional. No graphic designer? No problem. This acuity scheduling template comes fully designed so you can launch fa…</p>
+  <a class="listing-link" href="https://www.etsy.com/listing/4383312465/minimalist-acuity-templates-lash-acuity" target="_blank" rel="noopener">
+    Open on Etsy &rarr;
+  </a>
+</div>
+<div class="listing-card has-pn">
+  <div class="listing-title">Plantillas de publicaciones de Instagram en rosa melanina. Plantillas de lujo sin rostro para gestores de redes sociales o creadores de contenido. <span class="badge badge-pn">Popular Now</span></div>
+  <div class="listing-meta">
+    <span><strong>Shop:</strong> CieloRosaStudio</span>
+    <span><strong>Price:</strong> <span class="price">$6.84</span></span>
+    <span><strong>Reviews:</strong> 5</span>
+    <span><strong>Sales:</strong> Unknown</span>
+  </div>
+  <p style="font-size:0.82rem;color:#666;margin-top:8px;">Más de 60 plantillas de publicaciones de Instagram modernas y modernas inspiradas en Pinterest, kit de marca para redes sociales (descarga en PDF) ✨¿Quieres también cubiertas de carrete a juego? Actualiza a nuestro paquete de portadas para publicaciones y reels de Instagram y ahorra dinero en compar…</p>
+  <a class="listing-link" href="https://www.etsy.com/listing/4494188696/melanin-pink-instagram-post-templates" target="_blank" rel="noopener">
+    Open on Etsy &rarr;
+  </a>
+</div>
+<div class="listing-card has-pn">
+  <div class="listing-title">Modern B2B Marketing Social Media Post + Story Templates | LinkedIn & Instagram Templates for Business | Canva Editable | Branding Pack <span class="badge badge-pn">Popular Now</span></div>
+  <div class="listing-meta">
+    <span><strong>Shop:</strong> ShapeStud</span>
+    <span><strong>Price:</strong> <span class="price">$11.00</span></span>
+    <span><strong>Reviews:</strong> 5</span>
+    <span><strong>Sales:</strong> 476</span>
+  </div>
+  <p style="font-size:0.82rem;color:#666;margin-top:8px;">In a crowded feed, visibility is everything. These templates prioritize readability and professional branding, allowing you to showcase your expertise without spending hours on design. This premium pack of social media post + story templates is meticulously crafted for marketers, SEO experts, and di…</p>
+  <a class="listing-link" href="https://www.etsy.com/listing/4499265113/modern-b2b-marketing-social-media" target="_blank" rel="noopener">
+    Open on Etsy &rarr;
+  </a>
+</div>
+<div class="listing-card has-pn">
+  <div class="listing-title">Planificador de redes sociales: Hoja de cálculo, calendario mensual de contenido, plantilla para influencers (TikTok, Instagram, YouTube, Facebook, <span class="badge badge-pn">Popular Now</span></div>
+  <div class="listing-meta">
+    <span><strong>Shop:</strong> ExclusiveDesignLab</span>
+    <span><strong>Price:</strong> <span class="price">$3.99</span></span>
+    <span><strong>Reviews:</strong> 5</span>
+    <span><strong>Sales:</strong> Unknown</span>
+  </div>
+  <p style="font-size:0.82rem;color:#666;margin-top:8px;">Mantente organizado y constante con esta hoja de cálculo para planificar tus redes sociales, diseñada para creadores de contenido e influencers. Planifica y monitoriza tus publicaciones en TikTok, Instagram, YouTube, Facebook, Pinterest y más, sin esfuerzo. Este planificador de contenido de Google S…</p>
+  <a class="listing-link" href="https://www.etsy.com/listing/4387377897/social-media-planner-spreadsheet-monthly" target="_blank" rel="noopener">
+    Open on Etsy &rarr;
+  </a>
+</div>
+<div class="listing-card has-pn">
+  <div class="listing-title">Paquete de más de 20.000 plantillas de Canva con derechos de reventa (PLR) / Plantillas editables para redes sociales, agendas, negocios y marca / <span class="badge badge-pn">Popular Now</span></div>
+  <div class="listing-meta">
+    <span><strong>Shop:</strong> Glexmedia</span>
+    <span><strong>Price:</strong> <span class="price">$1.60</span></span>
+    <span><strong>Reviews:</strong> 5</span>
+    <span><strong>Sales:</strong> Unknown</span>
+  </div>
+  <p style="font-size:0.82rem;color:#666;margin-top:8px;">Crea, personaliza o vende: todo en un solo paquete. Tanto si quieres diseñar contenido para tu propia marca como si quieres empezar a vender productos digitales, este paquete te ofrece ambas opciones en un solo lugar. En lugar de pasar horas creando diseños desde cero o contratando diseñadores, obti…</p>
+  <a class="listing-link" href="https://www.etsy.com/listing/4477354525/20000-canva-templates-bundle-with-plr" target="_blank" rel="noopener">
+    Open on Etsy &rarr;
+  </a>
+</div>
+<div class="listing-card has-pn">
+  <div class="listing-title">Paquete de 10 plantillas para recuerdos de fiesta / Plantillas editables en Canva para bolsas de papas fritas, Capri Sun y envoltorios de Rice <span class="badge badge-pn">Popular Now</span></div>
+  <div class="listing-meta">
+    <span><strong>Shop:</strong> SvgtemplateArt</span>
+    <span><strong>Price:</strong> <span class="price">$0.97</span></span>
+    <span><strong>Reviews:</strong> 4</span>
+    <span><strong>Sales:</strong> Unknown</span>
+  </div>
+  <p style="font-size:0.82rem;color:#666;margin-top:8px;">✨ Tipo de producto: Plantilla digital 🎁 10 plantillas para recuerdos de fiesta: el paquete definitivo de Canva editable para celebraciones ¡Crea una fiesta temática perfecta con esta colección esencial de 10 plantillas para recuerdos de fiesta! Este paquete incluye los envoltorios y etiquetas más bu…</p>
+  <a class="listing-link" href="https://www.etsy.com/listing/4396185368/10x-party-favor-template-bundle-editable" target="_blank" rel="noopener">
+    Open on Etsy &rarr;
+  </a>
+</div>
+<div class="listing-card has-pn">
+  <div class="listing-title">25.500+ Canva PLR Templates Bundle | Editable Planner Journal Tracker Templates | Digital Products Pack PLR MRR Rights Included <span class="badge badge-pn">Popular Now</span></div>
+  <div class="listing-meta">
+    <span><strong>Shop:</strong> AndrDigitalArtStudio</span>
+    <span><strong>Price:</strong> <span class="price">$1.74</span></span>
+    <span><strong>Reviews:</strong> 5</span>
+    <span><strong>Sales:</strong> ,</span>
+  </div>
+  <p style="font-size:0.82rem;color:#666;margin-top:8px;">💎 25,500+ Editable Canva Templates Mega Bundle — PLR & MRR Rights Included Build your digital product business instantly with this all-in-one Canva Templates Bundle. Get 25,500+ professionally designed planners, journals, trackers, business templates, lifestyle bundles, and more — all fully editable…</p>
+  <a class="listing-link" href="https://www.etsy.com/listing/4302574537/14500-canva-plr-templates-bundle" target="_blank" rel="noopener">
+    Open on Etsy &rarr;
+  </a>
+</div>
+<div class="listing-card has-pn">
+  <div class="listing-title">Paquete de más de 20.000 plantillas de Canva con derechos de reventa (PLR) / Plantillas editables para redes sociales, agendas, negocios y marca / <span class="badge badge-pn">Popular Now</span></div>
+  <div class="listing-meta">
+    <span><strong>Shop:</strong> Glexmedia</span>
+    <span><strong>Price:</strong> <span class="price">$1.60</span></span>
+    <span><strong>Reviews:</strong> 5</span>
+    <span><strong>Sales:</strong> Unknown</span>
+  </div>
+  <p style="font-size:0.82rem;color:#666;margin-top:8px;">Crea, personaliza o vende: todo en un solo paquete. Tanto si quieres diseñar contenido para tu propia marca como si quieres empezar a vender productos digitales, este paquete te ofrece ambas opciones en un solo lugar. En lugar de pasar horas creando diseños desde cero o contratando diseñadores, obti…</p>
+  <a class="listing-link" href="https://www.etsy.com/listing/4477354525/20000-canva-templates-bundle-with-plr" target="_blank" rel="noopener">
+    Open on Etsy &rarr;
+  </a>
+</div>
+<div class="listing-card has-pn">
+  <div class="listing-title">Paquete de 10 plantillas para recuerdos de fiesta / Plantillas editables en Canva para bolsas de papas fritas, Capri Sun y envoltorios de Rice <span class="badge badge-pn">Popular Now</span></div>
+  <div class="listing-meta">
+    <span><strong>Shop:</strong> SvgtemplateArt</span>
+    <span><strong>Price:</strong> <span class="price">$0.97</span></span>
+    <span><strong>Reviews:</strong> 4</span>
+    <span><strong>Sales:</strong> Unknown</span>
+  </div>
+  <p style="font-size:0.82rem;color:#666;margin-top:8px;">✨ Tipo de producto: Plantilla digital 🎁 10 plantillas para recuerdos de fiesta: el paquete definitivo de Canva editable para celebraciones ¡Crea una fiesta temática perfecta con esta colección esencial de 10 plantillas para recuerdos de fiesta! Este paquete incluye los envoltorios y etiquetas más bu…</p>
+  <a class="listing-link" href="https://www.etsy.com/listing/4396185368/10x-party-favor-template-bundle-editable" target="_blank" rel="noopener">
+    Open on Etsy &rarr;
+  </a>
+</div>
+<div class="listing-card has-pn">
+  <div class="listing-title">Paquete de más de 50.000 plantillas ilimitadas para Canva / Planificadores, diarios y rastreadores editables / Productos digitales PLR MRR <span class="badge badge-pn">Popular Now</span></div>
+  <div class="listing-meta">
+    <span><strong>Shop:</strong> NovvaDesignCo</span>
+    <span><strong>Price:</strong> <span class="price">$1.75</span></span>
+    <span><strong>Reviews:</strong> 5</span>
+    <span><strong>Sales:</strong> Unknown</span>
+  </div>
+  <p style="font-size:0.82rem;color:#666;margin-top:8px;">💎 Paquete de más de 50.000 plantillas de Canva / Derechos PLR y MRR incluidos Inicia o expande tu negocio de productos digitales con este enorme paquete de plantillas de Canva. Obtén acceso instantáneo a más de 50.000 plantillas diseñadas profesionalmente, totalmente editables y listas para revender…</p>
+  <a class="listing-link" href="https://www.etsy.com/listing/4487989139/50000-unlimited-canva-templates-bundle" target="_blank" rel="noopener">
+    Open on Etsy &rarr;
+  </a>
+</div>
+  <h2 id="by-keyword">Full Listings by Keyword</h2><h2 id="wix-website">wix website — 9 listings</h2>
+<div class="table-wrap">
+<table class="sortable">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Shop</th>
+      <th>Price</th>
+      <th>Reviews</th>
+      <th>Sales</th>
+      <th>Badge</th>
+    </tr>
+  </thead>
+  <tbody><tr>
+  <td><a href="https://www.etsy.com/listing/1076803799/i-design-website-with-full-dedication" target="_blank" rel="noopener" style="color:var(--brown);">Je conçois un site Web avec un dévouement total et un design réactif, </a></td>
+  <td>RAJCUSTOMCREATIONS</td>
+  <td data-val="299.0" class="price">$299.00</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4297558243/website-template-design-blog-template" target="_blank" rel="noopener" style="color:var(--brown);">Website Template Design Blog Template Shop Integration Platform Setup </a></td>
+  <td>JOACreativeLab</td>
+  <td data-val="234.85" class="price">$234.85</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4480837113/premium-wix-website-for-agencies-service" target="_blank" rel="noopener" style="color:var(--brown);">Premium Wix Website for Agencies, Service Based Business, Luxury Wix W</a></td>
+  <td>StudioLaTerre</td>
+  <td data-val="199.0" class="price">$199.00</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4340044108/wix-studio-website-template-lifestyle" target="_blank" rel="noopener" style="color:var(--brown);">Plantilla web de Wix Studio: Marca de estilo de vida, coach, creador d</a></td>
+  <td>Pastelflush</td>
+  <td data-val="136.46" class="price">$136.46</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4500223838/wix-studio-brand-strategist-website" target="_blank" rel="noopener" style="color:var(--brown);">Plantilla web de Wix Studio para estrategas de marca / Gestor de redes</a></td>
+  <td>WixThemeDesigns</td>
+  <td data-val="127.37" class="price">$127.37</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4366049127/wedding-planner-wix-template-event-decor" target="_blank" rel="noopener" style="color:var(--brown);">Wedding Planner Wix Template | Event Decor & Florist Design | Editable</a></td>
+  <td>WixWebsiteProDesign</td>
+  <td data-val="79.6" class="price">$79.60</td>
+  <td data-val="5">5</td>
+  <td data-val="182">182</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/1759313833/minimalist-interior-design-wix-website" target="_blank" rel="noopener" style="color:var(--brown);">Modèle de Site Web de Design d&#39;intérieur minimaliste Wix</a></td>
+  <td>Pastelflush</td>
+  <td data-val="35.78" class="price">$35.78</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4383312926/luxury-branding-minimalist-1-page" target="_blank" rel="noopener" style="color:var(--brown);">Luxury Branding Minimalist 1 Page Premium Wix Website Agency Template </a></td>
+  <td>WiXwebTEMPLATES</td>
+  <td data-val="30.33" class="price">$30.33</td>
+  <td data-val="5">5</td>
+  <td data-val="80">80</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4386999096/business-template-website-wix-studio" target="_blank" rel="noopener" style="color:var(--brown);">Plantilla web para negocios, plantilla de Wix Studio, sitio web de asi</a></td>
+  <td>StudioJinbu</td>
+  <td data-val="16.98" class="price">$16.98</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr></tbody>
+</table>
+</div><h2 id="coach-website">coach website — 10 listings</h2>
+<div class="table-wrap">
+<table class="sortable">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Shop</th>
+      <th>Price</th>
+      <th>Reviews</th>
+      <th>Sales</th>
+      <th>Badge</th>
+    </tr>
+  </thead>
+  <tbody><tr>
+  <td><a href="https://www.etsy.com/listing/4432234694/milano-luxury-kajabi-website-template" target="_blank" rel="noopener" style="color:var(--brown);">Milano Luxury Kajabi Website Template for High End Coaches & Online Co</a></td>
+  <td>MindsetAF</td>
+  <td data-val="297.0" class="price">$297.00</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4439393058/wix-studio-website-template-for" target="_blank" rel="noopener" style="color:var(--brown);">Wix Studio Website Template for Photographers Event Planners Travel Ag</a></td>
+  <td>JOACreativeLab</td>
+  <td data-val="251.35" class="price">$251.35</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/1866125036/editorial-showit-website-template-for" target="_blank" rel="noopener" style="color:var(--brown);">Editorial Showit Website Template For Coaches and Freelancers | Black </a></td>
+  <td>CotswoldDesignsStore</td>
+  <td data-val="104.72" class="price">$104.72</td>
+  <td data-val="5">5</td>
+  <td data-val="952">952</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/1098637820/website-template-for-wix-wix-template" target="_blank" rel="noopener" style="color:var(--brown);">Website Template for Wix - Wix Template, Wix Theme, Blog Theme, Coach,</a></td>
+  <td>ThirtyOnePalmsStudio</td>
+  <td data-val="92.0" class="price">$92.00</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/1260282067/coaching-website-template-for-wix" target="_blank" rel="noopener" style="color:var(--brown);">Coaching Website Template for WIX / Coaching Website / Life Coach Webs</a></td>
+  <td>AndrewPixel</td>
+  <td data-val="78.85" class="price">$78.85</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/1722361992/life-coach-wix-template-for-therapist" target="_blank" rel="noopener" style="color:var(--brown);">Life Coach Wix Template for Therapist Full Website Wix Coaching Web Si</a></td>
+  <td>vectorocean</td>
+  <td data-val="71.33" class="price">$71.33</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4490283377/life-coach-wix-studio-website-template" target="_blank" rel="noopener" style="color:var(--brown);">Plantilla web Wix Studio para coaches de vida / Diseño web para negoci</a></td>
+  <td>PixlaraStudio</td>
+  <td data-val="10.5" class="price">$10.50</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4335165494/canva-website-template-for-coaches" target="_blank" rel="noopener" style="color:var(--brown);">Canva Website Template for Coaches Melanin Light Coach Website Life Co</a></td>
+  <td>DeluxeVisualsCo</td>
+  <td data-val="10.17" class="price">$10.17</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/1851622682/coaching-canva-website-template-teachers" target="_blank" rel="noopener" style="color:var(--brown);">Coaching Canva Website Template: Teachers, Therapists & Life Coaches</a></td>
+  <td>CaptivDesign</td>
+  <td data-val="9.97" class="price">$9.97</td>
+  <td data-val="5">5</td>
+  <td data-val="783">783</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4301332271/coach-website-canva-template-for-coach" target="_blank" rel="noopener" style="color:var(--brown);">Coach website Canva Template for Coach Landing Page Website Life Coach</a></td>
+  <td>yoursocialwebsite</td>
+  <td data-val="6.76" class="price">$6.76</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr></tbody>
+</table>
+</div><h2 id="wix-website-template">wix website template — 8 listings</h2>
+<div class="table-wrap">
+<table class="sortable">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Shop</th>
+      <th>Price</th>
+      <th>Reviews</th>
+      <th>Sales</th>
+      <th>Badge</th>
+    </tr>
+  </thead>
+  <tbody><tr>
+  <td><a href="https://www.etsy.com/listing/1076803799/i-design-website-with-full-dedication" target="_blank" rel="noopener" style="color:var(--brown);">I design website with full dedication and responsive design, Unlimited</a></td>
+  <td>RAJCUSTOMCREATIONS</td>
+  <td data-val="299.0" class="price">$299.00</td>
+  <td data-val="5">5</td>
+  <td data-val="626">626</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4297558243/website-template-design-blog-template" target="_blank" rel="noopener" style="color:var(--brown);">Modèle de site Web Modèle de blog Intégration de la boutique Configura</a></td>
+  <td>JOACreativeLab</td>
+  <td data-val="234.85" class="price">$234.85</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4480837113/premium-wix-website-for-agencies-service" target="_blank" rel="noopener" style="color:var(--brown);">Site Web premium Wix pour agences, Entreprise de services, Site Web Wi</a></td>
+  <td>StudioLaTerre</td>
+  <td data-val="199.0" class="price">$199.00</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/1098637820/website-template-for-wix-wix-template" target="_blank" rel="noopener" style="color:var(--brown);">Plantilla web para Wix - Plantilla Wix, Tema Wix, Tema para blog, Coac</a></td>
+  <td>ThirtyOnePalmsStudio</td>
+  <td data-val="92.0" class="price">$92.00</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4299560407/photography-wix-website-template-modern" target="_blank" rel="noopener" style="color:var(--brown);">Photography Wix Website Template: Modern Portfolio Design (Digital Dow</a></td>
+  <td>WixWebsiteProDesign</td>
+  <td data-val="79.6" class="price">$79.60</td>
+  <td data-val="5">5</td>
+  <td data-val="182">182</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/1722361992/life-coach-wix-template-for-therapist" target="_blank" rel="noopener" style="color:var(--brown);">Plantilla Wix para coach de vida para terapeutas. Sitio web completo d</a></td>
+  <td>vectorocean</td>
+  <td data-val="71.33" class="price">$71.33</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/1759313833/minimalist-interior-design-wix-website" target="_blank" rel="noopener" style="color:var(--brown);">Minimalist Interior Design Wix Website Template</a></td>
+  <td>Pastelflush</td>
+  <td data-val="35.78" class="price">$35.78</td>
+  <td data-val="5">5</td>
+  <td data-val="984">984</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4386999096/business-template-website-wix-studio" target="_blank" rel="noopener" style="color:var(--brown);">Business Template Website, Wix Studio Template, Virtual Assistant Webs</a></td>
+  <td>StudioJinbu</td>
+  <td data-val="16.98" class="price">$16.98</td>
+  <td data-val="5">5</td>
+  <td data-val="79">79</td>
+  <td><span class="badge-none">—</span></td>
+</tr></tbody>
+</table>
+</div><h2 id="website-templates">website templates — 10 listings</h2>
+<div class="table-wrap">
+<table class="sortable">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Shop</th>
+      <th>Price</th>
+      <th>Reviews</th>
+      <th>Sales</th>
+      <th>Badge</th>
+    </tr>
+  </thead>
+  <tbody><tr>
+  <td><a href="https://www.etsy.com/listing/4439393058/wix-studio-website-template-for" target="_blank" rel="noopener" style="color:var(--brown);">Modèle de site Web Wix Studio pour photographes Organisateurs d&#39;év</a></td>
+  <td>JOACreativeLab</td>
+  <td data-val="251.35" class="price">$251.35</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4412182864/bold-red-squarespace-template-for-life" target="_blank" rel="noopener" style="color:var(--brown);">Bold Red Squarespace Template for life Coaches, podcaster and course c</a></td>
+  <td>RowMarketCo</td>
+  <td data-val="206.9" class="price">$206.90</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/1770718561/editable-wix-studio-website-template-for" target="_blank" rel="noopener" style="color:var(--brown);">Editable Wix Studio Website Template for entrepreneurs coaches social </a></td>
+  <td>JOACreativeLab</td>
+  <td data-val="201.85" class="price">$201.85</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4451878794/squarespace-website-template-coaches" target="_blank" rel="noopener" style="color:var(--brown);">Squarespace 7.1 Website Template for Coaches, Creators, Authors (Purpl</a></td>
+  <td>FigolaCreative</td>
+  <td data-val="52.6" class="price">$52.60</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4415543203/credit-repair-website-template-credit" target="_blank" rel="noopener" style="color:var(--brown);">Credit Repair Website Template, Credit Repair Canva Site, Editable Can</a></td>
+  <td>DIYBeautyBoss</td>
+  <td data-val="23.0" class="price">$23.00</td>
+  <td data-val="4">4</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4386999096/business-template-website-wix-studio" target="_blank" rel="noopener" style="color:var(--brown);">Business Template Website, Wix Studio Template, Virtual Assistant Webs</a></td>
+  <td>StudioJinbu</td>
+  <td data-val="16.98" class="price">$16.98</td>
+  <td data-val="5">5</td>
+  <td data-val="79">79</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4301332271/coach-website-canva-template-for-coach" target="_blank" rel="noopener" style="color:var(--brown);">Coach website Canva Template for Coach Landing Page Website Life Coach</a></td>
+  <td>yoursocialwebsite</td>
+  <td data-val="6.76" class="price">$6.76</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4332206163/canva-website-template-for-social-media" target="_blank" rel="noopener" style="color:var(--brown);">Canva Website Template for Social Media Agency, Social Media Managers </a></td>
+  <td>HBADigitalCrafted</td>
+  <td data-val="2.1" class="price">$2.10</td>
+  <td data-val="5">5</td>
+  <td data-val="86">86</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4383312465/minimalist-acuity-templates-lash-acuity" target="_blank" rel="noopener" style="color:var(--brown);">Plantillas minimalistas de Acuity Plantilla de programación de pestaña</a></td>
+  <td>EqualsCoffee</td>
+  <td data-val="1.83" class="price">$1.83</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge badge-pn">Popular Now</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4456014196/hair-acuity-scheduling-template-diy" target="_blank" rel="noopener" style="color:var(--brown);">Plantilla de programación de Acuity Hair, sitio web de reservas de pel</a></td>
+  <td>FlyershopTreasures</td>
+  <td data-val="1.5" class="price">$1.50</td>
+  <td data-val="4">4</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge badge-pn">Popular Now</span></td>
+</tr></tbody>
+</table>
+</div><h2 id="ecommerce-website">ecommerce website — 10 listings</h2>
+<div class="table-wrap">
+<table class="sortable">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Shop</th>
+      <th>Price</th>
+      <th>Reviews</th>
+      <th>Sales</th>
+      <th>Badge</th>
+    </tr>
+  </thead>
+  <tbody><tr>
+  <td><a href="https://www.etsy.com/listing/1612644258/wordpress-full-website-setup-in-72-hours" target="_blank" rel="noopener" style="color:var(--brown);">Configuration complète du site Web WordPress en 72 heures avec des thè</a></td>
+  <td>AspireWebDesign</td>
+  <td data-val="340.0" class="price">$340.00</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/1076803799/i-design-website-with-full-dedication" target="_blank" rel="noopener" style="color:var(--brown);">Diseño sitios web con total dedicación y diseño responsivo, revisiones</a></td>
+  <td>RAJCUSTOMCREATIONS</td>
+  <td data-val="299.0" class="price">$299.00</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/1256434216/airy-light-modern-shop-website-theme" target="_blank" rel="noopener" style="color:var(--brown);">Thème minimaliste aéré pour Shopify - Modèle de commerce électronique </a></td>
+  <td>ThirtyOnePalmsStudio</td>
+  <td data-val="84.0" class="price">$84.00</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/1794630029/lilou-wordpress-theme-elementor-website" target="_blank" rel="noopener" style="color:var(--brown);">Lilou Coach Website Template | WordPress Elementor Theme for Ecommerce</a></td>
+  <td>MauveStudioShop</td>
+  <td data-val="60.04" class="price">$60.04</td>
+  <td data-val="5">5</td>
+  <td data-val="">,</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/1719224538/shopifywordpresssquarespace-complete" target="_blank" rel="noopener" style="color:var(--brown);">Shopify,WordPress,Squarespace Complete Website Setup in 72 Hours, Cust</a></td>
+  <td>AspireWebDesign</td>
+  <td data-val="60.0" class="price">$60.00</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/1736341536/white-minimal-ecommerce-website-template" target="_blank" rel="noopener" style="color:var(--brown);">Plantilla minimalista de comercio electrónico en blanco: tema Wix Stud</a></td>
+  <td>TemplateTwistShop</td>
+  <td data-val="46.38" class="price">$46.38</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4436832606/beauty-wordpress-theme-salon-website" target="_blank" rel="noopener" style="color:var(--brown);">Thème WordPress beauté – modèle Elementor de site Web de salon, site W</a></td>
+  <td>BETOPLAB</td>
+  <td data-val="32.75" class="price">$32.75</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4329737932/shopify-theme-kit-wellness-minimalist" target="_blank" rel="noopener" style="color:var(--brown);">Shopify Theme Kit Wellness Minimalist Website Template Luxury Shopify </a></td>
+  <td>TemplatesCove</td>
+  <td data-val="22.36" class="price">$22.36</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4449130267/e-commerce-canva-website-template" target="_blank" rel="noopener" style="color:var(--brown);">Modèle de site Web de commerce électronique Canva, site Web modifiable</a></td>
+  <td>HBADigitalCrafted</td>
+  <td data-val="2.1" class="price">$2.10</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4500179939/400-shopify-templates-bundle-ecommerce" target="_blank" rel="noopener" style="color:var(--brown);">400+ Shopify Templates Bundle | eCommerce Website Themes</a></td>
+  <td>TazkaCreations</td>
+  <td data-val="1.8" class="price">$1.80</td>
+  <td data-val="5">5</td>
+  <td data-val="180">180</td>
+  <td><span class="badge-none">—</span></td>
+</tr></tbody>
+</table>
+</div><h2 id="landing-page">landing page — 11 listings</h2>
+<div class="table-wrap">
+<table class="sortable">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Shop</th>
+      <th>Price</th>
+      <th>Reviews</th>
+      <th>Sales</th>
+      <th>Badge</th>
+    </tr>
+  </thead>
+  <tbody><tr>
+  <td><a href="https://www.etsy.com/listing/4433674007/custom-website-design-landing-page-full" target="_blank" rel="noopener" style="color:var(--brown);">Custom Website Design, Landing Page, Full Setup</a></td>
+  <td>MariasMediaShop</td>
+  <td data-val="280.0" class="price">$280.00</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/1867233051/showit-website-template-for" target="_blank" rel="noopener" style="color:var(--brown);">Plantilla web Showit para fotógrafos / Diseño de portafolio</a></td>
+  <td>StudioFiftyfiveCo</td>
+  <td data-val="220.01" class="price">$220.01</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4452617782/systemeio-course-template-one-click" target="_blank" rel="noopener" style="color:var(--brown);">Systeme.io Course Template | One-Click Online Course Setup | Editable </a></td>
+  <td>UumaWay</td>
+  <td data-val="39.42" class="price">$39.42</td>
+  <td data-val="5">5</td>
+  <td data-val="">,</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4492302683/systemeio-sales-funnel-template-landing" target="_blank" rel="noopener" style="color:var(--brown);">Systeme.io Sales Funnel Template | Landing Page & Website Template | H</a></td>
+  <td>CarlyVibes</td>
+  <td data-val="20.0" class="price">$20.00</td>
+  <td data-val="Unknown">Unknown</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4455996441/canva-website-template-social-media" target="_blank" rel="noopener" style="color:var(--brown);">Canva Website Template Social Media Manager Trendy Portfolio Marketing</a></td>
+  <td>DigitalNookStudioCo</td>
+  <td data-val="17.71" class="price">$17.71</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4494967603/esthetician-medspa-landing-page-canva" target="_blank" rel="noopener" style="color:var(--brown);">Page de destination pour esthéticienne Medspa Modèle de site Web Canva</a></td>
+  <td>FaridasStudio</td>
+  <td data-val="17.5" class="price">$17.50</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4419856764/stan-store-beacons-sales-page-canva" target="_blank" rel="noopener" style="color:var(--brown);">Plantilla de Canva para la página de ventas de Stan Store Beacons para</a></td>
+  <td>CreativeStudioAmber</td>
+  <td data-val="17.47" class="price">$17.47</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge badge-bs">Bestseller</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4464709305/virtual-assistant-canva-website-template" target="_blank" rel="noopener" style="color:var(--brown);">Virtual Assistant Canva Website Template | VA Portfolio Landing Page (</a></td>
+  <td>socialsatelier</td>
+  <td data-val="15.07" class="price">$15.07</td>
+  <td data-val="4">4</td>
+  <td data-val="807">807</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4443275073/business-coach-canva-landing-page" target="_blank" rel="noopener" style="color:var(--brown);">Business Coach Canva Landing Page Template, Burgundy Red Coaching Webs</a></td>
+  <td>EclosionDesignStudio</td>
+  <td data-val="11.55" class="price">$11.55</td>
+  <td data-val="5">5</td>
+  <td data-val="299">299</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/1731525179/canva-sales-page-template-coaching" target="_blank" rel="noopener" style="color:var(--brown);">Canva Sales Page Template, Coaching Course Landing Page, Landing Page,</a></td>
+  <td>hellosummerdesignco</td>
+  <td data-val="8.5" class="price">$8.50</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4463907237/green-business-consultant-canva-website" target="_blank" rel="noopener" style="color:var(--brown);">Green Business Consultant Canva Website Template Coach Landing Page Sa</a></td>
+  <td>GraceDigitalsCoPH</td>
+  <td data-val="7.63" class="price">$7.63</td>
+  <td data-val="5">5</td>
+  <td data-val="">,</td>
+  <td><span class="badge-none">—</span></td>
+</tr></tbody>
+</table>
+</div><h2 id="branding-kit">branding kit — 8 listings</h2>
+<div class="table-wrap">
+<table class="sortable">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Shop</th>
+      <th>Price</th>
+      <th>Reviews</th>
+      <th>Sales</th>
+      <th>Badge</th>
+    </tr>
+  </thead>
+  <tbody><tr>
+  <td><a href="https://www.etsy.com/listing/1864556739/custom-logo-branding-package-full-brand" target="_blank" rel="noopener" style="color:var(--brown);">Custom Logo Branding Package: Full Brand Identity Kit</a></td>
+  <td>FancyLandCo</td>
+  <td data-val="850.0" class="price">$850.00</td>
+  <td data-val="5">5</td>
+  <td data-val="729">729</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4381656044/custom-branding-logo-design-package" target="_blank" rel="noopener" style="color:var(--brown);">Custom Branding & Logo Design Package: Unique Business Identity, Profe</a></td>
+  <td>OliviaCreativeStudio</td>
+  <td data-val="164.54" class="price">$164.54</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge badge-bs">Bestseller</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4503988197/60-elegant-brand-kit-canva-template" target="_blank" rel="noopener" style="color:var(--brown);">60+ Elegant Brand Kit Canva Template Luxury Full Branding Kit for Coac</a></td>
+  <td>beychobindesign</td>
+  <td data-val="24.0" class="price">$24.00</td>
+  <td data-val="5">5</td>
+  <td data-val="90">90</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/1700706120/canva-branding-kit-logo-social-media" target="_blank" rel="noopener" style="color:var(--brown);">Canva Branding Kit: Logo & Social Media Templates</a></td>
+  <td>OhSoSocialDesignCo</td>
+  <td data-val="20.99" class="price">$20.99</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/1784647998/brand-guidelines-template-canva-template" target="_blank" rel="noopener" style="color:var(--brown);">Modèle de directives de marque | Modèle de toile | Manuel de la marque</a></td>
+  <td>StudioSwainCo</td>
+  <td data-val="8.91" class="price">$8.91</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/1440615410/branding-board-template-diy-branding-kit" target="_blank" rel="noopener" style="color:var(--brown);">Branding Board Template, DIY Branding Kit, Business Branding Kit, DIY </a></td>
+  <td>CoachTemplateDesign</td>
+  <td data-val="5.04" class="price">$5.04</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge badge-bs">Bestseller</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4494200812/60-brand-board-templates-bundle-canva" target="_blank" rel="noopener" style="color:var(--brown);">60+ Brand Board Templates Bundle – Canva Business Branding Kit, Logo D</a></td>
+  <td>pixbundle</td>
+  <td data-val="1.22" class="price">$1.22</td>
+  <td data-val="4">4</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4297427132/canva-branding-kit-diy-logo-color" target="_blank" rel="noopener" style="color:var(--brown);">Kit de marca Canva / Logotipo, paleta de colores y fuentes DIY / Plant</a></td>
+  <td>DesignzPrintablezhub</td>
+  <td data-val="0.99" class="price">$0.99</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr></tbody>
+</table>
+</div><h2 id="branding-package">branding package — 7 listings</h2>
+<div class="table-wrap">
+<table class="sortable">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Shop</th>
+      <th>Price</th>
+      <th>Reviews</th>
+      <th>Sales</th>
+      <th>Badge</th>
+    </tr>
+  </thead>
+  <tbody><tr>
+  <td><a href="https://www.etsy.com/listing/1864556739/custom-logo-branding-package-full-brand" target="_blank" rel="noopener" style="color:var(--brown);">Custom Logo Branding Package: Full Brand Identity Kit</a></td>
+  <td>FancyLandCo</td>
+  <td data-val="850.0" class="price">$850.00</td>
+  <td data-val="5">5</td>
+  <td data-val="729">729</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4377266777/custom-branding-package-with-unique-logo" target="_blank" rel="noopener" style="color:var(--brown);">Paquete de marca personalizado con logotipo único para su negocio, kit</a></td>
+  <td>OliviaCreativeStudio</td>
+  <td data-val="256.97" class="price">$256.97</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4439734199/creative-custom-branding-service" target="_blank" rel="noopener" style="color:var(--brown);">Creative Custom Branding Service | Artistic Logo Design & Brand Identi</a></td>
+  <td>Lumiira</td>
+  <td data-val="150.0" class="price">$150.00</td>
+  <td data-val="5">5</td>
+  <td data-val="75">75</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4488490558/minimalist-esthetician-branding-bundle" target="_blank" rel="noopener" style="color:var(--brown);">Lot de logo d&#39;esthéticienne minimaliste | Kit de modèles de produi</a></td>
+  <td>DreamBrandingStudio</td>
+  <td data-val="25.68" class="price">$25.68</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/1763029250/ade-3in1-branding-pack-brand-guidelines" target="_blank" rel="noopener" style="color:var(--brown);">Paquete de marca ADE 3 en 1. Pautas de marca, propuesta de marca y est</a></td>
+  <td>WildnunStudio</td>
+  <td data-val="25.2" class="price">$25.20</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4503988197/60-elegant-brand-kit-canva-template" target="_blank" rel="noopener" style="color:var(--brown);">Plus de 60 modèles élégants de kit de marque sur toile Kit de marque c</a></td>
+  <td>beychobindesign</td>
+  <td data-val="24.0" class="price">$24.00</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4479614413/brand-kit-canva-template-minimalist" target="_blank" rel="noopener" style="color:var(--brown);">Brand Kit Canva Template Minimalist Editorial Complete Branding Kit fo</a></td>
+  <td>CheraDesignStudio</td>
+  <td data-val="15.6" class="price">$15.60</td>
+  <td data-val="5">5</td>
+  <td data-val="242">242</td>
+  <td><span class="badge-none">—</span></td>
+</tr></tbody>
+</table>
+</div><h2 id="branding-bundle">branding bundle — 10 listings</h2>
+<div class="table-wrap">
+<table class="sortable">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Shop</th>
+      <th>Price</th>
+      <th>Reviews</th>
+      <th>Sales</th>
+      <th>Badge</th>
+    </tr>
+  </thead>
+  <tbody><tr>
+  <td><a href="https://www.etsy.com/listing/1864556739/custom-logo-branding-package-full-brand" target="_blank" rel="noopener" style="color:var(--brown);">Custom Logo Branding Package: Full Brand Identity Kit</a></td>
+  <td>FancyLandCo</td>
+  <td data-val="850.0" class="price">$850.00</td>
+  <td data-val="5">5</td>
+  <td data-val="729">729</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/1799994227/mega-business-branding-template-bundle" target="_blank" rel="noopener" style="color:var(--brown);">Mega Business Branding Template Bundle: Logo, Social Media, Marketing </a></td>
+  <td>ShopTemplateQueen</td>
+  <td data-val="35.0" class="price">$35.00</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4488490558/minimalist-esthetician-branding-bundle" target="_blank" rel="noopener" style="color:var(--brown);">Lot de logo d&#39;esthéticienne minimaliste | Kit de modèles de produi</a></td>
+  <td>DreamBrandingStudio</td>
+  <td data-val="25.68" class="price">$25.68</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4503988197/60-elegant-brand-kit-canva-template" target="_blank" rel="noopener" style="color:var(--brown);">Más de 60 plantillas elegantes para kits de marca en Canva. Kit de mar</a></td>
+  <td>beychobindesign</td>
+  <td data-val="24.0" class="price">$24.00</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4457562939/substack-branding-kit-canva-templates" target="_blank" rel="noopener" style="color:var(--brown);">Modèles Canva pour kit de marque Substack - Ensemble de graphismes pou</a></td>
+  <td>tabithaemma</td>
+  <td data-val="23.0" class="price">$23.00</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4347119401/1000-diy-branding-kit-templates-social" target="_blank" rel="noopener" style="color:var(--brown);">Plus de 1 000 modèles de kits de branding DIY, pack marketing sur les </a></td>
+  <td>SimpleSocialsDesign</td>
+  <td data-val="12.99" class="price">$12.99</td>
+  <td data-val="4">4</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/1784647998/brand-guidelines-template-canva-template" target="_blank" rel="noopener" style="color:var(--brown);">Brand Guidelines Template | Canva Template | Brand Manual | Brand Usag</a></td>
+  <td>StudioSwainCo</td>
+  <td data-val="8.91" class="price">$8.91</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4501183174/plr-branding-planner-strategy-guide" target="_blank" rel="noopener" style="color:var(--brown);">PLR Branding Planner & Strategy Guide Bundle For Digital Product Busin</a></td>
+  <td>SafariaStudio</td>
+  <td data-val="3.5" class="price">$3.50</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4420782791/80-brand-kit-template-logo-color-palette" target="_blank" rel="noopener" style="color:var(--brown);">80+ Brand Kit Template, Logo Color Palette, Brand Board Bundle, Busine</a></td>
+  <td>TheLaunchLabCo</td>
+  <td data-val="2.8" class="price">$2.80</td>
+  <td data-val="4">4</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4494200812/60-brand-board-templates-bundle-canva" target="_blank" rel="noopener" style="color:var(--brown);">60+ Brand Board Templates Bundle – Canva Business Branding Kit, Logo D</a></td>
+  <td>pixbundle</td>
+  <td data-val="1.22" class="price">$1.22</td>
+  <td data-val="4">4</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr></tbody>
+</table>
+</div><h2 id="branding-template">branding template — 10 listings</h2>
+<div class="table-wrap">
+<table class="sortable">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Shop</th>
+      <th>Price</th>
+      <th>Reviews</th>
+      <th>Sales</th>
+      <th>Badge</th>
+    </tr>
+  </thead>
+  <tbody><tr>
+  <td><a href="https://www.etsy.com/listing/4340066300/digital-marketing-branding-kit-2000" target="_blank" rel="noopener" style="color:var(--brown);">Kit de branding para marketing digital: más de 2000 plantillas de Canv</a></td>
+  <td>biRenkStudio</td>
+  <td data-val="33.0" class="price">$33.00</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/1763029250/ade-3in1-branding-pack-brand-guidelines" target="_blank" rel="noopener" style="color:var(--brown);">Paquete de marca ADE 3 en 1. Pautas de marca, propuesta de marca y est</a></td>
+  <td>WildnunStudio</td>
+  <td data-val="25.2" class="price">$25.20</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/1877794583/life-coaching-branding-toolkit-canva" target="_blank" rel="noopener" style="color:var(--brown);">Life Coaching Branding Toolkit, 2500+ Canva Templates</a></td>
+  <td>SimplifyMySocials</td>
+  <td data-val="25.2" class="price">$25.20</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4438188425/canva-branding-kit-template-bold-coach" target="_blank" rel="noopener" style="color:var(--brown);">Plantilla de kit de marca Canva: Directrices de identidad de marca aud</a></td>
+  <td>PixelCartLabel</td>
+  <td data-val="19.2" class="price">$19.20</td>
+  <td data-val="Unknown">Unknown</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4449214328/100-email-branding-templates-canva" target="_blank" rel="noopener" style="color:var(--brown);">100+ Email Branding Templates Canva, Modern Newsletter Template, Marke</a></td>
+  <td>UumaWay</td>
+  <td data-val="18.13" class="price">$18.13</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/1472458741/brand-guidelines-template-branding-kit" target="_blank" rel="noopener" style="color:var(--brown);">Plantilla de directrices de marca / plantilla de kit de marca / Direcc</a></td>
+  <td>PraptiDesign</td>
+  <td data-val="9.71" class="price">$9.71</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/1784647998/brand-guidelines-template-canva-template" target="_blank" rel="noopener" style="color:var(--brown);">Brand Guidelines Template | Canva Template | Brand Manual | Brand Usag</a></td>
+  <td>StudioSwainCo</td>
+  <td data-val="8.91" class="price">$8.91</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/1440615410/branding-board-template-diy-branding-kit" target="_blank" rel="noopener" style="color:var(--brown);">Branding Board Template, DIY Branding Kit, Business Branding Kit, DIY </a></td>
+  <td>CoachTemplateDesign</td>
+  <td data-val="5.04" class="price">$5.04</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge badge-bs">Bestseller</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4501183174/plr-branding-planner-strategy-guide" target="_blank" rel="noopener" style="color:var(--brown);">PLR Branding Planner & Strategy Guide Bundle For Digital Product Busin</a></td>
+  <td>SafariaStudio</td>
+  <td data-val="3.5" class="price">$3.50</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4420782791/80-brand-kit-template-logo-color-palette" target="_blank" rel="noopener" style="color:var(--brown);">Plus de 80 modèles de kit de marque, palette de couleurs du logo, lot </a></td>
+  <td>TheLaunchLabCo</td>
+  <td data-val="2.8" class="price">$2.80</td>
+  <td data-val="4">4</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr></tbody>
+</table>
+</div><h2 id="coaching-templates">coaching templates — 11 listings</h2>
+<div class="table-wrap">
+<table class="sortable">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Shop</th>
+      <th>Price</th>
+      <th>Reviews</th>
+      <th>Sales</th>
+      <th>Badge</th>
+    </tr>
+  </thead>
+  <tbody><tr>
+  <td><a href="https://www.etsy.com/listing/4466372019/instagram-coach-templates-social-media" target="_blank" rel="noopener" style="color:var(--brown);">Instagram Coach Templates, Social Media Manager Posts, Digital Markete</a></td>
+  <td>GridGirlsCreative</td>
+  <td data-val="27.45" class="price">$27.45</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge badge-bs">Bestseller</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/1736129844/canva-workbook-template-for-coaches" target="_blank" rel="noopener" style="color:var(--brown);">Canva Workbook Template for Coaches & Course Creators, Coaching Tools,</a></td>
+  <td>BrandingBabeCo</td>
+  <td data-val="26.6" class="price">$26.60</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/1862168494/life-coaching-branding-toolkit-canva" target="_blank" rel="noopener" style="color:var(--brown);">Life Coaching Branding Toolkit, Canva Templates, Coaching Tools and Re</a></td>
+  <td>SimplifyMySocials</td>
+  <td data-val="25.2" class="price">$25.20</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge badge-bs">Bestseller</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4449214328/100-email-branding-templates-canva" target="_blank" rel="noopener" style="color:var(--brown);">100+ Email Branding Templates Canva, Modern Newsletter Template, Marke</a></td>
+  <td>UumaWay</td>
+  <td data-val="18.13" class="price">$18.13</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/1563456624/executive-coaching-worksheet-templates" target="_blank" rel="noopener" style="color:var(--brown);">Executive Coaching Templates, Canva Templates, Leadership Coaching Wor</a></td>
+  <td>DCCoachingTemplates</td>
+  <td data-val="15.76" class="price">$15.76</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4443275073/business-coach-canva-landing-page" target="_blank" rel="noopener" style="color:var(--brown);">Business Coach Canva Landing Page Template, Burgundy Red Coaching Webs</a></td>
+  <td>EclosionDesignStudio</td>
+  <td data-val="11.55" class="price">$11.55</td>
+  <td data-val="5">5</td>
+  <td data-val="299">299</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4358290547/life-coaching-branding-toolkit-instagram" target="_blank" rel="noopener" style="color:var(--brown);">Life Coaching Branding Toolkit, Instagram Posts, Therapy Worksheets & </a></td>
+  <td>JGTemplatesDesigns</td>
+  <td data-val="10.93" class="price">$10.93</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4430559192/coaching-instagram-canva-templates" target="_blank" rel="noopener" style="color:var(--brown);">Coaching Instagram Canva Templates | Social Media Kit for Business Coa</a></td>
+  <td>socialsatelier</td>
+  <td data-val="10.63" class="price">$10.63</td>
+  <td data-val="4">4</td>
+  <td data-val="807">807</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/1881042738/coaching-toolkit-templates-forms" target="_blank" rel="noopener" style="color:var(--brown);">Coaching Toolkit, templates, forms, worksheets, workbook, assessments,</a></td>
+  <td>Leadershipcoaching</td>
+  <td data-val="9.29" class="price">$9.29</td>
+  <td data-val="5">5</td>
+  <td data-val="459">459</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4418539805/mega-coach-instagram-templates-canva" target="_blank" rel="noopener" style="color:var(--brown);">Mega Coaching Templates Neutral Instagram Bundle | Minimalist Beige Ae</a></td>
+  <td>sinyoradigitalstudio</td>
+  <td data-val="7.87" class="price">$7.87</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/1708542305/130-page-ebook-template-coaching-course" target="_blank" rel="noopener" style="color:var(--brown);">130 Page Ebook Template | Coaching Course Template | For Freelancers, </a></td>
+  <td>ShopRShop</td>
+  <td data-val="5.25" class="price">$5.25</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge badge-bs">Bestseller</span></td>
+</tr></tbody>
+</table>
+</div><h2 id="coaching-business">coaching business — 11 listings</h2>
+<div class="table-wrap">
+<table class="sortable">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Shop</th>
+      <th>Price</th>
+      <th>Reviews</th>
+      <th>Sales</th>
+      <th>Badge</th>
+    </tr>
+  </thead>
+  <tbody><tr>
+  <td><a href="https://www.etsy.com/listing/4371857836/coaching-for-high-performing-women-wix" target="_blank" rel="noopener" style="color:var(--brown);">Coaching para mujeres de alto rendimiento Plantilla de sitio web WiX B</a></td>
+  <td>WiXwebTEMPLATES</td>
+  <td data-val="36.39" class="price">$36.39</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/1633546851/notion-coaching-business-planner-client" target="_blank" rel="noopener" style="color:var(--brown);">Notion Coaching Business Planner: Client Portal & Dashboard Template</a></td>
+  <td>GraceAndGrow</td>
+  <td data-val="29.54" class="price">$29.54</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/1501348917/business-coaching-worksheet-templates" target="_blank" rel="noopener" style="color:var(--brown);">Business Coaching Worksheet Templates, Canva Workbook (Digital Downloa</a></td>
+  <td>DCCoachingTemplates</td>
+  <td data-val="15.76" class="price">$15.76</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/1563456624/executive-coaching-worksheet-templates" target="_blank" rel="noopener" style="color:var(--brown);">Executive Coaching Templates, Canva Templates, Leadership Coaching Wor</a></td>
+  <td>DCCoachingTemplates</td>
+  <td data-val="15.76" class="price">$15.76</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4490140526/coaching-canva-website-template-elegant" target="_blank" rel="noopener" style="color:var(--brown);">Coaching Canva Website Template, Elegant Luxury Sales Page, Business C</a></td>
+  <td>socialsatelier</td>
+  <td data-val="15.07" class="price">$15.07</td>
+  <td data-val="4">4</td>
+  <td data-val="807">807</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4443275073/business-coach-canva-landing-page" target="_blank" rel="noopener" style="color:var(--brown);">Business Coach Canva Landing Page Template, Burgundy Red Coaching Webs</a></td>
+  <td>EclosionDesignStudio</td>
+  <td data-val="11.55" class="price">$11.55</td>
+  <td data-val="5">5</td>
+  <td data-val="299">299</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4478070923/brand-guidelines-coaching-business-canva" target="_blank" rel="noopener" style="color:var(--brown);">Brand Guidelines Coaching Business Canva & Figma Template Branding Kit</a></td>
+  <td>UIUXHab</td>
+  <td data-val="11.25" class="price">$11.25</td>
+  <td data-val="5">5</td>
+  <td data-val="125">125</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4333358864/coaching-business-template-coaching" target="_blank" rel="noopener" style="color:var(--brown);">Coaching Business Template, Coaching Bundle, Coaching Planner Toolkit,</a></td>
+  <td>SavvyandThriving</td>
+  <td data-val="8.76" class="price">$8.76</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4433535013/luxury-business-coach-canva-templates-50" target="_blank" rel="noopener" style="color:var(--brown);">Dark Aesthetic Business Coach Instagram Templates, 50 Canva Posts for </a></td>
+  <td>sinyoradigitalstudio</td>
+  <td data-val="4.5" class="price">$4.50</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4504314460/business-coach-canva-website-template" target="_blank" rel="noopener" style="color:var(--brown);">Business Coach Canva Website Template, Editable Service Provider Sitem</a></td>
+  <td>RDJDsgnCo</td>
+  <td data-val="1.69" class="price">$1.69</td>
+  <td data-val="5">5</td>
+  <td data-val="34">34</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4461453653/7-figure-business-coaching-toolkit-canva" target="_blank" rel="noopener" style="color:var(--brown);">7-Figure Business Coaching Toolkit | Canva Templates for Coaches, Mark</a></td>
+  <td>Leadershipcoaching</td>
+  <td data-val="1.32" class="price">$1.32</td>
+  <td data-val="5">5</td>
+  <td data-val="459">459</td>
+  <td><span class="badge-none">—</span></td>
+</tr></tbody>
+</table>
+</div><h2 id="coaching-bundle">coaching bundle — 9 listings</h2>
+<div class="table-wrap">
+<table class="sortable">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Shop</th>
+      <th>Price</th>
+      <th>Reviews</th>
+      <th>Sales</th>
+      <th>Badge</th>
+    </tr>
+  </thead>
+  <tbody><tr>
+  <td><a href="https://www.etsy.com/listing/1429134252/kajabi-course-creator-bundle-bronwyn" target="_blank" rel="noopener" style="color:var(--brown);">Kajabi Course Creator Template Bundle: High Converting Kajabi Template</a></td>
+  <td>LarkandTweedCreative</td>
+  <td data-val="674.94" class="price">$674.94</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4435657439/canva-therapy-worksheets-bundle-editable" target="_blank" rel="noopener" style="color:var(--brown);">Whole Shop Bundle - 4500+ Therapy Worksheets PDF, Complete Mental Heal</a></td>
+  <td>ACollectiveGuidance</td>
+  <td data-val="168.11" class="price">$168.11</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4346647480/25-in-1-life-coach-canva-template-bundle" target="_blank" rel="noopener" style="color:var(--brown);">25-in-1 Life Coach Canva Template Bundle, Coaching Business Tools (Dig</a></td>
+  <td>BloomingMindCoach</td>
+  <td data-val="46.5" class="price">$46.50</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/1426785409/coaching-bundle-templates-for-coaches" target="_blank" rel="noopener" style="color:var(--brown);">Modèles d&#39;offres de coaching pour coachs, entreprise en ligne, pla</a></td>
+  <td>GlowCEO</td>
+  <td data-val="39.13" class="price">$39.13</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/1028010120/coaching-business-canva-template-bundle" target="_blank" rel="noopener" style="color:var(--brown);">Coaching Business Canva Template Bundle: Client Onboarding, Session Pl</a></td>
+  <td>JuliaOnPurpose</td>
+  <td data-val="37.0" class="price">$37.00</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4394468518/life-coaching-branding-toolkit-4500" target="_blank" rel="noopener" style="color:var(--brown);">Kit de herramientas de marca para coaching de vida / Más de 4500 plant</a></td>
+  <td>Leadershipcoaching</td>
+  <td data-val="31.9" class="price">$31.90</td>
+  <td data-val="5">5</td>
+  <td data-val="">,</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/1862168494/life-coaching-branding-toolkit-canva" target="_blank" rel="noopener" style="color:var(--brown);">Life Coaching Branding Toolkit, Canva Templates, Coaching Tools and Re</a></td>
+  <td>SimplifyMySocials</td>
+  <td data-val="25.2" class="price">$25.20</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge badge-bs">Bestseller</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/1876870914/1000-coaching-instagram-templates-life" target="_blank" rel="noopener" style="color:var(--brown);">1000 Coaching Instagram Templates: Life Coach Social Media Bundle (Can</a></td>
+  <td>StoryEngage</td>
+  <td data-val="12.04" class="price">$12.04</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/1693368686/business-coaching-bundle-plr-resell-550" target="_blank" rel="noopener" style="color:var(--brown);">Business Coaching Bundle PLR Resell 550+ Templates, 10-in-1, Instagram</a></td>
+  <td>TeeDeeWDesigns</td>
+  <td data-val="3.67" class="price">$3.67</td>
+  <td data-val="4">4</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr></tbody>
+</table>
+</div><h2 id="social-media-templates">social media templates — 10 listings</h2>
+<div class="table-wrap">
+<table class="sortable">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Shop</th>
+      <th>Price</th>
+      <th>Reviews</th>
+      <th>Sales</th>
+      <th>Badge</th>
+    </tr>
+  </thead>
+  <tbody><tr>
+  <td><a href="https://www.etsy.com/listing/1379961485/2100-instagram-templates-social-media" target="_blank" rel="noopener" style="color:var(--brown);">2100+ Instagram Templates, Social Media Templates, For Marketers, Soci</a></td>
+  <td>AndrewPixel</td>
+  <td data-val="32.75" class="price">$32.75</td>
+  <td data-val="5">5</td>
+  <td data-val="">,</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4501014541/spa-social-media-templates-canva-30" target="_blank" rel="noopener" style="color:var(--brown);">Plantillas para redes sociales de spas en Canva / 30 publicaciones de </a></td>
+  <td>CreativeFounder</td>
+  <td data-val="16.0" class="price">$16.00</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/1304375306/social-media-templates-small-business" target="_blank" rel="noopener" style="color:var(--brown);">Plantillas para redes sociales / Plantillas de Instagram para pequeñas</a></td>
+  <td>simplesundaypaperie</td>
+  <td data-val="12.13" class="price">$12.13</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4495277781/modern-corporate-business-social-media" target="_blank" rel="noopener" style="color:var(--brown);">Modern Corporate Business Social Media Post + Story Templates for Inst</a></td>
+  <td>ShapeStud</td>
+  <td data-val="10.0" class="price">$10.00</td>
+  <td data-val="5">5</td>
+  <td data-val="476">476</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4304109924/instagram-coach-post-templates-set-of-30" target="_blank" rel="noopener" style="color:var(--brown);">Instagram Coach Post Templates | Set of 30 | Service & Social Media Ma</a></td>
+  <td>StudioSwainCo</td>
+  <td data-val="9.65" class="price">$9.65</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4428514195/deep-blue-instagram-templates-canva" target="_blank" rel="noopener" style="color:var(--brown);">Modèles Instagram bleu foncé Canva | Trousse de marque aux bleuets pou</a></td>
+  <td>DisegnoBianco</td>
+  <td data-val="5.82" class="price">$5.82</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge badge-bs">Bestseller</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4379771686/business-aesthetic-instagram-post" target="_blank" rel="noopener" style="color:var(--brown);">Business Aesthetic Instagram Post Template Social Media Canva Instagra</a></td>
+  <td>TemplatesCove</td>
+  <td data-val="5.48" class="price">$5.48</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4464681466/brown-aesthetic-instagram-templates-for" target="_blank" rel="noopener" style="color:var(--brown);">Brown Aesthetic Instagram Templates for Coaches, Freelancers & SMM | S</a></td>
+  <td>LoreoDesign</td>
+  <td data-val="5.17" class="price">$5.17</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/1665073203/instagram-post-templates-social-media" target="_blank" rel="noopener" style="color:var(--brown);">Instagram Post Templates | Social Media Manager Templates | Instagram </a></td>
+  <td>ShopRShop</td>
+  <td data-val="3.85" class="price">$3.85</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4409378032/dark-social-media-templates-business" target="_blank" rel="noopener" style="color:var(--brown);">Dark Social Media Templates, Business Instagram Templates, Social Medi</a></td>
+  <td>StudiosPulseWeb</td>
+  <td data-val="2.55" class="price">$2.55</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge badge-pn">Popular Now</span></td>
+</tr></tbody>
+</table>
+</div><h2 id="website-template-expanded">website template (expanded) — 9 listings</h2>
+<div class="table-wrap">
+<table class="sortable">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Shop</th>
+      <th>Price</th>
+      <th>Reviews</th>
+      <th>Sales</th>
+      <th>Badge</th>
+    </tr>
+  </thead>
+  <tbody><tr>
+  <td><a href="https://www.etsy.com/listing/4433674007/custom-website-design-landing-page-full" target="_blank" rel="noopener" style="color:var(--brown);">Custom Website Design, Landing Page, Full Setup</a></td>
+  <td>MariasMediaShop</td>
+  <td data-val="280.0" class="price">$280.00</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4439393058/wix-studio-website-template-for" target="_blank" rel="noopener" style="color:var(--brown);">Wix Studio Website Template for Photographers Event Planners Travel Ag</a></td>
+  <td>JOACreativeLab</td>
+  <td data-val="251.35" class="price">$251.35</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4382956562/squarespace-agency-template-creative" target="_blank" rel="noopener" style="color:var(--brown);">Squarespace Agency Template, Creative Studio Website, Editorial Portfo</a></td>
+  <td>GlowupOnline</td>
+  <td data-val="213.77" class="price">$213.77</td>
+  <td data-val="5">5</td>
+  <td data-val="230">230</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/1098637820/website-template-for-wix-wix-template" target="_blank" rel="noopener" style="color:var(--brown);">Plantilla web para Wix - Plantilla Wix, Tema Wix, Tema para blog, Coac</a></td>
+  <td>ThirtyOnePalmsStudio</td>
+  <td data-val="92.0" class="price">$92.00</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/1895675663/clara-wordpress-theme-elementor-website" target="_blank" rel="noopener" style="color:var(--brown);">Clara WordPress Theme | Elementor Website Template for Coaches, Agenci</a></td>
+  <td>MauveStudioShop</td>
+  <td data-val="60.04" class="price">$60.04</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge badge-bs">Bestseller</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4426311051/modern-aesthetic-canva-website-template" target="_blank" rel="noopener" style="color:var(--brown);">Modern Aesthetic Canva Website Template Social Media Manager Portfolio</a></td>
+  <td>DigitalNookStudioCo</td>
+  <td data-val="17.71" class="price">$17.71</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge badge-bs">Bestseller</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4386999096/business-template-website-wix-studio" target="_blank" rel="noopener" style="color:var(--brown);">Plantilla web para negocios, plantilla de Wix Studio, sitio web de asi</a></td>
+  <td>StudioJinbu</td>
+  <td data-val="16.98" class="price">$16.98</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4415308407/neutral-toned-photography-one-page" target="_blank" rel="noopener" style="color:var(--brown);">Plantilla de sitio web de una página con fotografía en tonos neutros. </a></td>
+  <td>StudioZiara</td>
+  <td data-val="6.55" class="price">$6.55</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4383312465/minimalist-acuity-templates-lash-acuity" target="_blank" rel="noopener" style="color:var(--brown);">Minimalist Acuity Templates Lash Acuity Scheduling Template Lash Tech </a></td>
+  <td>EqualsCoffee</td>
+  <td data-val="1.83" class="price">$1.83</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge badge-pn">Popular Now</span></td>
+</tr></tbody>
+</table>
+</div><h2 id="social-media-expanded">social media (expanded) — 9 listings</h2>
+<div class="table-wrap">
+<table class="sortable">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Shop</th>
+      <th>Price</th>
+      <th>Reviews</th>
+      <th>Sales</th>
+      <th>Badge</th>
+    </tr>
+  </thead>
+  <tbody><tr>
+  <td><a href="https://www.etsy.com/listing/1722523007/1300-template-canva-branding-kit" target="_blank" rel="noopener" style="color:var(--brown);">1,300 Template Canva Branding Kit - Colorful Logo Design - Instagram T</a></td>
+  <td>OhSoSocialDesignCo</td>
+  <td data-val="20.99" class="price">$20.99</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/1837502447/50-in-1-social-media-manager-canva" target="_blank" rel="noopener" style="color:var(--brown);">50-in-1 Social Media Manager Canva Template Bundle - Digital Download</a></td>
+  <td>ShopTemplateQueen</td>
+  <td data-val="20.0" class="price">$20.00</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/1874472716/canva-instagram-templates-marketing-kit" target="_blank" rel="noopener" style="color:var(--brown);">Brand Marketing, Vibrant Modern Aesthetic, Social Media Kit, Small Bus</a></td>
+  <td>BYOTstudio</td>
+  <td data-val="19.99" class="price">$19.99</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4499265113/modern-b2b-marketing-social-media" target="_blank" rel="noopener" style="color:var(--brown);">Modern B2B Marketing Social Media Post + Story Templates | LinkedIn & </a></td>
+  <td>ShapeStud</td>
+  <td data-val="11.0" class="price">$11.00</td>
+  <td data-val="5">5</td>
+  <td data-val="476">476</td>
+  <td><span class="badge badge-pn">Popular Now</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4494188696/melanin-pink-instagram-post-templates" target="_blank" rel="noopener" style="color:var(--brown);">Plantillas de publicaciones de Instagram en rosa melanina. Plantillas </a></td>
+  <td>CieloRosaStudio</td>
+  <td data-val="6.84" class="price">$6.84</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge badge-pn">Popular Now</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4428514195/deep-blue-instagram-templates-canva" target="_blank" rel="noopener" style="color:var(--brown);">Deep Blue Instagram Templates Canva | Blueberry Branding Kit for Small</a></td>
+  <td>DisegnoBianco</td>
+  <td data-val="5.82" class="price">$5.82</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge badge-bs">Bestseller</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4387377897/social-media-planner-spreadsheet-monthly" target="_blank" rel="noopener" style="color:var(--brown);">Planificador de redes sociales: Hoja de cálculo, calendario mensual de</a></td>
+  <td>ExclusiveDesignLab</td>
+  <td data-val="3.99" class="price">$3.99</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge badge-pn">Popular Now</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4316712642/instagram-canva-template-bundle-social" target="_blank" rel="noopener" style="color:var(--brown);">Plantillas Canva para Instagram: Kit de branding para redes sociales D</a></td>
+  <td>FigolaCreative</td>
+  <td data-val="3.97" class="price">$3.97</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/1163108441/2-page-media-kit-canva-template" target="_blank" rel="noopener" style="color:var(--brown);">Plantilla de Canva para kit de medios de 2 páginas / Kit de medios de </a></td>
+  <td>ShopRShop</td>
+  <td data-val="2.8" class="price">$2.80</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge badge-bs">Bestseller</span></td>
+</tr></tbody>
+</table>
+</div><h2 id="site-web-expanded">site web (expanded) — 10 listings</h2>
+<div class="table-wrap">
+<table class="sortable">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Shop</th>
+      <th>Price</th>
+      <th>Reviews</th>
+      <th>Sales</th>
+      <th>Badge</th>
+    </tr>
+  </thead>
+  <tbody><tr>
+  <td><a href="https://www.etsy.com/listing/4497981862/ai-web-design-starter-package-custom-5" target="_blank" rel="noopener" style="color:var(--brown);">AI Web Design Starter Package | Custom 5-Page Site, AI Chatbot, Mobile</a></td>
+  <td>TurkOtagLab</td>
+  <td data-val="496.51" class="price">$496.51</td>
+  <td data-val="5">5</td>
+  <td data-val="11">11</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4501678049/interior-design-website-template-showit" target="_blank" rel="noopener" style="color:var(--brown);">Interior Design Website Template Showit Luxury Interior Designer Portf</a></td>
+  <td>WarmSoulGallery</td>
+  <td data-val="320.25" class="price">$320.25</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4503141705/showit-website-template-for-designers" target="_blank" rel="noopener" style="color:var(--brown);">Showit Website Template for Designers | Brand & Web Designer Portfolio</a></td>
+  <td>LucimaeWebTemplates</td>
+  <td data-val="296.25" class="price">$296.25</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4433674007/custom-website-design-landing-page-full" target="_blank" rel="noopener" style="color:var(--brown);">Custom Website Design, Landing Page, Full Setup</a></td>
+  <td>MariasMediaShop</td>
+  <td data-val="280.0" class="price">$280.00</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/1770718561/editable-wix-studio-website-template-for" target="_blank" rel="noopener" style="color:var(--brown);">Plantilla de sitio web editable de Wix Studio para emprendedores, coac</a></td>
+  <td>JOACreativeLab</td>
+  <td data-val="201.85" class="price">$201.85</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/1722361992/life-coach-wix-template-for-therapist" target="_blank" rel="noopener" style="color:var(--brown);">Modèle Wix Coach de vie pour thérapeute Site Web complet Wix Coaching </a></td>
+  <td>vectorocean</td>
+  <td data-val="71.33" class="price">$71.33</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4455996441/canva-website-template-social-media" target="_blank" rel="noopener" style="color:var(--brown);">Canva Website Template Social Media Manager Trendy Portfolio Marketing</a></td>
+  <td>DigitalNookStudioCo</td>
+  <td data-val="17.71" class="price">$17.71</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4386999096/business-template-website-wix-studio" target="_blank" rel="noopener" style="color:var(--brown);">Business Template Website, Wix Studio Template, Virtual Assistant Webs</a></td>
+  <td>StudioJinbu</td>
+  <td data-val="16.98" class="price">$16.98</td>
+  <td data-val="5">5</td>
+  <td data-val="79">79</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4301332271/coach-website-canva-template-for-coach" target="_blank" rel="noopener" style="color:var(--brown);">Coach website Canva Template for Coach Landing Page Website Life Coach</a></td>
+  <td>yoursocialwebsite</td>
+  <td data-val="6.76" class="price">$6.76</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4497270148/website-redesign-service-shopify-website" target="_blank" rel="noopener" style="color:var(--brown);">Servicio de rediseño web, diseño web para Shopify, rediseño web para W</a></td>
+  <td>OliviacustomshopArt</td>
+  <td data-val="0.0" class="price">$0.00</td>
+  <td data-val="4">4</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr></tbody>
+</table>
+</div><h2 id="wix-studio-expanded">wix studio (expanded) — 9 listings</h2>
+<div class="table-wrap">
+<table class="sortable">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Shop</th>
+      <th>Price</th>
+      <th>Reviews</th>
+      <th>Sales</th>
+      <th>Badge</th>
+    </tr>
+  </thead>
+  <tbody><tr>
+  <td><a href="https://www.etsy.com/listing/1076803799/i-design-website-with-full-dedication" target="_blank" rel="noopener" style="color:var(--brown);">I design website with full dedication and responsive design, Unlimited</a></td>
+  <td>RAJCUSTOMCREATIONS</td>
+  <td data-val="299.0" class="price">$299.00</td>
+  <td data-val="5">5</td>
+  <td data-val="626">626</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4439393058/wix-studio-website-template-for" target="_blank" rel="noopener" style="color:var(--brown);">Plantilla de sitio web de Wix Studio para fotógrafos, organizadores de</a></td>
+  <td>JOACreativeLab</td>
+  <td data-val="251.35" class="price">$251.35</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/1770718561/editable-wix-studio-website-template-for" target="_blank" rel="noopener" style="color:var(--brown);">Plantilla de sitio web editable de Wix Studio para emprendedores, coac</a></td>
+  <td>JOACreativeLab</td>
+  <td data-val="201.85" class="price">$201.85</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4480837113/premium-wix-website-for-agencies-service" target="_blank" rel="noopener" style="color:var(--brown);">Premium Wix Website for Agencies, Service Based Business, Luxury Wix W</a></td>
+  <td>StudioLaTerre</td>
+  <td data-val="199.0" class="price">$199.00</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4340044108/wix-studio-website-template-lifestyle" target="_blank" rel="noopener" style="color:var(--brown);">Wix Studio Website Template: Lifestyle Brand, Coach, Content Creator</a></td>
+  <td>Pastelflush</td>
+  <td data-val="136.46" class="price">$136.46</td>
+  <td data-val="5">5</td>
+  <td data-val="984">984</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/1722361992/life-coach-wix-template-for-therapist" target="_blank" rel="noopener" style="color:var(--brown);">Modèle Wix Coach de vie pour thérapeute Site Web complet Wix Coaching </a></td>
+  <td>vectorocean</td>
+  <td data-val="71.33" class="price">$71.33</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4380950137/wix-studio-website-template-digital-seo" target="_blank" rel="noopener" style="color:var(--brown);">Wix Studio Website Template: Digital & SEO Agency (Digital Download)</a></td>
+  <td>simplehyped</td>
+  <td data-val="21.01" class="price">$21.01</td>
+  <td data-val="5">5</td>
+  <td data-val="305">305</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4386999096/business-template-website-wix-studio" target="_blank" rel="noopener" style="color:var(--brown);">Business Template Website, Wix Studio Template, Virtual Assistant Webs</a></td>
+  <td>StudioJinbu</td>
+  <td data-val="16.98" class="price">$16.98</td>
+  <td data-val="5">5</td>
+  <td data-val="79">79</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4490283377/life-coach-wix-studio-website-template" target="_blank" rel="noopener" style="color:var(--brown);">Life Coach Wix Studio Website Template | Coaching Business Website Des</a></td>
+  <td>PixlaraStudio</td>
+  <td data-val="10.5" class="price">$10.50</td>
+  <td data-val="5">5</td>
+  <td data-val="6">6</td>
+  <td><span class="badge-none">—</span></td>
+</tr></tbody>
+</table>
+</div><h2 id="sitio-web-expanded">sitio web (expanded) — 9 listings</h2>
+<div class="table-wrap">
+<table class="sortable">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Shop</th>
+      <th>Price</th>
+      <th>Reviews</th>
+      <th>Sales</th>
+      <th>Badge</th>
+    </tr>
+  </thead>
+  <tbody><tr>
+  <td><a href="https://www.etsy.com/listing/1076803799/i-design-website-with-full-dedication" target="_blank" rel="noopener" style="color:var(--brown);">I design website with full dedication and responsive design, Unlimited</a></td>
+  <td>RAJCUSTOMCREATIONS</td>
+  <td data-val="299.0" class="price">$299.00</td>
+  <td data-val="5">5</td>
+  <td data-val="626">626</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/1854330327/squarespace-template-for-creative-agency" target="_blank" rel="noopener" style="color:var(--brown);">Squarespace Template for Creative Agency, Virtual Assistant Website, B</a></td>
+  <td>StudioLaTerre</td>
+  <td data-val="299.0" class="price">$299.00</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4382276165/gohighlevel-website-template-with-4" target="_blank" rel="noopener" style="color:var(--brown);">GoHighLevel Website Template with 4 Pages, Complete Website for Busine</a></td>
+  <td>LumiDigitalShop</td>
+  <td data-val="185.66" class="price">$185.66</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/1098637820/website-template-for-wix-wix-template" target="_blank" rel="noopener" style="color:var(--brown);">Website Template for Wix - Wix Template, Wix Theme, Blog Theme, Coach,</a></td>
+  <td>ThirtyOnePalmsStudio</td>
+  <td data-val="92.0" class="price">$92.00</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4491205452/elegant-creative-coach-wix-studio" target="_blank" rel="noopener" style="color:var(--brown);">Elegant Creative Coach Wix Studio Website Template – Creator Site Webs</a></td>
+  <td>BehiveTemplates</td>
+  <td data-val="80.0" class="price">$80.00</td>
+  <td data-val="5">5</td>
+  <td data-val="244">244</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4503776989/plantilla-de-pagina-web-en-squarespace" target="_blank" rel="noopener" style="color:var(--brown);">Plantilla Página Web Squarespace en Español para Coaches, Entrenadoras</a></td>
+  <td>EnieStudioDesign</td>
+  <td data-val="27.95" class="price">$27.95</td>
+  <td data-val="Unknown">Unknown</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4350773096/canva-website-template-for-coaches" target="_blank" rel="noopener" style="color:var(--brown);">Canva Website Template for Coaches, Social Media Managers, Virtual Ass</a></td>
+  <td>Goqa</td>
+  <td data-val="15.53" class="price">$15.53</td>
+  <td data-val="4">4</td>
+  <td data-val="178">178</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4464709305/virtual-assistant-canva-website-template" target="_blank" rel="noopener" style="color:var(--brown);">Virtual Assistant Canva Website Template | VA Portfolio Landing Page (</a></td>
+  <td>socialsatelier</td>
+  <td data-val="15.07" class="price">$15.07</td>
+  <td data-val="4">4</td>
+  <td data-val="807">807</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4454305092/canva-website-template-for-business" target="_blank" rel="noopener" style="color:var(--brown);">Plantilla de sitio web de Canva para coach de negocios, creador de cur</a></td>
+  <td>CODALAB</td>
+  <td data-val="10.31" class="price">$10.31</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr></tbody>
+</table>
+</div><h2 id="canva-template-expanded">canva template (expanded) — 10 listings</h2>
+<div class="table-wrap">
+<table class="sortable">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Shop</th>
+      <th>Price</th>
+      <th>Reviews</th>
+      <th>Sales</th>
+      <th>Badge</th>
+    </tr>
+  </thead>
+  <tbody><tr>
+  <td><a href="https://www.etsy.com/listing/4447475905/personal-social-media-canva-templates" target="_blank" rel="noopener" style="color:var(--brown);">Modèles personnels sur toile pour réseaux sociaux, publications Instag</a></td>
+  <td>prosocialtemplate</td>
+  <td data-val="24.26" class="price">$24.26</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4449738701/neutral-instagram-templates-for-business" target="_blank" rel="noopener" style="color:var(--brown);">Neutral Instagram Templates for Business | 500+ Canva Social Media Pos</a></td>
+  <td>DisegnoBianco</td>
+  <td data-val="7.28" class="price">$7.28</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge badge-bs">Bestseller</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4488122453/abstract-danish-floral-bridal-shower" target="_blank" rel="noopener" style="color:var(--brown);">Abstract Danish Floral Bridal Shower Invitation Template, Modern Retro</a></td>
+  <td>juniperplumpaperie</td>
+  <td data-val="5.25" class="price">$5.25</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/1211161810/1800-neutral-instagram-post-templates" target="_blank" rel="noopener" style="color:var(--brown);">1800 Neutral Instagram Post Templates - Engagement - Story Templates -</a></td>
+  <td>ParsimoniaDesigns</td>
+  <td data-val="4.5" class="price">$4.50</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge badge-bs">Bestseller</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4323160206/instagram-template-bundle-for-coaches" target="_blank" rel="noopener" style="color:var(--brown);">Instagram Template Bundle for Coaches: Neon Green Canva Social Media K</a></td>
+  <td>FigolaCreative</td>
+  <td data-val="3.97" class="price">$3.97</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge badge-bs">Bestseller</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4468572996/beige-instagram-post-templates-social" target="_blank" rel="noopener" style="color:var(--brown);">Beige Instagram Post Templates, Social Media Manager Canva Templates, </a></td>
+  <td>StudiosPulseWeb</td>
+  <td data-val="2.55" class="price">$2.55</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge badge-bs">Bestseller</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4474254186/100-canva-website-templates-bundle" target="_blank" rel="noopener" style="color:var(--brown);">100+ Canva Website Templates Bundle (Digital Download)</a></td>
+  <td>ThorPresets</td>
+  <td data-val="2.5" class="price">$2.50</td>
+  <td data-val="4">4</td>
+  <td data-val="875">875</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4477354525/20000-canva-templates-bundle-with-plr" target="_blank" rel="noopener" style="color:var(--brown);">Paquete de más de 20.000 plantillas de Canva con derechos de reventa (</a></td>
+  <td>Glexmedia</td>
+  <td data-val="1.6" class="price">$1.60</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge badge-pn">Popular Now</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4493946952/8400-canva-social-media-templates-bundle" target="_blank" rel="noopener" style="color:var(--brown);">Paquete de más de 8400 plantillas de Canva para redes sociales / Insta</a></td>
+  <td>JASATUDIO</td>
+  <td data-val="1.42" class="price">$1.42</td>
+  <td data-val="4">4</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4396185368/10x-party-favor-template-bundle-editable" target="_blank" rel="noopener" style="color:var(--brown);">Paquete de 10 plantillas para recuerdos de fiesta / Plantillas editabl</a></td>
+  <td>SvgtemplateArt</td>
+  <td data-val="0.97" class="price">$0.97</td>
+  <td data-val="4">4</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge badge-pn">Popular Now</span></td>
+</tr></tbody>
+</table>
+</div><h2 id="canva-templates-expanded">canva templates (expanded) — 10 listings</h2>
+<div class="table-wrap">
+<table class="sortable">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Shop</th>
+      <th>Price</th>
+      <th>Reviews</th>
+      <th>Sales</th>
+      <th>Badge</th>
+    </tr>
+  </thead>
+  <tbody><tr>
+  <td><a href="https://www.etsy.com/listing/1878098776/40-canva-website-template-pack-canva" target="_blank" rel="noopener" style="color:var(--brown);">40 Canva Website Template Pack, Canva Bundle Template, Canva Website T</a></td>
+  <td>DigitalBizForYou</td>
+  <td data-val="6.05" class="price">$6.05</td>
+  <td data-val="4">4</td>
+  <td data-val="673">673</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4428514195/deep-blue-instagram-templates-canva" target="_blank" rel="noopener" style="color:var(--brown);">Deep Blue Instagram Templates Canva | Blueberry Branding Kit for Small</a></td>
+  <td>DisegnoBianco</td>
+  <td data-val="5.82" class="price">$5.82</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge badge-bs">Bestseller</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/1211161810/1800-neutral-instagram-post-templates" target="_blank" rel="noopener" style="color:var(--brown);">1800 Neutral Instagram Post Templates - Engagement - Story Templates -</a></td>
+  <td>ParsimoniaDesigns</td>
+  <td data-val="4.5" class="price">$4.50</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge badge-bs">Bestseller</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4501671966/canva-pro-get-canva-pro-for-free-how-to" target="_blank" rel="noopener" style="color:var(--brown);">Canva Pro Account, Lifetime Access, 400,000+ Templates (Digital Delive</a></td>
+  <td>VorkesCreations</td>
+  <td data-val="3.66" class="price">$3.66</td>
+  <td data-val="5">5</td>
+  <td data-val="">,</td>
+  <td><span class="badge badge-bs">Bestseller</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4474254186/100-canva-website-templates-bundle" target="_blank" rel="noopener" style="color:var(--brown);">Paquete de más de 100 plantillas web de Canva (descarga digital)</a></td>
+  <td>ThorPresets</td>
+  <td data-val="2.5" class="price">$2.50</td>
+  <td data-val="4">4</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4487989139/50000-unlimited-canva-templates-bundle" target="_blank" rel="noopener" style="color:var(--brown);">Paquete de más de 50.000 plantillas ilimitadas para Canva / Planificad</a></td>
+  <td>NovvaDesignCo</td>
+  <td data-val="1.75" class="price">$1.75</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge badge-pn">Popular Now</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4302574537/14500-canva-plr-templates-bundle" target="_blank" rel="noopener" style="color:var(--brown);">25.500+ Canva PLR Templates Bundle | Editable Planner Journal Tracker </a></td>
+  <td>AndrDigitalArtStudio</td>
+  <td data-val="1.74" class="price">$1.74</td>
+  <td data-val="5">5</td>
+  <td data-val="">,</td>
+  <td><span class="badge badge-pn">Popular Now</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4477354525/20000-canva-templates-bundle-with-plr" target="_blank" rel="noopener" style="color:var(--brown);">Paquete de más de 20.000 plantillas de Canva con derechos de reventa (</a></td>
+  <td>Glexmedia</td>
+  <td data-val="1.6" class="price">$1.60</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge badge-pn">Popular Now</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4493946952/8400-canva-social-media-templates-bundle" target="_blank" rel="noopener" style="color:var(--brown);">Paquete de más de 8400 plantillas de Canva para redes sociales / Insta</a></td>
+  <td>JASATUDIO</td>
+  <td data-val="1.42" class="price">$1.42</td>
+  <td data-val="4">4</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4396185368/10x-party-favor-template-bundle-editable" target="_blank" rel="noopener" style="color:var(--brown);">Paquete de 10 plantillas para recuerdos de fiesta / Plantillas editabl</a></td>
+  <td>SvgtemplateArt</td>
+  <td data-val="0.97" class="price">$0.97</td>
+  <td data-val="4">4</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge badge-pn">Popular Now</span></td>
+</tr></tbody>
+</table>
+</div><h2 id="sales-page-expanded">sales page (expanded) — 9 listings</h2>
+<div class="table-wrap">
+<table class="sortable">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Shop</th>
+      <th>Price</th>
+      <th>Reviews</th>
+      <th>Sales</th>
+      <th>Badge</th>
+    </tr>
+  </thead>
+  <tbody><tr>
+  <td><a href="https://www.etsy.com/listing/4454751974/kajabi-sales-page-bundle-template-for" target="_blank" rel="noopener" style="color:var(--brown);">Kajabi Sales Page Bundle Template for Business Coaches High-Ticket Cou</a></td>
+  <td>CreativeStudioAmber</td>
+  <td data-val="174.67" class="price">$174.67</td>
+  <td data-val="5">5</td>
+  <td data-val="588">588</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/1828031869/kajabi-sales-page-template-for-coaches" target="_blank" rel="noopener" style="color:var(--brown);">Kajabi Sales Page Template for Coaches and Online Course Creators | PI</a></td>
+  <td>launchinstyle</td>
+  <td data-val="149.0" class="price">$149.00</td>
+  <td data-val="5">5</td>
+  <td data-val="441">441</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4470387252/showit-sales-page-template-for-coaches" target="_blank" rel="noopener" style="color:var(--brown);">Showit Sales Page Template for Coaches, Course Creators (One Page)</a></td>
+  <td>SoftGridCreative</td>
+  <td data-val="123.92" class="price">$123.92</td>
+  <td data-val="5">5</td>
+  <td data-val="306">306</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/1680388844/sales-page-template-for-wix-website" target="_blank" rel="noopener" style="color:var(--brown);">Plantilla de página de ventas para Wix - Plantilla web, sitio web de c</a></td>
+  <td>ThirtyOnePalmsStudio</td>
+  <td data-val="27.2" class="price">$27.20</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4490140526/coaching-canva-website-template-elegant" target="_blank" rel="noopener" style="color:var(--brown);">Coaching Canva Website Template, Elegant Luxury Sales Page, Business C</a></td>
+  <td>socialsatelier</td>
+  <td data-val="15.07" class="price">$15.07</td>
+  <td data-val="4">4</td>
+  <td data-val="807">807</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4498647587/canva-sales-page-template-coaching" target="_blank" rel="noopener" style="color:var(--brown);">Canva Sales Page Template Coaching Course Landing Page Content Creator</a></td>
+  <td>DigitalNookStudioCo</td>
+  <td data-val="13.92" class="price">$13.92</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4471795645/10-stan-store-beacons-sales-page" target="_blank" rel="noopener" style="color:var(--brown);">10 Stan Store & Beacons Sales Page Templates, Luxe Canva Landing Pages</a></td>
+  <td>DigitalMoneyMap</td>
+  <td data-val="8.99" class="price">$8.99</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4301332271/coach-website-canva-template-for-coach" target="_blank" rel="noopener" style="color:var(--brown);">Coach website Canva Template for Coach Landing Page Website Life Coach</a></td>
+  <td>yoursocialwebsite</td>
+  <td data-val="6.76" class="price">$6.76</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4472507873/canva-sales-page-template-plr-for-stan" target="_blank" rel="noopener" style="color:var(--brown);">Canva Sales Page Template PLR for Stan Store & Beacons, Digital Produc</a></td>
+  <td>BibliothequeDigitale</td>
+  <td data-val="3.88" class="price">$3.88</td>
+  <td data-val="4">4</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge badge-bs">Bestseller</span></td>
+</tr></tbody>
+</table>
+</div><h2 id="coaching-website-expanded">coaching website (expanded) — 9 listings</h2>
+<div class="table-wrap">
+<table class="sortable">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Shop</th>
+      <th>Price</th>
+      <th>Reviews</th>
+      <th>Sales</th>
+      <th>Badge</th>
+    </tr>
+  </thead>
+  <tbody><tr>
+  <td><a href="https://www.etsy.com/listing/1429134252/kajabi-course-creator-bundle-bronwyn" target="_blank" rel="noopener" style="color:var(--brown);">Kajabi Course Creator Template Bundle: High Converting Kajabi Template</a></td>
+  <td>LarkandTweedCreative</td>
+  <td data-val="674.94" class="price">$674.94</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4439393058/wix-studio-website-template-for" target="_blank" rel="noopener" style="color:var(--brown);">Plantilla de sitio web de Wix Studio para fotógrafos, organizadores de</a></td>
+  <td>JOACreativeLab</td>
+  <td data-val="251.35" class="price">$251.35</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/1260282067/coaching-website-template-for-wix" target="_blank" rel="noopener" style="color:var(--brown);">Plantilla de sitio web de coaching para WIX / Sitio web de coaching / </a></td>
+  <td>AndrewPixel</td>
+  <td data-val="78.85" class="price">$78.85</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/1722361992/life-coach-wix-template-for-therapist" target="_blank" rel="noopener" style="color:var(--brown);">Plantilla Wix para coach de vida para terapeutas. Sitio web completo d</a></td>
+  <td>vectorocean</td>
+  <td data-val="71.33" class="price">$71.33</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4386999096/business-template-website-wix-studio" target="_blank" rel="noopener" style="color:var(--brown);">Business Template Website, Wix Studio Template, Virtual Assistant Webs</a></td>
+  <td>StudioJinbu</td>
+  <td data-val="16.98" class="price">$16.98</td>
+  <td data-val="5">5</td>
+  <td data-val="79">79</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/1798478580/website-template-coaching-website-black" target="_blank" rel="noopener" style="color:var(--brown);">Plantilla de sitio web, sitio web de coaching, página de destino estét</a></td>
+  <td>DigitalNookStudioCo</td>
+  <td data-val="14.36" class="price">$14.36</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4443275073/business-coach-canva-landing-page" target="_blank" rel="noopener" style="color:var(--brown);">Business Coach Canva Landing Page Template, Burgundy Red Coaching Webs</a></td>
+  <td>EclosionDesignStudio</td>
+  <td data-val="11.55" class="price">$11.55</td>
+  <td data-val="5">5</td>
+  <td data-val="299">299</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/1851622682/coaching-canva-website-template-teachers" target="_blank" rel="noopener" style="color:var(--brown);">Plantilla web de Canva para coaching: Profesores, terapeutas y coaches</a></td>
+  <td>CaptivDesign</td>
+  <td data-val="9.97" class="price">$9.97</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/4301332271/coach-website-canva-template-for-coach" target="_blank" rel="noopener" style="color:var(--brown);">Coach website Canva Template for Coach Landing Page Website Life Coach</a></td>
+  <td>yoursocialwebsite</td>
+  <td data-val="6.76" class="price">$6.76</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr></tbody>
+</table>
+</div><h2 id="mod-les-expanded">mod les (expanded) — 2 listings</h2>
+<div class="table-wrap">
+<table class="sortable">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Shop</th>
+      <th>Price</th>
+      <th>Reviews</th>
+      <th>Sales</th>
+      <th>Badge</th>
+    </tr>
+  </thead>
+  <tbody><tr>
+  <td><a href="https://www.etsy.com/listing/4497274112/vintage-1960s-70s-nylon-nascar-le-mans" target="_blank" rel="noopener" style="color:var(--brown);">Vintage des années 1960 des années 70 en nylon NASCAR Le Mans blanc bl</a></td>
+  <td>MyGenerationV</td>
+  <td data-val="101.14" class="price">$101.14</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr><tr>
+  <td><a href="https://www.etsy.com/listing/1068252016/pre-order-koss-sportclip-ksc75" target="_blank" rel="noopener" style="color:var(--brown);">PREVENTA Auriculares Koss SportClip KSC75 modificados con MMCX</a></td>
+  <td>audiophilmods</td>
+  <td data-val="0.0" class="price">$0.00</td>
+  <td data-val="5">5</td>
+  <td data-val="0">Unknown</td>
+  <td><span class="badge-none">—</span></td>
+</tr></tbody>
+</table>
+</div>
+  
+<h2 id="keywords">Title Keyword Analysis</h2>
+<p style="color:var(--sand);margin-bottom:16px;font-size:0.85rem;">
+  Keywords that appear most in competitor listing titles — Etsy&rsquo;s #1 ranking factor.
+  Cross-reference these against your own listing titles.
+</p>
+<h3>Single Words</h3>
+<div style="margin:12px 0 24px;">
+<div class="bar-row">
+  <div class="bar-label" title="template">template</div>
+  <div class="bar-track">
+    <div class="bar-fill" style="width:100%">
+      <span>135</span>
+    </div>
+  </div>
+</div>
+
+<div class="bar-row">
+  <div class="bar-label" title="website">website</div>
+  <div class="bar-track">
+    <div class="bar-fill" style="width:94%">
+      <span>128</span>
+    </div>
+  </div>
+</div>
+
+<div class="bar-row">
+  <div class="bar-label" title="canva">canva</div>
+  <div class="bar-track">
+    <div class="bar-fill" style="width:90%">
+      <span>122</span>
+    </div>
+  </div>
+</div>
+
+<div class="bar-row">
+  <div class="bar-label" title="web">web</div>
+  <div class="bar-track">
+    <div class="bar-fill" style="width:57%">
+      <span>78</span>
+    </div>
+  </div>
+</div>
+
+<div class="bar-row">
+  <div class="bar-label" title="wix">wix</div>
+  <div class="bar-track">
+    <div class="bar-fill" style="width:55%">
+      <span>75</span>
+    </div>
+  </div>
+</div>
+
+<div class="bar-row">
+  <div class="bar-label" title="coaching">coaching</div>
+  <div class="bar-track">
+    <div class="bar-fill" style="width:51%">
+      <span>70</span>
+    </div>
+  </div>
+</div>
+
+<div class="bar-row">
+  <div class="bar-label" title="business">business</div>
+  <div class="bar-track">
+    <div class="bar-fill" style="width:50%">
+      <span>68</span>
+    </div>
+  </div>
+</div>
+
+<div class="bar-row">
+  <div class="bar-label" title="page">page</div>
+  <div class="bar-track">
+    <div class="bar-fill" style="width:45%">
+      <span>61</span>
+    </div>
+  </div>
+</div>
+
+<div class="bar-row">
+  <div class="bar-label" title="para">para</div>
+  <div class="bar-track">
+    <div class="bar-fill" style="width:44%">
+      <span>60</span>
+    </div>
+  </div>
+</div>
+
+<div class="bar-row">
+  <div class="bar-label" title="kit">kit</div>
+  <div class="bar-track">
+    <div class="bar-fill" style="width:44%">
+      <span>60</span>
+    </div>
+  </div>
+</div>
+
+<div class="bar-row">
+  <div class="bar-label" title="templates">templates</div>
+  <div class="bar-track">
+    <div class="bar-fill" style="width:42%">
+      <span>57</span>
+    </div>
+  </div>
+</div>
+
+<div class="bar-row">
+  <div class="bar-label" title="coach">coach</div>
+  <div class="bar-track">
+    <div class="bar-fill" style="width:39%">
+      <span>53</span>
+    </div>
+  </div>
+</div>
+
+<div class="bar-row">
+  <div class="bar-label" title="instagram">instagram</div>
+  <div class="bar-track">
+    <div class="bar-fill" style="width:37%">
+      <span>50</span>
+    </div>
+  </div>
+</div>
+
+<div class="bar-row">
+  <div class="bar-label" title="plantilla">plantilla</div>
+  <div class="bar-track">
+    <div class="bar-fill" style="width:32%">
+      <span>44</span>
+    </div>
+  </div>
+</div>
+
+<div class="bar-row">
+  <div class="bar-label" title="branding">branding</div>
+  <div class="bar-track">
+    <div class="bar-fill" style="width:31%">
+      <span>42</span>
+    </div>
+  </div>
+</div>
+
+<div class="bar-row">
+  <div class="bar-label" title="design">design</div>
+  <div class="bar-track">
+    <div class="bar-fill" style="width:30%">
+      <span>41</span>
+    </div>
+  </div>
+</div>
+
+<div class="bar-row">
+  <div class="bar-label" title="social">social</div>
+  <div class="bar-track">
+    <div class="bar-fill" style="width:28%">
+      <span>38</span>
+    </div>
+  </div>
+</div>
+
+<div class="bar-row">
+  <div class="bar-label" title="media">media</div>
+  <div class="bar-track">
+    <div class="bar-fill" style="width:28%">
+      <span>38</span>
+    </div>
+  </div>
+</div>
+
+<div class="bar-row">
+  <div class="bar-label" title="sitio">sitio</div>
+  <div class="bar-track">
+    <div class="bar-fill" style="width:23%">
+      <span>32</span>
+    </div>
+  </div>
+</div>
+
+<div class="bar-row">
+  <div class="bar-label" title="marca">marca</div>
+  <div class="bar-track">
+    <div class="bar-fill" style="width:22%">
+      <span>30</span>
+    </div>
+  </div>
+</div>
+
+<div class="bar-row">
+  <div class="bar-label" title="site">site</div>
+  <div class="bar-track">
+    <div class="bar-fill" style="width:21%">
+      <span>29</span>
+    </div>
+  </div>
+</div>
+
+<div class="bar-row">
+  <div class="bar-label" title="coaches">coaches</div>
+  <div class="bar-track">
+    <div class="bar-fill" style="width:21%">
+      <span>29</span>
+    </div>
+  </div>
+</div>
+
+<div class="bar-row">
+  <div class="bar-label" title="landing">landing</div>
+  <div class="bar-track">
+    <div class="bar-fill" style="width:20%">
+      <span>28</span>
+    </div>
+  </div>
+</div>
+
+<div class="bar-row">
+  <div class="bar-label" title="editable">editable</div>
+  <div class="bar-track">
+    <div class="bar-fill" style="width:20%">
+      <span>27</span>
+    </div>
+  </div>
+</div>
+
+<div class="bar-row">
+  <div class="bar-label" title="brand">brand</div>
+  <div class="bar-track">
+    <div class="bar-fill" style="width:20%">
+      <span>27</span>
+    </div>
+  </div>
+</div>
+
+<div class="bar-row">
+  <div class="bar-label" title="studio">studio</div>
+  <div class="bar-track">
+    <div class="bar-fill" style="width:19%">
+      <span>26</span>
+    </div>
+  </div>
+</div>
+
+<div class="bar-row">
+  <div class="bar-label" title="digital">digital</div>
+  <div class="bar-track">
+    <div class="bar-fill" style="width:19%">
+      <span>26</span>
+    </div>
+  </div>
+</div>
+
+<div class="bar-row">
+  <div class="bar-label" title="mod">mod</div>
+  <div class="bar-track">
+    <div class="bar-fill" style="width:19%">
+      <span>26</span>
+    </div>
+  </div>
+</div>
+
+<div class="bar-row">
+  <div class="bar-label" title="bundle">bundle</div>
+  <div class="bar-track">
+    <div class="bar-fill" style="width:19%">
+      <span>26</span>
+    </div>
+  </div>
+</div>
+
+<div class="bar-row">
+  <div class="bar-label" title="plantillas">plantillas</div>
+  <div class="bar-track">
+    <div class="bar-fill" style="width:18%">
+      <span>25</span>
+    </div>
+  </div>
+</div></div>
+<h3>2-Word Phrases</h3>
+<div style="margin:12px 0 24px;">
+<div class="bar-row">
+  <div class="bar-label" title="website template">website template</div>
+  <div class="bar-track">
+    <div class="bar-fill bar-phrase" style="width:100%">
+      <span>43</span>
+    </div>
+  </div>
+</div>
+
+<div class="bar-row">
+  <div class="bar-label" title="social media">social media</div>
+  <div class="bar-track">
+    <div class="bar-fill bar-phrase" style="width:88%">
+      <span>38</span>
+    </div>
+  </div>
+</div>
+
+<div class="bar-row">
+  <div class="bar-label" title="sitio web">sitio web</div>
+  <div class="bar-track">
+    <div class="bar-fill bar-phrase" style="width:74%">
+      <span>32</span>
+    </div>
+  </div>
+</div>
+
+<div class="bar-row">
+  <div class="bar-label" title="landing page">landing page</div>
+  <div class="bar-track">
+    <div class="bar-fill bar-phrase" style="width:62%">
+      <span>27</span>
+    </div>
+  </div>
+</div>
+
+<div class="bar-row">
+  <div class="bar-label" title="wix studio">wix studio</div>
+  <div class="bar-track">
+    <div class="bar-fill bar-phrase" style="width:58%">
+      <span>25</span>
+    </div>
+  </div>
+</div>
+
+<div class="bar-row">
+  <div class="bar-label" title="sales page">sales page</div>
+  <div class="bar-track">
+    <div class="bar-fill bar-phrase" style="width:46%">
+      <span>20</span>
+    </div>
+  </div>
+</div>
+
+<div class="bar-row">
+  <div class="bar-label" title="site web">site web</div>
+  <div class="bar-track">
+    <div class="bar-fill bar-phrase" style="width:44%">
+      <span>19</span>
+    </div>
+  </div>
+</div>
+
+<div class="bar-row">
+  <div class="bar-label" title="canva website">canva website</div>
+  <div class="bar-track">
+    <div class="bar-fill bar-phrase" style="width:39%">
+      <span>17</span>
+    </div>
+  </div>
+</div>
+
+<div class="bar-row">
+  <div class="bar-label" title="branding kit">branding kit</div>
+  <div class="bar-track">
+    <div class="bar-fill bar-phrase" style="width:39%">
+      <span>17</span>
+    </div>
+  </div>
+</div>
+
+<div class="bar-row">
+  <div class="bar-label" title="coaching website">coaching website</div>
+  <div class="bar-track">
+    <div class="bar-fill bar-phrase" style="width:37%">
+      <span>16</span>
+    </div>
+  </div>
+</div>
+
+<div class="bar-row">
+  <div class="bar-label" title="canva template">canva template</div>
+  <div class="bar-track">
+    <div class="bar-fill bar-phrase" style="width:34%">
+      <span>15</span>
+    </div>
+  </div>
+</div>
+
+<div class="bar-row">
+  <div class="bar-label" title="page template">page template</div>
+  <div class="bar-track">
+    <div class="bar-fill bar-phrase" style="width:34%">
+      <span>15</span>
+    </div>
+  </div>
+</div>
+
+<div class="bar-row">
+  <div class="bar-label" title="redes sociales">redes sociales</div>
+  <div class="bar-track">
+    <div class="bar-fill bar-phrase" style="width:32%">
+      <span>14</span>
+    </div>
+  </div>
+</div>
+
+<div class="bar-row">
+  <div class="bar-label" title="coach website">coach website</div>
+  <div class="bar-track">
+    <div class="bar-fill bar-phrase" style="width:32%">
+      <span>14</span>
+    </div>
+  </div>
+</div>
+
+<div class="bar-row">
+  <div class="bar-label" title="media manager">media manager</div>
+  <div class="bar-track">
+    <div class="bar-fill bar-phrase" style="width:32%">
+      <span>14</span>
+    </div>
+  </div>
+</div>
+
+<div class="bar-row">
+  <div class="bar-label" title="website wix">website wix</div>
+  <div class="bar-track">
+    <div class="bar-fill bar-phrase" style="width:30%">
+      <span>13</span>
+    </div>
+  </div>
+</div>
+
+<div class="bar-row">
+  <div class="bar-label" title="digital download">digital download</div>
+  <div class="bar-track">
+    <div class="bar-fill bar-phrase" style="width:27%">
+      <span>12</span>
+    </div>
+  </div>
+</div>
+
+<div class="bar-row">
+  <div class="bar-label" title="life coach">life coach</div>
+  <div class="bar-track">
+    <div class="bar-fill bar-phrase" style="width:27%">
+      <span>12</span>
+    </div>
+  </div>
+</div>
+
+<div class="bar-row">
+  <div class="bar-label" title="business coach">business coach</div>
+  <div class="bar-track">
+    <div class="bar-fill bar-phrase" style="width:27%">
+      <span>12</span>
+    </div>
+  </div>
+</div>
+
+<div class="bar-row">
+  <div class="bar-label" title="templates canva">templates canva</div>
+  <div class="bar-track">
+    <div class="bar-fill bar-phrase" style="width:27%">
+      <span>12</span>
+    </div>
+  </div>
+</div>
+
+<div class="bar-row">
+  <div class="bar-label" title="wix template">wix template</div>
+  <div class="bar-track">
+    <div class="bar-fill bar-phrase" style="width:25%">
+      <span>11</span>
+    </div>
+  </div>
+</div>
+
+<div class="bar-row">
+  <div class="bar-label" title="website design">website design</div>
+  <div class="bar-track">
+    <div class="bar-fill bar-phrase" style="width:25%">
+      <span>11</span>
+    </div>
+  </div>
+</div>
+
+<div class="bar-row">
+  <div class="bar-label" title="template coaching">template coaching</div>
+  <div class="bar-track">
+    <div class="bar-fill bar-phrase" style="width:25%">
+      <span>11</span>
+    </div>
+  </div>
+</div>
+
+<div class="bar-row">
+  <div class="bar-label" title="canva templates">canva templates</div>
+  <div class="bar-track">
+    <div class="bar-fill bar-phrase" style="width:25%">
+      <span>11</span>
+    </div>
+  </div>
+</div>
+
+<div class="bar-row">
+  <div class="bar-label" title="instagram templates">instagram templates</div>
+  <div class="bar-track">
+    <div class="bar-fill bar-phrase" style="width:25%">
+      <span>11</span>
+    </div>
+  </div>
+</div></div>
+
+<h3 style="margin-top:24px;">Full Word Table</h3>
+<div class="table-wrap">
+<table class="sortable" style="margin-top:8px;">
+  <thead><tr><th>Word</th><th>Count</th><th>Valid Etsy tag (≤20 chars)</th></tr></thead>
+  <tbody><tr><td>template</td><td data-val="135">135</td><td>yes</td></tr><tr><td>website</td><td data-val="128">128</td><td>yes</td></tr><tr><td>canva</td><td data-val="122">122</td><td>yes</td></tr><tr><td>web</td><td data-val="78">78</td><td>yes</td></tr><tr><td>wix</td><td data-val="75">75</td><td>yes</td></tr><tr><td>coaching</td><td data-val="70">70</td><td>yes</td></tr><tr><td>business</td><td data-val="68">68</td><td>yes</td></tr><tr><td>page</td><td data-val="61">61</td><td>yes</td></tr><tr><td>para</td><td data-val="60">60</td><td>yes</td></tr><tr><td>kit</td><td data-val="60">60</td><td>yes</td></tr><tr><td>templates</td><td data-val="57">57</td><td>yes</td></tr><tr><td>coach</td><td data-val="53">53</td><td>yes</td></tr><tr><td>instagram</td><td data-val="50">50</td><td>yes</td></tr><tr><td>plantilla</td><td data-val="44">44</td><td>yes</td></tr><tr><td>branding</td><td data-val="42">42</td><td>yes</td></tr><tr><td>design</td><td data-val="41">41</td><td>yes</td></tr><tr><td>social</td><td data-val="38">38</td><td>yes</td></tr><tr><td>media</td><td data-val="38">38</td><td>yes</td></tr><tr><td>sitio</td><td data-val="32">32</td><td>yes</td></tr><tr><td>marca</td><td data-val="30">30</td><td>yes</td></tr><tr><td>site</td><td data-val="29">29</td><td>yes</td></tr><tr><td>coaches</td><td data-val="29">29</td><td>yes</td></tr><tr><td>landing</td><td data-val="28">28</td><td>yes</td></tr><tr><td>editable</td><td data-val="27">27</td><td>yes</td></tr><tr><td>brand</td><td data-val="27">27</td><td>yes</td></tr><tr><td>studio</td><td data-val="26">26</td><td>yes</td></tr><tr><td>digital</td><td data-val="26">26</td><td>yes</td></tr><tr><td>mod</td><td data-val="26">26</td><td>yes</td></tr><tr><td>bundle</td><td data-val="26">26</td><td>yes</td></tr><tr><td>plantillas</td><td data-val="25">25</td><td>yes</td></tr></tbody>
+</table>
+</div>
+<h3 style="margin-top:24px;">Full Phrase Table</h3>
+<div class="table-wrap">
+<table class="sortable" style="margin-top:8px;">
+  <thead><tr><th>Phrase</th><th>Count</th><th>Valid Etsy tag (≤20 chars)</th></tr></thead>
+  <tbody><tr><td>website template</td><td data-val="43">43</td><td>yes</td></tr><tr><td>social media</td><td data-val="38">38</td><td>yes</td></tr><tr><td>sitio web</td><td data-val="32">32</td><td>yes</td></tr><tr><td>landing page</td><td data-val="27">27</td><td>yes</td></tr><tr><td>wix studio</td><td data-val="25">25</td><td>yes</td></tr><tr><td>sales page</td><td data-val="20">20</td><td>yes</td></tr><tr><td>site web</td><td data-val="19">19</td><td>yes</td></tr><tr><td>canva website</td><td data-val="17">17</td><td>yes</td></tr><tr><td>branding kit</td><td data-val="17">17</td><td>yes</td></tr><tr><td>coaching website</td><td data-val="16">16</td><td>yes</td></tr><tr><td>canva template</td><td data-val="15">15</td><td>yes</td></tr><tr><td>page template</td><td data-val="15">15</td><td>yes</td></tr><tr><td>redes sociales</td><td data-val="14">14</td><td>yes</td></tr><tr><td>coach website</td><td data-val="14">14</td><td>yes</td></tr><tr><td>media manager</td><td data-val="14">14</td><td>yes</td></tr><tr><td>website wix</td><td data-val="13">13</td><td>yes</td></tr><tr><td>digital download</td><td data-val="12">12</td><td>yes</td></tr><tr><td>life coach</td><td data-val="12">12</td><td>yes</td></tr><tr><td>business coach</td><td data-val="12">12</td><td>yes</td></tr><tr><td>templates canva</td><td data-val="12">12</td><td>yes</td></tr><tr><td>wix template</td><td data-val="11">11</td><td>yes</td></tr><tr><td>website design</td><td data-val="11">11</td><td>yes</td></tr><tr><td>template coaching</td><td data-val="11">11</td><td>yes</td></tr><tr><td>canva templates</td><td data-val="11">11</td><td>yes</td></tr><tr><td>instagram templates</td><td data-val="11">11</td><td>yes</td></tr></tbody>
+</table>
+</div>
+
+  
+<h2 id="expand">Keyword Expansion — Suggested Next Searches</h2>
+<p style="color:var(--sand);margin-bottom:12px;font-size:0.85rem;">
+  These 2-word phrases appeared frequently in competitor titles.
+  Use them as additional Etsy search queries to find more competitors.
+</p>
+<ul style="list-style:none;display:flex;flex-wrap:wrap;gap:8px;"><li><code style="background:#ede8e4;padding:2px 6px;border-radius:4px;">website template</code> — 25 titles</li><li><code style="background:#ede8e4;padding:2px 6px;border-radius:4px;">social media</code> — 23 titles</li><li><code style="background:#ede8e4;padding:2px 6px;border-radius:4px;">site web</code> — 17 titles</li><li><code style="background:#ede8e4;padding:2px 6px;border-radius:4px;">wix studio</code> — 12 titles</li><li><code style="background:#ede8e4;padding:2px 6px;border-radius:4px;">sitio web</code> — 11 titles</li><li><code style="background:#ede8e4;padding:2px 6px;border-radius:4px;">canva template</code> — 11 titles</li><li><code style="background:#ede8e4;padding:2px 6px;border-radius:4px;">canva templates</code> — 10 titles</li><li><code style="background:#ede8e4;padding:2px 6px;border-radius:4px;">sales page</code> — 9 titles</li><li><code style="background:#ede8e4;padding:2px 6px;border-radius:4px;">coaching website</code> — 9 titles</li><li><code style="background:#ede8e4;padding:2px 6px;border-radius:4px;">mod les</code> — 9 titles</li><li><code style="background:#ede8e4;padding:2px 6px;border-radius:4px;">life coach</code> — 8 titles</li><li><code style="background:#ede8e4;padding:2px 6px;border-radius:4px;">canva website</code> — 8 titles</li><li><code style="background:#ede8e4;padding:2px 6px;border-radius:4px;">business branding</code> — 8 titles</li><li><code style="background:#ede8e4;padding:2px 6px;border-radius:4px;">digital download</code> — 7 titles</li><li><code style="background:#ede8e4;padding:2px 6px;border-radius:4px;">media manager</code> — 7 titles</li><li><code style="background:#ede8e4;padding:2px 6px;border-radius:4px;">editable canva</code> — 7 titles</li><li><code style="background:#ede8e4;padding:2px 6px;border-radius:4px;">business coach</code> — 7 titles</li><li><code style="background:#ede8e4;padding:2px 6px;border-radius:4px;">templates canva</code> — 7 titles</li><li><code style="background:#ede8e4;padding:2px 6px;border-radius:4px;">website wix</code> — 6 titles</li><li><code style="background:#ede8e4;padding:2px 6px;border-radius:4px;">wix template</code> — 6 titles</li></ul>
+
+</div>
+
+<footer>
+  Switzertemplates Etsy Intelligence &nbsp;·&nbsp; 20 May 2026 15:12 &nbsp;·&nbsp;
+  Data sourced from public Etsy search results
+</footer>
+
+<script>
+function sortTable(table, col, asc) {
+  const tbody = table.querySelector('tbody');
+  const rows = Array.from(tbody.querySelectorAll('tr'));
+  rows.sort((a, b) => {
+    const av = a.cells[col].dataset.val || a.cells[col].textContent.trim();
+    const bv = b.cells[col].dataset.val || b.cells[col].textContent.trim();
+    const an = parseFloat(av.replace(/[^0-9.\-]/g, ''));
+    const bn = parseFloat(bv.replace(/[^0-9.\-]/g, ''));
+    if (!isNaN(an) && !isNaN(bn)) return asc ? an - bn : bn - an;
+    return asc ? av.localeCompare(bv) : bv.localeCompare(av);
+  });
+  rows.forEach(r => tbody.appendChild(r));
+  table.querySelectorAll('thead th').forEach((th, i) => {
+    th.classList.remove('sorted-asc', 'sorted-desc');
+    if (i === col) th.classList.add(asc ? 'sorted-asc' : 'sorted-desc');
+  });
+}
+document.querySelectorAll('table.sortable').forEach(table => {
+  table.querySelectorAll('thead th').forEach((th, i) => {
+    let asc = true;
+    th.addEventListener('click', () => { sortTable(table, i, asc); asc = !asc; });
+  });
+});
+</script>
+</body>
+</html>

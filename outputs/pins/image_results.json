@@ -1,0 +1,71 @@
+[
+  {
+    "page_number": 6,
+    "keyword": "wix website for coaches",
+    "prompt_type": 3,
+    "prompt_type_name": "TOPIC SPECIFIC (person + action)",
+    "image_prompt": "Woman with long chocolate brown hair in a cream oversized knit jumper, standing and leaning over a white marble desk, holding an open silver MacBook tilted toward her as she reviews the screen. Shot from behind at a slight angle, capturing her back and the side of her shoulder. Her face is not visible. One hand supports the laptop base while the other rests on the edge, a fine-line pen tucked between her fingers. A Starbucks iced latte in a clear cup with green straw sits on the marble surface nearby, catching soft light. The bright airy room has gold accents visible in the background - a thin gold frame on the wall, a small gold tray on the desk corner. Natural window light streams in from the left, creating directional shadows across the marble. The laptop screen shows a softly blurred website interface with abstract blocks of colour and layout elements, completely unreadable. Shallow depth of field with the desk surface slightly soft in the foreground. Warm Kodak Portra 400 tones, visible film grain, lived-in editorial quiet luxury aesthetic. The scene feels mid-workflow, genuinely candid - not arranged or posed.\n\nNo text, no words, no writing, no labels, no readable typography anywhere in the image. If a screen is visible it shows only a softly blurred website UI - blurred enough that no text is readable. No distorted AI text. No bright colours, no gradients, no studio lighting, no stock photography look, no digital sharpening. Portrait 9:16, high resolution.",
+    "choices": {},
+    "local_path": null,
+    "upload_url": null,
+    "success": false
+  },
+  {
+    "page_number": 7,
+    "keyword": "wix website for coaches",
+    "prompt_type": 1,
+    "prompt_type_name": "GENERAL LIFESTYLE",
+    "image_prompt": "A woman with long chocolate brown hair sits cross-legged on a cream boucl\u00e9 sofa, laptop balanced on her lap, reviewing several printed papers spread across the cream linen cushion beside her. She wears a crisp white linen shirt with sleeves rolled to the elbows, her face turned away as she focuses on the documents. Her hands with nude gel nails hold one page up, thin gold bangles catching the soft window light. Apple AirPods Max in silver rest on the sofa arm, and a black linen Productivity Planner by Intelligent Change sits nearby with a ribbon bookmark visible. A ribbed clear glass holds a creamy latte on a small side table just in frame. The laptop screen shows a softly blurred website interface, completely illegible. Warm afternoon light streams through sheer curtains, casting gentle shadows across the textured fabric. Shot on Kodak Portra 400 with visible grain, shallow depth of field blurring the planner slightly, one corner of a document cropped at the frame edge. Candid and lived-in, warm editorial quiet luxury aesthetic.\n\nNo text, no words, no writing, no labels, no readable typography anywhere in the image. If a screen is visible it shows only a softly blurred website UI or app - blurred enough that no text is readable. No distorted AI text. No bright colours, no gradients, no studio lighting, no stock photography look, no digital sharpening. Portrait 9:16, high resolution.",
+    "choices": {
+      "composition": "4",
+      "setting": "Cream linen surface on a bed or sofa",
+      "outfit": "white linen shirt",
+      "drink": "Latte in a ribbed clear glass",
+      "props": "Apple AirPods Max in silver, Productivity Planner by Intelligent Change",
+      "action": "Reviewing printed papers spread across a desk"
+    },
+    "local_path": "/Users/janeair/Documents/AI/switzertemplates/outputs/pins/images/pin-page-07-20260514-134623.jpg",
+    "upload_url": "https://res.cloudinary.com/dfzejcxvs/image/upload/v1778730415/switzertemplates/pins/awsmqgwionivur9bnvzj.jpg",
+    "success": true
+  },
+  {
+    "page_number": 8,
+    "keyword": "wix website for coaches",
+    "prompt_type": 2,
+    "prompt_type_name": "TOPIC SPECIFIC (props/objects)",
+    "image_prompt": "---\n\nOverhead flat lay of a light grey minimal desk positioned near large floor-to-ceiling windows, natural morning light streaming in from the left creating soft directional shadows. At the center, an Apple MacBook in space grey sits open, screen angled toward camera showing a slightly blurred Wix website builder interface with a coaching website template visible - clean layout with hero image placeholder, booking section, and testimonial blocks, all text too soft to read but the structure clearly recognizable as a professional coaching site. To the upper right, a small espresso in a cream ceramic cup on a matching saucer, surface of the coffee catching light. Scattered casually near the laptop: two delicate gold rings and a thin gold chain bracelet laid flat as if just removed while working. A tortoiseshell claw clip rests at the bottom edge of frame, partially cropped. The desk surface shows subtle texture and natural wear marks. Warm Kodak Portra 400 film aesthetic with visible grain, slightly soft focus on the periphery, the espresso cup gently blurred. One corner of the MacBook extends just beyond the frame edge. The scene feels genuinely used - a coach mid-workflow building their online presence, stepped away momentarily. Muted tones of grey, cream, warm gold, and soft natural wood from window frames visible at frame edge.\n\nNo distorted AI text, no garbled words, no bright colours, no gradients, no studio lighting. Portrait 9:16, high resolution.",
+    "choices": {},
+    "local_path": null,
+    "upload_url": null,
+    "success": false
+  },
+  {
+    "page_number": 9,
+    "keyword": "wix website for coaches",
+    "prompt_type": 3,
+    "prompt_type_name": "TOPIC SPECIFIC (person + action)",
+    "image_prompt": "A woman with long chocolate brown hair seated at a dark oak oval desk, photographed from behind at a slight 45-degree angle, her camel oversized coat draped over her shoulders as she types on a silver MacBook. Her hair is swept up with a tortoiseshell claw clip, a few strands falling loosely. The warm moody interior features deep shadows and rich wood tones, natural light filtering through a window to the side creating directional warmth across the scene. A small ceramic matcha bowl in muted sage sits beside the laptop, steam barely visible. A small ceramic object in matte taupe rests near the edge of the desk as a subtle accent. Her hands with nude gel nails and thin gold rings move across the keyboard, mid-type. The laptop screen shows a softly blurred website interface with indistinct layout blocks and shapes, completely unreadable. A gold chain bracelet catches the light on her wrist. The foreground shows the edge of the oak desk slightly out of focus, adding depth. Shot on Kodak Portra 400 with warm colour grading, visible film grain, and soft natural light. Candid and lived-in, not staged.\n\nNo text, no words, no writing, no labels, no readable typography anywhere in the image. If a screen is visible it shows only a softly blurred website UI - blurred enough that no text is readable. No distorted AI text. No bright colours, no gradients, no studio lighting, no stock photography look, no digital sharpening. Portrait 9:16, high resolution.",
+    "choices": {
+      "composition": "1",
+      "setting": "Dark oak oval desk, warm moody interior",
+      "outfit": "camel oversized coat",
+      "drink": "Matcha in a ceramic bowl or small ceramic cup",
+      "props": "tortoiseshell claw clip, small ceramic object in matte taupe",
+      "action": "Typing on a laptop"
+    },
+    "local_path": "/Users/janeair/Documents/AI/switzertemplates/outputs/pins/images/pin-page-09-20260514-134623.jpg",
+    "upload_url": "https://res.cloudinary.com/dfzejcxvs/image/upload/v1778730450/switzertemplates/pins/hpoqyiik5tysxjhwf4do.jpg",
+    "success": true
+  },
+  {
+    "page_number": 10,
+    "keyword": "wix website for coaches",
+    "prompt_type": 1,
+    "prompt_type_name": "GENERAL LIFESTYLE",
+    "image_prompt": "Low angle shot from glass coffee table level looking slightly up at a woman with long chocolate brown hair wearing a soft sage green cardigan over a white tee, seated on a cream boucl\u00e9 sofa. She is writing in a notebook with a fine-line pen, her face turned down and away from camera showing only her side profile and jaw. A silver Apple MacBook sits open on the glass coffee table in the foreground, screen showing a softly blurred website interface with no readable text. A cream Stanley tumbler rests nearby. Her hands feature long nude gel nails and delicate gold rings, a thin gold bangle catching the light as she writes. The room is bright with natural window light streaming from the left, creating soft directional shadows across the scene. Warm Kodak Portra 400 aesthetic with visible film grain, shallow depth of field with the MacBook slightly soft in the foreground. The edge of a cream throw pillow crops at the frame edge, adding intentional imperfection. Lived-in quiet luxury atmosphere, candid and unhurried.\n\nNo text, no words, no writing, no labels, no readable typography anywhere in the image. If a screen is visible it shows only a softly blurred website UI or app - blurred enough that no text is readable. No distorted AI text. No bright colours, no gradients, no studio lighting, no stock photography look, no digital sharpening. Portrait 9:16, high resolution.",
+    "choices": {},
+    "local_path": null,
+    "upload_url": null,
+    "success": false
+  }
+]

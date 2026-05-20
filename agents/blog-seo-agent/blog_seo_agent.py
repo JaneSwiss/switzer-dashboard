@@ -192,6 +192,7 @@ def fetch_page(url: str) -> dict:
         "h3s": [],
         "word_count": 0,
         "opening_paragraph": "",
+        "body_excerpt": "",
         "status": "ok",
     }
     try:
@@ -217,6 +218,14 @@ def fetch_page(url: str) -> dict:
         result["opening_paragraph"] = (
             first_p.get_text(strip=True)[:300] if first_p else ""
         )
+
+        # Extract first 8 meaningful paragraphs for deeper content analysis
+        meaningful_paras = [
+            p.get_text(strip=True)
+            for p in soup.find_all("p")
+            if len(p.get_text(strip=True)) > 60
+        ]
+        result["body_excerpt"] = " ".join(meaningful_paras[:8])[:2000]
 
     except Exception as e:
         result["status"] = f"blocked ({type(e).__name__}: {e})"
@@ -250,6 +259,114 @@ def research_competitors(keyword: str) -> "list[dict]":
     return competitors
 
 
+# ── module 2b: research helpers ───────────────────────────────────────────────
+
+def count_words(text: str) -> int:
+    """Count words after stripping HTML tags and markdown markers."""
+    clean = re.sub(r"<[^>]+>", " ", text)
+    clean = re.sub(r"\*+", " ", clean)
+    return len(clean.split())
+
+
+def calculate_target_length(competitors: "list[dict]") -> "tuple[int, int]":
+    """
+    Return (min_words, target_words) based on competitor page word counts.
+    Competitor word counts include nav/footer so we apply a 0.6 discount
+    to estimate article-only length before scaling.
+    Absolute floor is 1,800 words.
+    """
+    FLOOR = 1800
+    raw_counts = [
+        c["word_count"] for c in competitors
+        if c["status"] == "ok" and c["word_count"] > 800
+    ]
+    if not raw_counts:
+        return FLOOR, 2000
+
+    # Discount page word count to approximate article-only length
+    article_counts = [int(w * 0.6) for w in raw_counts]
+    avg = sum(article_counts) / len(article_counts)
+    top = max(article_counts)
+
+    # Target = 10% above average, but at least match the longest competitor
+    target = max(FLOOR, int(avg * 1.1), min(top, 3500))
+    return FLOOR, target
+
+
+def gather_research_snippets(keyword: str) -> str:
+    """
+    Run two extra SERP searches to collect recent snippets about the keyword.
+    Uses SERP snippets only — no additional page fetches needed.
+    Returns a formatted string ready to include in the research brief.
+    """
+    queries = [
+        f"{keyword} statistics data 2025 2026",
+        f"{keyword} tips examples guide",
+    ]
+    all_snippets = []
+    for query in queries:
+        results = fetch_serp(query)
+        for r in results[:5]:
+            snippet = r.get("snippet", "").strip()
+            title = r.get("title", "").strip()
+            url = r.get("link", "").strip()
+            if snippet and len(snippet) > 40:
+                all_snippets.append(f"[{title}]\n{snippet}\nSource: {url}")
+        time.sleep(0.4)
+    return "\n\n".join(all_snippets) if all_snippets else ""
+
+
+def synthesize_research(
+    keyword: str,
+    competitors: "list[dict]",
+    snippets: str,
+    target_words: int,
+) -> str:
+    """
+    One Claude call that turns competitor data + SERP snippets into a structured
+    research brief. This brief is fed into the writing prompt so the post is
+    genuinely more informative than what is currently ranking.
+    """
+    client = anthropic.Anthropic(api_key=ANTHROPIC_API_KEY)
+    competitor_summary = _build_competitor_summary(competitors)
+
+    research_prompt = f"""You are a content researcher for Switzertemplates, a digital product business for female small business owners, coaches, and service providers.
+
+Keyword to write about: {keyword}
+Target post length: {target_words} words minimum
+
+COMPETITOR CONTENT (top Google results):
+{competitor_summary}
+
+SUPPLEMENTARY RESEARCH SNIPPETS (recent web sources):
+{snippets if snippets else "(No supplementary snippets retrieved.)"}
+
+Create a research brief that the blog writer will use to write a post that is more specific, more useful, and more current than anything currently ranking. Include:
+
+1. KEY INSIGHTS (5-8 points): The most important, specific, actionable things someone searching for "{keyword}" needs to know right now. Be concrete. No vague generalities.
+
+2. CURRENT DATA & STATS (2025-2026): Any specific numbers, percentages, or facts from the research above that belong in the post. Flag the source URL for each. If no concrete stats were found, say so — do not invent numbers.
+
+3. REAL EXAMPLES: Specific, relatable examples tailored to female small business owners, coaches, and service providers. Show what this looks like in practice.
+
+4. ACTIONABLE STEPS: A concrete step-by-step breakdown the reader can actually follow. Not theory — real actions.
+
+5. COMPETITOR GAPS: What are these competitor posts NOT covering well? Where is the advice thin, generic, or outdated? These are the areas where our post wins.
+
+6. UNIQUE ANGLES (2-3): Fresh angles or perspectives that would make this post stand out and feel genuinely more useful to the reader.
+
+7. DEPTH NOTE: Based on the competitor word counts, note what depth is needed to compete on this keyword.
+
+Be specific and grounded. This brief will be handed directly to the writer. Return only the research brief — no preamble."""
+
+    resp = client.messages.create(
+        model="claude-opus-4-5",
+        max_tokens=2500,
+        messages=[{"role": "user", "content": research_prompt}],
+    )
+    return resp.content[0].text.strip()
+
+
 # ── module 3: blog post writer ─────────────────────────────────────────────────
 
 def _build_competitor_summary(competitors: "list[dict]") -> str:
@@ -258,14 +375,17 @@ def _build_competitor_summary(competitors: "list[dict]") -> str:
         if c["status"] != "ok":
             lines.append(f"Competitor {i}: {c['url']} — {c['status']}")
             continue
-        h2_text = "\n".join(f"    - {h}" for h in c["h2s"][:6]) or "    (none extracted)"
+        h2_text = "\n".join(f"    - {h}" for h in c["h2s"][:8]) or "    (none extracted)"
+        excerpt = c.get("body_excerpt", "")
+        excerpt_preview = (excerpt[:600] + "...") if len(excerpt) > 600 else excerpt
         lines.append(
             f"Competitor {i}: {c['url']}\n"
             f"  Title: {c['title']}\n"
             f"  H1: {c['h1']}\n"
             f"  H2s:\n{h2_text}\n"
             f"  Approx word count: {c['word_count']}\n"
-            f"  Opening paragraph: {c['opening_paragraph']}"
+            f"  Opening paragraph: {c['opening_paragraph']}\n"
+            f"  Body excerpt: {excerpt_preview}"
         )
     return "\n\n".join(lines) if lines else "(No competitor data available.)"
 
@@ -275,6 +395,8 @@ def build_prompt(
     competitors: list[dict],
     brand_voice: str,
     style_examples: str,
+    research_brief: str = "",
+    target_words: int = 2000,
 ) -> str:
     keyword = keyword_row["_keyword"]
 
@@ -284,8 +406,29 @@ def build_prompt(
     )
     tier = keyword_row.get(tier_col, "").strip() if tier_col else ""
 
+    # Notes column: pin/content inspiration uploaded by Jane
+    notes = (keyword_row.get("Notes") or "").strip()
+
     competitor_summary = _build_competitor_summary(competitors)
     banned_list = ", ".join(BANNED_WORDS)
+
+    notes_block = (
+        "\nPIN INSPIRATION FROM JANE'S RESEARCH — angles and themes that already perform well on Pinterest for this keyword:\n"
+        + notes
+        + "\n\nUse these to inform the post's angle and what topics resonate with this audience.\n"
+        + "Do not copy any titles or descriptions directly. Use them to understand what the reader cares about and what kind of content drives clicks for this keyword.\n\n---\n"
+    ) if notes else ""
+
+    # Body section count and per-section target scale with overall target length
+    if target_words >= 3000:
+        section_count = "6-8"
+        section_words = "200-350"
+    elif target_words >= 2500:
+        section_count = "6-7"
+        section_words = "200-300"
+    else:
+        section_count = "5-6"
+        section_words = "200-250"
 
     return f"""You are the Blog SEO Agent for Switzertemplates.
 
@@ -308,9 +451,34 @@ STYLE EXAMPLES — study the writing patterns, do not copy the text:
 
 ---
 
-COMPETITOR RESEARCH — understand what is already ranking, then write something better: more specific, more useful, more human:
+RESEARCH BRIEF — this was compiled from competitor analysis and live web research.
+Use the insights, examples, data points, and actionable steps in this brief to make the post genuinely valuable and more useful than what is currently ranking.
+Do not repeat competitor content — use this brief to go deeper, be more specific, and cover gaps competitors miss:
+
+{research_brief if research_brief else "(No research brief available — write from general knowledge.)"}
+
+---
+{notes_block}COMPETITOR RESEARCH — structure and depth reference only (do not copy content):
 
 {competitor_summary}
+
+---
+
+INFORMATION CURRENCY — CRITICAL:
+All information, advice, tools, statistics, and examples in this post must be current as of 2025-2026.
+Do not include outdated platform features, deprecated tools, or old statistics.
+If the research brief contains specific data points or stats with sources, use them.
+If you reference a statistic or fact, make sure it reflects how these platforms and tools work today.
+
+---
+
+DEPTH AND VALUE REQUIREMENTS — CRITICAL:
+Every section must deliver real, specific value. No generic advice that could apply to any business or topic.
+- Include at least 2-3 concrete, real-world examples throughout the post (tailored to coaches, service providers, and small business owners)
+- Include at least one actionable step-by-step breakdown in its own section
+- Use specific numbers, percentages, or data points where the research brief provides them
+- Call out at least one common mistake or misconception the reader is likely making right now
+- Give the reader something they can act on today — not just theory
 
 ---
 
@@ -344,16 +512,20 @@ Do not use em dashes. Do not use markdown headers (##).
 Write headings as plain ALL CAPS text on their own line.
 
 Structure:
-- Introduction (100-150 words): opens with the reader's real frustration or situation.
+- Introduction (150-200 words): opens with the reader's real frustration or situation.
   Must include the exact keyword naturally. No "In this post I will..." openers.
-- Body: 4-6 sections, each 150-250 words, one idea per section fully delivered.
+  Hook the reader immediately — name the specific problem or gap they are facing.
+- Body: {section_count} sections, each {section_words} words, one idea per section fully delivered.
+  At least one section must be a step-by-step breakdown with numbered or listed steps.
+  At least one section must include a real example showing what good looks like in practice.
   Personal examples woven in naturally.
 - Mid-post CTA: one only, tied to the problem the section is discussing.
   Never a hard sell. Introduce it as a helpful option.
-- Conclusion (100-150 words): no "In conclusion". Must include the exact keyword.
+- Conclusion (150-200 words): no "In conclusion". Must include the exact keyword.
   Ends with a final CTA to a relevant product or the Etsy shop.
 
-TARGET LENGTH: 1,200-1,800 words total.
+TARGET LENGTH: minimum {target_words:,} words. Write to this target — do not cut short.
+If you reach {target_words:,} words and the post still has more value to deliver, keep writing.
 
 ---
 
@@ -396,20 +568,85 @@ def check_banned_words(text: str) -> list[str]:
 
 
 def write_blog_post(keyword_row: dict, competitors: list[dict]) -> str:
-    """Call Claude to write the post. If banned words are found, request a revision."""
+    """
+    Research → synthesize → write → validate → (retry if needed).
+    Runs a research pipeline before writing so every post is genuinely
+    informative, current, and more useful than what is ranking.
+    """
+    keyword = keyword_row["_keyword"]
     brand_voice, style_examples = read_context_files()
-    prompt = build_prompt(keyword_row, competitors, brand_voice, style_examples)
-
     client = anthropic.Anthropic(api_key=ANTHROPIC_API_KEY)
-    print("  Calling Claude (claude-opus-4-5) to write blog post...")
+
+    # ── Step A: calculate target length from competitor data ──────────────────
+    min_words, target_words = calculate_target_length(competitors)
+    print(f"  Word count target: {target_words:,} words (minimum {min_words:,})")
+
+    # ── Step B: gather supplementary research snippets ────────────────────────
+    print("  Gathering research snippets...")
+    try:
+        snippets = gather_research_snippets(keyword)
+        snippet_count = snippets.count("\n\n") + 1 if snippets else 0
+        print(f"  {snippet_count} research snippet(s) collected.")
+    except Exception as e:
+        log_error("research_snippets", keyword, str(e))
+        print(f"  Research snippets failed: {e} — continuing without.")
+        snippets = ""
+
+    # ── Step C: synthesize research brief ────────────────────────────────────
+    print("  Synthesizing research brief...")
+    try:
+        research_brief = synthesize_research(keyword, competitors, snippets, target_words)
+    except Exception as e:
+        log_error("research_synthesis", keyword, str(e))
+        print(f"  Research synthesis failed: {e} — writing without brief.")
+        research_brief = ""
+
+    # ── Step D: write the post ────────────────────────────────────────────────
+    prompt = build_prompt(
+        keyword_row, competitors, brand_voice, style_examples,
+        research_brief=research_brief,
+        target_words=target_words,
+    )
+
+    print(f"  Calling Claude (claude-opus-4-5) to write blog post ({target_words:,}+ words)...")
 
     initial = client.messages.create(
         model="claude-opus-4-5",
-        max_tokens=4096,
+        max_tokens=8000,
         messages=[{"role": "user", "content": prompt}],
     )
     post_text = initial.content[0].text.strip()
 
+    # ── Step E: word count check — retry once if under minimum ───────────────
+    wc = count_words(post_text)
+    print(f"  Draft word count: {wc:,}")
+    if wc < min_words:
+        print(f"  Under {min_words:,} words — requesting an expansion pass...")
+        expansion_prompt = (
+            f"This blog post is {wc} words but must be at least {min_words} words. "
+            f"Expand it by adding more specific examples, more actionable detail, and deeper "
+            f"explanations in the sections that are currently thin. "
+            f"Do not add filler or padding — every added sentence must deliver real value. "
+            f"Return only the complete expanded blog post — no preamble.\n\n"
+            f"{post_text}"
+        )
+        expanded = client.messages.create(
+            model="claude-opus-4-5",
+            max_tokens=8000,
+            messages=[
+                {"role": "user", "content": prompt},
+                {"role": "assistant", "content": post_text},
+                {"role": "user", "content": expansion_prompt},
+            ],
+        )
+        post_text = expanded.content[0].text.strip()
+        wc = count_words(post_text)
+        print(f"  Expanded word count: {wc:,}")
+        if wc < min_words:
+            log_error("word_count", keyword, f"Post still under {min_words} words after expansion: {wc}")
+            print(f"  Still under {min_words:,} words after expansion — logged and continuing.")
+
+    # ── Step F: banned word check — revision pass if needed ──────────────────
     hits = check_banned_words(post_text)
     if hits:
         print(f"  Banned words found: {hits} - requesting revision...")
@@ -422,7 +659,7 @@ def write_blog_post(keyword_row: dict, competitors: list[dict]) -> str:
         )
         revised = client.messages.create(
             model="claude-opus-4-5",
-            max_tokens=4096,
+            max_tokens=8000,
             messages=[
                 {"role": "user", "content": prompt},
                 {"role": "assistant", "content": post_text},
@@ -433,7 +670,7 @@ def write_blog_post(keyword_row: dict, competitors: list[dict]) -> str:
 
         still_hit = check_banned_words(post_text)
         if still_hit:
-            log_error("banned_words", keyword_row["_keyword"], f"Banned words remain after revision: {still_hit}")
+            log_error("banned_words", keyword, f"Banned words remain after revision: {still_hit}")
             print(f"  Banned words remain after revision: {still_hit} — logged and continuing.")
 
     return post_text
@@ -936,7 +1173,7 @@ def run():
     print("=" * 50)
 
     # module 1
-    print("\n[1/4] Loading next keyword...")
+    print("\n[1/5] Loading next keyword...")
     try:
         keyword_row = load_next_keyword()
     except Exception as e:
@@ -952,7 +1189,7 @@ def run():
     print(f"  Slug    : {keyword_row['_slug']}")
 
     # module 2
-    print("\n[2/4] Researching competitors...")
+    print("\n[2/5] Researching competitors...")
     try:
         competitors = research_competitors(keyword)
     except Exception as e:
@@ -960,8 +1197,8 @@ def run():
         print(f"  Competitor research failed: {e} — continuing without data.")
         competitors = []
 
-    # module 3
-    print("\n[3/4] Writing blog post...")
+    # module 3 (research + write)
+    print("\n[3/5] Researching topic and writing blog post...")
     try:
         post_html = write_blog_post(keyword_row, competitors)
     except Exception as e:
@@ -977,7 +1214,7 @@ def run():
         print(f"  Image prompt generation failed: {e} — saving post without prompts.")
         image_prompts = "(Image prompt generation failed.)"
 
-    print("\n[3.5/4] Generating images via Gemini API...")
+    print("\n[4/5] Generating images via Gemini API...")
     image_paths = []
     try:
         image_paths = generate_images_from_prompts(image_prompts, keyword_row["_slug"])
@@ -990,7 +1227,7 @@ def run():
         print(f"  Image generation failed: {e} - continuing without images.")
 
     # module 4
-    print("\n[4/4] Saving output...")
+    print("\n[5/5] Saving output...")
     try:
         filename = save_output(keyword_row, post_html, image_prompts, image_paths)
     except Exception as e:

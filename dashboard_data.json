@@ -70,12 +70,11 @@
         "searches": "1,111",
         "competition": "1,566",
         "score": "710",
-        "notes": "#1 opportunity ÃÂ¢ÃÂÃÂ no listing targeting this yet"
+"notes": "#1 opportunity \u00c3\u00a2\u00c2\u0080\u00c2\u0094 no listing targeting this yet"
       },
       {
         "keyword": "pinterest inspired",
-        "searches": "ÃÂ¢ÃÂÃÂ",
-        "competition": "1,363",
+        "searches": "\u00c3\u00a2\u00c2\u0080\u00c2\u0094",        "competition": "1,363",
         "score": "260",
         "notes": "Strong, low competition"
       },
@@ -88,8 +87,7 @@
       },
       {
         "keyword": "smm instagram",
-        "searches": "ÃÂ¢ÃÂÃÂ",
-        "competition": "832",
+"searches": "\u00c3\u00a2\u00c2\u0080\u00c2\u0094",        "competition": "832",
         "score": "190",
         "notes": "Low competition relative to score"
       },
@@ -119,8 +117,7 @@
         "searches": "102",
         "competition": "768",
         "score": "130",
-        "notes": "Gap ÃÂ¢ÃÂÃÂ no listing"
-      },
+"notes": "Gap \u00c3\u00a2\u00c2\u0080\u00c2\u0094 no listing"      },
       {
         "keyword": "aesthetic carousel",
         "searches": "105",
@@ -304,6 +301,14 @@
         "published": false,
         "date": "2026-05-14",
         "url": "https://janeswiss.github.io/switzer-dashboard/posts/how-to-start-an-ecommerce-business.html"
+      },
+      {
+        "title": "pinterest marketing",
+        "keyword": "pinterest marketing",
+        "written": true,
+        "published": false,
+        "date": "2026-05-20",
+        "url": "https://janeswiss.github.io/switzer-dashboard/posts/pinterest-marketing.html"
       }
     ],
     "pending_tasks": [
@@ -698,8 +703,7 @@
     }
   ],
   "monthly_wins": [
-    "Etsy Expert agent completed ÃÂ¢ÃÂÃÂ all skills built and tested",
-    "Blog SEO agent completed",
+"Etsy Expert agent completed \u00c3\u00a2\u00c2\u0080\u00c2\u0094 all skills built and tested",    "Blog SEO agent completed",
     "AI Agency Dashboard live on all devices"
   ],
   "pinterest_agent": {

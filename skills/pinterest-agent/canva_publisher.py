@@ -131,13 +131,43 @@ def _load_architecture() -> dict:
     return json.loads(_ARCH_FILE.read_text())
 
 
-def classify_elements(slots: list[dict], page_number: int) -> list[dict]:
+def _get_pages_for_design(arch: dict, design_id: str | None) -> dict:
+    """
+    Return the pages dict for the given design.
+    Supports both the new {design_name: {pages: ...}} structure and the old flat structure.
+    If design_id is given, finds the matching entry by design_id field.
+    Falls back to the first entry, then to top-level 'pages'.
+    """
+    for entry in arch.values():
+        if isinstance(entry, dict) and entry.get("design_id") == design_id:
+            return entry.get("pages", {})
+    # Legacy flat structure
+    if "pages" in arch:
+        return arch["pages"]
+    # Fallback: first entry
+    for entry in arch.values():
+        if isinstance(entry, dict) and "pages" in entry:
+            return entry["pages"]
+    return {}
+
+
+def _get_role_order(page_number: int, design_id: str | None = None) -> list[str]:
+    """Return the role order for a page as a list, e.g. ['body', 'headline', 'cta'].
+    Reads key order from pin-architecture.json elements dict."""
+    arch  = _load_architecture()
+    pages = _get_pages_for_design(arch, design_id)
+    return list(pages.get(str(page_number), {}).get("elements", {}).keys())
+
+
+def classify_elements(slots: list[dict], page_number: int, design_id: str | None = None) -> list[dict]:
     """
     Assigns roles from context/pin-architecture.json — no height logic.
     Elements not listed in the architecture for this page are silently skipped.
+    Pass design_id to select the correct design when the file contains multiple designs.
     """
     arch      = _load_architecture()
-    page_arch = arch.get("pages", {}).get(str(page_number), {})
+    pages     = _get_pages_for_design(arch, design_id)
+    page_arch = pages.get(str(page_number), {})
     id_to_role = {eid: role for role, eid in page_arch.get("elements", {}).items()}
 
     result = []
@@ -171,22 +201,53 @@ def _build_system_prompt() -> str:
         "You are a Pinterest pin copy writer for Switzer Templates, a digital product business "
         "selling Canva templates, Wix website templates, branding kits and Instagram templates "
         "to small business owners and Etsy sellers.\n\n"
-        "Rules:\n\n"
-        "- Write in plain language, active voice, sentence case\n"
-        "- Never use all caps\n"
-        "- No hashtags\n"
-        "- The keyword drives everything — it must appear naturally in the headline\n"
-        "- Headline and body must work as one connected thought — body completes or extends the "
-        "headline, never starts a new idea\n"
-        "- No comma-pause constructions like 'Your website, ready to launch' — use straight "
-        "natural statements only\n"
-        "- Rotate superlatives across pins — best, perfect, ideal, top, great, proven, simple, "
-        "easy — never use the same one twice in the same batch\n"
-        "- Use proven Pinterest formulas: number + keyword + outcome, best/top/ideal + keyword + "
-        "benefit, how to + outcome, problem + fix\n"
-        "- CTA should feel like browsing not pressure — examples: 'View the template', "
-        "'Save this list', 'Shop the kit', 'Read the guide', 'Get the template'\n"
-        "- Never identify a specific product — the keyword drives the copy, not the product"
+        "Write natural, clickable Pinterest copy. Never robotic, never keyword-stuffed. "
+        "Use hook formulas from the rules file. "
+        "The keyword informs the topic but never gets forced into the headline word for word.\n\n"
+        "BODY BEFORE HEADLINE RULES:\n"
+        "- Body must be EITHER a short question OR a 2–3 word product descriptor. "
+        "Capital letter. Nothing else.\n"
+        "- If body is a question, the headline must answer it directly and clearly\n"
+        "- Good questions: 'Ready to launch?', 'Tired of DIY websites?', "
+        "'Want more bookings?', 'Still building from scratch?'\n"
+        "- Good descriptors: 'Done-for-you website', 'Premade and professional', 'Built for coaches'\n"
+        "- The headline must always make the product clear\n"
+        "- Good examples:\n"
+        "  'Ready to launch?' → 'Get this premade Wix website for therapists'\n"
+        "  'Tired of DIY websites?' → 'Try this premade Wix template for coaches'\n"
+        "  'Done-for-you website' → 'Wix template for coaches and consultants'\n"
+        "- NEVER write a benefit claim as a pre-heading body: "
+        "'No designer needed', 'Launch faster than you think' — these are wrong\n\n"
+        "HEADLINE BEFORE BODY RULES:\n"
+        "- Headline must clearly state the product — never vague\n"
+        "- Never start headline with 'Made for', 'No more', 'Get' if CTA also uses 'Get'\n"
+        "- Body is lowercase and completes the headline as one natural flowing thought\n"
+        "- Good examples:\n"
+        "  'Premade Wix website for coaches' + 'that books clients on autopilot'\n"
+        "  'Choose a premade Wix template for therapists' + 'that is ready to launch today'\n"
+        "  'Wix website templates for therapy practices' + 'that look custom and convert clients'\n"
+        "  'Save hours with this Wix website template' — headline only, no body needed\n\n"
+        "HEADLINE ONLY RULES:\n"
+        "- Must be completely self-explanatory — product clear, benefit clear\n"
+        "- Never vague: 'Before you build from scratch, see this' is wrong — "
+        "reader has no idea what the product is\n"
+        "- Good examples:\n"
+        "  'Save time by choosing this Wix template'\n"
+        "  'A therapy website that books clients'\n"
+        "  'Wix website templates for small businesses'\n\n"
+        "CTA RULES:\n"
+        "- Soft browsing CTAs only: View the template, Browse the collection, Get the template, "
+        "See the design, Start customizing, Shop the kit, Read the guide, Save this list\n"
+        "- Never use the same opening word in both headline and CTA\n"
+        "- Never repeat the same CTA twice in a batch\n\n"
+        "TRACKING RULES:\n"
+        "- Never repeat the same hook formula twice in a row\n"
+        "- Never repeat the same opening word across consecutive headlines\n"
+        "- Rotate superlatives and descriptive words across the batch\n\n"
+        "LANGUAGE RULES — always follow these:\n"
+        "- Never use commas in headlines or body copy\n"
+        "- Always use 'website' — never 'site'\n"
+        "- Always use 'premade' — never 'ready-made'"
     )
     if rules:
         prompt += f"\n\nPinterest copy rules reference:\n\n{rules}"
@@ -206,11 +267,42 @@ def extract_superlatives(elements: list[dict]) -> list[str]:
     return found
 
 
-def _ensure_sentence_case(elements: list[dict]) -> list[dict]:
+def _ensure_sentence_case(elements: list[dict], classified: list[dict] | None = None) -> list[dict]:
+    # Body casing is position-dependent — let Claude's output stand (body-after-headline
+    # must be lowercase; body-before-headline should already be capitalised by Claude).
+    # Only auto-capitalise headlines and CTAs as a safety net.
+    role_map = {s["element_id"]: s["role"] for s in classified} if classified else {}
     for el in elements:
         text = el.get("new_text", "")
+        role = role_map.get(el["element_id"], "")
+        if role == "body":
+            continue
         if text and text[0].islower():
             el["new_text"] = text[0].upper() + text[1:]
+    return elements
+
+
+def _apply_language_rules(elements: list[dict], classified: list[dict] | None = None) -> list[dict]:
+    """Auto-correct language rule violations after generation.
+    - Removes commas from headlines and body copy
+    - Replaces standalone 'site'/'Site' with 'website'/'Website' (all elements)
+    - Replaces 'ready-made'/'Ready-made' with 'premade'/'Premade' (all elements)
+    """
+    role_map = {s["element_id"]: s["role"] for s in classified} if classified else {}
+    for el in elements:
+        text = el.get("new_text", "")
+        if not text:
+            continue
+        role = role_map.get(el["element_id"], "")
+        # Remove commas from headlines and body (not CTAs)
+        if role in ("headline", "body") or not role:
+            text = text.replace(",", "")
+        # Replace standalone 'Site'/'site' → 'Website'/'website' (preserve leading capital)
+        text = re.sub(r'\bSite\b', 'Website', text)
+        text = re.sub(r'\bsite\b', 'website', text)
+        # Replace 'Ready-made'/'ready-made' → 'Premade'/'premade' (preserve leading capital)
+        text = text.replace("Ready-made", "Premade").replace("ready-made", "premade")
+        el["new_text"] = text
     return elements
 
 
@@ -249,34 +341,63 @@ def _user_prompt(
     body_lines_used: list[str],
     ctas_used: list[str],
     headline_phrases_used: list[str],
+    role_order: list[str] | None = None,
     retry_note: str = "",
 ) -> str:
-    slots = "\n".join(
-        f"- element_id: {s['element_id']}\n"
-        f"  Role: {s['role']}\n"
-        f"  Max words: {s['max_words']}\n"
-        f"  Current placeholder text (for context only): {s['current_text']}"
-        for s in classified
+    role_order_str = " → ".join(role_order) if role_order else "unknown"
+    slots = (
+        f"Role order for this page: {role_order_str}\n\n"
+        + "\n".join(
+            f"- element_id: {s['element_id']}\n"
+            f"  Role: {s['role']}\n"
+            f"  Max words: {s['max_words']}\n"
+            f"  Current placeholder text (for context only): {s['current_text']}"
+            for s in classified
+        )
     )
-    sup_str      = ", ".join(superlatives_used) if superlatives_used else "none yet"
-    body_str     = ", ".join(f'"{b}"' for b in body_lines_used) if body_lines_used else "none yet"
-    cta_str      = ", ".join(f'"{c}"' for c in ctas_used) if ctas_used else "none yet"
-    phrases_str  = ", ".join(f'"{p}"' for p in headline_phrases_used) if headline_phrases_used else "none yet"
+    sup_str     = ", ".join(superlatives_used) if superlatives_used else "none yet"
+    body_str    = ", ".join(f'"{b}"' for b in body_lines_used) if body_lines_used else "none yet"
+    cta_str     = ", ".join(f'"{c}"' for c in ctas_used) if ctas_used else "none yet"
+    phrases_str = ", ".join(f'"{p}"' for p in headline_phrases_used) if headline_phrases_used else "none yet"
     return (
         f"Write Pinterest pin copy for the following text slots. "
         f"The keyword for this pin is: {keyword}\n\n"
         "STRICT RULES:\n\n"
-        "- headline role: maximum 7 words. Use the keyword naturally. "
-        "Use a proven Pinterest formula from the rules file.\n"
-        "- body role: maximum 5 words. Must add NEW information that extends the headline — "
-        "not describe the template or repeat what the headline already said. Never repeat a "
-        "word from the headline. "
-        "Good examples: 'Best coach websites that convert clients' → body: 'without hiring a designer'. "
-        "'Top Wix templates for small businesses' → body: 'a website in a weekend'. "
-        "Bad examples (describe the template, not the client benefit): 'ready to customize', "
-        "'built and ready fast', 'everything included', 'ready to launch this week' — these "
-        "describe the template, not the client benefit. Always extend the headline with a "
-        "client-focused thought, a price/effort contrast, or a specific outcome.\n"
+        "- headline role: maximum 7 words. Use hook formulas — product + audience, made for, "
+        "no more, how to, problem-solution, result-driven. Sound like a real person, never an "
+        "SEO title. Use the keyword naturally.\n"
+        "- body role: position determines the rules — check the role order above.\n"
+        "  Body BEFORE headline: EITHER a short question OR a 2–3 word product descriptor. "
+        "Nothing else. No benefit claims, no full sentences.\n"
+        "  Good examples (body before / headline): "
+        "'Premade and easy-to-use' / 'Wix website for coaches and service businesses'; "
+        "'Ready to launch?' / 'Get this luxury website template for your business'; "
+        "'Still building from scratch?' / 'Get this premade Wix template for coaches'; "
+        "'Is your website losing you clients?' / 'Fix it with this premade Wix template'; "
+        "'Done-for-you website' / 'Clean Wix template for service businesses'\n"
+        "  Bad body-before examples — NEVER write these: "
+        "'No designer needed' (benefit claim), "
+        "'Launch faster than you think' (too long, headline material), "
+        "'Without the agency price' (benefit claim), "
+        "'Clients book on autopilot' (headline material, not pre-heading)\n"
+        "  Body AFTER headline: HEADLINE + BODY = ONE SENTENCE — this is the most important rule.\n"
+        "  Never write the headline as a complete thought and then add a body. "
+        "Instead write ONE sentence and split it across headline and body.\n"
+        "  How to do it: write the full sentence first, then split after the product is named. "
+        "Headline names the product. Body delivers the outcome or qualifier.\n"
+        "  Full sentence → split examples:\n"
+        "  'Choose a premade Wix coaching website that fills your calendar automatically' → "
+        "headline: 'Choose a premade Wix coaching website' / body: 'that fills your calendar automatically'\n"
+        "  'Get a premade therapy website that books clients while you sleep' → "
+        "headline: 'Get a premade therapy website' / body: 'that books clients while you sleep'\n"
+        "  'A luxury Wix template for consultants that looks like a custom build' → "
+        "headline: 'A luxury Wix template for consultants' / body: 'that looks like a custom build'\n"
+        "  'Save hours with a premade coaching website that is ready to launch today' → "
+        "headline: 'Save hours with a premade coaching website' / body: 'that is ready to launch today'\n"
+        "  NEVER do this:\n"
+        "  Write 'Your coaching website should be booking clients' as headline then add "
+        "'built and ready to launch' as body — these are two completely separate thoughts.\n"
+        "  Write a headline that is already a complete sentence then force a body after it.\n"
         "- cta role: maximum 4 words. Soft browsing CTA only. Action verb first.\n"
         f"- Never use the same superlative as other pins in this batch. "
         f"Superlatives used so far in this batch: {sup_str}\n"
@@ -307,6 +428,7 @@ def generate_copy(
     headline_phrases_used: list[str],
     api_key: str,
     retry_note: str = "",
+    role_order: list[str] | None = None,
 ) -> list[dict]:
     client  = anthropic.Anthropic(api_key=api_key)
     message = client.messages.create(
@@ -315,7 +437,7 @@ def generate_copy(
         system=_build_system_prompt(),
         messages=[{"role": "user", "content": _user_prompt(
             classified, keyword, superlatives_used, body_lines_used,
-            ctas_used, headline_phrases_used, retry_note
+            ctas_used, headline_phrases_used, role_order, retry_note
         )}],
     )
     raw = message.content[0].text.strip()
@@ -347,6 +469,7 @@ def validate_and_retry(
     ctas_used: list[str],
     headline_phrases_used: list[str],
     api_key: str,
+    role_order: list[str] | None = None,
 ) -> list[dict]:
     limit_map = {s["element_id"]: s["max_words"] for s in classified}
 
@@ -363,8 +486,7 @@ def validate_and_retry(
                 )
         return out
 
-    # Fix 3: sentence case before any validation
-    current = _ensure_sentence_case(generated)
+    current = _ensure_sentence_case(generated, classified)
 
     for attempt in range(3):
         bad = violations(current)
@@ -381,8 +503,9 @@ def validate_and_retry(
         current = _ensure_sentence_case(
             generate_copy(
                 classified, keyword, superlatives_used, body_lines_used,
-                ctas_used, headline_phrases_used, api_key, note
-            )
+                ctas_used, headline_phrases_used, api_key, note, role_order
+            ),
+            classified,
         )
 
     # Hard-truncate any remaining violations (drop words beyond limit)
@@ -391,6 +514,8 @@ def validate_and_retry(
         words = el.get("new_text", "").split()
         if len(words) > limit:
             el["new_text"] = " ".join(words[:limit])
+    # Apply language rules as final cleanup pass
+    _apply_language_rules(current, classified)
     return current
 
 
@@ -405,6 +530,7 @@ def generate_page_copy(
     body_lines_used: list[str] | None = None,
     ctas_used: list[str] | None = None,
     headline_phrases_used: list[str] | None = None,
+    design_id: str | None = None,
 ) -> dict:
     """
     Full steps 1–5 for one page.
@@ -434,9 +560,10 @@ def generate_page_copy(
     # Steps 1–3
     ctx        = parse_page_structure(txn_data, page_number)
     slots      = ctx["editable_slots"]
-    classified = classify_elements(slots, page_number)
+    classified = classify_elements(slots, page_number, design_id)
+    role_order = _get_role_order(page_number, design_id)
 
-    print(f"  Page {page_number}: {len(classified)} editable slot(s)")
+    print(f"  Page {page_number}: {len(classified)} editable slot(s)  role order: {' → '.join(role_order)}")
     for s in classified:
         print(f"    {s['role']:8s}  h={s['height']:6.1f}px  "
               f"max={s['max_words']}w  '{s['current_text'][:45]}'")
@@ -457,11 +584,11 @@ def generate_page_copy(
     # Steps 4–5
     generated = generate_copy(
         classified, keyword, superlatives_used, body_lines_used,
-        ctas_used, headline_phrases_used, api_key
+        ctas_used, headline_phrases_used, api_key, role_order=role_order
     )
     validated = validate_and_retry(
         classified, generated, keyword, superlatives_used, body_lines_used,
-        ctas_used, headline_phrases_used, api_key
+        ctas_used, headline_phrases_used, api_key, role_order=role_order
     )
 
     # Build output
@@ -538,6 +665,8 @@ def _cli() -> None:
                         help="Pipe-separated CTAs already used earlier in this batch")
     parser.add_argument("--headline-phrases-used", type=str, default="",
                         help="Pipe-separated 2-word headline phrases already used earlier in this batch")
+    parser.add_argument("--design-id",          type=str, default=None,
+                        help="Canva design ID — selects the correct pages from pin-architecture.json when multiple designs are present")
     parser.add_argument("--output",            type=Path, default=None,
                         help="Write result JSON here (default: stdout)")
     parser.add_argument("--full-run",          action="store_true",
@@ -583,7 +712,8 @@ def _cli() -> None:
     txn_data = json.loads(args.page_structure.read_text())
     result   = generate_page_copy(
         txn_data, args.page, keyword, api_key,
-        superlatives_used, body_lines_used, ctas_used, headline_phrases_used
+        superlatives_used, body_lines_used, ctas_used, headline_phrases_used,
+        design_id=args.design_id,
     )
 
     out = json.dumps(result, indent=2, ensure_ascii=False)
