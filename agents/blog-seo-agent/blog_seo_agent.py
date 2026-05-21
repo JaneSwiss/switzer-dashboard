@@ -42,6 +42,10 @@ load_dotenv(ROOT / ".env")
 ANTHROPIC_API_KEY   = os.getenv("ANTHROPIC_API_KEY")
 VALUESERP_API_KEY   = os.getenv("VALUESERP_API_KEY")
 GOOGLE_API_KEY      = os.getenv("NANO_BANANA_API_KEY")
+BING_API_KEY        = os.getenv("BING_API_KEY", "")
+INDEXNOW_KEY        = os.getenv("INDEXNOW_KEY", "")
+BLOG_BASE_URL       = os.getenv("BLOG_BASE_URL", "https://www.switzertemplates.com/blog")
+SITE_URL            = "https://www.switzertemplates.com"
 IMAGE_OUTPUT_DIR    = ROOT / "posts" / "images"
 
 BANNED_WORDS = [
@@ -1400,7 +1404,86 @@ def save_output(keyword_row: dict, post_html: str, image_prompts: str, image_pat
     return filename
 
 
-# ── module 5: run ──────────────────────────────────────────────────────────────
+# ── module 5: indexing submission ─────────────────────────────────────────────
+
+def ping_google_sitemap() -> None:
+    """Tell Google to re-crawl the sitemap so it picks up the new post."""
+    try:
+        sitemap_url = f"{SITE_URL}/sitemap.xml"
+        resp = requests.get(
+            f"https://www.google.com/ping?sitemap={sitemap_url}",
+            timeout=10,
+        )
+        if resp.status_code == 200:
+            print("  Google sitemap ping: sent")
+        else:
+            print(f"  Google sitemap ping: {resp.status_code}")
+    except Exception as e:
+        print(f"  Google sitemap ping failed: {e}")
+
+
+def submit_url_to_bing(post_url: str, keyword: str) -> None:
+    """Submit the post URL directly to Bing via Webmaster Tools API."""
+    if not BING_API_KEY:
+        print("  Bing submission: skipped (add BING_API_KEY to .env)")
+        return
+    try:
+        resp = requests.post(
+            f"https://ssl.bing.com/webmaster/api.svc/json/SubmitUrl?apikey={BING_API_KEY}",
+            json={"siteUrl": SITE_URL, "url": post_url},
+            headers={"Content-Type": "application/json; charset=utf-8"},
+            timeout=15,
+        )
+        if resp.status_code == 200:
+            print(f"  Bing direct submission: sent")
+        else:
+            print(f"  Bing direct submission: {resp.status_code} — {resp.text[:80]}")
+    except Exception as e:
+        print(f"  Bing submission failed: {e}")
+        log_error("indexing_bing", keyword, str(e))
+
+
+def submit_indexnow(post_url: str, keyword: str) -> None:
+    """Submit via IndexNow — notifies Bing, Yandex, and other engines at once."""
+    if not INDEXNOW_KEY:
+        print("  IndexNow: skipped (add INDEXNOW_KEY to .env)")
+        return
+    try:
+        payload = {
+            "host": SITE_URL.replace("https://", "").replace("http://", ""),
+            "key": INDEXNOW_KEY,
+            "keyLocation": f"{SITE_URL}/{INDEXNOW_KEY}.txt",
+            "urlList": [post_url],
+        }
+        resp = requests.post(
+            "https://api.indexnow.org/indexnow",
+            json=payload,
+            headers={"Content-Type": "application/json; charset=utf-8"},
+            timeout=15,
+        )
+        if resp.status_code in (200, 202):
+            print(f"  IndexNow (multi-engine): sent")
+        else:
+            print(f"  IndexNow: {resp.status_code} — {resp.text[:80]}")
+    except Exception as e:
+        print(f"  IndexNow failed: {e}")
+        log_error("indexing_indexnow", keyword, str(e))
+
+
+def submit_for_indexing(slug: str, keyword: str) -> None:
+    """
+    Step 1 (runs now): ping Google sitemap — safe to call immediately.
+    Steps 2-3 (full submission): Bing + IndexNow — use publish_indexing.py
+    after you publish the post to Wix so the URL is actually live.
+    """
+    expected_url = f"{BLOG_BASE_URL}/{slug}"
+    print(f"\n  Submitting for indexing...")
+    ping_google_sitemap()
+    print(f"  Post URL when live: {expected_url}")
+    print(f"  Run after publishing to Wix: python3 publish_indexing.py {slug}")
+
+
+# ── module 6: run ──────────────────────────────────────────────────────────────
 
 def run():
     print("=" * 50)
@@ -1491,6 +1574,8 @@ def run():
     except subprocess.CalledProcessError as e:
         print(f"  GitHub push failed: {e} - post saved locally, push manually if needed.")
         log_error("git_push", keyword, str(e))
+
+    submit_for_indexing(keyword_row["_slug"], keyword)
 
 
 def reformat_existing_post(slug: str) -> None:
