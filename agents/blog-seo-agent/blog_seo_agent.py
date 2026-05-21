@@ -178,6 +178,92 @@ def fetch_serp(keyword: str) -> "list[dict]":
         return []
 
 
+def fetch_paa(keyword: str) -> "list[str]":
+    """
+    Fetch Google 'People Also Ask' questions for the keyword via ValueSERP.
+    Returns a list of question strings — real questions real people type into Google.
+    """
+    params = {
+        "api_key": VALUESERP_API_KEY,
+        "q": keyword,
+        "gl": "us",
+        "hl": "en",
+        "num": 10,
+    }
+    try:
+        resp = requests.get(
+            "https://api.valueserp.com/search",
+            params=params,
+            timeout=20,
+        )
+        resp.raise_for_status()
+        return [
+            item.get("question", "")
+            for item in resp.json().get("related_questions", [])
+            if item.get("question")
+        ]
+    except Exception as e:
+        log_error("paa_fetch", keyword, str(e))
+        return []
+
+
+def fetch_reddit_questions(keyword: str) -> "list[str]":
+    """
+    Search Reddit via ValueSERP for real discussion threads about the keyword.
+    Returns thread titles that are questions or describe a problem/situation.
+    """
+    params = {
+        "api_key": VALUESERP_API_KEY,
+        "q": f"{keyword} site:reddit.com",
+        "gl": "us",
+        "hl": "en",
+        "num": 8,
+    }
+    try:
+        resp = requests.get(
+            "https://api.valueserp.com/search",
+            params=params,
+            timeout=20,
+        )
+        resp.raise_for_status()
+        question_words = {"how", "what", "why", "when", "which", "can", "should", "is", "are", "does", "do", "will"}
+        questions = []
+        for r in resp.json().get("organic_results", []):
+            title = r.get("title", "").strip()
+            if title and ("?" in title or any(title.lower().startswith(w) for w in question_words)):
+                questions.append(title)
+        return questions[:6]
+    except Exception as e:
+        log_error("reddit_questions", keyword, str(e))
+        return []
+
+
+def gather_faq_questions(keyword: str) -> str:
+    """
+    Collect real questions about the keyword from Google PAA and Reddit.
+    Returns a formatted string ready to include in the writing prompt.
+    This ensures the blog FAQ is based on questions real people actually ask —
+    not generic AI-generated filler.
+    """
+    paa = fetch_paa(keyword)
+    time.sleep(0.4)
+    reddit = fetch_reddit_questions(keyword)
+
+    sections = []
+    if paa:
+        sections.append("GOOGLE 'PEOPLE ALSO ASK' (real questions from Google search):")
+        for q in paa:
+            sections.append(f"- {q}")
+    if reddit:
+        if sections:
+            sections.append("")
+        sections.append("REAL QUESTIONS FROM REDDIT THREADS:")
+        for q in reddit:
+            sections.append(f"- {q}")
+
+    return "\n".join(sections) if sections else ""
+
+
 def fetch_page(url: str) -> dict:
     """
     GET a competitor URL and extract structural content.
@@ -397,6 +483,7 @@ def build_prompt(
     style_examples: str,
     research_brief: str = "",
     target_words: int = 2000,
+    faq_questions: str = "",
 ) -> str:
     keyword = keyword_row["_keyword"]
 
@@ -418,6 +505,15 @@ def build_prompt(
         + "\n\nUse these to inform the post's angle and what topics resonate with this audience.\n"
         + "Do not copy any titles or descriptions directly. Use them to understand what the reader cares about and what kind of content drives clicks for this keyword.\n\n---\n"
     ) if notes else ""
+
+    faq_block = (
+        "\nREAL QUESTIONS PEOPLE ASK — sourced from Google 'People Also Ask' and Reddit threads.\n"
+        "These are the actual questions real people type. Use them as the basis for the FAQ section.\n"
+        "Do not copy wording verbatim — rewrite each question naturally in your own words if needed.\n"
+        "Only use questions that genuinely fit this post. Skip any that are off-topic or redundant.\n\n"
+        + faq_questions
+        + "\n\n---\n"
+    ) if faq_questions else ""
 
     # Body section count and per-section target scale with overall target length
     if target_words >= 3000:
@@ -458,7 +554,7 @@ Do not repeat competitor content — use this brief to go deeper, be more specif
 {research_brief if research_brief else "(No research brief available — write from general knowledge.)"}
 
 ---
-{notes_block}COMPETITOR RESEARCH — structure and depth reference only (do not copy content):
+{notes_block}{faq_block}COMPETITOR RESEARCH — structure and depth reference only (do not copy content):
 
 {competitor_summary}
 
@@ -512,15 +608,24 @@ Do not use em dashes. Do not use markdown headers (##).
 Write headings as plain ALL CAPS text on their own line.
 
 Structure:
-- Introduction (150-200 words): opens with the reader's real frustration or situation.
-  Must include the exact keyword naturally. No "In this post I will..." openers.
-  Hook the reader immediately — name the specific problem or gap they are facing.
+- Introduction (150-200 words): the FIRST 1-2 sentences must give a direct, clear answer
+  to the post's main question. State the answer plainly upfront — do not bury it.
+  Example: "The fastest way to build a coaching business website is to start with a
+  premade template, customise it to your brand, and publish it in a day rather than
+  spending weeks building from scratch." Then open up to the reader's situation and
+  frustration. Must include the exact keyword naturally. No "In this post I will..." openers.
 - Body: {section_count} sections, each {section_words} words, one idea per section fully delivered.
   At least one section must be a step-by-step breakdown with numbered or listed steps.
   At least one section must include a real example showing what good looks like in practice.
   Personal examples woven in naturally.
 - Mid-post CTA: one only, tied to the problem the section is discussing.
   Never a hard sell. Introduce it as a helpful option.
+- FAQ SECTION — FREQUENTLY ASKED QUESTIONS: place this second-to-last, before the conclusion.
+  Include 4-6 Q&A pairs. Questions must be based on the real questions provided above
+  (from Google PAA and Reddit) — not invented. Use only questions that genuinely fit
+  the post. Reword naturally if needed. Each answer is 2-4 sentences, specific and useful.
+  Format: question as *italic text* on its own line, answer as a normal paragraph below it.
+  Section heading: FREQUENTLY ASKED QUESTIONS (in ALL CAPS, same as other headings).
 - Conclusion (150-200 words): no "In conclusion". Must include the exact keyword.
   Ends with a final CTA to a relevant product or the Etsy shop.
 
@@ -581,8 +686,8 @@ def write_blog_post(keyword_row: dict, competitors: list[dict]) -> str:
     min_words, target_words = calculate_target_length(competitors)
     print(f"  Word count target: {target_words:,} words (minimum {min_words:,})")
 
-    # ── Step B: gather supplementary research snippets ────────────────────────
-    print("  Gathering research snippets...")
+    # ── Step B: gather supplementary research snippets + FAQ questions ───────
+    print("  Gathering research snippets and FAQ questions...")
     try:
         snippets = gather_research_snippets(keyword)
         snippet_count = snippets.count("\n\n") + 1 if snippets else 0
@@ -591,6 +696,15 @@ def write_blog_post(keyword_row: dict, competitors: list[dict]) -> str:
         log_error("research_snippets", keyword, str(e))
         print(f"  Research snippets failed: {e} — continuing without.")
         snippets = ""
+
+    try:
+        faq_questions = gather_faq_questions(keyword)
+        faq_count = faq_questions.count("\n- ") if faq_questions else 0
+        print(f"  {faq_count} real FAQ questions sourced from Google PAA + Reddit.")
+    except Exception as e:
+        log_error("faq_questions", keyword, str(e))
+        print(f"  FAQ question gathering failed: {e} — FAQ will be skipped.")
+        faq_questions = ""
 
     # ── Step C: synthesize research brief ────────────────────────────────────
     print("  Synthesizing research brief...")
@@ -606,6 +720,7 @@ def write_blog_post(keyword_row: dict, competitors: list[dict]) -> str:
         keyword_row, competitors, brand_voice, style_examples,
         research_brief=research_brief,
         target_words=target_words,
+        faq_questions=faq_questions,
     )
 
     print(f"  Calling Claude (claude-opus-4-5) to write blog post ({target_words:,}+ words)...")
