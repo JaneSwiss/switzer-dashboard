@@ -1336,7 +1336,8 @@ def save_output(keyword_row: dict, post_html: str, image_prompts: str, image_pat
                 "written": True,
                 "published": False,
                 "date": date.today().isoformat(),
-                "url": f"https://janeswiss.github.io/switzer-dashboard/posts/{filename}"
+                "url": f"https://janeswiss.github.io/switzer-dashboard/posts/{filename}",
+                "source": (keyword_row.get("Source") or "").strip(),
             }
             posts.append(new_post)
             dashboard_data["blog_seo_agent"]["posts"] = posts
