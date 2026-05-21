@@ -795,110 +795,150 @@ def write_blog_post(keyword_row: dict, competitors: list[dict]) -> str:
 
 IMAGE_PROMPT_SYSTEM = """You are generating image prompts for SwitzerTemplates blog posts.
 Read the blog post content carefully. Every prompt must be specific to the post topic.
-VARIETY IS MANDATORY across all 5 photo prompts - no two images in the same post
-should use the same angle, setting, outfit, or drink.
 
-THE FEMALE CHARACTER:
-- Always has long chocolate brown hair
-- Face never fully visible - back, side profile, or hands/wrists only
-- OUTFIT - rotate freely, never repeat in same post:
-  oversized cream knit jumper, camel oversized coat, white linen shirt,
-  chocolate brown blazer, black turtleneck, beige trench coat,
-  white oversized sweatshirt, rust coloured knit, grey blazer,
-  soft sage green cardigan
-- Hands when shown: long gel nails in nude or white French, gold jewellery -
-  rings, thin bangles, delicate chain bracelet, small gold hoop earrings visible
-
-COMPOSITION - pick a different one for each of the 3 prompts, never repeat:
-1. Woman from behind at a desk, seated, slight 45-degree angle
-2. Overhead flat lay, no person, objects arranged loosely
-3. Close-up of hands only from above or side, mid-action
-4. Woman on sofa or floor with laptop on lap, legs crossed
-5. Woman at a café table outdoors or by a window, side profile
-6. Woman standing and leaning over a desk, action shot
-7. Low angle shot from desk level looking slightly up
-8. Wide room shot showing the full luxurious interior, woman small in frame
-9. Close-up of one hero object on a surface, blurred background
-10. Woman's back and side, looking out a large window, holding a drink
-
-SETTINGS - pick a different one for each of the 3 prompts, never repeat:
-- White marble desk or table, bright airy room with gold accents
-- Dark oak oval desk, warm moody interior
-- Glass coffee table, cream bouclé sofa visible
-- Café table with rattan chairs, outdoors or large window behind
-- Travertine or concrete surface, minimal grey interior
-- Light grey minimal desk, large floor-to-ceiling windows
-- Cream linen surface on a bed or sofa
-- Stone or plaster surface, Mediterranean or European interior feel
-- Wooden floor, person seated or cross-legged with items around them
-
-DRINKS - pick a different one for each of the 3 prompts, never repeat:
-- Starbucks iced latte in clear cup with green straw
-- Starbucks matcha in clear cup with green straw
-- Latte in a ribbed clear glass
-- Espresso in a small ceramic cup on a saucer
-- Matcha in a ceramic bowl or small ceramic cup
-- Stanley tumbler in cream or sand tone
-- Iced coffee in a plain clear glass
-- Pretty glass water bottle with a straw
-- No drink at all - leave it out entirely
-
-SIGNATURE PROPS (use 1-2 per image, varied):
-- Apple MacBook in silver or space grey
-- Apple AirPods Max in silver
-- Productivity Planner by Intelligent Change - black linen hardcover with gold foil
-- Gold jewellery pieces placed casually
-- Tortoiseshell claw clip
-- Fine-line pen
-- Small ceramic object in matte taupe or cream
-
-PHOTOGRAPHY STYLE (all images):
-- Warm editorial quiet luxury - real and lived-in, not staged
-- Kodak Portra 400: warm colour grading, visible grain, slightly soft
-- Natural window light with directional shadows, never studio lighting
-- Shallow depth of field, something slightly blurred in foreground or background
-- Intentionally imperfect: one element cropped at frame edge,
-  uneven light, visible surface texture, signs of real use
-- Candid, not arranged - feels genuinely real
+VARIETY IS NON-NEGOTIABLE. Each of the 5 images must feel like it was shot on a different
+day, in a completely different place, with a different mood. If two images could plausibly
+be from the same photoshoot or the same room, you have failed the brief. Push hard to
+choose genuinely different environments — not just different corners of the same aesthetic.
 
 ---
 
-PROMPT 1 - GENERAL LIFESTYLE:
-Choose one composition, one setting, one drink from the lists above.
-Scene should loosely relate to the post theme but not be too literal.
-The woman is present.
-End with: No text, no words, no writing, no labels, no readable typography
-anywhere in the image. If a screen is visible it shows only a softly blurred
-website UI or app - blurred enough that no text is readable. No distorted AI
-text. No bright colours, no gradients, no studio lighting, no stock photography
-look, no digital sharpening. Landscape 16:9, high resolution.
+WOMAN CHARACTER (when required in Prompts 1 and 3):
+- Long chocolate brown hair
+- Face never fully visible — back, side profile, or hands/wrists only
+- OUTFIT — one woman image must use a BOLD outfit, one must use a NEUTRAL outfit.
+  Never use the same outfit twice in one post.
+  Bold options: chocolate brown blazer, black turtleneck, rust coloured knit,
+    camel oversized coat, grey blazer, deep olive linen shirt, burgundy knit cardigan
+  Neutral options: oversized cream knit jumper, white linen shirt, beige trench coat,
+    white oversized sweatshirt, soft sage green cardigan, pale grey oversized tee
+- Hands when shown: long gel nails in nude or white French, gold jewellery —
+  rings, thin bangles, delicate chain bracelet, small gold hoop earrings visible
 
-PROMPT 2 - TOPIC SPECIFIC (props/objects):
-Directly illustrates the post topic through objects and scene only - no person needed.
-Choose a completely different composition and setting from Prompt 1.
-Use a different drink or no drink.
-Screen content is allowed and encouraged - show relevant UI like Etsy dashboard,
-Canva, Pinterest feed, website template, AI tool - but slightly blurred so
-individual words are not readable. No handwritten text visible anywhere.
-Any printed materials, papers, or cards in the scene should show
-only abstract marks, lines, shapes, or textures - no readable words or
-font names visible on any surface.
+TOPIC-RELEVANT PEOPLE (allowed in Prompt 3 only, for certain topics):
+If the post is about coaching, consulting, mentoring, business strategy, or team work:
+Prompt 3 MAY show two women in a professional conversation — one seen from behind
+or side, the other partially visible. Or a small group in a professional setting where
+faces are not shown. Must feel editorial and real, never corporate stock photo.
+
+---
+
+ENVIRONMENTS — pick a completely different type for each of the 5 images. Never repeat
+the same environment category. Choose from this full library:
+
+INDOOR — HOME SPACES:
+- Bright home office, white walls, large arched window, natural light, indoor plant in corner
+- Cosy home study, warm bookshelves behind, soft lamp light, leather chair or footstool visible
+- Bedroom window seat, cream linen, morning soft light, quiet and intimate
+- Kitchen bench or island, stone or marble surface, morning scene, relaxed domestic feel
+- Living room floor, cream rug, woman seated cross-legged, sunlight across the floor
+
+INDOOR — PROFESSIONAL AND CREATIVE SPACES:
+- Modern co-working space, open plan, exposed concrete or brick, warm Edison bulb lighting
+- Minimalist creative studio, off-white walls, single directional light from one side
+- Boutique hotel room or lounge nook, curved furniture, warm quiet atmosphere, elegant
+- High-end interior design showroom, beautiful furniture pieces visible in background
+- Scandinavian-style workspace, light oak desk, clean lines, very soft diffused window light
+- Dark and moody home office, dark shelving, warm amber lamp glow, rich textures
+
+OUTDOOR SPACES:
+- Rooftop terrace, city skyline softly blurred behind, warm afternoon sun, potted plants nearby
+- Garden table or outdoor dining area, dappled light through trees, natural shadows on surface
+- Mediterranean or European-style outdoor terrace, stone walls, terracotta tones, warm light
+- Park bench or garden reading spot, green trees blurred behind, candid and natural
+- Outdoor market or cobblestone street setting, European aesthetic, candid street-level feel
+- Hotel or villa pool area, sun lounger, tropical or warm-climate editorial feel
+
+CAFÉ AND HOSPITALITY — maximum ONE café-type setting per post, only if it fits naturally:
+- Modern minimalist café, white walls, round marble table, single pendant light above
+- Warm Parisian-style bistro, dark wood panelling, mirror or vintage art in background
+- Japanese-inspired café, clean lines, ceramic objects, calm and airy with soft light
+- Busy urban café, activity softly blurred in background, woman sharp and focused in foreground
+- Hotel lobby café or lounge, grand proportions, quiet midweek feel
+
+---
+
+COMPOSITIONS — use a different one for each of the 5 prompts, never repeat:
+1. From behind at a desk — seated, slight 45-degree angle, room visible around her
+2. Overhead flat lay — no person, objects arranged loosely on a styled surface
+3. Hands close-up — only hands and wrists in frame, mid-task, tight editorial crop
+4. Wide environment shot — woman small in a large interior or exterior, space is the subject
+5. Side profile at a surface — thoughtful, looking away, window or scene behind her
+6. Mid-action standing — woman leaning over a desk or caught mid-movement, candid
+7. Over-shoulder — shot from just behind and above her shoulder, work or screen ahead
+8. Floor or low angle — shot from floor level looking up slightly, desk edge in foreground
+9. Two-shot conversation — two women at a table or standing, faces not visible (coaching topics only)
+10. Hero object — single relevant object sharp on a surface, background softly blurred
+
+DRINKS — rotate across the 5 prompts, never repeat:
+- Starbucks iced latte in clear cup with green straw
+- Starbucks matcha in clear cup with green straw
+- Latte in a ribbed clear glass
+- Espresso in a small white ceramic cup on a saucer
+- Matcha in a handmade ceramic bowl or small cup
+- Stanley tumbler in cream, sand, or rose tone
+- Iced coffee in a plain clear glass
+- Sparkling water in a glass bottle with minimalist label
+- No drink — leave it out entirely
+
+SIGNATURE PROPS (use 1-2 per image, vary across all images):
+- Apple MacBook in silver or space grey
+- Apple AirPods Max in silver
+- Productivity Planner by Intelligent Change — black linen hardcover with gold foil
+- Gold jewellery pieces placed casually on a surface
+- Tortoiseshell claw clip resting nearby
+- Fine-line pen or thin pencil
+- Small ceramic object in matte taupe or cream
+- Fresh flowers or a single stem in a minimal bud vase
+- Open notebook showing blank pages or faint abstract marks
+- Printed brand mood board or colour palette cards
+- Soft folded linen or cotton fabric as a surface layer
+
+PHOTOGRAPHY STYLE (consistent across all images):
+- Warm editorial quiet luxury — real and lived-in, never staged or styled-looking
+- Kodak Portra 400: warm colour grading, visible film grain, slightly soft focus
+- Natural window light or outdoor natural daylight, directional shadows visible
+- Shallow depth of field, foreground or background element softly blurred
+- Intentionally imperfect: one element slightly cropped at frame edge,
+  uneven light falloff, visible surface texture, real-world signs of use
+- Candid energy throughout — feels genuinely real, not composed for a photoshoot
+
+---
+
+PROMPT 1 - GENERAL LIFESTYLE (woman present, bold outfit):
+Woman is the subject. Scene loosely relates to the post theme but is not too literal.
+MUST use a bold outfit from the bold options list.
+Choose one environment from the full library above — any category.
+Choose one composition from the list above.
+State clearly: composition chosen, environment chosen, outfit chosen, drink chosen.
+End with: No text, no words, no writing, no labels, no readable typography anywhere
+in the image. Screens show only softly blurred UI — no readable text. No distorted AI
+text. No bright colours, no gradients, no studio lighting, no stock photography look,
+no digital sharpening. Landscape 16:9, high resolution.
+
+PROMPT 2 - TOPIC SPECIFIC (props/objects, no person):
+Directly illustrates the post topic through objects and scene only — no person needed.
+Must be in a completely different environment category from Prompt 1.
+Screen content is allowed and encouraged — relevant blurred UI (Pinterest feed grid,
+Canva workspace, Etsy dashboard, website template editor) — blurred enough that no
+individual words are readable. No handwritten text visible anywhere.
+Any printed materials show only abstract marks, lines, or textures — no readable words.
+State clearly: composition chosen and environment chosen.
 End with: No distorted AI text, no garbled words, no bright colours,
 no gradients, no studio lighting. Landscape 16:9, high resolution.
 
-PROMPT 3 - TOPIC SPECIFIC (person + action):
-The woman with long chocolate brown hair doing something directly related to the post.
-Choose a completely different composition and setting from Prompts 1 and 2.
-Use a different outfit and different drink from Prompts 1 and 2.
-Mid-action, not posed. Back or side profile only.
-Any printed materials, papers, or cards in the scene should show
-only abstract marks, lines, shapes, or textures - no readable words or
-font names visible on any surface.
-End with: No text, no words, no writing, no labels, no readable typography
-anywhere in the image. If a screen is visible it shows only a softly blurred
-website UI - blurred enough that no text is readable. No distorted AI text.
-No bright colours, no gradients, no studio lighting, no stock photography
-look, no digital sharpening. Landscape 16:9, high resolution.
+PROMPT 3 - TOPIC SPECIFIC (person or people, neutral outfit):
+Woman doing something directly related to the post — mid-action, not posed.
+OR, if the post is about coaching, consulting, or team topics: two women in
+professional conversation, or a small group, faces not visible.
+MUST use a neutral outfit from the neutral options list.
+Must be in a completely different environment category from Prompts 1 and 2.
+Back or side profile only (for single woman). Faces never visible.
+State clearly: composition, environment, outfit, drink, and whether single woman or group.
+End with: No text, no words, no writing, no labels, no readable typography anywhere
+in the image. Screens show only softly blurred UI. No distorted AI text.
+No bright colours, no gradients, no studio lighting, no stock photography look,
+no digital sharpening. Landscape 16:9, high resolution.
 
 PROMPT 4 - TOPIC FOCUS:
 This image must directly and literally illustrate what the blog post is about.
