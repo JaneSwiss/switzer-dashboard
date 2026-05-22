@@ -134,8 +134,8 @@
 
 <div class="tab-nav">
   <button class="tab-btn active" data-tab="overview"><i class="ti ti-layout-dashboard"></i>Overview</button>
-  <button class="tab-btn" data-tab="etsy"><i class="ti ti-shopping-bag"></i>Etsy Expert</button>
   <button class="tab-btn" data-tab="blog"><i class="ti ti-file-text"></i>Blog SEO</button>
+  <button class="tab-btn" data-tab="etsy"><i class="ti ti-shopping-bag"></i>Etsy Expert</button>
   <button class="tab-btn" data-tab="pinterest"><i class="ti ti-brand-pinterest"></i>Pinterest</button>
 </div>
 
@@ -253,7 +253,7 @@
       <span class="badge badge-gray" id="kw-total">—</span>
     </div>
     <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:1rem;">
-      <input type="text" id="kw-search" placeholder="Search keywords..." oninput="filterKw()"
+      <input type="text" id="kw-search" placeholder="Search keywords..." oninput="KW_PAGE=1;filterKw()"
         style="flex:1;min-width:150px;font-size:13px;padding:7px 10px;border:1px solid var(--border2);border-radius:var(--radius-sm);font-family:var(--sans);background:var(--surface);color:var(--text);outline:none;" />
       <div style="display:flex;gap:6px;flex-wrap:wrap;">
         <button class="filter-btn active" data-tier="all"  onclick="setKwTier('all')">All</button>
@@ -313,6 +313,10 @@ const RAW_URL = `https://raw.githubusercontent.com/${GH_OWNER}/${GH_REPO}/main/$
 const API_URL = `https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${GH_FILE}`;
 let DATA = {};
 let KW_TIER = 'all';
+let BLOG_PAGE = 1;
+const BLOG_PER_PAGE = 10;
+let KW_PAGE = 1;
+const KW_PER_PAGE = 20;
 
 document.getElementById('dash-date').textContent = new Date().toLocaleDateString('en-AU',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
 document.getElementById('wins-month').textContent = new Date().toLocaleString('en-AU',{month:'long'});
@@ -536,8 +540,12 @@ function renderBlog(){
   const pub=posts.filter(p=>p.published).length, draft=posts.filter(p=>p.written&&!p.published).length;
   document.getElementById('blog-badge').textContent=`${pub} published · ${draft} ready`;
   const tbody=document.getElementById('blog-tbody'); tbody.innerHTML='';
-  if(!posts.length){ tbody.innerHTML='<tr><td colspan="7" class="empty">No posts yet.</td></tr>'; return; }
-  posts.forEach((post,i)=>{
+  if(!posts.length){ tbody.innerHTML='<tr><td colspan="7" class="empty">No posts yet.</td></tr>'; renderBlogPagination(0,0); return; }
+  const totalPages=Math.ceil(posts.length/BLOG_PER_PAGE);
+  BLOG_PAGE=Math.min(Math.max(1,BLOG_PAGE),totalPages);
+  const start=(BLOG_PAGE-1)*BLOG_PER_PAGE, slice=posts.slice(start,start+BLOG_PER_PAGE);
+  slice.forEach((post,si)=>{
+    const i=start+si;
     const status=post.published?'Published':post.written?'Ready to publish':'In progress';
     const sBg=post.published?'var(--teal-bg)':post.written?'var(--amber-bg)':'var(--surface2)';
     const sCol=post.published?'var(--teal-text)':post.written?'var(--amber-text)':'var(--text2)';
@@ -545,13 +553,22 @@ function renderBlog(){
     const src=post.source||'';
     const srcHtml=src?`<span class="badge" style="background:var(--amber-bg);color:var(--amber-text);font-size:10px;">${src}</span>`:`<span style="color:var(--text3);font-size:12px;">—</span>`;
     const tr=document.createElement('tr');
-    const titleHtml = post.url
-      ? `<a href="${post.url}" target="_blank" style="color:var(--choc);text-decoration:none;font-weight:500;">${post.title}<i class="ti ti-external-link" style="font-size:11px;margin-left:4px;vertical-align:1px;"></i></a>`
-      : `<span style="font-weight:500;">${post.title}</span>`;
+    const titleStyle=post.published?'text-decoration:line-through;color:var(--text3);font-weight:500;':'color:var(--choc);text-decoration:none;font-weight:500;';
+    const titleHtml=post.url
+      ?`<a href="${post.url}" target="_blank" style="${titleStyle}">${post.title}<i class="ti ti-external-link" style="font-size:11px;margin-left:4px;vertical-align:1px;opacity:0.5;"></i></a>`
+      :`<span style="${titleStyle}">${post.title}</span>`;
     tr.innerHTML=`<td>${titleHtml}</td><td style="font-size:12px;color:var(--text2);">${post.keyword||'—'}</td><td class="c"><span class="badge" style="background:${wBg};color:${wCol};">${post.written?'Done':'Pending'}</span></td><td class="c"><input type="checkbox" ${post.published?'checked':''} ${!post.written?'disabled':''} onchange="togglePub(${i},this.checked)" /></td><td class="c" style="font-size:12px;color:var(--text3);">${post.date||'—'}</td><td class="c"><span class="badge" style="background:${sBg};color:${sCol};">${status}</span></td><td class="c">${srcHtml}</td>`;
     tbody.appendChild(tr);
   });
+  renderBlogPagination(posts.length, totalPages);
 }
+function renderBlogPagination(total, totalPages){
+  let el=document.getElementById('blog-pagination');
+  if(!el){ el=document.createElement('div'); el.id='blog-pagination'; el.style.cssText='display:flex;align-items:center;justify-content:space-between;margin-top:10px;font-size:13px;color:var(--text3);'; document.getElementById('blog-tbody').closest('table').after(el); }
+  if(total<=BLOG_PER_PAGE){ el.innerHTML=''; return; }
+  el.innerHTML=`<span>Page ${BLOG_PAGE} of ${totalPages} &nbsp;·&nbsp; ${total} posts</span><div style="display:flex;gap:6px;"><button onclick="blogPage(${BLOG_PAGE-1})" ${BLOG_PAGE<=1?'disabled':''} style="padding:4px 10px;border:1px solid var(--border2);border-radius:5px;background:var(--surface);cursor:pointer;font-size:12px;">← Prev</button><button onclick="blogPage(${BLOG_PAGE+1})" ${BLOG_PAGE>=totalPages?'disabled':''} style="padding:4px 10px;border:1px solid var(--border2);border-radius:5px;background:var(--surface);cursor:pointer;font-size:12px;">Next →</button></div>`;
+}
+function blogPage(p){ BLOG_PAGE=p; renderBlog(); }
 async function togglePub(i,checked){
   DATA.blog_seo_agent.posts[i].published=checked;
   renderBlog(); renderOverview();
@@ -564,14 +581,17 @@ function renderKeywords(){
   document.getElementById('kw-total').textContent=all.length+' keywords';
   filterKw();
 }
-function setKwTier(tier){ KW_TIER=tier; document.querySelectorAll('.filter-btn').forEach(b=>b.classList.toggle('active',b.dataset.tier===tier)); filterKw(); }
+function setKwTier(tier){ KW_TIER=tier; KW_PAGE=1; document.querySelectorAll('.filter-btn').forEach(b=>b.classList.toggle('active',b.dataset.tier===tier)); filterKw(); }
 function filterKw(){
   const search=(document.getElementById('kw-search').value||'').toLowerCase();
   const all=DATA.keyword_masterlist||[];
   const filtered=all.filter(k=>(!search||(k.keyword||'').toLowerCase().includes(search))&&(KW_TIER==='all'||(k.priority_tier||k.tier||'').startsWith(KW_TIER)));
   const tbody=document.getElementById('kw-tbody'); tbody.innerHTML='';
-  if(!filtered.length){ tbody.innerHTML='<tr><td colspan="10" class="empty">No keywords match.</td></tr>'; document.getElementById('kw-showing').textContent=''; return; }
-  filtered.forEach(k=>{
+  if(!filtered.length){ tbody.innerHTML='<tr><td colspan="10" class="empty">No keywords match.</td></tr>'; document.getElementById('kw-showing').textContent=''; renderKwPagination(0,0); return; }
+  const totalPages=Math.ceil(filtered.length/KW_PER_PAGE);
+  KW_PAGE=Math.min(Math.max(1,KW_PAGE),totalPages);
+  const start=(KW_PAGE-1)*KW_PER_PAGE, slice=filtered.slice(start,start+KW_PER_PAGE);
+  slice.forEach(k=>{
     const tp=(k.priority_tier||k.tier||'').split(' ')[0];
     const tBg=tp==='P1'?'var(--teal-bg)':tp==='P2'?'var(--amber-bg)':'var(--surface2)';
     const tCol=tp==='P1'?'var(--teal-text)':tp==='P2'?'var(--amber-text)':'var(--text2)';
@@ -591,8 +611,16 @@ function filterKw(){
     tr.innerHTML=`<td style="font-weight:500;">${k.keyword}</td><td class="c">${searchVol?searchVol.toLocaleString():'—'}</td><td class="c" style="color:${compCol};font-weight:500;">${k.competition}</td><td class="c" style="color:${trendCol};font-weight:500;">${trendStr}</td><td class="c"><span class="badge" style="background:${sBg};color:${sCol};">${Math.round(k.score||0)}</span></td><td class="c" style="color:${pinVolCol};font-weight:${pinVol>0?'600':'400'};">${pinVolStr}</td><td class="c" style="color:${pinClicks>0?'var(--teal-mid)':'var(--text3)'};font-weight:${pinClicks>0?'600':'400'};">${pinClicks>0?pinClicks.toLocaleString():'—'}</td><td style="font-size:12px;color:var(--text2);">${k.content_pillar||k.pillar||''}</td><td class="c"><span class="badge" style="background:${tBg};color:${tCol};">${tp}</span></td><td class="c">${srcHtml}</td>`;
     tbody.appendChild(tr);
   });
-  document.getElementById('kw-showing').textContent=`Showing ${filtered.length} of ${all.length} keywords`;
+  document.getElementById('kw-showing').textContent=`Showing ${start+1}–${Math.min(start+KW_PER_PAGE,filtered.length)} of ${filtered.length} keywords`;
+  renderKwPagination(filtered.length, totalPages);
 }
+function renderKwPagination(total, totalPages){
+  let el=document.getElementById('kw-pagination');
+  if(!el){ el=document.createElement('div'); el.id='kw-pagination'; el.style.cssText='display:flex;align-items:center;justify-content:space-between;margin-top:10px;font-size:13px;color:var(--text3);'; document.getElementById('kw-showing').after(el); }
+  if(total<=KW_PER_PAGE){ el.innerHTML=''; return; }
+  el.innerHTML=`<span>Page ${KW_PAGE} of ${totalPages}</span><div style="display:flex;gap:6px;"><button onclick="kwPage(${KW_PAGE-1})" ${KW_PAGE<=1?'disabled':''} style="padding:4px 10px;border:1px solid var(--border2);border-radius:5px;background:var(--surface);cursor:pointer;font-size:12px;">← Prev</button><button onclick="kwPage(${KW_PAGE+1})" ${KW_PAGE>=totalPages?'disabled':''} style="padding:4px 10px;border:1px solid var(--border2);border-radius:5px;background:var(--surface);cursor:pointer;font-size:12px;">Next →</button></div>`;
+}
+function kwPage(p){ KW_PAGE=p; filterKw(); }
 
 // Pinterest
 function renderPinterest(){
