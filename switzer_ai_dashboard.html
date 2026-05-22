@@ -151,11 +151,12 @@
   </div>
   <div class="card">
     <div class="card-header">
-      <span class="card-title"><i class="ti ti-trophy" style="color:var(--amber-mid);font-size:18px;"></i>Monthly accomplishments</span>
+      <span class="card-title"><i class="ti ti-trophy" style="color:var(--amber-mid);font-size:18px;"></i><span id="wins-month-title">Monthly accomplishments</span></span>
       <span class="badge badge-amber" id="wins-month"></span>
     </div>
     <p style="font-size:12px;color:var(--text3);margin-bottom:0.75rem;">Auto-updated from your agents, posts, and sprint progress.</p>
     <div id="wins-list"></div>
+    <div id="wins-history"></div>
   </div>
 </div>
 
@@ -407,9 +408,12 @@ function renderOverview(){
 // Wins — auto-generated from actual data
 function renderWins(){
   const el = document.getElementById('wins-list');
+  const histEl = document.getElementById('wins-history');
   const wins = [];
   const now = new Date();
   const thisMonth = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}`;
+  const monthName = now.toLocaleString('en-US', {month:'long'});
+  document.getElementById('wins-month-title').textContent = `${monthName} accomplishments`;
 
   // Blog posts written and published
   const posts = (DATA.blog_seo_agent||{}).posts||[];
@@ -441,12 +445,36 @@ function renderWins(){
   if(kwCount>0) wins.push(`${kwCount} keywords in the Blog SEO masterlist (${(DATA.keyword_masterlist||[]).filter(k=>k.source==='Jane uploaded').length} Jane-uploaded)`);
 
   el.innerHTML = '';
-  document.getElementById('wins-month').textContent = wins.length+' this month';
-  if(!wins.length){ el.innerHTML='<p class="empty">Keep building — accomplishments appear here automatically.</p>'; return; }
+  document.getElementById('wins-month').textContent = wins.length+' wins';
+  if(!wins.length){ el.innerHTML='<p class="empty">Keep building — accomplishments appear here automatically.</p>'; }
   wins.forEach(w=>{
     const d=document.createElement('div'); d.className='win-item';
     d.innerHTML=`<i class="ti ti-check" style="font-size:15px;color:var(--teal-mid);margin-top:2px;flex-shrink:0;"></i><span style="font-size:14px;flex:1;">${w}</span>`;
     el.appendChild(d);
+  });
+
+  // Previous months from snapshots
+  histEl.innerHTML = '';
+  const snapshots = DATA.monthly_snapshots || {};
+  const sortedMonths = Object.keys(snapshots).sort().reverse(); // newest first
+  sortedMonths.forEach(key => {
+    if(key === thisMonth) return; // skip current month
+    const [year, month] = key.split('-');
+    const label = new Date(parseInt(year), parseInt(month)-1, 1)
+      .toLocaleString('en-US', {month:'long', year:'numeric'});
+    const monthWins = snapshots[key] || [];
+    if(!monthWins.length) return;
+    const section = document.createElement('div');
+    section.style.cssText = 'margin-top:1.5rem;padding-top:1.25rem;border-top:1px solid var(--border2);';
+    section.innerHTML = `<p style="font-size:12px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:0.75rem;">${label}</p>`;
+    monthWins.forEach(w => {
+      const d = document.createElement('div');
+      d.className = 'win-item';
+      d.style.opacity = '0.65';
+      d.innerHTML = `<i class="ti ti-check" style="font-size:15px;color:var(--text3);margin-top:2px;flex-shrink:0;"></i><span style="font-size:13px;flex:1;color:var(--text2);">${w}</span>`;
+      section.appendChild(d);
+    });
+    histEl.appendChild(section);
   });
 }
 
