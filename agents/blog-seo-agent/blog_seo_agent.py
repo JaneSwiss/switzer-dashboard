@@ -1157,7 +1157,64 @@ def generate_images_from_prompts(prompt_text: str, slug: str) -> "list[str]":
     return image_paths
 
 
-def _assemble_html(title: str, post_html: str, image_prompts: str, image_paths: "list[str]" = None) -> str:
+def extract_faq_schema(post_text: str) -> str:
+    """
+    Parse the FREQUENTLY ASKED QUESTIONS section from the raw post text and
+    return a JSON-LD FAQPage script tag for embedding in <head>.
+    Returns empty string if no FAQ section is found or no Q&A pairs can be parsed.
+    """
+    import json as _json
+
+    # Locate the FAQ section — everything between the heading and the next ALL-CAPS heading or end
+    faq_match = re.search(
+        r'FREQUENTLY ASKED QUESTIONS[^\n]*\n(.*?)(?=\n[A-Z][A-Z\s,]{3,}\n|\Z)',
+        post_text,
+        re.DOTALL,
+    )
+    if not faq_match:
+        return ""
+
+    faq_text = faq_match.group(1)
+
+    # Questions are formatted as *Question text?* on their own line
+    # Capture each question and the text that follows it until the next question
+    question_re = re.compile(r'\*([^*\n]+)\*\s*\n(.*?)(?=\n\*[^*\n]+\*|\Z)', re.DOTALL)
+
+    qa_pairs = []
+    for m in question_re.finditer(faq_text):
+        question = m.group(1).strip()
+        answer_raw = m.group(2).strip()
+        # Strip markdown markers, take first 2 paragraphs, normalise whitespace
+        answer = re.sub(r'\*+', '', answer_raw)
+        answer = "\n\n".join(answer.split("\n\n")[:2]).strip()
+        answer = re.sub(r"<[^>]+>", "", answer)
+        answer = " ".join(answer.split())
+        if question and answer:
+            qa_pairs.append((question, answer))
+
+    if not qa_pairs:
+        return ""
+
+    schema = {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": q,
+                "acceptedAnswer": {"@type": "Answer", "text": a},
+            }
+            for q, a in qa_pairs
+        ],
+    }
+    return (
+        '<script type="application/ld+json">\n'
+        + _json.dumps(schema, indent=2, ensure_ascii=False)
+        + "\n</script>"
+    )
+
+
+def _assemble_html(title: str, post_html: str, image_prompts: str, image_paths: "list[str]" = None, faq_schema: str = "") -> str:
     css = """
     <style>
       * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -1311,6 +1368,7 @@ def _assemble_html(title: str, post_html: str, image_prompts: str, image_paths: 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{title}</title>
+{faq_schema}
 {css}
 </head>
 <body>
@@ -1345,7 +1403,11 @@ def save_output(keyword_row: dict, post_html: str, image_prompts: str, image_pat
     filename = f"{slug}.html"
     out_path = OUTPUT_DIR / filename
 
-    full_html = _assemble_html(title, post_html, image_prompts, image_paths)
+    faq_schema = extract_faq_schema(post_html)
+    if faq_schema:
+        faq_q_count = faq_schema.count('"@type": "Question"')
+        print(f"  FAQ schema: {faq_q_count} question(s) embedded in <head>")
+    full_html = _assemble_html(title, post_html, image_prompts, image_paths, faq_schema=faq_schema)
     out_path.write_text(full_html, encoding="utf-8")
 
     plain_text = re.sub(r"<[^>]+>", " ", post_html)
