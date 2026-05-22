@@ -70,12 +70,11 @@
         "searches": "1,111",
         "competition": "1,566",
         "score": "710",
-        "notes": "#1 opportunity ÃÂ¢ÃÂÃÂ no listing targeting this yet"
+"notes": "#1 opportunity \u00c3\u00a2\u00c2\u0080\u00c2\u0094 no listing targeting this yet"
       },
       {
         "keyword": "pinterest inspired",
-        "searches": "ÃÂ¢ÃÂÃÂ",
-        "competition": "1,363",
+        "searches": "\u00c3\u00a2\u00c2\u0080\u00c2\u0094",        "competition": "1,363",
         "score": "260",
         "notes": "Strong, low competition"
       },
@@ -88,8 +87,7 @@
       },
       {
         "keyword": "smm instagram",
-        "searches": "ÃÂ¢ÃÂÃÂ",
-        "competition": "832",
+"searches": "\u00c3\u00a2\u00c2\u0080\u00c2\u0094",        "competition": "832",
         "score": "190",
         "notes": "Low competition relative to score"
       },
@@ -119,8 +117,7 @@
         "searches": "102",
         "competition": "768",
         "score": "130",
-        "notes": "Gap ÃÂ¢ÃÂÃÂ no listing"
-      },
+"notes": "Gap \u00c3\u00a2\u00c2\u0080\u00c2\u0094 no listing"      },
       {
         "keyword": "aesthetic carousel",
         "searches": "105",
@@ -1772,8 +1769,7 @@
     }
   ],
   "monthly_wins": [
-    "Etsy Expert agent completed ÃÂ¢ÃÂÃÂ all skills built and tested",
-    "Blog SEO agent completed",
+"Etsy Expert agent completed \u00c3\u00a2\u00c2\u0080\u00c2\u0094 all skills built and tested",    "Blog SEO agent completed",
     "AI Agency Dashboard live on all devices"
   ],
   "pinterest_agent": {
@@ -1807,8 +1803,7 @@
     },
     "weeks": {
       "week1": {
-        "label": "Week 1 â Build + Activate (Days 1-7)",
-        "tasks": [
+"label": "Week 1 \u2014 Build + Activate (Days 1-7)",        "tasks": [
           {
             "id": "w1_repurposer",
             "label": "Build Content Repurposer agent",
@@ -1853,32 +1848,27 @@
           },
           {
             "id": "w1_research",
-            "label": "Run Email Copy Agent --research â builds email-copywriting-principles.md",
-            "done": false,
+"label": "Run Email Copy Agent --research \u2192 builds email-copywriting-principles.md",            "done": false,
             "owner": "Run"
           },
           {
             "id": "w1_repurpose_all",
-            "label": "Run repurposer on all 48 existing posts â 480 pin copy sets + email hooks + carousels",
-            "done": false,
+"label": "Run repurposer on all 48 existing posts \u2192 480 pin copy sets + email hooks + carousels",            "done": false,
             "owner": "Run"
           },
           {
             "id": "w1_prod_pins_run",
-            "label": "Run product page pin generator â 20 product pins",
-            "done": false,
+"label": "Run product page pin generator \u2192 20 product pins",            "done": false,
             "owner": "Run"
           },
           {
             "id": "w1_re_engage",
-            "label": "Run Email Copy Agent --re-engagement â Jane pastes into Flodesk and sends",
-            "done": false,
+"label": "Run Email Copy Agent --re-engagement \u2192 Jane pastes into Flodesk and sends",            "done": false,
             "owner": "Jane"
           },
           {
             "id": "w1_3posts",
-            "label": "Run blog SEO agent 3x â publish 3 new posts to Wix + run publish_indexing.py each",
-            "done": false,
+"label": "Run blog SEO agent 3x \u2192 publish 3 new posts to Wix + run publish_indexing.py each",            "done": false,
             "owner": "Run+Jane"
           },
           {
@@ -1889,31 +1879,27 @@
           },
           {
             "id": "w1_lead_magnet",
-            "label": "Create 1 free lead magnet (mini template pack or brand checklist) â live Wix page",
-            "done": false,
+"label": "Create 1 free lead magnet (mini template pack or brand checklist) \u2192 live Wix page",            "done": false,
             "owner": "Jane"
           }
         ]
       },
       "week2": {
-        "label": "Week 2 â Content Sprint (Days 8-14)",
+"label": "Week 2 \u2014 Content Sprint (Days 8-14)",
         "tasks": [
           {
             "id": "w2_posts",
-            "label": "Run blog SEO agent daily â publish 7 new posts to Wix + index each",
-            "done": false,
+            "label": "Run blog SEO agent daily \u2192 publish 7 new posts to Wix + index each",            "done": false,
             "owner": "Run+Jane"
           },
           {
             "id": "w2_repurpose",
-            "label": "Run repurposer on each new post â immediately queue pins in Tailwind",
-            "done": false,
+"label": "Run repurposer on each new post \u2192 immediately queue pins in Tailwind",            "done": false,
             "owner": "Run"
           },
           {
             "id": "w2_email",
-            "label": "Run Email Copy Agent --blog-post â Jane sends in Flodesk",
-            "done": false,
+"label": "Run Email Copy Agent --blog-post \u2192 Jane sends in Flodesk",            "done": false,
             "owner": "Jane"
           },
           {
@@ -1924,8 +1910,7 @@
           },
           {
             "id": "w2_flodesk",
-            "label": "Check Flodesk re-engagement open rate â remove inactive contacts",
-            "done": false,
+"label": "Check Flodesk re-engagement open rate \u2192 remove inactive contacts",            "done": false,
             "owner": "Jane"
           },
           {
@@ -1937,24 +1922,21 @@
         ]
       },
       "week3": {
-        "label": "Week 3 â Compound (Days 15-21)",
+"label": "Week 3 \u2014 Compound (Days 15-21)",
         "tasks": [
           {
             "id": "w3_posts",
-            "label": "Run blog SEO agent daily â publish 7 more posts (17 new total)",
-            "done": false,
+            "label": "Run blog SEO agent daily \u2192 publish 7 more posts (17 new total)",            "done": false,
             "owner": "Run+Jane"
           },
           {
             "id": "w3_repurpose",
-            "label": "Run repurposer on each new post â Tailwind queue grows",
-            "done": false,
+"label": "Run repurposer on each new post \u2192 Tailwind queue grows",            "done": false,
             "owner": "Run"
           },
           {
             "id": "w3_email",
-            "label": "Run Email Copy Agent --blog-post â Jane sends in Flodesk",
-            "done": false,
+"label": "Run Email Copy Agent --blog-post \u2192 Jane sends in Flodesk",            "done": false,
             "owner": "Jane"
           },
           {
@@ -1965,8 +1947,7 @@
           },
           {
             "id": "w3_pinterest",
-            "label": "Check Pinterest analytics: top 3 performing pins â create 10 fresh variations each",
-            "done": false,
+"label": "Check Pinterest analytics: top 3 performing pins \u2192 create 10 fresh variations each",            "done": false,
             "owner": "Jane"
           },
           {
@@ -1978,24 +1959,21 @@
         ]
       },
       "week4": {
-        "label": "Week 4 â Double Down (Days 22-28)",
+"label": "Week 4 \u2014 Double Down (Days 22-28)",
         "tasks": [
           {
             "id": "w4_posts",
-            "label": "Run blog SEO agent daily â publish 7 more posts (24 new total)",
-            "done": false,
+            "label": "Run blog SEO agent daily \u2192 publish 7 more posts (24 new total)",            "done": false,
             "owner": "Run+Jane"
           },
           {
             "id": "w4_repurpose",
-            "label": "Run repurposer on each new post â Tailwind queue",
-            "done": false,
+"label": "Run repurposer on each new post \u2192 Tailwind queue",            "done": false,
             "owner": "Run"
           },
           {
             "id": "w4_email",
-            "label": "Run Email Copy Agent --blog-post â Jane sends in Flodesk",
-            "done": false,
+"label": "Run Email Copy Agent --blog-post \u2192 Jane sends in Flodesk",            "done": false,
             "owner": "Jane"
           },
           {
@@ -2006,12 +1984,148 @@
           },
           {
             "id": "w4_double",
-            "label": "Identify top traffic source â double everything going into it",
-            "done": false,
+"label": "Identify top traffic source \u2192 double everything going into it",            "done": false,
             "owner": "Jane"
           }
         ]
       }
     }
+  },
+  "repurposer": {
+    "posts": [
+      {
+        "slug": "branding-for-business",
+        "title": "Branding for business: how to build trust before anyone contacts you",
+        "pins_scheduled": false,
+        "email_sent": false,
+        "carousel_posted": false
+      },
+      {
+        "slug": "coaching-business",
+        "title": "coaching business",
+        "pins_scheduled": false,
+        "email_sent": false,
+        "carousel_posted": false
+      },
+      {
+        "slug": "e-commerce-business-plan",
+        "title": "How to write an e commerce business plan that actually gets used",
+        "pins_scheduled": false,
+        "email_sent": false,
+        "carousel_posted": false
+      },
+      {
+        "slug": "ecommerce-business-ideas",
+        "title": "Ecommerce business ideas that actually work in 2026",
+        "pins_scheduled": false,
+        "email_sent": false,
+        "carousel_posted": false
+      },
+      {
+        "slug": "ecommerce-business-marketing",
+        "title": "Ecommerce Business Marketing",
+        "pins_scheduled": false,
+        "email_sent": false,
+        "carousel_posted": false
+      },
+      {
+        "slug": "free-instagram-post-templates",
+        "title": "Free Instagram post templates that actually look professional",
+        "pins_scheduled": false,
+        "email_sent": false,
+        "carousel_posted": false
+      },
+      {
+        "slug": "free-instagram-templates",
+        "title": "free instagram templates",
+        "pins_scheduled": false,
+        "email_sent": false,
+        "carousel_posted": false
+      },
+      {
+        "slug": "how-to-start-an-ecommerce-business",
+        "title": "how to start an ecommerce business",
+        "pins_scheduled": false,
+        "email_sent": false,
+        "carousel_posted": false
+      },
+      {
+        "slug": "pinterest-affiliate-marketing",
+        "title": "pinterest affiliate marketing",
+        "pins_scheduled": false,
+        "email_sent": false,
+        "carousel_posted": false
+      },
+      {
+        "slug": "pinterest-marketing",
+        "title": "pinterest marketing",
+        "pins_scheduled": false,
+        "email_sent": false,
+        "carousel_posted": false
+      },
+      {
+        "slug": "starting-a-business-ideas",
+        "title": "Starting A Business Ideas",
+        "pins_scheduled": false,
+        "email_sent": false,
+        "carousel_posted": false
+      },
+      {
+        "slug": "starting-a-business-tips",
+        "title": "starting a business tips",
+        "pins_scheduled": false,
+        "email_sent": false,
+        "carousel_posted": false
+      },
+      {
+        "slug": "trending-products-to-sell-online",
+        "title": "Trending products to sell online in 2026",
+        "pins_scheduled": false,
+        "email_sent": false,
+        "carousel_posted": false
+      },
+      {
+        "slug": "website-template-for-blog",
+        "title": "website template for blog",
+        "pins_scheduled": false,
+        "email_sent": false,
+        "carousel_posted": false
+      },
+      {
+        "slug": "website-template-for-blogger",
+        "title": "website template for blogger",
+        "pins_scheduled": false,
+        "email_sent": false,
+        "carousel_posted": false
+      },
+      {
+        "slug": "website-template-for-ecommerce",
+        "title": "Website Template for Ecommerce",
+        "pins_scheduled": false,
+        "email_sent": false,
+        "carousel_posted": false
+      },
+      {
+        "slug": "website-template-for-photographer",
+        "title": "website template for photographer",
+        "pins_scheduled": false,
+        "email_sent": false,
+        "carousel_posted": false
+      },
+      {
+        "slug": "website-template-for-photographers",
+        "title": "website template for photographers",
+        "pins_scheduled": false,
+        "email_sent": false,
+        "carousel_posted": false
+      },
+      {
+        "slug": "website-template-for-portfolio",
+        "title": "How to choose the right website template for portfolio success",
+        "pins_scheduled": false,
+        "email_sent": false,
+        "carousel_posted": false
+      }
+    ]
   }
 }

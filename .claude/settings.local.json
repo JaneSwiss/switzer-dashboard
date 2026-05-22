@@ -201,7 +201,8 @@
       "Bash(python3 -c \"import ast; ast.parse\\(open\\('agents/blog-seo-agent/blog_seo_agent.py'\\).read\\(\\)\\); print\\('Syntax OK'\\)\")",
       "WebFetch(domain:medium.com)",
       "WebFetch(domain:www.forbes.com)",
-      "WebFetch(domain:www.reddit.com)"
+      "WebFetch(domain:www.reddit.com)",
+      "Bash(python3 -c *)"
     ],
     "additionalDirectories": [
       "/Users/janeair/Documents/AI/switzertemplates/agents/blog-seo-agent/output",

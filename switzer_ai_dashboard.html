@@ -136,6 +136,7 @@
   <button class="tab-btn active" data-tab="overview"><i class="ti ti-layout-dashboard"></i>Overview</button>
   <button class="tab-btn" data-tab="blog"><i class="ti ti-file-text"></i>Blog SEO</button>
   <button class="tab-btn" data-tab="etsy"><i class="ti ti-shopping-bag"></i>Etsy Expert</button>
+  <button class="tab-btn" data-tab="repurposer"><i class="ti ti-recycle"></i>Repurposer</button>
   <button class="tab-btn" data-tab="pinterest"><i class="ti ti-brand-pinterest"></i>Pinterest</button>
 </div>
 
@@ -268,6 +269,34 @@
       <tbody id="kw-tbody"><tr><td colspan="10" class="empty">Loading...</td></tr></tbody>
     </table></div>
     <p style="font-size:12px;color:var(--text3);margin-top:10px;" id="kw-showing"></p>
+  </div>
+</div>
+
+<!-- REPURPOSER -->
+<div class="tab-panel" id="panel-repurposer">
+  <div class="card">
+    <div class="card-header">
+      <span class="card-title"><i class="ti ti-recycle" style="color:var(--choc);font-size:18px;"></i>Content repurposer</span>
+      <span class="badge badge-gray" id="repurposer-badge">—</span>
+    </div>
+    <p style="font-size:13px;color:var(--text2);margin-bottom:1.25rem;">
+      For each post: open the output links, copy into Tailwind / Flodesk / Instagram, then tick the checkbox.
+      Links open on GitHub where you can read and copy the content.
+    </p>
+    <!-- Stats row -->
+    <div class="stat-grid" style="margin-bottom:1.5rem;" id="repurposer-stats"></div>
+    <!-- Table -->
+    <div class="table-wrap"><table>
+      <thead>
+        <tr>
+          <th style="min-width:220px;">Post</th>
+          <th class="c" style="min-width:130px;"><i class="ti ti-brand-pinterest" style="color:#e60023;"></i> Pins<br><span style="font-size:10px;font-weight:400;color:var(--text3);">scheduled in Tailwind</span></th>
+          <th class="c" style="min-width:130px;"><i class="ti ti-mail" style="color:var(--choc);"></i> Email hook<br><span style="font-size:10px;font-weight:400;color:var(--text3);">sent in Flodesk</span></th>
+          <th class="c" style="min-width:130px;"><i class="ti ti-brand-instagram" style="color:#c13584;"></i> Carousel<br><span style="font-size:10px;font-weight:400;color:var(--text3);">posted on Instagram</span></th>
+        </tr>
+      </thead>
+      <tbody id="repurposer-tbody"><tr><td colspan="4" class="empty">Loading...</td></tr></tbody>
+    </table></div>
   </div>
 </div>
 
@@ -622,6 +651,81 @@ function renderKwPagination(total, totalPages){
 }
 function kwPage(p){ KW_PAGE=p; filterKw(); }
 
+// Repurposer
+const GH_BLOB = `https://github.com/${GH_OWNER}/${GH_REPO}/blob/main`;
+function renderRepurposer(){
+  const data = DATA.repurposer || {};
+  const posts = data.posts || [];
+  const totalPins = posts.filter(p=>p.pins_scheduled).length;
+  const totalEmail = posts.filter(p=>p.email_sent).length;
+  const totalCarousel = posts.filter(p=>p.carousel_posted).length;
+  const allDone = posts.filter(p=>p.pins_scheduled&&p.email_sent&&p.carousel_posted).length;
+
+  document.getElementById('repurposer-badge').textContent = `${posts.length} posts`;
+
+  // Stats
+  const statsEl = document.getElementById('repurposer-stats');
+  statsEl.innerHTML = `
+    <div class="stat-card"><p class="stat-label">Pins scheduled</p><p class="stat-val">${totalPins}<span style="font-size:14px;color:var(--text3);">/${posts.length}</span></p><p class="stat-sub">In Tailwind</p></div>
+    <div class="stat-card"><p class="stat-label">Emails sent</p><p class="stat-val">${totalEmail}<span style="font-size:14px;color:var(--text3);">/${posts.length}</span></p><p class="stat-sub">Via Flodesk</p></div>
+    <div class="stat-card"><p class="stat-label">Carousels posted</p><p class="stat-val">${totalCarousel}<span style="font-size:14px;color:var(--text3);">/${posts.length}</span></p><p class="stat-sub">On Instagram</p></div>
+    <div class="stat-card"><p class="stat-label">Fully done</p><p class="stat-val">${allDone}<span style="font-size:14px;color:var(--text3);">/${posts.length}</span></p><p class="stat-sub">All 3 published</p></div>
+  `;
+
+  // Table
+  const tbody = document.getElementById('repurposer-tbody');
+  tbody.innerHTML = '';
+  if(!posts.length){ tbody.innerHTML='<tr><td colspan="4" class="empty">No repurposed posts yet.</td></tr>'; return; }
+
+  posts.forEach((post, i) => {
+    const slug = post.slug;
+    const base = `${GH_BLOB}/outputs/repurposed/${slug}`;
+    const pinsUrl   = `${base}/pins.json`;
+    const emailUrl  = `${base}/email_hook.md`;
+    const carouselUrl = `${base}/instagram_carousel.md`;
+
+    const rowStyle = (post.pins_scheduled && post.email_sent && post.carousel_posted)
+      ? 'opacity:0.5;' : '';
+
+    const titleStyle = (post.pins_scheduled && post.email_sent && post.carousel_posted)
+      ? 'text-decoration:line-through;color:var(--text3);font-weight:500;font-size:13px;'
+      : 'font-weight:500;font-size:13px;color:var(--text);';
+
+    const linkBtn = (url, label) =>
+      `<a href="${url}" target="_blank" style="display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:600;color:var(--choc);text-decoration:none;border:1.5px solid var(--border2);border-radius:5px;padding:3px 8px;margin-bottom:5px;white-space:nowrap;">
+        <i class="ti ti-external-link" style="font-size:11px;"></i>${label}
+      </a>`;
+
+    const cb = (field, checked) =>
+      `<input type="checkbox" ${checked?'checked':''} onchange="toggleRepurposer(${i},'${field}',this.checked)"
+        style="width:16px;height:16px;cursor:pointer;accent-color:var(--choc);display:block;margin:4px auto 0;">`;
+
+    const tr = document.createElement('tr');
+    tr.style.cssText = rowStyle;
+    tr.innerHTML = `
+      <td><span style="${titleStyle}">${post.title || slug.replace(/-/g,' ')}</span></td>
+      <td class="c">
+        ${linkBtn(pinsUrl, '10 pins')}
+        ${cb('pins_scheduled', post.pins_scheduled)}
+      </td>
+      <td class="c">
+        ${linkBtn(emailUrl, 'Email hook')}
+        ${cb('email_sent', post.email_sent)}
+      </td>
+      <td class="c">
+        ${linkBtn(carouselUrl, 'Carousel')}
+        ${cb('carousel_posted', post.carousel_posted)}
+      </td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+async function toggleRepurposer(i, field, checked){
+  DATA.repurposer.posts[i][field] = checked;
+  renderRepurposer();
+  await saveData('Repurposer: ' + DATA.repurposer.posts[i].slug + ' ' + field);
+}
+
 // Pinterest
 function renderPinterest(){
   const pin=DATA.pinterest_agent||{};
@@ -682,7 +786,7 @@ document.getElementById('token-input').addEventListener('keydown', e => { if(e.k
 // Load everything
 async function loadDashboard(){
   await loadData();
-  renderOverview(); renderWins(); renderEtsy(); renderSprint(); renderBlog(); renderKeywords(); renderPinterest();
+  renderOverview(); renderWins(); renderEtsy(); renderSprint(); renderBlog(); renderKeywords(); renderRepurposer(); renderPinterest();
 }
 if (checkToken()) loadDashboard();
 </script>
