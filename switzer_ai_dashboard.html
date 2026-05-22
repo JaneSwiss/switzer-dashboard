@@ -204,6 +204,38 @@
 
 <!-- BLOG SEO -->
 <div class="tab-panel" id="panel-blog">
+
+  <!-- SPRINT TRACKER -->
+  <div class="card" style="border:2px solid var(--choc);background:linear-gradient(135deg,#fdf8f5 0%,#fff 100%);">
+    <div class="card-header" style="margin-bottom:0.5rem;">
+      <span class="card-title"><i class="ti ti-rocket" style="color:var(--choc);font-size:18px;"></i>4-Week Traffic Sprint</span>
+      <span class="badge" style="background:var(--choc);color:#fff;" id="sprint-progress-badge">Loading...</span>
+    </div>
+    <p style="font-size:13px;color:var(--text2);margin-bottom:0.75rem;" id="sprint-goal-text">Loading...</p>
+    <div style="display:flex;gap:10px;align-items:center;margin-bottom:1.25rem;flex-wrap:wrap;">
+      <div style="flex:1;min-width:200px;background:var(--surface2);border-radius:6px;height:8px;overflow:hidden;">
+        <div id="sprint-overall-bar" style="height:100%;background:var(--choc);border-radius:6px;transition:width .4s;width:0%;"></div>
+      </div>
+      <a id="sprint-plan-link" href="https://github.com/JaneSwiss/switzer-dashboard/blob/main/sprint-plan.md" target="_blank"
+        style="display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:var(--choc);text-decoration:none;border:1.5px solid var(--choc);border-radius:6px;padding:5px 12px;white-space:nowrap;">
+        <i class="ti ti-external-link" style="font-size:13px;"></i> View full plan
+      </a>
+    </div>
+
+    <!-- Daily task -->
+    <div id="sprint-daily" style="background:var(--amber-bg);border-radius:8px;padding:0.85rem 1rem;margin-bottom:1.25rem;display:flex;align-items:center;gap:10px;">
+      <input type="checkbox" id="daily-task-cb" onchange="toggleDailyTask(this.checked)" style="width:17px;height:17px;cursor:pointer;accent-color:var(--choc);">
+      <div style="flex:1;">
+        <p style="font-size:13px;font-weight:600;color:var(--amber-text);margin:0;" id="daily-task-label">Loading...</p>
+        <p style="font-size:11px;color:var(--text3);margin:2px 0 0;">Daily — every day of the sprint</p>
+      </div>
+      <span class="badge" style="background:var(--amber-bg);color:var(--amber-text);border:1px solid var(--amber-mid);font-size:10px;">Daily</span>
+    </div>
+
+    <!-- This week -->
+    <div id="sprint-week-container"></div>
+  </div>
+
   <div class="card">
     <div class="card-header">
       <span class="card-title"><i class="ti ti-robot" style="color:var(--teal-mid);font-size:18px;"></i>Post tracker</span>
@@ -424,6 +456,81 @@ function renderEtsy(){
 }
 
 // Blog
+// Sprint Tracker
+function renderSprint(){
+  const s = DATA.sprint_tracker;
+  if(!s) return;
+
+  // Goal text
+  document.getElementById('sprint-goal-text').textContent = s.goal + ' · ' + s.honest_timeline;
+
+  // Daily task
+  const dt = s.daily_task||{};
+  const today = new Date().toISOString().slice(0,10);
+  const dailyCb = document.getElementById('daily-task-cb');
+  dailyCb.checked = dt.last_done === today;
+  document.getElementById('daily-task-label').textContent = dt.label||'';
+
+  // Current week (auto-detect from start_date)
+  const start = new Date(s.start_date);
+  const now = new Date();
+  const daysSince = Math.floor((now - start) / 86400000);
+  const weekNum = Math.min(Math.floor(daysSince / 7) + 1, 4);
+  const weekKey = 'week' + weekNum;
+  const weeks = s.weeks||{};
+
+  // Overall progress
+  let totalTasks=0, doneTasks=0;
+  Object.values(weeks).forEach(w => { (w.tasks||[]).forEach(t => { totalTasks++; if(t.done) doneTasks++; }); });
+  const pct = totalTasks ? Math.round(doneTasks/totalTasks*100) : 0;
+  document.getElementById('sprint-overall-bar').style.width = pct+'%';
+  document.getElementById('sprint-progress-badge').textContent = pct+'% complete';
+
+  // This week's checklist
+  const container = document.getElementById('sprint-week-container');
+  container.innerHTML = '';
+  const wk = weeks[weekKey];
+  if(!wk) return;
+  const tasks = wk.tasks||[];
+  const wDone = tasks.filter(t=>t.done).length;
+  const ownerColors = {'Claude':'var(--teal-bg)','Jane':'var(--amber-bg)','Run':'var(--surface2)','Run+Jane':'var(--surface2)'};
+  const ownerTextColors = {'Claude':'var(--teal-text)','Jane':'var(--amber-text)','Run':'var(--text2)','Run+Jane':'var(--text2)'};
+
+  container.innerHTML = `
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.6rem;">
+      <p style="font-size:13px;font-weight:700;color:var(--text);margin:0;">${wk.label}</p>
+      <span style="font-size:12px;color:var(--text3);">${wDone} of ${tasks.length} done</span>
+    </div>
+    <div style="background:var(--surface2);border-radius:4px;height:5px;overflow:hidden;margin-bottom:1rem;">
+      <div style="height:100%;background:var(--teal-mid);border-radius:4px;width:${tasks.length?Math.round(wDone/tasks.length*100):0}%;transition:width .4s;"></div>
+    </div>
+    ${tasks.map((t,i) => `
+      <div style="display:flex;align-items:flex-start;gap:10px;padding:7px 0;border-bottom:1px solid var(--border2);${t.done?'opacity:0.55;':''}" id="sprint-row-${t.id}">
+        <input type="checkbox" ${t.done?'checked':''} onchange="toggleSprintTask('${weekKey}',${i},this.checked)"
+          style="width:16px;height:16px;margin-top:1px;flex-shrink:0;cursor:pointer;accent-color:var(--choc);">
+        <p style="flex:1;font-size:13px;color:var(--text);margin:0;${t.done?'text-decoration:line-through;color:var(--text3);':''}">${t.label}</p>
+        <span style="font-size:10px;font-weight:600;padding:2px 7px;border-radius:10px;background:${ownerColors[t.owner]||'var(--surface2)'};color:${ownerTextColors[t.owner]||'var(--text2)'};flex-shrink:0;">${t.owner}</span>
+      </div>
+    `).join('')}
+  `;
+}
+
+async function toggleSprintTask(weekKey, taskIdx, checked){
+  if(!DATA.sprint_tracker) return;
+  DATA.sprint_tracker.weeks[weekKey].tasks[taskIdx].done = checked;
+  renderSprint();
+  await saveData('Sprint task updated');
+}
+
+async function toggleDailyTask(checked){
+  if(!DATA.sprint_tracker) return;
+  const today = new Date().toISOString().slice(0,10);
+  DATA.sprint_tracker.daily_task.done_today = checked;
+  DATA.sprint_tracker.daily_task.last_done = checked ? today : '';
+  renderSprint();
+  await saveData('Daily task updated');
+}
+
 function renderBlog(){
   const blog=DATA.blog_seo_agent||{}, posts=blog.posts||[];
   const pub=posts.filter(p=>p.published).length, draft=posts.filter(p=>p.written&&!p.published).length;
@@ -547,7 +654,7 @@ document.getElementById('token-input').addEventListener('keydown', e => { if(e.k
 // Load everything
 async function loadDashboard(){
   await loadData();
-  renderOverview(); renderWins(); renderEtsy(); renderBlog(); renderKeywords(); renderPinterest();
+  renderOverview(); renderWins(); renderEtsy(); renderSprint(); renderBlog(); renderKeywords(); renderPinterest();
 }
 if (checkToken()) loadDashboard();
 </script>
