@@ -142,7 +142,6 @@
 
 <!-- OVERVIEW -->
 <div class="tab-panel active" id="panel-overview">
-  <div id="ov-csv"></div>
   <div class="stat-grid">
     <div class="stat-card"><p class="stat-label">Etsy Expert</p><div style="display:flex;align-items:center;gap:6px;margin-bottom:4px;"><span class="status-dot" style="background:var(--teal-mid);"></span><p class="stat-val" style="margin:0;">Active</p></div><p class="stat-sub" id="ov-etsy-run">—</p></div>
     <div class="stat-card"><p class="stat-label">Blog SEO</p><div style="display:flex;align-items:center;gap:6px;margin-bottom:4px;"><span class="status-dot" style="background:var(--teal-mid);"></span><p class="stat-val" style="margin:0;">Active</p></div><p class="stat-sub" id="ov-blog-run">—</p></div>
@@ -150,23 +149,13 @@
     <div class="stat-card"><p class="stat-label">Pending tasks</p><p class="stat-val" id="ov-pending">—</p><p class="stat-sub">Need your input</p></div>
     <div class="stat-card"><p class="stat-label">Posts this month</p><p class="stat-val" id="ov-posts">—</p><p class="stat-sub" id="ov-posts-sub">—</p></div>
   </div>
-  <div class="card card-accent">
-    <div class="card-header">
-      <span class="card-title"><i class="ti ti-alert-circle" style="color:var(--coral);font-size:18px;"></i>Needs your attention</span>
-      <span class="badge badge-coral" id="attn-badge">—</span>
-    </div>
-    <div id="attn-list"><p class="empty">Loading...</p></div>
-  </div>
   <div class="card">
     <div class="card-header">
       <span class="card-title"><i class="ti ti-trophy" style="color:var(--amber-mid);font-size:18px;"></i>Monthly accomplishments</span>
       <span class="badge badge-amber" id="wins-month"></span>
     </div>
+    <p style="font-size:12px;color:var(--text3);margin-bottom:0.75rem;">Auto-updated from your agents, posts, and sprint progress.</p>
     <div id="wins-list"></div>
-    <div class="add-row">
-      <input type="text" id="new-win" placeholder="Add an accomplishment..." />
-      <button onclick="addWin()">Add +</button>
-    </div>
   </div>
 </div>
 
@@ -411,40 +400,55 @@ function renderOverview(){
   const pub=posts.filter(p=>p.published).length, draft=posts.filter(p=>p.written&&!p.published).length;
   document.getElementById('ov-posts').textContent    = posts.filter(p=>p.written||p.published).length;
   document.getElementById('ov-posts-sub').textContent= `${pub} published · ${draft} drafted`;
-  csvBanner('ov-csv', etsy.last_run, etsy.next_run);
   const tasks=(etsy.priority_tasks||[]).filter(t=>t.status!=='done');
-  const pending=(blog.pending_tasks||[]);
-  const pinPending=(pin.pending_tasks||[]);
-  document.getElementById('ov-pending').textContent  = tasks.length;
-  const attn=[
-    ...tasks.slice(0,3).map(t=>({agent:'Etsy Expert',text:t.task,urgency:parseInt(t.priority)<=2?'high':'medium'})),
-    ...pending.map(t=>({agent:'Blog SEO',text:t.task,urgency:'medium'})),
-    ...pinPending.map(t=>({agent:'Pinterest',text:t.task,urgency:'medium'}))
-  ];
-  document.getElementById('attn-badge').textContent = attn.length+' item'+(attn.length!==1?'s':'');
-  const el=document.getElementById('attn-list'); el.innerHTML='';
-  if(!attn.length){ el.innerHTML='<p class="empty">All clear — nothing needs your attention.</p>'; return; }
-  attn.forEach(item=>{
-    const col=item.urgency==='high'?'var(--coral)':'var(--amber-mid)';
-    const d=document.createElement('div'); d.className='row';
-    d.innerHTML=`<div class="attn-dot" style="background:${col};"></div><div style="flex:1;"><p class="row-text">${item.text}</p><p class="row-meta">${item.agent}</p></div>`;
-    el.appendChild(d);
-  });
+  document.getElementById('ov-pending').textContent = tasks.length;
 }
 
-// Wins
+// Wins — auto-generated from actual data
 function renderWins(){
-  const wins=DATA.monthly_wins||[], el=document.getElementById('wins-list'); el.innerHTML='';
-  if(!wins.length){ el.innerHTML='<p class="empty">No accomplishments yet. Add your first one below.</p>'; return; }
-  wins.forEach((w,i)=>{
+  const el = document.getElementById('wins-list');
+  const wins = [];
+  const now = new Date();
+  const thisMonth = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}`;
+
+  // Blog posts written and published
+  const posts = (DATA.blog_seo_agent||{}).posts||[];
+  const writtenThisMonth = posts.filter(p=>p.date&&p.date.startsWith(thisMonth)).length;
+  const publishedTotal = posts.filter(p=>p.published).length;
+  const writtenTotal = posts.filter(p=>p.written).length;
+  if(writtenThisMonth>0) wins.push(`${writtenThisMonth} new blog post${writtenThisMonth>1?'s':''} written this month by the Blog SEO agent`);
+  if(publishedTotal>0)   wins.push(`${publishedTotal} blog post${publishedTotal>1?'s':''} published on switzertemplates.com total`);
+
+  // Content repurposer
+  const reposts = (DATA.repurposer||{}).posts||[];
+  const totalPinSets = reposts.length * 10;
+  const pinsScheduled = reposts.filter(p=>p.pins_scheduled).length;
+  const emailsSent = reposts.filter(p=>p.email_sent).length;
+  const carouselsPosted = reposts.filter(p=>p.carousel_posted).length;
+  if(reposts.length>0)    wins.push(`Content Repurposer agent built — ${reposts.length} posts repurposed into ${totalPinSets} pin copy sets, ${reposts.length} email hooks, and ${reposts.length} Instagram carousels`);
+  if(pinsScheduled>0)     wins.push(`${pinsScheduled} post${pinsScheduled>1?'s':''} pinned to Tailwind`);
+  if(emailsSent>0)        wins.push(`${emailsSent} email hook${emailsSent>1?'s':''} sent via Flodesk`);
+  if(carouselsPosted>0)   wins.push(`${carouselsPosted} Instagram carousel${carouselsPosted>1?'s':''} posted`);
+
+  // Sprint tracker — completed tasks
+  const sprint = DATA.sprint_tracker||{};
+  let sprintDone = 0;
+  Object.values(sprint.weeks||{}).forEach(w=>(w.tasks||[]).forEach(t=>{ if(t.done) sprintDone++; }));
+  if(sprintDone>0) wins.push(`${sprintDone} sprint task${sprintDone>1?'s':''} completed in the 4-week traffic growth plan`);
+
+  // Keyword masterlist
+  const kwCount = (DATA.keyword_masterlist||[]).length;
+  if(kwCount>0) wins.push(`${kwCount} keywords in the Blog SEO masterlist (${(DATA.keyword_masterlist||[]).filter(k=>k.source==='Jane uploaded').length} Jane-uploaded)`);
+
+  el.innerHTML = '';
+  document.getElementById('wins-month').textContent = wins.length+' this month';
+  if(!wins.length){ el.innerHTML='<p class="empty">Keep building — accomplishments appear here automatically.</p>'; return; }
+  wins.forEach(w=>{
     const d=document.createElement('div'); d.className='win-item';
-    d.innerHTML=`<i class="ti ti-check" style="font-size:15px;color:var(--teal-mid);margin-top:2px;flex-shrink:0;"></i><span style="font-size:14px;flex:1;">${w}</span><button class="win-del" onclick="removeWin(${i})"><i class="ti ti-x"></i></button>`;
+    d.innerHTML=`<i class="ti ti-check" style="font-size:15px;color:var(--teal-mid);margin-top:2px;flex-shrink:0;"></i><span style="font-size:14px;flex:1;">${w}</span>`;
     el.appendChild(d);
   });
 }
-async function addWin(){ const inp=document.getElementById('new-win'); if(!inp.value.trim()) return; if(!DATA.monthly_wins) DATA.monthly_wins=[]; DATA.monthly_wins.push(inp.value.trim()); inp.value=''; renderWins(); await saveData('Add win'); }
-async function removeWin(i){ DATA.monthly_wins.splice(i,1); renderWins(); await saveData('Remove win'); }
-document.getElementById('new-win').addEventListener('keydown',e=>{ if(e.key==='Enter') addWin(); });
 
 // Etsy
 function renderEtsy(){
