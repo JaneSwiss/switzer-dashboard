@@ -70,11 +70,11 @@
         "searches": "1,111",
         "competition": "1,566",
         "score": "710",
-        "notes": "#1 opportunity Ã¢ÂÂ no listing targeting this yet"
+        "notes": "#1 opportunity ÃÂ¢ÃÂÃÂ no listing targeting this yet"
       },
       {
         "keyword": "pinterest inspired",
-        "searches": "Ã¢ÂÂ",
+        "searches": "ÃÂ¢ÃÂÃÂ",
         "competition": "1,363",
         "score": "260",
         "notes": "Strong, low competition"
@@ -88,7 +88,7 @@
       },
       {
         "keyword": "smm instagram",
-        "searches": "Ã¢ÂÂ",
+        "searches": "ÃÂ¢ÃÂÃÂ",
         "competition": "832",
         "score": "190",
         "notes": "Low competition relative to score"
@@ -119,7 +119,7 @@
         "searches": "102",
         "competition": "768",
         "score": "130",
-        "notes": "Gap Ã¢ÂÂ no listing"
+        "notes": "Gap ÃÂ¢ÃÂÃÂ no listing"
       },
       {
         "keyword": "aesthetic carousel",
@@ -1802,7 +1802,7 @@
     },
     "weeks": {
       "week1": {
-        "label": "Week 1 — Build + Activate (Days 1-7)",
+        "label": "Week 1 â Build + Activate (Days 1-7)",
         "tasks": [
           {
             "id": "w1_repurposer",
@@ -1843,36 +1843,36 @@
           {
             "id": "w1_indexing",
             "label": "Submit all 48 existing posts for indexing via Google Search Console",
-            "done": false,
+            "done": true,
             "owner": "Jane"
           },
           {
             "id": "w1_research",
-            "label": "Run Email Copy Agent --research → builds email-copywriting-principles.md",
+            "label": "Run Email Copy Agent --research â builds email-copywriting-principles.md",
             "done": false,
             "owner": "Run"
           },
           {
             "id": "w1_repurpose_all",
-            "label": "Run repurposer on all 48 existing posts → 480 pin copy sets + email hooks + carousels",
+            "label": "Run repurposer on all 48 existing posts â 480 pin copy sets + email hooks + carousels",
             "done": false,
             "owner": "Run"
           },
           {
             "id": "w1_prod_pins_run",
-            "label": "Run product page pin generator → 20 product pins",
+            "label": "Run product page pin generator â 20 product pins",
             "done": false,
             "owner": "Run"
           },
           {
             "id": "w1_re_engage",
-            "label": "Run Email Copy Agent --re-engagement → Jane pastes into Flodesk and sends",
+            "label": "Run Email Copy Agent --re-engagement â Jane pastes into Flodesk and sends",
             "done": false,
             "owner": "Jane"
           },
           {
             "id": "w1_3posts",
-            "label": "Run blog SEO agent 3x → publish 3 new posts to Wix + run publish_indexing.py each",
+            "label": "Run blog SEO agent 3x â publish 3 new posts to Wix + run publish_indexing.py each",
             "done": false,
             "owner": "Run+Jane"
           },
@@ -1884,30 +1884,30 @@
           },
           {
             "id": "w1_lead_magnet",
-            "label": "Create 1 free lead magnet (mini template pack or brand checklist) → live Wix page",
+            "label": "Create 1 free lead magnet (mini template pack or brand checklist) â live Wix page",
             "done": false,
             "owner": "Jane"
           }
         ]
       },
       "week2": {
-        "label": "Week 2 — Content Sprint (Days 8-14)",
+        "label": "Week 2 â Content Sprint (Days 8-14)",
         "tasks": [
           {
             "id": "w2_posts",
-            "label": "Run blog SEO agent daily → publish 7 new posts to Wix + index each",
+            "label": "Run blog SEO agent daily â publish 7 new posts to Wix + index each",
             "done": false,
             "owner": "Run+Jane"
           },
           {
             "id": "w2_repurpose",
-            "label": "Run repurposer on each new post → immediately queue pins in Tailwind",
+            "label": "Run repurposer on each new post â immediately queue pins in Tailwind",
             "done": false,
             "owner": "Run"
           },
           {
             "id": "w2_email",
-            "label": "Run Email Copy Agent --blog-post → Jane sends in Flodesk",
+            "label": "Run Email Copy Agent --blog-post â Jane sends in Flodesk",
             "done": false,
             "owner": "Jane"
           },
@@ -1919,7 +1919,7 @@
           },
           {
             "id": "w2_flodesk",
-            "label": "Check Flodesk re-engagement open rate → remove inactive contacts",
+            "label": "Check Flodesk re-engagement open rate â remove inactive contacts",
             "done": false,
             "owner": "Jane"
           },
@@ -1932,23 +1932,23 @@
         ]
       },
       "week3": {
-        "label": "Week 3 — Compound (Days 15-21)",
+        "label": "Week 3 â Compound (Days 15-21)",
         "tasks": [
           {
             "id": "w3_posts",
-            "label": "Run blog SEO agent daily → publish 7 more posts (17 new total)",
+            "label": "Run blog SEO agent daily â publish 7 more posts (17 new total)",
             "done": false,
             "owner": "Run+Jane"
           },
           {
             "id": "w3_repurpose",
-            "label": "Run repurposer on each new post → Tailwind queue grows",
+            "label": "Run repurposer on each new post â Tailwind queue grows",
             "done": false,
             "owner": "Run"
           },
           {
             "id": "w3_email",
-            "label": "Run Email Copy Agent --blog-post → Jane sends in Flodesk",
+            "label": "Run Email Copy Agent --blog-post â Jane sends in Flodesk",
             "done": false,
             "owner": "Jane"
           },
@@ -1960,7 +1960,7 @@
           },
           {
             "id": "w3_pinterest",
-            "label": "Check Pinterest analytics: top 3 performing pins → create 10 fresh variations each",
+            "label": "Check Pinterest analytics: top 3 performing pins â create 10 fresh variations each",
             "done": false,
             "owner": "Jane"
           },
@@ -1973,23 +1973,23 @@
         ]
       },
       "week4": {
-        "label": "Week 4 — Double Down (Days 22-28)",
+        "label": "Week 4 â Double Down (Days 22-28)",
         "tasks": [
           {
             "id": "w4_posts",
-            "label": "Run blog SEO agent daily → publish 7 more posts (24 new total)",
+            "label": "Run blog SEO agent daily â publish 7 more posts (24 new total)",
             "done": false,
             "owner": "Run+Jane"
           },
           {
             "id": "w4_repurpose",
-            "label": "Run repurposer on each new post → Tailwind queue",
+            "label": "Run repurposer on each new post â Tailwind queue",
             "done": false,
             "owner": "Run"
           },
           {
             "id": "w4_email",
-            "label": "Run Email Copy Agent --blog-post → Jane sends in Flodesk",
+            "label": "Run Email Copy Agent --blog-post â Jane sends in Flodesk",
             "done": false,
             "owner": "Jane"
           },
@@ -2001,7 +2001,7 @@
           },
           {
             "id": "w4_double",
-            "label": "Identify top traffic source → double everything going into it",
+            "label": "Identify top traffic source â double everything going into it",
             "done": false,
             "owner": "Jane"
           }
@@ -2148,7 +2148,7 @@
   },
   "monthly_snapshots": {
     "2026-04": [
-      "Etsy Expert agent built — all skills complete and tested",
+      "Etsy Expert agent built â all skills complete and tested",
       "Blog SEO agent built and running",
       "AI Agency Dashboard live on all devices"
     ]
