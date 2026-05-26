@@ -1867,7 +1867,7 @@
           {
             "id": "w1_re_engage",
             "label": "Run Email Copy Agent --re-engagement → Jane pastes into Flodesk and sends",
-            "done": false,
+            "done": true,
             "owner": "Jane"
           },
           {
