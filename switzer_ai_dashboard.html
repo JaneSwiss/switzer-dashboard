@@ -405,7 +405,10 @@ async function loadData() {
     }
   });
   const meta = await res.json();
-  DATA = JSON.parse(decodeURIComponent(escape(atob(meta.content.replace(/\n/g, '')))));
+  const bytes = atob(meta.content.replace(/\n/g, ''));
+  const uint8 = new Uint8Array(bytes.length);
+  for(let i=0;i<bytes.length;i++) uint8[i]=bytes.charCodeAt(i);
+  DATA = JSON.parse(new TextDecoder('utf-8').decode(uint8));
 }
 
 // GitHub write — reads current SHA then PUTs updated file
