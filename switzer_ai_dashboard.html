@@ -138,6 +138,7 @@
   <button class="tab-btn" data-tab="repurposer"><i class="ti ti-recycle"></i>Repurposer</button>
   <button class="tab-btn" data-tab="etsy"><i class="ti ti-shopping-bag"></i>Etsy Expert</button>
   <button class="tab-btn" data-tab="pinterest"><i class="ti ti-brand-pinterest"></i>Pinterest</button>
+  <button class="tab-btn" data-tab="email"><i class="ti ti-mail"></i>Email Agent</button>
 </div>
 
 <!-- OVERVIEW -->
@@ -290,6 +291,53 @@
   </div>
 </div>
 
+<!-- EMAIL AGENT -->
+<div class="tab-panel" id="panel-email">
+  <div class="card">
+    <div class="card-header">
+      <span class="card-title"><i class="ti ti-brain" style="color:var(--teal-mid);font-size:18px;"></i>What the agent learned</span>
+      <span class="badge badge-teal" id="email-research-badge">Research done</span>
+    </div>
+    <p style="font-size:13px;color:var(--text2);margin-bottom:1rem;">Principles synthesised from Maxwell Copy and Alex Cattoni. Loaded automatically every time an email is written.</p>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:1rem;">
+      <a id="email-principles-link" href="#" target="_blank"
+        style="display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:var(--choc);text-decoration:none;border:1.5px solid var(--choc);border-radius:6px;padding:7px 14px;">
+        <i class="ti ti-external-link" style="font-size:13px;"></i> View email copywriting principles
+      </a>
+      <a href="https://github.com/JaneSwiss/switzer-dashboard/tree/main/outputs/emails" target="_blank"
+        style="display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:var(--text2);text-decoration:none;border:1.5px solid var(--border2);border-radius:6px;padding:7px 14px;">
+        <i class="ti ti-folder" style="font-size:13px;"></i> Browse all email files
+      </a>
+    </div>
+    <div style="background:var(--surface2);border-radius:8px;padding:0.85rem 1rem;">
+      <p style="font-size:12px;color:var(--text2);margin-bottom:6px;font-weight:600;">How to run:</p>
+      <p style="font-size:12px;font-family:monospace;color:var(--text3);line-height:2;">
+        python3 agents/email-agent/email_agent.py --re-engagement<br>
+        python3 agents/email-agent/email_agent.py --blog-post &lt;slug&gt;<br>
+        python3 agents/email-agent/email_agent.py --product bundle|website|branding-kit|pinterest-services<br>
+        python3 agents/email-agent/email_agent.py --weekly
+      </p>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <span class="card-title"><i class="ti ti-mail" style="color:var(--choc);font-size:18px;"></i>Email tracker</span>
+      <span class="badge badge-gray" id="email-badge">—</span>
+    </div>
+    <p style="font-size:13px;color:var(--text2);margin-bottom:1rem;">Tick "Sent" once you've pasted it into Flodesk and sent it. Links open the full email file on GitHub.</p>
+    <div class="table-wrap"><table>
+      <thead><tr>
+        <th>Type</th>
+        <th style="min-width:240px;">Subject line A</th>
+        <th class="c">Date written</th>
+        <th class="c">File</th>
+        <th class="c">Sent in Flodesk</th>
+      </tr></thead>
+      <tbody id="email-tbody"><tr><td colspan="5" class="empty">Loading...</td></tr></tbody>
+    </table></div>
+  </div>
+</div>
+
 <!-- PINTEREST -->
 <div class="tab-panel" id="panel-pinterest">
   <div class="card">
@@ -357,7 +405,7 @@ async function loadData() {
     }
   });
   const meta = await res.json();
-  DATA = JSON.parse(atob(meta.content.replace(/\n/g, '')));
+  DATA = JSON.parse(decodeURIComponent(escape(atob(meta.content.replace(/\n/g, '')))));
 }
 
 // GitHub write — reads current SHA then PUTs updated file
@@ -758,6 +806,59 @@ async function toggleRepurposer(i, field, checked){
   await saveData('Repurposer: ' + DATA.repurposer.posts[i].slug + ' ' + field);
 }
 
+// Email Agent
+function renderEmail(){
+  const ea = DATA.email_agent || {};
+  const emails = ea.emails || [];
+  const sent = emails.filter(e=>e.sent).length;
+  document.getElementById('email-badge').textContent = `${sent} sent · ${emails.length - sent} pending`;
+
+  const badge = document.getElementById('email-research-badge');
+  const link  = document.getElementById('email-principles-link');
+  if(ea.research_done){
+    badge.textContent = 'Research done'; badge.className = 'badge badge-teal';
+    link.href = `https://github.com/${GH_OWNER}/${GH_REPO}/blob/main/${ea.principles_file||'context/email-copywriting-principles.md'}`;
+  } else {
+    badge.textContent = 'Run --research first'; badge.className = 'badge badge-amber';
+    link.style.opacity = '0.4'; link.style.pointerEvents = 'none';
+  }
+
+  const tbody = document.getElementById('email-tbody');
+  tbody.innerHTML = '';
+  if(!emails.length){ tbody.innerHTML='<tr><td colspan="5" class="empty">No emails written yet — run the email agent to generate one.</td></tr>'; return; }
+
+  const typeStyle = {
+    'Re-engagement':         ['var(--amber-bg)',  'var(--amber-text)'],
+    'Blog post':             ['var(--teal-bg)',   'var(--teal-text)'],
+    'Weekly':                ['var(--teal-bg)',   'var(--teal-text)'],
+    'Product':               ['var(--coral-bg)',  'var(--coral-text)'],
+  };
+  emails.forEach((email, i) => {
+    const typeKey = Object.keys(typeStyle).find(k => email.type.startsWith(k)) || '';
+    const [tBg, tCol] = typeStyle[typeKey] || ['var(--surface2)', 'var(--text2)'];
+    const fileUrl = `https://github.com/${GH_OWNER}/${GH_REPO}/blob/main/outputs/emails/${email.filename}`;
+    const tr = document.createElement('tr');
+    tr.style.cssText = email.sent ? 'opacity:0.5;' : '';
+    tr.innerHTML = `
+      <td><span class="badge" style="background:${tBg};color:${tCol};white-space:nowrap;">${email.type}</span></td>
+      <td style="font-size:13px;font-weight:500;${email.sent?'text-decoration:line-through;color:var(--text3);':''}">${email.subject}</td>
+      <td class="c" style="font-size:12px;color:var(--text3);">${email.date_written}</td>
+      <td class="c"><a href="${fileUrl}" target="_blank"
+        style="display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:600;color:var(--choc);text-decoration:none;border:1.5px solid var(--border2);border-radius:5px;padding:3px 8px;white-space:nowrap;">
+        <i class="ti ti-external-link" style="font-size:11px;"></i>Open</a></td>
+      <td class="c"><input type="checkbox" ${email.sent?'checked':''} onchange="toggleEmailSent(${i},this.checked)"
+        style="width:16px;height:16px;cursor:pointer;accent-color:var(--choc);"></td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+async function toggleEmailSent(i, checked){
+  if(!DATA.email_agent) return;
+  DATA.email_agent.emails[i].sent = checked;
+  renderEmail();
+  await saveData('Email sent: ' + DATA.email_agent.emails[i].subject);
+}
+
 // Pinterest
 function renderPinterest(){
   const pin=DATA.pinterest_agent||{};
@@ -818,7 +919,7 @@ document.getElementById('token-input').addEventListener('keydown', e => { if(e.k
 // Load everything
 async function loadDashboard(){
   await loadData();
-  renderOverview(); renderWins(); renderEtsy(); renderSprint(); renderBlog(); renderKeywords(); renderRepurposer(); renderPinterest();
+  renderOverview(); renderWins(); renderEtsy(); renderSprint(); renderBlog(); renderKeywords(); renderRepurposer(); renderEmail(); renderPinterest();
 }
 if (checkToken()) loadDashboard();
 </script>
