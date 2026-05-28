@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /clients/
+Disallow: /outputs/client-audits/
+Disallow: /switzer_ai_dashboard.html

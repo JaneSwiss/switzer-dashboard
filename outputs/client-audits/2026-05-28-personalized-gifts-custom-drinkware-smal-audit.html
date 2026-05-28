@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Pinterest audit — personalized gifts custom drinkware small gifts</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+<style>
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #faf7f3;
+  --surface: #fff;
+  --surface2: #f0ebe2;
+  --border: #e4dbd0;
+  --border2: #d6ccc0;
+  --text: #2b2520;
+  --text2: #7a6458;
+  --text3: #c9b8a8;
+  --accent: #b09478;
+  --gold: #c9a87c;
+  --dark-banner: #2b2520;
+  --serif: 'Instrument Serif', Georgia, serif;
+  --sans: 'DM Sans', -apple-system, sans-serif;
+  --radius: 10px;
+  --radius-sm: 6px;
+}
+body {
+  font-family: var(--sans);
+  font-weight: 300;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  font-size: 14px;
+  line-height: 1.6;
+}
+.wrapper {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 5rem;
+}
+/* body has no top padding — header is full-width above wrapper */
+body > .wrapper { padding-top: 2rem; }
+
+/* ── Header (full-width, matches onboarding page exactly) ───────── */
+.header {
+  text-align: center;
+  padding: 3.5rem 1.5rem 2rem;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 0;
+  background: var(--bg);
+}
+.header-label {
+  font-size: 11px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--text2);
+  margin: 0 auto 14px;
+  font-family: var(--sans);
+  font-weight: 300;
+  text-align: center;
+  max-width: none;
+}
+.header h1 {
+  font-family: var(--serif);
+  font-size: clamp(28px, 5vw, 42px);
+  font-weight: normal;
+  color: var(--text);
+  line-height: 1.2;
+  margin-bottom: 12px;
+  text-align: center;
+}
+.header-date {
+  font-size: 13px;
+  color: var(--text3);
+  font-family: var(--sans);
+  font-weight: 300;
+  text-align: center;
+  max-width: none;
+  margin: 0 auto;
+}
+
+/* ── Cards ──────────────────────────────────────────────────────── */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 1rem;
+}
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+}
+.card-title {
+  font-family: var(--serif);
+  font-size: 24px;
+  font-weight: normal;
+  color: var(--text);
+}
+.section-num {
+  font-size: 10px;
+  color: #fff;
+  letter-spacing: .08em;
+  background: #5c3d2e;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-weight: 400;
+  white-space: nowrap;
+}
+
+/* ── Stat grid ──────────────────────────────────────────────────── */
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 10px;
+  margin: 1rem 0 0.5rem;
+}
+.stat-card {
+  background: var(--surface2);
+  border-radius: var(--radius-sm);
+  padding: 14px 12px;
+}
+.stat-label {
+  font-size: 12px;
+  color: var(--text);
+  letter-spacing: 0;
+  text-transform: none;
+  margin-top: 6px;
+  font-weight: 300;
+  line-height: 1.4;
+}
+.stat-val {
+  font-family: var(--serif);
+  font-size: 32px;
+  color: var(--text);
+  margin-bottom: 0;
+  line-height: 1.1;
+}
+.stat-sub {
+  font-size: 11px;
+  color: var(--text3);
+  line-height: 1.4;
+}
+
+/* ── Keyword pills ──────────────────────────────────────────────── */
+.pill-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 4px 0;
+}
+.pill {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 5px 14px;
+  font-size: 13px;
+  color: var(--text2);
+  white-space: nowrap;
+  font-weight: 400;
+}
+
+/* ── Tables ─────────────────────────────────────────────────────── */
+.table-wrap { overflow-x: auto; margin: 0.75rem 0; }
+table { width: 100%; border-collapse: collapse; }
+th {
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--text3);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  padding: 0 10px 10px;
+  text-align: left;
+  border-bottom: 1px solid var(--border2);
+  white-space: nowrap;
+  font-family: var(--sans);
+}
+td {
+  padding: 10px;
+  font-size: 15px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+  color: var(--text);
+  line-height: 1.5;
+  font-weight: 300;
+}
+tr:last-child td { border-bottom: none; }
+tbody tr:hover { background: var(--surface2); }
+
+/* ── Sub-section (h3) ───────────────────────────────────────────── */
+.subsection {
+  margin-top: 1.25rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--border);
+}
+.card-header + .subsection,
+.card-header + .strategy-step { border-top: none; }
+.subsection-title {
+  font-family: var(--serif);
+  font-size: 19px;
+  font-weight: normal;
+  color: var(--text);
+  margin-bottom: 0.75rem;
+}
+
+/* ── H4 / bold labels ───────────────────────────────────────────── */
+.field-label {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text2);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  margin: 1rem 0 4px;
+  font-family: var(--sans);
+}
+
+/* ── Body text ──────────────────────────────────────────────────── */
+p {
+  font-size: 15px;
+  color: var(--text2);
+  line-height: 1.65;
+  margin-bottom: 0.75rem;
+  max-width: 720px;
+  font-weight: 300;
+}
+p:last-child { margin-bottom: 0; }
+ul, ol { padding-left: 20px; margin-bottom: 0.75rem; }
+li {
+  font-size: 15px;
+  color: var(--text2);
+  line-height: 1.6;
+  margin-bottom: 4px;
+  font-weight: 300;
+}
+a { color: var(--accent); }
+strong { color: var(--text); font-weight: 500; }
+em { color: var(--text2); }
+
+/* ── Italic meta / source note ──────────────────────────────────── */
+.meta-note {
+  font-size: 11px;
+  color: var(--text3);
+  font-style: italic;
+  margin-bottom: 0.75rem;
+}
+
+/* ── Trend cards (Design Style Trends) ─────────────────────────── */
+.trend-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 12px;
+  margin: 0.75rem 0;
+}
+.trend-card {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px 14px;
+}
+.trend-card-num {
+  font-size: 10px;
+  color: var(--text3);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  font-family: var(--sans);
+  font-weight: 400;
+  margin-bottom: 6px;
+}
+.trend-card-name {
+  font-family: var(--serif);
+  font-size: 16px;
+  font-weight: normal;
+  color: var(--text);
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+.trend-card-desc {
+  font-size: 12px;
+  color: var(--text2);
+  line-height: 1.6;
+  font-weight: 300;
+}
+.trend-card-desc em {
+  color: var(--accent);
+  font-style: italic;
+  display: block;
+  margin-top: 6px;
+}
+
+/* ── Strategy card (section 7) ───────────────────────────────────── */
+.strategy-card {
+  border: 1px solid var(--border2);
+  overflow: hidden;
+  padding: 0;
+}
+.strategy-card .card-header {
+  background: var(--dark-banner);
+  margin: 0;
+  padding: 1.5rem 1.75rem 1.25rem;
+  border-bottom: none;
+  border-radius: 0;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+.strategy-card .card-header::after {
+  flex: 0 0 100%;
+  content: '';
+  display: block;
+  width: 36px;
+  height: 3px;
+  background: var(--gold);
+  border-radius: 2px;
+  margin-top: 10px;
+  opacity: 0.8;
+}
+.strategy-card .card-title { color: #f8f5f2; font-size: 24px; }
+.strategy-card .section-num { background: var(--gold); color: #2b2520; }
+
+/* ── Personal recommendations ────────────────────────────────────── */
+.rec-list { display: flex; flex-direction: column; gap: 6px; margin-top: 0.5rem; }
+.rec-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 15px;
+  color: var(--text2);
+  line-height: 1.6;
+  font-weight: 300;
+  font-style: italic;
+}
+.rec-pin { flex-shrink: 0; font-size: 16px; line-height: 1.45; }
+.strategy-step {
+  display: grid;
+  grid-template-columns: 26px 1fr;
+  gap: 1rem;
+  padding: 1.25rem 1.75rem;
+  border-top: 1px solid var(--border);
+  align-items: start;
+}
+.strategy-step-num {
+  font-size: 15px;
+  color: var(--accent);
+  line-height: 1.3;
+  padding-top: 1px;
+  text-align: center;
+}
+.strategy-step-title {
+  font-family: var(--serif);
+  font-size: 19px;
+  color: var(--text);
+  font-weight: normal;
+  margin-bottom: 0.6rem;
+}
+.strategy-step-body { font-size: 15px; color: var(--text2); line-height: 1.7; font-weight: 300; }
+.strategy-step-body p { margin-bottom: 0.5rem; max-width: none; color: var(--text2); font-size: 15px; font-weight: 300; }
+.strategy-step-body p:last-child { margin-bottom: 0; }
+.strategy-step-body ul, .strategy-step-body ol { padding-left: 18px; margin: 0.25rem 0; }
+.strategy-step-body li { color: var(--text2); font-size: 15px; line-height: 1.6; margin-bottom: 3px; font-weight: 300; }
+.strategy-step-body strong { color: var(--text); font-weight: 500; }
+.strategy-step-body .table-wrap { margin: 0.5rem 0; }
+
+/* ── Colour swatch ──────────────────────────────────────────────── */
+.swatch {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border-radius: 3px;
+  border: 1px solid var(--border2);
+  vertical-align: middle;
+  margin-right: 5px;
+}
+
+/* ── HR ─────────────────────────────────────────────────────────── */
+hr { display: none; }
+
+/* ── CSV download buttons ────────────────────────────────────────── */
+.csv-download-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 0.75rem;
+}
+.csv-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: #5c3d2e;
+  border: 1px solid #5c3d2e;
+  border-radius: 6px;
+  padding: 7px 14px;
+  font-size: 12px;
+  font-family: var(--sans);
+  font-weight: 400;
+  color: #fff;
+  text-decoration: none;
+  letter-spacing: .01em;
+  transition: background 0.12s, border-color 0.12s;
+}
+.csv-btn:hover { background: #4a3025; border-color: #4a3025; color: #fff; }
+.csv-btn svg { flex-shrink: 0; stroke: #fff; }
+
+/* ── Actionable Spreadsheet section ─────────────────────────────── */
+.spreadsheet-card {
+  border: 1.5px solid #34a853;
+  background: #fff;
+  text-align: center;
+  padding: 2.5rem 1.5rem 2rem;
+  margin-top: 1.5rem;
+}
+.canva-card { border-color: #29ABE2; margin-top: 0.75rem; }
+.canva-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: #29ABE2;
+  color: #fff;
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 500;
+  padding: 14px 28px;
+  border-radius: 8px;
+  text-decoration: none;
+  letter-spacing: .01em;
+  transition: background 0.15s, box-shadow 0.15s;
+  box-shadow: 0 2px 8px rgba(41,171,226,0.3);
+}
+.canva-btn:hover { background: #1e96cf; box-shadow: 0 4px 14px rgba(41,171,226,0.4); }
+.canva-btn svg { flex-shrink: 0; }
+.spreadsheet-card .card-header { display: none; }
+.spreadsheet-eyebrow {
+  font-size: 11px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--text2);
+  font-weight: 300;
+  margin-bottom: 14px;
+}
+.spreadsheet-title {
+  font-family: var(--serif);
+  font-size: clamp(22px, 4vw, 32px);
+  font-weight: normal;
+  color: var(--text);
+  margin-bottom: 10px;
+  line-height: 1.2;
+}
+.spreadsheet-desc {
+  font-size: 13px;
+  color: var(--text2);
+  font-weight: 300;
+  max-width: 480px;
+  margin: 0 auto 2rem;
+  line-height: 1.65;
+}
+.sheets-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: #34a853;
+  color: #fff;
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 500;
+  padding: 14px 28px;
+  border-radius: 8px;
+  text-decoration: none;
+  letter-spacing: .01em;
+  transition: background 0.15s, box-shadow 0.15s;
+  box-shadow: 0 2px 8px rgba(52,168,83,0.25);
+}
+.sheets-btn:hover { background: #2d9248; box-shadow: 0 4px 14px rgba(52,168,83,0.35); }
+.sheets-btn svg { flex-shrink: 0; }
+.spreadsheet-note {
+  font-size: 13px;
+  color: var(--text3);
+  margin-top: 1rem;
+  font-weight: 300;
+  max-width: none;
+}
+
+</style>
+</head>
+<body>
+<div class="header">
+  <p class="header-label">Switzertemplates Pinterest Services</p>
+  <h1>Corner Cove Studios Audit</h1>
+  <p class="header-date">2026-05-28</p>
+</div>
+<div class="wrapper">
+<div class="card">
+<div class="card-header"><div class="card-title">Pinterest niche overview</div><span class="section-num">01</span></div>
+<p>Pinterest is where people go when they already know they want to buy something — they just haven't found the right thing yet. Gift shoppers arrive with an occasion in mind and a willingness to discover brands they've never heard of. They search, save, and plan weeks or months before actually purchasing, which means a well-optimised pin keeps driving traffic long after it's published. For a business that makes everything in-house and personalises every product to order, that's an audience worth owning.</p>
+<div class="stat-grid">
+<div class="stat-card"><div class="stat-val">518M+</div><div class="stat-label">Monthly active users — all searching, saving, and planning purchases</div></div>
+<div class="stat-card"><div class="stat-val">97%</div><div class="stat-label">Top searches are unbranded — buyers are open to discovering you</div></div>
+<div class="stat-card"><div class="stat-val">85%</div><div class="stat-label">Pinners have bought something after discovering it on the platform</div></div>
+<div class="stat-card"><div class="stat-val">169K+</div><div class="stat-label">Monthly Pinterest searches across your core keywords</div></div>
+</div>
+</div>
+<div class="card">
+<div class="card-header"><div class="card-title">Trending keywords in your niche</div><span class="section-num">02</span></div>
+<p class="meta-note">Based on Google monthly search volume + Pinterest commercial intent scoring</p>
+<div class="pill-grid"><span class="pill">custom gifts</span><span class="pill">gifts for her</span><span class="pill">unique gifts</span><span class="pill">custom mugs</span><span class="pill">personalized coffee mug</span><span class="pill">personalized water bottle</span><span class="pill">personalized tumbler</span><span class="pill">cute gifts</span><span class="pill">personalized gifts</span><span class="pill">cute tumblers</span><span class="pill">custom drinkware</span><span class="pill">custom gifts for women</span><span class="pill">personalised cup</span><span class="pill">coffee mug gift</span><span class="pill">birthday gifts</span></div>
+</div>
+<div class="card">
+<div class="card-header"><div class="card-title">Keyword groups</div><span class="section-num">03</span></div>
+<div class="subsection"><div class="subsection-title">Group 1: personalized gifts / custom gifts</div>
+<div class="table-wrap"><table><thead><tr>
+<th>Keyword</th>
+<th>Board name</th>
+<th>Buyer intent</th>
+</tr></thead><tbody>
+<tr><td>personalized gifts</td><td>Personalized gifts</td><td>High — searcher knows exactly what they want and is ready to buy</td></tr>
+<tr><td>custom gifts</td><td>Custom gifts</td><td>High — product-specific search with strong purchase intent</td></tr>
+<tr><td>custom gifts for women</td><td>Custom gifts for women</td><td>High — niche and specific, indicating ready-to-buy mindset</td></tr>
+<tr><td>personalized gifts for her</td><td>Personalized gifts for her</td><td>High — occasion-driven with clear gifting purchase intent</td></tr>
+</tbody></table></div>
+</div>
+<div class="subsection"><div class="subsection-title">Group 2: unique gifts</div>
+<div class="table-wrap"><table><thead><tr>
+<th>Keyword</th>
+<th>Board name</th>
+<th>Buyer intent</th>
+</tr></thead><tbody>
+<tr><td>unique gifts</td><td>Unique gifts</td><td>Medium — gift inspiration seeker with strong purchase potential</td></tr>
+<tr><td>gifts for her</td><td>Gifts for her</td><td>High — strong buyer intent tied to gifting occasions</td></tr>
+<tr><td>birthday gifts</td><td>Birthday gifts</td><td>High — occasion-driven search with clear purchase urgency</td></tr>
+</tbody></table></div>
+</div>
+<div class="subsection"><div class="subsection-title">Group 3: cute gifts</div>
+<div class="table-wrap"><table><thead><tr>
+<th>Keyword</th>
+<th>Board name</th>
+<th>Buyer intent</th>
+</tr></thead><tbody>
+<tr><td>cute gifts</td><td>Cute gifts</td><td>Medium — browsing emotionally, close to purchase decision</td></tr>
+<tr><td>small gifts for her</td><td>Small gifts for her</td><td>High — looking for something specific and affordable to buy now</td></tr>
+</tbody></table></div>
+</div>
+<div class="subsection"><div class="subsection-title">Group 4: tumblers</div>
+<div class="table-wrap"><table><thead><tr>
+<th>Keyword</th>
+<th>Board name</th>
+<th>Buyer intent</th>
+</tr></thead><tbody>
+<tr><td>personalized tumbler</td><td>Personalized tumbler</td><td>High — product-level keyword from a shopper ready to buy</td></tr>
+<tr><td>cute tumblers</td><td>Cute tumblers</td><td>Medium — style-driven discovery that converts with strong visuals</td></tr>
+<tr><td>custom tumbler</td><td>Custom tumbler</td><td>High — product-specific search signals purchase intent</td></tr>
+</tbody></table></div>
+</div>
+<div class="subsection"><div class="subsection-title">Group 5: coffee mugs</div>
+<div class="table-wrap"><table><thead><tr>
+<th>Keyword</th>
+<th>Board name</th>
+<th>Buyer intent</th>
+</tr></thead><tbody>
+<tr><td>personalized coffee mug</td><td>Personalized coffee mug</td><td>High — detailed product query from a buyer near conversion</td></tr>
+<tr><td>coffee mug gift</td><td>Coffee mug gift</td><td>High — gift occasion paired with product signals strong buying intent</td></tr>
+<tr><td>custom mugs</td><td>Custom mugs</td><td>High — product-specific search with clear commercial intent</td></tr>
+</tbody></table></div>
+</div>
+<div class="subsection"><div class="subsection-title">Group 6: cutting boards</div>
+<div class="table-wrap"><table><thead><tr>
+<th>Keyword</th>
+<th>Board name</th>
+<th>Buyer intent</th>
+</tr></thead><tbody>
+<tr><td>personalized cutting board</td><td>Personalized cutting board</td><td>High — specific gift product search with clear purchase intent</td></tr>
+<tr><td>custom cutting board</td><td>Custom cutting board</td><td>High — buyer searching for a specific personalised item</td></tr>
+<tr><td>engraved cutting board</td><td>Engraved cutting board</td><td>High — product detail keyword from a ready-to-buy shopper</td></tr>
+</tbody></table></div>
+</div>
+<div class="subsection"><div class="subsection-title">Group 7: coasters</div>
+<div class="table-wrap"><table><thead><tr>
+<th>Keyword</th>
+<th>Board name</th>
+<th>Buyer intent</th>
+</tr></thead><tbody>
+<tr><td>personalized coasters</td><td>Personalized coasters</td><td>High — gift-focused product search with buying intent</td></tr>
+<tr><td>custom coasters</td><td>Custom coasters</td><td>High — specific product search indicating purchase readiness</td></tr>
+<tr><td>coasters gift set</td><td>Coasters gift set</td><td>High — occasion-driven search with strong conversion potential</td></tr>
+</tbody></table></div>
+</div>
+<div class="subsection"><div class="subsection-title">Download detailed spreadsheet for each keyword group:</div>
+<div class="csv-download-row">
+<p><a href="keyword-groups/personalized-gifts-custom-gifts.csv" download class="csv-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Personalized gifts / custom gifts</a></p>
+<p><a href="keyword-groups/unique-gifts.csv" download class="csv-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Unique gifts</a></p>
+<p><a href="keyword-groups/cute-gifts.csv" download class="csv-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Cute gifts</a></p>
+<p><a href="keyword-groups/tumblers.csv" download class="csv-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Tumblers</a></p>
+<p><a href="keyword-groups/coffee-mugs.csv" download class="csv-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Coffee mugs</a></p>
+<p><a href="keyword-groups/cutting-boards.csv" download class="csv-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Cutting boards</a></p>
+<p><a href="keyword-groups/coasters.csv" download class="csv-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Coasters</a></p>
+</div>
+</div>
+</div>
+<div class="card">
+<div class="card-header"><div class="card-title">What buyers are asking (reddit & Quora)</div><span class="section-num">04</span></div>
+<div class="table-wrap"><table><thead><tr>
+<th>#</th>
+<th>Buyer question</th>
+<th>Pinterest content angle</th>
+</tr></thead><tbody>
+<tr><td>1</td><td><a href="https://reddit.com/r/GiftIdeas/comments/1p4tioz/what_is_the_best_christmas_gift_you_have_ever/" target="_blank" rel="noopener">What's a memorable, meaningful Christmas gift that will actually stand out?</a></td><td>"The Christmas gifts people still talk about years later" — personalised drinkware and custom keepsakes as emotionally resonant alternatives to generic presents</td></tr>
+<tr><td>2</td><td><a href="https://reddit.com/r/GiftIdeas/comments/1p0ix0d/whats_your_nofail_gift_youve_bought_more_than_once/" target="_blank" rel="noopener">What's a reliable, repeatable gift that works for almost anyone?</a></td><td>"The one personalised gift you'll want to buy for everyone" — positioning custom drinkware or engraved items as the ultimate repeat-purchase gift</td></tr>
+<tr><td>3</td><td><a href="https://reddit.com/r/GiftIdeas/comments/1pu2kpm/gift_ideas_for_a_very_quiet_coworker_who/" target="_blank" rel="noopener">What's a thoughtful, personalised gift for someone I don't know very well?</a></td><td>"Thoughtful gifts for the coworker you barely know (but still want to impress)" — custom mugs or desk-friendly drinkware as safe, feel-good workplace gifts</td></tr>
+<tr><td>4</td><td><a href="https://reddit.com/r/Gifts/comments/1pbukr4/sponsoring_a_family_this_holiday_but_mom_didnt/" target="_blank" rel="noopener">What's a heartfelt, practical gift for someone who puts themselves last?</a></td><td>"The perfect gift for the mum who asks for nothing" — personalised mugs or custom tumblers as affordable, emotionally meaningful choices</td></tr>
+<tr><td>5</td><td><a href="https://reddit.com/r/Gifts/comments/1oyltdz/my_family_says_im_good_at_giving_gifts_so_maybe/" target="_blank" rel="noopener">What are the best gifts to give under $50 or $100 that people will actually love?</a></td><td>"Gifts under $50 that look like you spent way more" — personalised drinkware and custom gifts as high-perceived-value, budget-friendly options</td></tr>
+<tr><td>6</td><td><a href="https://reddit.com/r/AskWomen/comments/1pawa57/heard_this_same_song_twenty_times_its_the_2025/" target="_blank" rel="noopener">What are women actually asking for as gifts this holiday season?</a></td><td>"What women actually want this Christmas (and a personalised gift that nails it)" — directing traffic toward custom drinkware and handcrafted personalised products</td></tr>
+<tr><td>7</td><td><a href="https://reddit.com/r/weddingplanning/comments/1rf2bf6/found_out_2_of_my_friends_sold_the_gifts_i_used/" target="_blank" rel="noopener">What are meaningful, keepsake-worthy bridesmaid or wedding party gifts people will actually treasure?</a></td><td>"Bridesmaid gifts so personal, they'd never dream of selling them" — custom engraved drinkware or personalised keepsake sets</td></tr>
+<tr><td>8</td><td><a href="https://reddit.com/r/weddingplanning/comments/1rj6tep/my_2025_summer_camp_dream_wedding/" target="_blank" rel="noopener">What are unique, personalised wedding favours or gifts that match a themed wedding?</a></td><td>"Custom wedding favours that make your theme unforgettable" — personalised drinkware and handcrafted items tailored to wedding aesthetics</td></tr>
+<tr><td>9</td><td><a href="https://reddit.com/r/Etsy/comments/1p1rpz7/do_i_just_take_the_loss_and_move_on/" target="_blank" rel="noopener">How do I find a trustworthy seller for custom gifts who will actually get it right?</a></td><td>"How to spot a custom gift maker you can actually trust" — building credibility for the in-house handcrafted process as the reliable, quality-guaranteed alternative</td></tr>
+<tr><td>10</td><td><a href="https://reddit.com/r/Gifts/comments/1plxs66/what_is_your_favorite_gift_you_will_be_giving/" target="_blank" rel="noopener">What's a gift I'll be genuinely excited to give this Christmas?</a></td><td>"Gifts you'll be just as excited to give as they are to receive" — personalised, handcrafted drinkware and custom products as gifts that generate real joy on both sides</td></tr>
+</tbody></table></div>
+</div>
+<div class="card">
+<div class="card-header"><div class="card-title">Visual trends on Pinterest</div><span class="section-num">05</span></div>
+<div class="subsection"><div class="subsection-title">2026 colour palette</div>
+<div class="table-wrap"><table><thead><tr>
+<th>Colour Name</th>
+<th>Hex (estimate)</th>
+<th>Mood/Feeling</th>
+<th>Use in Pins</th>
+</tr></thead><tbody>
+<tr><td>Warm Butter</td><td><span class="swatch" style="background:#F5E6C8;"></span>#F5E6C8</td><td>Nostalgic, handcrafted, cosy</td><td>Pin backgrounds for lifestyle flat lays of mugs and tumblers</td></tr>
+<tr><td>Terracotta Clay</td><td><span class="swatch" style="background:#C1603A;"></span>#C1603A</td><td>Earthy, artisan, grounded</td><td>Text overlays and border accents on personalised gift pins</td></tr>
+<tr><td>Dusty Sage</td><td><span class="swatch" style="background:#8FA68E;"></span>#8FA68E</td><td>Calm, natural, wholesome</td><td>Background wash for wedding and anniversary gift collections</td></tr>
+<tr><td>Deep Plum</td><td><span class="swatch" style="background:#5C2D4E;"></span>#5C2D4E</td><td>Luxurious, emotive, gifting-forward</td><td>Dark-mode style pins for premium corporate drinkware</td></tr>
+<tr><td>Soft Chalk White</td><td><span class="swatch" style="background:#F2EEE8;"></span>#F2EEE8</td><td>Clean, minimal, elevated</td><td>Product-focus pins where the item needs to breathe</td></tr>
+<tr><td>Burnished Copper</td><td><span class="swatch" style="background:#B56E3C;"></span>#B56E3C</td><td>Warm metallic, celebratory</td><td>Highlight engravings, foiling, or logo details on business drinkware</td></tr>
+</tbody></table></div>
+</div>
+<div class="subsection"><div class="subsection-title">2026 design style trends</div>
+<div class="trend-grid">
+<div class="trend-card"><div class="trend-card-num">Trend 01</div><div class="trend-card-name">Artisan close-up</div><div class="trend-card-desc">Extreme macro shots that reveal texture, grain, and hand-finishing detail. The imperfection <em>is</em> the selling point. Up-close photography of materials, craft, and making builds instant trust and stands out in a feed of polished stock imagery.</div></div>
+<div class="trend-card"><div class="trend-card-num">Trend 02</div><div class="trend-card-name">Quiet luxury aesthetic</div><div class="trend-card-desc">Minimal scenes, one or two objects, soft shadow, zero clutter. Emotional without being loud. This aesthetic performs especially well in gifting, home, and lifestyle niches where buyers want to feel something before they click.</div></div>
+<div class="trend-card"><div class="trend-card-num">Trend 03</div><div class="trend-card-name">Typography as hero</div><div class="trend-card-desc">The text in the image carries the message — the product becomes the frame. Bold, clean type over a simple background is one of the highest-save formats on Pinterest right now, particularly for products where the personalisation or message is the main selling point.</div></div>
+<div class="trend-card"><div class="trend-card-num">Trend 04</div><div class="trend-card-name">The occasion anchor</div><div class="trend-card-desc">Pins built around a specific life moment — birthday, promotion, new home, wedding — with seasonal colour and simple contextual props. Content tied to a real occasion converts because it meets the buyer exactly where they are emotionally.</div></div>
+</div>
+</div>
+</div>
+<div class="card">
+<div class="card-header"><div class="card-title">Competitor analysis</div><span class="section-num">06</span></div>
+<p class="meta-note">Use these accounts for general inspiration, board analysis, recent pin analysis, and for following their followers to grow your own audience.</p>
+<div class="table-wrap"><table><thead><tr>
+<th>Account</th>
+<th>Followers</th>
+<th>Boards</th>
+<th>Bio</th>
+</tr></thead><tbody>
+<tr><td><a href="https://www.pinterest.com/marigoldgrey" target="_blank" rel="noopener">@marigoldgrey</a></td><td>49K</td><td>86</td><td>The best gift ideas, unique gift boxes & creative gift baskets for cor...</td></tr>
+<tr><td><a href="https://www.pinterest.com/ohheygiftday" target="_blank" rel="noopener">@ohheygiftday</a></td><td>24</td><td>17</td><td>Curated gift boxes for every occasion. Thoughtfully filled, beautifull...</td></tr>
+<tr><td><a href="https://www.pinterest.com/giftsforyounow" target="_blank" rel="noopener">@giftsforyounow</a></td><td>9K</td><td>109</td><td>Creating memories for life with fun personalized gifts for every occas...</td></tr>
+<tr><td><a href="https://www.pinterest.com/vividgiftideas" target="_blank" rel="noopener">@vividgiftideas</a></td><td>25K</td><td>71</td><td>Unique gift ideas. Collect, share, inspire on the art of gift giving. ...</td></tr>
+<tr><td><a href="https://www.pinterest.com/amesandoates" target="_blank" rel="noopener">@amesandoates</a></td><td>2K</td><td>31</td><td>Modern gifting, made simple. We provide luxury curated & custom giftin...</td></tr>
+</tbody></table></div>
+<div class="subsection"><div class="subsection-title">@marigoldgrey — 49k followers</div>
+<p><strong>@marigoldgrey</strong> positions itself as a broad gift inspiration hub — curating ideas across corporate, wedding, holiday, and demographic-based gifting. With 86 boards, their strategy is clearly volume-driven discovery, casting a wide net to capture search traffic across dozens of gift categories rather than owning a specific product or craft identity.</p>
+</div>
+<div class="subsection"><div class="subsection-title">@ohheygiftday — 24 followers</div>
+<p><strong>@ohheygiftday</strong> appears to sell pre-curated gift boxes — a passive, browse-and-buy model. With 17 boards and only 24 followers, their strategy leans on broad occasion-based categories (birthdays, holidays, etc.) rather than product differentiation. Their bio signals lifestyle appeal but no craft, process, or personalisation story.</p>
+</div>
+<div class="subsection"><div class="subsection-title">@giftsforyounow — 9k followers</div>
+<p><strong>@giftsforyounow</strong> runs a broad, occasion-led content strategy — Valentine's Day, birthdays, holidays, baby gifts — designed to cast a wide net across gift-search traffic. With 109 boards, they're clearly chasing volume over depth, positioning themselves as a general gifting destination rather than a specialist.</p>
+</div>
+<div class="subsection"><div class="subsection-title">@vividgiftideas — 25k followers</div>
+<p><strong>@vividgiftideas</strong> presents as a broad gift inspiration curator rather than a seller — 71 boards signals a wide-net, lifestyle-led approach covering every gift occasion imaginable. Their bio ("collect, share, inspire") confirms they're aggregating ideas, not showcasing a craft or process. Follower count suggests solid traction, but likely thin brand identity.</p>
+</div>
+<div class="subsection"><div class="subsection-title">@amesandoates — 2k followers</div>
+<p><strong>@amesandoates</strong> positions itself as a luxury gifting curator for corporate and individual clients, with 31 boards suggesting a broad content spread — likely covering gifting occasions, aesthetics, and lifestyle inspiration rather than product-focused content. Their "curated" language implies a reseller or sourcing model rather than in-house production.</p>
+</div>
+</div>
+<div class="card strategy-card">
+<div class="card-header"><div class="card-title">Pinterest strategy & growth plan</div><span class="section-num">07</span></div>
+<div class="strategy-step"><div class="strategy-step-num">✓</div><div class="strategy-step-content"><div class="strategy-step-title">Pinning frequency & timing</div><div class="strategy-step-body"><p><strong>If your Pinterest account is brand new</strong>, start slowly — pin just 1–3 times per day and repin from other accounts rather than uploading your own content. The exception is purely educational or informational content that links to your website or an external resource. Don't over-post early — posting too much too soon can trigger spam filters and cause Pinterest to restrict your reach before you've built any momentum. Let the algorithm learn what your account is about first.</p><p><strong>Growing and established accounts</strong> can pin 3–10 times per day. Scale up gradually as you build a library of unique content and links — don't jump from 3 to 10 overnight.</p><p><strong>Hard limit:</strong> Never save or post more than 50 pins in a single day. That's the point where Pinterest starts flagging accounts for spam, regardless of how long you've been active.</p><p>Once you're consistently hitting strong save rates, accounts that scale to 10–15 pins per day consistently see real compounding growth — but that number has to be reached over months, not weeks. Maintain at least one pin per day even during quiet weeks — momentum is much harder to rebuild than it is to maintain.</p></div></div></div>
+<div class="strategy-step"><div class="strategy-step-num">✓</div><div class="strategy-step-content"><div class="strategy-step-title">Pin format mix</div><div class="strategy-step-body"><p>The consistently best-performing pin format on Pinterest is the <strong>TOBI pin</strong> — text on background image. A clean, compelling background photo with a direct, readable text overlay outperforms pure product photography and video in most niches. This is where to start.</p><p>Keep pin colors in mind: <strong>dominant pin colors matter</strong>. Pins where red, purple, or pink is prominent tend to get more clicks on average. You don't need to completely change your palette, but it's worth testing these as overlay or accent colors in your pins.</p><p>Think of your pin mix across two goals: <strong>pins for saves</strong> (beautiful, aspirational, visually strong — these spread your reach as people board them) and <strong>pins for clicks</strong> (clear headline, direct outcome, specific link promise — these drive traffic). You need both. A save-heavy account builds audience; a click-heavy account builds revenue.</p><p>Static images have the longest shelf life of any format. Video pins (7–15 seconds, no sound required) are the fastest way to reach new audiences. Use different destination links across your pins — don't point everything to the same URL.</p></div></div></div>
+<div class="strategy-step"><div class="strategy-step-num">✓</div><div class="strategy-step-content"><div class="strategy-step-title">How pinterest's algorithm works</div><div class="strategy-step-body"><p>Pinterest ranks pins on three factors:</p><p><strong>Saves</strong> are the most powerful signal. A saved pin keeps circulating for months after it's published. Every time someone saves your pin, Pinterest distributes it to more people. This is why a pin with 200 impressions and 15 saves outperforms a pin with 4,000 impressions and 3 saves — the save rate is what the algorithm reads as quality.</p><p><strong>Keywords</strong> determine who sees your content. They belong in four places: pin title (front-load the primary keyword), pin description (3–5 keywords placed naturally), alt text (describe the image and include one keyword), board name, and board description. Write full board descriptions — Pinterest uses them for interest matching, not just humans reading them.</p></div></div></div>
+<div class="strategy-step"><div class="strategy-step-num">✓</div><div class="strategy-step-content"><div class="strategy-step-title">Writing pin descriptions that convert</div><div class="strategy-step-body"><p>Every description should do three things, in this order:</p><ol><li><strong>Context using keywords</strong> — tell Pinterest (and the reader) exactly what the pin is about, using your primary keyword naturally in the first sentence</li><li><strong>Benefit of clicking through</strong> — give them a reason to leave Pinterest and visit your page</li><li><strong>Encourage a save</strong> — ask them to save it for later</li></ol><p>Most descriptions should be exactly 3 sentences — one for each goal. Short, purposeful, keyword-rich.</p><div class="field-label">Example:</div><p class="meta-note">"Looking for a personalised gift that actually feels special? Our custom drinkware is handcrafted in-house — from engraved mugs to personalised tumblers — ready to order with a name, date or message. Save this for your next gifting occasion."</p></div></div></div>
+<div class="strategy-step"><div class="strategy-step-num">✓</div><div class="strategy-step-content"><div class="strategy-step-title">Keyword research tools</div><div class="strategy-step-body"><p>Use these to find the keywords that actually have search volume on Pinterest before you create content:</p><ul><li><strong>Pinterest Trends</strong> (trends.pinterest.com) — shows what's growing in search right now</li><li><strong>Pinterest Search</strong> — type your main keyword while logged out and note all the autocomplete suggestions; then add a letter (a, b, c...) to surface more long-tail phrases</li><li><strong>Pinterest Ads manager</strong> — use the keyword targeting tool to see volume data before you create content</li></ul></div></div></div>
+<div class="strategy-step"><div class="strategy-step-num">✓</div><div class="strategy-step-content"><div class="strategy-step-title">What actually drives growth</div><div class="strategy-step-body"><p><strong>Follow at least 10 related accounts</strong> in your niche when you first set up. Pinterest uses your follows to understand what category your account belongs to — this helps your early pins get distributed to the right audience.</p><p><strong>Analyse your top-performing pins and do more of the same.</strong> Once you have 4–6 weeks of data, look at which pins are getting the most saves and clicks. Double down on that format, aesthetic, and topic — don't spread effort evenly across everything. Pinterest rewards accounts that find what works and repeat it.</p><p><strong>Two content types that consistently do well:</strong> information/educational content (one clear idea, one clear takeaway — works well linking to blog posts or how-to guides) and round-ups/listicles (curated collections around a theme, like "10 personalised gift ideas under £30"). Both formats give Pinterest users a reason to save for later, which is the most valuable action they can take.</p><p>Growth on Pinterest is cumulative, not viral. A pin published today may still be driving traffic in 8 months. The accounts that win are the ones that show up consistently, optimise as they go, and don't stop when early impressions look slow.</p></div></div></div>
+<div class="strategy-step"><div class="strategy-step-num">✓</div><div class="strategy-step-content"><div class="strategy-step-title">Board structure recommendations</div><div class="strategy-step-body"><div class="table-wrap"><table><thead><tr>
+<th>Board name</th>
+<th>Description</th>
+<th>Keywords</th>
+<th>Min pins</th>
+<th>Pin types</th>
+</tr></thead><tbody>
+<tr><td><strong>Personalized gifts</strong></td><td>Handcrafted personalized gifts for birthdays, weddings, and special occasions. Custom-made for everyone on your list.</td><td>personalized gifts, unique gifts, custom gifts</td><td>50</td><td>Product pins, lifestyle shots, gift guides, seasonal repins</td></tr>
+<tr><td><strong>Custom gifts</strong></td><td>Unique custom gifts made in-house for businesses and everyday customers. From drinkware to keepsakes, find the perfect handcrafted gift.</td><td>custom gifts, custom gifts for women, unique gifts</td><td>50</td><td>Product pins, behind-the-scenes, business gifting inspo, repins</td></tr>
+<tr><td><strong>Gifts for her</strong></td><td>The best gifts for her — personalized, practical and totally unique. Handcrafted custom drinkware, mugs and more she'll actually love.</td><td>gifts for her, cute gifts, personalized gifts</td><td>60</td><td>Product pins, styled flat lays, gift roundups, repins</td></tr>
+<tr><td><strong>Custom drinkware</strong></td><td>Premium custom drinkware personalised just for you or your brand. Tumblers, water bottles and mugs — all handcrafted in-house.</td><td>custom drinkware, personalized tumbler, personalized water bottle</td><td>45</td><td>Product pins, collection showcases, branding mockups, repins</td></tr>
+<tr><td><strong>Personalized tumbler</strong></td><td>Personalized tumblers custom-made with care. Great for daily use, gifting, or branded merchandise.</td><td>personalized tumbler, cute tumblers, custom drinkware</td><td>45</td><td>Product pins, lifestyle shots, color/style variations, repins</td></tr>
+<tr><td><strong>Personalized coffee mug</strong></td><td>A personalized coffee mug made just for you — ideal as a heartfelt gift or a custom branded keepsake. Handcrafted with care.</td><td>personalized coffee mug, custom mugs, personalized gifts</td><td>45</td><td>Product pins, styled mug shots, gift occasion pins, repins</td></tr>
+<tr><td><strong>Cute gifts</strong></td><td>The cutest gifts for any occasion — all handcrafted and personalised. Custom mugs, tumblers, and small gifts everyone will adore.</td><td>cute gifts, cute tumblers, gifts for her</td><td>50</td><td>Product pins, trend-led lifestyle images, seasonal gift guides, repins</td></tr>
+</tbody></table></div></div></div></div>
+</div>
+<div class="card">
+<div class="card-header"><div class="card-title">Personal recommendations</div><span class="section-num">08</span></div>
+<div class="rec-list">
+<div class="rec-item"><span class="rec-pin">📌</span><span>Add personalized tumblers/custom tumblers to your range — people on Pinterest search for this term heavily and there is strong buyer intent behind it</span></div>
+<div class="rec-item"><span class="rec-pin">📌</span><span>Add Christmas tumblers/drinkware to your pin content — starting now gives you the best chance of ranking for these keywords by the time Christmas traffic peaks</span></div>
+<div class="rec-item"><span class="rec-pin">📌</span><span>Add a blog section to your website — checklists, gift guides, and how-to posts give Pinterest users somewhere valuable to land, and give you a steady stream of fresh content to pin</span></div>
+<div class="rec-item"><span class="rec-pin">📌</span><span>Add a short questionnaire at checkout asking how customers found you — this lets you track how much traffic and revenue is actually coming from Pinterest over time</span></div>
+</div>
+</div>
+<div class="card spreadsheet-card">
+  <div class="spreadsheet-title">Your actionable GoogleSheet</div>
+  <p class="spreadsheet-desc"><strong>Make sure you make your own copy. Go to File → Make a copy</strong></p>
+  <a href="https://docs.google.com/spreadsheets/d/19rPT5TIxXDF5JkUZZiq5hqPPKBTI_yq5W6DFK2yS8Zc/edit?usp=sharing" target="_blank" class="sheets-btn">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect x="4" y="1" width="16" height="22" rx="2" fill="white" opacity="0.15"/>
+  <path d="M14 1H4C2.9 1 2 1.9 2 3V21C2 22.1 2.9 23 4 23H20C21.1 23 22 22.1 22 21V9L14 1Z" fill="white"/>
+  <path d="M14 1V9H22L14 1Z" fill="rgba(255,255,255,0.6)"/>
+  <rect x="6" y="13" width="12" height="1.5" rx="0.75" fill="#34a853"/>
+  <rect x="6" y="16" width="8" height="1.5" rx="0.75" fill="#34a853"/>
+  <rect x="6" y="10" width="12" height="1.5" rx="0.75" fill="#34a853"/>
+</svg>
+    Open the file
+  </a>
+</div>
+<div class="card spreadsheet-card canva-card">
+  <div class="spreadsheet-title">50 pin templates for Canva</div>
+  <p class="spreadsheet-desc">Ready-to-edit pin templates built for Pinterest. Customise with your photos and texts.</p>
+  <a href="https://canva.link/5mazrd595nv86lj" target="_blank" class="canva-btn">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="12" cy="12" r="10" fill="white" opacity="0.9"/>
+  <path d="M15.5 8.5C15.5 8.5 14.5 7 12 7C9 7 7 9.5 7 12C7 14.5 9 17 12 17C14.5 17 15.5 15.5 15.5 15.5" stroke="rgba(123,97,255,0.9)" stroke-width="2" stroke-linecap="round"/>
+  <circle cx="12" cy="12" r="2.5" fill="rgba(123,97,255,0.9)"/>
+</svg>
+    50 pin templates for Canva
+  </a>
+</div>
+</div>
+</body>
+</html>
