@@ -1797,8 +1797,8 @@
     "honest_timeline": "4-week sprint plants seeds. Compounding traffic from month 3-6.",
     "daily_task": {
       "label": "Upload 7 pins to Tailwind (repurposer copy + your own Canva images)",
-      "done_today": false,
-      "last_done": ""
+      "done_today": true,
+      "last_done": "2026-06-01"
     },
     "weeks": {
       "week1": {
