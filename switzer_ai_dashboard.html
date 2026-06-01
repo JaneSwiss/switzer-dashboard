@@ -649,16 +649,19 @@ async function toggleDailyTask(checked){
 }
 
 function renderBlog(){
-  const blog=DATA.blog_seo_agent||{}, posts=blog.posts||[];
-  const pub=posts.filter(p=>p.published).length, draft=posts.filter(p=>p.written&&!p.published).length;
+  const blog=DATA.blog_seo_agent||{};
+  const allPosts=blog.posts||[];
+  const pub=allPosts.filter(p=>p.published).length, draft=allPosts.filter(p=>p.written&&!p.published).length;
   document.getElementById('blog-badge').textContent=`${pub} published · ${draft} ready`;
   const tbody=document.getElementById('blog-tbody'); tbody.innerHTML='';
-  if(!posts.length){ tbody.innerHTML='<tr><td colspan="7" class="empty">No posts yet.</td></tr>'; renderBlogPagination(0,0); return; }
+  if(!allPosts.length){ tbody.innerHTML='<tr><td colspan="7" class="empty">No posts yet.</td></tr>'; renderBlogPagination(0,0); return; }
+  // Sort newest first by date so new posts always appear on page 1
+  const posts=[...allPosts].sort((a,b)=>(b.date||'').localeCompare(a.date||''));
   const totalPages=Math.ceil(posts.length/BLOG_PER_PAGE);
   BLOG_PAGE=Math.min(Math.max(1,BLOG_PAGE),totalPages);
   const start=(BLOG_PAGE-1)*BLOG_PER_PAGE, slice=posts.slice(start,start+BLOG_PER_PAGE);
   slice.forEach((post,si)=>{
-    const i=start+si;
+    const i=allPosts.indexOf(post);
     const status=post.published?'Published':post.written?'Ready to publish':'In progress';
     const sBg=post.published?'var(--teal-bg)':post.written?'var(--amber-bg)':'var(--surface2)';
     const sCol=post.published?'var(--teal-text)':post.written?'var(--amber-text)':'var(--text2)';
