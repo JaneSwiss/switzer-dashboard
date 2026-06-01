@@ -1,0 +1,1333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lead Tracker</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+          background: #f8f5f2; color: #383838; font-size: 14px; }
+
+  .header { background: #383838; color: #f8f5f2; padding: 24px 40px; }
+  .header h1 { font-size: 19px; font-weight: 600; letter-spacing: 0.02em; }
+  .header p  { color: #bbb0aa; font-size: 13px; margin-top: 3px; }
+
+  .server-note { background: #fde8d4; color: #8a3a00; font-size: 12px;
+                  padding: 10px 40px; border-bottom: 1px solid #f5c6a0; }
+  .server-note code { background: rgba(0,0,0,0.08); padding: 1px 5px; border-radius: 3px;
+                       font-family: monospace; }
+
+  .stats { background: #fff; border-bottom: 1px solid #e8e3de;
+            padding: 16px 40px; display: flex; gap: 28px; align-items: center; flex-wrap: wrap; }
+  .stat .num { font-size: 26px; font-weight: 700; color: #8d6e63; }
+  .stat .lbl { font-size: 11px; color: #a5988e; text-transform: uppercase; letter-spacing: 0.06em; }
+  .stat-badge { background: #f8f5f2; border: 1px solid #e8e3de; border-radius: 4px;
+                 padding: 4px 10px; font-size: 12px; }
+
+  .filters { background: #fff; padding: 12px 40px; border-bottom: 1px solid #e8e3de;
+              display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+  .filters label { font-size: 11px; color: #a5988e; text-transform: uppercase;
+                    letter-spacing: 0.05em; margin-right: 3px; }
+  .filters input, .filters select {
+    border: 1px solid #e8e3de; border-radius: 4px; padding: 5px 10px;
+    font-size: 13px; color: #383838; background: #f8f5f2; outline: none; }
+  .filters input:focus, .filters select:focus { border-color: #8d6e63; }
+
+  .table-wrap { padding: 20px 40px; overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; background: #fff;
+           border-radius: 8px; overflow: hidden;
+           box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
+  th { background: #383838; color: #f8f5f2; font-size: 11px; font-weight: 600;
+        letter-spacing: 0.06em; text-transform: uppercase; padding: 11px 14px;
+        text-align: left; white-space: nowrap; }
+  td { padding: 10px 14px; border-bottom: 1px solid #f0ebe7; vertical-align: middle;
+        line-height: 1.5; }
+  td small { color: #a5988e; font-size: 12px; }
+  tr.lead-row:hover td { background: #fdfcfb; }
+  tr.lead-row.priority-high { border-left: 3px solid #8d6e63; }
+  tr.lead-row.priority-mid  { border-left: 3px solid #bbb0aa; }
+  tr.lead-row.priority-low  { border-left: 3px solid #e8e3de; }
+  tr.lead-row.sent td { opacity: 0.45; }
+
+  /* Status selector */
+  .status-select {
+    border: 1px solid #e8e3de; border-radius: 4px; padding: 4px 8px;
+    font-size: 11px; background: #f8f5f2; color: #383838; cursor: pointer; outline: none;
+  }
+  .status-select.status-messaged { background: #e8f7dc; color: #3a7a30; border-color: #c4e6b0; }
+  .status-select.status-replied  { background: #fde8d4; color: #c05c00; border-color: #f5c6a0; }
+  .status-select.status-paid     { background: #383838; color: #f8f5f2; }
+  .status-select.status-qualified { background: #dcedf7; color: #1a5e8a; border-color: #b0d4ec; }
+  .status-select.status-found    { background: #f0ebe7; color: #8d6e63; }
+  .status-select.saving { opacity: 0.6; pointer-events: none; }
+  .status-select.saved  { outline: 2px solid #6a9e72; outline-offset: 1px; }
+
+  /* Badges */
+  .badge { font-size: 11px; padding: 2px 8px; border-radius: 3px; font-weight: 500; }
+  .source-etsy      { background: #fde8d4; color: #c05c00; }
+  .source-instagram { background: #f3e0f7; color: #7b2d8b; }
+  .source-google,
+  .source-bing      { background: #dcedf7; color: #1a5e8a; }
+
+  .score { font-weight: 700; font-size: 13px; }
+  .score-high { color: #8d6e63; }
+  .score-mid  { color: #bbb0aa; }
+  .score-low  { color: #c8c0bb; }
+
+  .pint-no  { color: #6a9e72; font-weight: 600; font-size: 12px; }
+  .pint-yes { color: #bbb0aa; font-size: 12px; }
+
+  .status { font-size: 11px; padding: 3px 8px; border-radius: 3px; }
+  .status-found     { background: #f0ebe7; color: #8d6e63; }
+  .status-qualified { background: #dcedf7; color: #1a5e8a; }
+  .status-messaged  { background: #e8f7dc; color: #3a7a30; }
+  .status-replied   { background: #fde8d4; color: #c05c00; }
+  .status-paid      { background: #383838; color: #f8f5f2; }
+
+  /* Message button */
+  .msg-cell { text-align: center; }
+  .msg-btn {
+    background: #f8f5f2; border: 1px solid #e8e3de; border-radius: 5px;
+    padding: 5px 11px; font-size: 12px; color: #8d6e63; cursor: pointer;
+    display: inline-flex; align-items: center; gap: 5px; transition: all 0.15s;
+  }
+  .msg-btn:hover { background: #8d6e63; color: #fff; border-color: #8d6e63; }
+  .msg-btn.open   { background: #8d6e63; color: #fff; border-color: #8d6e63; }
+  .no-draft { color: #c8c0bb; font-size: 12px; }
+
+  /* Draft panel */
+  tr.draft-panel td { background: #fdf9f7; padding: 0 40px 18px 40px;
+                       border-bottom: 1px solid #e8e3de; }
+  .draft-box { border-left: 3px solid #8d6e63; padding: 14px 18px;
+                background: #fff; border-radius: 0 6px 6px 0; }
+  .draft-meta { font-size: 11px; text-transform: uppercase; letter-spacing: 0.07em;
+                 color: #a5988e; margin-bottom: 10px; }
+  .draft-text { font-size: 13px; line-height: 1.8; color: #383838; white-space: pre-wrap; }
+  .copy-btn { margin-top: 14px; background: #383838; color: #f8f5f2; border: none;
+               border-radius: 4px; padding: 7px 18px; font-size: 12px; cursor: pointer; }
+  .copy-btn:hover  { background: #8d6e63; }
+  .copy-btn.copied { background: #6a9e72; }
+
+  a { color: #8d6e63; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .empty { color: #c8c0bb; }
+  .hidden { display: none !important; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Lead Tracker</h1>
+  <p>Pinterest Services &middot; Switzertemplates &middot; 2026-05-26</p>
+</div>
+
+<div class="server-note">
+          Status changes are view-only here. Run <code>python3 skills/lead-gen-agent/main.py --serve</code> to track progress live.
+        </div>
+
+<div class="stats">
+  <div class="stat"><div class="num">38</div><div class="lbl">Total leads</div></div>
+  <div class="stat"><div class="num">16</div><div class="lbl">Contactable</div></div>
+  <div class="stat"><div class="num">38</div><div class="lbl">Drafts ready</div></div>
+  <div class="stat"><div class="num">0</div><div class="lbl">Messaged</div></div>
+  <div style="flex:1"></div>
+  <span class="stat-badge">etsy: <strong>38</strong></span>
+</div>
+
+<div class="filters">
+  <div>
+    <label>Search</label>
+    <input type="text" id="search" placeholder="name, niche..." oninput="filterTable()">
+  </div>
+  <div>
+    <label>Source</label>
+    <select id="fSource" onchange="filterTable()">
+      <option value="">All</option>
+      <option value="etsy">Etsy</option>
+      <option value="instagram">Instagram</option>
+      <option value="google">Google</option>
+    </select>
+  </div>
+  <div>
+    <label>Status</label>
+    <select id="fStatus" onchange="filterTable()">
+      <option value="">All</option>
+      <option value="found">Found</option>
+      <option value="qualified">Qualified</option>
+      <option value="messaged">Messaged</option>
+      <option value="replied">Replied</option>
+      <option value="paid">Paid</option>
+    </select>
+  </div>
+  <div style="display:flex;align-items:center;gap:6px;">
+    <input type="checkbox" id="fNoPint" onchange="filterTable()">
+    <label for="fNoPint" style="cursor:pointer">No Pinterest only</label>
+  </div>
+  <div style="display:flex;align-items:center;gap:6px;">
+    <input type="checkbox" id="fHasMsg" onchange="filterTable()">
+    <label for="fHasMsg" style="cursor:pointer">Has message</label>
+  </div>
+</div>
+
+<div class="table-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th>Source</th>
+        <th>Business</th>
+        <th>Niche</th>
+        <th>Links</th>
+        <th>Contact</th>
+        <th>Pinterest</th>
+        <th>Score</th>
+        <th>Status</th>
+        <th>Message</th>
+      </tr>
+    </thead>
+    <tbody>
+      
+        <tr class="lead-row priority-high" id="row-6c8d2129"
+            data-source="etsy" data-status="qualified"
+            data-niche="handmade jewelry" data-pinterest="N">
+          <td><span class="badge source-etsy">etsy</span></td>
+          <td>
+            <strong>NThandmadeJewelry</strong>
+            
+          </td>
+          <td>handmade jewelry</td>
+          <td><a href="https://www.etsy.com/shop/NThandmadeJewelry" target="_blank">Etsy</a></td>
+          <td><a href="https://instagram.com/nthandmadejewelry" target="_blank">@nthandmadejewelry</a></td>
+          <td><span class="pint pint-no">No Pinterest</span></td>
+          <td><span class="score score-high">10</span></td>
+          <td class="status-cell"><span class="status status-qualified">Qualified</span></td>
+          <td class="msg-cell"><button class="msg-btn" onclick="toggleDraft(event, '6c8d2129')" title="View message">
+              <span>&#9993;</span> <span class="msg-label">View</span>
+            </button></td>
+        </tr>
+        
+            <tr class="draft-panel" id="panel-6c8d2129" style="display:none;">
+              <td colspan="9">
+                <div class="draft-box">
+                  <div class="draft-meta">Instagram DM &middot; NThandmadeJewelry</div>
+                  <div class="draft-text" id="draft-6c8d2129">──────────────────────────────────────────────────<br><br>Hi,<br>How are you?<br>I really like your profile - the delicate wirework on your rings caught my eye, they have such a handcrafted, one-of-a-kind feel that's hard to find anywhere else. This kind of product usually does really well on Pinterest, and I noticed you don't have a Pinterest profile linked anywhere.<br><br>My name is Jane. I work with business owners like you to drive thousands of visitors from Pinterest to their shops and websites (I also run Switzer Templates, a shop with over 28,000 sales, and Pinterest is my main traffic driver)<br><br>If you'd like to make the most of Pinterest for your business, I offer two packages that will help to set your account up for success: https://pinterest.switzertemplates.com/ I do a full audit and build a comprehensive strategy specifically for your niche, using paid analytics tools that aren't available to the general public - so you get clear insight into what's actually working in your niche and how much traffic and sales you can expect.<br><br>If you're curious about Pinterest but not ready to invest yet, I put together a free guide on how to set up your profile and get started. You can grab it here: switzertemplates.myflodesk.com/pinterest-guidebook<br><br>Let me know if you have any questions - always happy to help!<br><br>Regards,<br>Jane</div>
+                  <button class="copy-btn" onclick="copyDraft(event, '6c8d2129')">Copy message</button>
+                </div>
+              </td>
+            </tr>
+        <tr class="lead-row priority-high" id="row-5d6befe5"
+            data-source="etsy" data-status="qualified"
+            data-niche="handmade jewelry" data-pinterest="Y">
+          <td><span class="badge source-etsy">etsy</span></td>
+          <td>
+            <strong>rioritajewelry</strong>
+            
+          </td>
+          <td>handmade jewelry</td>
+          <td><a href="https://www.etsy.com/shop/rioritajewelry" target="_blank">Etsy</a></td>
+          <td><a href="https://instagram.com/riorita_jewelry" target="_blank">@riorita_jewelry</a></td>
+          <td><span class="pint pint-yes">Has Pinterest</span></td>
+          <td><span class="score score-high">10</span></td>
+          <td class="status-cell"><span class="status status-qualified">Qualified</span></td>
+          <td class="msg-cell"><button class="msg-btn" onclick="toggleDraft(event, '5d6befe5')" title="View message">
+              <span>&#9993;</span> <span class="msg-label">View</span>
+            </button></td>
+        </tr>
+        
+            <tr class="draft-panel" id="panel-5d6befe5" style="display:none;">
+              <td colspan="9">
+                <div class="draft-box">
+                  <div class="draft-meta">Instagram DM &middot; rioritajewelry</div>
+                  <div class="draft-text" id="draft-5d6befe5">──────────────────────────────────────────────────<br><br>Hi,<br>How are you?<br>I really like your profile - the handmade jewelry pieces have such a personal, artisan feel, and the delicate details in each design really caught my eye. This kind of product usually does really well on Pinterest, and I noticed you don't have a Pinterest profile linked anywhere.<br><br>My name is Jane. I work with business owners like you to drive thousands of visitors from Pinterest to their shops and websites (I also run Switzer Templates, a shop with over 28,000 sales, and Pinterest is my main traffic driver)<br><br>If you'd like to make the most of Pinterest for your business, I offer two packages that will help to set your account up for success: https://pinterest.switzertemplates.com/ I do a full audit and build a comprehensive strategy specifically for your niche, using paid analytics tools that aren't available to the general public - so you get clear insight into what's actually working in your niche and how much traffic and sales you can expect.<br><br>If you're curious about Pinterest but not ready to invest yet, I put together a free guide on how to set up your profile and get started. You can grab it here: switzertemplates.myflodesk.com/pinterest-guidebook<br><br>Let me know if you have any questions - always happy to help!<br><br>Regards,<br>Jane</div>
+                  <button class="copy-btn" onclick="copyDraft(event, '5d6befe5')">Copy message</button>
+                </div>
+              </td>
+            </tr>
+        <tr class="lead-row priority-mid" id="row-dc493259"
+            data-source="etsy" data-status="qualified"
+            data-niche="handmade jewelry" data-pinterest="N">
+          <td><span class="badge source-etsy">etsy</span></td>
+          <td>
+            <strong>LaRueHandmadeJewelry</strong>
+            <br><small>La</small>
+          </td>
+          <td>handmade jewelry</td>
+          <td><a href="https://www.etsy.com/shop/LaRueHandmadeJewelry" target="_blank">Etsy</a></td>
+          <td><a href="https://www.etsy.com/shop/LaRueHandmadeJewelry" target="_blank">Etsy message</a></td>
+          <td><span class="pint pint-no">No Pinterest</span></td>
+          <td><span class="score score-mid">8</span></td>
+          <td class="status-cell"><span class="status status-qualified">Qualified</span></td>
+          <td class="msg-cell"><button class="msg-btn" onclick="toggleDraft(event, 'dc493259')" title="View message">
+              <span>&#9993;</span> <span class="msg-label">View</span>
+            </button></td>
+        </tr>
+        
+            <tr class="draft-panel" id="panel-dc493259" style="display:none;">
+              <td colspan="9">
+                <div class="draft-box">
+                  <div class="draft-meta">Instagram DM &middot; LaRueHandmadeJewelry</div>
+                  <div class="draft-text" id="draft-dc493259">──────────────────────────────────────────────────<br><br>Hi,<br>How are you?<br>I really like your profile - the delicate wirework on your earrings caught my eye, and the way you layer different metals together feels really unique and thoughtful. This kind of product usually does really well on Pinterest, and I noticed you don't have a Pinterest profile linked anywhere.<br><br>My name is Jane. I work with business owners like you to drive thousands of visitors from Pinterest to their shops and websites (I also run Switzer Templates, a shop with over 28,000 sales, and Pinterest is my main traffic driver)<br><br>If you'd like to make the most of Pinterest for your business, I offer two packages that will help to set your account up for success: https://pinterest.switzertemplates.com/ I do a full audit and build a comprehensive strategy specifically for your niche, using paid analytics tools that aren't available to the general public - so you get clear insight into what's actually working in your niche and how much traffic and sales you can expect.<br><br>If you're curious about Pinterest but not ready to invest yet, I put together a free guide on how to set up your profile and get started. You can grab it here: switzertemplates.myflodesk.com/pinterest-guidebook<br><br>Let me know if you have any questions - always happy to help!<br><br>Regards,<br>Jane</div>
+                  <button class="copy-btn" onclick="copyDraft(event, 'dc493259')">Copy message</button>
+                </div>
+              </td>
+            </tr>
+        <tr class="lead-row priority-mid" id="row-c4803c10"
+            data-source="etsy" data-status="qualified"
+            data-niche="handmade jewelry" data-pinterest="N">
+          <td><span class="badge source-etsy">etsy</span></td>
+          <td>
+            <strong>Lucyhandmadejewelry</strong>
+            
+          </td>
+          <td>handmade jewelry</td>
+          <td><a href="https://www.etsy.com/shop/Lucyhandmadejewelry" target="_blank">Etsy</a></td>
+          <td><a href="https://instagram.com/lucyhandmadejewelry" target="_blank">@lucyhandmadejewelry</a></td>
+          <td><span class="pint pint-no">No Pinterest</span></td>
+          <td><span class="score score-mid">7</span></td>
+          <td class="status-cell"><span class="status status-qualified">Qualified</span></td>
+          <td class="msg-cell"><button class="msg-btn" onclick="toggleDraft(event, 'c4803c10')" title="View message">
+              <span>&#9993;</span> <span class="msg-label">View</span>
+            </button></td>
+        </tr>
+        
+            <tr class="draft-panel" id="panel-c4803c10" style="display:none;">
+              <td colspan="9">
+                <div class="draft-box">
+                  <div class="draft-meta">Instagram DM &middot; Lucyhandmadejewelry</div>
+                  <div class="draft-text" id="draft-c4803c10">──────────────────────────────────────────────────<br><br>Hi,<br>How are you?<br>I really like your profile - your handmade pieces have such a personal, artisan feel, and the delicate detailing on your jewelry really caught my eye! This kind of product usually does really well on Pinterest, and I noticed you don't have a Pinterest profile linked anywhere.<br><br>My name is Jane. I work with business owners like you to drive thousands of visitors from Pinterest to their shops and websites (I also run Switzer Templates, a shop with over 28,000 sales, and Pinterest is my main traffic driver)<br><br>If you'd like to make the most of Pinterest for your business, I offer two packages that will help to set your account up for success: https://pinterest.switzertemplates.com/ I do a full audit and build a comprehensive strategy specifically for your niche, using paid analytics tools that aren't available to the general public - so you get clear insight into what's actually working in your niche and how much traffic and sales you can expect.<br><br>If you're curious about Pinterest but not ready to invest yet, I put together a free guide on how to set up your profile and get started. You can grab it here: switzertemplates.myflodesk.com/pinterest-guidebook<br><br>Let me know if you have any questions - always happy to help!<br><br>Regards,<br>Jane</div>
+                  <button class="copy-btn" onclick="copyDraft(event, 'c4803c10')">Copy message</button>
+                </div>
+              </td>
+            </tr>
+        <tr class="lead-row priority-mid" id="row-2b0c3b3f"
+            data-source="etsy" data-status="qualified"
+            data-niche="handmade jewelry" data-pinterest="N">
+          <td><span class="badge source-etsy">etsy</span></td>
+          <td>
+            <strong>LunariaAnnuaMx</strong>
+            
+          </td>
+          <td>handmade jewelry</td>
+          <td><a href="https://www.etsy.com/shop/LunariaAnnuaMx" target="_blank">Etsy</a></td>
+          <td><a href="https://instagram.com/lunariaannuamx" target="_blank">@lunariaannuamx</a></td>
+          <td><span class="pint pint-no">No Pinterest</span></td>
+          <td><span class="score score-mid">7</span></td>
+          <td class="status-cell"><span class="status status-qualified">Qualified</span></td>
+          <td class="msg-cell"><button class="msg-btn" onclick="toggleDraft(event, '2b0c3b3f')" title="View message">
+              <span>&#9993;</span> <span class="msg-label">View</span>
+            </button></td>
+        </tr>
+        
+            <tr class="draft-panel" id="panel-2b0c3b3f" style="display:none;">
+              <td colspan="9">
+                <div class="draft-box">
+                  <div class="draft-meta">Instagram DM &middot; LunariaAnnuaMx</div>
+                  <div class="draft-text" id="draft-2b0c3b3f">──────────────────────────────────────────────────<br><br>Hi,<br>How are you?<br>I really like your profile - your handmade jewelry pieces have such a delicate, organic feel, especially the way you incorporate natural shapes into each design. This kind of product usually does really well on Pinterest, and I noticed you don't have a Pinterest profile linked anywhere.<br><br>My name is Jane. I work with business owners like you to drive thousands of visitors from Pinterest to their shops and websites (I also run Switzer Templates, a shop with over 28,000 sales, and Pinterest is my main traffic driver)<br><br>If you'd like to make the most of Pinterest for your business, I offer two packages that will help to set your account up for success: https://pinterest.switzertemplates.com/ I do a full audit and build a comprehensive strategy specifically for your niche, using paid analytics tools that aren't available to the general public - so you get clear insight into what's actually working in your niche and how much traffic and sales you can expect.<br><br>If you're curious about Pinterest but not ready to invest yet, I put together a free guide on how to set up your profile and get started. You can grab it here: switzertemplates.myflodesk.com/pinterest-guidebook<br><br>Let me know if you have any questions - always happy to help!<br><br>Regards,<br>Jane</div>
+                  <button class="copy-btn" onclick="copyDraft(event, '2b0c3b3f')">Copy message</button>
+                </div>
+              </td>
+            </tr>
+        <tr class="lead-row priority-low" id="row-a66b1adb"
+            data-source="etsy" data-status="qualified"
+            data-niche="handmade jewelry" data-pinterest="N">
+          <td><span class="badge source-etsy">etsy</span></td>
+          <td>
+            <strong>LunarticHandmades</strong>
+            
+          </td>
+          <td>handmade jewelry</td>
+          <td><a href="https://www.etsy.com/shop/LunarticHandmades" target="_blank">Etsy</a></td>
+          <td><a href="https://www.etsy.com/shop/LunarticHandmades" target="_blank">Etsy message</a></td>
+          <td><span class="pint pint-no">No Pinterest</span></td>
+          <td><span class="score score-low">5</span></td>
+          <td class="status-cell"><span class="status status-qualified">Qualified</span></td>
+          <td class="msg-cell"><button class="msg-btn" onclick="toggleDraft(event, 'a66b1adb')" title="View message">
+              <span>&#9993;</span> <span class="msg-label">View</span>
+            </button></td>
+        </tr>
+        
+            <tr class="draft-panel" id="panel-a66b1adb" style="display:none;">
+              <td colspan="9">
+                <div class="draft-box">
+                  <div class="draft-meta">Instagram DM &middot; LunarticHandmades</div>
+                  <div class="draft-text" id="draft-a66b1adb">──────────────────────────────────────────────────<br><br>Hi,<br>How are you?<br>I really like your profile - your handmade jewelry pieces have such a unique, ethereal quality to them, especially the delicate metalwork I noticed in your shop. This kind of product usually does really well on Pinterest, and I noticed you don't have a Pinterest profile linked anywhere.<br><br>My name is Jane. I work with business owners like you to drive thousands of visitors from Pinterest to their shops and websites (I also run Switzer Templates, a shop with over 28,000 sales, and Pinterest is my main traffic driver)<br><br>If you'd like to make the most of Pinterest for your business, I offer two packages that will help to set your account up for success: https://pinterest.switzertemplates.com/ I do a full audit and build a comprehensive strategy specifically for your niche, using paid analytics tools that aren't available to the general public - so you get clear insight into what's actually working in your niche and how much traffic and sales you can expect.<br><br>If you're curious about Pinterest but not ready to invest yet, I put together a free guide on how to set up your profile and get started. You can grab it here: switzertemplates.myflodesk.com/pinterest-guidebook<br><br>Let me know if you have any questions - always happy to help!<br><br>Regards,<br>Jane</div>
+                  <button class="copy-btn" onclick="copyDraft(event, 'a66b1adb')">Copy message</button>
+                </div>
+              </td>
+            </tr>
+        <tr class="lead-row priority-low" id="row-15a8c1f2"
+            data-source="etsy" data-status="qualified"
+            data-niche="handmade jewelry" data-pinterest="N">
+          <td><span class="badge source-etsy">etsy</span></td>
+          <td>
+            <strong>KoiDesignHandmade</strong>
+            
+          </td>
+          <td>handmade jewelry</td>
+          <td><a href="https://www.etsy.com/shop/KoiDesignHandmade" target="_blank">Etsy</a></td>
+          <td><a href="https://www.etsy.com/shop/KoiDesignHandmade" target="_blank">Etsy message</a></td>
+          <td><span class="pint pint-no">No Pinterest</span></td>
+          <td><span class="score score-low">5</span></td>
+          <td class="status-cell"><span class="status status-qualified">Qualified</span></td>
+          <td class="msg-cell"><button class="msg-btn" onclick="toggleDraft(event, '15a8c1f2')" title="View message">
+              <span>&#9993;</span> <span class="msg-label">View</span>
+            </button></td>
+        </tr>
+        
+            <tr class="draft-panel" id="panel-15a8c1f2" style="display:none;">
+              <td colspan="9">
+                <div class="draft-box">
+                  <div class="draft-meta">Instagram DM &middot; KoiDesignHandmade</div>
+                  <div class="draft-text" id="draft-15a8c1f2">──────────────────────────────────────────────────<br><br>Hi,<br>How are you?<br>I really like your profile - the delicate wirework in your pieces is stunning, and the way you incorporate natural stones gives each one such a unique, earthy feel. This kind of product usually does really well on Pinterest, and I noticed you don't have a Pinterest profile linked anywhere.<br><br>My name is Jane. I work with business owners like you to drive thousands of visitors from Pinterest to their shops and websites (I also run Switzer Templates, a shop with over 28,000 sales, and Pinterest is my main traffic driver)<br><br>If you'd like to make the most of Pinterest for your business, I offer two packages that will help to set your account up for success: https://pinterest.switzertemplates.com/ I do a full audit and build a comprehensive strategy specifically for your niche, using paid analytics tools that aren't available to the general public - so you get clear insight into what's actually working in your niche and how much traffic and sales you can expect.<br><br>If you're curious about Pinterest but not ready to invest yet, I put together a free guide on how to set up your profile and get started. You can grab it here: switzertemplates.myflodesk.com/pinterest-guidebook<br><br>Let me know if you have any questions - always happy to help!<br><br>Regards,<br>Jane</div>
+                  <button class="copy-btn" onclick="copyDraft(event, '15a8c1f2')">Copy message</button>
+                </div>
+              </td>
+            </tr>
+        <tr class="lead-row priority-mid" id="row-45043847"
+            data-source="etsy" data-status="qualified"
+            data-niche="handmade jewelry" data-pinterest="N">
+          <td><span class="badge source-etsy">etsy</span></td>
+          <td>
+            <strong>BohoArtisanJewelry</strong>
+            
+          </td>
+          <td>handmade jewelry</td>
+          <td><a href="https://www.etsy.com/shop/BohoArtisanJewelry" target="_blank">Etsy</a></td>
+          <td><a href="https://www.etsy.com/shop/BohoArtisanJewelry" target="_blank">Etsy message</a></td>
+          <td><span class="pint pint-no">No Pinterest</span></td>
+          <td><span class="score score-mid">8</span></td>
+          <td class="status-cell"><span class="status status-qualified">Qualified</span></td>
+          <td class="msg-cell"><button class="msg-btn" onclick="toggleDraft(event, '45043847')" title="View message">
+              <span>&#9993;</span> <span class="msg-label">View</span>
+            </button></td>
+        </tr>
+        
+            <tr class="draft-panel" id="panel-45043847" style="display:none;">
+              <td colspan="9">
+                <div class="draft-box">
+                  <div class="draft-meta">Instagram DM &middot; BohoArtisanJewelry</div>
+                  <div class="draft-text" id="draft-45043847">──────────────────────────────────────────────────<br><br>Hi,<br>How are you?<br>I really like your profile - the way you incorporate raw gemstones into your wire-wrapped pieces gives them such an earthy, one-of-a-kind feel. This kind of product usually does really well on Pinterest, and I noticed you don't have a Pinterest profile linked anywhere.<br><br>My name is Jane. I work with business owners like you to drive thousands of visitors from Pinterest to their shops and websites (I also run Switzer Templates, a shop with over 28,000 sales, and Pinterest is my main traffic driver)<br><br>If you'd like to make the most of Pinterest for your business, I offer two packages that will help to set your account up for success: https://pinterest.switzertemplates.com/ I do a full audit and build a comprehensive strategy specifically for your niche, using paid analytics tools that aren't available to the general public - so you get clear insight into what's actually working in your niche and how much traffic and sales you can expect.<br><br>If you're curious about Pinterest but not ready to invest yet, I put together a free guide on how to set up your profile and get started. You can grab it here: switzertemplates.myflodesk.com/pinterest-guidebook<br><br>Let me know if you have any questions - always happy to help!<br><br>Regards,<br>Jane</div>
+                  <button class="copy-btn" onclick="copyDraft(event, '45043847')">Copy message</button>
+                </div>
+              </td>
+            </tr>
+        <tr class="lead-row priority-low" id="row-4bf5aec5"
+            data-source="etsy" data-status="qualified"
+            data-niche="handmade candles" data-pinterest="N">
+          <td><span class="badge source-etsy">etsy</span></td>
+          <td>
+            <strong>MelisaHomeLight</strong>
+            
+          </td>
+          <td>handmade candles</td>
+          <td><a href="https://www.etsy.com/shop/MelisaHomeLight" target="_blank">Etsy</a></td>
+          <td><a href="https://www.etsy.com/shop/MelisaHomeLight" target="_blank">Etsy message</a></td>
+          <td><span class="pint pint-no">No Pinterest</span></td>
+          <td><span class="score score-low">5</span></td>
+          <td class="status-cell"><span class="status status-qualified">Qualified</span></td>
+          <td class="msg-cell"><button class="msg-btn" onclick="toggleDraft(event, '4bf5aec5')" title="View message">
+              <span>&#9993;</span> <span class="msg-label">View</span>
+            </button></td>
+        </tr>
+        
+            <tr class="draft-panel" id="panel-4bf5aec5" style="display:none;">
+              <td colspan="9">
+                <div class="draft-box">
+                  <div class="draft-meta">Instagram DM &middot; MelisaHomeLight</div>
+                  <div class="draft-text" id="draft-4bf5aec5">──────────────────────────────────────────────────<br><br>Hi,<br>How are you?<br>I really like your profile - the handmade candles caught my eye, especially how each one feels so carefully crafted with such a cozy, personal touch. This kind of product usually does really well on Pinterest, and I noticed you don't have a Pinterest profile linked anywhere.<br><br>My name is Jane. I work with business owners like you to drive thousands of visitors from Pinterest to their shops and websites (I also run Switzer Templates, a shop with over 28,000 sales, and Pinterest is my main traffic driver)<br><br>If you'd like to make the most of Pinterest for your business, I offer two packages that will help to set your account up for success: https://pinterest.switzertemplates.com/ I do a full audit and build a comprehensive strategy specifically for your niche, using paid analytics tools that aren't available to the general public - so you get clear insight into what's actually working in your niche and how much traffic and sales you can expect.<br><br>If you're curious about Pinterest but not ready to invest yet, I put together a free guide on how to set up your profile and get started. You can grab it here: switzertemplates.myflodesk.com/pinterest-guidebook<br><br>Let me know if you have any questions - always happy to help!<br><br>Regards,<br>Jane</div>
+                  <button class="copy-btn" onclick="copyDraft(event, '4bf5aec5')">Copy message</button>
+                </div>
+              </td>
+            </tr>
+        <tr class="lead-row priority-low" id="row-dd51c648"
+            data-source="etsy" data-status="qualified"
+            data-niche="handmade candles" data-pinterest="N">
+          <td><span class="badge source-etsy">etsy</span></td>
+          <td>
+            <strong>JoJosHandmadeCandles</strong>
+            
+          </td>
+          <td>handmade candles</td>
+          <td><a href="https://www.etsy.com/shop/JoJosHandmadeCandles" target="_blank">Etsy</a></td>
+          <td><a href="https://www.etsy.com/shop/JoJosHandmadeCandles" target="_blank">Etsy message</a></td>
+          <td><span class="pint pint-no">No Pinterest</span></td>
+          <td><span class="score score-low">5</span></td>
+          <td class="status-cell"><span class="status status-qualified">Qualified</span></td>
+          <td class="msg-cell"><button class="msg-btn" onclick="toggleDraft(event, 'dd51c648')" title="View message">
+              <span>&#9993;</span> <span class="msg-label">View</span>
+            </button></td>
+        </tr>
+        
+            <tr class="draft-panel" id="panel-dd51c648" style="display:none;">
+              <td colspan="9">
+                <div class="draft-box">
+                  <div class="draft-meta">Instagram DM &middot; JoJosHandmadeCandles</div>
+                  <div class="draft-text" id="draft-dd51c648">──────────────────────────────────────────────────<br><br>Hi,<br>How are you?<br>I really like your profile - the way you craft those hand-poured candles with unique scent combinations really caught my eye! This kind of product usually does really well on Pinterest, and I noticed you don't have a Pinterest profile linked anywhere.<br><br>My name is Jane. I work with business owners like you to drive thousands of visitors from Pinterest to their shops and websites (I also run Switzer Templates, a shop with over 28,000 sales, and Pinterest is my main traffic driver)<br><br>If you'd like to make the most of Pinterest for your business, I offer two packages that will help to set your account up for success: https://pinterest.switzertemplates.com/ I do a full audit and build a comprehensive strategy specifically for your niche, using paid analytics tools that aren't available to the general public - so you get clear insight into what's actually working in your niche and how much traffic and sales you can expect.<br><br>If you're curious about Pinterest but not ready to invest yet, I put together a free guide on how to set up your profile and get started. You can grab it here: switzertemplates.myflodesk.com/pinterest-guidebook<br><br>Let me know if you have any questions - always happy to help!<br><br>Regards,<br>Jane</div>
+                  <button class="copy-btn" onclick="copyDraft(event, 'dd51c648')">Copy message</button>
+                </div>
+              </td>
+            </tr>
+        <tr class="lead-row priority-mid" id="row-60eaf887"
+            data-source="etsy" data-status="qualified"
+            data-niche="handmade candles" data-pinterest="N">
+          <td><span class="badge source-etsy">etsy</span></td>
+          <td>
+            <strong>HarmonyandCandles</strong>
+            
+          </td>
+          <td>handmade candles</td>
+          <td><a href="https://www.etsy.com/shop/HarmonyandCandles" target="_blank">Etsy</a></td>
+          <td><a href="https://instagram.com/harmonyandcandles" target="_blank">@harmonyandcandles</a></td>
+          <td><span class="pint pint-no">No Pinterest</span></td>
+          <td><span class="score score-mid">7</span></td>
+          <td class="status-cell"><span class="status status-qualified">Qualified</span></td>
+          <td class="msg-cell"><button class="msg-btn" onclick="toggleDraft(event, '60eaf887')" title="View message">
+              <span>&#9993;</span> <span class="msg-label">View</span>
+            </button></td>
+        </tr>
+        
+            <tr class="draft-panel" id="panel-60eaf887" style="display:none;">
+              <td colspan="9">
+                <div class="draft-box">
+                  <div class="draft-meta">Instagram DM &middot; HarmonyandCandles</div>
+                  <div class="draft-text" id="draft-60eaf887">──────────────────────────────────────────────────<br><br>Hi,<br>How are you?<br>I really like your profile - your handmade candles caught my eye, especially the way each one feels so intentional and cozy, like they were crafted with a really personal touch. This kind of product usually does really well on Pinterest, and I noticed you don't have a Pinterest profile linked anywhere.<br><br>My name is Jane. I work with business owners like you to drive thousands of visitors from Pinterest to their shops and websites (I also run Switzer Templates, a shop with over 28,000 sales, and Pinterest is my main traffic driver)<br><br>If you'd like to make the most of Pinterest for your business, I offer two packages that will help to set your account up for success: https://pinterest.switzertemplates.com/ I do a full audit and build a comprehensive strategy specifically for your niche, using paid analytics tools that aren't available to the general public - so you get clear insight into what's actually working in your niche and how much traffic and sales you can expect.<br><br>If you're curious about Pinterest but not ready to invest yet, I put together a free guide on how to set up your profile and get started. You can grab it here: switzertemplates.myflodesk.com/pinterest-guidebook<br><br>Let me know if you have any questions - always happy to help!<br><br>Regards,<br>Jane</div>
+                  <button class="copy-btn" onclick="copyDraft(event, '60eaf887')">Copy message</button>
+                </div>
+              </td>
+            </tr>
+        <tr class="lead-row priority-mid" id="row-5be2f335"
+            data-source="etsy" data-status="qualified"
+            data-niche="handmade candles" data-pinterest="N">
+          <td><span class="badge source-etsy">etsy</span></td>
+          <td>
+            <strong>southernmadecandle</strong>
+            
+          </td>
+          <td>handmade candles</td>
+          <td><a href="https://www.etsy.com/shop/southernmadecandle" target="_blank">Etsy</a></td>
+          <td><a href="https://www.etsy.com/shop/southernmadecandle" target="_blank">Etsy message</a></td>
+          <td><span class="pint pint-no">No Pinterest</span></td>
+          <td><span class="score score-mid">8</span></td>
+          <td class="status-cell"><span class="status status-qualified">Qualified</span></td>
+          <td class="msg-cell"><button class="msg-btn" onclick="toggleDraft(event, '5be2f335')" title="View message">
+              <span>&#9993;</span> <span class="msg-label">View</span>
+            </button></td>
+        </tr>
+        
+            <tr class="draft-panel" id="panel-5be2f335" style="display:none;">
+              <td colspan="9">
+                <div class="draft-box">
+                  <div class="draft-meta">Instagram DM &middot; southernmadecandle</div>
+                  <div class="draft-text" id="draft-5be2f335">──────────────────────────────────────────────────<br><br>Hi,<br>How are you?<br>I really like your profile - your handmade candles caught my eye, especially the warm, cozy aesthetic and the care that clearly goes into every pour. This kind of product usually does really well on Pinterest, and I noticed you don't have a Pinterest profile linked anywhere.<br><br>My name is Jane. I work with business owners like you to drive thousands of visitors from Pinterest to their shops and websites (I also run Switzer Templates, a shop with over 28,000 sales, and Pinterest is my main traffic driver)<br><br>If you'd like to make the most of Pinterest for your business, I offer two packages that will help to set your account up for success: https://pinterest.switzertemplates.com/ I do a full audit and build a comprehensive strategy specifically for your niche, using paid analytics tools that aren't available to the general public - so you get clear insight into what's actually working in your niche and how much traffic and sales you can expect.<br><br>If you're curious about Pinterest but not ready to invest yet, I put together a free guide on how to set up your profile and get started. You can grab it here: switzertemplates.myflodesk.com/pinterest-guidebook<br><br>Let me know if you have any questions - always happy to help!<br><br>Regards,<br>Jane</div>
+                  <button class="copy-btn" onclick="copyDraft(event, '5be2f335')">Copy message</button>
+                </div>
+              </td>
+            </tr>
+        <tr class="lead-row priority-low" id="row-22919dbf"
+            data-source="etsy" data-status="qualified"
+            data-niche="handmade candles" data-pinterest="N">
+          <td><span class="badge source-etsy">etsy</span></td>
+          <td>
+            <strong>JustForYouCandleCo</strong>
+            
+          </td>
+          <td>handmade candles</td>
+          <td><a href="https://www.etsy.com/shop/JustForYouCandleCo" target="_blank">Etsy</a></td>
+          <td><a href="https://www.etsy.com/shop/JustForYouCandleCo" target="_blank">Etsy message</a></td>
+          <td><span class="pint pint-no">No Pinterest</span></td>
+          <td><span class="score score-low">5</span></td>
+          <td class="status-cell"><span class="status status-qualified">Qualified</span></td>
+          <td class="msg-cell"><button class="msg-btn" onclick="toggleDraft(event, '22919dbf')" title="View message">
+              <span>&#9993;</span> <span class="msg-label">View</span>
+            </button></td>
+        </tr>
+        
+            <tr class="draft-panel" id="panel-22919dbf" style="display:none;">
+              <td colspan="9">
+                <div class="draft-box">
+                  <div class="draft-meta">Instagram DM &middot; JustForYouCandleCo</div>
+                  <div class="draft-text" id="draft-22919dbf">──────────────────────────────────────────────────<br><br>Hi,<br>How are you?<br>I really like your profile - your handmade candles look so cozy, and the way you describe each scent makes it easy to picture them burning at home. This kind of product usually does really well on Pinterest, and I noticed you don't have a Pinterest profile linked anywhere.<br><br>My name is Jane. I work with business owners like you to drive thousands of visitors from Pinterest to their shops and websites (I also run Switzer Templates, a shop with over 28,000 sales, and Pinterest is my main traffic driver)<br><br>If you'd like to make the most of Pinterest for your business, I offer two packages that will help to set your account up for success: https://pinterest.switzertemplates.com/ I do a full audit and build a comprehensive strategy specifically for your niche, using paid analytics tools that aren't available to the general public - so you get clear insight into what's actually working in your niche and how much traffic and sales you can expect.<br><br>If you're curious about Pinterest but not ready to invest yet, I put together a free guide on how to set up your profile and get started. You can grab it here: switzertemplates.myflodesk.com/pinterest-guidebook<br><br>Let me know if you have any questions - always happy to help!<br><br>Regards,<br>Jane</div>
+                  <button class="copy-btn" onclick="copyDraft(event, '22919dbf')">Copy message</button>
+                </div>
+              </td>
+            </tr>
+        <tr class="lead-row priority-mid" id="row-bbac66aa"
+            data-source="etsy" data-status="qualified"
+            data-niche="handmade candles" data-pinterest="N">
+          <td><span class="badge source-etsy">etsy</span></td>
+          <td>
+            <strong>ThePureScent</strong>
+            
+          </td>
+          <td>handmade candles</td>
+          <td><a href="https://www.etsy.com/shop/ThePureScent" target="_blank">Etsy</a> · <a href="https://thepurescent.com/?srsltid=AfmBOoqMMuYUy8UV098Csclnr-7at8dy51rdPpD_ngMSg5l19w3-N1bD" target="_blank">Website</a></td>
+          <td><a href="https://thepurescent.com/pages/contact" target="_blank">Contact form</a></td>
+          <td><span class="pint pint-no">No Pinterest</span></td>
+          <td><span class="score score-mid">8</span></td>
+          <td class="status-cell"><span class="status status-qualified">Qualified</span></td>
+          <td class="msg-cell"><button class="msg-btn" onclick="toggleDraft(event, 'bbac66aa')" title="View message">
+              <span>&#9993;</span> <span class="msg-label">View</span>
+            </button></td>
+        </tr>
+        
+            <tr class="draft-panel" id="panel-bbac66aa" style="display:none;">
+              <td colspan="9">
+                <div class="draft-box">
+                  <div class="draft-meta">Message &middot; ThePureScent</div>
+                  <div class="draft-text" id="draft-bbac66aa">──────────────────────────────────────────────────<br><br>Hi,<br>How are you?<br>I really like your profile - your handmade candles look so cozy, and the minimalist packaging really caught my eye! This kind of product usually does really well on Pinterest, and I noticed you don't have a Pinterest profile linked anywhere.<br><br>My name is Jane. I work with business owners like you to drive thousands of visitors from Pinterest to their shops and websites (I also run Switzer Templates, a shop with over 28,000 sales, and Pinterest is my main traffic driver)<br><br>If you'd like to make the most of Pinterest for your business, I offer two packages that will help to set your account up for success: https://pinterest.switzertemplates.com/ I do a full audit and build a comprehensive strategy specifically for your niche, using paid analytics tools that aren't available to the general public - so you get clear insight into what's actually working in your niche and how much traffic and sales you can expect.<br><br>If you're curious about Pinterest but not ready to invest yet, I put together a free guide on how to set up your profile and get started. You can grab it here: switzertemplates.myflodesk.com/pinterest-guidebook<br><br>Let me know if you have any questions - always happy to help!<br><br>Regards,<br>Jane</div>
+                  <button class="copy-btn" onclick="copyDraft(event, 'bbac66aa')">Copy message</button>
+                </div>
+              </td>
+            </tr>
+        <tr class="lead-row priority-low" id="row-bdeb5f10"
+            data-source="etsy" data-status="qualified"
+            data-niche="handmade candles" data-pinterest="N">
+          <td><span class="badge source-etsy">etsy</span></td>
+          <td>
+            <strong>LivCandleShop</strong>
+            
+          </td>
+          <td>handmade candles</td>
+          <td><a href="https://www.etsy.com/shop/LivCandleShop" target="_blank">Etsy</a></td>
+          <td><a href="https://www.etsy.com/shop/LivCandleShop" target="_blank">Etsy message</a></td>
+          <td><span class="pint pint-no">No Pinterest</span></td>
+          <td><span class="score score-low">5</span></td>
+          <td class="status-cell"><span class="status status-qualified">Qualified</span></td>
+          <td class="msg-cell"><button class="msg-btn" onclick="toggleDraft(event, 'bdeb5f10')" title="View message">
+              <span>&#9993;</span> <span class="msg-label">View</span>
+            </button></td>
+        </tr>
+        
+            <tr class="draft-panel" id="panel-bdeb5f10" style="display:none;">
+              <td colspan="9">
+                <div class="draft-box">
+                  <div class="draft-meta">Instagram DM &middot; LivCandleShop</div>
+                  <div class="draft-text" id="draft-bdeb5f10">──────────────────────────────────────────────────<br><br>Hi,<br>How are you?<br>I really like your profile - your handmade candles look so cozy and the scent combinations you've chosen seem really thoughtful and unique. This kind of product usually does really well on Pinterest, and I noticed you don't have a Pinterest profile linked anywhere.<br><br>My name is Jane. I work with business owners like you to drive thousands of visitors from Pinterest to their shops and websites (I also run Switzer Templates, a shop with over 28,000 sales, and Pinterest is my main traffic driver)<br><br>If you'd like to make the most of Pinterest for your business, I offer two packages that will help to set your account up for success: https://pinterest.switzertemplates.com/ I do a full audit and build a comprehensive strategy specifically for your niche, using paid analytics tools that aren't available to the general public - so you get clear insight into what's actually working in your niche and how much traffic and sales you can expect.<br><br>If you're curious about Pinterest but not ready to invest yet, I put together a free guide on how to set up your profile and get started. You can grab it here: switzertemplates.myflodesk.com/pinterest-guidebook<br><br>Let me know if you have any questions - always happy to help!<br><br>Regards,<br>Jane</div>
+                  <button class="copy-btn" onclick="copyDraft(event, 'bdeb5f10')">Copy message</button>
+                </div>
+              </td>
+            </tr>
+        <tr class="lead-row priority-mid" id="row-16111b8a"
+            data-source="etsy" data-status="qualified"
+            data-niche="handmade candles" data-pinterest="N">
+          <td><span class="badge source-etsy">etsy</span></td>
+          <td>
+            <strong>SashaCandleCo</strong>
+            <br><small>Sasha</small>
+          </td>
+          <td>handmade candles</td>
+          <td><a href="https://www.etsy.com/shop/SashaCandleCo" target="_blank">Etsy</a></td>
+          <td><a href="https://instagram.com/sashacandleco" target="_blank">@sashacandleco</a></td>
+          <td><span class="pint pint-no">No Pinterest</span></td>
+          <td><span class="score score-mid">7</span></td>
+          <td class="status-cell"><span class="status status-qualified">Qualified</span></td>
+          <td class="msg-cell"><button class="msg-btn" onclick="toggleDraft(event, '16111b8a')" title="View message">
+              <span>&#9993;</span> <span class="msg-label">View</span>
+            </button></td>
+        </tr>
+        
+            <tr class="draft-panel" id="panel-16111b8a" style="display:none;">
+              <td colspan="9">
+                <div class="draft-box">
+                  <div class="draft-meta">Instagram DM &middot; SashaCandleCo</div>
+                  <div class="draft-text" id="draft-16111b8a">──────────────────────────────────────────────────<br><br>Hi,<br>How are you?<br>I really like your profile - your handmade candles caught my eye, especially the way you craft such cozy, unique scents that feel so thoughtful and personal. This kind of product usually does really well on Pinterest, and I noticed you don't have a Pinterest profile linked anywhere.<br><br>My name is Jane. I work with business owners like you to drive thousands of visitors from Pinterest to their shops and websites (I also run Switzer Templates, a shop with over 28,000 sales, and Pinterest is my main traffic driver)<br><br>If you'd like to make the most of Pinterest for your business, I offer two packages that will help to set your account up for success: https://pinterest.switzertemplates.com/ I do a full audit and build a comprehensive strategy specifically for your niche, using paid analytics tools that aren't available to the general public - so you get clear insight into what's actually working in your niche and how much traffic and sales you can expect.<br><br>If you're curious about Pinterest but not ready to invest yet, I put together a free guide on how to set up your profile and get started. You can grab it here: switzertemplates.myflodesk.com/pinterest-guidebook<br><br>Let me know if you have any questions - always happy to help!<br><br>Regards,<br>Jane</div>
+                  <button class="copy-btn" onclick="copyDraft(event, '16111b8a')">Copy message</button>
+                </div>
+              </td>
+            </tr>
+        <tr class="lead-row priority-mid" id="row-faaff147"
+            data-source="etsy" data-status="qualified"
+            data-niche="handmade jewelry" data-pinterest="Y">
+          <td><span class="badge source-etsy">etsy</span></td>
+          <td>
+            <strong>bottledupdesigns</strong>
+            
+          </td>
+          <td>handmade jewelry</td>
+          <td><a href="https://www.etsy.com/shop/bottledupdesigns" target="_blank">Etsy</a> · <a href="https://bottledupdesigns.com/?srsltid=AfmBOoqlF62dtcYkghxe4zrMQMoedsa5B9xxsSvDSOpN2NndZ11RQ5oT" target="_blank">Website</a></td>
+          <td><a href="https://bottledupdesigns.com/pages/contact-us" target="_blank">Contact form</a></td>
+          <td><span class="pint pint-yes">Has Pinterest</span></td>
+          <td><span class="score score-mid">8</span></td>
+          <td class="status-cell"><span class="status status-qualified">Qualified</span></td>
+          <td class="msg-cell"><button class="msg-btn" onclick="toggleDraft(event, 'faaff147')" title="View message">
+              <span>&#9993;</span> <span class="msg-label">View</span>
+            </button></td>
+        </tr>
+        
+            <tr class="draft-panel" id="panel-faaff147" style="display:none;">
+              <td colspan="9">
+                <div class="draft-box">
+                  <div class="draft-meta">Message &middot; bottledupdesigns</div>
+                  <div class="draft-text" id="draft-faaff147">──────────────────────────────────────────────────<br><br>Hi,<br>How are you?<br>I really like your profile - your handmade jewelry pieces have such a personal, artisan feel, and the delicate details in each design really caught my eye. This kind of product usually does really well on Pinterest, and I noticed you don't have a Pinterest profile linked anywhere.<br><br>My name is Jane. I work with business owners like you to drive thousands of visitors from Pinterest to their shops and websites (I also run Switzer Templates, a shop with over 28,000 sales, and Pinterest is my main traffic driver)<br><br>If you'd like to make the most of Pinterest for your business, I offer two packages that will help to set your account up for success: https://pinterest.switzertemplates.com/ I do a full audit and build a comprehensive strategy specifically for your niche, using paid analytics tools that aren't available to the general public - so you get clear insight into what's actually working in your niche and how much traffic and sales you can expect.<br><br>If you're curious about Pinterest but not ready to invest yet, I put together a free guide on how to set up your profile and get started. You can grab it here: switzertemplates.myflodesk.com/pinterest-guidebook<br><br>Let me know if you have any questions - always happy to help!<br><br>Regards,<br>Jane</div>
+                  <button class="copy-btn" onclick="copyDraft(event, 'faaff147')">Copy message</button>
+                </div>
+              </td>
+            </tr>
+        <tr class="lead-row priority-mid" id="row-35804167"
+            data-source="etsy" data-status="qualified"
+            data-niche="handmade jewelry" data-pinterest="—">
+          <td><span class="badge source-etsy">etsy</span></td>
+          <td>
+            <strong>chaddsfordjewelry</strong>
+            
+          </td>
+          <td>handmade jewelry</td>
+          <td><a href="https://www.etsy.com/shop/chaddsfordjewelry" target="_blank">Etsy</a> · <a href="https://chaddsfordjewelry.com/" target="_blank">Website</a></td>
+          <td><a href="mailto:support@chaddsfordjewelry.com">support@chaddsfordjewelry.com</a></td>
+          <td><span class="pint pint-yes">—</span></td>
+          <td><span class="score score-mid">8</span></td>
+          <td class="status-cell"><span class="status status-qualified">Qualified</span></td>
+          <td class="msg-cell"><button class="msg-btn" onclick="toggleDraft(event, '35804167')" title="View message">
+              <span>&#9993;</span> <span class="msg-label">View</span>
+            </button></td>
+        </tr>
+        
+            <tr class="draft-panel" id="panel-35804167" style="display:none;">
+              <td colspan="9">
+                <div class="draft-box">
+                  <div class="draft-meta">Email &middot; chaddsfordjewelry</div>
+                  <div class="draft-text" id="draft-35804167">──────────────────────────────────────────────────<br><br>Hi,<br>How are you?<br>I really like your profile - the handmade details in your jewelry pieces are so unique, and I love how each one feels genuinely one-of-a-kind. This kind of product usually does really well on Pinterest, and I noticed you don't have a Pinterest profile linked anywhere.<br><br>My name is Jane. I work with business owners like you to drive thousands of visitors from Pinterest to their shops and websites (I also run Switzer Templates, a shop with over 28,000 sales, and Pinterest is my main traffic driver)<br><br>If you'd like to make the most of Pinterest for your business, I offer two packages that will help to set your account up for success: https://pinterest.switzertemplates.com/ I do a full audit and build a comprehensive strategy specifically for your niche, using paid analytics tools that aren't available to the general public - so you get clear insight into what's actually working in your niche and how much traffic and sales you can expect.<br><br>If you're curious about Pinterest but not ready to invest yet, I put together a free guide on how to set up your profile and get started. You can grab it here: switzertemplates.myflodesk.com/pinterest-guidebook<br><br>Let me know if you have any questions - always happy to help!<br><br>Regards,<br>Jane</div>
+                  <button class="copy-btn" onclick="copyDraft(event, '35804167')">Copy message</button>
+                </div>
+              </td>
+            </tr>
+        <tr class="lead-row priority-mid" id="row-3aa07aa7"
+            data-source="etsy" data-status="qualified"
+            data-niche="handmade jewelry" data-pinterest="—">
+          <td><span class="badge source-etsy">etsy</span></td>
+          <td>
+            <strong>NavyGems</strong>
+            
+          </td>
+          <td>handmade jewelry</td>
+          <td><a href="https://www.etsy.com/shop/NavyGems" target="_blank">Etsy</a></td>
+          <td><a href="https://instagram.com/navygemsjewelry" target="_blank">@navygemsjewelry</a></td>
+          <td><span class="pint pint-yes">—</span></td>
+          <td><span class="score score-mid">7</span></td>
+          <td class="status-cell"><span class="status status-qualified">Qualified</span></td>
+          <td class="msg-cell"><button class="msg-btn" onclick="toggleDraft(event, '3aa07aa7')" title="View message">
+              <span>&#9993;</span> <span class="msg-label">View</span>
+            </button></td>
+        </tr>
+        
+            <tr class="draft-panel" id="panel-3aa07aa7" style="display:none;">
+              <td colspan="9">
+                <div class="draft-box">
+                  <div class="draft-meta">Instagram DM &middot; NavyGems</div>
+                  <div class="draft-text" id="draft-3aa07aa7">──────────────────────────────────────────────────<br><br>Hi,<br>How are you?<br>I really like your profile - your handmade jewelry caught my eye, especially the delicate navy-toned gemstone pieces that have such a unique, personal touch to them. This kind of product usually does really well on Pinterest, and I noticed you don't have a Pinterest profile linked anywhere.<br><br>My name is Jane. I work with business owners like you to drive thousands of visitors from Pinterest to their shops and websites (I also run Switzer Templates, a shop with over 28,000 sales, and Pinterest is my main traffic driver)<br><br>If you'd like to make the most of Pinterest for your business, I offer two packages that will help to set your account up for success: https://pinterest.switzertemplates.com/ I do a full audit and build a comprehensive strategy specifically for your niche, using paid analytics tools that aren't available to the general public - so you get clear insight into what's actually working in your niche and how much traffic and sales you can expect.<br><br>If you're curious about Pinterest but not ready to invest yet, I put together a free guide on how to set up your profile and get started. You can grab it here: switzertemplates.myflodesk.com/pinterest-guidebook<br><br>Let me know if you have any questions - always happy to help!<br><br>Regards,<br>Jane</div>
+                  <button class="copy-btn" onclick="copyDraft(event, '3aa07aa7')">Copy message</button>
+                </div>
+              </td>
+            </tr>
+        <tr class="lead-row priority-mid" id="row-cb90de0c"
+            data-source="etsy" data-status="qualified"
+            data-niche="handmade jewelry" data-pinterest="—">
+          <td><span class="badge source-etsy">etsy</span></td>
+          <td>
+            <strong>BrambleGroveBoutique</strong>
+            
+          </td>
+          <td>handmade jewelry</td>
+          <td><a href="https://www.etsy.com/shop/BrambleGroveBoutique" target="_blank">Etsy</a> · <a href="https://bramblegroveboutique.patternbyetsy.com/" target="_blank">Website</a></td>
+          <td><a href="https://bramblegroveboutique.patternbyetsy.com/contact-us" target="_blank">Contact form</a></td>
+          <td><span class="pint pint-yes">—</span></td>
+          <td><span class="score score-mid">8</span></td>
+          <td class="status-cell"><span class="status status-qualified">Qualified</span></td>
+          <td class="msg-cell"><button class="msg-btn" onclick="toggleDraft(event, 'cb90de0c')" title="View message">
+              <span>&#9993;</span> <span class="msg-label">View</span>
+            </button></td>
+        </tr>
+        
+            <tr class="draft-panel" id="panel-cb90de0c" style="display:none;">
+              <td colspan="9">
+                <div class="draft-box">
+                  <div class="draft-meta">Message &middot; BrambleGroveBoutique</div>
+                  <div class="draft-text" id="draft-cb90de0c">──────────────────────────────────────────────────<br><br>Hi,<br>How are you?<br>I really like your profile - the way you incorporate natural textures and earthy tones into your handmade pieces gives them such a unique, organic feel that really stands out. This kind of product usually does really well on Pinterest, and I noticed you don't have a Pinterest profile linked anywhere.<br><br>My name is Jane. I work with business owners like you to drive thousands of visitors from Pinterest to their shops and websites (I also run Switzer Templates, a shop with over 28,000 sales, and Pinterest is my main traffic driver)<br><br>If you'd like to make the most of Pinterest for your business, I offer two packages that will help to set your account up for success: https://pinterest.switzertemplates.com/ I do a full audit and build a comprehensive strategy specifically for your niche, using paid analytics tools that aren't available to the general public - so you get clear insight into what's actually working in your niche and how much traffic and sales you can expect.<br><br>If you're curious about Pinterest but not ready to invest yet, I put together a free guide on how to set up your profile and get started. You can grab it here: switzertemplates.myflodesk.com/pinterest-guidebook<br><br>Let me know if you have any questions - always happy to help!<br><br>Regards,<br>Jane</div>
+                  <button class="copy-btn" onclick="copyDraft(event, 'cb90de0c')">Copy message</button>
+                </div>
+              </td>
+            </tr>
+        <tr class="lead-row priority-mid" id="row-a82b1628"
+            data-source="etsy" data-status="qualified"
+            data-niche="handmade jewelry" data-pinterest="Y">
+          <td><span class="badge source-etsy">etsy</span></td>
+          <td>
+            <strong>EmkaJewelry</strong>
+            
+          </td>
+          <td>handmade jewelry</td>
+          <td><a href="https://www.etsy.com/shop/EmkaJewelry" target="_blank">Etsy</a> · <a href="https://emkajewelry.com/?srsltid=AfmBOooqisJUO2aS-2FcBzRNu5CmXiTQEFKw7pnMPaViJa0Pm5vN7O75" target="_blank">Website</a></td>
+          <td><a href="https://emkajewelry.com/pages/contact-us" target="_blank">Contact form</a></td>
+          <td><span class="pint pint-yes">Has Pinterest</span></td>
+          <td><span class="score score-mid">8</span></td>
+          <td class="status-cell"><span class="status status-qualified">Qualified</span></td>
+          <td class="msg-cell"><button class="msg-btn" onclick="toggleDraft(event, 'a82b1628')" title="View message">
+              <span>&#9993;</span> <span class="msg-label">View</span>
+            </button></td>
+        </tr>
+        
+            <tr class="draft-panel" id="panel-a82b1628" style="display:none;">
+              <td colspan="9">
+                <div class="draft-box">
+                  <div class="draft-meta">Message &middot; EmkaJewelry</div>
+                  <div class="draft-text" id="draft-a82b1628">──────────────────────────────────────────────────<br><br>Hi,<br>How are you?<br>I really like your profile - the delicate wirework on your handmade pieces caught my eye, especially how each one looks so thoughtfully crafted. This kind of product usually does really well on Pinterest, and I noticed you don't have a Pinterest profile linked anywhere.<br><br>My name is Jane. I work with business owners like you to drive thousands of visitors from Pinterest to their shops and websites (I also run Switzer Templates, a shop with over 28,000 sales, and Pinterest is my main traffic driver)<br><br>If you'd like to make the most of Pinterest for your business, I offer two packages that will help to set your account up for success: https://pinterest.switzertemplates.com/ I do a full audit and build a comprehensive strategy specifically for your niche, using paid analytics tools that aren't available to the general public - so you get clear insight into what's actually working in your niche and how much traffic and sales you can expect.<br><br>If you're curious about Pinterest but not ready to invest yet, I put together a free guide on how to set up your profile and get started. You can grab it here: switzertemplates.myflodesk.com/pinterest-guidebook<br><br>Let me know if you have any questions - always happy to help!<br><br>Regards,<br>Jane</div>
+                  <button class="copy-btn" onclick="copyDraft(event, 'a82b1628')">Copy message</button>
+                </div>
+              </td>
+            </tr>
+        <tr class="lead-row priority-mid" id="row-705c2046"
+            data-source="etsy" data-status="qualified"
+            data-niche="handmade jewelry" data-pinterest="—">
+          <td><span class="badge source-etsy">etsy</span></td>
+          <td>
+            <strong>SpaceAgeRings</strong>
+            
+          </td>
+          <td>handmade jewelry</td>
+          <td><a href="https://www.etsy.com/shop/SpaceAgeRings" target="_blank">Etsy</a></td>
+          <td><a href="https://instagram.com/spaceagerings" target="_blank">@spaceagerings</a></td>
+          <td><span class="pint pint-yes">—</span></td>
+          <td><span class="score score-mid">7</span></td>
+          <td class="status-cell"><span class="status status-qualified">Qualified</span></td>
+          <td class="msg-cell"><button class="msg-btn" onclick="toggleDraft(event, '705c2046')" title="View message">
+              <span>&#9993;</span> <span class="msg-label">View</span>
+            </button></td>
+        </tr>
+        
+            <tr class="draft-panel" id="panel-705c2046" style="display:none;">
+              <td colspan="9">
+                <div class="draft-box">
+                  <div class="draft-meta">Instagram DM &middot; SpaceAgeRings</div>
+                  <div class="draft-text" id="draft-705c2046">──────────────────────────────────────────────────<br><br>Hi,<br>How are you?<br>I really like your profile - your handmade rings have such a cool retro-futuristic vibe, and the unique shapes you work with really stand out from typical jewelry. This kind of product usually does really well on Pinterest, and I noticed you don't have a Pinterest profile linked anywhere.<br><br>My name is Jane. I work with business owners like you to drive thousands of visitors from Pinterest to their shops and websites (I also run Switzer Templates, a shop with over 28,000 sales, and Pinterest is my main traffic driver)<br><br>If you'd like to make the most of Pinterest for your business, I offer two packages that will help to set your account up for success: https://pinterest.switzertemplates.com/ I do a full audit and build a comprehensive strategy specifically for your niche, using paid analytics tools that aren't available to the general public - so you get clear insight into what's actually working in your niche and how much traffic and sales you can expect.<br><br>If you're curious about Pinterest but not ready to invest yet, I put together a free guide on how to set up your profile and get started. You can grab it here: switzertemplates.myflodesk.com/pinterest-guidebook<br><br>Let me know if you have any questions - always happy to help!<br><br>Regards,<br>Jane</div>
+                  <button class="copy-btn" onclick="copyDraft(event, '705c2046')">Copy message</button>
+                </div>
+              </td>
+            </tr>
+        <tr class="lead-row priority-mid" id="row-972438e4"
+            data-source="etsy" data-status="qualified"
+            data-niche="handmade jewelry" data-pinterest="Y">
+          <td><span class="badge source-etsy">etsy</span></td>
+          <td>
+            <strong>FiligranUSA</strong>
+            
+          </td>
+          <td>handmade jewelry</td>
+          <td><a href="https://www.etsy.com/shop/FiligranUSA" target="_blank">Etsy</a> · <a href="https://filigranist.com/pages/shop-with-confidence-at-our-etsy-and-amazon-stores?srsltid=AfmBOopl8DDxYXqWcLUS4ajMQTnjzbgi26n9Asx2JJP0Q1nTHMJiwOje" target="_blank">Website</a></td>
+          <td><a href="mailto:info@filigranist.com">info@filigranist.com</a></td>
+          <td><span class="pint pint-yes">Has Pinterest</span></td>
+          <td><span class="score score-mid">8</span></td>
+          <td class="status-cell"><span class="status status-qualified">Qualified</span></td>
+          <td class="msg-cell"><button class="msg-btn" onclick="toggleDraft(event, '972438e4')" title="View message">
+              <span>&#9993;</span> <span class="msg-label">View</span>
+            </button></td>
+        </tr>
+        
+            <tr class="draft-panel" id="panel-972438e4" style="display:none;">
+              <td colspan="9">
+                <div class="draft-box">
+                  <div class="draft-meta">Email &middot; FiligranUSA</div>
+                  <div class="draft-text" id="draft-972438e4">──────────────────────────────────────────────────<br><br>Hi,<br>How are you?<br>I really like your profile - your handmade filigree pieces are absolutely stunning, especially the delicate lacework detail in the metalwork. This kind of product usually does really well on Pinterest, and I noticed you don't have a Pinterest profile linked anywhere.<br><br>My name is Jane. I work with business owners like you to drive thousands of visitors from Pinterest to their shops and websites (I also run Switzer Templates, a shop with over 28,000 sales, and Pinterest is my main traffic driver)<br><br>If you'd like to make the most of Pinterest for your business, I offer two packages that will help to set your account up for success: https://pinterest.switzertemplates.com/ I do a full audit and build a comprehensive strategy specifically for your niche, using paid analytics tools that aren't available to the general public - so you get clear insight into what's actually working in your niche and how much traffic and sales you can expect.<br><br>If you're curious about Pinterest but not ready to invest yet, I put together a free guide on how to set up your profile and get started. You can grab it here: switzertemplates.myflodesk.com/pinterest-guidebook<br><br>Let me know if you have any questions - always happy to help!<br><br>Regards,<br>Jane</div>
+                  <button class="copy-btn" onclick="copyDraft(event, '972438e4')">Copy message</button>
+                </div>
+              </td>
+            </tr>
+        <tr class="lead-row priority-low" id="row-cf803a12"
+            data-source="etsy" data-status="qualified"
+            data-niche="ceramic pottery" data-pinterest="—">
+          <td><span class="badge source-etsy">etsy</span></td>
+          <td>
+            <strong>MossMarbleCo</strong>
+            
+          </td>
+          <td>ceramic pottery</td>
+          <td><a href="https://www.etsy.com/shop/MossMarbleCo" target="_blank">Etsy</a></td>
+          <td><a href="https://www.etsy.com/shop/MossMarbleCo" target="_blank">Etsy message</a></td>
+          <td><span class="pint pint-yes">—</span></td>
+          <td><span class="score score-low">5</span></td>
+          <td class="status-cell"><span class="status status-qualified">Qualified</span></td>
+          <td class="msg-cell"><button class="msg-btn" onclick="toggleDraft(event, 'cf803a12')" title="View message">
+              <span>&#9993;</span> <span class="msg-label">View</span>
+            </button></td>
+        </tr>
+        
+            <tr class="draft-panel" id="panel-cf803a12" style="display:none;">
+              <td colspan="9">
+                <div class="draft-box">
+                  <div class="draft-meta">Instagram DM &middot; MossMarbleCo</div>
+                  <div class="draft-text" id="draft-cf803a12">──────────────────────────────────────────────────<br><br>Hi,<br>How are you?<br>I really like your profile - the earthy glazes on your ceramic pieces have such a natural, organic feel that really sets them apart from other pottery I've come across. This kind of product usually does really well on Pinterest, and I noticed you don't have a Pinterest profile linked anywhere.<br><br>My name is Jane. I work with business owners like you to drive thousands of visitors from Pinterest to their shops and websites (I also run Switzer Templates, a shop with over 28,000 sales, and Pinterest is my main traffic driver)<br><br>If you'd like to make the most of Pinterest for your business, I offer two packages that will help to set your account up for success: https://pinterest.switzertemplates.com/ I do a full audit and build a comprehensive strategy specifically for your niche, using paid analytics tools that aren't available to the general public - so you get clear insight into what's actually working in your niche and how much traffic and sales you can expect.<br><br>If you're curious about Pinterest but not ready to invest yet, I put together a free guide on how to set up your profile and get started. You can grab it here: switzertemplates.myflodesk.com/pinterest-guidebook<br><br>Let me know if you have any questions - always happy to help!<br><br>Regards,<br>Jane</div>
+                  <button class="copy-btn" onclick="copyDraft(event, 'cf803a12')">Copy message</button>
+                </div>
+              </td>
+            </tr>
+        <tr class="lead-row priority-mid" id="row-d40be09a"
+            data-source="etsy" data-status="qualified"
+            data-niche="ceramic pottery" data-pinterest="—">
+          <td><span class="badge source-etsy">etsy</span></td>
+          <td>
+            <strong>CoastalClayCo</strong>
+            
+          </td>
+          <td>ceramic pottery</td>
+          <td><a href="https://www.etsy.com/shop/CoastalClayCo" target="_blank">Etsy</a> · <a href="https://coastalclayco.com/" target="_blank">Website</a></td>
+          <td><a href="https://coastalclayco.com/pages/contact" target="_blank">Contact form</a></td>
+          <td><span class="pint pint-yes">—</span></td>
+          <td><span class="score score-mid">8</span></td>
+          <td class="status-cell"><span class="status status-qualified">Qualified</span></td>
+          <td class="msg-cell"><button class="msg-btn" onclick="toggleDraft(event, 'd40be09a')" title="View message">
+              <span>&#9993;</span> <span class="msg-label">View</span>
+            </button></td>
+        </tr>
+        
+            <tr class="draft-panel" id="panel-d40be09a" style="display:none;">
+              <td colspan="9">
+                <div class="draft-box">
+                  <div class="draft-meta">Message &middot; CoastalClayCo</div>
+                  <div class="draft-text" id="draft-d40be09a">──────────────────────────────────────────────────<br><br>Hi,<br>How are you?<br>I really like your profile - your speckled blue glaze bowls caught my eye immediately, they have such a calm, ocean-inspired quality that feels really special. This kind of product usually does really well on Pinterest, and I noticed you don't have a Pinterest profile linked anywhere.<br><br>My name is Jane. I work with business owners like you to drive thousands of visitors from Pinterest to their shops and websites (I also run Switzer Templates, a shop with over 28,000 sales, and Pinterest is my main traffic driver)<br><br>If you'd like to make the most of Pinterest for your business, I offer two packages that will help to set your account up for success: https://pinterest.switzertemplates.com/ I do a full audit and build a comprehensive strategy specifically for your niche, using paid analytics tools that aren't available to the general public - so you get clear insight into what's actually working in your niche and how much traffic and sales you can expect.<br><br>If you're curious about Pinterest but not ready to invest yet, I put together a free guide on how to set up your profile and get started. You can grab it here: switzertemplates.myflodesk.com/pinterest-guidebook<br><br>Let me know if you have any questions - always happy to help!<br><br>Regards,<br>Jane</div>
+                  <button class="copy-btn" onclick="copyDraft(event, 'd40be09a')">Copy message</button>
+                </div>
+              </td>
+            </tr>
+        <tr class="lead-row priority-high" id="row-915308a7"
+            data-source="etsy" data-status="qualified"
+            data-niche="ceramic pottery" data-pinterest="—">
+          <td><span class="badge source-etsy">etsy</span></td>
+          <td>
+            <strong>AndreaHillPottery</strong>
+            
+          </td>
+          <td>ceramic pottery</td>
+          <td><a href="https://www.etsy.com/shop/AndreaHillPottery" target="_blank">Etsy</a> · <a href="https://andreahillpottery.wixsite.com/andrea-hill-pottery/contact" target="_blank">Website</a></td>
+          <td><a href="mailto:andreahillpottery@gmail.com">andreahillpottery@gmail.com</a><br><a href="https://instagram.com/andreahillpottery" target="_blank">@andreahillpottery</a></td>
+          <td><span class="pint pint-yes">—</span></td>
+          <td><span class="score score-high">10</span></td>
+          <td class="status-cell"><span class="status status-qualified">Qualified</span></td>
+          <td class="msg-cell"><button class="msg-btn" onclick="toggleDraft(event, '915308a7')" title="View message">
+              <span>&#9993;</span> <span class="msg-label">View</span>
+            </button></td>
+        </tr>
+        
+            <tr class="draft-panel" id="panel-915308a7" style="display:none;">
+              <td colspan="9">
+                <div class="draft-box">
+                  <div class="draft-meta">Email &middot; AndreaHillPottery</div>
+                  <div class="draft-text" id="draft-915308a7">──────────────────────────────────────────────────<br><br>Hi,<br>How are you?<br>I really like your profile - the way you glaze your ceramic pieces with those earthy, muted tones gives them such a handcrafted, soulful quality that really stands out. This kind of product usually does really well on Pinterest, and I noticed you don't have a Pinterest profile linked anywhere.<br><br>My name is Jane. I work with business owners like you to drive thousands of visitors from Pinterest to their shops and websites (I also run Switzer Templates, a shop with over 28,000 sales, and Pinterest is my main traffic driver)<br><br>If you'd like to make the most of Pinterest for your business, I offer two packages that will help to set your account up for success: https://pinterest.switzertemplates.com/ I do a full audit and build a comprehensive strategy specifically for your niche, using paid analytics tools that aren't available to the general public - so you get clear insight into what's actually working in your niche and how much traffic and sales you can expect.<br><br>If you're curious about Pinterest but not ready to invest yet, I put together a free guide on how to set up your profile and get started. You can grab it here: switzertemplates.myflodesk.com/pinterest-guidebook<br><br>Let me know if you have any questions - always happy to help!<br><br>Regards,<br>Jane</div>
+                  <button class="copy-btn" onclick="copyDraft(event, '915308a7')">Copy message</button>
+                </div>
+              </td>
+            </tr>
+        <tr class="lead-row priority-mid" id="row-ddb1a11b"
+            data-source="etsy" data-status="qualified"
+            data-niche="ceramic pottery" data-pinterest="—">
+          <td><span class="badge source-etsy">etsy</span></td>
+          <td>
+            <strong>SassyNClassyCloset</strong>
+            
+          </td>
+          <td>ceramic pottery</td>
+          <td><a href="https://www.etsy.com/shop/SassyNClassyCloset" target="_blank">Etsy</a></td>
+          <td><a href="https://www.etsy.com/shop/SassyNClassyCloset" target="_blank">Etsy message</a></td>
+          <td><span class="pint pint-yes">—</span></td>
+          <td><span class="score score-mid">8</span></td>
+          <td class="status-cell"><span class="status status-qualified">Qualified</span></td>
+          <td class="msg-cell"><button class="msg-btn" onclick="toggleDraft(event, 'ddb1a11b')" title="View message">
+              <span>&#9993;</span> <span class="msg-label">View</span>
+            </button></td>
+        </tr>
+        
+            <tr class="draft-panel" id="panel-ddb1a11b" style="display:none;">
+              <td colspan="9">
+                <div class="draft-box">
+                  <div class="draft-meta">Instagram DM &middot; SassyNClassyCloset</div>
+                  <div class="draft-text" id="draft-ddb1a11b">──────────────────────────────────────────────────<br><br>Hi,<br>How are you?<br>I really like your profile - your glazed ceramic mugs have such beautiful, earthy tones that make them feel both handcrafted and timeless. This kind of product usually does really well on Pinterest, and I noticed you don't have a Pinterest profile linked anywhere.<br><br>My name is Jane. I work with business owners like you to drive thousands of visitors from Pinterest to their shops and websites (I also run Switzer Templates, a shop with over 28,000 sales, and Pinterest is my main traffic driver)<br><br>If you'd like to make the most of Pinterest for your business, I offer two packages that will help to set your account up for success: https://pinterest.switzertemplates.com/ I do a full audit and build a comprehensive strategy specifically for your niche, using paid analytics tools that aren't available to the general public - so you get clear insight into what's actually working in your niche and how much traffic and sales you can expect.<br><br>If you're curious about Pinterest but not ready to invest yet, I put together a free guide on how to set up your profile and get started. You can grab it here: switzertemplates.myflodesk.com/pinterest-guidebook<br><br>Let me know if you have any questions - always happy to help!<br><br>Regards,<br>Jane</div>
+                  <button class="copy-btn" onclick="copyDraft(event, 'ddb1a11b')">Copy message</button>
+                </div>
+              </td>
+            </tr>
+        <tr class="lead-row priority-low" id="row-72e94735"
+            data-source="etsy" data-status="qualified"
+            data-niche="ceramic pottery" data-pinterest="—">
+          <td><span class="badge source-etsy">etsy</span></td>
+          <td>
+            <strong>KJPottery</strong>
+            
+          </td>
+          <td>ceramic pottery</td>
+          <td><a href="https://www.etsy.com/shop/KJPottery" target="_blank">Etsy</a></td>
+          <td><a href="https://www.etsy.com/shop/KJPottery" target="_blank">Etsy message</a></td>
+          <td><span class="pint pint-yes">—</span></td>
+          <td><span class="score score-low">5</span></td>
+          <td class="status-cell"><span class="status status-qualified">Qualified</span></td>
+          <td class="msg-cell"><button class="msg-btn" onclick="toggleDraft(event, '72e94735')" title="View message">
+              <span>&#9993;</span> <span class="msg-label">View</span>
+            </button></td>
+        </tr>
+        
+            <tr class="draft-panel" id="panel-72e94735" style="display:none;">
+              <td colspan="9">
+                <div class="draft-box">
+                  <div class="draft-meta">Instagram DM &middot; KJPottery</div>
+                  <div class="draft-text" id="draft-72e94735">──────────────────────────────────────────────────<br><br>Hi,<br>How are you?<br>I really like your profile - the earthy glazes on your ceramic mugs feel so warm and handmade, like each one has its own little story. This kind of product usually does really well on Pinterest, and I noticed you don't have a Pinterest profile linked anywhere.<br><br>My name is Jane. I work with business owners like you to drive thousands of visitors from Pinterest to their shops and websites (I also run Switzer Templates, a shop with over 28,000 sales, and Pinterest is my main traffic driver)<br><br>If you'd like to make the most of Pinterest for your business, I offer two packages that will help to set your account up for success: https://pinterest.switzertemplates.com/ I do a full audit and build a comprehensive strategy specifically for your niche, using paid analytics tools that aren't available to the general public - so you get clear insight into what's actually working in your niche and how much traffic and sales you can expect.<br><br>If you're curious about Pinterest but not ready to invest yet, I put together a free guide on how to set up your profile and get started. You can grab it here: switzertemplates.myflodesk.com/pinterest-guidebook<br><br>Let me know if you have any questions - always happy to help!<br><br>Regards,<br>Jane</div>
+                  <button class="copy-btn" onclick="copyDraft(event, '72e94735')">Copy message</button>
+                </div>
+              </td>
+            </tr>
+        <tr class="lead-row priority-low" id="row-3f650049"
+            data-source="etsy" data-status="qualified"
+            data-niche="ceramic pottery" data-pinterest="—">
+          <td><span class="badge source-etsy">etsy</span></td>
+          <td>
+            <strong>LAISMAN</strong>
+            
+          </td>
+          <td>ceramic pottery</td>
+          <td><a href="https://www.etsy.com/shop/LAISMAN" target="_blank">Etsy</a></td>
+          <td><a href="https://www.etsy.com/shop/LAISMAN" target="_blank">Etsy message</a></td>
+          <td><span class="pint pint-yes">—</span></td>
+          <td><span class="score score-low">5</span></td>
+          <td class="status-cell"><span class="status status-qualified">Qualified</span></td>
+          <td class="msg-cell"><button class="msg-btn" onclick="toggleDraft(event, '3f650049')" title="View message">
+              <span>&#9993;</span> <span class="msg-label">View</span>
+            </button></td>
+        </tr>
+        
+            <tr class="draft-panel" id="panel-3f650049" style="display:none;">
+              <td colspan="9">
+                <div class="draft-box">
+                  <div class="draft-meta">Instagram DM &middot; LAISMAN</div>
+                  <div class="draft-text" id="draft-3f650049">──────────────────────────────────────────────────<br><br>Hi,<br>How are you?<br>I really like your profile - the earthy textures and muted glazes on your ceramic pieces caught my eye immediately, they feel so tactile even through a screen. This kind of product usually does really well on Pinterest, and I noticed you don't have a Pinterest profile linked anywhere.<br><br>My name is Jane. I work with business owners like you to drive thousands of visitors from Pinterest to their shops and websites (I also run Switzer Templates, a shop with over 28,000 sales, and Pinterest is my main traffic driver)<br><br>If you'd like to make the most of Pinterest for your business, I offer two packages that will help to set your account up for success: https://pinterest.switzertemplates.com/ I do a full audit and build a comprehensive strategy specifically for your niche, using paid analytics tools that aren't available to the general public - so you get clear insight into what's actually working in your niche and how much traffic and sales you can expect.<br><br>If you're curious about Pinterest but not ready to invest yet, I put together a free guide on how to set up your profile and get started. You can grab it here: switzertemplates.myflodesk.com/pinterest-guidebook<br><br>Let me know if you have any questions - always happy to help!<br><br>Regards,<br>Jane</div>
+                  <button class="copy-btn" onclick="copyDraft(event, '3f650049')">Copy message</button>
+                </div>
+              </td>
+            </tr>
+        <tr class="lead-row priority-mid" id="row-1e071f8a"
+            data-source="etsy" data-status="qualified"
+            data-niche="ceramic pottery" data-pinterest="—">
+          <td><span class="badge source-etsy">etsy</span></td>
+          <td>
+            <strong>ChiveCeramics</strong>
+            
+          </td>
+          <td>ceramic pottery</td>
+          <td><a href="https://www.etsy.com/shop/ChiveCeramics" target="_blank">Etsy</a></td>
+          <td><a href="https://www.etsy.com/shop/ChiveCeramics" target="_blank">Etsy message</a></td>
+          <td><span class="pint pint-yes">—</span></td>
+          <td><span class="score score-mid">8</span></td>
+          <td class="status-cell"><span class="status status-qualified">Qualified</span></td>
+          <td class="msg-cell"><button class="msg-btn" onclick="toggleDraft(event, '1e071f8a')" title="View message">
+              <span>&#9993;</span> <span class="msg-label">View</span>
+            </button></td>
+        </tr>
+        
+            <tr class="draft-panel" id="panel-1e071f8a" style="display:none;">
+              <td colspan="9">
+                <div class="draft-box">
+                  <div class="draft-meta">Instagram DM &middot; ChiveCeramics</div>
+                  <div class="draft-text" id="draft-1e071f8a">──────────────────────────────────────────────────<br><br>Hi,<br>How are you?<br>I really like your profile - the organic, earthy textures on your handmade bowls caught my eye immediately, they look so beautifully imperfect in the best way. This kind of product usually does really well on Pinterest, and I noticed you don't have a Pinterest profile linked anywhere.<br><br>My name is Jane. I work with business owners like you to drive thousands of visitors from Pinterest to their shops and websites (I also run Switzer Templates, a shop with over 28,000 sales, and Pinterest is my main traffic driver)<br><br>If you'd like to make the most of Pinterest for your business, I offer two packages that will help to set your account up for success: https://pinterest.switzertemplates.com/ I do a full audit and build a comprehensive strategy specifically for your niche, using paid analytics tools that aren't available to the general public - so you get clear insight into what's actually working in your niche and how much traffic and sales you can expect.<br><br>If you're curious about Pinterest but not ready to invest yet, I put together a free guide on how to set up your profile and get started. You can grab it here: switzertemplates.myflodesk.com/pinterest-guidebook<br><br>Let me know if you have any questions - always happy to help!<br><br>Regards,<br>Jane</div>
+                  <button class="copy-btn" onclick="copyDraft(event, '1e071f8a')">Copy message</button>
+                </div>
+              </td>
+            </tr>
+        <tr class="lead-row priority-low" id="row-a9bbe339"
+            data-source="etsy" data-status="qualified"
+            data-niche="home decor handmade" data-pinterest="—">
+          <td><span class="badge source-etsy">etsy</span></td>
+          <td>
+            <strong>LUMIARTISANSTORY</strong>
+            
+          </td>
+          <td>home decor handmade</td>
+          <td><a href="https://www.etsy.com/shop/LUMIARTISANSTORY" target="_blank">Etsy</a></td>
+          <td><a href="https://www.etsy.com/shop/LUMIARTISANSTORY" target="_blank">Etsy message</a></td>
+          <td><span class="pint pint-yes">—</span></td>
+          <td><span class="score score-low">5</span></td>
+          <td class="status-cell"><span class="status status-qualified">Qualified</span></td>
+          <td class="msg-cell"><button class="msg-btn" onclick="toggleDraft(event, 'a9bbe339')" title="View message">
+              <span>&#9993;</span> <span class="msg-label">View</span>
+            </button></td>
+        </tr>
+        
+            <tr class="draft-panel" id="panel-a9bbe339" style="display:none;">
+              <td colspan="9">
+                <div class="draft-box">
+                  <div class="draft-meta">Instagram DM &middot; LUMIARTISANSTORY</div>
+                  <div class="draft-text" id="draft-a9bbe339">──────────────────────────────────────────────────<br><br>Hi,<br>How are you?<br>I really like your profile - the handmade home decor pieces you create have such a cozy, artisan feel that makes each item look like it truly belongs in a lived-in, loved home. This kind of product usually does really well on Pinterest, and I noticed you don't have a Pinterest profile linked anywhere.<br><br>My name is Jane. I work with business owners like you to drive thousands of visitors from Pinterest to their shops and websites (I also run Switzer Templates, a shop with over 28,000 sales, and Pinterest is my main traffic driver)<br><br>If you'd like to make the most of Pinterest for your business, I offer two packages that will help to set your account up for success: https://pinterest.switzertemplates.com/ I do a full audit and build a comprehensive strategy specifically for your niche, using paid analytics tools that aren't available to the general public - so you get clear insight into what's actually working in your niche and how much traffic and sales you can expect.<br><br>If you're curious about Pinterest but not ready to invest yet, I put together a free guide on how to set up your profile and get started. You can grab it here: switzertemplates.myflodesk.com/pinterest-guidebook<br><br>Let me know if you have any questions - always happy to help!<br><br>Regards,<br>Jane</div>
+                  <button class="copy-btn" onclick="copyDraft(event, 'a9bbe339')">Copy message</button>
+                </div>
+              </td>
+            </tr>
+        <tr class="lead-row priority-low" id="row-1f4b60b3"
+            data-source="etsy" data-status="qualified"
+            data-niche="home decor handmade" data-pinterest="—">
+          <td><span class="badge source-etsy">etsy</span></td>
+          <td>
+            <strong>Wovaa</strong>
+            
+          </td>
+          <td>home decor handmade</td>
+          <td><a href="https://www.etsy.com/shop/Wovaa" target="_blank">Etsy</a></td>
+          <td><a href="https://www.etsy.com/shop/Wovaa" target="_blank">Etsy message</a></td>
+          <td><span class="pint pint-yes">—</span></td>
+          <td><span class="score score-low">5</span></td>
+          <td class="status-cell"><span class="status status-qualified">Qualified</span></td>
+          <td class="msg-cell"><button class="msg-btn" onclick="toggleDraft(event, '1f4b60b3')" title="View message">
+              <span>&#9993;</span> <span class="msg-label">View</span>
+            </button></td>
+        </tr>
+        
+            <tr class="draft-panel" id="panel-1f4b60b3" style="display:none;">
+              <td colspan="9">
+                <div class="draft-box">
+                  <div class="draft-meta">Instagram DM &middot; Wovaa</div>
+                  <div class="draft-text" id="draft-1f4b60b3">──────────────────────────────────────────────────<br><br>Hi,<br>How are you?<br>I really like your profile - the texture and earthy tones in your woven wall hangings caught my eye immediately, they have such a cozy, artisan feel to them. This kind of product usually does really well on Pinterest, and I noticed you don't have a Pinterest profile linked anywhere.<br><br>My name is Jane. I work with business owners like you to drive thousands of visitors from Pinterest to their shops and websites (I also run Switzer Templates, a shop with over 28,000 sales, and Pinterest is my main traffic driver)<br><br>If you'd like to make the most of Pinterest for your business, I offer two packages that will help to set your account up for success: https://pinterest.switzertemplates.com/ I do a full audit and build a comprehensive strategy specifically for your niche, using paid analytics tools that aren't available to the general public - so you get clear insight into what's actually working in your niche and how much traffic and sales you can expect.<br><br>If you're curious about Pinterest but not ready to invest yet, I put together a free guide on how to set up your profile and get started. You can grab it here: switzertemplates.myflodesk.com/pinterest-guidebook<br><br>Let me know if you have any questions - always happy to help!<br><br>Regards,<br>Jane</div>
+                  <button class="copy-btn" onclick="copyDraft(event, '1f4b60b3')">Copy message</button>
+                </div>
+              </td>
+            </tr>
+        <tr class="lead-row priority-low" id="row-5c33e6a4"
+            data-source="etsy" data-status="qualified"
+            data-niche="home decor handmade" data-pinterest="—">
+          <td><span class="badge source-etsy">etsy</span></td>
+          <td>
+            <strong>StarArtisans</strong>
+            
+          </td>
+          <td>home decor handmade</td>
+          <td><a href="https://www.etsy.com/shop/StarArtisans" target="_blank">Etsy</a></td>
+          <td><a href="https://www.etsy.com/shop/StarArtisans" target="_blank">Etsy message</a></td>
+          <td><span class="pint pint-yes">—</span></td>
+          <td><span class="score score-low">5</span></td>
+          <td class="status-cell"><span class="status status-qualified">Qualified</span></td>
+          <td class="msg-cell"><button class="msg-btn" onclick="toggleDraft(event, '5c33e6a4')" title="View message">
+              <span>&#9993;</span> <span class="msg-label">View</span>
+            </button></td>
+        </tr>
+        
+            <tr class="draft-panel" id="panel-5c33e6a4" style="display:none;">
+              <td colspan="9">
+                <div class="draft-box">
+                  <div class="draft-meta">Instagram DM &middot; StarArtisans</div>
+                  <div class="draft-text" id="draft-5c33e6a4">──────────────────────────────────────────────────<br><br>Hi,<br>How are you?<br>I really like your profile - your handmade home decor pieces have such a cozy, personal touch, and the craftsmanship in your work really stands out. This kind of product usually does really well on Pinterest, and I noticed you don't have a Pinterest profile linked anywhere.<br><br>My name is Jane. I work with business owners like you to drive thousands of visitors from Pinterest to their shops and websites (I also run Switzer Templates, a shop with over 28,000 sales, and Pinterest is my main traffic driver)<br><br>If you'd like to make the most of Pinterest for your business, I offer two packages that will help to set your account up for success: https://pinterest.switzertemplates.com/ I do a full audit and build a comprehensive strategy specifically for your niche, using paid analytics tools that aren't available to the general public - so you get clear insight into what's actually working in your niche and how much traffic and sales you can expect.<br><br>If you're curious about Pinterest but not ready to invest yet, I put together a free guide on how to set up your profile and get started. You can grab it here: switzertemplates.myflodesk.com/pinterest-guidebook<br><br>Let me know if you have any questions - always happy to help!<br><br>Regards,<br>Jane</div>
+                  <button class="copy-btn" onclick="copyDraft(event, '5c33e6a4')">Copy message</button>
+                </div>
+              </td>
+            </tr>
+        <tr class="lead-row priority-low" id="row-278b04e6"
+            data-source="etsy" data-status="qualified"
+            data-niche="home decor handmade" data-pinterest="—">
+          <td><span class="badge source-etsy">etsy</span></td>
+          <td>
+            <strong>VetnikovStore</strong>
+            
+          </td>
+          <td>home decor handmade</td>
+          <td><a href="https://www.etsy.com/shop/VetnikovStore" target="_blank">Etsy</a></td>
+          <td><a href="https://www.etsy.com/shop/VetnikovStore" target="_blank">Etsy message</a></td>
+          <td><span class="pint pint-yes">—</span></td>
+          <td><span class="score score-low">5</span></td>
+          <td class="status-cell"><span class="status status-qualified">Qualified</span></td>
+          <td class="msg-cell"><button class="msg-btn" onclick="toggleDraft(event, '278b04e6')" title="View message">
+              <span>&#9993;</span> <span class="msg-label">View</span>
+            </button></td>
+        </tr>
+        
+            <tr class="draft-panel" id="panel-278b04e6" style="display:none;">
+              <td colspan="9">
+                <div class="draft-box">
+                  <div class="draft-meta">Instagram DM &middot; VetnikovStore</div>
+                  <div class="draft-text" id="draft-278b04e6">──────────────────────────────────────────────────<br><br>Hi,<br>How are you?<br>I really like your profile - the handmade home decor pieces have such a cozy, artisan feel, and the attention to detail in each item really stands out. This kind of product usually does really well on Pinterest, and I noticed you don't have a Pinterest profile linked anywhere.<br><br>My name is Jane. I work with business owners like you to drive thousands of visitors from Pinterest to their shops and websites (I also run Switzer Templates, a shop with over 28,000 sales, and Pinterest is my main traffic driver)<br><br>If you'd like to make the most of Pinterest for your business, I offer two packages that will help to set your account up for success: https://pinterest.switzertemplates.com/ I do a full audit and build a comprehensive strategy specifically for your niche, using paid analytics tools that aren't available to the general public - so you get clear insight into what's actually working in your niche and how much traffic and sales you can expect.<br><br>If you're curious about Pinterest but not ready to invest yet, I put together a free guide on how to set up your profile and get started. You can grab it here: switzertemplates.myflodesk.com/pinterest-guidebook<br><br>Let me know if you have any questions - always happy to help!<br><br>Regards,<br>Jane</div>
+                  <button class="copy-btn" onclick="copyDraft(event, '278b04e6')">Copy message</button>
+                </div>
+              </td>
+            </tr>
+        <tr class="lead-row priority-low" id="row-7713420d"
+            data-source="etsy" data-status="qualified"
+            data-niche="home decor handmade" data-pinterest="—">
+          <td><span class="badge source-etsy">etsy</span></td>
+          <td>
+            <strong>MinhAndBros</strong>
+            
+          </td>
+          <td>home decor handmade</td>
+          <td><a href="https://www.etsy.com/shop/MinhAndBros" target="_blank">Etsy</a></td>
+          <td><a href="https://www.etsy.com/shop/MinhAndBros" target="_blank">Etsy message</a></td>
+          <td><span class="pint pint-yes">—</span></td>
+          <td><span class="score score-low">5</span></td>
+          <td class="status-cell"><span class="status status-qualified">Qualified</span></td>
+          <td class="msg-cell"><button class="msg-btn" onclick="toggleDraft(event, '7713420d')" title="View message">
+              <span>&#9993;</span> <span class="msg-label">View</span>
+            </button></td>
+        </tr>
+        
+            <tr class="draft-panel" id="panel-7713420d" style="display:none;">
+              <td colspan="9">
+                <div class="draft-box">
+                  <div class="draft-meta">Instagram DM &middot; MinhAndBros</div>
+                  <div class="draft-text" id="draft-7713420d">──────────────────────────────────────────────────<br><br>Hi,<br>How are you?<br>I really like your profile - the handmade home decor pieces have such a warm, personal touch that you don't often find in mass-produced items. This kind of product usually does really well on Pinterest, and I noticed you don't have a Pinterest profile linked anywhere.<br><br>My name is Jane. I work with business owners like you to drive thousands of visitors from Pinterest to their shops and websites (I also run Switzer Templates, a shop with over 28,000 sales, and Pinterest is my main traffic driver)<br><br>If you'd like to make the most of Pinterest for your business, I offer two packages that will help to set your account up for success: https://pinterest.switzertemplates.com/ I do a full audit and build a comprehensive strategy specifically for your niche, using paid analytics tools that aren't available to the general public - so you get clear insight into what's actually working in your niche and how much traffic and sales you can expect.<br><br>If you're curious about Pinterest but not ready to invest yet, I put together a free guide on how to set up your profile and get started. You can grab it here: switzertemplates.myflodesk.com/pinterest-guidebook<br><br>Let me know if you have any questions - always happy to help!<br><br>Regards,<br>Jane</div>
+                  <button class="copy-btn" onclick="copyDraft(event, '7713420d')">Copy message</button>
+                </div>
+              </td>
+            </tr>
+        <tr class="lead-row priority-low" id="row-a3be7446"
+            data-source="etsy" data-status="qualified"
+            data-niche="home decor handmade" data-pinterest="—">
+          <td><span class="badge source-etsy">etsy</span></td>
+          <td>
+            <strong>Bellahera</strong>
+            
+          </td>
+          <td>home decor handmade</td>
+          <td><a href="https://www.etsy.com/shop/Bellahera" target="_blank">Etsy</a></td>
+          <td><a href="https://www.etsy.com/shop/Bellahera" target="_blank">Etsy message</a></td>
+          <td><span class="pint pint-yes">—</span></td>
+          <td><span class="score score-low">5</span></td>
+          <td class="status-cell"><span class="status status-qualified">Qualified</span></td>
+          <td class="msg-cell"><button class="msg-btn" onclick="toggleDraft(event, 'a3be7446')" title="View message">
+              <span>&#9993;</span> <span class="msg-label">View</span>
+            </button></td>
+        </tr>
+        
+            <tr class="draft-panel" id="panel-a3be7446" style="display:none;">
+              <td colspan="9">
+                <div class="draft-box">
+                  <div class="draft-meta">Instagram DM &middot; Bellahera</div>
+                  <div class="draft-text" id="draft-a3be7446">──────────────────────────────────────────────────<br><br>Hi,<br>How are you?<br>I really like your profile - your handmade home decor pieces have such a cozy, personal touch, and the attention to detail in your craftsmanship really makes each item feel special. This kind of product usually does really well on Pinterest, and I noticed you don't have a Pinterest profile linked anywhere.<br><br>My name is Jane. I work with business owners like you to drive thousands of visitors from Pinterest to their shops and websites (I also run Switzer Templates, a shop with over 28,000 sales, and Pinterest is my main traffic driver)<br><br>If you'd like to make the most of Pinterest for your business, I offer two packages that will help to set your account up for success: https://pinterest.switzertemplates.com/ I do a full audit and build a comprehensive strategy specifically for your niche, using paid analytics tools that aren't available to the general public - so you get clear insight into what's actually working in your niche and how much traffic and sales you can expect.<br><br>If you're curious about Pinterest but not ready to invest yet, I put together a free guide on how to set up your profile and get started. You can grab it here: switzertemplates.myflodesk.com/pinterest-guidebook<br><br>Let me know if you have any questions - always happy to help!<br><br>Regards,<br>Jane</div>
+                  <button class="copy-btn" onclick="copyDraft(event, 'a3be7446')">Copy message</button>
+                </div>
+              </td>
+            </tr>
+        <tr class="lead-row priority-low" id="row-0342e6c9"
+            data-source="etsy" data-status="qualified"
+            data-niche="home decor handmade" data-pinterest="—">
+          <td><span class="badge source-etsy">etsy</span></td>
+          <td>
+            <strong>CarpenterKatieCo</strong>
+            
+          </td>
+          <td>home decor handmade</td>
+          <td><a href="https://www.etsy.com/shop/CarpenterKatieCo" target="_blank">Etsy</a></td>
+          <td><a href="https://www.etsy.com/shop/CarpenterKatieCo" target="_blank">Etsy message</a></td>
+          <td><span class="pint pint-yes">—</span></td>
+          <td><span class="score score-low">5</span></td>
+          <td class="status-cell"><span class="status status-qualified">Qualified</span></td>
+          <td class="msg-cell"><button class="msg-btn" onclick="toggleDraft(event, '0342e6c9')" title="View message">
+              <span>&#9993;</span> <span class="msg-label">View</span>
+            </button></td>
+        </tr>
+        
+            <tr class="draft-panel" id="panel-0342e6c9" style="display:none;">
+              <td colspan="9">
+                <div class="draft-box">
+                  <div class="draft-meta">Instagram DM &middot; CarpenterKatieCo</div>
+                  <div class="draft-text" id="draft-0342e6c9">──────────────────────────────────────────────────<br><br>Hi,<br>How are you?<br>I really like your profile - your handmade home decor pieces have such a warm, personal touch, and the woodwork details really stand out! This kind of product usually does really well on Pinterest, and I noticed you don't have a Pinterest profile linked anywhere.<br><br>My name is Jane. I work with business owners like you to drive thousands of visitors from Pinterest to their shops and websites (I also run Switzer Templates, a shop with over 28,000 sales, and Pinterest is my main traffic driver)<br><br>If you'd like to make the most of Pinterest for your business, I offer two packages that will help to set your account up for success: https://pinterest.switzertemplates.com/ I do a full audit and build a comprehensive strategy specifically for your niche, using paid analytics tools that aren't available to the general public - so you get clear insight into what's actually working in your niche and how much traffic and sales you can expect.<br><br>If you're curious about Pinterest but not ready to invest yet, I put together a free guide on how to set up your profile and get started. You can grab it here: switzertemplates.myflodesk.com/pinterest-guidebook<br><br>Let me know if you have any questions - always happy to help!<br><br>Regards,<br>Jane</div>
+                  <button class="copy-btn" onclick="copyDraft(event, '0342e6c9')">Copy message</button>
+                </div>
+              </td>
+            </tr>
+        <tr class="lead-row priority-low" id="row-8250ba90"
+            data-source="etsy" data-status="qualified"
+            data-niche="home decor handmade" data-pinterest="—">
+          <td><span class="badge source-etsy">etsy</span></td>
+          <td>
+            <strong>MyGroundingLiving</strong>
+            
+          </td>
+          <td>home decor handmade</td>
+          <td><a href="https://www.etsy.com/shop/MyGroundingLiving" target="_blank">Etsy</a></td>
+          <td><a href="https://www.etsy.com/shop/MyGroundingLiving" target="_blank">Etsy message</a></td>
+          <td><span class="pint pint-yes">—</span></td>
+          <td><span class="score score-low">5</span></td>
+          <td class="status-cell"><span class="status status-qualified">Qualified</span></td>
+          <td class="msg-cell"><button class="msg-btn" onclick="toggleDraft(event, '8250ba90')" title="View message">
+              <span>&#9993;</span> <span class="msg-label">View</span>
+            </button></td>
+        </tr>
+        
+            <tr class="draft-panel" id="panel-8250ba90" style="display:none;">
+              <td colspan="9">
+                <div class="draft-box">
+                  <div class="draft-meta">Instagram DM &middot; MyGroundingLiving</div>
+                  <div class="draft-text" id="draft-8250ba90">──────────────────────────────────────────────────<br><br>Hi,<br>How are you?<br>I really like your profile - your handmade home decor pieces have such a grounding, earthy feel that makes each item look so intentional and carefully crafted. This kind of product usually does really well on Pinterest, and I noticed you don't have a Pinterest profile linked anywhere.<br><br>My name is Jane. I work with business owners like you to drive thousands of visitors from Pinterest to their shops and websites (I also run Switzer Templates, a shop with over 28,000 sales, and Pinterest is my main traffic driver)<br><br>If you'd like to make the most of Pinterest for your business, I offer two packages that will help to set your account up for success: https://pinterest.switzertemplates.com/ I do a full audit and build a comprehensive strategy specifically for your niche, using paid analytics tools that aren't available to the general public - so you get clear insight into what's actually working in your niche and how much traffic and sales you can expect.<br><br>If you're curious about Pinterest but not ready to invest yet, I put together a free guide on how to set up your profile and get started. You can grab it here: switzertemplates.myflodesk.com/pinterest-guidebook<br><br>Let me know if you have any questions - always happy to help!<br><br>Regards,<br>Jane</div>
+                  <button class="copy-btn" onclick="copyDraft(event, '8250ba90')">Copy message</button>
+                </div>
+              </td>
+            </tr>
+    </tbody>
+  </table>
+</div>
+
+<script>
+function toggleDraft(event, id) {
+  event.stopPropagation();
+  const panel = document.getElementById('panel-' + id);
+  const btn   = event.currentTarget;
+  if (!panel) return;
+  const open = panel.style.display !== 'none';
+  panel.style.display = open ? 'none' : 'table-row';
+  btn.classList.toggle('open', !open);
+  btn.querySelector('.msg-label').textContent = open ? 'View' : 'Hide';
+}
+
+function copyDraft(event, id) {
+  event.stopPropagation();
+  const el = document.getElementById('draft-' + id);
+  if (!el) return;
+  const text = el.innerHTML
+    .replace(/<br\s*\/?>/gi, '\n')
+    .replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&middot;/g, '·');
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = event.currentTarget;
+    const orig = btn.textContent;
+    btn.textContent = 'Copied!';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = orig; btn.classList.remove('copied'); }, 2000);
+  });
+}
+
+function updateStatus(leadId, sel) {
+  const newStatus = sel.value;
+  sel.className = 'status-select status-' + newStatus + ' saving';
+
+  fetch('http://127.0.0.1:8765/update', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ lead_id: leadId, status: newStatus })
+  })
+  .then(r => r.json())
+  .then(() => {
+    sel.className = 'status-select status-' + newStatus + ' saved';
+    // Update row data attribute for filtering
+    const row = document.getElementById('row-' + leadId);
+    if (row) row.dataset.status = newStatus;
+    // Dim row if messaged/paid
+    if (newStatus === 'messaged' || newStatus === 'paid') row && row.classList.add('sent');
+    else row && row.classList.remove('sent');
+    setTimeout(() => { sel.className = 'status-select status-' + newStatus; }, 1200);
+  })
+  .catch(() => {
+    sel.className = 'status-select status-' + newStatus;
+  });
+}
+
+function filterTable() {
+  const search = document.getElementById('search').value.toLowerCase();
+  const src    = document.getElementById('fSource').value;
+  const stat   = document.getElementById('fStatus').value;
+  const noPint = document.getElementById('fNoPint').checked;
+  const hasMsg = document.getElementById('fHasMsg').checked;
+
+  document.querySelectorAll('tr.lead-row').forEach(row => {
+    const panel = row.nextElementSibling;
+    const hasPanel = panel && panel.classList.contains('draft-panel');
+    const match =
+      (!search || row.textContent.toLowerCase().includes(search)) &&
+      (!src    || row.dataset.source === src) &&
+      (!stat   || row.dataset.status === stat) &&
+      (!noPint || row.dataset.pinterest === 'N') &&
+      (!hasMsg || row.querySelector('.msg-btn') !== null);
+    row.classList.toggle('hidden', !match);
+    if (hasPanel) panel.classList.toggle('hidden', !match);
+  });
+}
+</script>
+</body>
+</html>

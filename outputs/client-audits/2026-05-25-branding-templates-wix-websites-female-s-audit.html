@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pinterest Audit — branding templates Wix websites female small business</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+<style>
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #faf7f3;
+  --surface: #fff;
+  --surface2: #f0ebe2;
+  --border: #e4dbd0;
+  --border2: #d6ccc0;
+  --text: #2b2520;
+  --text2: #7a6458;
+  --text3: #c9b8a8;
+  --accent: #b09478;
+  --gold: #c9a87c;
+  --dark-banner: #2b2520;
+  --serif: 'Instrument Serif', Georgia, serif;
+  --sans: 'DM Sans', -apple-system, sans-serif;
+  --radius: 10px;
+  --radius-sm: 6px;
+}
+body {
+  font-family: var(--sans);
+  font-weight: 300;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  font-size: 14px;
+  line-height: 1.6;
+}
+.wrapper {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 5rem;
+}
+/* body has no top padding — header is full-width above wrapper */
+body > .wrapper { padding-top: 2rem; }
+
+/* ── Header (full-width, matches onboarding page exactly) ───────── */
+.header {
+  text-align: center;
+  padding: 3.5rem 1.5rem 2rem;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 0;
+  background: var(--bg);
+}
+.header-label {
+  font-size: 11px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--text2);
+  margin: 0 auto 14px;
+  font-family: var(--sans);
+  font-weight: 300;
+  text-align: center;
+  max-width: none;
+}
+.header h1 {
+  font-family: var(--serif);
+  font-size: clamp(28px, 5vw, 42px);
+  font-weight: normal;
+  color: var(--text);
+  line-height: 1.2;
+  margin-bottom: 12px;
+  text-align: center;
+}
+.header-date {
+  font-size: 13px;
+  color: var(--text3);
+  font-family: var(--sans);
+  font-weight: 300;
+  text-align: center;
+  max-width: none;
+  margin: 0 auto;
+}
+
+/* ── Cards ──────────────────────────────────────────────────────── */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 1rem;
+}
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+}
+.card-title {
+  font-family: var(--serif);
+  font-size: 20px;
+  font-weight: normal;
+  color: var(--text);
+}
+.section-num {
+  font-size: 10px;
+  color: var(--text3);
+  letter-spacing: .08em;
+  background: var(--surface2);
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-weight: 400;
+  white-space: nowrap;
+}
+
+/* ── Stat grid ──────────────────────────────────────────────────── */
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 10px;
+  margin: 1rem 0 0.5rem;
+}
+.stat-card {
+  background: var(--surface2);
+  border-radius: var(--radius-sm);
+  padding: 14px 12px;
+}
+.stat-label {
+  font-size: 12px;
+  color: var(--text);
+  letter-spacing: 0;
+  text-transform: none;
+  margin-top: 6px;
+  font-weight: 300;
+  line-height: 1.4;
+}
+.stat-val {
+  font-family: var(--serif);
+  font-size: 32px;
+  color: var(--text);
+  margin-bottom: 0;
+  line-height: 1.1;
+}
+.stat-sub {
+  font-size: 11px;
+  color: var(--text3);
+  line-height: 1.4;
+}
+
+/* ── Keyword pills ──────────────────────────────────────────────── */
+.pill-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 4px 0;
+}
+.pill {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 5px 14px;
+  font-size: 13px;
+  color: var(--text2);
+  white-space: nowrap;
+  font-weight: 400;
+}
+
+/* ── Tables ─────────────────────────────────────────────────────── */
+.table-wrap { overflow-x: auto; margin: 0.75rem 0; }
+table { width: 100%; border-collapse: collapse; }
+th {
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--text3);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  padding: 0 10px 10px;
+  text-align: left;
+  border-bottom: 1px solid var(--border2);
+  white-space: nowrap;
+  font-family: var(--sans);
+}
+td {
+  padding: 10px;
+  font-size: 13px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+  color: var(--text);
+  line-height: 1.5;
+  font-weight: 300;
+}
+tr:last-child td { border-bottom: none; }
+tbody tr:hover { background: var(--surface2); }
+
+/* ── Sub-section (h3) ───────────────────────────────────────────── */
+.subsection {
+  margin-top: 1.25rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--border);
+}
+.card-header + .subsection,
+.card-header + .strategy-step { border-top: none; }
+.subsection-title {
+  font-family: var(--serif);
+  font-size: 17px;
+  font-weight: normal;
+  color: var(--text);
+  margin-bottom: 0.75rem;
+}
+
+/* ── H4 / bold labels ───────────────────────────────────────────── */
+.field-label {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text2);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  margin: 1rem 0 4px;
+  font-family: var(--sans);
+}
+
+/* ── Body text ──────────────────────────────────────────────────── */
+p {
+  font-size: 13px;
+  color: var(--text2);
+  line-height: 1.65;
+  margin-bottom: 0.75rem;
+  max-width: 720px;
+  font-weight: 300;
+}
+p:last-child { margin-bottom: 0; }
+ul, ol { padding-left: 20px; margin-bottom: 0.75rem; }
+li {
+  font-size: 13px;
+  color: var(--text2);
+  line-height: 1.6;
+  margin-bottom: 4px;
+  font-weight: 300;
+}
+a { color: var(--accent); }
+strong { color: var(--text); font-weight: 500; }
+em { color: var(--text2); }
+
+/* ── Italic meta / source note ──────────────────────────────────── */
+.meta-note {
+  font-size: 11px;
+  color: var(--text3);
+  font-style: italic;
+  margin-bottom: 0.75rem;
+}
+
+/* ── Trend cards (Design Style Trends) ─────────────────────────── */
+.trend-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 12px;
+  margin: 0.75rem 0;
+}
+.trend-card {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px 14px;
+}
+.trend-card-num {
+  font-size: 10px;
+  color: var(--text3);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  font-family: var(--sans);
+  font-weight: 400;
+  margin-bottom: 6px;
+}
+.trend-card-name {
+  font-family: var(--serif);
+  font-size: 16px;
+  font-weight: normal;
+  color: var(--text);
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+.trend-card-desc {
+  font-size: 12px;
+  color: var(--text2);
+  line-height: 1.6;
+  font-weight: 300;
+}
+.trend-card-desc em {
+  color: var(--accent);
+  font-style: italic;
+  display: block;
+  margin-top: 6px;
+}
+
+/* ── Strategy card (section 7) ───────────────────────────────────── */
+.strategy-card {
+  border: 1px solid var(--border2);
+  overflow: hidden;
+  padding: 0;
+}
+.strategy-card .card-header {
+  background: var(--dark-banner);
+  margin: 0;
+  padding: 1.5rem 1.75rem 1.25rem;
+  border-bottom: none;
+  border-radius: 0;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+.strategy-card .card-header::after {
+  flex: 0 0 100%;
+  content: '';
+  display: block;
+  width: 36px;
+  height: 3px;
+  background: var(--gold);
+  border-radius: 2px;
+  margin-top: 10px;
+  opacity: 0.8;
+}
+.strategy-card .card-title { color: #f8f5f2; font-size: 22px; }
+.strategy-card .section-num { background: var(--gold); color: #fff; }
+.strategy-step {
+  display: grid;
+  grid-template-columns: 26px 1fr;
+  gap: 1rem;
+  padding: 1.25rem 1.75rem;
+  border-top: 1px solid var(--border);
+  align-items: start;
+}
+.strategy-step-num {
+  font-size: 15px;
+  color: var(--accent);
+  line-height: 1.3;
+  padding-top: 1px;
+  text-align: center;
+}
+.strategy-step-title {
+  font-family: var(--serif);
+  font-size: 17px;
+  color: var(--text);
+  font-weight: normal;
+  margin-bottom: 0.6rem;
+}
+.strategy-step-body { font-size: 13px; color: var(--text2); line-height: 1.7; font-weight: 300; }
+.strategy-step-body p { margin-bottom: 0.5rem; max-width: none; color: var(--text2); font-size: 13px; font-weight: 300; }
+.strategy-step-body p:last-child { margin-bottom: 0; }
+.strategy-step-body ul, .strategy-step-body ol { padding-left: 18px; margin: 0.25rem 0; }
+.strategy-step-body li { color: var(--text2); font-size: 13px; line-height: 1.6; margin-bottom: 3px; font-weight: 300; }
+.strategy-step-body strong { color: var(--text); font-weight: 500; }
+.strategy-step-body .table-wrap { margin: 0.5rem 0; }
+
+/* ── Colour swatch ──────────────────────────────────────────────── */
+.swatch {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border-radius: 3px;
+  border: 1px solid var(--border2);
+  vertical-align: middle;
+  margin-right: 5px;
+}
+
+/* ── HR ─────────────────────────────────────────────────────────── */
+hr { display: none; }
+
+</style>
+</head>
+<body>
+<div class="header">
+  <p class="header-label">Switzertemplates Pinterest Services</p>
+  <h1>SwitzerTemplates Audit</h1>
+  <p class="header-date">2026-05-25</p>
+</div>
+<div class="wrapper">
+<div class="card">
+<div class="card-header"><div class="card-title">Pinterest niche overview</div><span class="section-num">01</span></div>
+<p>Pinterest is the highest-intent discovery platform for your niche — users are actively searching for business branding, website design, and entrepreneur tools, often with credit card in hand, making it a natural fit for digital products at your price point. Because 97% of top searches are unbranded, your premade Wix websites and branding kits have the same visibility as established competitors from day one, meaning a well-optimised profile can start capturing purchase-ready traffic almost immediately.</p>
+<div class="stat-grid">
+<div class="stat-card"><div class="stat-val">518M+</div><div class="stat-label">Monthly active Pinterest users globally (2024)</div></div>
+<div class="stat-card"><div class="stat-val">97%</div><div class="stat-label">Top Pinterest searches are unbranded — users are looking for ideas, not specific brands</div></div>
+<div class="stat-card"><div class="stat-val">80%</div><div class="stat-label">Of weekly Pinners have discovered a new brand or product on Pinterest</div></div>
+<div class="stat-card"><div class="stat-val">14,390</div><div class="stat-label">Combined monthly searches across your top keywords on Pinterest</div></div>
+<div class="stat-card"><div class="stat-val">7–10x</div><div class="stat-label">Longer content lifespan on Pinterest vs Instagram — Pins drive traffic for months, not hours</div></div>
+</div>
+</div>
+<div class="card">
+<div class="card-header"><div class="card-title">Trending keywords in your niche</div><span class="section-num">02</span></div>
+<p class="meta-note">Based on Google monthly search volume + Pinterest commercial intent scoring</p>
+<div class="pill-grid"><span class="pill">Wix website templates</span><span class="pill">small business website design</span><span class="pill">branding templates</span><span class="pill">Instagram feed templates</span><span class="pill">how to brand your business</span><span class="pill">done for you website</span><span class="pill">social media branding templates</span><span class="pill">business branding package</span><span class="pill">Instagram templates for business</span><span class="pill">feminine branding kit</span><span class="pill">small business branding kit</span><span class="pill">feminine website design</span><span class="pill">Wix template shop</span></div>
+</div>
+<div class="card">
+<div class="card-header"><div class="card-title">Keyword groups</div><span class="section-num">03</span></div>
+<div class="subsection"><div class="subsection-title">Group 1: Wix website templates & design</div>
+<div class="table-wrap"><table><thead><tr>
+<th>Keyword</th>
+<th>Monthly Volume</th>
+<th>Board Name</th>
+<th>Pins/Week</th>
+<th>Buyer Intent</th>
+</tr></thead><tbody>
+<tr><td>Wix website templates</td><td>9,900</td><td>Wix Website Templates for Small Business</td><td>5</td><td>High — searchers are actively browsing ready-to-buy template options</td></tr>
+<tr><td>small business website design</td><td>2,900</td><td>Small Business Website Design Ideas</td><td>4</td><td>High — indicates intent to launch or redesign a business site soon</td></tr>
+<tr><td>done for you website</td><td>70</td><td>Done-For-You Wix Websites</td><td>2</td><td>High — "done for you" phrasing signals purchase-ready buyers</td></tr>
+<tr><td>feminine website design</td><td>10</td><td>Feminine Website Design Inspiration</td><td>2</td><td>High — niche qualifier suggests a specific aesthetic buyer is seeking</td></tr>
+<tr><td>Wix template shop</td><td>10</td><td>Wix Template Shop Finds</td><td>2</td><td>High — "shop" phrasing directly indicates purchase intent</td></tr>
+</tbody></table></div>
+</div>
+<div class="subsection"><div class="subsection-title">Group 2: branding kits & packages</div>
+<div class="table-wrap"><table><thead><tr>
+<th>Keyword</th>
+<th>Monthly Volume</th>
+<th>Board Name</th>
+<th>Pins/Week</th>
+<th>Buyer Intent</th>
+</tr></thead><tbody>
+<tr><td>branding templates</td><td>720</td><td>Branding Templates for Small Business</td><td>4</td><td>High — users are looking for tangible, downloadable branding assets</td></tr>
+<tr><td>business branding package</td><td>40</td><td>Business Branding Packages</td><td>2</td><td>High — "package" signals readiness to invest in a complete branding solution</td></tr>
+<tr><td>feminine branding kit</td><td>10</td><td>Feminine Branding Kits for Women in Business</td><td>2</td><td>High — highly specific search suggesting a buyer close to purchasing</td></tr>
+<tr><td>small business branding kit</td><td>10</td><td>Small Business Branding Kits</td><td>2</td><td>High — kit-focused language reflects a desire for an all-in-one purchase</td></tr>
+</tbody></table></div>
+</div>
+<div class="subsection"><div class="subsection-title">Group 3: social media & Instagram templates</div>
+<div class="table-wrap"><table><thead><tr>
+<th>Keyword</th>
+<th>Monthly Volume</th>
+<th>Board Name</th>
+<th>Pins/Week</th>
+<th>Buyer Intent</th>
+</tr></thead><tbody>
+<tr><td>Instagram feed templates</td><td>390</td><td>Instagram Feed Templates for Business</td><td>3</td><td>High — visual searchers on Pinterest ready to buy aesthetic templates</td></tr>
+<tr><td>social media branding templates</td><td>50</td><td>Social Media Branding Templates</td><td>2</td><td>High — combining branding and social signals readiness to implement</td></tr>
+<tr><td>Instagram templates for business</td><td>20</td><td>Instagram Templates for Small Business</td><td>2</td><td>High — business-specific qualifier shows commercial use intent</td></tr>
+</tbody></table></div>
+</div>
+<div class="subsection"><div class="subsection-title">Group 4: how to brand your business (education-to-sale)</div>
+<div class="table-wrap"><table><thead><tr>
+<th>Keyword</th>
+<th>Monthly Volume</th>
+<th>Board Name</th>
+<th>Pins/Week</th>
+<th>Buyer Intent</th>
+</tr></thead><tbody>
+<tr><td>how to brand your business</td><td>260</td><td>How to Brand Your Small Business</td><td>3</td><td>Medium — educational intent but warms cold audience toward branding products</td></tr>
+</tbody></table></div>
+</div>
+</div>
+<div class="card">
+<div class="card-header"><div class="card-title">What buyers are asking (reddit & Quora)</div><span class="section-num">04</span></div>
+<div class="table-wrap"><table><thead><tr>
+<th>#</th>
+<th>Buyer Question</th>
+<th>Suggestions</th>
+</tr></thead><tbody>
+<tr><td>1</td><td><a href="https://www.reddit.com/r/smallbusiness/comments/1s6vznu/best_way_to_createmaintain_a_website/">What is the easiest way to get a professional website up without hiring a developer?</a></td><td>Buyers here are overwhelmed beginners who want a done-for-them or nearly-done solution. Pin angle: 'Skip the learning curve — get a premade Wix website designed for female small business owners, ready to customize in a weekend.'</td></tr>
+<tr><td>2</td><td><a href="https://www.quora.com/How-do-I-create-a-website-for-a-small-business-quickly">How can I launch a professional small business website fast without starting from scratch?</a></td><td>The word 'quickly' signals urgency and low tolerance for complexity — this buyer wants a shortcut. Pin angle: 'Your Wix website, done for you — launch your business online this week with a premade template built for women entrepreneurs.'</td></tr>
+<tr><td>3</td><td><a href="https://www.quora.com/Do-I-really-need-a-professional-website-for-my-small-business-or-is-a-simple-one-enough">Can I get a website that looks professional without paying agency prices or learning to code?</a></td><td>Buyers are weighing DIY vs. professional quality and need reassurance that affordable templates can look high-end. Pin angle: 'Yes, you need a professional website — here's how to get one for under $100 with a premade Wix design built for small business women.'</td></tr>
+<tr><td>4</td><td><a href="https://www.quora.com/Where-can-I-find-an-agency-which-builds-a-website-at-an-affordable-price-for-my-small-business">Where can I get a beautiful, affordable website for my small business without hiring an expensive agency?</a></td><td>This buyer is actively searching for a purchase and just needs to discover the right product exists. Pin angle: 'Why pay agency prices? Get a stunning premade Wix website designed for female small business owners — affordable, fast, and no tech skills needed.'</td></tr>
+<tr><td>5</td><td><a href="https://www.quora.com/Do-small-businesses-really-need-a-professional-website-developer-or-can-they-build-a-website-themselves">Is there a middle ground between hiring a web developer and building a website totally from scratch myself?</a></td><td>Buyers are stuck between two extremes and a premade template is the perfect middle-ground solution they don't know exists yet. Pin angle: 'You don't need a developer OR design skills — our premade Wix websites give you the best of both worlds for your small business.'</td></tr>
+<tr><td>6</td><td><a href="https://www.quora.com/Do-small-businesses-really-need-a-website-or-is-Instagram-enough-to-get-clients-now">Should I invest in a website and Instagram presence together, or can I get away with just one?</a></td><td>This buyer is close to purchasing but needs convincing on value — and this client sells both websites AND Instagram templates, making it a perfect bundle pitch. Pin angle: 'Instagram gets attention, your website closes the sale — get our 3-in-1 bundle with a premade Wix site + Instagram templates made for female business owners.'</td></tr>
+<tr><td>7</td><td><a href="https://www.quora.com/I-m-thinking-about-starting-a-small-business-as-a-woman-but-I-m-not-sure-where-to-begin-How-much-money-did-you-need-to-get-started">What do I actually need to buy to look professional when launching my small business as a woman?</a></td><td>This is the ideal target customer at the very start of her buying journey — she needs branding, a website, and social media presence all at once. Pin angle: 'Everything you need to launch your business looking polished — branding kit, Wix website, and Instagram templates in one affordable bundle for women entrepreneurs.'</td></tr>
+<tr><td>8</td><td><a href="https://www.reddit.com/r/smallbusiness/comments/1oout54/does_brand_identity_even_matter_for_small/">How do I create a cohesive brand identity for my small business without spending a fortune on a designer?</a></td><td>Buyers here are questioning whether branding is worth it — they need to be shown accessible, affordable options that deliver real results. Pin angle: 'Yes, branding matters — and you don't need a $5K designer to get it right. See how our premade branding kits help female small business owners look instantly credible.'</td></tr>
+<tr><td>9</td><td><a href="https://www.reddit.com/r/branding/comments/1ppa9yi/when_launching_your_brand_whats_the_first_thing/">What branding essentials do I need first when launching my small business, and where can I get them affordably?</a></td><td>Buyers are actively planning their launch and looking for a clear starting point — this is a perfect entry point to showcase the 3-in-1 bundle. Pin angle: 'Starting a business? Here's exactly what you need first — and how to get your logo, website, and Instagram templates all in one place, designed for women in business.'</td></tr>
+<tr><td>10</td><td><a href="https://www.reddit.com/r/Tech4LocalBusiness/comments/1tf6uds/simple_design_tool_thats_been_saving_me_time_for/">Where can I find ready-made social media and branding templates that look professional but are easy to customize myself?</a></td><td>Buyers here are already sold on the concept of templates and are actively seeking recommendations — this is a warm audience. Pin angle: 'Stop starting from scratch every time — our Instagram templates and branding kits are made for female small business owners who want to look polished without the design stress.'</td></tr>
+</tbody></table></div>
+</div>
+<div class="card">
+<div class="card-header"><div class="card-title">Visual trends on Pinterest</div><span class="section-num">05</span></div>
+<div class="subsection"><div class="subsection-title">2026 colour palette</div>
+<div class="table-wrap"><table><thead><tr>
+<th>Colour Name</th>
+<th>Hex (estimate)</th>
+<th>Mood/Feeling</th>
+<th>Use in Pins</th>
+</tr></thead><tbody>
+<tr><td>Warm Parchment</td><td><span class="swatch" style="background:#F5ECD7;"></span>#F5ECD7</td><td>Grounded, luxe-minimal</td><td>Pin backgrounds for branding kit mockups</td></tr>
+<tr><td>Dusty Terracotta</td><td><span class="swatch" style="background:#C4714F;"></span>#C4714F</td><td>Bold, feminine energy</td><td>CTA buttons, text overlays on template pins</td></tr>
+<tr><td>Sage Mist</td><td><span class="swatch" style="background:#A8B5A2;"></span>#A8B5A2</td><td>Calm, professional</td><td>Negative space in website preview pins</td></tr>
+<tr><td>Deep Plum</td><td><span class="swatch" style="background:#5C3A5E;"></span>#5C3A5E</td><td>Rich, aspirational</td><td>Headline text on bundle offer pins</td></tr>
+<tr><td>Butter Cream</td><td><span class="swatch" style="background:#F7E9B0;"></span>#F7E9B0</td><td>Soft, approachable</td><td>Background wash for Instagram template showcases</td></tr>
+<tr><td>Warm Slate</td><td><span class="swatch" style="background:#7A7B8C;"></span>#7A7B8C</td><td>Modern, trustworthy</td><td>Secondary text, borders, icon accents</td></tr>
+</tbody></table></div>
+<p>Lean into warm neutrals anchored by one rich accent — parchment backgrounds with terracotta or plum text make branding kit pins feel elevated without looking corporate. Rotate sage and slate as supporting tones to keep your feed cohesive across all four product categories.</p>
+</div>
+<div class="subsection"><div class="subsection-title">2026 design style trends</div>
+<div class="trend-grid">
+<div class="trend-card"><div class="trend-card-num">Trend 01</div><div class="trend-card-name">Quiet Luxury Minimalism</div><div class="trend-card-desc">Clean layouts with generous white space, serif typography, and understated colour — looks expensive by showing less. <em>Apply to branding kits: showcase one logo lockup centred on a parchment background with a single elegant serif font as the only element.</em></div></div>
+<div class="trend-card"><div class="trend-card-num">Trend 02</div><div class="trend-card-name">Tactile Texture Layering</div><div class="trend-card-desc">Subtle paper grain, linen overlays, or soft noise textures sit beneath flat design elements, adding warmth and depth. <em>Apply to premade Wix websites: overlay a light grain texture on website screenshot mockups so they read as crafted, not cookie-cutter.</em></div></div>
+<div class="trend-card"><div class="trend-card-num">Trend 03</div><div class="trend-card-name">Before/After Split Frames</div><div class="trend-card-desc">Two-panel pins showing a "generic business" versus a "branded business" create instant visual contrast and scroll-stopping tension. <em>Apply to 3-in-1 bundles: left panel shows a blank Canva doc, right panel shows the full branded suite — zero words needed.</em></div></div>
+<div class="trend-card"><div class="trend-card-num">Trend 04</div><div class="trend-card-name">Typographic Hero Pins</div><div class="trend-card-desc">The entire pin is one bold statement in oversized type, no imagery — the font, colour, and layout carry the message alone. <em>Apply to Instagram templates: pin the template name in large display text with a one-line result promise like "post in 5 minutes, look like you hired a designer."</em></div></div>
+</div>
+</div>
+</div>
+<div class="card">
+<div class="card-header"><div class="card-title">Content gap opportunities</div><span class="section-num">06</span></div>
+<div class="table-wrap"><table><thead><tr>
+<th>#</th>
+<th>Keyword / Angle</th>
+<th>Why It's a Gap</th>
+<th>Action: What to Create</th>
+<th>Link to</th>
+<th>Effort</th>
+</tr></thead><tbody>
+<tr><td>1</td><td><strong>"Small business website design"</strong> (2,900 vol / 0.11 competition)</td><td>Extremely low competition for a keyword with real purchase intent. Most existing pins are agency portfolio shots targeting corporate clients — not the female solopreneur who needs an affordable, done-for-you solution. The feminine small business buyer is completely underserved here.</td><td>Create a <strong>before/after carousel pin</strong> titled <em>"Affordable Small Business Website Design for Female Entrepreneurs (Done For You on Wix)"</em> — show a bland, DIY-looking site on the left vs. your polished premade template on the right. Add text overlay: "No designer needed. Ready in a day."</td><td>Premade Wix website shop page</td><td>Easy</td></tr>
+<tr><td>2</td><td><strong>"Wix template shop"</strong> (10 vol / 0.00 competition)</td><td>Zero competition. Anyone searching this phrase is in active buying mode — they already know they want a Wix template and are shopping around. Almost no sellers have optimised pins for this exact phrase, making it an easy first-page grab even with low repin velocity.</td><td>Create a <strong>static product flat-lay pin</strong> titled <em>"Wix Template Shop for Female Small Businesses — Feminine + Ready to Launch"</em> showing 3–4 template mockups tiled together. Pin description should list 5 niche types served (e.g., coaches, photographers, VAs).</td><td>Direct Wix website template collection page</td><td>Easy</td></tr>
+<tr><td>3</td><td><strong>"How to brand your business"</strong> (260 vol / 0.46 competition)</td><td>Mid-competition but most existing pins are generic blog-post graphics from 2019–2021 with no visual examples and heavy text. They educate but never sell. There's a clear gap for pins that teach <em>and</em> position a paid product as the shortcut — especially with a feminine visual identity.</td><td>Create a <strong>Pinterest idea pin (video/slideshow)</strong> titled <em>"How to Brand Your Business in a Weekend (Without Hiring a Designer)"</em> — walk through 5 branding elements (logo, colours, fonts, patterns, templates) using your branding kit as the visual example on every slide. End slide: "Grab the done-for-you kit — link in bio."</td><td>Branding kit product page</td><td>Medium</td></tr>
+<tr><td>4</td><td><strong>"Instagram feed templates"</strong> (390 vol / 0.33 competition)</td><td>Decent volume with moderate competition, but the majority of pins link to generic Canva template roundups on blogs — not to a <em>cohesive business branding system</em>. No one is connecting Instagram templates to a full brand identity package. Female founders searching this want consistency, not just pretty squares.</td><td>Create a <strong>carousel pin</strong> titled <em>"Instagram Feed Templates That Actually Match Your Brand — For Female Small Business Owners"</em> showing 9-grid mockups in 3 different colour palettes from your Instagram template pack. Add text: "Part of our 3-in-1 business bundle."</td><td>3-in-1 business bundle page</td><td>Medium</td></tr>
+<tr><td>5</td><td><strong>"Done for you website"</strong> (70 vol / 0.53 competition)</td><td>Low volume but extraordinarily high purchase intent — this is someone who has already decided they don't want to DIY. Existing pins are scarce and mostly from web design agencies quoting $3K–$10K projects, which immediately alienates budget-conscious small business owners. The affordable, self-install version of this concept has almost no representation.</td><td>Create a <strong>static pin with bold typography overlay</strong> titled <em>"Done-For-You Wix Website — Launched in 24 Hours, No Tech Stress"</em> on a clean, feminine background. Pin description should answer the 3 objections: cost, tech skill required, and customisation. Include a price anchor ("Starting at $[X]").</td><td>Premade Wix website product listing</td><td>Easy</td></tr>
+</tbody></table></div>
+<p><strong>The single biggest opportunity is "small business website design" at 2,900 monthly searches with only 0.11 competition.</strong> This combination — high relative volume, near-zero competition, and strong buyer intent — almost never appears in a keyword set, and the fact that existing pins are targeting the wrong audience (corporate buyers, not female solopreneurs) means the client can dominate this keyword with a single well-optimised pin this week. Acting on this first creates a compounding traffic asset: Pinterest rewards early traction on underserved keywords with sustained organic reach, so one strong pin here can drive consistent clicks to the Wix website shop for months with zero ongoing ad spend.</p>
+</div>
+<div class="card strategy-card">
+<div class="card-header"><div class="card-title">Pinterest strategy & growth plan</div><span class="section-num">07</span></div>
+<div class="strategy-step"><div class="strategy-step-num">✓</div><div class="strategy-step-content"><div class="strategy-step-title">Pinning frequency & timing</div><div class="strategy-step-body"><p>Aim for <strong>5–7 fresh pins per day</strong> in the first 90 days. This doesn't mean creating 5–7 pieces of content daily — it means distributing saved content strategically across boards, including relevant third-party pins (roughly 20% saves, 80% original). Pinterest's algorithm rewards accounts that show up consistently over time, not in bursts, so a missed week hurts more than a lower daily count.</p><p>Schedule pins between <strong>8–11 PM EST on Tuesdays, Wednesdays, and Thursdays</strong> — when female small business owners are browsing after business hours. Saturday mornings (7–9 AM) also over-index for this audience. Use a scheduler like Tailwind or Pinterest's native scheduler to maintain cadence without manual daily effort.</p></div></div></div>
+<div class="strategy-step"><div class="strategy-step-num">✓</div><div class="strategy-step-content"><div class="strategy-step-title">Pin format mix</div><div class="strategy-step-body"><p>For this niche in 2026, lead with <strong>static pins (50%)</strong> — they consistently drive the highest click-through for template and digital product sellers because the image <em>is</em> the product preview. <strong>Video pins (30%)</strong> should show the before/after of a branding kit being applied or a Wix template loading on-screen — 6–15 seconds, no sound required, text overlay essential. <strong>Carousels (20%)</strong> work well for bundle products like the 3-in-1 business bundle, walking viewers through each component as a slide sequence.</p><p>Idea pins (formerly Story pins) are deprioritized for outbound clicks, so use them sparingly — only if building organic followers is the goal that month. Every other format should link directly to a product page or landing page.</p></div></div></div>
+<div class="strategy-step"><div class="strategy-step-num">✓</div><div class="strategy-step-content"><div class="strategy-step-title">What makes pins get clicks</div><div class="strategy-step-body"><p><strong>1. Lead the title with the search term, not the brand.</strong> "Done-for-You Wix Website for Female Small Business Owners" outperforms "Meet Your New Brand" every time. Pinterest is a search engine — the keyword earns the impression, the visual earns the click.</p><p><strong>2. Text overlay should answer a question or name the outcome.</strong> "Your website could look like this in 24 hours" or "Branding kit for coaches, creatives & product-based businesses" converts better than decorative overlay. Use high-contrast text, large enough to read in the feed thumbnail.</p><p><strong>3. Show the product in context, not isolation.</strong> A Wix template mockup displayed on a laptop inside a styled desk flat lay outperforms a plain screenshot. Pin images should look aspirational but achievable — this audience is buying a transformation, not a file.</p><p><strong>4. Vertical 2:3 ratio (1000x1500px), every time.</strong> Pins that don't fill the column get visually buried. Never post square or landscape formats as primary pins.</p></div></div></div>
+<div class="strategy-step"><div class="strategy-step-num">✓</div><div class="strategy-step-content"><div class="strategy-step-title">Keyword strategy</div><div class="strategy-step-body"><p>Keywords should appear in four places: <strong>pin title</strong> (first 40–60 characters carry the most weight), <strong>pin description</strong> (up to 500 characters — use naturally, not stuffed), <strong>alt text</strong> (concise, descriptive, 100 characters max), and <strong>board titles and descriptions</strong> (treat each board like its own SEO landing page). Pinterest reads all four independently.</p><div class="field-label">Example using client keywords:</div><ul><li><em>Title:</em> "Branding Templates + Wix Website for Female Small Business Owners"</li><li><em>Description:</em> "Get a done-for-you website and branding package designed for small business owners ready to look polished online. Includes Wix website template, Instagram feed templates, and a full business branding package — everything you need to launch with confidence."</li><li><em>Board name:</em> "Wix Website Templates for Small Businesses"</li><li><em>Alt text:</em> "Premade Wix website template for female small business owner"</li></ul></div></div></div>
+<div class="strategy-step"><div class="strategy-step-num">✓</div><div class="strategy-step-content"><div class="strategy-step-title">What actually drives growth</div><div class="strategy-step-body"><p><strong>Days 1–90: Focus entirely on discoverability infrastructure.</strong> Build out 8–12 keyword-optimized boards before worrying about reach metrics. Pin all existing products with properly structured titles, descriptions, and alt text. Create at least 3–5 pins per product (different images, angles, and hooks pointing to the same URL) — Pinterest rewards multiple entry points to the same destination. Don't chase saves or followers yet; chase indexed content.</p><p><strong>Months 3–6: This is when compounding kicks in.</strong> Pinterest's distribution lag means pins from month one start surfacing in search results at month three. At this stage, double down on whatever format and keyword cluster is driving the most outbound clicks in analytics. Introduce seasonal angles ("New Year rebrand," "Spring launch your business") tied to core keywords. Accounts in this niche typically see meaningful organic traffic between months 4–6 — the groundwork laid in the first 90 days determines whether that traffic converts.</p></div></div></div>
+<div class="strategy-step"><div class="strategy-step-num">✓</div><div class="strategy-step-content"><div class="strategy-step-title">Board structure recommendations</div><div class="strategy-step-body"><div class="table-wrap"><table><thead><tr>
+<th>Board Name</th>
+<th>Description</th>
+<th>Keywords</th>
+<th>Min Pins</th>
+<th>Pin Types</th>
+</tr></thead><tbody>
+<tr><td><strong>Wix Website Templates</strong></td><td>Browse stunning Wix website templates designed for female small business owners. Find done-for-you layouts that are easy to customise and launch fast.</td><td>Wix website templates, done for you website, small business website design</td><td>50</td><td>Product pins, lifestyle mockups, before/after website reveals</td></tr>
+<tr><td><strong>Feminine Branding Kit</strong></td><td>Discover feminine branding kits built for small businesses ready to look polished and professional. Logos, colour palettes, fonts and brand boards included.</td><td>Feminine branding kit, business branding package, small business branding kit</td><td>50</td><td>Product pins, flat lay mockups, colour palette repins</td></tr>
+<tr><td><strong>Branding Templates</strong></td><td>Explore ready-made branding templates that help small business owners build a cohesive visual identity quickly and confidently without hiring a designer.</td><td>Branding templates, social media branding templates, how to brand your business</td><td>40</td><td>Product pins, educational tips, repins from complementary creators</td></tr>
+<tr><td><strong>Instagram Templates For Business</strong></td><td>Find Instagram templates for business that keep your feed consistent, on-brand and scroll-stopping. Perfect for female entrepreneurs managing their own content.</td><td>Instagram templates for business, Instagram feed templates, social media branding templates</td><td>40</td><td>Product pins, feed preview mockups, educational carousel repins</td></tr>
+<tr><td><strong>Feminine Website Design</strong></td><td>Get inspired by feminine website design ideas for coaches, creatives and product sellers. Clean, elegant layouts that convert visitors into paying customers.</td><td>Feminine website design, small business website design, Wix website templates</td><td>50</td><td>Inspiration repins, product pins, website screenshot pins</td></tr>
+<tr><td><strong>Small Business Branding Kit</strong></td><td>Everything a small business needs in one place. Shop small business branding kits with logos, brand guides and social media templates built to save you time.</td><td>Small business branding kit, business branding package, feminine branding kit</td><td>45</td><td>Product pins, bundle mockups, testimonial graphic pins</td></tr>
+<tr><td><strong>How To Brand Your Business</strong></td><td>Learn how to brand your business from scratch with practical tips, visual guides and ready-to-use templates made for female small business owners on a budget.</td><td>How to brand your business, branding templates, social media branding templates</td><td>35</td><td>Educational pins, blog post pins, infographic repins, tip graphics</td></tr>
+</tbody></table></div></div></div></div>
+</div>
+</div>
+</body>
+</html>

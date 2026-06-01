@@ -352,6 +352,29 @@ API key in `.env` as `ANTHROPIC_API_KEY`. Etsy key as `ETSY_API_KEY` (optional �
 
 ---
 
+### `skills/stock-photo-generator/`
+**What it does:** Generates dark-aesthetic business lifestyle stock photos on demand. Takes a topic or scene description, writes a detailed cinematic prompt via Claude, and generates the image via Gemini Imagen. Dark luxury aesthetic — black, charcoal, espresso, gold accents. Business women, success, money, ambition themes.
+
+**Run:**
+- `python3 skills/stock-photo-generator/main.py "woman working late in dark office"` — single topic
+- `python3 skills/stock-photo-generator/main.py --topics "jet lifestyle" "money mindset" "boss energy"` — batch
+- `python3 skills/stock-photo-generator/main.py` — interactive mode (enter topics one per line)
+- `python3 skills/stock-photo-generator/main.py --ratio 16:9` — landscape format
+
+**Inputs:** Topic or scene description — can be a mood, setting, theme, or specific prop combination.
+
+**Outputs:**
+- `outputs/stock-photos/YYYY-MM-DD-HHMMSS/` — all generated JPGs + HTML preview (opens automatically)
+- Default ratio: 9:16 portrait (Pinterest/Instagram). Use `--ratio 16:9` for landscape.
+
+**Aesthetic:** Deep black backgrounds, single warm amber light source, Fujifilm Neopan 400CN grain, cinematic contrast. Woman's face never visible. Dark luxury props: Birkin bag, MacBook, stacked cash, luxury watch, gold jewellery.
+
+**API keys used:** `ANTHROPIC_API_KEY` (prompts), `NANO_BANANA_API_KEY` (Gemini Imagen).
+
+**Additional requirements:** `pip3 install google-genai` (on top of base requirements).
+
+---
+
 ### `scheduler/`
 **What it does:** Runs continuously in the background. Every 14 days, sends a Mac desktop notification asking for a fresh Everbee export. When a new CSV appears in `data/everbee-etsy/`, automatically runs `report-generator` and sends a notification when the report is ready.
 
