@@ -480,6 +480,56 @@ def _build_competitor_summary(competitors: "list[dict]") -> str:
     return "\n\n".join(lines) if lines else "(No competitor data available.)"
 
 
+def get_existing_post_angles(keyword: str) -> str:
+    """
+    Find already-written posts on the same topic and extract their title +
+    opening paragraph so the new post can take a genuinely different angle.
+    Matches on shared content pillar words (e.g. 'pinterest', 'coaching', 'branding').
+    Returns a formatted string for the prompt, or empty string if nothing relevant found.
+    """
+    if not OUTPUT_DIR.exists():
+        return ""
+
+    # Determine topic words from the keyword
+    topic_words = {w.lower() for w in keyword.split() if len(w) > 3}
+    topic_words -= {"with", "from", "your", "that", "this", "have", "will", "make"}
+
+    angles = []
+    for html_path in OUTPUT_DIR.glob("*.html"):
+        slug = html_path.stem
+        slug_words = set(slug.replace("-", " ").split())
+        # Skip if no overlap with topic words
+        if not topic_words & slug_words:
+            continue
+        try:
+            from bs4 import BeautifulSoup as _BS
+            soup = _BS(html_path.read_text(encoding="utf-8"), "html.parser")
+            for el in soup.find_all("div", class_="image-prompts"):
+                el.decompose()
+            h1 = soup.find("h1")
+            title = h1.get_text(strip=True) if h1 else slug.replace("-", " ")
+            # Get first meaningful paragraph
+            paras = [p.get_text(strip=True) for p in soup.find_all("p") if len(p.get_text(strip=True)) > 60]
+            opening = paras[0][:300] if paras else ""
+            if title and opening:
+                angles.append(f'- Post: "{title}"\n  Opening: "{opening}"')
+        except Exception:
+            continue
+
+    if not angles:
+        return ""
+
+    return (
+        "PREVIOUSLY WRITTEN POSTS ON THIS TOPIC — avoid repeating their angles, hooks, comparisons, or structure:\n\n"
+        + "\n\n".join(angles)
+        + "\n\nFor every item above: your post must open with a COMPLETELY DIFFERENT hook, "
+        "use different examples, and avoid the same comparisons. "
+        "If a previous post opens by comparing Pinterest to Instagram, do NOT use that comparison. "
+        "If a previous post leads with an income statistic, lead with something else entirely. "
+        "The reader may have read all previous posts — make this one feel fresh."
+    )
+
+
 def build_prompt(
     keyword_row: dict,
     competitors: list[dict],
@@ -488,6 +538,7 @@ def build_prompt(
     research_brief: str = "",
     target_words: int = 2000,
     faq_questions: str = "",
+    existing_angles: str = "",
 ) -> str:
     keyword = keyword_row["_keyword"]
 
@@ -518,6 +569,10 @@ def build_prompt(
         + faq_questions
         + "\n\n---\n"
     ) if faq_questions else ""
+
+    angles_block = (
+        "\n" + existing_angles + "\n\n---\n"
+    ) if existing_angles else ""
 
     # Body section count and per-section target scale with overall target length
     if target_words >= 3000:
@@ -558,7 +613,7 @@ Do not repeat competitor content — use this brief to go deeper, be more specif
 {research_brief if research_brief else "(No research brief available — write from general knowledge.)"}
 
 ---
-{notes_block}{faq_block}COMPETITOR RESEARCH — structure and depth reference only (do not copy content):
+{notes_block}{faq_block}{angles_block}COMPETITOR RESEARCH — structure and depth reference only (do not copy content):
 
 {competitor_summary}
 
@@ -720,11 +775,18 @@ def write_blog_post(keyword_row: dict, competitors: list[dict]) -> str:
         research_brief = ""
 
     # ── Step D: write the post ────────────────────────────────────────────────
+    # Load existing post angles so Claude doesn't repeat the same hooks
+    existing_angles = get_existing_post_angles(keyword)
+    if existing_angles:
+        angle_count = existing_angles.count("- Post:")
+        print(f"  Found {angle_count} existing post(s) on similar topic — will avoid repeating their angles.")
+
     prompt = build_prompt(
         keyword_row, competitors, brand_voice, style_examples,
         research_brief=research_brief,
         target_words=target_words,
         faq_questions=faq_questions,
+        existing_angles=existing_angles,
     )
 
     print(f"  Calling Claude (claude-opus-4-5) to write blog post ({target_words:,}+ words)...")
