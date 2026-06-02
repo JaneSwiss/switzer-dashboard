@@ -833,17 +833,43 @@ def write_blog_post(keyword_row: dict, competitors: list[dict]) -> str:
         angle_count = existing_angles.count("- Post:")
         print(f"  Found {angle_count} existing post(s) on similar topic — will avoid repeating their angles.")
 
-    # Load published posts for crosslinking
+    # Scrape live blog for published post URLs — always current, no manual maintenance
     published_posts_list = ""
     try:
-        import json as _json
-        if PUBLISHED_POSTS_FILE.exists():
-            posts = _json.loads(PUBLISHED_POSTS_FILE.read_text(encoding="utf-8"))
-            published_posts_list = "\n".join(
-                f'- {p["title"]} → {p["url"]}' for p in posts
-            )
-    except Exception:
-        pass
+        print("  Fetching live blog posts for crosslinking...")
+        blog_resp = requests.get(
+            "https://www.switzertemplates.com/blog",
+            headers=FETCH_HEADERS,
+            timeout=15,
+        )
+        if blog_resp.status_code == 200:
+            from bs4 import BeautifulSoup as _BS
+            blog_soup = _BS(blog_resp.text, "html.parser")
+            live_posts = []
+            for a in blog_soup.find_all("a", href=True):
+                href = a["href"]
+                if "/post/" in href:
+                    full_url = href if href.startswith("http") else f"https://www.switzertemplates.com{href}"
+                    title = a.get_text(strip=True)
+                    if full_url not in [p["url"] for p in live_posts] and title:
+                        live_posts.append({"title": title, "url": full_url})
+            if live_posts:
+                published_posts_list = "\n".join(
+                    f'- {p["title"]} → {p["url"]}' for p in live_posts
+                )
+                print(f"  Found {len(live_posts)} published posts for crosslinking.")
+    except Exception as e:
+        # Fall back to static file if scrape fails
+        try:
+            import json as _json
+            if PUBLISHED_POSTS_FILE.exists():
+                posts = _json.loads(PUBLISHED_POSTS_FILE.read_text(encoding="utf-8"))
+                published_posts_list = "\n".join(
+                    f'- {p["title"]} → {p["url"]}' for p in posts
+                )
+                print(f"  Live scrape failed ({e}), using static fallback list.")
+        except Exception:
+            pass
 
     prompt = build_prompt(
         keyword_row, competitors, brand_voice, style_examples,
