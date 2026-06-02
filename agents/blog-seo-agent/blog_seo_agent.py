@@ -738,10 +738,16 @@ or concept, insert a DALL-E prompt inline using this exact format on its own lin
 Rules for DALL-E prompts:
 - Include one wherever a real screenshot would replace 50+ words of explanation
 - Ideal locations: step-by-step sections, "what it looks like" moments, before/after examples, tool walkthroughs
-- Each prompt must describe a specific, realistic UI or visual relevant to that exact part of the post
-- Be specific: include UI colors, interface name, what data/content is shown, layout
+- Each prompt must be detailed enough that an AI image generator produces a convincing, specific result
+- Every prompt MUST include all of these elements:
+  1. Interface name (e.g. "Pinterest analytics dashboard", "Canva pin editor", "Tailwind scheduling calendar")
+  2. Exact color scheme (e.g. "Pinterest red #e60023 and white", "Canva purple and white", "clean white UI with grey sidebar")
+  3. Specific data or content shown (e.g. "Impressions: 847,293 with upward blue trend line", "showing 3 pin templates in vertical format", "a scheduled queue with 7 pins for the week")
+  4. Layout details (e.g. "left sidebar navigation, main content area with grid", "top toolbar, canvas in center, layers panel on right")
+  5. Format: "Landscape 16:9, high resolution, realistic flat UI design"
 - Minimum 2, maximum 5 DALL-E prompts per post
-- Example for a Pinterest post: [DALLE: A realistic mockup screenshot of Pinterest analytics dashboard showing monthly stats: Impressions 847,293 with upward trend line, Engagements 12,847, Outbound clicks 4,521. Pinterest red and white color scheme, clean modern UI, data clearly readable. 16:9 landscape.]
+- BAD example (too vague): [DALLE: A screenshot of Pinterest showing pins]
+- GOOD example: [DALLE: A realistic mockup screenshot of the Pinterest analytics dashboard. Pinterest red (#e60023) top navigation bar, white background. Main stats panel shows: Impressions 847,293 with an upward trending blue line graph, Engagements 12,847, Outbound clicks 4,521, all in large bold numbers. Left sidebar shows navigation: Overview, Audience insights, Video, Conversion insights. Data is clearly readable. Landscape 16:9, flat modern UI design.]
 
 ---
 
