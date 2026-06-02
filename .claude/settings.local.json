@@ -308,7 +308,9 @@
       "WebFetch(domain:archive.org)",
       "WebFetch(domain:web.archive.org)",
       "WebFetch(domain:www.switzertemplates.com)",
-      "Bash(open posts/how-to-make-money-on-pinterest.html)"
+      "Bash(open posts/how-to-make-money-on-pinterest.html)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" \"https://www.switzertemplates.com/sitemap.xml\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" \"https://www.switzertemplates.com/blog-posts-sitemap.xml\")"
     ],
     "additionalDirectories": [
       "/Users/janeair/Documents/AI/switzertemplates/agents/blog-seo-agent/output",
