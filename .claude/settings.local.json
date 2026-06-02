@@ -302,7 +302,13 @@
       "Bash(python3 skills/stock-photo-generator/main.py --no-preview --batch 5)",
       "Bash(python3 skills/lead-gen-agent/main.py --outreach --limit 95)",
       "Bash(python3 skills/lead-gen-agent/email_sender.py --limit 15)",
-      "Bash(grep -v \"API_KEY=$\\\\|=#\")"
+      "Bash(grep -v \"API_KEY=$\\\\|=#\")",
+      "WebFetch(domain:yourpincoach.com)",
+      "WebFetch(domain:webcache.googleusercontent.com)",
+      "WebFetch(domain:archive.org)",
+      "WebFetch(domain:web.archive.org)",
+      "WebFetch(domain:www.switzertemplates.com)",
+      "Bash(open posts/how-to-make-money-on-pinterest.html)"
     ],
     "additionalDirectories": [
       "/Users/janeair/Documents/AI/switzertemplates/agents/blog-seo-agent/output",

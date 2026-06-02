@@ -213,29 +213,63 @@ Examples of the right tone:
 
 Write only the single sentence. No quotes around it. Nothing else."""
 
-_SUBJECT_PROMPT = """Write one email subject line. Output ONLY the subject line — nothing else, no labels, no quotes.
-
-Rules:
-- Always mention Pinterest
-- Maximum 8 words
-- Sounds like a real person, not a marketer
-- No exclamation marks, no ALL CAPS, no emojis
-- No names
-- Vary the style each time — question, statement, or simple offer
-
-Examples of exactly the right tone and length:
-- Are your ideal clients finding you on Pinterest?
-- Quick question about your Pinterest presence
-- Is Pinterest missing from your marketing?
-- I think your {niche} business is perfect for Pinterest
-- Have you tried Pinterest for your {niche} business?
-- Your competitors are quietly growing on Pinterest
-- There's a Pinterest opportunity here
-- Pinterest could work really well for you
-- I'd love to set up your Pinterest for success
-- Most {niche} businesses sleep on Pinterest
-
-Output the subject line only."""
+SUBJECT_POOL = [
+    # Questions
+    "Are your ideal clients finding you on Pinterest?",
+    "Quick question about your Pinterest presence",
+    "Is Pinterest missing from your marketing?",
+    "Have you tried Pinterest for your business?",
+    "Could Pinterest work for your business?",
+    "Are you using Pinterest to get clients?",
+    "Has anyone mentioned Pinterest to you yet?",
+    "Is your business showing up on Pinterest?",
+    "Are you missing clients on Pinterest?",
+    "Do your ideal clients use Pinterest?",
+    # Observations
+    "I think your business is perfect for Pinterest",
+    "Your business would do really well on Pinterest",
+    "Noticed you're not on Pinterest yet",
+    "I spotted a Pinterest opportunity for your business",
+    "Pinterest could be a real fit for what you do",
+    "Your type of business thrives on Pinterest",
+    "Honestly your business is made for Pinterest",
+    "Your work would translate so well to Pinterest",
+    "I think you'd love what Pinterest could do for you",
+    "I kept thinking about your business and Pinterest",
+    # Soft pitch
+    "I'd love to set up your Pinterest for success",
+    "Let's get your business growing on Pinterest",
+    "Your next clients might already be on Pinterest",
+    "There's a Pinterest audience ready for your business",
+    "Pinterest could bring you clients without the ad spend",
+    "I can help you get found on Pinterest",
+    "Your business deserves to be on Pinterest",
+    "Pinterest is where your next client is searching",
+    "Let me show you what Pinterest could do for you",
+    "Your ideal clients are already on Pinterest",
+    "I'd love to help you grow on Pinterest",
+    "Pinterest could change the game for your business",
+    "Let's put your business in front of Pinterest users",
+    # Curiosity / provocative
+    "Your competitors are quietly growing on Pinterest",
+    "Most businesses in your niche sleep on Pinterest",
+    "There's a traffic source you're probably not using",
+    "Pinterest doesn't work for everyone — but it might for you",
+    "Something your marketing is probably missing",
+    "Pinterest is quietly sending clients to your competitors",
+    "This is probably where your next client is right now",
+    "The platform most businesses in your industry forget",
+    "Most people in your industry haven't figured Pinterest out",
+    "The one platform your competitors aren't taking seriously",
+    "Your next 10 clients might already be on Pinterest",
+    "Pinterest is underrated for businesses like yours",
+    # Simple / direct
+    "Noticed a Pinterest gap worth fixing",
+    "A Pinterest strategy built for your business",
+    "Pinterest could be your best marketing channel",
+    "Worth 5 minutes of your time — Pinterest for your business",
+    "Your business + Pinterest = a lot of potential clients",
+]
 
 # DM template (Instagram) — unchanged
 _TEMPLATE = """Hi,
@@ -405,13 +439,7 @@ def generate_draft(lead: dict) -> tuple[str, str, str]:
     opener = opener_msg.content[0].text.strip().strip('"').strip("'").strip()
 
     if outreach_type == "email":
-        # Generate subject line for email outreach
-        subject_msg = client.messages.create(
-            model="claude-sonnet-4-6",
-            max_tokens=30,
-            messages=[{"role": "user", "content": _build_subject_prompt(lead)}],
-        )
-        subject_line = _clean_subject(subject_msg.content[0].text.strip(), client, lead)
+        subject_line = random.choice(SUBJECT_POOL)
 
         greeting_name = _extract_first_name(lead)
         template = random.choice(_EMAIL_TEMPLATES)
