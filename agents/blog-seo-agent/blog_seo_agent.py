@@ -1595,19 +1595,21 @@ def save_output(keyword_row: dict, post_html: str, image_prompts: str, image_pat
 # ── module 5: indexing submission ─────────────────────────────────────────────
 
 def ping_google_sitemap() -> None:
-    """Tell Google to re-crawl the sitemap so it picks up the new post."""
-    try:
-        sitemap_url = f"{SITE_URL}/sitemap.xml"
-        resp = requests.get(
-            f"https://www.google.com/ping?sitemap={sitemap_url}",
-            timeout=10,
-        )
-        if resp.status_code == 200:
-            print("  Google sitemap ping: sent")
-        else:
-            print(f"  Google sitemap ping: {resp.status_code}")
-    except Exception as e:
-        print(f"  Google sitemap ping failed: {e}")
+    """Ping both sitemaps so Google picks up new blog posts immediately."""
+    sitemaps = [
+        f"{SITE_URL}/blog-posts-sitemap.xml",
+        f"{SITE_URL}/sitemap.xml",
+    ]
+    for sitemap_url in sitemaps:
+        try:
+            resp = requests.get(
+                f"https://www.google.com/ping?sitemap={sitemap_url}",
+                timeout=10,
+            )
+            label = sitemap_url.split("/")[-1]
+            print(f"  Google sitemap ping ({label}): {'sent' if resp.status_code == 200 else resp.status_code}")
+        except Exception as e:
+            print(f"  Google sitemap ping failed: {e}")
 
 
 def submit_url_to_bing(post_url: str, keyword: str) -> None:

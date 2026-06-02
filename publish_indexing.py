@@ -39,14 +39,13 @@ SITE_URL      = "https://www.switzertemplates.com"
 
 
 def ping_google_sitemap() -> None:
-    try:
-        resp = requests.get(
-            f"https://www.google.com/ping?sitemap={SITE_URL}/sitemap.xml",
-            timeout=10,
-        )
-        print(f"  Google sitemap ping: {'✓ sent' if resp.status_code == 200 else resp.status_code}")
-    except Exception as e:
-        print(f"  Google sitemap ping failed: {e}")
+    for sitemap in [f"{SITE_URL}/blog-posts-sitemap.xml", f"{SITE_URL}/sitemap.xml"]:
+        try:
+            resp = requests.get(f"https://www.google.com/ping?sitemap={sitemap}", timeout=10)
+            label = sitemap.split("/")[-1]
+            print(f"  Google sitemap ping ({label}): {'✓ sent' if resp.status_code == 200 else resp.status_code}")
+        except Exception as e:
+            print(f"  Google sitemap ping failed: {e}")
 
 
 def submit_bing(post_url: str) -> None:
