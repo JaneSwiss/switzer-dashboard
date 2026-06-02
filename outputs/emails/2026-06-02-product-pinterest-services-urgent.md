@@ -1,36 +1,34 @@
-SUBJECT LINE A: I checked my analytics this morning
-SUBJECT LINE B: 5 Pinterest spots open — I handle everything
-PREVIEW TEXT: Thousands of clicks, no ads. Here's what that setup looks like.
+SUBJECT LINE A: What's happening to your Pinterest right now
+SUBJECT LINE B: 5 Pinterest spots — closes June 30
+PREVIEW TEXT: If you set it up and haven't touched it since — read this.
 
 ---
 
 BODY:
 
-I checked my Pinterest analytics this morning.
+If you set up a Pinterest account and haven't touched it in months — here's what's happening.
 
-Thousands of clicks last month — from pins, not ads. Some of those pins are two years old and still sending traffic.
+The algorithm is quietly ignoring you.
 
-I've been managing my own account long enough to know exactly what makes Pinterest work for a business. The keyword structure, the board logic, the pin design, the posting rhythm. Get those right and the platform keeps paying you back for years. Get them wrong and it ignores you quietly.
+Pinterest rewards keyword strategy, consistent pinning, and the right board structure. Without those, your pins sit there and collect nothing. Most accounts look exactly like this. It's not a character flaw — it's just setup.
 
-I'm opening 5 spots this month to build this for someone else's account.
+I'm fixing 5 accounts this month.
 
-Two options:
+Done-for-you: full account audit, keyword research, board optimisation, content plan, pin design, and scheduling. I handle everything. When I'm finished, your Pinterest is built to drive traffic long after I'm done working on it.
 
-**$699 — Pinterest Strategy**
-Full audit, keyword research, board optimisation, 90-day content plan, and custom pin templates built for your business.
+**$699 — Strategy**
+Audit + keywords + board setup + 90-day plan + custom pin templates.
 
-**$1,299 — Pinterest Strategy + Setup**
-Everything above, plus I build it all out — boards created, 30 pins designed and scheduled, Tailwind configured and ready to go.
+**$1,299 — Strategy + Full Setup**
+Everything above, plus 30 pins designed, scheduled, and live.
 
-I do all of this myself. No team, no handoff. That's why it's 5 spots and not 50.
-
-Once they're gone, next availability is July.
+5 spots. Closes June 30. Next availability: July.
 
 Xo Jane
 
 ---
 
 FLODESK NOTES:
-Segment: All past buyers — especially template and branding kit customers (NOT people who received this email first time around; exclude that segment or use a different send)
-CTA button label: See the Pinterest packages
+Segment: All past buyers — exclude anyone who already signed up for Pinterest services
+CTA button label: See both packages
 CTA link: https://pinterest.switzertemplates.com
