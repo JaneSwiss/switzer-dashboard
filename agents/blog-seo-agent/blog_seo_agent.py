@@ -34,8 +34,9 @@ OUTPUT_DIR      = ROOT / "posts"
 LOGS_DIR        = AGENT_DIR / "logs"
 COMPLETED_LOG   = LOGS_DIR / "completed.json"
 ERROR_LOG       = LOGS_DIR / "errors.json"
-BRAND_VOICE_FILE    = ROOT / "context" / "brand-voice.md"
-STYLE_EXAMPLES_FILE = ROOT / "context" / "content-style-examples.md"
+BRAND_VOICE_FILE      = ROOT / "context" / "brand-voice.md"
+STYLE_EXAMPLES_FILE   = ROOT / "context" / "content-style-examples.md"
+PUBLISHED_POSTS_FILE  = ROOT / "context" / "published-posts.json"
 
 load_dotenv(ROOT / ".env")
 
@@ -539,6 +540,7 @@ def build_prompt(
     target_words: int = 2000,
     faq_questions: str = "",
     existing_angles: str = "",
+    published_posts_list: str = "",
 ) -> str:
     keyword = keyword_row["_keyword"]
 
@@ -715,11 +717,39 @@ Also never use: "You've got this", "Level up", "Exciting news!", "Have you ever 
 
 ---
 
+CROSSLINKING — REQUIRED:
+Naturally link to 2-3 of the following published blog posts within the body where genuinely relevant.
+Only link where it adds real value to the reader — never force it.
+Use the exact URL. Anchor text should be a natural phrase in the sentence, not the post title verbatim.
+Format: <a href="URL">anchor text</a>
+
+{published_posts_list}
+
+---
+
+DALL-E IMAGE PROMPTS — REQUIRED:
+Wherever a screenshot, UI example, or visual illustration would help the reader understand a step, tip,
+or concept, insert a DALL-E prompt inline using this exact format on its own line:
+
+[DALLE: A realistic mockup screenshot of ...]
+
+Rules for DALL-E prompts:
+- Include one wherever a real screenshot would replace 50+ words of explanation
+- Ideal locations: step-by-step sections, "what it looks like" moments, before/after examples, tool walkthroughs
+- Each prompt must describe a specific, realistic UI or visual relevant to that exact part of the post
+- Be specific: include UI colors, interface name, what data/content is shown, layout
+- Minimum 2, maximum 5 DALL-E prompts per post
+- Example for a Pinterest post: [DALLE: A realistic mockup screenshot of Pinterest analytics dashboard showing monthly stats: Impressions 847,293 with upward trend line, Engagements 12,847, Outbound clicks 4,521. Pinterest red and white color scheme, clean modern UI, data clearly readable. 16:9 landscape.]
+
+---
+
 OUTPUT FORMAT:
 
 Return ONLY the blog post as plain text using the FORMATTING RULES above.
 No preamble. No "Here is the post:". No meta-commentary at the start or end.
-No HTML tags. Start with the title in ALL CAPS on the first line.
+Include <a href> crosslinks inline where relevant.
+Include [DALLE: ...] prompts inline where a screenshot would help.
+Start with the title in ALL CAPS on the first line.
 Use markdown bold (**), bold italic (***), and italic (*) exactly as specified.
 Write section headings in ALL CAPS on their own line with a blank line before and after.
 """
@@ -781,12 +811,25 @@ def write_blog_post(keyword_row: dict, competitors: list[dict]) -> str:
         angle_count = existing_angles.count("- Post:")
         print(f"  Found {angle_count} existing post(s) on similar topic — will avoid repeating their angles.")
 
+    # Load published posts for crosslinking
+    published_posts_list = ""
+    try:
+        import json as _json
+        if PUBLISHED_POSTS_FILE.exists():
+            posts = _json.loads(PUBLISHED_POSTS_FILE.read_text(encoding="utf-8"))
+            published_posts_list = "\n".join(
+                f'- {p["title"]} → {p["url"]}' for p in posts
+            )
+    except Exception:
+        pass
+
     prompt = build_prompt(
         keyword_row, competitors, brand_voice, style_examples,
         research_brief=research_brief,
         target_words=target_words,
         faq_questions=faq_questions,
         existing_angles=existing_angles,
+        published_posts_list=published_posts_list,
     )
 
     print(f"  Calling Claude (claude-opus-4-5) to write blog post ({target_words:,}+ words)...")
@@ -1406,6 +1449,18 @@ def _assemble_html(title: str, post_html: str, image_prompts: str, image_paths: 
                 else:
                     wrapped.append(f'<p>{sub}</p>')
     content = '\n'.join(wrapped)
+
+    # Convert [DALLE: ...] blocks into styled prompt cards
+    def dalle_block(m):
+        prompt_text = m.group(1).strip().replace('<','&lt;').replace('>','&gt;')
+        return (
+            '<div style="background:#f0f4ff;border:1.5px solid #c5d3f5;border-radius:8px;'
+            'padding:1rem 1.25rem;margin:1.5rem 0;font-family:\'Courier New\',monospace;font-size:12px;line-height:1.6;color:#333;">'
+            '<p style="font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;'
+            'color:#6b7bb5;margin:0 0 0.5rem;font-family:Arial,sans-serif;">DALL-E / ChatGPT image prompt</p>'
+            f'<p style="margin:0;">{prompt_text}</p></div>'
+        )
+    content = re.sub(r'\[DALLE:(.*?)\]', dalle_block, content, flags=re.DOTALL)
 
     # Convert markdown bold-italic ***text*** to <strong><em>
     content = re.sub(r'\*\*\*(.*?)\*\*\*', r'<strong><em>\1</em></strong>', content)
