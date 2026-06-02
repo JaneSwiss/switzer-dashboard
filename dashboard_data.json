@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-05-26",
+  "last_updated": "2026-06-02",
   "etsy_agent": {
     "status": "active",
     "last_run": "2026-05-05",
@@ -2421,6 +2421,20 @@
         "subject": "Pinterest is working while you sleep",
         "date_written": "2026-05-26",
         "filename": "2026-05-26-product-pinterest-services.md",
+        "sent": false
+      },
+      {
+        "type": "Pinterest services - urgency",
+        "subject_a": "Your Pinterest account is collecting dust",
+        "date_written": "2026-06-02",
+        "file": "outputs/emails/2026-06-02-product-pinterest-services-urgent.md",
+        "sent": false
+      },
+      {
+        "type": "Re-engagement 2 (value-first)",
+        "subject_a": "Pinterest is hiding your pins (here’s why)",
+        "date_written": "2026-06-02",
+        "file": "outputs/emails/2026-06-02-re-engagement-2.md",
         "sent": false
       }
     ]

@@ -187,6 +187,82 @@ CTA link: [full URL — always switzertemplates.com, never Etsy]"""
 
 # ── writing modes ─────────────────────────────────────────────────────────────
 
+def write_pinterest_urgent(client: anthropic.Anthropic, ctx: dict) -> str:
+    prompt = f"""{system_block(ctx)}
+
+TASK: Write a product email for Pinterest Marketing Services — done-for-you Pinterest management by Jane.
+
+URGENCY CONTEXT:
+- Jane is opening spots for her next client cohort — exactly 5 spots available
+- She handles all client work personally (not a team), so spots are genuinely limited
+- Once the 5 spots fill, the next availability is the following month
+- The first email announcing this service went out and got minimal response — this follow-up
+  email needs a completely different angle to drive action
+
+Product details:
+{PRODUCT_SUPPLEMENTS['pinterest-services']}
+
+Email requirements:
+- Lead with the PROBLEM: they have a Pinterest account but it's either sitting idle or not
+  converting — they set it up, posted a few times, and then it just... stopped
+- Make the scarcity feel personal and real — Jane does this herself, 5 spots, period
+- Reference her own Pinterest account as the proof: it drives thousands of clicks to her
+  shop every month — she knows what works because she lives it
+- Paint a picture of what Pinterest looks like when it's working: traffic showing up months
+  later from pins posted years ago, clicks while they sleep, leads they didn't have to chase
+- The urgency should come from: this is the time to set it up RIGHT before the algorithm
+  ignores you for another 6 months — not manufactured hype
+- One clear CTA to {PRODUCT_URLS['pinterest-services']}
+- 200-300 words body
+- Audience: 21,000 warm past buyers — they already invest in looking professional; this is
+  the next step for those who want more reach without more content
+
+Tone: Personal, direct, like Jane is talking to one person. Confident but not pushy.
+The scarcity is real — write it that way."""
+
+    return call_claude(client, prompt, max_tokens=1400)
+
+
+def write_re_engagement_2(client: anthropic.Anthropic, ctx: dict) -> str:
+    prompt = f"""{system_block(ctx)}
+
+TASK: Write a SECOND re-engagement email for subscribers who did NOT open the first re-engagement email.
+
+Context:
+- These subscribers have been inactive 90+ days
+- They already received a first re-engagement email ("Before I remove you, read this" /
+  "Still there? Here's what you'd be leaving.") — and they did NOT open it
+- They are past buyers — they've bought from Switzertemplates before
+- Threat framing did not work on them — do not repeat it
+
+CRITICAL STRATEGIC SHIFT:
+- Do NOT mention list cleaning, removing, unsubscribing — that approach failed
+- Do NOT use urgency or threat framing of any kind
+- Use a completely different angle: pure, immediate value with no ask attached
+- The subject line should be about a specific business problem or insight — not about Jane's inbox
+- No mention of the previous email, no guilt, no "you haven't opened in a while"
+- The tone should feel like Jane reached back into her contacts and sent something useful
+  because she thought of them — not because she's trying to save a metric
+
+Email approach:
+- Open with ONE specific, surprising insight about Pinterest or online visibility that
+  makes the reader think "I didn't know that" or "that's exactly what's happening to me"
+- Give them 1-2 concrete tips they can act on TODAY without buying anything
+  (example: how often to pin, the biggest Pinterest mistake most accounts make,
+   or the one thing that separates accounts that get traffic from those that don't)
+- This free value should be specific enough to be genuinely useful — not a teaser
+- End with a single very soft CTA: a blog post, the Pinterest guide, or just "hit reply
+  if you want me to take a look at your account" — no product pitch
+- Under 200 words body total — tight and focused
+- The subject line must feel like a useful tip email, not a re-engagement campaign
+
+The goal: earn a click by deserving it. If they open and click, they're re-engaged.
+If they don't, they'll be quietly removed — but this email gets one last real shot
+by giving something first."""
+
+    return call_claude(client, prompt, max_tokens=1200)
+
+
 def write_re_engagement(client: anthropic.Anthropic, ctx: dict) -> str:
     prompt = f"""{system_block(ctx)}
 
@@ -408,6 +484,10 @@ def main():
                        help="Build email principles from YouTube transcripts (run once)")
     group.add_argument("--re-engagement", action="store_true",
                        help="Write a re-engagement email for quiet subscribers")
+    group.add_argument("--re-engagement-2", action="store_true",
+                       help="Write a second re-engagement email (value-first, for those who ignored the first)")
+    group.add_argument("--pinterest-urgent", action="store_true",
+                       help="Write a Pinterest services email with genuine scarcity (5 spots)")
     group.add_argument("--blog-post", metavar="SLUG",
                        help="Write an email promoting a blog post by slug")
     group.add_argument("--product", metavar="NAME",
@@ -431,6 +511,14 @@ def main():
     if args.re_engagement:
         email_type = "re-engagement"
         content = write_re_engagement(client, ctx)
+
+    elif getattr(args, "re_engagement_2", False):
+        email_type = "re-engagement-2"
+        content = write_re_engagement_2(client, ctx)
+
+    elif getattr(args, "pinterest_urgent", False):
+        email_type = "product-pinterest-services-urgent"
+        content = write_pinterest_urgent(client, ctx)
 
     elif args.blog_post:
         email_type = f"blog-{args.blog_post}"
