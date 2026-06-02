@@ -746,6 +746,7 @@ Rules for DALL-E prompts:
   4. Layout details (e.g. "left sidebar navigation, main content area with grid", "top toolbar, canvas in center, layers panel on right")
   5. Format: "Landscape 16:9, high resolution, realistic flat UI design"
 - Minimum 2, maximum 5 DALL-E prompts per post
+- Each prompt must directly illustrate what is being described in that specific paragraph or section — not a generic image. A reader looking at the prompt should immediately understand which part of the post it belongs to.
 - BAD example (too vague): [DALLE: A screenshot of Pinterest showing pins]
 - GOOD example: [DALLE: A realistic mockup screenshot of the Pinterest analytics dashboard. Pinterest red (#e60023) top navigation bar, white background. Main stats panel shows: Impressions 847,293 with an upward trending blue line graph, Engagements 12,847, Outbound clicks 4,521, all in large bold numbers. Left sidebar shows navigation: Overview, Audience insights, Video, Conversion insights. Data is clearly readable. Landscape 16:9, flat modern UI design.]
 
