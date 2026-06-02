@@ -719,10 +719,23 @@ Also never use: "You've got this", "Level up", "Exciting news!", "Have you ever 
 
 ---
 
+CTA MAPPING — apply the correct CTA based on the post topic:
+- Post about Pinterest (marketing, strategy, services, management, agency, scheduling, analytics, growth, affiliate):
+  → Mid-post CTA AND conclusion CTA must both link to https://pinterest.switzertemplates.com/
+  → Present it as Jane's done-for-you Pinterest marketing service ($699 strategy / $1,299 full setup)
+- Post about Wix websites or website templates:
+  → CTA to https://www.switzertemplates.com/premade-wix-website-templates-for-sale
+- Post about branding or branding kits:
+  → CTA to https://www.switzertemplates.com/branding-packages
+- Post about business bundles or complete online presence:
+  → CTA to https://www.switzertemplates.com/business-template-bundles
+- Post about coaching business (not specifically Pinterest):
+  → CTA to https://www.switzertemplates.com/business-template-bundles
+
 CROSSLINKING — REQUIRED:
-Naturally link to 2-3 of the following published blog posts within the body where genuinely relevant.
+Naturally link to 2-3 of the following published pages within the body where genuinely relevant.
 Only link where it adds real value to the reader — never force it.
-Use the exact URL. Anchor text should be a natural phrase in the sentence, not the post title verbatim.
+Use the exact URL. Anchor text should be a natural phrase in the sentence, not the page title verbatim.
 Format: <a href="URL">anchor text</a>
 
 {published_posts_list}
