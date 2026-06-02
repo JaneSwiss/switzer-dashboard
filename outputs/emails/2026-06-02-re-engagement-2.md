@@ -1,34 +1,26 @@
-SUBJECT LINE A: Pinterest is hiding your pins (here's why)
-SUBJECT LINE B: The 3-second rule killing your Pinterest reach
-PREVIEW TEXT: Most accounts make this mistake without realising it
+SUBJECT LINE A: I made you something (10 free Pinterest templates)
+SUBJECT LINE B: Free: 10 pin designs that are getting clicks in 2025
+PREVIEW TEXT: No catch. Download in Canva and start pinning today.
 
 ---
 
 BODY:
 
-Quick one for you.
+I put something together for you.
 
-I was auditing a client's Pinterest last week and spotted something that's tanking reach for almost every small business account I look at.
+10 Pinterest pin templates — the exact formats that are getting the most clicks from small business accounts right now. Text-first designs, clean layouts, the kind that stop the scroll without looking generic.
 
-They're pinning in bursts.
+You can download them, add your branding in Canva, and start using them today. Free. No purchase needed.
 
-Ten pins on Monday. Nothing until Friday. Another batch. Then silence.
+[Download the 10 free pin templates →][FREEBIE LINK]
 
-Pinterest reads this as inconsistent — and inconsistent accounts get pushed down.
+I'm not going to pretend this is purely selfless. I want to remind you that I'm here and that what I send you is worth opening.
 
-Here's what actually works:
+But mostly — Pinterest is genuinely one of the highest-return things a small business can invest time in, and I figure the most useful thing I can give you is something you can actually use this week.
 
-**Pin 3-5 times per day, spread out.** Not 15 pins in one sitting. The algorithm rewards steady activity over volume dumps.
+If you want the strategy behind the pins (why certain formats work, how to structure your boards, what the algorithm is actually rewarding in 2025), I put it all in a guide:
 
-**Your first image has 3 seconds.** If someone can't tell what your pin is about instantly — text too small, photo too busy, no clear hook — they scroll. Pinterest notices.
-
-Two small shifts. Both free. Both fixable today.
-
-If you want the full breakdown of what's working on Pinterest right now, I put together a guide a while back:
-
-[Read the Pinterest guide →](https://www.switzertemplates.com/post/pinterest-marketing-the-complete-guide)
-
-Or if you want me to take a quick look at your account and tell you what I'd change — just reply. Happy to help.
+[Read the full Pinterest marketing guide →](https://www.switzertemplates.com/post/pinterest-marketing-the-complete-guide)
 
 Xo Jane
 
@@ -36,5 +28,13 @@ Xo Jane
 
 FLODESK NOTES:
 Segment: Past buyers inactive 90+ days who did NOT open first re-engagement email
-CTA button label: Read the Pinterest guide
-CTA link: https://www.switzertemplates.com/post/pinterest-marketing-the-complete-guide
+CTA button label: Download the free templates
+CTA link: [FREEBIE LINK — replace before sending]
+
+BEFORE SENDING — what you need to create:
+- A Canva template pack with 10 Pinterest pin designs (1000x1500px)
+- Formats to include: 2-3 text-heavy quote/tip styles, 3-4 product/brand showcase layouts,
+  2-3 blog-post-style pins with title + supporting image, 1-2 minimal text-on-image styles
+- Make them editable in Canva (share as template link, not a file download)
+- Replace [FREEBIE LINK] with the Canva template link or a landing page/Flodesk form URL
+- Optional: gate the download behind a Flodesk form to re-tag them as active subscribers
