@@ -2425,17 +2425,17 @@
       },
       {
         "type": "Pinterest services - urgency",
-        "subject_a": "I checked my analytics this morning",
         "date_written": "2026-06-02",
-        "file": "outputs/emails/2026-06-02-product-pinterest-services-urgent.md",
-        "sent": false
+        "sent": false,
+        "subject": "I checked my analytics this morning",
+        "filename": "2026-06-02-product-pinterest-services-urgent.md"
       },
       {
         "type": "Re-engagement 2 (freebie offer)",
-        "subject_a": "I made you something (10 free Pinterest templates)",
         "date_written": "2026-06-02",
-        "file": "outputs/emails/2026-06-02-re-engagement-2.md",
-        "sent": false
+        "sent": false,
+        "subject": "I made you something (10 free Pinterest templates)",
+        "filename": "2026-06-02-re-engagement-2.md"
       }
     ]
   },
