@@ -18,11 +18,18 @@ from blog_seo_agent import (
 from bs4 import BeautifulSoup
 
 POSTS_DIR = Path(__file__).parent / "posts"
+IMAGE_DIR = POSTS_DIR / "images"
 
-SLUGS_TO_REGENERATE = [
-    "pinterest-affiliate-marketing",
-    "coaching-business",
-]
+def get_slugs_missing_images() -> list:
+    """Find all posts that have no generated images."""
+    missing = []
+    for html_path in sorted(POSTS_DIR.glob("*.html")):
+        slug = html_path.stem
+        # Check if any image exists for this slug
+        has_images = any(IMAGE_DIR.glob(f"{slug}-image-*.jpg")) or any(IMAGE_DIR.glob(f"{slug}-pinterest.jpg"))
+        if not has_images:
+            missing.append(slug)
+    return missing
 
 
 def regenerate(slug: str) -> None:
@@ -86,6 +93,14 @@ def regenerate(slug: str) -> None:
 
 
 if __name__ == "__main__":
-    for slug in SLUGS_TO_REGENERATE:
-        regenerate(slug)
+    slugs = get_slugs_missing_images()
+    if not slugs:
+        print("All posts already have images. Nothing to do.")
+    else:
+        print(f"Found {len(slugs)} post(s) missing images:")
+        for s in slugs:
+            print(f"  - {s}")
+        print()
+        for slug in slugs:
+            regenerate(slug)
     print("\nDone. Push to GitHub to update the live posts.")
