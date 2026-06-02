@@ -621,6 +621,25 @@ Do not repeat competitor content — use this brief to go deeper, be more specif
 
 ---
 
+COMPETING SERVICES — NEVER MENTION:
+Never recommend, name, or describe any third-party service that competes with Switzertemplates offerings.
+This includes: Pinterest management agencies, Pinterest VAs, Pinterest management services offered by others,
+branding agencies, website design agencies, Canva design services offered by competitors, or any
+done-for-you service that Jane herself offers. If a post covers a topic where such services exist
+(e.g. "how to make money on pinterest"), do NOT include "offer Pinterest management services" or similar
+as a method or suggestion. The only Pinterest services to mention are Jane's own at pinterest.switzertemplates.com.
+
+CTA RELEVANCE — CRITICAL:
+Every CTA must be directly relevant to the post topic. Do not insert unrelated product CTAs.
+- Pinterest posts → CTA to pinterest.switzertemplates.com only
+- Website template posts → CTA to the Wix website templates page only
+- Branding posts → CTA to the branding packages page only
+- Do NOT add a branding kit CTA inside a Pinterest post
+- Do NOT add a website template CTA inside an email marketing post
+- The CTA must feel like a natural next step for someone who just read the post
+
+---
+
 INFORMATION CURRENCY — CRITICAL:
 The current year is 2026. All information, advice, tools, statistics, and examples must be current as of 2026.
 Do not write "2025" anywhere in the post — not in the title, not in headings, not in the body.
