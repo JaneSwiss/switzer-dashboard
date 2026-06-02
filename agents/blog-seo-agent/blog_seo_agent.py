@@ -622,7 +622,9 @@ Do not repeat competitor content — use this brief to go deeper, be more specif
 ---
 
 INFORMATION CURRENCY — CRITICAL:
-All information, advice, tools, statistics, and examples in this post must be current as of 2025-2026.
+The current year is 2026. All information, advice, tools, statistics, and examples must be current as of 2026.
+Do not write "2025" anywhere in the post — not in the title, not in headings, not in the body.
+If a year must appear in the title or a heading, use 2026.
 Do not include outdated platform features, deprecated tools, or old statistics.
 If the research brief contains specific data points or stats with sources, use them.
 If you reference a statistic or fact, make sure it reflects how these platforms and tools work today.
