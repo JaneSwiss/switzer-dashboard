@@ -2169,7 +2169,7 @@
           {
             "id": "w2_flodesk",
             "label": "Check Flodesk re-engagement open rate → remove inactive contacts",
-            "done": false,
+            "done": true,
             "owner": "Jane"
           },
           {
