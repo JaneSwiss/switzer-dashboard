@@ -980,16 +980,34 @@ choose genuinely different environments — not just different corners of the sa
 ---
 
 WOMAN CHARACTER (when required in Prompts 1 and 3):
-- Long chocolate brown hair
-- Face never fully visible — back, side profile, or hands/wrists only
-- OUTFIT — one woman image must use a BOLD outfit, one must use a NEUTRAL outfit.
-  Never use the same outfit twice in one post.
-  Bold options: chocolate brown blazer, black turtleneck, rust coloured knit,
-    camel oversized coat, grey blazer, deep olive linen shirt, burgundy knit cardigan
-  Neutral options: oversized cream knit jumper, white linen shirt, beige trench coat,
-    white oversized sweatshirt, soft sage green cardigan, pale grey oversized tee
-- Hands when shown: long gel nails in nude or white French, gold jewellery —
-  rings, thin bangles, delicate chain bracelet, small gold hoop earrings visible
+She is a beautiful, model-looking woman. Every image must feel like a high-end editorial shoot.
+
+HAIR — choose a different style per post, always voluminous and polished:
+- Long, voluminous chocolate brown waves with soft movement and shine
+- Thick, voluminous dark brown hair in a loose low bun with face-framing pieces falling out
+- Long glossy dark brown hair, straight with a subtle blowout volume at the roots
+- Voluminous chocolate brown hair half-up, rest falling in soft waves
+- Long rich brown hair loosely tucked behind one ear, voluminous and healthy-looking
+Never flat, never straggly. Always thick, full, model-quality hair.
+
+FACE — never fully visible. Back of head, side profile with jaw/cheekbone only, or hands/wrists only.
+
+OUTFIT — one woman image must use a BOLD outfit, one must use a NEUTRAL outfit. Never repeat.
+  Bold options: chocolate brown tailored blazer, black fitted turtleneck, rust coloured chunky knit,
+    camel oversized coat with belt, dark grey fitted blazer, deep burgundy wrap top,
+    forest green silk blouse, ivory structured blazer with gold buttons
+  Neutral options: oversized cream cashmere knit, crisp white linen shirt open at collar,
+    beige belted trench coat, white oversized sweatshirt, soft sage green cardigan,
+    pale grey ribbed turtleneck, oatmeal coloured linen co-ord
+
+NAILS + JEWELLERY — always include, always vary the combination:
+- Nail options: long gel nails in nude, white French tip, soft pink, sheer glazed, champagne beige,
+  milky white, or ballet pink — always long and perfectly shaped
+- Jewellery options (mix 2-3 per image, vary across posts):
+  thin gold chain necklace, layered delicate gold necklaces, chunky gold chain bracelet,
+  thin stacked gold rings, single statement gold ring, pearl drop earrings,
+  small gold hoop earrings, delicate gold cuff bracelet, thin gold bangles,
+  tortoiseshell hair clip, gold hair pin, silk hair scarf loosely tied
 
 TOPIC-RELEVANT PEOPLE (allowed in Prompt 3 only, for certain topics):
 If the post is about coaching, consulting, mentoring, business strategy, or team work:
@@ -1035,16 +1053,18 @@ CAFÉ AND HOSPITALITY — maximum ONE café-type setting per post, only if it fi
 ---
 
 COMPOSITIONS — use a different one for each of the 5 prompts, never repeat:
-1. From behind at a desk — seated, slight 45-degree angle, room visible around her
-2. Overhead flat lay — no person, objects arranged loosely on a styled surface
-3. Hands close-up — only hands and wrists in frame, mid-task, tight editorial crop
+1. From behind at a desk — seated, slight 45-degree angle, room visible, hair cascading down
+2. Overhead flat lay — no person, objects arranged loosely on a styled surface with jewellery pieces
+3. Hands close-up — only hands and long gel nails in frame, mid-task, jewellery clearly visible
 4. Wide environment shot — woman small in a large interior or exterior, space is the subject
-5. Side profile at a surface — thoughtful, looking away, window or scene behind her
-6. Mid-action standing — woman leaning over a desk or caught mid-movement, candid
-7. Over-shoulder — shot from just behind and above her shoulder, work or screen ahead
-8. Floor or low angle — shot from floor level looking up slightly, desk edge in foreground
-9. Two-shot conversation — two women at a table or standing, faces not visible (coaching topics only)
-10. Hero object — single relevant object sharp on a surface, background softly blurred
+5. Side profile at a surface — jaw and cheekbone visible, voluminous hair catching light, window behind
+6. Mid-action standing — woman leaning over a desk, hair falling forward, caught mid-movement
+7. Over-shoulder close — shot from just behind, hair volume visible, screen or work ahead, nails on keyboard
+8. Floor or low angle — shot from floor level, woman seated with legs crossed, looking down at phone or notebook
+9. Two-shot conversation — two stylish women at a table, faces not visible (coaching/consulting topics)
+10. Walking or moving — woman from behind mid-stride in a beautiful space, coat or hair in motion
+11. Window light portrait — back of head and shoulder only, facing window, rim of light on hair edges
+12. Lying or reclining — woman on sofa or bed from above, laptop or book, hair spread naturally
 
 DRINKS — rotate across the 5 prompts, never repeat:
 - Starbucks iced latte in clear cup with green straw
@@ -1057,18 +1077,24 @@ DRINKS — rotate across the 5 prompts, never repeat:
 - Sparkling water in a glass bottle with minimalist label
 - No drink — leave it out entirely
 
-SIGNATURE PROPS (use 1-2 per image, vary across all images):
-- Apple MacBook in silver or space grey
-- Apple AirPods Max in silver
-- Productivity Planner by Intelligent Change — black linen hardcover with gold foil
-- Gold jewellery pieces placed casually on a surface
-- Tortoiseshell claw clip resting nearby
-- Fine-line pen or thin pencil
-- Small ceramic object in matte taupe or cream
-- Fresh flowers or a single stem in a minimal bud vase
-- Open notebook showing blank pages or faint abstract marks
-- Printed brand mood board or colour palette cards
-- Soft folded linen or cotton fabric as a surface layer
+SIGNATURE PROPS (use 1-2 per image, vary across ALL images — never repeat the same prop twice in one post):
+- Apple MacBook Pro in silver, screen open showing blurred creative workspace
+- Apple iPhone 15 Pro in natural titanium, screen lit with blurred content
+- Apple AirPods Max in silver or midnight, resting on a surface
+- Productivity Planner by Intelligent Change — black linen hardcover, gold foil spine
+- Glossy hardcover coffee table book, spine visible with abstract cover
+- Small luxury perfume bottle in amber or clear glass on a surface
+- Fresh peonies, ranunculus, or garden roses in a minimal fluted vase
+- Single stem eucalyptus or dried pampas grass in a thin ceramic vase
+- Ceramic coffee cup in matte white or speckled clay on a saucer
+- Gold-rimmed glasses resting on a notebook or surface
+- Expensive-looking sunglasses folded on the edge of the desk
+- Small gold or marble tray holding jewellery or perfume
+- Open Moleskine or linen notebook with a gold pen across the page
+- Printed brand mood board with colour swatches and editorial images
+- Clear glass vase with tall stems of white flowers
+- Candle in a minimal glass or concrete vessel, lit or unlit
+- Small potted succulent or monstera leaf on the corner of a desk
 
 PHOTOGRAPHY STYLE (consistent across all images):
 - Warm editorial quiet luxury — real and lived-in, never staged or styled-looking
