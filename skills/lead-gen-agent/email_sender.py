@@ -30,7 +30,7 @@ except ImportError:
     pass
 
 sys.path.insert(0, str(Path(__file__).parent))
-from lead_tracker import get_leads_for_email_sending, update_lead
+from lead_tracker import get_leads_for_email_sending, update_lead, record_sent_email
 
 GMAIL_ADDRESS      = os.getenv("GMAIL_ADDRESS")
 GMAIL_APP_PASSWORD = os.getenv("GMAIL_APP_PASSWORD")
@@ -134,6 +134,10 @@ def run(daily_limit: int = DAILY_LIMIT, dry_run: bool = False):
             continue
 
         print(f"  Sending to {to_addr} ({business})", file=sys.stderr)
+        # Write to append-only sent log BEFORE sending — prevents duplicates even if CSV is
+        # overwritten by a concurrent process mid-run
+        if not dry_run:
+            record_sent_email(to_addr, lead_id, business)
         success = _send_one(to_addr, subject, body, dry_run=dry_run)
 
         if success:

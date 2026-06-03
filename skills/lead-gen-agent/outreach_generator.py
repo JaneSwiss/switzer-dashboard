@@ -290,7 +290,7 @@ Jane"""
 # Email body variants — rotated randomly to avoid spam filters.
 # Subject line and opener are already unique per lead.
 _EMAIL_TEMPLATES = [
-    """Hi {name},
+    """{greeting}
 
 {opener} I think your business could do really well on Pinterest — and I noticed you don't have a profile linked anywhere.
 
@@ -305,7 +305,7 @@ Happy to answer any questions!
 Regards,
 Jane""",
 
-    """Hi {name},
+    """{greeting}
 
 {opener} One thing I noticed — you don't seem to have a Pinterest presence, which is worth looking into for your type of business.
 
@@ -320,7 +320,7 @@ Let me know if you have any questions.
 Regards,
 Jane""",
 
-    """Hi {name},
+    """{greeting}
 
 {opener} I wanted to reach out because I think Pinterest could be a strong traffic channel for your business — and I can see you're not on it yet.
 
@@ -335,7 +335,7 @@ Always happy to chat if you have questions.
 Regards,
 Jane""",
 
-    """Hi {name},
+    """{greeting}
 
 {opener} I came across your business and noticed you're not on Pinterest — which actually surprised me, because your niche tends to do really well there.
 
@@ -402,23 +402,44 @@ def _extract_first_name(lead: dict) -> str:
     """
     Extract a usable first name from a lead.
     Tries owner_name first, then splits CamelCase shop names.
-    Falls back to 'there' if nothing looks like a real name.
+    Returns empty string if nothing looks like a real name.
     """
     import re
+
+    # Known non-name words that appear first in business names
+    _NOT_NAMES = {
+        "the", "a", "an", "my", "your", "our", "new", "old", "best", "pro",
+        "top", "true", "pure", "just", "all", "one", "two", "three", "four",
+        "eye", "body", "soul", "mind", "life", "live", "love", "real", "rise",
+        "flow", "glow", "peak", "core", "apex", "elite", "prime", "plus",
+        "fit", "flex", "zen", "well", "care", "heal", "vibe", "bold", "bliss",
+        "studio", "clinic", "center", "centre", "house", "home", "room",
+        "group", "team", "club", "hub", "lab", "co", "inc", "llc",
+        "inner", "outer", "urban", "city", "west", "east", "north", "south",
+        "downtown", "uptown", "bright", "clear", "clean", "fresh", "smart",
+        "move", "werk", "werk", "total", "whole", "pivot", "spark", "starling",
+        "yonder", "derm", "skin", "face", "body", "hair", "nail", "lash",
+    }
+
     owner = (lead.get("owner_name") or "").strip()
     if owner:
         return owner.split()[0]
 
     shop = (lead.get("shop_or_business_name") or "").strip()
     if shop:
-        # Split CamelCase: "AndreaHillPottery" → ["Andrea", "Hill", "Pottery"]
-        words = re.sub(r"([A-Z][a-z]+)", r" \1", shop).split()
-        first = words[0] if words else ""
-        # Only use if CamelCase actually split the name AND it looks like a real first name
-        if len(words) > 1 and len(first) >= 3 and not first.isupper() and first.isalpha():
-            return first
+        # Only attempt CamelCase splitting — not space-separated business names
+        # "AndreaHillPottery" has no spaces but does have mid-word capitals
+        if " " not in shop:
+            words = re.sub(r"([A-Z][a-z]+)", r" \1", shop).split()
+            first = words[0] if words else ""
+            if (len(words) > 1
+                    and len(first) >= 3
+                    and not first.isupper()
+                    and first.isalpha()
+                    and first.lower() not in _NOT_NAMES):
+                return first
 
-    return "there"
+    return ""
 
 
 def generate_draft(lead: dict) -> tuple[str, str, str]:
@@ -442,8 +463,9 @@ def generate_draft(lead: dict) -> tuple[str, str, str]:
         subject_line = random.choice(SUBJECT_POOL)
 
         greeting_name = _extract_first_name(lead)
+        greeting = f"Hi {greeting_name}," if greeting_name else "Hi,"
         template = random.choice(_EMAIL_TEMPLATES)
-        draft = template.format(opener=opener, name=greeting_name)
+        draft = template.format(opener=opener, greeting=greeting)
     else:
         subject_line = ""
         draft = _TEMPLATE.format(opener=opener)

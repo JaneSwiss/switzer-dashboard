@@ -221,14 +221,36 @@ def _is_sendable_email(email: str) -> bool:
     return True
 
 
+SENT_LOG_PATH = OUTPUT_DIR / "sent-emails.log"
+
+
+def _load_sent_emails() -> set:
+    """Return set of all email addresses that have ever been sent to (append-only log)."""
+    if not SENT_LOG_PATH.exists():
+        return set()
+    lines = SENT_LOG_PATH.read_text(encoding="utf-8").splitlines()
+    return {line.split("|")[0].strip().lower() for line in lines if line.strip()}
+
+
+def record_sent_email(email: str, lead_id: str, business: str):
+    """Append one line to the sent log. Never overwrites — safe against CSV race conditions."""
+    _ensure_dir()
+    from datetime import date
+    line = f"{email.lower()}|{lead_id}|{business}|{date.today().isoformat()}\n"
+    with open(SENT_LOG_PATH, "a", encoding="utf-8") as f:
+        f.write(line)
+
+
 def get_leads_for_email_sending(daily_limit=20):
-    """Return leads with a sendable contact_email not yet messaged, sorted by priority."""
+    """Return leads with a sendable contact_email not yet sent to, sorted by priority."""
+    already_sent = _load_sent_emails()
     leads = load_leads()
     eligible = [
         l for l in leads
         if _is_sendable_email(l.get("contact_email", ""))
         and l.get("status") not in ("messaged", "replied", "paid")
         and not l.get("outreach_date")
+        and l.get("contact_email", "").lower() not in already_sent
     ]
     eligible.sort(key=lambda l: float(l.get("priority_score") or 0), reverse=True)
     return eligible[:daily_limit]
