@@ -1018,83 +1018,109 @@ faces are not shown. Must feel editorial and real, never corporate stock photo.
 ---
 
 ENVIRONMENTS — pick a completely different type for each of the 5 images. Never repeat
-the same environment category. Choose from this full library:
+the same environment category. Every environment must feel distinct in colour, light, and mood.
 
 INDOOR — HOME SPACES:
-- Bright home office, white walls, large arched window, natural light, indoor plant in corner
-- Cosy home study, warm bookshelves behind, soft lamp light, leather chair or footstool visible
-- Bedroom window seat, cream linen, morning soft light, quiet and intimate
-- Kitchen bench or island, stone or marble surface, morning scene, relaxed domestic feel
-- Living room floor, cream rug, woman seated cross-legged, sunlight across the floor
+- Bright home office with white arched window, sheer curtains moving in breeze, morning light flooding in
+- Cosy reading nook with built-in bookshelves floor to ceiling, warm amber lamp, velvet armchair
+- Bedroom with linen duvet, morning light casting long shadows across cream sheets
+- Kitchen island in white marble, pendant lights above, fresh flowers on the counter
+- Living room sofa in bouclé cream fabric, afternoon sun through plantation shutters, rug visible
+- Walk-in wardrobe or dressing room, full-length mirror, clothes visible in background, editorial mood
+- Bathroom vanity with travertine tiles, luxe products arranged neatly, soft diffused light
 
 INDOOR — PROFESSIONAL AND CREATIVE SPACES:
-- Modern co-working space, open plan, exposed concrete or brick, warm Edison bulb lighting
-- Minimalist creative studio, off-white walls, single directional light from one side
-- Boutique hotel room or lounge nook, curved furniture, warm quiet atmosphere, elegant
-- High-end interior design showroom, beautiful furniture pieces visible in background
-- Scandinavian-style workspace, light oak desk, clean lines, very soft diffused window light
-- Dark and moody home office, dark shelving, warm amber lamp glow, rich textures
+- Modern co-working space with exposed ceiling beams, warm Edison pendants, brick wall
+- Minimalist photography studio, white curved cove backdrop, single beauty dish light from side
+- Boutique hotel suite sitting room, curved Art Deco armchair, dramatic drapes, evening lamp glow
+- Luxury brand showroom or concept store interior, editorial, objects on pedestals, gallery white walls
+- Dark moody office with floor-to-ceiling dark shelving, leather chair, warm amber lamp only light source
+- Mid-century modern workspace, walnut desk, pendant Arco lamp, minimal and warm
+- Glass-walled penthouse office, city blurred behind full-height windows, clean modern desk
 
 OUTDOOR SPACES:
-- Rooftop terrace, city skyline softly blurred behind, warm afternoon sun, potted plants nearby
-- Garden table or outdoor dining area, dappled light through trees, natural shadows on surface
-- Mediterranean or European-style outdoor terrace, stone walls, terracotta tones, warm light
-- Park bench or garden reading spot, green trees blurred behind, candid and natural
-- Outdoor market or cobblestone street setting, European aesthetic, candid street-level feel
-- Hotel or villa pool area, sun lounger, tropical or warm-climate editorial feel
+- Rooftop terrace with city skyline, golden hour light, terracotta pots, olive tree in planter
+- Stone courtyard in Mediterranean villa, bougainvillea blurred behind, dappled morning light
+- European cobblestone street, archway visible behind, woman captured mid-stride, golden light
+- Lush garden, hedgerow blurred background, wrought iron table, very soft diffused light
+- Beach-adjacent poolside at a luxury villa, sun lounger, blue water blurred behind, warm
+- Verdant hotel garden terrace, rattan furniture, greenery everywhere, warm dappled shade
+- City rooftop at dusk, string lights beginning to glow, warm purple-orange sky behind
 
-CAFÉ AND HOSPITALITY — maximum ONE café-type setting per post, only if it fits naturally:
-- Modern minimalist café, white walls, round marble table, single pendant light above
-- Warm Parisian-style bistro, dark wood panelling, mirror or vintage art in background
-- Japanese-inspired café, clean lines, ceramic objects, calm and airy with soft light
-- Busy urban café, activity softly blurred in background, woman sharp and focused in foreground
-- Hotel lobby café or lounge, grand proportions, quiet midweek feel
+CAFÉ AND HOSPITALITY — maximum ONE per post:
+- Sleek all-white café with marble counter, minimalist pendant, single flower stem in vase
+- Parisian café with mirrored walls, rattan chairs, marble bistro table, warm afternoon light
+- Japanese-inspired café with pale timber, ceramic objects, stone surfaces, calm zen aesthetic
+- Luxury hotel lobby bar, dramatic high ceilings, low leather seating, soft indirect lighting
+- Rooftop café bar, city view behind, warm golden hour, elegant glassware on the table
+- Coastal café, light wood, linen napkins, sea light, relaxed editorial feel
 
 ---
 
-COMPOSITIONS — use a different one for each of the 5 prompts, never repeat:
-1. From behind at a desk — seated, slight 45-degree angle, room visible, hair cascading down
-2. Overhead flat lay — no person, objects arranged loosely on a styled surface with jewellery pieces
-3. Hands close-up — only hands and long gel nails in frame, mid-task, jewellery clearly visible
-4. Wide environment shot — woman small in a large interior or exterior, space is the subject
-5. Side profile at a surface — jaw and cheekbone visible, voluminous hair catching light, window behind
-6. Mid-action standing — woman leaning over a desk, hair falling forward, caught mid-movement
-7. Over-shoulder close — shot from just behind, hair volume visible, screen or work ahead, nails on keyboard
-8. Floor or low angle — shot from floor level, woman seated with legs crossed, looking down at phone or notebook
-9. Two-shot conversation — two stylish women at a table, faces not visible (coaching/consulting topics)
-10. Walking or moving — woman from behind mid-stride in a beautiful space, coat or hair in motion
-11. Window light portrait — back of head and shoulder only, facing window, rim of light on hair edges
-12. Lying or reclining — woman on sofa or bed from above, laptop or book, hair spread naturally
+COMPOSITIONS — pick a completely different one for each of the 5 prompts. Never repeat any:
+1. From behind at a desk — seated, hair cascading down back, room stretching into background
+2. Overhead flat lay — no person, props and jewellery arranged loosely on a textured surface
+3. Hands-only close-up — long gel nails in frame, rings and bracelets visible, mid-task action
+4. Wide shot — woman very small in grand environment, architecture or landscape is the subject
+5. Side profile — jaw and cheekbone edge visible, voluminous hair lit from window behind
+6. Mid-action — woman leaning over desk or turning, hair caught in motion, candid energy
+7. Over-shoulder — camera just behind her shoulder, nails visible on laptop or phone, work ahead
+8. Low floor angle — shot from below desk level looking up slightly, legs and hem of outfit visible
+9. Walking away — full rear view mid-stride through a beautiful space, coat hem or hair moving
+10. Window silhouette — back of head against bright window, hair as silhouette with rim light on edges
+11. Reclining — woman lying on sofa or bed, shot from above at angle, hair spread, book or phone in hand
+12. Mirror reflection — woman seen in a decorative mirror, back to camera, reflection shows confidence not face
+13. Staircase — woman on wide staircase from below, looking up at landing, architectural drama
+14. Reading or writing — intense focus, face angled down, hair falling forward, pen or book in hand
+15. Standing at window — full figure from behind at floor-to-ceiling window, city or garden outside
 
-DRINKS — rotate across the 5 prompts, never repeat:
+DRINKS — rotate, never repeat across the 5 prompts:
 - Starbucks iced latte in clear cup with green straw
 - Starbucks matcha in clear cup with green straw
-- Latte in a ribbed clear glass
-- Espresso in a small white ceramic cup on a saucer
-- Matcha in a handmade ceramic bowl or small cup
-- Stanley tumbler in cream, sand, or rose tone
-- Iced coffee in a plain clear glass
-- Sparkling water in a glass bottle with minimalist label
+- Iced brown sugar oat latte in clear cup
+- Latte in a ribbed clear glass tumbler
+- Espresso in a small white ceramic cup on a gold-rimmed saucer
+- Matcha in a handmade speckled ceramic bowl
+- Stanley tumbler in cream, cloud, or rose quartz
+- Iced coffee in a plain clear glass with ice cubes
+- Sparkling water in a glass bottle with a paper straw
+- Freshly poured champagne in a crystal flute
+- Glass of rosé, condensation on the outside
 - No drink — leave it out entirely
 
-SIGNATURE PROPS (use 1-2 per image, vary across ALL images — never repeat the same prop twice in one post):
-- Apple MacBook Pro in silver, screen open showing blurred creative workspace
-- Apple iPhone 15 Pro in natural titanium, screen lit with blurred content
-- Apple AirPods Max in silver or midnight, resting on a surface
-- Productivity Planner by Intelligent Change — black linen hardcover, gold foil spine
-- Glossy hardcover coffee table book, spine visible with abstract cover
-- Small luxury perfume bottle in amber or clear glass on a surface
-- Fresh peonies, ranunculus, or garden roses in a minimal fluted vase
-- Single stem eucalyptus or dried pampas grass in a thin ceramic vase
-- Ceramic coffee cup in matte white or speckled clay on a saucer
-- Gold-rimmed glasses resting on a notebook or surface
-- Expensive-looking sunglasses folded on the edge of the desk
-- Small gold or marble tray holding jewellery or perfume
-- Open Moleskine or linen notebook with a gold pen across the page
-- Printed brand mood board with colour swatches and editorial images
-- Clear glass vase with tall stems of white flowers
-- Candle in a minimal glass or concrete vessel, lit or unlit
-- Small potted succulent or monstera leaf on the corner of a desk
+SIGNATURE PROPS (use 1-2 per image, vary across ALL 5 images — never repeat the same prop twice in one post):
+TECH:
+- Apple MacBook Pro open on desk, screen showing blurred design or analytics
+- Apple iPhone 15 Pro in natural titanium, face down or screen lit with blurred content
+- Apple AirPods Max in silver resting beside the laptop
+- iPad Pro in a cream leather folio case, open with blurred content
+
+STATIONERY + BOOKS:
+- Productivity Planner by Intelligent Change — black linen hardcover, gold foil lettering
+- Large format art or fashion coffee table book, cover partially visible
+- Open linen-covered notebook, blank pages, fine-tip pen lying across it
+- Stack of 3-4 hardcover books in neutral tones, spines aligned
+- Printed brand mood board showing colour swatches, editorial photos, type samples
+
+BOTANICALS + VESSELS:
+- Bouquet of white peonies or garden roses in a fluted glass vase
+- Single long-stem white orchid in a minimal ceramic vase
+- Dried pampas grass in a tall travertine vase
+- Eucalyptus and olive branch arrangement in clear glass
+- Small potted fiddle-leaf fig or monstera visible in background corner
+
+BEAUTY + PERSONAL:
+- Small amber glass luxury perfume bottle with gold cap on marble surface
+- Silk scarf loosely draped over the edge of a chair or desk
+- Designer sunglasses folded on the edge of the desk or chair arm
+- Gold compact mirror open on a surface
+- Small gold or marble tray holding a ring, bracelet, and perfume
+
+CANDLES + DECOR:
+- Tall pillar candle in a gold or concrete holder, unlit
+- Cluster of 3 varying height candles in linen-toned vessels
+- Single sculptural ceramic object in matte taupe or cream
+- Small abstract sculpture or art object as desk accessory
 
 PHOTOGRAPHY STYLE (consistent across all images):
 - Warm editorial quiet luxury — real and lived-in, never staged or styled-looking
