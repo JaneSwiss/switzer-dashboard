@@ -257,8 +257,8 @@
       </div>
     </div>
     <div class="table-wrap"><table>
-      <thead><tr><th style="min-width:180px;">Keyword</th><th class="c">Search vol</th><th class="c">Competition</th><th class="c">Trend</th><th class="c">Score</th><th class="c">Pinterest vol</th><th class="c">Pin clicks</th><th>Pillar</th><th class="c">Tier</th><th class="c">Source</th></tr></thead>
-      <tbody id="kw-tbody"><tr><td colspan="10" class="empty">Loading...</td></tr></tbody>
+      <thead><tr><th style="min-width:180px;">Keyword</th><th class="c">Search vol</th><th class="c">Competition</th><th class="c">Pinterest vol</th><th class="c">Score</th><th>Pillar</th><th class="c">Tier</th><th class="c">Source</th></tr></thead>
+      <tbody id="kw-tbody"><tr><td colspan="8" class="empty">Loading...</td></tr></tbody>
     </table></div>
     <p style="font-size:12px;color:var(--text3);margin-top:10px;" id="kw-showing"></p>
   </div>
@@ -703,7 +703,7 @@ function filterKw(){
   const all=DATA.keyword_masterlist||[];
   const filtered=all.filter(k=>(!search||(k.keyword||'').toLowerCase().includes(search))&&(KW_TIER==='all'||(k.priority_tier||k.tier||'').startsWith(KW_TIER)));
   const tbody=document.getElementById('kw-tbody'); tbody.innerHTML='';
-  if(!filtered.length){ tbody.innerHTML='<tr><td colspan="10" class="empty">No keywords match.</td></tr>'; document.getElementById('kw-showing').textContent=''; renderKwPagination(0,0); return; }
+  if(!filtered.length){ tbody.innerHTML='<tr><td colspan="8" class="empty">No keywords match.</td></tr>'; document.getElementById('kw-showing').textContent=''; renderKwPagination(0,0); return; }
   const totalPages=Math.ceil(filtered.length/KW_PER_PAGE);
   KW_PAGE=Math.min(Math.max(1,KW_PAGE),totalPages);
   const start=(KW_PAGE-1)*KW_PER_PAGE, slice=filtered.slice(start,start+KW_PER_PAGE);
@@ -713,18 +713,14 @@ function filterKw(){
     const tCol=tp==='P1'?'var(--teal-text)':tp==='P2'?'var(--amber-text)':'var(--text2)';
     const sBg=k.score>=70?'var(--teal-bg)':k.score>=50?'var(--amber-bg)':'var(--surface2)';
     const sCol=k.score>=70?'var(--teal-text)':k.score>=50?'var(--amber-text)':'var(--text2)';
-    const trend=k.trend_pct||k.trend||0;
-    const trendCol=trend>0?'var(--teal-mid)':trend<0?'var(--coral)':'var(--text3)';
-    const trendStr=trend>0?'↑ '+trend+'%':trend<0?'↓ '+Math.abs(trend)+'%':'—';
     const compCol=k.competition<=0.2?'var(--teal-mid)':k.competition<=0.5?'var(--amber-mid)':'var(--coral)';
     const pinVol=k.pinterest_vol||0;
     const pinVolStr=pinVol>0?pinVol.toLocaleString():'—';
     const pinVolCol=pinVol>=1000?'var(--teal-mid)':pinVol>0?'var(--amber-mid)':'var(--text3)';
-    const pinClicks=k.pinterest_clicks_proven||k.pinterest_clicks||0;
     const srcHtml=k.source?`<span class="badge" style="background:var(--amber-bg);color:var(--amber-text);font-size:10px;">${k.source}</span>`:`<span style="color:var(--text3);">—</span>`;
     const searchVol=k.monthly_search_vol||k.search_vol||0;
     const tr=document.createElement('tr');
-    tr.innerHTML=`<td style="font-weight:500;">${k.keyword}</td><td class="c">${searchVol?searchVol.toLocaleString():'—'}</td><td class="c" style="color:${compCol};font-weight:500;">${k.competition}</td><td class="c" style="color:${trendCol};font-weight:500;">${trendStr}</td><td class="c"><span class="badge" style="background:${sBg};color:${sCol};">${Math.round(k.score||0)}</span></td><td class="c" style="color:${pinVolCol};font-weight:${pinVol>0?'600':'400'};">${pinVolStr}</td><td class="c" style="color:${pinClicks>0?'var(--teal-mid)':'var(--text3)'};font-weight:${pinClicks>0?'600':'400'};">${pinClicks>0?pinClicks.toLocaleString():'—'}</td><td style="font-size:12px;color:var(--text2);">${k.content_pillar||k.pillar||''}</td><td class="c"><span class="badge" style="background:${tBg};color:${tCol};">${tp}</span></td><td class="c">${srcHtml}</td>`;
+    tr.innerHTML=`<td style="font-weight:500;">${k.keyword}</td><td class="c">${searchVol?searchVol.toLocaleString():'—'}</td><td class="c" style="color:${compCol};font-weight:500;">${k.competition}</td><td class="c" style="color:${pinVolCol};font-weight:${pinVol>0?'600':'400'};">${pinVolStr}</td><td class="c"><span class="badge" style="background:${sBg};color:${sCol};">${Math.round(k.score||0)}</span></td><td style="font-size:12px;color:var(--text2);">${k.content_pillar||k.pillar||''}</td><td class="c"><span class="badge" style="background:${tBg};color:${tCol};">${tp}</span></td><td class="c">${srcHtml}</td>`;
     tbody.appendChild(tr);
   });
   document.getElementById('kw-showing').textContent=`Showing ${start+1}–${Math.min(start+KW_PER_PAGE,filtered.length)} of ${filtered.length} keywords`;
