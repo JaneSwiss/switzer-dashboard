@@ -402,6 +402,15 @@
         "date": "2026-06-02",
         "url": "https://janeswiss.github.io/switzer-dashboard/posts/pinterest-virtual-assistant.html",
         "source": "Jane uploaded"
+      },
+      {
+        "title": "how to delete a board on pinterest",
+        "keyword": "how to delete a board on pinterest",
+        "written": true,
+        "published": false,
+        "date": "2026-06-04",
+        "url": "https://janeswiss.github.io/switzer-dashboard/posts/how-to-delete-a-board-on-pinterest.html",
+        "source": "Pinclicks + Semrush"
       }
     ],
     "pending_tasks": [
@@ -2443,8 +2452,9 @@
         "tasks": [
           {
             "id": "w2_posts",
-"label": "Run blog SEO agent daily \u2192 publish 7 new posts to Wix + index each",
-            "done": false,            "owner": "Run+Jane"
+            "label": "Run blog SEO agent daily \u2192 publish 7 new posts to Wix + index each",
+            "done": false,
+            "owner": "Run+Jane"
           },
           {
             "id": "w2_repurpose",
@@ -2466,8 +2476,9 @@
           },
           {
             "id": "w2_flodesk",
-"label": "Check Flodesk re-engagement open rate \u2192 remove inactive contacts",
-            "done": false,            "owner": "Jane"
+            "label": "Check Flodesk re-engagement open rate \u2192 remove inactive contacts",
+            "done": false,
+            "owner": "Jane"
           },
           {
             "id": "w2_tailwind",
