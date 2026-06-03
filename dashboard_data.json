@@ -371,7 +371,7 @@
         "title": "# Pinterest marketing agency: how to hire the right one (and avoid expensive mistakes)",
         "keyword": "pinterest marketing agency",
         "written": true,
-        "published": false,
+        "published": true,
         "date": "2026-06-02",
         "url": "https://janeswiss.github.io/switzer-dashboard/posts/pinterest-marketing-agency.html",
         "source": "Jane uploaded"
@@ -2145,7 +2145,7 @@
           {
             "id": "w2_posts",
             "label": "Run blog SEO agent daily → publish 7 new posts to Wix + index each",
-            "done": false,
+            "done": true,
             "owner": "Run+Jane"
           },
           {
