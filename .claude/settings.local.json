@@ -316,7 +316,8 @@
       "Bash(sed -n '10p' outputs/leads/outreach-drafts/c467fbfc-eyestreet-massage-email.txt)",
       "Bash(rm outputs/leads/outreach-drafts/*-email.txt 2>/dev/null; python3 skills/lead-gen-agent/main.py --outreach --limit 200 2>&1 | tail -5)",
       "Bash(python3 skills/lead-gen-agent/email_sender.py --limit 10)",
-      "Bash(python3 agents/blog-seo-agent/blog_seo_agent.py --keyword \"pinterest for etsy sellers\")"
+      "Bash(python3 agents/blog-seo-agent/blog_seo_agent.py --keyword \"pinterest for etsy sellers\")",
+      "Bash(python3 agents/blog-seo-agent/blog_seo_agent.py --keyword \"pinterest for small business\")"
     ],
     "additionalDirectories": [
       "/Users/janeair/Documents/AI/switzertemplates/agents/blog-seo-agent/output",

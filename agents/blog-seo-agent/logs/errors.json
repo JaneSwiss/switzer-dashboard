@@ -424,5 +424,11 @@
     "stage": "banned_words",
     "keyword": "pinterest for etsy sellers",
     "error": "Banned words remain after revision: ['landscape']"
+  },
+  {
+    "date": "2026-06-04",
+    "stage": "banned_words",
+    "keyword": "pinterest for small business",
+    "error": "Banned words remain after revision: ['landscape']"
   }
 ]
