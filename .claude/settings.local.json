@@ -310,7 +310,13 @@
       "WebFetch(domain:www.switzertemplates.com)",
       "Bash(open posts/how-to-make-money-on-pinterest.html)",
       "Bash(curl -s -o /dev/null -w \"%{http_code}\" \"https://www.switzertemplates.com/sitemap.xml\")",
-      "Bash(curl -s -o /dev/null -w \"%{http_code}\" \"https://www.switzertemplates.com/blog-posts-sitemap.xml\")"
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" \"https://www.switzertemplates.com/blog-posts-sitemap.xml\")",
+      "Bash(rm outputs/leads/outreach-drafts/*-email.txt && echo \"Cleared all email drafts\")",
+      "Bash(sed -n '10p' outputs/leads/outreach-drafts/88507072-saralynnbrennan-email.txt)",
+      "Bash(sed -n '10p' outputs/leads/outreach-drafts/c467fbfc-eyestreet-massage-email.txt)",
+      "Bash(rm outputs/leads/outreach-drafts/*-email.txt 2>/dev/null; python3 skills/lead-gen-agent/main.py --outreach --limit 200 2>&1 | tail -5)",
+      "Bash(python3 skills/lead-gen-agent/email_sender.py --limit 10)",
+      "Bash(python3 agents/blog-seo-agent/blog_seo_agent.py --keyword \"pinterest for etsy sellers\")"
     ],
     "additionalDirectories": [
       "/Users/janeair/Documents/AI/switzertemplates/agents/blog-seo-agent/output",

@@ -1785,7 +1785,7 @@ def submit_for_indexing(slug: str, keyword: str) -> None:
 
 # ── module 6: run ──────────────────────────────────────────────────────────────
 
-def run():
+def run(force_keyword: str = None):
     print("=" * 50)
     print("  Blog SEO Agent — Switzertemplates")
     print("=" * 50)
@@ -1793,7 +1793,32 @@ def run():
     # module 1
     print("\n[1/5] Loading next keyword...")
     try:
-        keyword_row = load_next_keyword()
+        if force_keyword:
+            # Build a minimal keyword_row from the forced keyword
+            keyword_row = {
+                "_keyword": force_keyword,
+                "_slug": slugify(force_keyword),
+                "Priority Tier": "P1 - Build first",
+                "Content Pillar": "Pinterest Marketing",
+                "Notes": "",
+                "Source": "",
+            }
+            # Try to find it in the masterlist to get full metadata
+            all_rows = load_next_keyword.__wrapped__() if hasattr(load_next_keyword, '__wrapped__') else None
+            try:
+                with KEYWORDS_FILE.open(newline="", encoding="utf-8-sig") as f:
+                    import csv as _csv
+                    for row in _csv.DictReader(f):
+                        row = {k.strip(): v.strip() for k, v in row.items()}
+                        kw = row.get("Keyword", "")
+                        if kw.lower() == force_keyword.lower():
+                            keyword_row = {**row, "_keyword": kw, "_slug": slugify(kw)}
+                            break
+            except Exception:
+                pass
+            print(f"  Forced keyword: {force_keyword}")
+        else:
+            keyword_row = load_next_keyword()
     except Exception as e:
         log_error("keyword_loader", "", str(e))
         print(f"  Keyword loader failed: {e}")
@@ -2036,4 +2061,11 @@ def reformat_all_posts() -> None:
 
 
 if __name__ == "__main__":
-    run()
+    import argparse as _ap
+    parser = _ap.ArgumentParser()
+    parser.add_argument("--keyword", metavar="KEYWORD", help="Write a post for a specific keyword instead of the next in queue")
+    args = parser.parse_args()
+    if args.keyword:
+        run(force_keyword=args.keyword)
+    else:
+        run()

@@ -400,13 +400,27 @@ def _clean_subject(raw: str, client, lead: dict) -> str:
 
 def _extract_first_name(lead: dict) -> str:
     """
-    Extract a usable first name from a lead.
-    Tries owner_name first, then splits CamelCase shop names.
+    Extract a usable first name from a lead. Priority order:
+    1. owner_name field (set by website scraper)
+    2. Email prefix — kayla@kaylasnell.com → Kayla
+    3. CamelCase shop name — AndreaHillPottery → Andrea
     Returns empty string if nothing looks like a real name.
     """
     import re
 
-    # Known non-name words that appear first in business names
+    _GENERIC_PREFIXES = {
+        "info", "admin", "hello", "contact", "enquiries", "enquiry",
+        "office", "mail", "mymail", "team", "support", "reception", "studio",
+        "clinic", "salon", "spa", "shop", "store", "sales", "booking",
+        "bookings", "appointments", "general", "noreply", "no-reply",
+        "help", "service", "services", "care", "management",
+        "intake", "therapy", "coaching", "clientconnect", "customercare",
+        "concierge", "wellness", "training", "fitness", "massage",
+        "beauty", "aesthetics", "accounts", "billing",
+        "hiring", "jobs", "recruitment", "careers", "frontdesk",
+        "front", "desk", "board",
+    }
+
     _NOT_NAMES = {
         "the", "a", "an", "my", "your", "our", "new", "old", "best", "pro",
         "top", "true", "pure", "just", "all", "one", "two", "three", "four",
@@ -417,27 +431,100 @@ def _extract_first_name(lead: dict) -> str:
         "group", "team", "club", "hub", "lab", "co", "inc", "llc",
         "inner", "outer", "urban", "city", "west", "east", "north", "south",
         "downtown", "uptown", "bright", "clear", "clean", "fresh", "smart",
-        "move", "werk", "werk", "total", "whole", "pivot", "spark", "starling",
+        "move", "werk", "total", "whole", "pivot", "spark", "starling",
         "yonder", "derm", "skin", "face", "body", "hair", "nail", "lash",
+        # surnames / place names that look like first names in email prefixes
+        "brookshire", "tmivong",
     }
 
+    # Common first names — used to extract names from domain roots when email prefix is generic
+    # e.g. info@amyvermillion.com → Amy, info@annabaylis.com.au → Anna
+    _COMMON_NAMES = {
+        "amy", "anna", "anne", "annie", "amanda", "andrea", "angela", "alyssa",
+        "alicia", "alison", "alexis", "alexa", "alice", "abby", "abigail",
+        "ashley", "amber", "april", "audrey", "aurora",
+        "bella", "bethany", "bianca", "brianna", "brittany", "brooke",
+        "caitlin", "carly", "carmen", "caroline", "cassandra", "catherine",
+        "charlotte", "chelsea", "chloe", "christy", "claire", "claudia",
+        "dana", "danielle", "diana", "elise", "elizabeth", "ella", "emily",
+        "emma", "erica", "eimear", "eva", "evelyn",
+        "faith", "fiona", "francesca", "gabrielle", "gemma", "georgia",
+        "grace", "hannah", "haley", "heather", "holly", "isabelle", "isla",
+        "jade", "jamie", "jane", "jasmine", "jenna", "jennifer", "jessica",
+        "julia", "julie", "june", "kasey", "kate", "katelyn", "katherine",
+        "kathryn", "katie", "kayla", "kelly", "kim", "kimberly", "kristen",
+        "laura", "lauren", "leah", "lily", "linda", "lisa", "lucy",
+        "madison", "megan", "melissa", "michelle", "molly", "monica",
+        "morgan", "natalie", "natasha", "nicole", "nina", "olivia",
+        "paige", "patricia", "rachel", "rebecca", "renee", "riley",
+        "samantha", "sandra", "sara", "sarah", "savannah", "shannon",
+        "sophia", "sophie", "stephanie", "susan", "sydney", "tara",
+        "taylor", "tessa", "tiffany", "vanessa", "victoria", "violet",
+        "whitney", "zoe",
+        # male names (coaches, trainers etc. do appear)
+        "adam", "alex", "andrew", "brian", "chris", "daniel", "david",
+        "ethan", "james", "jason", "john", "jon", "jordan", "josh",
+        "justin", "kevin", "kyle", "mark", "matt", "michael", "mike",
+        "nathan", "nick", "paul", "peter", "ryan", "sam", "sean",
+        "thomas", "tim", "tom", "tyler", "william",
+    }
+
+    # 1. owner_name from website scraper
     owner = (lead.get("owner_name") or "").strip()
     if owner:
         return owner.split()[0]
 
+    # 2. Email prefix — most reliable signal for personal business emails
+    email = (lead.get("contact_email") or "").strip().lower()
+    # Strip URL-encoded junk and stray punctuation (e.g. "%20ginger@", ":shannon@")
+    email = email.lstrip("%20").lstrip(":").lstrip("%20%20").lstrip()
+    if "@" in email:
+        prefix = email.split("@")[0]
+        # Handle firstname.lastname or firstname_lastname patterns
+        for sep in (".", "_", "-"):
+            if sep in prefix:
+                prefix = prefix.split(sep)[0]
+                break
+        has_vowel = any(c in "aeiou" for c in prefix)
+        in_common = prefix in _COMMON_NAMES
+        if (prefix.isalpha()
+                and has_vowel
+                and 2 <= len(prefix) <= 9   # >9 chars = almost certainly a compound business name
+                and prefix not in _GENERIC_PREFIXES
+                and prefix not in _NOT_NAMES
+                and (len(prefix) >= 5 or in_common)):  # short prefixes must be known names
+            return prefix.capitalize()
+
+    # 3. "byName" in email prefix — e.g. aestheticsbyeimear@gmail.com → Eimear
+    if "@" in email:
+        raw_prefix = email.split("@")[0]
+        if "by" in raw_prefix:
+            after_by = raw_prefix.split("by")[-1]
+            if (after_by.isalpha()
+                    and 2 <= len(after_by) <= 10
+                    and after_by not in _GENERIC_PREFIXES
+                    and after_by not in _NOT_NAMES):
+                return after_by.capitalize()
+
+    # 4. Domain-root extraction for generic email prefixes
+    # e.g. info@amyvermillion.com → domain root "amyvermillion" starts with "amy"
+    if "@" in email:
+        domain_root = email.split("@")[1].split(".")[0].lower()
+        for name in sorted(_COMMON_NAMES, key=len, reverse=True):  # longest first avoids partial matches
+            if domain_root.startswith(name):
+                return name.capitalize()
+
+    # 5. CamelCase shop name — only for names without spaces
     shop = (lead.get("shop_or_business_name") or "").strip()
-    if shop:
-        # Only attempt CamelCase splitting — not space-separated business names
-        # "AndreaHillPottery" has no spaces but does have mid-word capitals
-        if " " not in shop:
-            words = re.sub(r"([A-Z][a-z]+)", r" \1", shop).split()
-            first = words[0] if words else ""
-            if (len(words) > 1
-                    and len(first) >= 3
-                    and not first.isupper()
-                    and first.isalpha()
-                    and first.lower() not in _NOT_NAMES):
-                return first
+    if shop and " " not in shop:
+        words = re.sub(r"([A-Z][a-z]+)", r" \1", shop).split()
+        first = words[0] if words else ""
+        if (len(words) > 1
+                and len(first) >= 3
+                and not first.isupper()
+                and first.isalpha()
+                and first.lower() not in _NOT_NAMES):
+            return first
 
     return ""
 
