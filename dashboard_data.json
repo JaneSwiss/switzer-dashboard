@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-06-02",
+  "last_updated": "2026-06-07",
   "etsy_agent": {
     "status": "active",
     "last_run": "2026-05-05",
@@ -2793,5 +2793,19 @@
       "replied": 0,
       "sent_today": 0
     }
+  },
+  "nerd_agent": {
+    "status": "active",
+    "last_run": "never",
+    "total_sources_processed": 0,
+    "topics_covered": [],
+    "sources_by_type": {
+      "youtube": 0,
+      "article": 0,
+      "email": 0,
+      "pdf": 0
+    },
+    "topics": {},
+    "recent_sources": []
   }
 }

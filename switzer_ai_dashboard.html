@@ -22,7 +22,7 @@
     --radius: 10px; --radius-sm: 6px;
   }
   body { font-family: var(--sans); background: var(--bg); color: var(--text); min-height: 100vh; }
-  .container { max-width: 900px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
+  .container { max-width: 1280px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
   .token-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.55); display: flex; align-items: center; justify-content: center; z-index: 100; padding: 1.25rem; }
   .token-box { background: var(--surface); border-radius: var(--radius); padding: 2rem; max-width: 440px; width: 100%; box-shadow: 0 8px 32px rgba(0,0,0,0.18); }
   .token-box h2 { font-family: var(--serif); font-size: 20px; font-weight: normal; margin-bottom: 8px; }
@@ -112,6 +112,7 @@
   <div class="token-box">
     <h2>Welcome to your dashboard</h2>
     <p>Enter your GitHub Personal Access Token to enable saving. This stays in your browser only — it never gets uploaded anywhere.</p>
+    <p id="token-error" style="display:none;color:#c0392b;font-weight:600;font-size:13px;margin:-4px 0 10px;"></p>
     <input type="password" id="token-input" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx" />
     <button onclick="saveToken()">Save and open dashboard</button>
     <p class="token-step">Don't have a token? <a href="https://github.com/settings/tokens" target="_blank">Create one here</a> with <strong>repo</strong> scope selected.</p>
@@ -140,6 +141,7 @@
   <button class="tab-btn" data-tab="etsy"><i class="ti ti-shopping-bag"></i>Etsy Expert</button>
   <button class="tab-btn" data-tab="pinterest"><i class="ti ti-brand-pinterest"></i>Pinterest</button>
   <button class="tab-btn" data-tab="email"><i class="ti ti-mail"></i>Email Agent</button>
+  <button class="tab-btn" data-tab="nerd"><i class="ti ti-brain"></i>Nerd Agent</button>
 </div>
 
 <!-- OVERVIEW -->
@@ -368,6 +370,50 @@
   </div>
 </div>
 
+<!-- NERD AGENT -->
+<div class="tab-panel" id="panel-nerd">
+  <div class="card">
+    <div class="card-header">
+      <span class="card-title"><i class="ti ti-brain" style="color:var(--teal-mid);font-size:18px;"></i>Knowledge base</span>
+      <span class="badge badge-teal" id="nerd-sources-badge">—</span>
+    </div>
+    <p style="font-size:13px;color:var(--text2);margin-bottom:1rem;">Feeds YouTube videos, blog posts, newsletters, and PDFs into a structured knowledge base. Topic insight files are written to <code>context/nerd-insights/</code> for other agents to load.</p>
+    <div class="stat-grid" id="nerd-stat-grid"></div>
+    <div style="background:var(--surface2);border-radius:8px;padding:0.85rem 1rem;margin-top:0.5rem;">
+      <p style="font-size:12px;color:var(--text2);margin-bottom:6px;font-weight:600;">How to run:</p>
+      <p style="font-size:12px;font-family:monospace;color:var(--text3);line-height:2.1;">
+        python3 agents/nerd-agent/nerd_agent.py learn --url "https://youtube.com/watch?v=..."<br>
+        python3 agents/nerd-agent/nerd_agent.py learn --url "https://blog.example.com/post"<br>
+        python3 agents/nerd-agent/nerd_agent.py learn --file "/path/to/course.pdf"<br>
+        python3 agents/nerd-agent/nerd_agent.py learn --text "paste content" --source "Title"<br>
+        python3 agents/nerd-agent/nerd_agent.py report --all<br>
+        python3 agents/nerd-agent/nerd_agent.py list
+      </p>
+    </div>
+  </div>
+  <div class="card" id="nerd-topics-card">
+    <div class="card-header">
+      <span class="card-title"><i class="ti ti-books" style="color:var(--choc);font-size:18px;"></i>Topics learned</span>
+      <span class="badge badge-gray" id="nerd-topics-badge">—</span>
+    </div>
+    <div id="nerd-topics-list"><p class="empty">No topics yet — run the agent to start ingesting sources.</p></div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <span class="card-title"><i class="ti ti-history" style="color:var(--text2);font-size:18px;"></i>Recent sources</span>
+    </div>
+    <div class="table-wrap"><table>
+      <thead><tr>
+        <th>Type</th>
+        <th style="min-width:220px;">Title</th>
+        <th>Topics</th>
+        <th class="c">Date</th>
+      </tr></thead>
+      <tbody id="nerd-sources-tbody"><tr><td colspan="4" class="empty">Loading...</td></tr></tbody>
+    </table></div>
+  </div>
+</div>
+
 </div>
 <script>
 // ── CONFIG ────────────────────────────────────────────────────────────────
@@ -405,6 +451,14 @@ async function loadData() {
       'Accept': 'application/vnd.github.v3+json'
     }
   });
+  if (res.status === 401 || res.status === 403) {
+    const err = new Error('GitHub rejected the saved token (status ' + res.status + ')');
+    err.authFailure = true;
+    throw err;
+  }
+  if (!res.ok) {
+    throw new Error('GitHub API error: ' + res.status);
+  }
   const meta = await res.json();
   const bytes = atob(meta.content.replace(/\n/g, ''));
   const uint8 = new Uint8Array(bytes.length);
@@ -896,6 +950,90 @@ function renderPinterest(){
   });
 }
 
+// Nerd Agent
+function renderNerd(){
+  const na = DATA.nerd_agent || {};
+  const total = na.total_sources_processed || 0;
+  const topics = na.topics || {};
+  const topicKeys = Object.keys(topics);
+  const byType = na.sources_by_type || {};
+
+  document.getElementById('nerd-sources-badge').textContent =
+    total + ' source' + (total !== 1 ? 's' : '') + ' ingested';
+  document.getElementById('nerd-topics-badge').textContent =
+    topicKeys.length + ' topic' + (topicKeys.length !== 1 ? 's' : '');
+
+  // Stat grid
+  const grid = document.getElementById('nerd-stat-grid');
+  grid.innerHTML = '';
+  [
+    {label: 'Total sources', val: total + ''},
+    {label: 'Topics covered', val: topicKeys.length + ''},
+    {label: 'YouTube videos', val: (byType.youtube || 0) + ''},
+    {label: 'Articles / blogs', val: (byType.article || 0) + ''},
+    {label: 'Newsletters', val: (byType.email || 0) + ''},
+    {label: 'PDFs', val: (byType.pdf || 0) + ''},
+  ].forEach(m => {
+    const card = document.createElement('div');
+    card.className = 'stat-card';
+    card.innerHTML = `<p class="stat-label">${m.label}</p><p class="stat-val">${m.val}</p>`;
+    grid.appendChild(card);
+  });
+
+  // Topics list
+  const topicEl = document.getElementById('nerd-topics-list');
+  topicEl.innerHTML = '';
+  if(!topicKeys.length){
+    topicEl.innerHTML = '<p class="empty">No topics yet — run the agent to start ingesting sources.</p>';
+  } else {
+    topicKeys.sort().forEach(t => {
+      const info = topics[t] || {};
+      const label = t.replace(/-/g,' ').replace(/\b\w/g,c=>c.toUpperCase());
+      const fileUrl = `https://github.com/${GH_OWNER}/${GH_REPO}/blob/main/${info.insight_file||'context/nerd-insights/'+t+'.md'}`;
+      const steps = info.actionable_steps || 0;
+      const d = document.createElement('div');
+      d.className = 'row';
+      d.innerHTML = `
+        <i class="ti ti-bookmark" style="color:var(--choc);font-size:16px;margin-top:2px;flex-shrink:0;"></i>
+        <div style="flex:1;">
+          <p class="row-text" style="font-weight:500;">${label}</p>
+          <p class="row-meta">${info.sources||0} source${(info.sources||0)!==1?'s':''} · ${steps} actionable step${steps!==1?'s':''} · last updated ${info.last_updated||'—'}</p>
+        </div>
+        <a href="${fileUrl}" target="_blank"
+          style="display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:600;color:var(--choc);text-decoration:none;border:1.5px solid var(--border2);border-radius:5px;padding:3px 8px;white-space:nowrap;flex-shrink:0;">
+          <i class="ti ti-external-link" style="font-size:11px;"></i>View insights
+        </a>`;
+      topicEl.appendChild(d);
+    });
+  }
+
+  // Recent sources table
+  const tbody = document.getElementById('nerd-sources-tbody');
+  tbody.innerHTML = '';
+  const recent = na.recent_sources || [];
+  if(!recent.length){
+    tbody.innerHTML = '<tr><td colspan="4" class="empty">No sources ingested yet.</td></tr>';
+    return;
+  }
+  const typeBadge = {
+    youtube:  ['var(--coral-bg)',  'var(--coral-text)',  'YouTube'],
+    article:  ['var(--teal-bg)',   'var(--teal-text)',   'Article'],
+    email:    ['var(--amber-bg)',  'var(--amber-text)',  'Newsletter'],
+    pdf:      ['var(--surface2)',  'var(--text2)',       'PDF'],
+  };
+  recent.forEach(s => {
+    const [tBg, tCol, tLabel] = typeBadge[s.type] || ['var(--surface2)','var(--text2)', s.type];
+    const topicsStr = (s.topics||[]).map(t=>t.replace(/-/g,' ')).join(', ') || '—';
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td><span class="badge" style="background:${tBg};color:${tCol};white-space:nowrap;">${tLabel}</span></td>
+      <td style="font-size:13px;">${s.title||'Untitled'}</td>
+      <td style="font-size:12px;color:var(--text3);">${topicsStr}</td>
+      <td class="c" style="font-size:12px;color:var(--text3);">${s.date_ingested||'—'}</td>`;
+    tbody.appendChild(tr);
+  });
+}
+
 // Token management
 function checkToken() {
   const token = localStorage.getItem('switzer_gh_token');
@@ -909,6 +1047,7 @@ function saveToken() {
   const val = document.getElementById('token-input').value.trim();
   if (!val) { alert('Please enter your token.'); return; }
   localStorage.setItem('switzer_gh_token', val);
+  document.getElementById('token-error').style.display = 'none';
   document.getElementById('token-overlay').style.display = 'none';
   if (checkToken()) loadDashboard();
 }
@@ -921,8 +1060,20 @@ document.getElementById('token-input').addEventListener('keydown', e => { if(e.k
 
 // Load everything
 async function loadDashboard(){
-  await loadData();
-  renderOverview(); renderWins(); renderEtsy(); renderSprint(); renderBlog(); renderKeywords(); renderRepurposer(); renderEmail(); renderPinterest();
+  try {
+    await loadData();
+  } catch (e) {
+    console.error(e);
+    if (e.authFailure) {
+      localStorage.removeItem('switzer_gh_token');
+      const errEl = document.getElementById('token-error');
+      errEl.textContent = 'Your saved token has expired or was revoked. Please generate a new one and enter it below.';
+      errEl.style.display = 'block';
+      document.getElementById('token-overlay').style.display = 'flex';
+    }
+    return;
+  }
+  renderOverview(); renderWins(); renderEtsy(); renderSprint(); renderBlog(); renderKeywords(); renderRepurposer(); renderEmail(); renderPinterest(); renderNerd();
 }
 if (checkToken()) loadDashboard();
 </script>
