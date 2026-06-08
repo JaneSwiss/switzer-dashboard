@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 """
 Nerd Agent — Switzertemplates
-Ingests external resources (YouTube videos, blog posts, newsletters, PDFs),
+Ingests external resources (YouTube videos, blog posts, newsletters, plain-text notes),
 extracts key insights, and writes topic overviews that other agents can load.
 
 Commands:
     python3 agents/nerd-agent/nerd_agent.py learn --url "https://youtube.com/watch?v=..."
     python3 agents/nerd-agent/nerd_agent.py learn --url "https://blog.example.com/post"
-    python3 agents/nerd-agent/nerd_agent.py learn --file "/path/to/course.pdf"
+    python3 agents/nerd-agent/nerd_agent.py learn --txt "/path/to/notes.txt"
     python3 agents/nerd-agent/nerd_agent.py learn --text "Content..." --source "Newsletter title"
     python3 agents/nerd-agent/nerd_agent.py learn --batch "urls.txt"
     python3 agents/nerd-agent/nerd_agent.py learn --url "..." --topics "pinterest-marketing,etsy-seo"
@@ -58,8 +58,9 @@ load_dotenv(ROOT / ".env")
 
 ANTHROPIC_API_KEY = os.getenv("ANTHROPIC_API_KEY")
 
-# Max chars sent to Claude per source (~35 min of video or a long article)
-MAX_TEXT_CHARS = 15_000
+# Max chars sent to Claude per source (~2.5 hrs of video transcript or a long article —
+# generous enough that real sources are read in full, not cut short)
+MAX_TEXT_CHARS = 100_000
 
 ALLOWED_TOPICS = {
     "pinterest-marketing",
@@ -156,9 +157,6 @@ def detect_source_type(source):
         return "youtube"
     if re.search(r'\.substack\.com/p/|open\.substack\.com/pub/', source):
         return "substack"
-    p = Path(source)
-    if p.exists() and p.suffix.lower() == ".pdf":
-        return "pdf"
     if source.startswith("http"):
         return "article"
     return "text"
@@ -320,46 +318,12 @@ def fetch_web_page(url):
     return {"type": "article", "url": url, "title": title, "text": text, "word_count": len(text.split())}
 
 
-def fetch_pdf(file_path):
-    try:
-        import fitz
-    except ImportError:
-        print("PyMuPDF not installed. Run: pip3 install PyMuPDF")
-        sys.exit(1)
-
-    p = Path(file_path)
-    if not p.exists():
-        raise FileNotFoundError(f"PDF not found: {file_path}")
-
-    doc = fitz.open(str(p))
-    pages_text = [page.get_text() for page in doc]
-    doc.close()
-
-    text = "\n\n".join(pages_text).strip()
-
-    if len(text) < 100:
-        raise RuntimeError(
-            f"PDF returned no text — it may be image-based (scanned).\n"
-            f"Copy the content manually and use:\n"
-            f"  nerd_agent.py learn --text \"<paste>\" --source \"{p.stem}\""
-        )
-
-    if len(text) > MAX_TEXT_CHARS:
-        print(f"  PDF truncated to {MAX_TEXT_CHARS:,} chars")
-        text = text[:MAX_TEXT_CHARS]
-
-    title = p.stem.replace("-", " ").replace("_", " ").title()
-    return {"type": "pdf", "url": str(p.resolve()), "title": title, "text": text, "word_count": len(text.split())}
-
-
 def fetch_content(source, source_type=None):
     stype = source_type or detect_source_type(source)
     if stype == "youtube":
         return fetch_youtube(source)
     if stype == "substack":
         return fetch_substack(source)
-    if stype == "pdf":
-        return fetch_pdf(source)
     if stype in ("article", "url"):
         return fetch_web_page(source)
     raise ValueError(f"Unknown source type '{stype}' for: {source}")
@@ -378,25 +342,16 @@ def load_context():
 
 
 def extract_insights(content, client):
-    brand_voice, product_catalog = load_context()
     topics_list = ", ".join(sorted(ALLOWED_TOPICS))
 
-    prompt = f"""You are the Nerd Agent for Switzertemplates, a digital product business.
+    prompt = f"""You are the Nerd Agent for Switzertemplates. Your job right now is purely to read
+and faithfully record what a source says — not to interpret it, react to it, or connect it to
+the business. That happens later, in a separate step, with its own clear labelling.
 
-Business:
-- Products: branding kits ($38), Wix websites ($64), 3-in-1 bundles ($82), Instagram templates ($15)
-- Audience: female small business owners, coaches, service providers
-- Goal: help customers look professional online fast without hiring a designer
-
-Brand voice (summary):
-{brand_voice[:1200]}
-
-Products:
-{product_catalog[:1000]}
-
----
-
-Analyse this {content['type']} and extract structured business insights.
+Read this {content['type']} closely AND COMPLETELY — start to finish, including specific
+numbers, named tools, named techniques, step-by-step processes, examples, and any concrete
+detail given. Do not skim or stop early. Do not settle for the broad-strokes version when the
+source actually gives specifics — a vague restatement of a specific claim is a miss.
 
 Title: {content['title']}
 Content:
@@ -408,39 +363,29 @@ Return ONLY a valid JSON object — no preamble, no explanation, just the JSON:
 
 {{
   "topics": ["pick 1-3 from ONLY: {topics_list}"],
-  "key_points": ["3-8 specific, concrete points from the source"],
-  "summary": "2-3 paragraph plain-text summary of what was learned",
-  "business_ideas": [
-    {{
-      "idea": "specific idea for Switzertemplates based on what was learned",
-      "product_relevance": "branding-kit | wix-website | instagram-templates | bundle | email-list | blog | pinterest | etsy",
-      "effort": "low | medium | high",
-      "topic": "one topic slug from the allowed list"
-    }}
-  ],
-  "actionable_steps": ["3-6 concrete next steps Jane can take right now"]
+  "key_points": ["8-20 specific points this source actually makes — one per distinct claim, number, technique, tool, step, or example. Prefer many precise, concrete points over a few broad ones. A 60-90 minute video or dense article should yield points from across its whole runtime/length, not just its opening minutes."],
+  "summary": "4-6 paragraph plain-text summary that walks through what this source covers, in the order it covers it, preserving specific names, numbers, tools, and step-by-step detail rather than flattening them into generalities"
 }}
 
 Rules:
-- topics must only use values from the allowed list above
-- key_points must be specific and quote-worthy, never vague
-- business_ideas must be specific to Switzertemplates products and audience
-- actionable_steps must be concrete actions, not generic advice"""
+- topics must only use values from the allowed list above (pick based on subject matter, not relevance to Switzertemplates)
+- key_points and summary must be grounded ONLY in what's explicitly present in the content above
+- do NOT add interpretation, generalisation, business advice, opinions, or assumptions
+- do NOT invent ideas, recommendations, or next steps — if it's not in the source, it doesn't belong here
+- do NOT compress specific, concrete claims (numbers, named tools, named methods, exact steps) into vague generalities — keep the specificity that's actually there
+- if the source is thin, vague, or repetitive, reflect that honestly rather than padding it out"""
 
     try:
         resp = client.messages.create(
             model="claude-opus-4-5",
-            max_tokens=2000,
+            max_tokens=6000,
             messages=[{"role": "user", "content": prompt}]
         )
         raw = strip_code_fences(resp.content[0].text)
         parsed = json.loads(raw)
     except json.JSONDecodeError as e:
         log_error("extraction", content.get("url", "unknown"), f"JSON parse failed: {e}")
-        parsed = {
-            "topics": [], "key_points": [], "summary": "Extraction failed.",
-            "business_ideas": [], "actionable_steps": [],
-        }
+        parsed = {"topics": [], "key_points": [], "summary": "Extraction failed."}
 
     # Validate topics — only keep known values
     valid_topics = [t for t in parsed.get("topics", []) if t in ALLOWED_TOPICS]
@@ -452,8 +397,6 @@ Rules:
         "topics": valid_topics,
         "key_points": parsed.get("key_points", []),
         "summary": parsed.get("summary", ""),
-        "business_ideas": parsed.get("business_ideas", []),
-        "actionable_steps": parsed.get("actionable_steps", []),
     }
 
 
@@ -486,8 +429,6 @@ def store_entry(entry, force=False):
         "word_count": entry.get("word_count", 0),
         "key_points": entry.get("key_points", []),
         "summary": entry.get("summary", ""),
-        "business_ideas": entry.get("business_ideas", []),
-        "actionable_steps": entry.get("actionable_steps", []),
     }
 
     (ENTRIES_DIR / filename).write_text(
@@ -563,14 +504,12 @@ def write_topic_report(topic, client):
     today = date.today().isoformat()
 
     all_points = []
-    all_ideas = []
-    all_steps = []
+    all_summaries = []
     source_rows = []
 
     for e in entries:
         all_points.extend(e.get("key_points", []))
-        all_ideas.extend(e.get("business_ideas", []))
-        all_steps.extend(e.get("actionable_steps", []))
+        all_summaries.append(f"{e.get('title', 'Untitled')} — {e.get('summary', '')}")
         source_rows.append({
             "title": e.get("title", "Untitled"),
             "type": e.get("type", "article"),
@@ -579,12 +518,8 @@ def write_topic_report(topic, client):
 
     _, product_catalog = load_context()
 
-    ideas_text = "\n".join(
-        f"- [{i.get('product_relevance','?')}] ({i.get('effort','?')}) {i.get('idea','')}"
-        for i in all_ideas[:20]
-    )
     points_text = "\n".join(f"- {p}" for p in all_points[:30])
-    steps_text = "\n".join(f"- {s}" for s in all_steps[:25])
+    summaries_text = "\n".join(f"- {s}" for s in all_summaries[:15])
     sources_text = "\n".join(
         f"{i+1}. {s['title']} ({s['type']}, {s['date']})"
         for i, s in enumerate(source_rows)
@@ -596,22 +531,29 @@ def write_topic_report(topic, client):
 
     prompt = f"""Write a topic insight report for Switzertemplates on: {label}
 
-Synthesise {len(entries)} source(s) into a practical reference document.
+This report has two distinct parts that must NOT blur into each other.
 
-Key points from all sources:
+PART 1 — what was learned (strictly factual, grounded in the sources):
+Organise and present the material below. Stay strictly within what these {len(entries)} source(s)
+actually say. Do not add outside knowledge, interpretation, or claims the sources don't make.
+
+Key points captured from the sources:
 {points_text}
 
-Business ideas from all sources:
-{ideas_text}
+Per-source summaries:
+{summaries_text}
 
-Actionable steps from all sources:
-{steps_text}
+PART 2 — implementation suggestions (clearly your own synthesis, clearly labelled as such):
+Now, building ONLY on what's documented in Part 1 (not on outside assumptions), propose how
+Switzertemplates could apply it. This part is explicitly the agent's own thinking — that's its
+purpose here — but every suggestion must trace back to something actually learned above.
+
+Product context (for relevance only — branding kits $38, Wix websites $64, 3-in-1 bundles $82,
+Instagram templates $15, audience: female small business owners/coaches/service providers):
+{product_catalog[:800]}
 
 Sources:
 {sources_text}
-
-Product context:
-{product_catalog[:800]}
 
 Write in this exact markdown format — nothing before or after:
 
@@ -620,31 +562,23 @@ Write in this exact markdown format — nothing before or after:
 
 ---
 
-## Key Principles
+## What We Learned
 
-[3-6 bullet points — most important principles, specific and actionable]
+*A faithful account of what these sources say — no added interpretation.*
 
----
+[3-6 bullet points — the most important, concrete principles, stated as the sources state them]
 
-## Business Ideas for Switzertemplates
-
-### Branding Kit Opportunities
-[Ideas relevant to the branding kit product]
-
-### Blog / SEO Opportunities
-[Content and SEO angles to pursue]
-
-### Wix Website Opportunities
-[Ideas for the Wix website product]
-
-### Pinterest & Social Opportunities
-[Pinterest and social media angles]
+[1-2 short paragraphs synthesising what these sources cover overall]
 
 ---
 
-## Actionable Steps
+## Implementation Suggestions for Switzertemplates
 
-[Numbered list of 5-8 concrete steps Jane should take]
+*The Nerd Agent's own suggestions for applying the above to the business — these are proposals
+to evaluate, not facts from the sources.*
+
+[3-6 concrete suggestions, each tied back to a specific learning above and to a specific
+product/channel where relevant]
 
 ---
 
@@ -743,7 +677,7 @@ def update_dashboard():
     sources = index.get("sources", [])
 
     topic_summary = {}
-    sources_by_type = {"youtube": 0, "article": 0, "email": 0, "pdf": 0}
+    sources_by_type = {"youtube": 0, "article": 0, "email": 0}
 
     for src in sources:
         stype = src.get("type", "article")
@@ -756,7 +690,7 @@ def update_dashboard():
             if t not in topic_summary:
                 topic_summary[t] = {
                     "sources": 0,
-                    "actionable_steps": 0,
+                    "key_points_captured": 0,
                     "last_updated": "",
                     "insight_file": f"context/nerd-insights/{t}.md",
                 }
@@ -765,11 +699,11 @@ def update_dashboard():
             if d > topic_summary[t]["last_updated"]:
                 topic_summary[t]["last_updated"] = d
 
-    # Count actionable steps per topic from entry files
+    # Count key points captured per topic from entry files
     for t in topic_summary:
         entries = load_entries_for_topic(t)
-        topic_summary[t]["actionable_steps"] = sum(
-            len(e.get("actionable_steps", [])) for e in entries
+        topic_summary[t]["key_points_captured"] = sum(
+            len(e.get("key_points", [])) for e in entries
         )
 
     recent = sorted(sources, key=lambda x: x.get("date_ingested", ""), reverse=True)[:10]
@@ -831,7 +765,7 @@ def _learn_single(source, source_type, title_override, force, topics_override, c
             entry["topics"] = overrides
 
     print(f"  Topics: {', '.join(entry['topics'])}")
-    print(f"  Ideas:  {len(entry['business_ideas'])} business ideas generated")
+    print(f"  Captured: {len(entry['key_points'])} key points")
 
     entry_id = store_entry(entry, force=force)
 
@@ -868,7 +802,7 @@ def _learn_text(text, source_title, force, topics_override, client):
             entry["topics"] = overrides
 
     print(f"  Topics: {', '.join(entry['topics'])}")
-    print(f"  Ideas:  {len(entry['business_ideas'])} business ideas generated")
+    print(f"  Captured: {len(entry['key_points'])} key points")
 
     entry_id = store_entry(entry, force=force)
 
@@ -902,11 +836,14 @@ def run_learn(args, client):
         _learn_text(args.text, source_title, args.force, getattr(args, 'topics', None), client)
         return
 
-    if args.file:
-        _learn_single(
-            args.file, "pdf", args.source, args.force,
-            getattr(args, 'topics', None), client
-        )
+    if args.txt:
+        txt_path = Path(args.txt)
+        if not txt_path.exists():
+            print(f"Text file not found: {args.txt}")
+            sys.exit(1)
+        text = txt_path.read_text(encoding="utf-8", errors="replace").strip()
+        source_title = args.source or txt_path.stem.replace("-", " ").replace("_", " ").title()
+        _learn_text(text, source_title, args.force, getattr(args, 'topics', None), client)
         return
 
     if args.url:
@@ -916,7 +853,7 @@ def run_learn(args, client):
         )
         return
 
-    print("Provide --url, --file, --text, or --batch")
+    print("Provide --url, --txt, --text, or --batch")
     sys.exit(1)
 
 
@@ -1029,10 +966,10 @@ def main():
     # learn
     p_learn = sub.add_parser("learn", help="Ingest a new source")
     p_learn.add_argument("--url",    help="URL to ingest (YouTube, blog, Substack, etc.)")
-    p_learn.add_argument("--file",   help="Path to a PDF file")
+    p_learn.add_argument("--txt",    help="Path to a plain .txt file to ingest (e.g. course notes extracted elsewhere)")
     p_learn.add_argument("--text",   help="Raw text content to ingest (newsletter, course notes, etc.)")
     p_learn.add_argument("--batch",  help="Path to a text file with one URL per line")
-    p_learn.add_argument("--source", help="Title/label override (for --text or --file)")
+    p_learn.add_argument("--source", help="Title/label override (for --text or --txt)")
     p_learn.add_argument("--topics", help="Override auto-detected topics (comma-separated): " + ", ".join(sorted(ALLOWED_TOPICS)))
     p_learn.add_argument("--force",  action="store_true", help="Re-process even if already ingested")
 
@@ -1046,7 +983,7 @@ def main():
     # list
     p_list = sub.add_parser("list", help="Browse the knowledge base")
     p_list.add_argument("--topic", help="Filter by topic")
-    p_list.add_argument("--type",  help="Filter by type: youtube, article, email, pdf")
+    p_list.add_argument("--type",  help="Filter by type: youtube, article, email")
     p_list.add_argument("--id",    help="Show full detail for one entry by ID")
 
     # share

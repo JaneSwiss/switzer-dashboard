@@ -2797,33 +2797,33 @@
   "nerd_agent": {
     "status": "active",
     "last_run": "2026-06-08",
-    "total_sources_processed": 7,
+    "total_sources_processed": 10,
     "topics_covered": [
       "business-strategy",
       "content-creation",
       "pinterest-marketing"
     ],
     "sources_by_type": {
-      "youtube": 6,
+      "youtube": 9,
       "article": 0,
       "email": 1
     },
     "topics": {
       "pinterest-marketing": {
-        "sources": 7,
-        "key_points_captured": 56,
+        "sources": 10,
+        "key_points_captured": 182,
         "last_updated": "2026-06-08",
         "insight_file": "context/nerd-insights/pinterest-marketing.md"
       },
       "content-creation": {
-        "sources": 6,
-        "key_points_captured": 48,
+        "sources": 9,
+        "key_points_captured": 163,
         "last_updated": "2026-06-08",
         "insight_file": "context/nerd-insights/content-creation.md"
       },
       "business-strategy": {
         "sources": 1,
-        "key_points_captured": 8,
+        "key_points_captured": 18,
         "last_updated": "2026-06-08",
         "insight_file": "context/nerd-insights/business-strategy.md"
       }
@@ -2892,6 +2892,36 @@
       {
         "id": "6ea5df36",
         "title": "The Pinterest Strategy That's Actually Working for Me in 2026",
+        "type": "youtube",
+        "topics": [
+          "pinterest-marketing",
+          "content-creation"
+        ],
+        "date_ingested": "2026-06-08"
+      },
+      {
+        "id": "38c2578b",
+        "title": "How I'm Growing my Blog with Pinterest in 2026 | Blogging and Pinterest Workflow for More Traffic",
+        "type": "youtube",
+        "topics": [
+          "pinterest-marketing",
+          "content-creation"
+        ],
+        "date_ingested": "2026-06-08"
+      },
+      {
+        "id": "0e4879ee",
+        "title": "Why Your Pinterest Traffic Isn’t Growing in 2026 (Fix This First)",
+        "type": "youtube",
+        "topics": [
+          "pinterest-marketing",
+          "content-creation"
+        ],
+        "date_ingested": "2026-06-08"
+      },
+      {
+        "id": "21529eed",
+        "title": "QkXSH_cLPQ4",
         "type": "youtube",
         "topics": [
           "pinterest-marketing",

@@ -1,5 +1,156 @@
 {
   "version": 1,
-  "total_sources": 0,
-  "sources": []
+  "total_sources": 10,
+  "sources": [
+    {
+      "id": "3fca9459",
+      "type": "email",
+      "url": "text:Tony Hills Newsletters:c22b087b3eec",
+      "title": "Tony Hills Newsletters",
+      "author": "",
+      "date_ingested": "2026-06-08",
+      "topics": [
+        "pinterest-marketing"
+      ],
+      "word_count": 1433,
+      "summary_file": "entries/3fca9459-tony-hills-newsletters.json",
+      "status": "ok"
+    },
+    {
+      "id": "54872267",
+      "type": "youtube",
+      "url": "https://www.youtube.com/watch?v=nYKnvkrIevA",
+      "title": "How To Use Pinterest In 2026 - Step by Step Guide I Make 6 Figures Per Year On Pinterest",
+      "author": "",
+      "date_ingested": "2026-06-08",
+      "topics": [
+        "pinterest-marketing",
+        "content-creation"
+      ],
+      "word_count": 6615,
+      "summary_file": "entries/54872267-how-to-use-pinterest-in-2026-step-b.json",
+      "status": "ok"
+    },
+    {
+      "id": "2dfd7b65",
+      "type": "youtube",
+      "url": "https://www.youtube.com/watch?v=U7ZqpgTpjes",
+      "title": "The Pinterest Strategy Etsy Sellers Should Be Using in 2026 | Jenna Kutcher & Dylan Jahraus",
+      "author": "",
+      "date_ingested": "2026-06-08",
+      "topics": [
+        "pinterest-marketing",
+        "business-strategy",
+        "content-creation"
+      ],
+      "word_count": 11473,
+      "summary_file": "entries/2dfd7b65-the-pinterest-strategy-etsy-sellers.json",
+      "status": "ok"
+    },
+    {
+      "id": "ee788c1f",
+      "type": "youtube",
+      "url": "https://www.youtube.com/watch?v=0auLgo1azlE",
+      "title": "How to Grow on Pinterest in 2026 (Try these NEW tools!)",
+      "author": "",
+      "date_ingested": "2026-06-08",
+      "topics": [
+        "pinterest-marketing",
+        "content-creation"
+      ],
+      "word_count": 5367,
+      "summary_file": "entries/ee788c1f-how-to-grow-on-pinterest-in-2026-tr.json",
+      "status": "ok"
+    },
+    {
+      "id": "7bc04b29",
+      "type": "youtube",
+      "url": "https://www.youtube.com/watch?v=TfOhKeciZpU",
+      "title": "The Pinterest Strategy That's Actually Working for Me in 2026",
+      "author": "",
+      "date_ingested": "2026-06-08",
+      "topics": [
+        "pinterest-marketing",
+        "content-creation"
+      ],
+      "word_count": 2683,
+      "summary_file": "entries/7bc04b29-the-pinterest-strategy-thats-actual.json",
+      "status": "ok"
+    },
+    {
+      "id": "3948dfc6",
+      "type": "youtube",
+      "url": "https://www.youtube.com/watch?v=DnScrkLAX9c",
+      "title": "How to Get Started with Pinterest in 2026 (Important Updates)",
+      "author": "",
+      "date_ingested": "2026-06-08",
+      "topics": [
+        "pinterest-marketing",
+        "content-creation"
+      ],
+      "word_count": 1735,
+      "summary_file": "entries/3948dfc6-how-to-get-started-with-pinterest-i.json",
+      "status": "ok"
+    },
+    {
+      "id": "6ea5df36",
+      "type": "youtube",
+      "url": "https://www.youtube.com/watch?v=m9vnKPnVocA",
+      "title": "The Pinterest Strategy That's Actually Working for Me in 2026",
+      "author": "",
+      "date_ingested": "2026-06-08",
+      "topics": [
+        "pinterest-marketing",
+        "content-creation"
+      ],
+      "word_count": 2281,
+      "summary_file": "entries/6ea5df36-the-pinterest-strategy-thats-actual.json",
+      "status": "ok"
+    },
+    {
+      "id": "38c2578b",
+      "type": "youtube",
+      "url": "https://www.youtube.com/watch?v=I_MbkHhAeF4",
+      "title": "How I'm Growing my Blog with Pinterest in 2026 | Blogging and Pinterest Workflow for More Traffic",
+      "author": "",
+      "date_ingested": "2026-06-08",
+      "topics": [
+        "pinterest-marketing",
+        "content-creation"
+      ],
+      "word_count": 3266,
+      "summary_file": "entries/38c2578b-how-im-growing-my-blog-with-pintere.json",
+      "status": "ok"
+    },
+    {
+      "id": "0e4879ee",
+      "type": "youtube",
+      "url": "https://www.youtube.com/watch?v=zE0d-LA2yOI",
+      "title": "Why Your Pinterest Traffic Isn’t Growing in 2026 (Fix This First)",
+      "author": "",
+      "date_ingested": "2026-06-08",
+      "topics": [
+        "pinterest-marketing",
+        "content-creation"
+      ],
+      "word_count": 1807,
+      "summary_file": "entries/0e4879ee-why-your-pinterest-traffic-isnt-gro.json",
+      "status": "ok"
+    },
+    {
+      "id": "21529eed",
+      "type": "youtube",
+      "url": "https://www.youtube.com/watch?v=QkXSH_cLPQ4",
+      "title": "QkXSH_cLPQ4",
+      "author": "",
+      "date_ingested": "2026-06-08",
+      "topics": [
+        "pinterest-marketing",
+        "content-creation"
+      ],
+      "word_count": 1595,
+      "summary_file": "entries/21529eed-qkxsh-clpq4.json",
+      "status": "ok"
+    }
+  ]
 }

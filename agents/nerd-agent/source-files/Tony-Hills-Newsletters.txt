@@ -1,0 +1,170 @@
+Tony Hill newsletters
+
+Main Pinterest strategy across all PDFs
+The overall strategy is: stop making generic or repetitive pins and start creating keyword-led, visually diverse, intent-specific pins based on what Pinterest already rewards.
+Pinterest is now better at detecting “same-ish” pins, so changing only a title or slightly changing a design is not enough anymore. The strongest approach is to create pins that target different keywords, different user situations, different hooks, different visuals, and different boards.
+
+1. Seasonal Pinterest traffic / holiday pinning
+The old advice was to start Christmas pins around July or August because pins needed months to rank. The updated advice says newer pins can rank faster now, often in 2-4 weeks, especially for newer accounts or newer blog posts. So the timing depends more on your niche.
+For example:
+A knitting audience may search months ahead because handmade Christmas gifts take time.
+A recipe audience may search much closer to the holiday, often after Thanksgiving.
+Screenshot instructions converted to text
+In the Pinterest Trends / keyword tool screenshot, the process shown is:
+Set Trend type to Top monthly trends.
+Choose the closest Interest category to your niche.
+Set the End date to a past date, for example 11/30/2023.
+Scan the keyword list for seasonal keywords.
+In the example, the selected interest is Home Decor.
+The keyword table shows examples like:
+home inspo
+outdoor ideas
+bedroom ideas
+thanksgiving table settings
+room ideas
+living room decor
+thanksgiving wallpaper
+christmas decor ideas for living room
+Repeat this by changing the end date month by month: July/August, September 30, October 31, November 30, December 31.
+The action plan from the PDF:
+Identify seasonal keywords.
+Decide whether to create new posts, update existing posts, or both.
+Plan a pinning schedule.
+Find secondary keywords for blog posts, pin titles, and pin descriptions.
+Use Interest Explorer to find long-tail official Pinterest interests that may not appear in Trends but can help with home feed visibility.
+Best takeaway: pin in advance, but also keep pinning through the actual holiday season instead of posting everything at once.
+
+2. How to rank higher in Pinterest search with PinClicks
+To rank #1 for a Pinterest keyword, the PDF says to study the top-ranking pins first. Look at what Pinterest is already rewarding, then create a better, more specific version — not a copy.
+Ranking factors mentioned
+A strong pin should have:
+Target keyword in the pin title.
+Target keyword in the pin description.
+Relevant annotated interests in the pin description.
+Visually appealing image.
+Relevant text overlay if the top-ranking pins use text.
+Correct user intent.
+Timely/relevant topic.
+What to study in top pins
+Look at:
+Number of saves.
+Date pinned.
+Annotated interests.
+Pin style: image-only, text overlay, collage, etc.
+Adjectives used.
+Main colors.
+Description style and keywords.
+The big point: model the structure, not the exact pin. Add a fresh angle like easier, simpler, trendier, more specific, for a certain audience, or for a certain situation.
+
+3. Full PinClicks workflow / SOP example
+The PDF gives a step-by-step workflow using the niche example day hikes.
+Step 1: Research a Pinterest-friendly blog post idea
+In Keyword Explorer, search a broad keyword like day hike.
+The screenshot shows these keyword ideas:
+rainy day hike outfit — score 200
+multi day hike packing list — 151
+day hike food — 149
+what to pack for a day hike — 131
+day hike lunch ideas — 113
+day hike checklist — 108
+day hike snacks — 106
+3 day hike packing list — 90
+day hike food ideas — 86
+day hike backpack women — 61
+day hike aesthetic — 53
+He first considers day hike lunch ideas, but the screenshot shows many newer pins already targeting that exact topic, so he decides it is too competitive.
+Then he checks day hike first aid kit. The screenshot shows top results are older and not specifically targeting “day hike,” which makes it a better opportunity.
+Step 2: Find top pins for inspiration
+For day hike first aid kit, he checks Top Pins, reviews the top 3-4 results, then sorts by pin score.
+The screenshot shows top pins such as:
+“How To Build Your Own Hiking First Aid Kit” — pin score 100
+“What to Pack in Your Hiking Day Pack”
+“Build Your Own First Aid Kit For Hiking & Backpack…”
+“How To Create A Backpacking First Aid Kit”
+“Ultimate Hiking First Aid Kit…”
+He notices the top-performing style is TOBI pins, meaning text on background image, so that is the pin style he chooses.
+Step 3: Extract keyword annotations
+The example pin screenshot shows the top pin title:
+How To Build Your Own Hiking First Aid Kit
+The description says:
+“Going out for a day hike or backpacking?? READ THIS FIRST! Be sure to buy or build your own hiking first aid kit before your next trip. Carry all the supplies you need to help yourself or other hikers stay alive on the trail. #hiking #backpacking #firstaid #hikingessentials”
+The visible keyword annotations are:
+Camping Supplies
+Camping And Hiking
+Camping
+Backpacking Tips
+Backpacking
+Hiking First Aid Kit
+Backpacking For Beginners
+Hiking Essentials
+Hiking Backpack
+He exports the annotations, sorts them by occurrence, and chooses the most repeated ones from the top-ranking pins.
+Step 4: Use Interest Explorer
+He searches day hike first aid kit and gets no results. Then he broadens it to first aid kit.
+The screenshot shows the official interest:
+hiking first aid kit
+Then the next screenshot shows related interest results:
+hiking first aid kit checklist
+hiking first aid kit
+He adds hiking first aid kit checklist to the keyword list.
+Step 5: Create the blog post and pin
+The final keyword list used in the blog post:
+Backpacking tips
+Hiking First Aid Kit
+Hiking Essentials
+Backpacking for beginners
+Hiking backpack
+Hiking first aid kit checklist
+He says keywords should appear closer to the beginning of the blog post where possible. Then he gives ChatGPT the keywords and pin title to write the pin description and image alt text. Finally, he pins it to boards named Day Hikes and First Aid Kits, because those board names match official Pinterest interests.
+
+4. Pinterest “hidden keywords” / annotations
+Annotations are hidden keyword phrases Pinterest associates with a pin. Pinterest uses signals like:
+pin title
+pin description
+URL
+board name
+board description
+page title
+page description
+objects detected in the image
+These annotations come from Pinterest’s internal human-curated interest database. They help Pinterest understand what a pin is about and can improve visibility in search and the home feed.
+Screenshot instructions converted to text
+The screenshot compares logged-in vs logged-out Pinterest views.
+When logged in, the annotations are not visible.
+When logged out, the annotations appear under the pin description. The example pin is:
+Quick and Easy Sunday Dinner Ideas for Family (cheap recipes!)
+The visible annotations include:
+Fast Cheap Dinner Ideas
+Cheap Dinner Ideas For Family
+Weekly… / related topic label partially cut off
+The screenshot labels these visible tags as Annotations.
+The PDF says creators used to manually collect these annotations from logged-out Pinterest pages, but PinClicks can now show annotations for the top 25 ranking pins, including how often they appear and which pins use them. The practical use: choose the top 3-5 most relevant annotations for your next pin.
+
+5. Pinterest home feed change
+Pinterest is trying to solve two problems:
+Users getting bored from seeing too much repetitive content.
+Users being turned off by low-quality pins cluttering their feed.
+Pinterest now looks more closely at pin diversity across:
+Topics: interest keywords.
+Intent: shopping, planning, saving, etc.
+Style: visual look, design, aesthetic.
+Pinterest asks:
+Do these pins look alike?
+Do they say similar things?
+Do users treat them the same?
+So if you use the same background image with slightly different text, Pinterest may now see those as basically the same pin.
+Screenshot instructions converted to text
+The Keyword Planner screenshot shows a keyword cluster report for cottagecore.
+It shows:
+Keyword Clusters “Keywords have been categorized by AI into contextually relevant clusters” 10 clusters · 279 keywords
+Trending keyword examples:
+Cottagecore Living Room — score 25 — volume 62,384
+pink cottagecore aesthetic living room — score 9
+cottagecore big living room — score 8
+cottagecore living room mobile home — score 2
+cottagecore living room with kids — score 2
+cottagecore living room with tv — score 2
+The strategy is to turn these into separate blog posts and pins for different situations, instead of making one generic “cottagecore living room ideas” post
+
+
+Pinterest is rewarding relevance + uniqueness. Don’t just make more pins. Make more specific pins for more specific people
