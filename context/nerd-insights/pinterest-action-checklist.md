@@ -1,46 +1,55 @@
 # Pinterest — Action Checklist for Switzertemplates
 
-*The Nerd Agent's own suggestions for applying everything in the [Pinterest summary](pinterest-summary.md) to the business — proposals to evaluate and tick off, not facts from the sources.*
+*The Nerd Agent's own suggestions for applying everything in the [Pinterest summary](pinterest-summary.md) to the business — proposals to evaluate and tick off, not facts from the sources. Each item below points back to the specific workflow it's adapted from.*
 
 ---
 
-## Foundation
+## Set up the foundation (Workflow 1 — the 30-day roadmap, Week 1)
 
-- [ ] Confirm the Pinterest account is set up as a free business account with discovery/search visibility turned on
-- [ ] Build a keyword spreadsheet per product line (3-in-1 bundles, Wix websites, branding kits, Instagram template packs) using the **autocomplete method** (type the keyword, record the dropdown) and the **alphabet soup method** (keyword + each letter A-Z, aiming for 20-30 longtail variations per topic)
-- [ ] Trial **PinClicks** (named across sources as the strongest dedicated keyword tool) for scored keyword data and cluster reports — or Tailwind's free keyword tool as a no-cost starting point — rather than guessing at search terms
-- [ ] Run shortlisted keywords through **Pinterest Trends** with the date range set to a full year, scanning month by month, to map out seasonal peaks for "new business launch," "rebrand," "website refresh" type searches
-- [ ] Use **Interest Explorer** to check whether a planned board name matches an official Pinterest "interest" category (broaden the term if a search returns nothing — e.g. "branding kit" → "brand identity")
-- [ ] Create boards named after exact keyword phrases / interest categories — e.g. "Coach Website Templates," "Branding Kits for Service Providers," "Instagram Templates for Wellness Coaches" — not a generic "Switzertemplates" board. Seed each new board with 15-20 repinned, relevant pins before adding original content
+- [ ] Convert/confirm the account is a free Pinterest **business** account, with profile privacy and "hide from search engines" turned **off**
+- [ ] Run the **autocomplete + alphabet-soup methods** on each product line (3-in-1 bundles, Wix websites, branding kits, Instagram packs) — type the seed term, then append A-Z to it — until you have **20-30 longtail variants per product** and 50+ keywords total before designing a single pin
+- [ ] Trial **PinClicks** for scored keyword data and to study what's already ranking (Workflow 2 walks through exactly how — see below); Tailwind's free keyword tool is a no-cost starting point if PinClicks isn't worth it yet
+- [ ] Build **5 boards** — one broad ("Branding & Web for Small Business") and four specific (e.g. "Coach Website Templates," "Branding Kits for Service Providers," "Instagram Templates for Wellness Coaches," "Small Business Starter Kits") — and seed *each one* with **15-20 repinned, relevant pins** before posting anything original
 
-## Pin creation
+## Run the PinClicks keyword SOP per product line (copy Workflow 2 exactly)
 
-- [ ] Apply the **fresh pins** technique directly: 5-10 (up to 20) distinct pins per product, each with a new image, title, and description pointing at the *same* listing — no new product or content needed. Start with the flagship 3-in-1 Bundle ($82)
-- [ ] Make every pin's design genuinely distinct (not just a new title on the same layout) — vary the keyword angle, the user situation it speaks to, the hook, the visual, and the board it targets, since Pinterest now scores pins on topic, intent, *and* style diversity
-- [ ] Put **text overlay on every pin** (99% of top-performing pins carry it) and lead with an outcome/curiosity hook rather than a feature list — "Look client-ready by Friday" beats "1,000+ Canva templates included"
-- [ ] Use lifestyle/in-context mockups — templates shown on a phone in someone's hands, a Wix site open on a laptop in a styled home office — rather than flat white-background previews; Pinterest's AI reads the actual image content
-- [ ] Build pins at the exact spec named across sources: **2:3 ratio / 1000×1500px**, keyword frontloaded in the **first 30-40 characters** of the title, and the description's first 50-60 characters carrying the hook (before "read more" cuts it off)
-- [ ] Try **Pin Generator** (paste a product link, get 10-20 pin variations in minutes) to speed up batch creation, and test ChatGPT/Claude with the prompt *"give me SEO and clickable Pinterest titles for [topic]"* as a title-brainstorm shortcut (then shorten — AI titles run long)
-- [ ] Link every pin straight to the **specific product page** (Etsy listing or direct checkout link), never the shop homepage — sources are explicit that homepage links produce favourites, not sales
+- [ ] Search the seed term in PinClicks Keyword Explorer, get the scored list, and **deliberately reject the saturated top-scorers** in favour of a specific, less-contested longtail phrase — the newsletter's worked example chose "day hike first aid kit" over "day hike lunch ideas" for exactly this reason
+- [ ] Open the current top-ranking pins for the chosen phrase and note: save count, how recently pinned, visual style (the source found "TOBI" — text on background image — was the winning style for its example), colour palette, and description wording
+- [ ] Pull those pins' **annotations** via PinClicks (top 25 ranking pins + occurrence counts) and use the 3-5 most relevant ones directly in your own title/description/board name — don't guess at phrasing
+- [ ] Run the chosen phrase through **Interest Explorer**; if it returns nothing, broaden the term until it surfaces an *official* Pinterest interest category, and name the board after that exact category (not an invented phrase)
 
-## Scheduling & cadence
+## Pick one pinning recipe and run it consistently (Workflows 3 & 4)
 
-- [ ] Pick one of the two named pinning "recipes" and run it consistently: **(a)** 3 pins per product, one per week for 3 weeks, or **(b)** 6 pins per piece of content split across 3 keyword-themed boards on an A→B→C→A rotation (covers one product for 5-6 weeks before it needs revisiting)
-- [ ] Never schedule the same product link two days running — rotate so Monday/Wednesday/Friday point at different listings, then circle back
-- [ ] Aim for a realistic, *sustainable* daily minimum (1-2 pins/day is the sources' baseline floor) and hold that number every single week — sources are blunt that 5 pins/week done every week beats swinging between 1, 5, and 20
-- [ ] Schedule seasonal/product pins **45-60 days ahead** of expected demand (new-year launches, EOFY rebrands, "back to business" in late Jan/July)
-- [ ] Batch-create a month of pins in one sitting and schedule via Tailwind or Pinterest's native scheduler — sources directly compared both against live posting and found no meaningful difference in reach. If testing Tailwind, look at **Turbo Pin** (engage with 10 other pins first to unlock submission — one tester's single Turbo Pin became their best performer that month)
+- [ ] Choose one: **(a)** the simpler Etsy-seller recipe — 3 pins per product (different photo/SEO/hashtags), one variation per product per week across 3 weeks, **or** **(b)** the richer blog-style recipe — 6 pins per piece of content (2 pins × 3 keyword sets), spread across 1 existing + 2 new keyword-named boards, rotated A→B→C→A one week apart (keeps one product "covered" for 5-6 weeks)
+- [ ] For recipe (b): generate the two *new* board descriptions by giving ChatGPT the target keyword set and asking for an SEO-optimised board description to paste in directly
+- [ ] **Never schedule the same product link two days running** — alternate so Monday/Wednesday/Friday point at different listings, then circle back, exactly as both recipes describe
+- [ ] Use ChatGPT/Claude with the prompt *"Give me SEO and clickable Pinterest titles for [topic]"* as a starting point for each pin's title — then shorten it; sources are consistent that AI-written titles run too long and need trimming
 
-## Diagnosing & troubleshooting
+## Build pins that match what's actually winning (Workflows 1, 2 & 6)
 
-- [ ] If traffic stalls, run it through the **6-cause framework** from "Why Your Pinterest Traffic Isn't Growing": (1) not enough volume yet, (2) inconsistent posting confusing the algorithm, (3) titles/descriptions too flat to create curiosity, (4) high landing-page bounce rate signalling low value, (5) guessing keywords instead of using real search data, (6) no feedback loop / not checking analytics
-- [ ] If a landing page is leaking visitors fast (people bouncing within ~10 seconds), strengthen the opening hook and add a clear next-step ("related products," "see the full bundle") to keep them moving — Pinterest penalises reach when it detects this pattern
-- [ ] Track **reach, saves, outbound clicks, and year-over-year growth** (not just month-to-month) as the four metrics that actually matter
+- [ ] Build to spec: **2:3 ratio / 1000×1500px**, keyword in the **first 30-40 characters** of the title, hook in the description's **first 50-60 characters**
+- [ ] Put **text overlay on every pin** (99% of top-clicked pins carry it per two separate sources) and write it as an outcome/curiosity hook, not a feature list — "Look client-ready by Friday" beats "1,000+ Canva templates included"
+- [ ] Use lifestyle/in-context mockups (templates on a phone in someone's hands, a Wix site open on a laptop in a styled home office) — Pinterest's AI now reads the actual image content, so real-feeling photos beat flat product previews
+- [ ] Avoid faces on pins **except** where the niche is closer to fashion/beauty/jewellery (several of our product lines — branding for beauty/wellness coaches — may be the exception worth testing deliberately)
+- [ ] Try **Pin Generator** (paste a product link → 10-20 ready pin variations in minutes) to hit the cited 10-12/day floor without manually designing each one — but keep a Canva-template-based design pass too, since one source notes AI-generated pin images "look obviously AI" and underperform
+- [ ] Link every pin to the **specific product page / Etsy listing**, never the shop homepage — the Etsy-seller recipe found homepage links produced favourites, not sales, while listing links got products into customers' carts where they resurface on return visits
 
-## Mindset & ongoing management
+## Schedule and batch (Workflows 1, 3, 4 & tool mechanics)
 
-- [ ] Treat Pinterest as a roughly **one-hour-a-week** system, not a daily-attention channel — batch the work
-- [ ] Commit to a genuine **4-6 month** runway before judging results (sources note most people quit in months 1-3, right before the flywheel typically starts) — expect early pins to sit quiet, then suddenly take off weeks later ("warm-up" period)
-- [ ] If it proves itself after that window, consider handing the weekly routine to a VA — sources cost this at roughly $30-35/hour (~$140/month for the one-hour system)
-- [ ] If an algorithm shake-up hits (sudden drop in stats), wait about a week first — sources say 90% of the time it self-corrects — then change only **one** variable at a time and give it ~3 weeks before judging, rather than overhauling everything at once
-- [ ] Keep board/account focus tight and identifiable (e.g. clearly "for coaches and service providers," not "small business stuff in general") — sources note Pinterest grows clearly-niched accounts faster than broad ones
+- [ ] Batch a month of pins in one sitting (Nick Garcia's "content batching week"), then schedule via **Tailwind or Pinterest's native scheduler** — sources directly compared both against live posting and found no meaningful difference, so pick whichever is less friction
+- [ ] If testing Tailwind, look at **Turbo Pin**: engage with 10 other pins first to unlock submission, and — per the source's own caveat — pick a pin you already believe will perform well organically before submitting it, not a random one
+- [ ] Schedule seasonal/product pins **45-60 days ahead** of expected demand — run the newsletter's exact Pinterest Trends date-scan (set the end date to the 31st/30th of each month working backwards through the prior year) for "new business launch," "EOFY rebrand," "back to business" style searches
+- [ ] Settle on a genuinely sustainable daily floor (sources cite 1-2/day as the realistic baseline, 10-12/day as one source's stated minimum) and **hold that exact number every week** — the 6-year veteran is blunt that "5 pins every week" beats swinging between 1, 5, and 20
+
+## Diagnose stalls with the named 6-cause framework (Workflow 5 — run this if growth flatlines)
+
+- [ ] Walk a stalled account through the six causes in order and apply the matching fix: (1) not enough volume yet → pin more, smartly; (2) inconsistent posting → fixed schedule; (3) flat titles → sharper curiosity hooks; (4) high page-bounce ("traffic leak," <10 sec) → stronger landing-page intros + "related" prompts to keep visitors moving; (5) guessing keywords → PinClicks real data; (6) not checking analytics → build in a regular review and double down on what's already working
+- [ ] Track the four metrics the sources actually use to judge Pinterest performance: **reach, saves, outbound clicks, and year-over-year (not month-to-month) growth**
+
+## Mindset & ongoing management (Workflows 1, 4 & the algorithm-change protocol)
+
+- [ ] Treat this as a **roughly one-hour-a-week** batched system, not a daily-attention channel
+- [ ] Commit to a genuine **4-6 month** runway — sources are consistent that most people quit in months 1-3, right before the flywheel typically starts, and that early pins can sit quiet for weeks before suddenly taking off ("warm-up" period)
+- [ ] If it proves itself after that window, consider handing the weekly batch to a VA — sources cost this at roughly **$30-35/hour** (~$140/month for the one-hour system)
+- [ ] If stats suddenly drop, follow the named 3-step protocol exactly: **wait ~1 week first** (90% self-correct per the source), **then change exactly one variable** and give it **~3 weeks** before judging — never overhaul everything at once, or you lose the ability to tell what was actually working
+- [ ] Keep board/account focus tight and identifiable — "for coaches and service providers," not "small business stuff in general" — the 6-year veteran's "dogs vs. animals generally" example is the clearest illustration of why specificity compounds faster

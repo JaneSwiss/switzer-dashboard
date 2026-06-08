@@ -177,6 +177,48 @@ and replaced the embedded Pinterest summary prose inside `switzer_ai_dashboard.h
 "Pinterest" card (~lines 387-394) with matching source-linked paragraphs (`[source]` links
 styled in `var(--choc)`), and bumped the "Based on 7 sources" footer line to 10.
 
+## Rewrote it AGAIN — first version was still too shallow on the "how" (2026-06-08)
+
+Jane reviewed the source-linked version above and called out specific paragraphs as
+"useless... just general statistics, not useful knowledge" — and asked directly whether
+that was the *source's* fault or the *agent's laziness*. Good question to actually answer:
+I went back and read every entry's full `summary` field (4-6 paragraphs each, not just the
+bullet `key_points`), and the answer was unambiguous — **the extraction had already
+captured the step-by-step detail; the consolidation step threw it away.** E.g. the raw
+entry for Nick Garcia's video already contained his exact 5-step framework AND a
+week-by-week 30-day roadmap; Megan's entry already contained her exact "6 pins / 3 keyword
+sets / rotate boards A→B→C" recipe; the newsletter entry already contained a full worked
+PinClicks SOP using "day hike" as the running example (with real scored numbers, rejected
+keywords, and the reasoning for each choice). My first rewrite had flattened all of that
+into name-drops ("PinClicks is named as the strongest tool…") instead of walking through
+the actual processes — exactly what Jane was reacting to.
+
+**Rewrote `pinterest-summary.md` a second time, restructured entirely around six
+copyable, numbered workflows** (each one a real step-by-step process pulled from a
+source's full summary, not a compressed bullet):
+1. Nick Garcia's 5-step system + 30-day roadmap (the "45 followers → 1M impressions" story,
+   told as *how*, not just *what*)
+2. The newsletter's full PinClicks SOP worked on "day hikes" — scored keyword list →
+   rejecting saturated terms → reverse-engineering winning pins → pulling annotations →
+   confirming board names via Interest Explorer
+3. Megan's "6 pins / 3 keyword sets / rotate 3 boards" recipe, step by step
+4. The simpler Etsy-seller "3 pins/product over 3 weeks" recipe, step by step
+5. The 6-cause traffic-stall framework as an actual problem→fix table (not just six names)
+6. Elna's full content pipeline — a named tool for every single stage, in order
+
+Plus two reference sections ("Tool mechanics — exactly how the named tools actually work"
+and "Handling algorithm changes — the exact 3-step protocol") and a short "platform
+context" section for the broad numbers (kept brief and explicitly framed as *context*, not
+as the main content this time). Every workflow still links to its exact source.
+
+Updated `pinterest-action-checklist.md` to mirror the new workflow structure — each
+checklist section now explicitly says "(copy Workflow N)" and references the same
+concrete steps (e.g. "reject saturated keywords the way the PinClicks SOP did," "generate
+board descriptions via ChatGPT the way Megan does," "follow the named 3-step
+algorithm-change protocol exactly"). Replaced the dashboard's embedded Pinterest card prose
+again to match — each paragraph now walks through a workflow's mechanics rather than
+naming a stat, while keeping the per-claim `[source]` links.
+
 ## Next steps
 
 1. Jane to review the rewritten `pinterest-summary.md`, `pinterest-action-checklist.md`,
