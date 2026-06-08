@@ -223,6 +223,47 @@ The scarcity is real — write it that way."""
     return call_claude(client, prompt, max_tokens=1400)
 
 
+def write_pinterest_newsletter(client: anthropic.Anthropic, ctx: dict) -> str:
+    prompt = f"""{system_block(ctx)}
+
+TASK: Write a value-led newsletter about Pinterest for the FULL Switzertemplates list (21,000
+subscribers — mixed warm and cold, past buyers across all products).
+
+Goal: This is NOT a sales email. It's a trust-building, educational email that warms the
+audience toward Pinterest as a topic, gives away something genuinely useful, and only
+softly opens the door to Jane's Pinterest services — without pitching them.
+
+Structure to follow:
+1. Open with what makes Pinterest different from every other platform: it compounds.
+   A pin posted today can still be sending clicks in two years. Instagram and TikTok
+   content has a lifespan of about 48 hours — Pinterest pins keep working long after
+   you've moved on to the next thing.
+2. Connect that to a concrete benefit for a small business owner: traffic that shows up
+   without you creating new content every day. More time back. Less pressure to "always
+   be posting."
+3. The hook: Jane is giving away 10 free Pinterest pin templates — ready to use in Canva,
+   built in the formats getting the most clicks right now. No catch, no opt-in funnel talk.
+4. ONE soft, single-sentence mention near the end: if someone wants this handled for them
+   entirely, Jane also offers done-for-you Pinterest services — phrase it as a passing
+   mention with a simple text link, NOT a second button, NOT pricing, NOT urgency.
+5. Primary CTA (the only button): download the free templates.
+
+Tone: generous, low-pressure, educational — like sharing something useful with a friend,
+not selling. The freebie is the hero of this email. The services mention is a quiet,
+open door — easy to miss if you're not looking for it, easy to click if you are.
+
+Requirements:
+- 200-280 words body
+- Exactly ONE button-style CTA: the freebie download — use [FREEBIE LINK] as the placeholder
+- The Pinterest services mention must be ONE sentence, woven naturally into the closing,
+  with a plain text link only (use {PRODUCT_URLS['pinterest-services']})
+- No urgency, no scarcity, no "spots", no pricing, no packages — that belongs in a
+  different email, not this one
+- Audience: full list — assume mixed familiarity with Pinterest"""
+
+    return call_claude(client, prompt, max_tokens=1400)
+
+
 def write_re_engagement_2(client: anthropic.Anthropic, ctx: dict) -> str:
     prompt = f"""{system_block(ctx)}
 
@@ -488,6 +529,8 @@ def main():
                        help="Write a second re-engagement email (value-first, for those who ignored the first)")
     group.add_argument("--pinterest-urgent", action="store_true",
                        help="Write a Pinterest services email with genuine scarcity (5 spots)")
+    group.add_argument("--pinterest-newsletter", action="store_true",
+                       help="Write a value-led Pinterest newsletter for the full list (freebie hook, soft pitch)")
     group.add_argument("--blog-post", metavar="SLUG",
                        help="Write an email promoting a blog post by slug")
     group.add_argument("--product", metavar="NAME",
@@ -519,6 +562,10 @@ def main():
     elif getattr(args, "pinterest_urgent", False):
         email_type = "product-pinterest-services-urgent"
         content = write_pinterest_urgent(client, ctx)
+
+    elif getattr(args, "pinterest_newsletter", False):
+        email_type = "newsletter-pinterest-freebie"
+        content = write_pinterest_newsletter(client, ctx)
 
     elif args.blog_post:
         email_type = f"blog-{args.blog_post}"
