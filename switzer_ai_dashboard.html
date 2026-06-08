@@ -377,26 +377,28 @@
       <span class="card-title"><i class="ti ti-brain" style="color:var(--teal-mid);font-size:18px;"></i>Knowledge base</span>
       <span class="badge badge-teal" id="nerd-sources-badge">—</span>
     </div>
-    <p style="font-size:13px;color:var(--text2);margin-bottom:1rem;">Feeds YouTube videos, blog posts, newsletters, and PDFs into a structured knowledge base. Topic insight files are written to <code>context/nerd-insights/</code> for other agents to load.</p>
-    <div class="stat-grid" id="nerd-stat-grid"></div>
-    <div style="background:var(--surface2);border-radius:8px;padding:0.85rem 1rem;margin-top:0.5rem;">
-      <p style="font-size:12px;color:var(--text2);margin-bottom:6px;font-weight:600;">How to run:</p>
-      <p style="font-size:12px;font-family:monospace;color:var(--text3);line-height:2.1;">
-        python3 agents/nerd-agent/nerd_agent.py learn --url "https://youtube.com/watch?v=..."<br>
-        python3 agents/nerd-agent/nerd_agent.py learn --url "https://blog.example.com/post"<br>
-        python3 agents/nerd-agent/nerd_agent.py learn --file "/path/to/course.pdf"<br>
-        python3 agents/nerd-agent/nerd_agent.py learn --text "paste content" --source "Title"<br>
-        python3 agents/nerd-agent/nerd_agent.py report --all<br>
-        python3 agents/nerd-agent/nerd_agent.py list
-      </p>
-    </div>
+    <p style="font-size:13px;color:var(--text2);">Feeds YouTube videos, blog posts, and newsletters into a structured knowledge base. Insight files are written to <code>context/nerd-insights/</code> for other agents to load.</p>
   </div>
-  <div class="card" id="nerd-topics-card">
+  <div class="card" id="nerd-pinterest-card">
     <div class="card-header">
-      <span class="card-title"><i class="ti ti-books" style="color:var(--choc);font-size:18px;"></i>Topics learned</span>
-      <span class="badge badge-gray" id="nerd-topics-badge">—</span>
+      <span class="card-title"><i class="ti ti-bookmark" style="color:var(--choc);font-size:18px;"></i>Pinterest</span>
     </div>
-    <div id="nerd-topics-list"><p class="empty">No topics yet — run the agent to start ingesting sources.</p></div>
+    <div style="font-size:13px;color:var(--text2);line-height:1.65;display:flex;flex-direction:column;gap:0.8rem;">
+      <p><strong style="color:var(--text1);">Pinterest is a search engine, not a social network.</strong> Pins have an average lifespan of 4+ months and a half-life of 13+ months — compared to 24-48 hours for an Instagram post. People arrive already searching and planning, with high purchase intent. One source described an account that stopped posting and still generated inquiries three years later.</p>
+      <p><strong style="color:var(--text1);">You don't need followers or fame to get traffic.</strong> Discovery is search-based, not audience-based — sources cite an account with 45 followers generating 350-600 daily website visits, and Etsy sellers seeing Pinterest show up as a free organic traffic source in their shop analytics.</p>
+      <p><strong style="color:var(--text1);">It realistically takes about one hour a week.</strong> Compared to the 19-20 hours the average entrepreneur spends on marketing overall. Expect a 30-60 day patience window before traffic picks up — then it keeps compounding with very little upkeep. Outsourcing the routine to a VA was costed at roughly $30-35/hour.</p>
+      <p><strong style="color:var(--text1);">Keyword research is the foundation.</strong> The autocomplete method and "alphabet soup" method (keyword + each letter A-Z) surface longtail terms; Pinterest Trends validates volume and seasonal timing — plan content 45-60 days ahead of a peak. Pinterest's "annotation" system tags pins based on title, description, board name, and what its AI detects inside the image.</p>
+      <p><strong style="color:var(--text1);">Pins need to be genuinely different from each other, not just relabelled.</strong> Pinterest now detects "same-ish" pins. Recommended approach: three pins per product, each with a different photo and keyword angle, staggered roughly a week apart — linking straight to the product page rather than the shop homepage.</p>
+      <p><strong style="color:var(--text1);">Newer pins can rank within 2-4 weeks</strong> rather than months — study top-ranking pins for a keyword (saves, age, style, colours, wording) and publish something more specific and better. Schedulers like Tailwind don't hurt reach.</p>
+      <p><strong style="color:var(--text1);">Three things separate accounts that work from ones that don't: consistency, real (not AI-generated) images, and proper keyword use.</strong> Pinterest's AI reads images directly, so real product photos and customer examples are favoured over generated visuals — and inconsistency is named as the most common mistake business owners make.</p>
+    </div>
+    <div style="margin-top:1rem;padding-top:0.85rem;border-top:1px solid var(--border2);display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;">
+      <p style="font-size:12px;color:var(--text3);">Based on 7 sources — full write-up in <a href="https://github.com/janeswiss/switzer-dashboard/blob/main/context/nerd-insights/pinterest-summary.md" target="_blank" style="color:var(--choc);font-weight:600;">pinterest-summary.md</a></p>
+      <a href="https://github.com/janeswiss/switzer-dashboard/blob/main/context/nerd-insights/pinterest-action-checklist.md" target="_blank"
+        style="display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:600;color:#fff;background:var(--choc);text-decoration:none;border-radius:6px;padding:6px 12px;white-space:nowrap;">
+        <i class="ti ti-checklist" style="font-size:13px;"></i>View action checklist
+      </a>
+    </div>
   </div>
   <div class="card">
     <div class="card-header">
@@ -954,58 +956,9 @@ function renderPinterest(){
 function renderNerd(){
   const na = DATA.nerd_agent || {};
   const total = na.total_sources_processed || 0;
-  const topics = na.topics || {};
-  const topicKeys = Object.keys(topics);
-  const byType = na.sources_by_type || {};
 
   document.getElementById('nerd-sources-badge').textContent =
     total + ' source' + (total !== 1 ? 's' : '') + ' ingested';
-  document.getElementById('nerd-topics-badge').textContent =
-    topicKeys.length + ' topic' + (topicKeys.length !== 1 ? 's' : '');
-
-  // Stat grid
-  const grid = document.getElementById('nerd-stat-grid');
-  grid.innerHTML = '';
-  [
-    {label: 'Total sources', val: total + ''},
-    {label: 'Topics covered', val: topicKeys.length + ''},
-    {label: 'YouTube videos', val: (byType.youtube || 0) + ''},
-    {label: 'Articles / blogs', val: (byType.article || 0) + ''},
-    {label: 'Newsletters', val: (byType.email || 0) + ''},
-    {label: 'PDFs', val: (byType.pdf || 0) + ''},
-  ].forEach(m => {
-    const card = document.createElement('div');
-    card.className = 'stat-card';
-    card.innerHTML = `<p class="stat-label">${m.label}</p><p class="stat-val">${m.val}</p>`;
-    grid.appendChild(card);
-  });
-
-  // Topics list
-  const topicEl = document.getElementById('nerd-topics-list');
-  topicEl.innerHTML = '';
-  if(!topicKeys.length){
-    topicEl.innerHTML = '<p class="empty">No topics yet — run the agent to start ingesting sources.</p>';
-  } else {
-    topicKeys.sort().forEach(t => {
-      const info = topics[t] || {};
-      const label = t.replace(/-/g,' ').replace(/\b\w/g,c=>c.toUpperCase());
-      const fileUrl = `https://github.com/${GH_OWNER}/${GH_REPO}/blob/main/${info.insight_file||'context/nerd-insights/'+t+'.md'}`;
-      const steps = info.actionable_steps || 0;
-      const d = document.createElement('div');
-      d.className = 'row';
-      d.innerHTML = `
-        <i class="ti ti-bookmark" style="color:var(--choc);font-size:16px;margin-top:2px;flex-shrink:0;"></i>
-        <div style="flex:1;">
-          <p class="row-text" style="font-weight:500;">${label}</p>
-          <p class="row-meta">${info.sources||0} source${(info.sources||0)!==1?'s':''} · ${steps} actionable step${steps!==1?'s':''} · last updated ${info.last_updated||'—'}</p>
-        </div>
-        <a href="${fileUrl}" target="_blank"
-          style="display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:600;color:var(--choc);text-decoration:none;border:1.5px solid var(--border2);border-radius:5px;padding:3px 8px;white-space:nowrap;flex-shrink:0;">
-          <i class="ti ti-external-link" style="font-size:11px;"></i>View insights
-        </a>`;
-      topicEl.appendChild(d);
-    });
-  }
 
   // Recent sources table
   const tbody = document.getElementById('nerd-sources-tbody');
