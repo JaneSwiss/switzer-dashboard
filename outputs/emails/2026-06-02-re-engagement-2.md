@@ -1,26 +1,26 @@
-SUBJECT LINE A: I made you something (10 free Pinterest templates)
-SUBJECT LINE B: Free: 10 pin designs that are getting clicks in 2025
-PREVIEW TEXT: No catch. Download in Canva and start pinning today.
+SUBJECT LINE A: Grab these 10 free Pinterest templates
+SUBJECT LINE B: Why 2026 is the year to get serious about Pinterest
+PREVIEW TEXT: Free templates inside — and a quick case for why now.
 
 ---
 
 BODY:
 
-I put something together for you.
+Here's something worth knowing before you write Pinterest off as a "nice to have."
 
-10 Pinterest pin templates — the exact formats that are getting the most clicks from small business accounts right now. Text-first designs, clean layouts, the kind that stop the scroll without looking generic.
+Pinterest users aren't there to scroll. They're there to find something specific — a product, a solution, a business that does what they need. The search intent is already baked in before they ever find your pin. That's a fundamentally different kind of traffic than most places you're already showing up.
 
-You can download them, add your branding in Canva, and start using them today. Free. No purchase needed.
+And it's only getting stronger.
 
-[Download the 10 free pin templates →][FREEBIE LINK]
+Pinterest has been investing heavily in shopping discovery and visual search — making it easier for people to find products and services they're actively looking to buy. The platform is growing, the tools are improving, and most small businesses are still not taking it seriously. That gap is exactly where the opportunity is.
 
-I'm not going to pretend this is purely selfless. I want to remind you that I'm here and that what I send you is worth opening.
+The best time to set up your Pinterest account properly was last year. Second best time is now.
 
-But mostly — Pinterest is genuinely one of the highest-return things a small business can invest time in, and I figure the most useful thing I can give you is something you can actually use this week.
+To make it easier to start, I put together 10 free Pinterest pin templates — built in the formats getting the most clicks in 2026, ready to customise in Canva.
 
-If you want the strategy behind the pins (why certain formats work, how to structure your boards, what the algorithm is actually rewarding in 2025), I put it all in a guide:
+[Grab the free templates →][FREEBIE LINK — replace before sending]
 
-[Read the full Pinterest marketing guide →](https://www.switzertemplates.com/post/pinterest-marketing-the-complete-guide)
+If you'd rather have someone come in and handle the whole setup — strategy, boards, pins, scheduling — I also offer [done-for-you Pinterest setup](https://pinterest.switzertemplates.com).
 
 Xo Jane
 
@@ -28,13 +28,8 @@ Xo Jane
 
 FLODESK NOTES:
 Segment: Past buyers inactive 90+ days who did NOT open first re-engagement email
-CTA button label: Download the free templates
-CTA link: [FREEBIE LINK — replace before sending]
+CTA button label: Grab the free templates
+CTA link: [FREEBIE LINK — replace with Canva template link once the 10-pin pack is built]
 
-BEFORE SENDING — what you need to create:
-- A Canva template pack with 10 Pinterest pin designs (1000x1500px)
-- Formats to include: 2-3 text-heavy quote/tip styles, 3-4 product/brand showcase layouts,
-  2-3 blog-post-style pins with title + supporting image, 1-2 minimal text-on-image styles
-- Make them editable in Canva (share as template link, not a file download)
-- Replace [FREEBIE LINK] with the Canva template link or a landing page/Flodesk form URL
-- Optional: gate the download behind a Flodesk form to re-tag them as active subscribers
+NOTE: Same freebie as the full-list newsletter (outputs/emails/2026-06-08-newsletter-pinterest-freebie.md).
+Build the pack once, reuse the link in both.
