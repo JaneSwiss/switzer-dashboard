@@ -1,55 +1,77 @@
-# Pinterest — Action Checklist for Switzertemplates
+# Pinterest — What to try next (specifically for Switzertemplates)
 
-*The Nerd Agent's own suggestions for applying everything in the [Pinterest summary](pinterest-summary.md) to the business — proposals to evaluate and tick off, not facts from the sources. Each item below points back to the specific workflow it's adapted from.*
+*You're already running Tailwind, posting ~10 pins/day, and using PinClicks. This list skips everything you already do and focuses only on things from the source material that are likely to move the needle — tested techniques you're probably not using yet.*
 
 ---
 
-## Set up the foundation (Workflow 1 — the 30-day roadmap, Week 1)
+## Stop targeting "branding kit" — go after the gaps your competitors are ignoring
 
-- [ ] Convert/confirm the account is a free Pinterest **business** account, with profile privacy and "hide from search engines" turned **off**
-- [ ] Run the **autocomplete + alphabet-soup methods** on each product line (3-in-1 bundles, Wix websites, branding kits, Instagram packs) — type the seed term, then append A-Z to it — until you have **20-30 longtail variants per product** and 50+ keywords total before designing a single pin
-- [ ] Trial **PinClicks** for scored keyword data and to study what's already ranking (Workflow 2 walks through exactly how — see below); Tailwind's free keyword tool is a no-cost starting point if PinClicks isn't worth it yet
-- [ ] Build **5 boards** — one broad ("Branding & Web for Small Business") and four specific (e.g. "Coach Website Templates," "Branding Kits for Service Providers," "Instagram Templates for Wellness Coaches," "Small Business Starter Kits") — and seed *each one* with **15-20 repinned, relevant pins** before posting anything original
+You're probably searching PinClicks for broad terms and picking the highest-volume options. The method the sources recommend is the opposite: **find phrases where the current top-ranking pins are old and non-specific**, because that's where a well-targeted fresh pin can rank quickly.
 
-## Run the PinClicks keyword SOP per product line (copy Workflow 2 exactly)
+- [ ] Search your core terms in PinClicks Keyword Explorer, then **look at what's actually ranking for each phrase**. Reject anything where recent pins are already specifically targeting it. Pick the ones where the top results are 1-2 years old and clearly not optimised for that exact phrase.
+- [ ] Go deeper by niche: don't just target "branding kit" — try "branding kit for therapists," "branding kit for photographers," "branding kit for wellness coaches" separately. Each of those is its own search cluster with different competition levels. PinClicks' Keyword Planner shows the full cluster — one search for "branding kit" could return 10 different sub-niches, each needing its own pin.
 
-- [ ] Search the seed term in PinClicks Keyword Explorer, get the scored list, and **deliberately reject the saturated top-scorers** in favour of a specific, less-contested longtail phrase — the newsletter's worked example chose "day hike first aid kit" over "day hike lunch ideas" for exactly this reason
-- [ ] Open the current top-ranking pins for the chosen phrase and note: save count, how recently pinned, visual style (the source found "TOBI" — text on background image — was the winning style for its example), colour palette, and description wording
-- [ ] Pull those pins' **annotations** via PinClicks (top 25 ranking pins + occurrence counts) and use the 3-5 most relevant ones directly in your own title/description/board name — don't guess at phrasing
-- [ ] Run the chosen phrase through **Interest Explorer**; if it returns nothing, broaden the term until it surfaces an *official* Pinterest interest category, and name the board after that exact category (not an invented phrase)
+---
 
-## Pick one pinning recipe and run it consistently (Workflows 3 & 4)
+## Pull annotations off your competitors' top pins and use them in yours
 
-- [ ] Choose one: **(a)** the simpler Etsy-seller recipe — 3 pins per product (different photo/SEO/hashtags), one variation per product per week across 3 weeks, **or** **(b)** the richer blog-style recipe — 6 pins per piece of content (2 pins × 3 keyword sets), spread across 1 existing + 2 new keyword-named boards, rotated A→B→C→A one week apart (keeps one product "covered" for 5-6 weeks)
-- [ ] For recipe (b): generate the two *new* board descriptions by giving ChatGPT the target keyword set and asking for an SEO-optimised board description to paste in directly
-- [ ] **Never schedule the same product link two days running** — alternate so Monday/Wednesday/Friday point at different listings, then circle back, exactly as both recipes describe
-- [ ] Use ChatGPT/Claude with the prompt *"Give me SEO and clickable Pinterest titles for [topic]"* as a starting point for each pin's title — then shorten it; sources are consistent that AI-written titles run too long and need trimming
+This is probably the highest-leverage thing you're not doing. Annotations are the hidden keyword tags Pinterest assigns to every pin — they control which searches you show up in. PinClicks shows you exactly what annotations the current top-25 pins for any phrase carry.
 
-## Build pins that match what's actually winning (Workflows 1, 2 & 6)
+- [ ] For each phrase you're targeting, open the top-ranking pins in PinClicks and check their annotations. Note the 3-5 that appear most often across the top pins — those are the categories Pinterest considers this content to belong to.
+- [ ] Work those exact annotation phrases into your pin title, description, and board name. Don't invent your own phrasing — mirror what Pinterest is already rewarding.
 
-- [ ] Build to spec: **2:3 ratio / 1000×1500px**, keyword in the **first 30-40 characters** of the title, hook in the description's **first 50-60 characters**
-- [ ] Put **text overlay on every pin** (99% of top-clicked pins carry it per two separate sources) and write it as an outcome/curiosity hook, not a feature list — "Look client-ready by Friday" beats "1,000+ Canva templates included"
-- [ ] Use lifestyle/in-context mockups (templates on a phone in someone's hands, a Wix site open on a laptop in a styled home office) — Pinterest's AI now reads the actual image content, so real-feeling photos beat flat product previews
-- [ ] Avoid faces on pins **except** where the niche is closer to fashion/beauty/jewellery (several of our product lines — branding for beauty/wellness coaches — may be the exception worth testing deliberately)
-- [ ] Try **Pin Generator** (paste a product link → 10-20 ready pin variations in minutes) to hit the cited 10-12/day floor without manually designing each one — but keep a Canva-template-based design pass too, since one source notes AI-generated pin images "look obviously AI" and underperform
-- [ ] Link every pin to the **specific product page / Etsy listing**, never the shop homepage — the Etsy-seller recipe found homepage links produced favourites, not sales, while listing links got products into customers' carts where they resurface on return visits
+> Example from sources: the top "day hike first aid kit" pin carried annotations "Camping Supplies," "Hiking First Aid Kit," "Hiking Essentials," "Backpacking For Beginners" — all fed back into the new pin's copy word for word.
 
-## Schedule and batch (Workflows 1, 3, 4 & tool mechanics)
+---
 
-- [ ] Batch a month of pins in one sitting (Nick Garcia's "content batching week"), then schedule via **Tailwind or Pinterest's native scheduler** — sources directly compared both against live posting and found no meaningful difference, so pick whichever is less friction
-- [ ] If testing Tailwind, look at **Turbo Pin**: engage with 10 other pins first to unlock submission, and — per the source's own caveat — pick a pin you already believe will perform well organically before submitting it, not a random one
-- [ ] Schedule seasonal/product pins **45-60 days ahead** of expected demand — run the newsletter's exact Pinterest Trends date-scan (set the end date to the 31st/30th of each month working backwards through the prior year) for "new business launch," "EOFY rebrand," "back to business" style searches
-- [ ] Settle on a genuinely sustainable daily floor (sources cite 1-2/day as the realistic baseline, 10-12/day as one source's stated minimum) and **hold that exact number every week** — the 6-year veteran is blunt that "5 pins every week" beats swinging between 1, 5, and 20
+## Run Megan's rotation system on your top-converting products
 
-## Diagnose stalls with the named 6-cause framework (Workflow 5 — run this if growth flatlines)
+You have existing products with proven demand. The specific recipe that reversed one blogger's declining traffic:
 
-- [ ] Walk a stalled account through the six causes in order and apply the matching fix: (1) not enough volume yet → pin more, smartly; (2) inconsistent posting → fixed schedule; (3) flat titles → sharper curiosity hooks; (4) high page-bounce ("traffic leak," <10 sec) → stronger landing-page intros + "related" prompts to keep visitors moving; (5) guessing keywords → PinClicks real data; (6) not checking analytics → build in a regular review and double down on what's already working
-- [ ] Track the four metrics the sources actually use to judge Pinterest performance: **reach, saves, outbound clicks, and year-over-year (not month-to-month) growth**
+- [ ] Pick your 3-5 best-converting Etsy listings. For each one, open Pinterest Trends and search the keywords that listing ranks for. Set the date range to 1 year and note the related keywords shown below the graph.
+- [ ] Identify 3 keyword sets per listing. Make 2 pins per keyword set = 6 pins total, all linking to the same Etsy listing.
+- [ ] Create 2 new boards named exactly after the extra keyword sets (use ChatGPT to write the board descriptions: paste the keyword set in and ask for an SEO-optimised Pinterest board description).
+- [ ] Schedule one pin per week, rotating across the 3 boards: week 1 → board A, week 2 → board B, week 3 → board C, week 4 → back to board A. One listing covered for 5-6 weeks with no extra work after setup.
 
-## Mindset & ongoing management (Workflows 1, 4 & the algorithm-change protocol)
+---
 
-- [ ] Treat this as a **roughly one-hour-a-week** batched system, not a daily-attention channel
-- [ ] Commit to a genuine **4-6 month** runway — sources are consistent that most people quit in months 1-3, right before the flywheel typically starts, and that early pins can sit quiet for weeks before suddenly taking off ("warm-up" period)
-- [ ] If it proves itself after that window, consider handing the weekly batch to a VA — sources cost this at roughly **$30-35/hour** (~$140/month for the one-hour system)
-- [ ] If stats suddenly drop, follow the named 3-step protocol exactly: **wait ~1 week first** (90% self-correct per the source), **then change exactly one variable** and give it **~3 weeks** before judging — never overhaul everything at once, or you lose the ability to tell what was actually working
-- [ ] Keep board/account focus tight and identifiable — "for coaches and service providers," not "small business stuff in general" — the 6-year veteran's "dogs vs. animals generally" example is the clearest illustration of why specificity compounds faster
+## Find which of your existing pins are already converting — and make 5 more of each
+
+You're posting at volume, which means you have data. The move is to mine it.
+
+- [ ] Pull your Pinterest analytics and filter by **outbound clicks** (not impressions, not saves — clicks). Find the top 10 pins that are actually sending people to your site or Etsy.
+- [ ] For each of those, make 5 new variations: new image, new title, different keyword angle — same URL. These are your highest-probability pins because the format and topic are already proven.
+- [ ] Check whether those top-click pins have anything in common (visual style? specific product? specific niche angle? time of year they were pinned?) — that pattern tells you where to focus your next batch.
+
+---
+
+## Map your seasonal content calendar using Pinterest Trends
+
+Pin timing matters more than most people realise. The technique from sources:
+
+- [ ] Open Pinterest Trends. Set "Trend type" to Top monthly trends, pick your interest category (try "Business," "Arts and Crafts," "Design").
+- [ ] Set the end date to last July 31 and note what's trending. Then move it to Sept 30, Oct 31, Nov 30, Dec 31 — map what peaks when.
+- [ ] For Switzertemplates specifically: "new business launch" types search heavily in January, "rebrand" and "EOFY" in June-July, "back to business" in late January. Create those pins **45-60 days before the peak** — not the week before.
+
+---
+
+## Try Turbo Pin on one of your best-performing existing pins
+
+You're already on Tailwind. Turbo Pin is a feature you probably haven't tested:
+
+- [ ] Engage with 10 other creators' pins in the Turbo Pin feed (likes, comments, or saves — whichever is quickest). This unlocks one Turbo Pin submission.
+- [ ] Submit a pin you already know performs well organically — not a random one. The one tester in the sources submitted a pin she was confident about; it became her best-performing pin of the month (521 impressions, 11 engagements, 1 save from a single submission).
+- [ ] Track it for 30 days and compare to your organic pins from the same week.
+
+---
+
+## Check whether a traffic leak is killing your distribution
+
+If any of your landing pages have a high bounce rate (people clicking from Pinterest then leaving within ~10 seconds), Pinterest reads that as a signal that your content wasn't valuable and starts throttling reach for those pins — even well-made ones.
+
+- [ ] Check Google Analytics for your top Pinterest landing pages. Filter for Pinterest as the traffic source and look at average session duration. If it's under 30 seconds consistently, that's a problem.
+- [ ] For any page with a high Pinterest bounce rate: strengthen the opening headline (it needs to deliver immediately on what the pin promised) and add clear "related" links or product recommendations so visitors have somewhere to go next rather than back.
+
+---
+
+*Full detail on any of these: [pinterest-summary.md](pinterest-summary.md)*
