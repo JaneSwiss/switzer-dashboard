@@ -515,85 +515,75 @@ def write_topic_report(topic, client):
         source_rows.append({
             "title": e.get("title", "Untitled"),
             "type": e.get("type", "article"),
+            "url": e.get("url", ""),
             "date": e.get("date_ingested", ""),
         })
 
     _, product_catalog = load_context()
 
-    points_text = "\n".join(f"- {p}" for p in all_points[:30])
-    summaries_text = "\n".join(f"- {s}" for s in all_summaries[:15])
+    points_text = "\n".join(f"- {p}" for p in all_points[:50])
+    summaries_text = "\n\n".join(
+        f"SOURCE: {s['title']}\n{s['summary']}"
+        for s in [{"title": e.get("title","Untitled"), "summary": e.get("summary","")} for e in entries]
+    )
     sources_text = "\n".join(
-        f"{i+1}. {s['title']} ({s['type']}, {s['date']})"
-        for i, s in enumerate(source_rows)
-    )
-    table_rows = "\n".join(
-        f"| {i+1} | {s['title']} | {s['type']} | {s['date']} |"
+        f"{i+1}. {s['title']} — {s['url']}"
         for i, s in enumerate(source_rows)
     )
 
-    prompt = f"""Write a topic insight report for Switzertemplates on: {label}
+    prompt = f"""Write a comprehensive, actionable topic summary for Switzertemplates on: {label}
 
-This report has two distinct parts that must NOT blur into each other.
+This is a reference document — it should teach someone exactly HOW to apply what these {len(entries)} source(s) say.
+Read ALL the source summaries below in full before writing anything.
 
-PART 1 — what was learned (strictly factual, grounded in the sources):
-Organise and present the material below. Stay strictly within what these {len(entries)} source(s)
-actually say. Do not add outside knowledge, interpretation, or claims the sources don't make.
+STYLE RULES — non-negotiable:
+- Write in plain, conversational English. No academic tone, no corporate language.
+- Organise by practical theme/use-case — NOT by "what we learned" vs "what to do." Those two things should be inseparable.
+- For every tactic: explain HOW it works, not just that it exists. Give the mechanism.
+- Include real examples from the sources — specific numbers, named tools, named people, step-by-step processes. Use blockquotes (>) for concrete examples pulled directly from the sources.
+- Where a process has steps, write numbered steps.
+- Where data is tabular, use a table.
+- Weave Switzertemplates application in naturally where relevant — a line like "For Switzertemplates: ..." inside the relevant section. Do NOT create a separate "implementation suggestions" block.
+- No generic intro paragraph. No "in today's world..." or "AI is transforming..." — jump straight into the first section.
+- No "What We Learned" or "Implementation Suggestions" headers.
+- Add an HTML anchor to each section header: <a name="slug"></a> on the line before it.
+- Source attribution should be inline and human ("From a creator who built X," "One source described...") not just footnote numbers.
+- End with a sources list using the actual URLs provided.
+- Aim for depth over breadth. A section with real step-by-step detail is worth more than five bullet points.
 
-Key points captured from the sources:
+CONTENT — read these in full:
+
+Key points across all sources:
 {points_text}
 
-Per-source summaries:
+Full per-source summaries:
 {summaries_text}
 
-PART 2 — implementation suggestions (clearly your own synthesis, clearly labelled as such):
-Now, building ONLY on what's documented in Part 1 (not on outside assumptions), propose how
-Switzertemplates could apply it. This part is explicitly the agent's own thinking — that's its
-purpose here — but every suggestion must trace back to something actually learned above.
-
-Product context (for relevance only — branding kits $38, Wix websites $64, 3-in-1 bundles $82,
-Instagram templates $15, audience: female small business owners/coaches/service providers):
-{product_catalog[:800]}
-
-Sources:
+Sources (with URLs for the footer):
 {sources_text}
 
-Write in this exact markdown format — nothing before or after:
+Product context for Switzertemplates (branding kits $38, Wix websites $64, 3-in-1 bundles $82,
+Instagram templates $15, audience: female small business owners/coaches/service providers):
+{product_catalog[:600]}
 
-# Nerd Agent Insights — {label}
-*Auto-generated. Last updated: {today}. Sources: {len(entries)}.*
+OUTPUT FORMAT — write in this exact markdown structure, nothing before or after:
 
----
+# {label} — Actionable summary
 
-## What We Learned
-
-*A faithful account of what these sources say — no added interpretation.*
-
-[3-6 bullet points — the most important, concrete principles, stated as the sources state them]
-
-[1-2 short paragraphs synthesising what these sources cover overall]
+*All sources listed at the bottom*
 
 ---
 
-## Implementation Suggestions for Switzertemplates
-
-*The Nerd Agent's own suggestions for applying the above to the business — these are proposals
-to evaluate, not facts from the sources.*
-
-[3-6 concrete suggestions, each tied back to a specific learning above and to a specific
-product/channel where relevant]
+[4-7 sections, each covering one practical theme from the content. Identify the themes yourself based on what the sources actually cover — do not invent themes the sources don't address.]
 
 ---
 
-## Source List
-
-| # | Title | Type | Date |
-|---|-------|------|------|
-{table_rows}"""
+*Sources: [comma-separated linked list — format: [Title](url)]*"""
 
     try:
         resp = client.messages.create(
             model="claude-opus-4-5",
-            max_tokens=3000,
+            max_tokens=6000,
             messages=[{"role": "user", "content": prompt}]
         )
         report_text = resp.content[0].text.strip()
