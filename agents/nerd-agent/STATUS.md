@@ -155,10 +155,6 @@ numbered workflow headers. Those references are now removed.
    `python3 agents/nerd-agent/nerd_agent.py learn --url <url>`
    or for batch: create a `.txt` file with one URL per line and run `learn --batch`.
 
-2. **The Netlify token `nfp_TuZK1wZunkFhrvUhx8DJMGitDhbxjBaB4d50`** was found in plain
-   text in `.claude/settings.local.json` in an earlier session. It should be rotated —
-   it's been in a version-controlled file.
-
-3. **Add a second topic** when Jane starts feeding the agent sources on a new subject
+2. **Add a second topic** when Jane starts feeding the agent sources on a new subject
    (email marketing, SEO, etc.). The agent handles multiple topics automatically — just
    supply a `--topics` flag when ingesting or let it auto-classify.
