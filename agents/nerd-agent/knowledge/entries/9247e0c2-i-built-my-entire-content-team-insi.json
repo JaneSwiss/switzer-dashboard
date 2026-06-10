@@ -1,0 +1,33 @@
+{
+  "id": "9247e0c2",
+  "type": "youtube",
+  "url": "https://www.youtube.com/watch?v=z96UhRTWhW8",
+  "title": "I Built My Entire Content Team Inside Claude (No Employees)",
+  "date_ingested": "2026-06-10",
+  "topics": [
+    "ai-tools"
+  ],
+  "word_count": 2573,
+  "key_points": [
+    "Claude Co-work can transcribe video and audio directly — you can give it a YouTube URL or upload a video and it creates a markdown file that auto-saves to Google Drive",
+    "The complete system is called 'Draft Loop' — it takes transcripts, journal entries, or meetings and turns them into written, visual, and video content automatically inside Co-work",
+    "Draft Loop requires building nine skills total, organized into five sections: foundation, written, visual, video, and the final unified pipeline",
+    "The foundation skill is Brand Voice — it determines tone, patterns, and phrases so content doesn't sound like 'generic slop' and reads past conversations to establish voice",
+    "Brand Voice setup uses a setup prompt that asks questions and goes through past Claude conversations, then a full brand voice skill is pasted in",
+    "Written section includes four skills: Tweets and Threads (goes through a tweet pass and threads pass), LinkedIn posts, Substack articles, and the Five Lens Framework",
+    "From one transcript, the system generated 15 tweets, 3 threads, 4 LinkedIn posts, and 3 Substack essays — all saved to Google Drive",
+    "Visual section requires the Higgs Field connector — must be set up via 'add custom connector' in Claude's connectors section",
+    "Visual skills include Carousel (creates paper-written style with pen look) and Character Storyboard for AI character scenes — both require setup prompts plus full skill instructions",
+    "Video section uses HeyGen integration — requires selecting avatar(s) and voice, then copying the avatar ID and voice ID",
+    "The presenter uses two avatars (indoor and outdoor) for variety, and the skill setup prompt asks which environment to use",
+    "HeyGen voice can use their native clone or connect to 11 Labs as a third-party voice clone option",
+    "The final skill is the Draft Loop pipeline itself — once set up, you type 'run the full pipeline' to trigger everything",
+    "Recommended to create a Co-work project called 'draft loop' with custom instructions, files (logo, AI character, carousel examples), and memory turned on",
+    "When running the pipeline, it first does a content audit showing topics for tweets, threads, LinkedIn posts without writing — you review and approve before it writes",
+    "Co-work shows progress as it works through each stage: content audit, written content, visuals, video, carousel",
+    "All outputs (written content, images, videos) are automatically saved to Google Drive",
+    "HeyGen is optional — can be removed from instructions if you don't want to clone yourself",
+    "Required subscriptions to run full Draft Loop: Higgs Field subscription and HeyGen subscription (if using video)"
+  ],
+  "summary": "The video presents a complete content creation system called Draft Loop built entirely within Claude Co-work. The presenter begins by demonstrating that Claude Co-work can transcribe videos directly — either from a YouTube URL or uploaded video — outputting a markdown file that auto-saves to Google Drive. This transcript serves as the input for the entire system.\n\nThe Draft Loop system consists of nine skills organized into five sections: foundation, written, visual, video, and the unified pipeline. The foundation section establishes the Brand Voice skill, which is set up first using a setup prompt that reads past Claude conversations to determine tone, patterns, and phrases. If information is missing, it asks questions. The full brand voice skill is then pasted in to complete setup.\n\nThe written section covers four skills: Tweets and Threads (which runs a tweet pass and threads pass for short vs. dialogue content), LinkedIn posts, Substack articles, and the Five Lens Framework. The presenter demonstrates output from one transcript: 15 tweets, 3 threads, 4 LinkedIn posts, and 3 Substack essays. These skills don't require setup prompts — you simply copy the full skill instructions and paste them into Claude.\n\nThe visual section requires first connecting Higgs Field to Claude via the connectors section using 'add custom connector.' Two skills are built here: Carousel (which creates a paper-written aesthetic style) and Character Storyboard for AI character scenes. Both require a setup prompt plus the full skill instructions.\n\nThe video section integrates HeyGen with Claude. Setup requires going into HeyGen to select avatars (the presenter uses indoor and outdoor options for variety) and copying the avatar IDs, then selecting a voice and copying the voice ID. Voice can use HeyGen's native clone or connect to 11 Labs. The setup prompt requires inputting these IDs.\n\nThe final step creates the Draft Loop skill that triggers everything. The presenter recommends creating a dedicated Co-work project called 'draft loop' with custom instructions pasted in, files uploaded (logo, AI character, carousel examples), and memory enabled. To run, you add a transcript and type 'Can you run the full content pipeline?' The system first performs a content audit showing planned topics for approval, then proceeds through written content, visuals, video, and carousel creation — with progress visible throughout. All outputs save to Google Drive automatically. HeyGen integration is optional and can be removed from instructions. Running the full system requires Higgs Field and HeyGen subscriptions."
+}

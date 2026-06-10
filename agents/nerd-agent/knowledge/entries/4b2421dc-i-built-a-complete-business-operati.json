@@ -1,0 +1,32 @@
+{
+  "id": "4b2421dc",
+  "type": "youtube",
+  "url": "https://www.youtube.com/watch?v=3Bfx4osqbfE",
+  "title": "I built a complete “business operating system” using claude code",
+  "date_ingested": "2026-06-10",
+  "topics": [
+    "ai-tools"
+  ],
+  "word_count": 3999,
+  "key_points": [
+    "The speaker runs a 17-person, $700,000/month company using a custom-built dashboard operating system",
+    "The ops machine was built using Claude Code mixed with Vercel, combined with data stored in HubSpot",
+    "Three things every core team needs: a dashboard, an amazing meeting rhythm, and clear objectives and key results (OKRs)",
+    "The command center shows company priorities with goals organized by week, month, and quarter, with progress bars that update as tasks are checked off",
+    "Level 10 Meeting structure comes from the book Traction by Gino Wickman - starts with wins, then scoreboard metrics (cash collected, margin, FSMs hired, close rate, show rate), then issues and opportunities section",
+    "All meetings are recorded on Fathom, and recordings are automatically piped into Claude Code to update the ops machine and meeting rhythm automatically",
+    "The speaker aims to talk to about five different mentors or advisors each week (examples given: Dan Bolden, Neil Patel, Ryan Holiday, William Brown, Ryan Klog)",
+    "After advisor conversations, Claude automatically pushes recommendations and action plans into the initiatives section - example given was an LTV expansion plan from Neil Patel including getting clients on ACH first payments with backup credit card",
+    "Favorite interview question learned from Elon Musk: 'Tell me about something that you've done that is exceptional'",
+    "Example of exceptional answer: candidate who built organic Instagram audience to over 180,000 followers; example of non-exceptional: helping a high school person win a science experiment",
+    "About 30% of the speaker's job is recruiting",
+    "Recruiting happens globally with recruiters in Lebanon, Brazil, Eastern Europe, and Latin America",
+    "The company's core product Velocity delivers 60 different assets across 75 days with 7 calls, including onboarding call, brand deep dive, brand positioning document, content GPS, content pillars, conversion assets, content machine, revenue and monetization pack, workshops, email sequences, and newsletters",
+    "The email list has grown to a quarter million people, all organically",
+    "Cohort-based programs run every 3 months, with Cash Flow Machine mentioned as the next one",
+    "The company is scaling the team from 5 customer success managers to about 12 over the next 4 months",
+    "Current revenue goal is to grow from current level to $2 million per month",
+    "Vision concept learned from Mark Benioff's book Into the Cloud - he always had a card showing mission, vision, and core goals to every person in the company"
+  ],
+  "summary": "The video demonstrates a custom-built business operating system dashboard that the speaker uses to run his 17-person, $700,000/month company. He explains that the system was built using Claude Code mixed with Vercel, pulling data from HubSpot to create a centralized dashboard. He identifies three essential elements every core team needs: a dashboard, a meeting rhythm, and clear objectives and key results.\n\nThe command center section shows company priorities organized hierarchically - weekly goals that ladder up to monthly goals, which ladder up to quarterly goals, with progress bars that update as tasks are completed. The Level 10 Meeting structure, which he credits to Gino Wickman's book Traction, begins with team wins, moves to a scoreboard showing metrics like cash collected, margin, FSMs hired, close rate, and show rate, then addresses issues and opportunities. All meetings are recorded using Fathom, and these recordings are automatically fed into Claude Code to update the ops machine without manual entry.\n\nThe speaker explains that he talks to approximately five mentors or advisors each week, naming Dan Bolden, Neil Patel, Ryan Holiday, William Brown, and Ryan Klog as examples. After these conversations, Claude automatically generates recommendations and action plans that populate the initiatives section - he demonstrates an LTV expansion plan that appeared after a call with Neil Patel, including tactics like getting clients on ACH payments with backup credit cards.\n\nFor recruiting, which comprises about 30% of his job, he shares his favorite interview question learned from Elon Musk: 'Tell me about something that you've done that is exceptional.' He contrasts an exceptional answer (building an organic Instagram audience to 180,000 followers) with a non-exceptional one (helping a high schooler win a science experiment). The company recruits globally with recruiters in Lebanon, Brazil, Eastern Europe, and Latin America.\n\nThe company's core product Velocity is detailed: across 75 days with 7 calls, they deliver approximately 60 assets including brand positioning documents, content GPS, content pillars, conversion assets, content machine setup, revenue and monetization packs, workshops, email sequences, and newsletters. The company has grown its email list to a quarter million subscribers organically, runs cohort-based programs every 3 months, and is scaling from 5 to 12 customer success managers over the next 4 months with a goal of reaching $2 million per month. He credits Mark Benioff's book Into the Cloud for the practice of centralizing vision, mission, and goals on a single card shown to everyone in the company."
+}

@@ -71,6 +71,7 @@ ALLOWED_TOPICS = {
     "product-development",
     "wix-websites",
     "branding",
+    "ai-tools",
 }
 
 TOPIC_LABELS = {
@@ -82,6 +83,7 @@ TOPIC_LABELS = {
     "product-development": "Product Development",
     "wix-websites": "Wix Websites",
     "branding": "Branding",
+    "ai-tools": "AI Tools & Making Money with AI",
 }
 
 FETCH_HEADERS = {

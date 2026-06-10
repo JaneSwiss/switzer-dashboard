@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "total_sources": 10,
+  "total_sources": 20,
   "sources": [
     {
       "id": "3fca9459",
@@ -150,6 +150,146 @@
       ],
       "word_count": 1595,
       "summary_file": "entries/21529eed-qkxsh-clpq4.json",
+      "status": "ok"
+    },
+    {
+      "id": "ce754acb",
+      "type": "youtube",
+      "url": "https://www.youtube.com/watch?v=wkPatBreE9w",
+      "title": "Why You Must Stop Selling Your Time for Money",
+      "author": "",
+      "date_ingested": "2026-06-10",
+      "topics": [
+        "ai-tools"
+      ],
+      "word_count": 3689,
+      "summary_file": "entries/ce754acb-why-you-must-stop-selling-your-time.json",
+      "status": "ok"
+    },
+    {
+      "id": "339a5c3d",
+      "type": "youtube",
+      "url": "https://www.youtube.com/watch?v=lDHrmDAD9y4",
+      "title": "How This Mom Makes $48K/Month With Claude",
+      "author": "",
+      "date_ingested": "2026-06-10",
+      "topics": [
+        "ai-tools"
+      ],
+      "word_count": 7829,
+      "summary_file": "entries/339a5c3d-how-this-mom-makes-48kmonth-with-cl.json",
+      "status": "ok"
+    },
+    {
+      "id": "68c04d3b",
+      "type": "youtube",
+      "url": "https://www.youtube.com/watch?v=LIf0AzB1610",
+      "title": "I Asked Claude To Make Me as Much Money as Possible",
+      "author": "",
+      "date_ingested": "2026-06-10",
+      "topics": [
+        "ai-tools"
+      ],
+      "word_count": 3888,
+      "summary_file": "entries/68c04d3b-i-asked-claude-to-make-me-as-much-m.json",
+      "status": "ok"
+    },
+    {
+      "id": "9247e0c2",
+      "type": "youtube",
+      "url": "https://www.youtube.com/watch?v=z96UhRTWhW8",
+      "title": "I Built My Entire Content Team Inside Claude (No Employees)",
+      "author": "",
+      "date_ingested": "2026-06-10",
+      "topics": [
+        "ai-tools"
+      ],
+      "word_count": 2573,
+      "summary_file": "entries/9247e0c2-i-built-my-entire-content-team-insi.json",
+      "status": "ok"
+    },
+    {
+      "id": "620da512",
+      "type": "youtube",
+      "url": "https://www.youtube.com/watch?v=GVdUa30NpO4",
+      "title": "If You Want to Get Rich With AI, Build This One Agent First",
+      "author": "",
+      "date_ingested": "2026-06-10",
+      "topics": [
+        "ai-tools"
+      ],
+      "word_count": 2295,
+      "summary_file": "entries/620da512-if-you-want-to-get-rich-with-ai-bui.json",
+      "status": "ok"
+    },
+    {
+      "id": "4b2421dc",
+      "type": "youtube",
+      "url": "https://www.youtube.com/watch?v=3Bfx4osqbfE",
+      "title": "I built a complete “business operating system” using claude code",
+      "author": "",
+      "date_ingested": "2026-06-10",
+      "topics": [
+        "ai-tools"
+      ],
+      "word_count": 3999,
+      "summary_file": "entries/4b2421dc-i-built-a-complete-business-operati.json",
+      "status": "ok"
+    },
+    {
+      "id": "840cae84",
+      "type": "youtube",
+      "url": "https://www.youtube.com/watch?v=wZeOwqmSw84",
+      "title": "Learn 97% of Claude in Under 16 Minutes",
+      "author": "",
+      "date_ingested": "2026-06-10",
+      "topics": [
+        "ai-tools"
+      ],
+      "word_count": 3403,
+      "summary_file": "entries/840cae84-learn-97-of-claude-in-under-16-minu.json",
+      "status": "ok"
+    },
+    {
+      "id": "5f676964",
+      "type": "youtube",
+      "url": "https://www.youtube.com/watch?v=4lbl9MtKUF8",
+      "title": "How I'd Use Claude AI to Build a Premium Personal Brand (1-Person Business)",
+      "author": "",
+      "date_ingested": "2026-06-10",
+      "topics": [
+        "ai-tools"
+      ],
+      "word_count": 5773,
+      "summary_file": "entries/5f676964-how-id-use-claude-ai-to-build-a-pre.json",
+      "status": "ok"
+    },
+    {
+      "id": "2ff3dc02",
+      "type": "youtube",
+      "url": "https://www.youtube.com/watch?v=0NDATb9zI8M",
+      "title": "This AI Business Will Make You $1M (With Zero Employees)",
+      "author": "",
+      "date_ingested": "2026-06-10",
+      "topics": [
+        "ai-tools"
+      ],
+      "word_count": 4987,
+      "summary_file": "entries/2ff3dc02-this-ai-business-will-make-you-1m-w.json",
+      "status": "ok"
+    },
+    {
+      "id": "c044e55e",
+      "type": "youtube",
+      "url": "https://www.youtube.com/watch?v=ZXJgcmLeK_E",
+      "title": "How I Make $100k/month Using Claude Code (full guide)",
+      "author": "",
+      "date_ingested": "2026-06-10",
+      "topics": [
+        "ai-tools"
+      ],
+      "word_count": 4366,
+      "summary_file": "entries/c044e55e-how-i-make-100kmonth-using-claude-c.json",
       "status": "ok"
     }
   ]

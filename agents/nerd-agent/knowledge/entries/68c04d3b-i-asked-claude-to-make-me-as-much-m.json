@@ -1,0 +1,34 @@
+{
+  "id": "68c04d3b",
+  "type": "youtube",
+  "url": "https://www.youtube.com/watch?v=LIf0AzB1610",
+  "title": "I Asked Claude To Make Me as Much Money as Possible",
+  "date_ingested": "2026-06-10",
+  "topics": [
+    "ai-tools"
+  ],
+  "word_count": 3888,
+  "key_points": [
+    "Creator made $44,000 in one month, with $34,000 from AI side hustles and $10,000 from full-time job",
+    "Income breakdown: $22,000 (64% of side hustle income) from sponsorships, $5,500 from client work via Upwork for AI SEO monthly retainer, approximately $6,000+ from a School community started 3 weeks ago with 120 members, and about $2,000/month from YouTube AdSense",
+    "Creator achieved these results within 6 months while working full-time and raising three kids under age seven, sometimes sleeping only 3-4 hours per night",
+    "Previously tried and failed at dropshipping, Amazon FBA, Etsy, print on demand, and ebooks before finding success with content creation",
+    "In 2026 alone, 135,000 workers have already lost jobs (about 900 people per day), and 49% of workers feel insecure about losing their jobs",
+    "86% of content is projected to be AI influencers and AI avatars",
+    "Creator built an app called sleestudio.com for analyzing personal brands and creating content scripts, with approximately 2,500 active users across free, pro, and scale plans",
+    "Receives 5-7 brand sponsorship inquiries daily and uses Class Skills to organize emails and vet brand alignment",
+    "The 'inside-out method' involves studying who you are internally to represent yourself externally to the world",
+    "Ikigai is a Japanese concept meaning 'reason for being' with four questions: What do you love to do? What are you good at? What does the world need? What can you get paid for?",
+    "Creator recommends answering Ikigai questions on paper in a technology-free environment before using AI assistance",
+    "A Claude skill called 'Aslee Ikigai Skill' can be downloaded and uploaded to Claude to help with research on what the world needs",
+    "To use Claude skills: go to Claude desktop app > customize > skills > click plus sign > create skills > upload skill, then use with slash command (e.g., /sly ikigai)",
+    "Personal brand blueprint available at slystudio.com asks four Ikigai questions and generates content pillars",
+    "Long-form content recommended over short-form because: easier to repurpose long-form to short-form, viewers resonate more deeply with longer content, and brands prefer sponsoring YouTube over Instagram or TikTok",
+    "Creator has 62,000 YouTube followers, 356,000 TikTok followers, and approximately 100,000 Instagram followers (550,000 total), but brands specifically wanted YouTube sponsorships",
+    "YouTube's algorithm is Gemini, which tests video quality and considers total number of videos when deciding to recommend content",
+    "Blotato is an app by creator Sabrina that enables multi-platform publishing to X, LinkedIn, Facebook, TikTok, Instagram, Threads, Pinterest, Blue Sky, and YouTube",
+    "Creator tried and failed to build auto-publishing with Claude code themselves; succeeded with Instagram but TikTok rejected them three times and LinkedIn was too complicated",
+    "Blotato offers API keys and MCP that can connect with Claude for research and automation"
+  ],
+  "summary": "The creator opens by stating they made $44,000 in one month, with $34,000 from AI side hustles and $10,000 from their full-time job. They explain their motivation: after being unexpectedly laid off as a top producer at a startup despite strong performance, they realized job security doesn't come from being good at your job but from owning multiple income streams. They cite 2026 statistics showing 135,000 workers have lost jobs (900 per day) and 49% of workers feel job insecurity.\n\nThe income breakdown is detailed: $22,000 (64% of side hustle income) comes from sponsorships with 5-7 brands reaching out daily, managed by Class Skills; $5,500 from a monthly AI SEO retainer client acquired through Upwork within the first 2 weeks of starting an AI consulting business; approximately $6,000+ from a School community started 3 weeks prior with 120 members; and about $2,000/month from YouTube AdSense. They also mention an app called sleestudio.com with 2,500 active users that they built for personal brand analysis and content script creation, though it generates minimal revenue since community members get free access.\n\nThe creator emphasizes that this was achieved in 6 months while maintaining a full-time job and raising three children under seven, often sleeping only 3-4 hours. They note previous failures with dropshipping, Amazon FBA, Etsy, print on demand, and ebooks, and identify building a personal brand as the key differentiator, especially as research suggests 86% of content will be AI-generated avatars.\n\nThe methodology section introduces the 'inside-out method' and the Japanese concept of Ikigai (reason for being). Four specific questions are presented: What do you love to do? What are you good at? What does the world need? What can you get paid for? The creator instructs viewers to answer these on paper in a technology-free environment first, then use a downloadable Claude skill called 'Aslee Ikigai Skill' to get AI research on what the world actually needs. Specific instructions are given for uploading skills to Claude desktop: customize > skills > plus sign > create skills > upload skill, then activate with slash commands. A personal brand blueprint at slystudio.com is also mentioned that generates content pillars after answering the four questions.\n\nFor platform strategy, the creator recommends starting with long-form content because it's easier to go from long-form to short-form, viewers build deeper connections with longer content, and brands prefer sponsoring YouTube. They share their own follower counts (62,000 YouTube, 356,000 TikTok, 100,000 Instagram) and note that despite having more followers elsewhere, brands specifically wanted YouTube sponsorships. They explain YouTube's algorithm is Gemini, which evaluates video quality and considers total video count when recommending content.\n\nThe creator discusses multi-platform publishing challenges, noting they tried building auto-publishing with Claude code but gave up after TikTok rejected them three times and LinkedIn proved too complicated (though they succeeded with Instagram). They recommend Blotato, an app by creator Sabrina, which connects to X, LinkedIn, Facebook, TikTok, Instagram, Threads, Pinterest, Blue Sky, and YouTube for scheduling and publishing. They highlight Blotato's API key and MCP features that can connect with Claude for research. The video concludes by urging viewers to complete the Ikigai exercise today and mentions a separate video about setting up eight different agents using Claude code."
+}

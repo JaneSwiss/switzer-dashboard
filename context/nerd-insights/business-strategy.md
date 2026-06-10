@@ -1,5 +1,5 @@
 # Nerd Agent Insights — Business Strategy
-*Auto-generated. Last updated: 2026-06-08. Sources: 1.*
+*Auto-generated. Last updated: 2026-06-10. Sources: 1.*
 
 ---
 
@@ -7,19 +7,16 @@
 
 *A faithful account of what these sources say — no added interpretation.*
 
-- **Pinterest requires approximately one hour per week to implement**, compared to the average entrepreneur spending 19-20 hours weekly on marketing and content creation. Results typically begin showing within 30-60 days of consistent implementation.
+- Pinterest strategy requires approximately one hour per week to implement, compared to the average entrepreneur spending 19-20 hours weekly on marketing and content creation
+- Pinterest pins have a 13+ month half-life versus Instagram posts' 24-48 hour shelf life, and 96% of Pinterest searches are unbranded, meaning users are open to discovering new sellers rather than searching for specific brands
+- Fresh pins don't require new products — creators can make 5-10 or even 20 different pins for a single product by varying designs and titles, with recommended posting frequency of one to two fresh pins daily
+- Boards should be titled around how people actually search (specific terms like "living room wall art") rather than creative names, and keywords must match what the ideal audience is actually typing
+- Infographic pins generate saves but not clicks; to drive traffic, pins need to create curiosity and promise outcomes rather than just list features
+- Results from Pinterest strategy typically begin showing within 30-60 days of consistent implementation, and Pinterest pins now rank in Google search results, providing dual SEO benefit
 
-- **Pinterest content has dramatically longer longevity than Instagram**: the average half-life of one Pinterest pin is 13+ months, while an Instagram post's shelf life is 24-48 hours.
+The source presents Pinterest as a low-effort, high-longevity marketing channel particularly suited to product-based businesses. Jenna Kutcher, a digital entrepreneur, explains that the platform functions as a "quiet system" running in the background, sending tens of thousands of monthly visitors with minimal ongoing work. The strategy centres on creating differentiated "fresh pins" — varying designs and titles for existing products — rather than constantly producing new offerings.
 
-- **96% of Pinterest searches are unbranded**, meaning users are actively open to discovering new sellers and creators rather than searching for specific brands they already know.
-
-- **Fresh pins don't require new products** — creators can make 5-10 or even 20 different pins for a single product or piece of content by varying designs and titles. Recommended posting frequency is one to two fresh pins daily, schedulable in one weekly session.
-
-- **Board organisation and keywords must match actual search behaviour**: boards should be titled around how people actually search (specific terms like "living room wall art") rather than creative names. Keywords must reflect what the ideal audience types, not how the creator describes their work.
-
-- **Pin design affects outcomes differently**: lifestyle mockups showing products in context outperform sterile white backgrounds. Infographic pins generate saves but not clicks; to drive traffic, pins need to create curiosity and promise outcomes rather than list features.
-
-This source presents Pinterest as a low-effort, high-longevity marketing channel particularly suited to product-based businesses. The core strategy centres on creating multiple differentiated pins for existing products, using search-aligned keywords and board structures, and maintaining consistency over 30-60 days to see results. The platform's unbranded search behaviour and content longevity are positioned as key advantages over social platforms like Instagram. Implementation can be fully outsourced to a virtual assistant at approximately $30-35 per hour for one hour weekly. Pinterest pins now also rank in Google search results, creating dual visibility benefits.
+Key tactical guidance includes organising boards around actual search behaviour, using lifestyle mockups rather than plain backgrounds for product imagery, and focusing pin messaging on outcomes rather than features. The entire system can be outsourced to a virtual assistant for approximately $30-35 per hour. One cited student achieved over one million Pinterest views within 60 days of starting the platform.
 
 ---
 
@@ -27,17 +24,17 @@ This source presents Pinterest as a low-effort, high-longevity marketing channel
 
 *The Nerd Agent's own suggestions for applying the above to the business — these are proposals to evaluate, not facts from the sources.*
 
-- **Create 10-20 pin variations for each existing product**: The source confirms fresh pins don't require new products. For the 3-in-1 Business Bundle ($82), branding kits ($38), and Wix websites ($64), Switzertemplates could create multiple pin designs showing different template pages, colour variations, or mockup contexts — all linking to the same product URLs.
+- **Create 10-20 pin variations for each existing product** — Since fresh pins don't require new products, Switzertemplates could design multiple pin graphics for the 3-in-1 Bundle ($82), branding kits ($38), and Wix websites ($64) by varying layouts, highlighting different template samples, or featuring alternative colour schemes from the same kit. This maximises content output without new product development.
 
-- **Organise Pinterest boards around how female small business owners actually search**: Rather than boards titled "Our Templates" or "Switzertemplates Products," consider specific search-aligned titles like "coach website templates," "branding templates for service providers," "Instagram templates for small business," or "Canva templates for coaches." This aligns with the source's guidance that boards should reflect actual search terms.
+- **Name boards around how female coaches and service providers actually search** — Rather than creative board titles, use specific search-driven names like "coach website templates," "service provider branding kits," "Instagram templates for coaches," or "Canva templates for small business." This aligns with the guidance that keywords must match what the ideal audience types.
 
-- **Show templates in lifestyle/context mockups rather than flat previews**: The source states lifestyle contexts outperform sterile backgrounds. Pins could show the Wix websites displayed on laptop screens in styled office settings, or Instagram templates shown on phone mockups in realistic scenarios relevant to the target audience of coaches and service providers.
+- **Shift pin messaging from features to outcomes** — For the Instagram templates ($15), instead of "15 Instagram post templates," test pins like "Plan a week of Instagram content in 20 minutes." For the 3-in-1 Bundle, emphasise "Launch your coaching brand this weekend" rather than listing what's included. This addresses the finding that outcome-focused pins drive clicks while feature lists only generate saves.
 
-- **Frame pins around outcomes rather than features**: Instead of "1,000+ Canva templates included," the source suggests creating curiosity with outcome-focused messaging — such as "Launch your coaching brand this weekend" or "Build a cohesive brand without hiring a designer." This specifically addresses the finding that infographic-style pins generate saves but not clicks.
+- **Show templates in lifestyle/mockup contexts** — The source notes that products shown in use outperform sterile backgrounds. Create pins showing Wix website templates displayed on laptop screens in styled office settings, or branding kit elements arranged on desks — contexts that resonate with the target audience of female small business owners.
 
-- **Allocate one hour weekly to Pinterest, potentially outsourced**: Given the $30-35/hour VA rate mentioned and the one-hour weekly requirement, Switzertemplates could test this channel for approximately $140/month. The 30-60 day results timeline provides a clear evaluation window before committing further resources.
+- **Schedule one weekly Pinterest session to batch-create and schedule pins** — Given the one-hour-per-week implementation claim and the recommendation of one to two fresh pins daily, Switzertemplates could establish a single weekly workflow to create 7-14 pins for the coming week. This could later be outsourced to a VA at the cited $30-35/hour rate.
 
-- **Use Pinterest to validate product ideas through keyword research**: The source mentions the boot camp covers keyword research to validate product ideas. Before creating new template collections (e.g., for specific niches), Switzertemplates could research Pinterest search volume to gauge demand among the target audience.
+- **Track results at the 30-60 day mark** — Since the source specifies this timeframe for seeing results, set a review checkpoint to assess Pinterest traffic to product pages before adjusting strategy or expanding investment.
 
 ---
 
