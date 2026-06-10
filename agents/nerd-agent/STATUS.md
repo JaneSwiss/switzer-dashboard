@@ -3,7 +3,8 @@
 *A living file. Update it at the end of any session where we build/change something
 meaningful on this agent — overwrite stale sections, don't just append.*
 
-**Last updated:** 2026-06-08 (later session — fixed shallow-extraction bug, re-ingested all sources at depth, added 3 more videos, rewrote summary/checklist/dashboard with per-point source links)
+**Last updated:** 2026-06-10 (multiple rewrites of the summary, checklist, and dashboard
+output until Jane was happy — see full history below)
 
 ---
 
@@ -19,213 +20,145 @@ Commands: `learn`, `report`, `list`, `share` — see the module docstring for fu
 
 ## Confirmed working
 
-- `learn --url <youtube/substack/article URL>` — fetches, extracts insights, stores entry,
-  updates topic insight file + dashboard
-- `learn --text "..." --source "title"` — ingest pasted text directly
-- `learn --batch <file>` — ingest a list of URLs
+- `learn --url <youtube/substack/article URL>` — fetches transcript, extracts insights,
+  stores entry, updates topic insight file + dashboard
+- `learn --txt <path/to/file.txt>` — ingest a plain text file (use for newsletter notes,
+  ChatGPT-extracted PDF text, etc.)
+- `learn --batch <file>` — one URL per line, ingest in sequence
+- `learn --force` — re-ingest a URL that already exists in the knowledge base
 - `report --status` / `report --all` / `report --topic <t>` — regenerate insight files
 - `list`, `list --topic`, `list --id` — browse the knowledge base
 - `share` — write insight files to `context/` and refresh dashboard
 
-## Changed this session (2026-06-08)
+## Current knowledge base — 10 sources, all Pinterest
 
-**Removed PDF + image-description (vision) support entirely.** A prior session had
-added `fetch_pdf` plus a vision sub-pipeline (extract embedded images → filter/dedupe/
-downsize → caption with a cheap model → fold into the text). It was half-wired (the
-`client` was never actually passed through, so it was dead code) and added real
-complexity (PyMuPDF + Pillow deps, a second model in the loop, an image-description cache).
+All 10 sources are about Pinterest marketing. No other topics yet.
 
-**Why it's gone:** we'd been hitting the "approaching 1M-token context window" wall while
-testing PDF ingestion. That ceiling is about *the Claude Code session's* context, not the
-agent's own API calls (those are capped at `MAX_TEXT_CHARS = 15_000` chars/source and run
-as isolated requests) — it was almost certainly caused by large/scanned PDFs being read
-directly into the chat session while debugging extraction. Still, the PDF path was the
-most fragile, highest-maintenance part of the agent for a feature Jane doesn't strictly
-need — she can already extract PDF text via ChatGPT reliably.
+| # | Title | Type | Entry ID |
+|---|---|---|---|
+| 1 | Tony Hills Newsletters | text (.txt) | 3fca9459 |
+| 2 | How To Use Pinterest In 2026 - Step by Step Guide | youtube | 54872267 |
+| 3 | The Pinterest Strategy Etsy Sellers Should Be Using in 2026 (Jenna Kutcher & Dylan Jahraus) | youtube | 2dfd7b65 |
+| 4 | How to Grow on Pinterest in 2026 (Try these NEW tools!) | youtube | ee788c1f |
+| 5 | The Pinterest Strategy That's Actually Working for Me in 2026 (`v=TfOhKeciZpU`) | youtube | 7bc04b29 |
+| 6 | How to Get Started with Pinterest in 2026 (Important Updates) | youtube | 3948dfc6 |
+| 7 | The Pinterest Strategy That's Actually Working for Me in 2026 (`v=m9vnKPnVocA`) | youtube | 6ea5df36 |
+| 8 | How I'm Growing my Blog with Pinterest in 2026 | youtube | 38c2578b |
+| 9 | Why Your Pinterest Traffic Isn't Growing in 2026 (Fix This First) | youtube | 0e4879ee |
+| 10 | (`v=QkXSH_cLPQ4` — title scrape failed, stored as video ID) | youtube | 21529eed |
 
-**Replacement: `learn --txt <path/to/file.txt>`** — reads a plain text file off disk and
-routes it through the existing pasted-text pipeline (`_learn_text`). New workflow:
-1. Feed the PDF to ChatGPT, have it extract/summarize the text
-2. Save that as a `.txt` file
-3. `python3 agents/nerd-agent/nerd_agent.py learn --txt "/path/to/notes.txt" --topics "pinterest-marketing"`
+Entry files: `agents/nerd-agent/knowledge/entries/*.json`
+Topic insight files: `context/nerd-insights/pinterest-marketing.md`, `content-creation.md`, `business-strategy.md`
 
-## Resolved earlier this session — sample data cleared
+## Output files — current state
 
-The dashboard's `nerd_agent` section had previously shown "2 sources processed" (fake
-"Tony Hill — Pinterest traffic" email entries, IDs `f9949a8d`/`7f692708`) and there was a
-fully-written `context/nerd-insights/pinterest-marketing.md` to match — but the real
-`knowledge/sources.json` / `knowledge/entries/` / `logs/ingested.json` were all empty, and
-those entry IDs existed nowhere else on disk. Jane confirmed (2026-06-08): **it was sample/
-placeholder data**, hand-written to mock up the dashboard tab — never a real ingest.
+Three files are the deliverables. Read these to understand what the agent has produced:
 
-Cleared it properly using the agent's own code paths (not hand-edited) — ran
-`update_dashboard()` / `write_insights_index()` against the real empty `sources.json`,
-and overwrote the fabricated `pinterest-marketing.md` with a short note explaining it
-was cleared placeholder text.
+**`context/nerd-insights/pinterest-summary.md`**
+The consolidated Pinterest summary. Written in plain English, no generic intro or
+statistics. Structured around actionable sections: keyword research (PinClicks SOP,
+annotations, Interest Explorer, Pinterest Trends seasonal method), two pinning recipes
+(3-pin simple and 6-pin rotation), what gets a pin clicked vs. saved (with spec table),
+the 6-cause traffic-stall diagnostic with fixes, tool breakdowns (PinClicks, Tailwind
+Turbo Pin, Pin Generator, Interest Explorer), and algorithm-change protocol. Includes
+examples from sources throughout (the "day hike first aid kit" PinClicks example,
+Megan's exact board-rotation method, the 180k clicks account, the Etsy cart finding).
+No blah-blah filler, no general stats paragraphs.
 
-## Changed later this session — extraction rewritten to stop inventing content
+**`context/nerd-insights/pinterest-action-checklist.md`**
+Action checklist specifically for Switzertemplates. Written for Jane, not for someone
+starting from scratch. Assumes she's already using Tailwind, posting ~10 pins/day, and
+using PinClicks. Contains only things she's likely not doing yet that could move the
+needle: PinClicks gap-finding (targeting old/unsaturated results), annotations workflow,
+Megan's 6-pin/3-board rotation on existing top-converting products, mining existing
+analytics for top-click pins and making 5 variations of each, seasonal Trends calendar,
+Turbo Pin trial, and the traffic-leak diagnostic.
 
-Jane flagged that the agent was sometimes producing "his own assumptions or irrelevant
-ideas" instead of faithfully reporting what a source actually says. Looking at the code,
-the cause was structural: `extract_insights` asked Claude to generate `business_ideas`
-and `actionable_steps` *while* reading each individual source — i.e. invent business
-applications in the same breath as summarising, often from a single source in isolation.
-That's where "fantasy instead of fidelity" was coming from.
+**`context/nerd-insights/pinterest-action-checklist.md`** ← same file
+**`dashboard_data.json`** — `nerd_agent` section updated to reflect 10 sources.
 
-**Fix — split learning from suggesting into two clearly separate stages:**
-- `extract_insights` (per-source): now asks ONLY for `topics`, `key_points`, and
-  `summary` — explicitly instructed to stay strictly grounded in what the source says,
-  no interpretation/generalisation/business advice/assumptions, and to say so honestly
-  if a source is thin rather than padding it out. `business_ideas`/`actionable_steps`
-  fields removed entirely (also dropped from `store_entry`'s `entry_data`).
-- `write_topic_report` (cross-source synthesis): rewritten so the generated markdown has
-  two clearly labelled, separated sections — **"What We Learned"** (faithful synthesis of
-  key points + summaries actually captured from sources) and **"Implementation Suggestions
-  for Switzertemplates"** (explicitly framed as the agent's own proposals, each one tied
-  back to a specific learning, generated only after and based on Part 1 — not from outside
-  assumptions). Old "Business Ideas" / "Actionable Steps" sections removed.
-- Dashboard's per-topic stats now track `key_points_captured` instead of `actionable_steps`.
+## Dashboard tab — Nerd
 
-Confirmed working end-to-end on real data (see below) — "What We Learned" sections read as
-faithful, source-traceable accounts; "Implementation Suggestions" cite exactly which source/
-learning each proposal builds on.
+The Nerd tab in `switzer_ai_dashboard.html` shows:
 
-## First real ingest — knowledge base now populated (2026-06-08)
+- **"Pinterest" card** (dark red title + icon): four actionable sections with bullet
+  lists — keyword research, pin scheduling recipes, what gets clicked, and the 6-cause
+  traffic-stall framework. Each section has a "→ full detail" link to the named anchor
+  in `pinterest-summary.md`. "View action checklist" button in dark red on the left.
+- **"Recent sources" table**: auto-populated from `dashboard_data.json`.
+- The old "Knowledge base" card (stats + how-to-run description) was removed — Jane
+  found it useless.
 
-Jane dropped source files into `agents/nerd-agent/source-files/`:
-- `Tony-Hills-Newsletters.txt` — Pinterest strategy newsletter notes (ingested via `--txt`)
-- `Youtube-links.pdf` — a PDF of 6 YouTube links (the agent has no PDF support by design;
-  extracted the underlying URLs from the PDF's link annotations via `strings <file> | grep http`,
-  wrote them to a batch file, ran `learn --batch`)
+Colors used: `var(--red-mid)` (#C0392B) for Pinterest title, icon, button, and "→" links.
 
-**7 sources ingested, 0 errors:**
-1. Tony Hills Newsletters (email) — `pinterest-marketing`
-2. How To Use Pinterest In 2026 - Step by Step Guide (youtube) — `pinterest-marketing, content-creation`
-3. The Pinterest Strategy Etsy Sellers Should Be Using in 2026 | Jenna Kutcher & Dylan Jahraus (youtube) — `pinterest-marketing, business-strategy, content-creation`
-4. How to Grow on Pinterest in 2026 (Try these NEW tools!) (youtube) — `pinterest-marketing, content-creation`
-5. The Pinterest Strategy That's Actually Working for Me in 2026 (youtube, `v=TfOhKeciZpU`) — `pinterest-marketing, content-creation`
-6. How to Get Started with Pinterest in 2026 (Important Updates) (youtube) — `pinterest-marketing, content-creation`
-7. The Pinterest Strategy That's Actually Working for Me in 2026 (youtube, `v=m9vnKPnVocA` — different video, same title as #5) — `pinterest-marketing, content-creation`
+## Key code changes made (for context if the code needs touching)
 
-Topic insight files regenerated for real: `context/nerd-insights/pinterest-marketing.md`,
-`content-creation.md`, `business-strategy.md`, plus `_index.md`. Dashboard `nerd_agent`
-section reflects the real 7-source state (`total_sources_processed: 7`,
-`sources_by_type: {youtube: 6, email: 1}`).
+**`nerd_agent.py` — extraction depth fixes:**
+- `MAX_TEXT_CHARS`: `15_000` → `100_000` — the old limit was truncating 41-88 minute
+  video transcripts to ~20% of their content before Claude ever saw them
+- `extract_insights` prompt: `key_points` raised from "3-8 points" to "8-20 points
+  spanning the full runtime"; `summary` raised from "2-3 paragraphs" to "4-6 paragraphs
+  preserving specific names, numbers, tools, and step-by-step detail"; added explicit
+  rule against compressing concrete claims into vague generalities
+- `max_tokens` in `extract_insights`: `2000` → `6000`
+- Result: 17-20 key points per source (vs. 7-9 before), zero truncation warnings
 
-## Fixed a major bug — extraction was truncating long videos to ~20% (2026-06-08)
+**`nerd_agent.py` — extraction fidelity fix (earlier session):**
+- `extract_insights` previously asked for `business_ideas` and `actionable_steps` at
+  the same time as summarising — this caused the agent to invent business applications
+  while reading individual sources. Those fields were removed entirely.
+- Now: `extract_insights` is strictly faithful (topics + key_points + summary only).
+  `write_topic_report` does the synthesis and clearly labels "What We Learned" vs.
+  "Implementation Suggestions for Switzertemplates" as separate sections.
 
-Jane reviewed the dashboard's Pinterest summary and called it out directly: *"extremely
-short and not specific at all... general bullshit... not everything that's in these
-YouTube videos."* She was right — root cause was structural, not a prompting nuance:
+**PDF support removed** (earlier session):
+- `fetch_pdf` and the vision sub-pipeline (image extraction + captioning) were removed —
+  dead code that added PyMuPDF/Pillow deps and a second model in the loop.
+- Replacement workflow: feed the PDF to ChatGPT, save the extracted text as `.txt`,
+  then `learn --txt "/path/to/notes.txt"`.
 
-- `MAX_TEXT_CHARS` was `15_000`. The agent computed `word_count` on the **full** transcript
-  but then **truncated `text` to 15K chars before sending it to Claude**. A 41-88 minute
-  video runs 5,000-11,000+ words / ~30,000-69,000 characters — so Claude was only ever
-  seeing the **first ~20-30%** of each long source. Combined with a prompt that asked for
-  just "3-8 key points" and a "2-3 paragraph" summary at `max_tokens=2000`, the result was
-  exactly what Jane described: thin, generic, front-loaded summaries.
+## Summary of summary rewrites (so you understand the iteration history)
 
-**Fix, applied at the root:**
-- `MAX_TEXT_CHARS`: `15_000` → `100_000` (covers even the longest transcripts whole)
-- `extract_insights` prompt: now explicitly instructs Claude to "read this {type} closely
-  AND COMPLETELY"; `key_points` raised from "3-8 specific points" to **"8-20 specific
-  points... spanning the source's whole runtime/length, not just its opening minutes"**;
-  `summary` raised from "2-3 paragraphs" to **"4-6 paragraphs... preserving specific names,
-  numbers, tools, and step-by-step detail rather than flattening into generalities"**, plus
-  an explicit rule against compressing concrete claims into vague generalities
-- `max_tokens`: `2000` → `6000` (so the richer output has room to land)
+The consolidated summary went through multiple rewrites based on Jane's feedback:
 
-**Verified empirically** — re-running all sources with `--force` produced **zero
-truncation-warning messages** (vs. routine truncation before) and **17-20 key points per
-source** (vs. 7-9 before): roughly **2x the captured detail per source**, now spanning
-each video's full runtime rather than its opening third.
+1. **First version** — too short, too generic, "general bullshit"
+2. **Added source links** — every claim got a `[source]` YouTube link — Jane wanted to
+   understand HOW things worked, not just citations
+3. **"Workflow 1-6" numbered structure** — more detail, step-by-step — Jane called it
+   "robotic, technical, gives me zero understanding of how this works"
+4. **Conversational rewrite** — second-person, plain English — closer, but still included
+   general stats paragraphs ("Pinterest is a search engine…") and timeline info she
+   didn't want
+5. **Current version** — no general intro, no stats paragraphs, no blah-blah, straight
+   to actionable steps with examples from sources. "→ full detail" links from the
+   dashboard instead of per-claim [source] links.
 
-## Re-ingested everything + added 3 more videos — 10 sources total (2026-06-08)
+**Root cause of repeated revisions:** The `summary` and `key_points` fields in the
+extracted entries already contained full step-by-step detail. The consolidation step kept
+compressing that into name-drops and statistics. The fix was to read the full `summary`
+field of each entry (not just `key_points`) and actually transfer the process detail.
 
-Re-ran `learn --batch ... --force` on the original 6 YouTube sources plus the 1 newsletter
-(all re-extracted at the new depth), then Jane supplied 3 more video URLs (with Pinterest
-tracking params `&pp=...` — the existing video-ID regex `(?:v=|youtu\.be/)([a-zA-Z0-9_-]{11})`
-handled them with no code changes needed) and those were ingested fresh:
+## Checklist history
 
-8. How I'm Growing my Blog with Pinterest in 2026 (youtube, `v=I_MbkHhAeF4`)
-9. Why Your Pinterest Traffic Isn't Growing in 2026 (Fix This First) (youtube, `v=zE0d-LA2yOI`)
-10. (youtube, `v=QkXSH_cLPQ4`) — `og:title` scrape returned nothing usable, so this entry
-    is stored with its raw video ID as the title (pre-existing graceful-degradation
-    behaviour, not a new bug); the transcript itself fetched and analysed fine (1,595
-    words, 17 key points)
+The action checklist was originally written for someone starting from scratch — covered
+account setup, "try Tailwind," "post consistently," etc. Jane pointed out she already uses
+Tailwind, already posts ~10 pins/day, already uses PinClicks. Rewritten to skip all of
+that and focus on six specific techniques from the source material she's likely not using
+yet (see checklist file for detail).
 
-`knowledge/sources.json` and `knowledge/entries/*.json` now hold all 10. Topic insight
-files regenerated: `pinterest-marketing.md` (10 sources), `content-creation.md` (9),
-`business-strategy.md` (1).
+The checklist also had stale references to "Workflow 2" from when the summary used
+numbered workflow headers. Those references are now removed.
 
-## Rewrote the consolidated Pinterest summary with per-point source links (2026-06-08)
+## Next steps / what to work on next
 
-Jane added a standing requirement on top of the depth fix: *"each important point of the
-summary should be backed up with the link to the source."* Rewrote
-`context/nerd-insights/pinterest-summary.md` from scratch around the richer 10-source
-material — every claim now carries an inline link back to its exact YouTube URL (or a
-plain "(Tony Hills Newsletters)" citation for the one text-based source, since it has no
-public URL). The new summary surfaces the specifics that were getting lost before: named
-tools (PinClicks, Tailwind's keyword tool + Turbo Pin, Pin Generator, Interest Explorer),
-named techniques (fresh pins, alphabet soup method, the two concrete pinning "recipes,"
-the 6-cause traffic-stall framework), and exact figures (600M MAU, 96% unbranded searches,
-45 followers → 1M impressions, 180,000 clicks in 90 days, 2:3 / 1000×1500px spec, etc.).
+1. **Feed more sources** when Jane has them. Run:
+   `python3 agents/nerd-agent/nerd_agent.py learn --url <url>`
+   or for batch: create a `.txt` file with one URL per line and run `learn --batch`.
 
-Also updated `pinterest-action-checklist.md` to reference the same named tools/techniques/
-framework (added a new "Diagnosing & troubleshooting" section based on the 6-cause model),
-and replaced the embedded Pinterest summary prose inside `switzer_ai_dashboard.html`'s
-"Pinterest" card (~lines 387-394) with matching source-linked paragraphs (`[source]` links
-styled in `var(--choc)`), and bumped the "Based on 7 sources" footer line to 10.
+2. **The Netlify token `nfp_TuZK1wZunkFhrvUhx8DJMGitDhbxjBaB4d50`** was found in plain
+   text in `.claude/settings.local.json` in an earlier session. It should be rotated —
+   it's been in a version-controlled file.
 
-## Rewrote it AGAIN — first version was still too shallow on the "how" (2026-06-08)
-
-Jane reviewed the source-linked version above and called out specific paragraphs as
-"useless... just general statistics, not useful knowledge" — and asked directly whether
-that was the *source's* fault or the *agent's laziness*. Good question to actually answer:
-I went back and read every entry's full `summary` field (4-6 paragraphs each, not just the
-bullet `key_points`), and the answer was unambiguous — **the extraction had already
-captured the step-by-step detail; the consolidation step threw it away.** E.g. the raw
-entry for Nick Garcia's video already contained his exact 5-step framework AND a
-week-by-week 30-day roadmap; Megan's entry already contained her exact "6 pins / 3 keyword
-sets / rotate boards A→B→C" recipe; the newsletter entry already contained a full worked
-PinClicks SOP using "day hike" as the running example (with real scored numbers, rejected
-keywords, and the reasoning for each choice). My first rewrite had flattened all of that
-into name-drops ("PinClicks is named as the strongest tool…") instead of walking through
-the actual processes — exactly what Jane was reacting to.
-
-**Rewrote `pinterest-summary.md` a second time, restructured entirely around six
-copyable, numbered workflows** (each one a real step-by-step process pulled from a
-source's full summary, not a compressed bullet):
-1. Nick Garcia's 5-step system + 30-day roadmap (the "45 followers → 1M impressions" story,
-   told as *how*, not just *what*)
-2. The newsletter's full PinClicks SOP worked on "day hikes" — scored keyword list →
-   rejecting saturated terms → reverse-engineering winning pins → pulling annotations →
-   confirming board names via Interest Explorer
-3. Megan's "6 pins / 3 keyword sets / rotate 3 boards" recipe, step by step
-4. The simpler Etsy-seller "3 pins/product over 3 weeks" recipe, step by step
-5. The 6-cause traffic-stall framework as an actual problem→fix table (not just six names)
-6. Elna's full content pipeline — a named tool for every single stage, in order
-
-Plus two reference sections ("Tool mechanics — exactly how the named tools actually work"
-and "Handling algorithm changes — the exact 3-step protocol") and a short "platform
-context" section for the broad numbers (kept brief and explicitly framed as *context*, not
-as the main content this time). Every workflow still links to its exact source.
-
-Updated `pinterest-action-checklist.md` to mirror the new workflow structure — each
-checklist section now explicitly says "(copy Workflow N)" and references the same
-concrete steps (e.g. "reject saturated keywords the way the PinClicks SOP did," "generate
-board descriptions via ChatGPT the way Megan does," "follow the named 3-step
-algorithm-change protocol exactly"). Replaced the dashboard's embedded Pinterest card prose
-again to match — each paragraph now walks through a workflow's mechanics rather than
-naming a stat, while keeping the per-claim `[source]` links.
-
-## Next steps
-
-1. Jane to review the rewritten `pinterest-summary.md`, `pinterest-action-checklist.md`,
-   and the dashboard Nerd tab — confirm the new depth + per-point source links read the
-   way she wants
-2. `.claude/settings.local.json` had unrelated permission entries (incl. a live Netlify
-   token typed in plain text) mixed into an earlier diff — cleaned up; **the Netlify
-   token (`nfp_TuZK1wZunkFhrvUhx8DJMGitDhbxjBaB4d50`) should still be rotated** since it
-   sat in a working-tree file
-3. Whatever Jane wants to build next on this agent
+3. **Add a second topic** when Jane starts feeding the agent sources on a new subject
+   (email marketing, SEO, etc.). The agent handles multiple topics automatically — just
+   supply a `--topics` flag when ingesting or let it auto-classify.
