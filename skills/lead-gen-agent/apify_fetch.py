@@ -63,6 +63,17 @@ def fetch(url, retries=2, timeout=60):
             )
             r.raise_for_status()
             return r.text
+        except requests.exceptions.HTTPError as e:
+            code = e.response.status_code if e.response is not None else 0
+            if code in (403, 401, 429):
+                # Blocked — no point retrying other paths on this domain
+                print(f"  [fetch error] {url} — {e}", file=sys.stderr)
+                return "BLOCKED"
+            if attempt < retries:
+                time.sleep(3)
+            else:
+                print(f"  [fetch error] {url} — {e}", file=sys.stderr)
+                return None
         except Exception as e:
             if attempt < retries:
                 time.sleep(3)

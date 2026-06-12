@@ -106,7 +106,9 @@ def process_lead(lead: dict) -> dict:
 
     # Skip non-business sites
     from urllib.parse import urlparse
-    domain = urlparse(website).netloc.lower().lstrip("www.")
+    domain = urlparse(website).netloc.lower()
+    if domain.startswith("www."):
+        domain = domain[4:]
     if any(domain == d or domain.endswith("." + d) for d in SKIP_WEBSITE_DOMAINS):
         print(f"    Skipping non-business site: {domain}", file=sys.stderr)
         return {"website": ""}  # clear the junk URL
@@ -121,6 +123,12 @@ def process_lead(lead: dict) -> dict:
     for page_url in pages_to_try:
         print(f"    Fetching: {page_url}", file=sys.stderr)
         html = apify_fetch.fetch(page_url, timeout=30)
+        if html == "BLOCKED":
+            if page_url == website:
+                # Whole domain is blocked — no point trying any other paths
+                break
+            time.sleep(1)
+            continue
         if not html:
             time.sleep(1)
             continue
