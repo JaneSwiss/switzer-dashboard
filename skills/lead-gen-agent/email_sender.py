@@ -157,6 +157,11 @@ def run(daily_limit: int = DAILY_LIMIT, dry_run: bool = False):
             time.sleep(SEND_DELAY_SECS)
 
     print(f"\n[Email Sender] {sent_count} emails sent.", file=sys.stderr)
+    try:
+        from export_contacts import run as export_contacts
+        export_contacts()
+    except Exception as e:
+        print(f"[Contacts Book] Export skipped: {e}", file=sys.stderr)
     return sent_count
 
 

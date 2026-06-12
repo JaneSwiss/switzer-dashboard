@@ -157,8 +157,28 @@ def process_lead(lead: dict) -> dict:
     return updates
 
 
-def run():
+def run(limit=None):
+    from lead_tracker import _BAD_EMAIL_DOMAINS
     leads = get_leads_needing_contact_extraction()
+
+    # Skip leads whose website is a known directory/platform domain
+    def _is_bad_domain(url: str) -> bool:
+        if not url:
+            return False
+        try:
+            from urllib.parse import urlparse
+            domain = urlparse(url).netloc.lower()
+            if domain.startswith("www."):
+                domain = domain[4:]
+            if domain.endswith(".edu") or domain.endswith(".gov"):
+                return True
+            return any(domain == d or domain.endswith("." + d) for d in _BAD_EMAIL_DOMAINS)
+        except Exception:
+            return False
+
+    leads = [l for l in leads if not _is_bad_domain(l.get("website", ""))]
+    if limit:
+        leads = leads[:limit]
     print(f"\n[Website Extractor] {len(leads)} leads to process", file=sys.stderr)
 
     updated = 0
@@ -174,8 +194,17 @@ def run():
         time.sleep(1.5)
 
     print(f"\n[Website Extractor] Updated {updated}/{len(leads)} leads.", file=sys.stderr)
+    try:
+        from export_contacts import run as export_contacts
+        export_contacts()
+    except Exception as e:
+        print(f"[Contacts Book] Export skipped: {e}", file=sys.stderr)
     return updated
 
 
 if __name__ == "__main__":
-    run()
+    import argparse
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--limit", type=int, default=None, help="Max leads to process (default: all)")
+    args = parser.parse_args()
+    run(limit=args.limit)
