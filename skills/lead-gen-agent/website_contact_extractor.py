@@ -44,6 +44,12 @@ SKIP_WEBSITE_DOMAINS = {
 
 CONTACT_PATH_HINTS = ["/contact", "/contact-us", "/get-in-touch", "/about", "/about-us", "/reach-us"]
 
+# E-commerce niches that are already Pinterest-heavy — skip if Pinterest detected
+ECOMMERCE_NICHES = {
+    "handmade jewelry", "handmade skincare", "handmade candles",
+    "ceramic pottery", "print on demand",
+}
+
 
 def _clean_email(email: str):
     email = email.strip().lower()
@@ -88,6 +94,30 @@ def _find_contact_page_url(html: str, base_url: str) -> str:
 
 def _has_pinterest(html: str) -> bool:
     return bool(re.search(r"pinterest\.com", html, re.I))
+
+
+def _is_wix_site(html: str) -> bool:
+    """Wix contact forms are JS-rendered and can't be submitted by Playwright reliably."""
+    return "static.wixstatic.com" in html or "wix-code" in html or "_wixCssModule" in html
+
+
+def _has_contact_form(html: str) -> bool:
+    """
+    Check if static HTML contains a fillable contact form — a <form> with at least
+    a textarea or a text input (not just a search or login form).
+    """
+    soup = BeautifulSoup(html, "html.parser")
+    for form in soup.find_all("form"):
+        if form.find("textarea"):
+            return True
+        for inp in form.find_all("input"):
+            itype = (inp.get("type") or "text").lower()
+            if itype in ("text", "email") and not any(
+                kw in (inp.get("name") or inp.get("placeholder") or inp.get("id") or "").lower()
+                for kw in ("search", "login", "username", "password", "zip", "postal", "coupon")
+            ):
+                return True
+    return False
 
 
 def _base_url(url: str) -> str:
@@ -140,13 +170,24 @@ def process_lead(lead: dict) -> dict:
                 updates["notes"] = f"extra emails: {', '.join(emails[1:])}"
             break
 
-        # Track contact page URL for manual follow-up even if no email found
-        if not contact_page_found and page_url != website:
-            contact_page_found = page_url
-
-        # Check for Pinterest link on their site
-        if _has_pinterest(html) and not lead.get("pinterest_url"):
+        # Pinterest check — e-commerce leads already on Pinterest aren't worth pitching
+        if _has_pinterest(html):
+            niche = lead.get("product_type", "")
+            if niche in ECOMMERCE_NICHES:
+                print(f"    → skip: e-commerce lead already has Pinterest", file=sys.stderr)
+                return {"status": "dead", "notes": "already on Pinterest"}
             updates["pinterest_present"] = "Y"
+
+        # Wix sites: forms are JS-only, Playwright can't submit them — skip contact URL
+        if page_url == website and _is_wix_site(html):
+            print(f"    → Wix site detected — email only, skipping contact form path", file=sys.stderr)
+            break
+
+        # Only store a contact page URL if a real fillable form exists in the HTML
+        if not contact_page_found and page_url != website:
+            if _has_contact_form(html):
+                contact_page_found = page_url
+            # If no form in static HTML, log but don't store — avoids wasted Playwright sessions
 
         # Find the contact page URL from homepage to try next
         if page_url == website and not contact_page_found:

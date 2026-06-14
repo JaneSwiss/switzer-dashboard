@@ -9,6 +9,7 @@ Usage:
     python3 contact_form_sender.py --dry-run --limit 5
 """
 
+import csv
 import os
 import re
 import sys
@@ -72,20 +73,24 @@ def _field_combined(inp) -> tuple[str, str]:
     return combined, itype
 
 
-def _submit_form(page, body: str) -> bool:
+def _submit_form(page, body: str) -> str:
     """
     Find and fill the contact form on the current page, then submit.
-    Returns True on success.
+
+    Returns:
+      "success"     — form found, filled, and submitted
+      "no-form"     — no usable form on the page (Type 1 — not worth manual attempt)
+      "fill-failed" — form found but couldn't be filled/submitted (Type 2 — worth manual attempt)
     """
     try:
         page.wait_for_selector("form", state="attached", timeout=12000)
     except Exception:
         print("    [form] No <form> element found on page", file=sys.stderr)
-        return False
+        return "no-form"
 
     forms = page.query_selector_all("form")
     if not forms:
-        return False
+        return "no-form"
 
     best_form  = None
     best_score = 0
@@ -105,7 +110,7 @@ def _submit_form(page, body: str) -> bool:
 
     if not best_form or best_score < 1:
         print(f"    [form] Best score was {best_score} — no suitable contact form found", file=sys.stderr)
-        return False
+        return "no-form"
 
     filled_message = False
     inputs = best_form.query_selector_all("input, textarea, select")
@@ -124,7 +129,6 @@ def _submit_form(page, body: str) -> bool:
             pass
 
         def _fill(el, value):
-            """Fill a field — Playwright fill() first, JS eval as fallback for hidden elements."""
             try:
                 el.fill(value)
                 return True
@@ -155,7 +159,6 @@ def _submit_form(page, body: str) -> bool:
             _fill(inp, SENDER_NAME)
 
     if not filled_message:
-        # Skip hidden/reCAPTCHA textareas — target the first visible one
         textarea = best_form.query_selector("textarea:not([name*='recaptcha']):not([name*='g-recaptcha'])")
         if textarea:
             try:
@@ -165,14 +168,12 @@ def _submit_form(page, body: str) -> bool:
                 pass
 
     if not filled_message:
-        print("    [form] Could not fill message/textarea field", file=sys.stderr)
-        return False
+        print("    [form] Form found but could not fill message field", file=sys.stderr)
+        return "fill-failed"
 
-    # requestSubmit() triggers validation and bypasses popup/overlay interception
     try:
         best_form.evaluate("f => f.requestSubmit()")
     except Exception:
-        # Fallback: direct click on submit button
         submit_btn = best_form.query_selector("button[type=submit], input[type=submit], button:not([type])")
         if submit_btn:
             try:
@@ -183,7 +184,7 @@ def _submit_form(page, body: str) -> bool:
             best_form.evaluate("f => f.submit()")
 
     time.sleep(2)
-    return True
+    return "success"
 
 
 def _is_bad_contact_domain(url: str) -> bool:
@@ -192,10 +193,42 @@ def _is_bad_contact_domain(url: str) -> bool:
     if not url:
         return True
     try:
-        domain = urlparse(url).netloc.lower().lstrip("www.")
+        domain = urlparse(url).netloc.lower()
+        if domain.startswith("www."):
+            domain = domain[4:]
         return any(domain == d or domain.endswith("." + d) for d in _BAD_EMAIL_DOMAINS)
     except Exception:
         return True
+
+
+MANUAL_FORMS_CSV = Path(__file__).resolve().parents[2] / "outputs" / "leads" / "manual-forms.csv"
+_MANUAL_FIELDNAMES = ["lead_id", "business_name", "niche", "website", "contact_form_url", "draft_file"]
+
+
+def _write_manual_csv(lead: dict):
+    """Append a Type-2 failure (form found, fill failed) to the manual submission CSV."""
+    draft_files = glob.glob(str(DRAFTS_DIR / f"{lead['lead_id']}-*-contact-form.txt"))
+    row = {
+        "lead_id":          lead["lead_id"],
+        "business_name":    lead.get("shop_or_business_name", ""),
+        "niche":            lead.get("product_type", ""),
+        "website":          lead.get("website", ""),
+        "contact_form_url": lead.get("contact_page_url", ""),
+        "draft_file":       draft_files[0] if draft_files else "",
+    }
+    existing_ids = set()
+    write_header = not MANUAL_FORMS_CSV.exists()
+    if MANUAL_FORMS_CSV.exists():
+        with open(MANUAL_FORMS_CSV, newline="", encoding="utf-8") as f:
+            for r in csv.DictReader(f):
+                existing_ids.add(r.get("lead_id", ""))
+    if row["lead_id"] in existing_ids:
+        return  # already logged
+    with open(MANUAL_FORMS_CSV, "a", newline="", encoding="utf-8") as f:
+        writer = csv.DictWriter(f, fieldnames=_MANUAL_FIELDNAMES)
+        if write_header:
+            writer.writeheader()
+        writer.writerow(row)
 
 
 def get_leads_for_contact_form(daily_limit: int = 20):
@@ -214,7 +247,7 @@ def get_leads_for_contact_form(daily_limit: int = 20):
         if l.get("contact_page_url")
         and not _is_bad_contact_domain(l.get("contact_page_url", ""))
         and not l.get("contact_email")
-        and l.get("status") not in ("messaged", "replied", "paid")
+        and l.get("status") not in ("messaged", "replied", "paid", "dead")
         and not l.get("outreach_date")
         and "form-failed" not in (l.get("notes") or "")
         and l["lead_id"] not in sent_ids
@@ -280,13 +313,13 @@ def run(daily_limit: int = 20, dry_run: bool = False):
                     page.wait_for_load_state("networkidle", timeout=8000)
                 except Exception:
                     pass
-                success = _submit_form(page, body)
+                result = _submit_form(page, body)
                 page.close()
             except Exception as e:
                 print(f"    ✗ Error: {e}", file=sys.stderr)
-                success = False
+                result = "no-form"
 
-            if success:
+            if result == "success":
                 record_sent_email(f"form:{lead_id}", lead_id, business)
                 update_lead(lead_id, {
                     "status":        "messaged",
@@ -295,12 +328,19 @@ def run(daily_limit: int = 20, dry_run: bool = False):
                 })
                 sent_count += 1
                 print(f"    ✓ Submitted", file=sys.stderr)
-            else:
-                # Mark as failed so future runs skip this lead
+            elif result == "fill-failed":
+                # Type 2 — form exists but couldn't fill: add to manual CSV for Jane
+                _write_manual_csv(lead)
                 existing_notes = lead.get("notes") or ""
                 if "form-failed" not in existing_notes:
                     update_lead(lead_id, {"notes": (existing_notes + " form-failed").strip()})
-                print(f"    ✗ Could not find/fill form", file=sys.stderr)
+                print(f"    ✗ Added to manual-forms.csv", file=sys.stderr)
+            else:
+                # Type 1 — no form on page: mark failed, skip in future
+                existing_notes = lead.get("notes") or ""
+                if "form-failed" not in existing_notes:
+                    update_lead(lead_id, {"notes": (existing_notes + " form-failed").strip()})
+                print(f"    ✗ No form found", file=sys.stderr)
 
             if i < len(leads) - 1:
                 time.sleep(3)
