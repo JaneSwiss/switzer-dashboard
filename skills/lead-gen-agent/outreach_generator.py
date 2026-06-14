@@ -161,6 +161,37 @@ NICHE_ANGLES = {
         "Pinterest shoppers actively seek out small businesses and independent makers — it's baked into the culture "
         "of the platform. Unlike Instagram where posts disappear in 24 hours, pins drive traffic for months or years."
     ),
+    "health coaching": (
+        "Women search Pinterest for answers before they hire anyone — 'gut health tips', 'hormone balance', "
+        "'how to lose weight naturally', 'what to eat to have more energy'. Health coaches who show up in those "
+        "searches get discovered by people who are already committed to making a change."
+    ),
+    "relationship coaching": (
+        "Pinterest is where women go when they're quietly working on themselves — searching 'how to attract the right partner', "
+        "'dating confidence', 'relationship red flags', 'heal after a breakup'. A relationship coach with a presence "
+        "there gets found by exactly the right people at exactly the right moment."
+    ),
+    "financial coaching": (
+        "Money mindset and personal finance is one of Pinterest's strongest niches among women. They search "
+        "'how to save money', 'money management tips', 'financial freedom journey', 'pay off debt fast'. "
+        "Financial coaches who show up there reach buyers who are already motivated to change their relationship with money."
+    ),
+    "mindset coaching": (
+        "Mindset, self-development, and confidence content is one of Pinterest's most-saved categories. "
+        "Women search 'morning routine ideas', 'growth mindset quotes', 'how to build confidence', 'daily habits'. "
+        "A mindset coach who shows up there gets found by people actively investing in themselves."
+    ),
+    "personal styling": (
+        "Fashion and personal style is one of Pinterest's top categories — women plan their wardrobes through it. "
+        "They search 'capsule wardrobe', 'how to dress your body type', 'business casual outfits for women', "
+        "'elevated everyday style'. Personal stylists who show up in those searches get clients who are already "
+        "motivated to invest in their appearance."
+    ),
+    "home organizing": (
+        "Home organisation is one of Pinterest's most searched and saved categories. People search 'pantry organisation ideas', "
+        "'bedroom declutter', 'minimalist home', 'small space storage' — and they save this content for months "
+        "before hiring someone. A professional organiser on Pinterest gets discovered at exactly the inspiration-to-action moment."
+    ),
 }
 
 FALLBACK_ANGLE = (
@@ -185,10 +216,11 @@ def _get_niche_angle(product_type: str) -> str:
 
 
 def _detect_outreach_type(lead: dict) -> str:
-    """DM if we have an Instagram handle, email if we have an email, form otherwise."""
+    """DM if we have an Instagram handle, email if we have a sendable email, form otherwise."""
+    from lead_tracker import _is_sendable_email
     if lead.get("instagram_handle") and not lead.get("contact_email"):
         return "DM"
-    if lead.get("contact_email"):
+    if lead.get("contact_email") and _is_sendable_email(lead["contact_email"]):
         return "email"
     if lead.get("contact_page_url"):
         return "contact-form"
@@ -271,18 +303,18 @@ SUBJECT_POOL = [
     "Your business + Pinterest = a lot of potential clients",
 ]
 
-# DM template (Instagram) — unchanged
-_TEMPLATE = """Hi,
-How are you?
-{opener} This kind of product usually does really well on Pinterest, and I noticed you don't have a Pinterest profile linked anywhere.
+# Contact form + DM template — no "Hi there", no "How are you?"
+_TEMPLATE = """{greeting}
 
-My name is Jane. I work with business owners like you to drive thousands of visitors from Pinterest to their shops and websites (I also run Switzer Templates, a shop with over 28,000 sales, and Pinterest is my main traffic driver)
+{opener} I noticed you don't have a Pinterest presence — which is worth looking into for your type of business.
 
-If you'd like to make the most of Pinterest for your business, I offer two packages that will help to set your account up for success: https://pinterest.switzertemplates.com/ I do a full audit and build a comprehensive strategy specifically for your niche, using paid analytics tools that aren't available to the general public - so you get clear insight into what's actually working in your niche and how much traffic and sales you can expect.
+My name is Jane. I work with business owners to build Pinterest strategies that drive consistent, long-term traffic to their websites. I also run Switzer Templates (28,000+ sales), and Pinterest is my main traffic driver.
 
-If you're curious about Pinterest but not ready to invest yet, I put together a free guide on how to set up your profile and get started. You can grab it here: switzertemplates.myflodesk.com/pinterest-guidebook
+I offer two packages tailored to your niche: https://pinterest.switzertemplates.com/ Each includes a full audit and a strategy built around what's actually working in your industry.
 
-Let me know if you have any questions - always happy to help!
+There's also a free Pinterest starter guide here if you want to explore first: switzertemplates.myflodesk.com/pinterest-guidebook
+
+Happy to answer any questions.
 
 Regards,
 Jane"""
@@ -454,7 +486,7 @@ def _extract_first_name(lead: dict) -> str:
         "julia", "julie", "june", "kasey", "kate", "katelyn", "katherine",
         "kathryn", "katie", "kayla", "kelly", "kim", "kimberly", "kristen",
         "laura", "lauren", "leah", "lily", "linda", "lisa", "lucy",
-        "madison", "megan", "melissa", "michelle", "molly", "monica",
+        "madison", "mary", "maya", "megan", "melissa", "michelle", "molly", "monica",
         "morgan", "natalie", "natasha", "nicole", "nina", "olivia",
         "paige", "patricia", "rachel", "rebecca", "renee", "riley",
         "samantha", "sandra", "sara", "sarah", "savannah", "shannon",
@@ -514,16 +546,14 @@ def _extract_first_name(lead: dict) -> str:
             if domain_root.startswith(name):
                 return name.capitalize()
 
-    # 5. CamelCase shop name — only for names without spaces
+    # 5. CamelCase shop name — only when first word is a known real first name
     shop = (lead.get("shop_or_business_name") or "").strip()
     if shop and " " not in shop:
         words = re.sub(r"([A-Z][a-z]+)", r" \1", shop).split()
         first = words[0] if words else ""
         if (len(words) > 1
-                and len(first) >= 3
-                and not first.isupper()
                 and first.isalpha()
-                and first.lower() not in _NOT_NAMES):
+                and first.lower() in _COMMON_NAMES):
             return first
 
     return ""
@@ -555,7 +585,9 @@ def generate_draft(lead: dict) -> tuple[str, str, str]:
         draft = template.format(opener=opener, greeting=greeting)
     else:
         subject_line = ""
-        draft = _TEMPLATE.format(opener=opener)
+        greeting_name = _extract_first_name(lead)
+        greeting = f"Hi {greeting_name}," if greeting_name else "Hi,"
+        draft = _TEMPLATE.format(opener=opener, greeting=greeting)
 
     return outreach_type, subject_line, draft
 
@@ -583,8 +615,10 @@ def save_draft(lead: dict, outreach_type: str, subject_line: str, draft: str) ->
     return path
 
 
-def run(limit=20):
-    leads = get_leads_for_outreach(limit=limit)
+def run(limit=20, only_type=None):
+    leads = get_leads_for_outreach(limit=limit * 10 if only_type else limit)
+    if only_type:
+        leads = [l for l in leads if _detect_outreach_type(l) == only_type][:limit]
     print(f"\n[Outreach Generator] {len(leads)} leads to process", file=sys.stderr)
 
     generated = 0
@@ -611,5 +645,7 @@ if __name__ == "__main__":
     import argparse
     parser = argparse.ArgumentParser()
     parser.add_argument("--limit", type=int, default=20, help="Max leads to process")
+    parser.add_argument("--type", dest="only_type", default=None,
+                        help="Only generate for leads of this type: email, contact-form, DM")
     args = parser.parse_args()
-    run(limit=args.limit)
+    run(limit=args.limit, only_type=args.only_type)

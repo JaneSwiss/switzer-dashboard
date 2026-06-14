@@ -195,12 +195,84 @@ SKIP_DOMAINS = {
 
 _SNIPPET_EMAIL_RE = re.compile(r"[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}")
 
+_CONTENT_PATH_SEGMENTS = {
+    "blog", "news", "journal", "articles", "article", "press",
+    "news-and-updates", "updates", "insights", "resources", "stories",
+    "posts", "post", "editorial", "media",
+}
+
+_PRODUCT_PATH_SEGMENTS = {
+    "shop", "collections", "products", "product", "store", "catalogue", "catalog",
+}
+
+
+def _normalise_url(url: str) -> str:
+    """
+    Strip non-homepage paths so extraction always starts from the right place:
+    - Blog/article paths → homepage (the business is valid, just wrong page)
+    - Product/collection paths → homepage (same reason)
+    - Shopify Google Shopping tracking param (srsltid) → homepage
+    """
+    parsed = urlparse(url)
+    path_parts = [p for p in parsed.path.split("/") if p]
+
+    is_content = any(part.lower() in _CONTENT_PATH_SEGMENTS for part in path_parts)
+    is_product = any(part.lower() in _PRODUCT_PATH_SEGMENTS for part in path_parts)
+    is_shopify_tracking = "srsltid" in parsed.query
+
+    if is_content or is_product or is_shopify_tracking:
+        return f"{parsed.scheme}://{parsed.netloc}"
+    return url
+
+# Words that appear in Google titles/snippets for institutions — not solo businesses.
+# Checked against title + snippet before ever fetching the URL.
+_INSTITUTIONAL_KEYWORDS = {
+    # Large health/medical institutions
+    "hospital", "hospitals", "rehabilitation", "rehab center", "medical center",
+    "medical group", "health system", "health network", "health centre",
+    # Education
+    "university", "college", "department of", "school of", "faculty of",
+    # Other institutions
+    "institute", "institution", "foundation",
+    "food bank", "food pantry",
+    "ymca", "ywca", "jcc",
+    "community center", "community centre",
+    "nonprofit", "non-profit", "not-for-profit",
+    "government", "public health",
+    "church", "cathedral", "parish",
+    "council", "municipality",
+    # Chains and franchises
+    "chain", "franchise",
+    "massage envy", "massage heights", "hand and stone",
+    # Multi-practitioner practices (team, not solo owner)
+    "& associates", "and associates", "counseling associates",
+    "therapy associates", "coaching associates",
+    "group therapy", "therapy group",
+    "counseling group", "counseling center", "therapy center",
+    "family services", "family counseling center",
+    "mental health center", "mental health services",
+    "behavioral health", "behavioral services",
+    "coaching firm", "coaching company", "coaching team",
+    "design group", "design firm", "design studio team",
+    "& partners", "and partners",
+}
+
+
+def _is_institutional(title: str, snippet: str) -> bool:
+    """Return True if title or snippet suggests an institution, chain, or non-solo business."""
+    combined = (title + " " + snippet).lower()
+    return any(kw in combined for kw in _INSTITUTIONAL_KEYWORDS)
+
 
 def _should_skip(url: str) -> bool:
     domain = urlparse(url).netloc.lower()
     if domain.startswith("www."):
         domain = domain[4:]
     if domain.endswith(".edu") or domain.endswith(".gov"):
+        return True
+    # Domain-level institutional signals (catches obvious cases before title check)
+    _DOMAIN_SIGNALS = ("hospital", "rehab", "health-system", "medcenter", "university", "college")
+    if any(sig in domain for sig in _DOMAIN_SIGNALS):
         return True
     return any(domain == s or domain.endswith("." + s) for s in SKIP_DOMAINS)
 
@@ -238,10 +310,16 @@ def _search(query: str, num: int = 10) -> list[dict]:
             link = item.get("link", "")
             if not link or _should_skip(link):
                 continue
-            snippet = (item.get("snippet") or "") + " " + (item.get("title") or "")
+            title   = item.get("title") or ""
+            snippet = item.get("snippet") or ""
+            if _is_institutional(title, snippet):
+                print(f"  [skip institutional] {title[:80]}", file=sys.stderr)
+                continue
+            link = _normalise_url(link)
+            combined = snippet + " " + title
             results.append({
                 "url": link,
-                "snippet_email": _extract_snippet_email(snippet),
+                "snippet_email": _extract_snippet_email(combined),
             })
         return results
     except Exception as e:

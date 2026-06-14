@@ -76,19 +76,22 @@ def append_leads(new_leads):
     """
     existing = load_leads()
 
-    existing_etsy = {r["etsy_url"] for r in existing if r.get("etsy_url")}
-    existing_ig   = {r["instagram_handle"] for r in existing if r.get("instagram_handle")}
-    existing_email = {r["contact_email"] for r in existing if r.get("contact_email")}
+    existing_etsy    = {r["etsy_url"] for r in existing if r.get("etsy_url")}
+    existing_ig      = {r["instagram_handle"] for r in existing if r.get("instagram_handle")}
+    existing_email   = {r["contact_email"] for r in existing if r.get("contact_email")}
+    existing_website = {r["website"] for r in existing if r.get("website")}
 
     added = 0
     for lead in new_leads:
         etsy_url = lead.get("etsy_url", "")
         ig       = lead.get("instagram_handle", "")
         email    = lead.get("contact_email", "")
+        website  = lead.get("website", "")
 
         if (etsy_url and etsy_url in existing_etsy) or \
            (ig and ig in existing_ig) or \
-           (email and email in existing_email):
+           (email and email in existing_email) or \
+           (website and website in existing_website):
             continue
 
         # Fill in defaults
@@ -108,6 +111,8 @@ def append_leads(new_leads):
             existing_ig.add(ig)
         if email:
             existing_email.add(email)
+        if website:
+            existing_website.add(website)
 
         added += 1
 
@@ -133,6 +138,7 @@ def get_leads_needing_contact_extraction():
         if l.get("website")
         and not l.get("contact_email")
         and not l.get("contact_page_url")
+        and l.get("status") not in ("dead", "messaged", "replied", "paid")
     ]
 
 
@@ -171,6 +177,10 @@ _BAD_EMAIL_PREFIXES = {
     "hiring", "jobs", "recruitment", "careers", "noreply", "no-reply",
     "board", "support", "info.board", "medicalrecords", "billing",
     "frontdesk", "reception.desk",
+    # Generic role inboxes — not the business owner
+    "admin", "reception", "customercare", "clientconnect", "intake",
+    "concierge", "studio", "enquiries", "enquiry", "comments", "feedback",
+    "press", "media", "partnerships", "wholesale", "orders",
 }
 
 _BAD_EMAIL_DOMAINS = {
@@ -186,10 +196,37 @@ _BAD_EMAIL_DOMAINS = {
     "facefoundrie.com", "oasisfacebar.com", "heydayskincare.com",
     "actioncoach.com", "actioncoach.co.uk", "actioncoach.us",
     "polsky.uchicago.edu", "lifestance.com",
+    "clubpilates.com", "orangetheory.com", "solidcore.co",
+    "stretchlab.com", "cyclebar.com", "purebarre.com",
     # Nonprofits and community orgs
-    "cclconnect.org", "altarcommunity.com",
+    "cclconnect.org", "altarcommunity.com", "jccindy.org",
+    # Therapy/wellness directories
+    "goodtherapy.org", "thervo.com", "styleseat.com", "vagaro.com",
     # Fake / placeholder
-    "mailservice.com", "example.com",
+    "mailservice.com", "example.com", "mysite.com",
+    # Marketplace / directories (not real business sites)
+    "oneflare.com.au", "hipages.com.au", "oneflare.com",
+    "patternbyetsy.com",  # Etsy-hosted storefronts, not real websites
+    # Fitness / wellness booking platforms and chains
+    "classpass.com", "mindbodyonline.com", "peerspace.com", "halaxy.com",
+    "lifetime.life", "methodpilates.com", "secondnature.io", "bodyrok.com",
+    "findyourtrainer.com", "fitnesstrainer.com",
+    # Health / wellness directories (additional)
+    "healthgrades.com", "betterhelp.com", "talkspace.com", "growtherapy.com",
+    "practo.com", "thervo.com", "counselling-directory.org.uk",
+    "nutritionist-resource.org.uk", "lifecoach-directory.org.uk",
+    # Wedding / events directories and platforms
+    "partyslate.com", "eventective.com", "onefinedayweddingexpo.com.au",
+    # Local media, blogs, tourism (not business sites)
+    "axios.com", "bostonmagazine.com", "theurbanlist.com", "goop.com",
+    "hobokengirl.com", "eater.com", "visitkc.com", "clutch.co", "mapquest.com",
+    # General directories
+    "yellowpages.com.au", "heytutor.com",
+    # Hospital systems and large health networks (not sole traders)
+    "medstarhealth.org", "uwmedicine.org", "uchealth.org", "nyp.org",
+    "saintalphonsus.org", "stlukesonline.org", "bristolhealth.org",
+    "indymca.org", "ymcanorth.org", "tucsonjcc.org", "tucsonymca.org",
+    "shalomaustin.org", "tbpm.org", "brighamandwomens.org", "southshorehealth.org",
 }
 
 
@@ -248,7 +285,7 @@ def get_leads_for_email_sending(daily_limit=20):
     eligible = [
         l for l in leads
         if _is_sendable_email(l.get("contact_email", ""))
-        and l.get("status") not in ("messaged", "replied", "paid")
+        and l.get("status") not in ("messaged", "replied", "paid", "dead")
         and not l.get("outreach_date")
         and l.get("contact_email", "").lower() not in already_sent
     ]

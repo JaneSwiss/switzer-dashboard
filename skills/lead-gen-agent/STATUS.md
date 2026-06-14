@@ -1,6 +1,6 @@
 # Lead-gen agent — STATUS
 
-Last updated: 2026-06-12
+Last updated: 2026-06-14
 
 ---
 
@@ -9,16 +9,17 @@ Last updated: 2026-06-12
 Cold outreach pipeline for Jane's **Pinterest strategy consulting service** (NOT branding kits/templates).
 Finds small business owners who have no Pinterest presence, generates personalised outreach, sends via email or website contact form.
 
-Target: any small business owner (product sellers, coaches, service businesses — all valid).
+Target: solo coaches, consultants, service providers, small e-commerce brands.
 Pitch: Pinterest strategy packages → pinterest.switzertemplates.com
 
 ---
 
 ## Daily routine (just tell me "send today's outreach" and I run all of this)
 
-1. Send 15–50 emails to leads with direct email addresses
-2. Submit as many contact forms as possible to leads without email addresses
-3. If queue is running low: extract contact info from the next batch of leads, then generate drafts
+1. Send emails to leads with direct email addresses (limit 15–20/day)
+2. Submit contact forms to leads without email addresses (limit 20–30/day)
+3. If queue is running low: run extractor on next batch, then generate drafts
+4. If extractor queue is also low: run web_search_finder first to add new leads
 
 ---
 
@@ -30,39 +31,55 @@ website_contact_extractor.py → scrapes websites to find email or contact URL
 outreach_generator.py        → generates personalised draft per lead (Claude)
 email_sender.py              → sends emails via Gmail SMTP
 contact_form_sender.py       → submits contact forms via Playwright (headless Chrome)
+export_contacts.py           → exports contacts-book-YYYY-MM-DD.csv (auto-runs after sending)
 ```
 
 Lead tracker CSV: `outputs/leads/lead-tracker.csv`
 Sent log (append-only): `outputs/leads/sent-emails.log`
 Outreach drafts: `outputs/leads/outreach-drafts/`
+Manual form failures: `outputs/leads/manual-forms.csv`
 
 ---
 
 ## Contacts book
 
-Permanent, human-readable record of all qualified leads. Open in Google Sheets.
+Permanent, dated CSV of all qualified leads. Re-generated automatically after every send run.
 
-File: `outputs/leads/contacts-book.csv`
+File pattern: `outputs/leads/contacts-book-YYYY-MM-DD.csv`
 Script: `python3 skills/lead-gen-agent/export_contacts.py`
 
 Columns: business_name, owner_name, niche, website, email, contact_form_url, source, messaged, date_messaged, response
 
-Re-run this script at the end of each session to keep the file current.
-
-**As of 2026-06-12:** 431 contacts — 158 messaged, 273 not yet contacted, 264 have email, 167 have contact form URL.
+**As of 2026-06-14:** 482 contacts — 172 messaged, 310 not yet contacted, 302 have email, 180 have contact form URL.
 
 ---
 
-## Current queue (as of 2026-06-12)
+## Current queue (as of 2026-06-14)
 
 | Stage | Count |
 |-------|-------|
-| Ready to email (have email, not sent) | ~151 |
-| Ready for contact form (have URL + draft) | ~17 |
-| Have contact URL but need draft generated | ~22 |
-| Need contact extraction from website | ~332 |
-| Already messaged | ~178 |
-| Total in tracker | ~945 |
+| Already messaged | ~172 |
+| Ready to email (have email + draft, not sent) | ~130 |
+| Ready for contact form (have URL + draft) | ~5 |
+| Need extraction (have website, no contact info) | ~249 |
+| Need outreach draft generated | ~200 |
+| Total in tracker | ~978 |
+
+---
+
+## Target niches
+
+### Service niches (searched per city, US + UK/AU cities)
+life coaching, health coaching, relationship coaching, financial coaching, mindset coaching,
+therapy, business coaching, nutrition coaching, esthetics, interior design,
+wedding photography, event planning, massage therapy, personal styling, home organizing
+
+### E-commerce niches (no city, lower priority)
+handmade jewelry, handmade skincare, handmade candles, ceramic pottery, print on demand
+
+### Removed niches
+personal trainers, florists, pilates, virtual assistants, copywriters, social media managers,
+digital product sellers, brand consultants — removed as too competitive, low budget, or direct competitors
 
 ---
 
@@ -70,82 +87,136 @@ Re-run this script at the end of each session to keep the file current.
 
 | Tool | Purpose | Limit |
 |------|---------|-------|
-| Serper.dev | Google search for new leads | 2,500 searches/month free. Each run = ~250. Run 2–3x/week to stay free |
-| Apify residential proxy | Website scraping (contact extractor only) | $8/GB. ~$0.05/day at current pace. Plan: $29/month, $13 spent |
-| Gmail SMTP | Email sending | 500/day hard limit. Currently sending 15–50/day |
-| Playwright (local) | Contact form submission | No external limit. ~45s per attempt. Runs on Jane's Mac |
-| Anthropic API (Sonnet 4.6) | Outreach draft generation | ~$0.01/draft. 50 drafts/day ≈ $0.50/day |
-| Hunter.io | Email enrichment from domains | 25 searches/month free. Currently disabled (HUNTER_ENRICHER_ENABLED=false) |
-
-**Total daily cost at full scale: ~$0.25–$0.62/day (~$7–20/month)**
+| Serper.dev | Google search for new leads | 2,500 searches/month free. Each run uses ~6–25 queries |
+| Apify residential proxy | Website scraping (extractor only) | ~$0.05/day at current pace |
+| Gmail SMTP | Email sending | 500/day hard limit. Sending 15–20/day |
+| Playwright (local) | Contact form submission | No external limit. ~45s per form. Runs on Jane's Mac |
+| Anthropic API (Sonnet 4.6) | Draft generation | ~$0.01/draft |
 
 ---
 
-## What's working
+## Junk filtering — 4 layers
 
-- **Email sending** — reliable. Gmail SMTP, App Password auth. Duplicate prevention via append-only sent-emails.log
-- **Contact form submission** — works for Shopify, WordPress, standard HTML forms (~25% success rate across all attempts)
-- **Lead finding** — web_search_finder.py uses Serper (Google) across 19 niches × 47 locations
-- **Draft generation** — personalised opener + body via Claude. Greeting extracts first name from owner_name, email prefix, or business name
+### Layer 1: Serper result filtering (web_search_finder — before saving to tracker)
 
-## What doesn't work / known issues
+**Institutional keyword filter** (checks title + snippet):
+- Hospitals, medical centers, health systems, rehab centers
+- Universities, colleges, schools
+- Foundations, institutes, nonprofits, food banks
+- YMCAs, JCCs, churches, councils
+- Chains and franchises (Massage Envy, Hand and Stone, etc.)
+- Multi-practitioner signals: "& associates," "counseling center," "therapy center," "mental health center," "behavioral health," "family services," "coaching firm," "coaching team," "design group," "design firm," "design studio team," "& partners"
 
-- **Etsy actor (Apify)** — broken, returns 0 results. Switched to Google search for Etsy-type product sellers
-- **Contact forms with iframes** — Typeform, JotForm, Calendly embedded forms can't be filled (not in main DOM). These get `form-failed` flag and are auto-skipped
-- **Heavy Cloudflare sites** — some sites block headless Playwright even with webdriver flag hidden. Auto-skipped after failure
-- **HighLevel/msgsndr forms** — hidden modal forms. Some now work via JS eval fallback
-- **Hunter.io enricher** — disabled. Only 25 free/month, not worth enabling until paid plan
-- **Apify Etsy actor** — actor ID 7uBnuXg56t3U0h5Nl needs shop name extraction fix (shop names buried in listing URLs). Not worth fixing — Google search works fine
+**Domain-level signals** (checked in `_should_skip()`):
+- `.edu`, `.gov` — always skipped
+- Domain contains "hospital," "rehab," "university," "college" — skipped
+- Known junk domains in `SKIP_DOMAINS` (Yelp, directories, booking platforms, etc.)
+
+**URL normalisation** (keeps the lead, fixes the URL):
+- Blog/article path (`/blog/`, `/news/`, `/journal/`, etc.) → strip to homepage
+- Product/shop path (`/shop`, `/collections`, `/products`) → strip to homepage
+- Shopify Google Shopping tracking param (`srsltid=`) → strip to homepage
+
+**Snippet email extraction** (bonus — no fetch needed):
+- Sendable email in Serper snippet → lead marked qualified, skips extraction entirely
+
+**Service query excludes** (appended to every city-based query):
+`-site:yelp.com -site:psychologytoday.com -site:thumbtack.com -site:bark.com -site:zocdoc.com -site:healthgrades.com -site:betterhelp.com -site:theknot.com -site:weddingwire.com`
+
+### Layer 2: Extractor filtering (website_contact_extractor)
+- `SKIP_WEBSITE_DOMAINS` — non-business domains cleared before fetching
+- `_BAD_EMAIL_DOMAINS` — known platform/directory domains filtered from extracted emails
+- Wix sites detected → skip contact form path (forms are JS-only, can't be submitted)
+- `_has_contact_form()` — contact page URL only stored if real fillable form found in static HTML
+- E-commerce leads already on Pinterest → marked dead, skipped
+- Homepage returns 403/401/429 (BLOCKED) → bail on whole domain immediately, skip all paths
+
+### Layer 3: Lead tracker filtering (lead_tracker.py)
+- `_is_sendable_email()` — blocks bad prefixes and known platform domains
+- Bad prefixes: hiring, jobs, noreply, board, support, billing, frontdesk, admin, reception, customercare, intake, concierge, enquiries, feedback, press, media, partnerships, wholesale, orders
+- `mysite.com` blocked (placeholder domain)
+- Dead/messaged/paid leads excluded from extraction queue
+
+### Layer 4: Pre-send filtering (email_sender + contact_form_sender)
+- `_is_sendable_email()` runs again before every email send
+- `_is_bad_contact_domain()` runs before every form submit
+- Sent log deduplication — never emails the same address twice
+- `form-failed` in notes → auto-skipped by contact form sender
 
 ---
 
-## Junk filtering (3 layers)
+## Deduplication
 
-1. **Entry (web_search_finder)** — `SKIP_DOMAINS` blocks directories, chains, booking platforms before leads enter tracker
-2. **Pre-scrape (website_contact_extractor)** — `_BAD_EMAIL_DOMAINS` skips known bad sites before fetching
-3. **Pre-send (email_sender + contact_form_sender)** — `_is_sendable_email()` blocks generic inboxes (admin@, reception@, etc.) and known platform domains
-
-### Bad email prefixes (skip these inboxes)
-hiring, jobs, recruitment, careers, noreply, no-reply, board, support, billing, frontdesk, admin, reception, customercare, clientconnect, intake, concierge, studio, enquiries, enquiry, comments, feedback, press, media, partnerships, wholesale, orders
+`append_leads()` in lead_tracker.py deduplicates by:
+- `etsy_url` — Etsy shop URL
+- `instagram_handle` — Instagram handle
+- `contact_email` — email address
+- `website` — website URL ← added this session (prevents same site being added twice from multiple finder runs)
 
 ---
 
-## Outreach message (current template)
+## Outreach — email (3 rotating templates)
 
-```
-{greeting}
+All templates share: personalised opener (Claude-generated), Jane's social proof (28,000+ sales), link to pinterest.switzertemplates.com, free guide link. No price mentioned. Subject line from pool of 50+ variants.
 
-{opener} I noticed you don't have a Pinterest presence — which is worth looking into for your type of business.
+Greeting: "Hi {FirstName}," extracted in priority order:
+1. `owner_name` field (set by scraper)
+2. Email prefix if it looks like a real name (e.g. `elissa@...` → Elissa)
+3. "byName" pattern in prefix (e.g. `aestheticsbyeimear@` → Eimear)
+4. Domain root starting with a known first name (e.g. `info@amyvermillion.com` → Amy)
+5. CamelCase business name (first word only, if in known names list)
+Falls back to "Hi," if none found.
 
-My name is Jane. I work with business owners to build Pinterest strategies that drive consistent, long-term traffic to their websites. I also run Switzer Templates (28,000+ sales), and Pinterest is my main traffic driver.
+## Outreach — contact form (1 template)
 
-I offer two packages tailored to your niche: https://pinterest.switzertemplates.com/ Each includes a full audit and a strategy built around what's actually working in your industry.
+Same structure as email but shorter — no subject, adapted for a contact box.
+Draft files: `{lead_id}-{business}-contact-form.txt`
 
-There's also a free Pinterest starter guide here if you want to explore first: switzertemplates.myflodesk.com/pinterest-guidebook
+## Niche angles — all covered
 
-Happy to answer any questions.
+All 15 service niches + 5 e-commerce niches have specific Pinterest reasoning in `NICHE_ANGLES` dict in `outreach_generator.py`. None fall back to `FALLBACK_ANGLE`.
 
-Regards,
-Jane
-```
-
-Greeting: "Hi {FirstName}," — extracted from owner_name → email prefix → domain root → CamelCase business name (first word only if in known first names list). Falls back to "Hi," if no name found.
+New niches added this session: health coaching, relationship coaching, financial coaching, mindset coaching, personal styling, home organizing.
 
 ---
 
 ## Contact form sender — technical notes
 
-File: `contact_form_sender.py`
-
-Key fixes applied 2026-06-12:
-- `state="attached"` in wait_for_selector (was "visible" — caused forms below fold to time out)
-- `requestSubmit()` for form submission — bypasses newsletter popup overlays
-- `navigator.webdriver` hidden via init_script — reduces Cloudflare bot detection
-- `networkidle` wait after domcontentloaded — gives JS-rendered forms time to mount
-- reCAPTCHA textareas skipped (both in fill loop and fallback query)
-- `"re"` removed from `_SUBJECT_HINTS` (was matching "g-recaptcha-response")
+- `requestSubmit()` for form submission — bypasses newsletter overlays
+- `navigator.webdriver` hidden — reduces Cloudflare bot detection
+- `networkidle` wait after `domcontentloaded` — gives JS-rendered forms time to mount
+- reCAPTCHA fields skipped
 - JS eval fallback for hidden/framework-managed fields (HighLevel/msgsndr)
-- Failed leads marked with `form-failed` in notes → auto-skipped on future runs
+- Failed leads marked `form-failed` in notes → auto-skipped on future runs
+- Type 1 failure (no form found) → `form-failed` flag only
+- Type 2 failure (form found, couldn't fill) → added to `manual-forms.csv` + `form-failed` flag
+
+---
+
+## A-to-Z test results (2026-06-14)
+
+Ran a full pipeline test on a small batch to verify efficiency:
+
+| Step | Result |
+|------|--------|
+| Finder (6 queries) | 33 new leads added |
+| Extraction (33 leads, ~12 min) | 26/33 contactable (79%) |
+| Drafts generated | 22 |
+| Emails sent | 5 (all personal-name inboxes) |
+| Forms submitted | 4 |
+| Total messaged | 9 from 33 leads (27%) |
+
+Main finding: 79% contactable rate confirms filtering improvements are working. Remaining issue is that some service queries (nutritionist) returned institutional results — fixed with institutional keyword filter on titles/snippets.
+
+---
+
+## Known remaining issues
+
+- **Massage Envy, chains** in massage therapist search — caught by institutional filter now
+- **Therapist niche** is highest junk risk (many multi-therapist practices have solo-looking websites) — monitor quality
+- **E-commerce quality** is lower than service niches — acceptable as lower priority
+- **Contact form success rate** varies (~40–60% of attempts succeed) — Playwright limitation for JS-heavy forms
+- **Apify Etsy actor** — broken, not used. Google search works fine as replacement
 
 ---
 
@@ -155,4 +226,5 @@ Key fixes applied 2026-06-12:
 - `APIFY_API_KEY` + `APIFY_PROXY_PASSWORD` — Apify scraping proxy
 - `GMAIL_ADDRESS` + `GMAIL_APP_PASSWORD` — email sending
 - `SERPER_API_KEY` — Google search for leads
-- `HUNTER_API_KEY` — email enrichment (currently disabled)
+- `TAILWIND_API_KEY` — not used by lead-gen agent
+- `HUNTER_API_KEY` — email enrichment (disabled, only 25/month free)
