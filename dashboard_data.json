@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-06-10",
+  "last_updated": "2026-06-09",
   "etsy_agent": {
     "status": "active",
     "last_run": "2026-05-05",
@@ -2787,18 +2787,25 @@
         "date_written": "2026-06-08",
         "filename": "2026-06-08-newsletter-pinterest-freebie.md",
         "sent": false
+      },
+      {
+        "type": "Newsletter - marketing order (Pinterest pitch)",
+        "subject": "You're doing your marketing in the wrong order",
+        "date_written": "2026-06-09",
+        "filename": "2026-06-09-newsletter-marketing-order.md",
+        "sent": false
       }
     ]
   },
   "lead_gen_agent": {
     "status": "active",
-    "last_run": "2026-06-01",
+    "last_run": "2026-06-15",
     "stats": {
-      "total_leads": 142,
-      "contactable": 3,
-      "messaged": 3,
+      "total_leads": 1274,
+      "contactable": 573,
+      "messaged": 190,
       "replied": 0,
-      "sent_today": 0
+      "sent_today": 14
     }
   },
   "nerd_agent": {
