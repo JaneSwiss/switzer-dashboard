@@ -1,32 +1,28 @@
-SUBJECT LINE A: You're doing your marketing in the wrong order
-SUBJECT LINE B: Why your marketing isn't gaining traction (it's not the content)
-PREVIEW TEXT: Most business owners skip step one entirely.
+SUBJECT LINE A: 30-day marketing cheat sheet for business owners
+SUBJECT LINE B: The 30-day marketing plan worth actually following
+PREVIEW TEXT: Week by week — what to do and in what order.
 
 ---
 
 BODY:
 
-The reason most small business marketing doesn't gain traction isn't the content.
+If you've been putting off getting your marketing in order, here's a simple plan.
 
-It's the order.
+Four weeks. Twelve tasks. Each week builds on the last so nothing gets skipped and nothing gets wasted.
 
-Most business owners start by picking a platform and posting as much as possible. Then, months in, they wonder why nothing is working — and try to backfill the strategy they should have built first.
+**Week 1 — The foundation**
+Set up Google Analytics so you actually know where your traffic comes from. Choose one platform to focus on (Pinterest is worth a serious look — people go there actively searching for products and services, not just scrolling past ads). Create a simple lead magnet to start building your email list from day one.
 
-Here's the sequence that actually makes sense:
+**Week 2 — The content**
+Write your first blog post targeting a keyword your customer would actually search. Set up a basic email welcome series for anyone who subscribes. Build a social posting schedule you can realistically stick to — consistency beats volume every time.
 
-**1. Set up tracking before you post anything.**
-Google Analytics, your website stats, even just knowing where your traffic comes from. This takes an afternoon and feels like admin — but in three months, when you want to know what's actually working, you'll have data instead of guesses.
+**Week 3 — The review**
+Check your analytics and see what's already moving. Make sure your website works properly on mobile — most of your visitors are on their phones. Build a content calendar for the next month so you're not starting from scratch every week.
 
-**2. Pick one platform and build it properly.**
-Not three. One. If you're deciding where to focus, Pinterest is worth a serious look — it's a search engine as much as it is a social platform. People go there actively looking for something to buy or try. That's a different kind of traffic than most platforms give you, and it keeps working long after you've posted.
+**Week 4 — The refinement**
+Look at your numbers: open rates, traffic, what people clicked. Run an A/B test on your next email subject line. Plan month two based on what the data actually says, not what you hoped would work.
 
-**3. Build your email list from day one.**
-Your social following is rented. Your list is yours. A simple lead magnet — a free template, a checklist, a short guide — gives people a reason to hand over their email. Once they're on your list, no algorithm stands between you and them.
-
-**4. Then make the content plan.**
-A blog post, a posting schedule, a content calendar — all of this works better once the first three are in place. You know who you're talking to. You have somewhere to send them. You can measure what happens.
-
-That's it. Not complicated. Just not the order most people follow.
+That's it. Not a complicated system. Just the right things, in the right order.
 
 Xo Jane
 
@@ -37,6 +33,6 @@ Segment: Full list (21,000 subscribers)
 CTA button label: See done-for-you Pinterest setup
 CTA link: https://pinterest.switzertemplates.com
 
-P.S. line to add below sign-off (optional):
-"If Pinterest is the platform you want to focus on — I offer done-for-you setup,
-so you can skip the learning curve entirely. [See what's included →](https://pinterest.switzertemplates.com)"
+P.S. to add below sign-off:
+"If Pinterest is the platform you're committing to in week one — I offer done-for-you setup
+so you can skip the trial and error. [See what's included →](https://pinterest.switzertemplates.com)"
