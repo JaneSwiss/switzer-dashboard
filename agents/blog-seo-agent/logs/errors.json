@@ -436,5 +436,29 @@
     "stage": "banned_words",
     "keyword": "how to delete a board on pinterest",
     "error": "Banned words remain after revision: ['landscape']"
+  },
+  {
+    "date": "2026-06-18",
+    "stage": "banned_words",
+    "keyword": "how to get followers on pinterest",
+    "error": "Banned words remain after revision: ['landscape']"
+  },
+  {
+    "date": "2026-06-18",
+    "stage": "banned_words",
+    "keyword": "pinterest marketing manager",
+    "error": "Banned words remain after revision: ['discover', 'landscape']"
+  },
+  {
+    "date": "2026-06-18",
+    "stage": "banned_words",
+    "keyword": "how to start a pinterest page",
+    "error": "Banned words remain after revision: ['landscape']"
+  },
+  {
+    "date": "2026-06-18",
+    "stage": "banned_words",
+    "keyword": "pinterest tips for beginners",
+    "error": "Banned words remain after revision: ['landscape']"
   }
 ]

@@ -83,23 +83,77 @@ def extract_post_content(html_path: Path) -> "tuple[str, str]":
     if h1:
         h1.decompose()
 
+    _insert_spacer_paragraphs(post_div, soup)
+
     body_html = "".join(str(child) for child in post_div.children).strip()
     return title, body_html
 
 
+def _insert_spacer_paragraphs(post_div, soup: BeautifulSoup) -> None:
+    """Wix's blog editor applies no built-in margin between consecutive
+    paragraph/list/heading blocks (confirmed: converted paragraphData is always
+    empty — Wix relies on default theme spacing, which is much tighter than the
+    local HTML preview's CSS). Without this, short label-style paragraphs
+    (e.g. "<p><strong>Her Pinterest setup:</strong></p>") stack directly against
+    the next block with no visual gap, which is exactly what was showing up
+    squished in the Wix drafts. A blank paragraph between every block-level
+    child reproduces what manually pressing Enter in the Wix editor does."""
+    children = [c for c in post_div.find_all(recursive=False)]
+    for child in reversed(children[:-1]):
+        spacer = soup.new_tag("p")
+        spacer.append(" ")
+        child.insert_after(spacer)
+
+
+RICOS_MAX_CHARS = 29000  # Wix's hard limit is 30,000 — leave a safety margin
+
+
+def _chunk_html_blocks(body_html: str, max_chars: int = RICOS_MAX_CHARS) -> "list[str]":
+    """Splits body HTML into chunks under Wix's per-request character limit,
+    breaking only at top-level block boundaries (never mid-tag) so each chunk
+    is valid, self-contained HTML."""
+    soup = BeautifulSoup(body_html, "html.parser")
+    blocks = [str(c) for c in soup.find_all(recursive=False)]
+
+    chunks, current = [], ""
+    for block in blocks:
+        if current and len(current) + len(block) > max_chars:
+            chunks.append(current)
+            current = block
+        else:
+            current += block
+    if current:
+        chunks.append(current)
+    return chunks
+
+
 def convert_html_to_ricos(body_html: str) -> dict:
     """Calls Wix's Convert-to-Ricos-Document endpoint to turn plain HTML
-    into the rich-content format the Draft Posts API requires."""
-    resp = requests.post(
-        f"{WIX_API_BASE}/ricos/v1/ricos-document/convert/to-ricos",
-        headers=_headers(),
-        json={"html": body_html},
-        timeout=30,
-    )
-    if not resp.ok:
-        print(f"Ricos conversion error {resp.status_code}: {resp.text}")
-        resp.raise_for_status()
-    return resp.json()["document"]
+    into the rich-content format the Draft Posts API requires. Chunks the
+    request when the post is long enough to exceed Wix's 30,000-character
+    per-request limit, then merges the resulting node lists into one document."""
+    chunks = _chunk_html_blocks(body_html) if len(body_html) > RICOS_MAX_CHARS else [body_html]
+
+    merged_nodes = []
+    document_meta = None
+    for i, chunk in enumerate(chunks):
+        resp = requests.post(
+            f"{WIX_API_BASE}/ricos/v1/ricos-document/convert/to-ricos",
+            headers=_headers(),
+            json={"html": chunk},
+            timeout=30,
+        )
+        if not resp.ok:
+            print(f"Ricos conversion error (chunk {i+1}/{len(chunks)}) {resp.status_code}: {resp.text}")
+            resp.raise_for_status()
+        doc = resp.json()["document"]
+        merged_nodes.extend(doc.get("nodes", []))
+        if document_meta is None:
+            document_meta = {k: v for k, v in doc.items() if k != "nodes"}
+
+    if len(chunks) > 1:
+        print(f"  Converted in {len(chunks)} chunks ({len(body_html):,} chars total) — merged into one document.")
+    return {**(document_meta or {}), "nodes": merged_nodes}
 
 
 def create_draft_post(title: str, rich_content: dict) -> dict:
@@ -123,7 +177,20 @@ def create_draft_post(title: str, rich_content: dict) -> dict:
     return resp.json()
 
 
-def publish(slug: str) -> None:
+def update_draft_post(draft_id: str, title: str, rich_content: dict) -> dict:
+    resp = requests.patch(
+        f"{WIX_API_BASE}/blog/v3/draft-posts/{draft_id}",
+        headers=_headers(),
+        json={"draftPost": {"id": draft_id, "title": title, "richContent": rich_content}},
+        timeout=30,
+    )
+    if not resp.ok:
+        print(f"Wix API error {resp.status_code}: {resp.text}")
+        resp.raise_for_status()
+    return resp.json()
+
+
+def publish(slug: str, draft_id: str = None) -> None:
     if not (WIX_API_KEY and WIX_SITE_ID and WIX_MEMBER_ID):
         print("Missing WIX_API_KEY, WIX_SITE_ID, or WIX_MEMBER_ID in .env — see setup steps in this file's docstring.")
         sys.exit(1)
@@ -137,17 +204,20 @@ def publish(slug: str) -> None:
     print("Converting content to Wix rich-content format...")
     rich_content = convert_html_to_ricos(body_html)
 
-    print("Creating draft post in Wix...")
-    result = create_draft_post(title, rich_content)
-
-    draft = result.get("draftPost", {})
-    draft_id = draft.get("id", "unknown")
-    print(f"\nDraft created: {draft_id}")
+    if draft_id:
+        print(f"Updating existing draft {draft_id} in Wix...")
+        update_draft_post(draft_id, title, rich_content)
+        print(f"\nDraft updated: {draft_id}")
+    else:
+        print("Creating draft post in Wix...")
+        result = create_draft_post(title, rich_content)
+        draft_id = result.get("draftPost", {}).get("id", "unknown")
+        print(f"\nDraft created: {draft_id}")
     print(f"Open your Wix Blog dashboard > Drafts to review and publish '{title}'.")
 
 
 if __name__ == "__main__":
-    if len(sys.argv) != 2:
-        print("Usage: python3 publish_to_wix.py <slug>")
+    if len(sys.argv) not in (2, 3):
+        print("Usage: python3 publish_to_wix.py <slug> [existing_draft_id]")
         sys.exit(1)
-    publish(sys.argv[1])
+    publish(sys.argv[1], sys.argv[2] if len(sys.argv) == 3 else None)

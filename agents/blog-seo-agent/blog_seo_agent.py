@@ -841,7 +841,11 @@ never ALL CAPS, never Title Case.
 
 
 def check_banned_words(text: str) -> list[str]:
-    plain = re.sub(r"<[^>]+>", " ", text)
+    # Strip [DALLE: ...] image prompts first — they legitimately use words like
+    # "landscape" (aspect ratio) and "discover" that would otherwise false-positive
+    # against actual blog prose.
+    without_prompts = re.sub(r"\[DALLE:.*?\]", " ", text, flags=re.DOTALL)
+    plain = re.sub(r"<[^>]+>", " ", without_prompts)
     lower = plain.lower()
     return [w for w in BANNED_WORDS if w.lower() in lower]
 
