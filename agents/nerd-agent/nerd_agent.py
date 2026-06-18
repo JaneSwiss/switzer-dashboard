@@ -72,6 +72,7 @@ ALLOWED_TOPICS = {
     "wix-websites",
     "branding",
     "ai-tools",
+    "ai-video-editing",
 }
 
 TOPIC_LABELS = {
@@ -82,6 +83,7 @@ TOPIC_LABELS = {
     "content-creation": "Content Creation",
     "product-development": "Product Development",
     "wix-websites": "Wix Websites",
+    "ai-video-editing": "AI Video Editing",
     "branding": "Branding",
     "ai-tools": "AI Tools & Making Money with AI",
 }

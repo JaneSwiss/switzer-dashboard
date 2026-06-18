@@ -1,0 +1,33 @@
+{
+  "id": "7bb4287c",
+  "type": "youtube",
+  "url": "https://www.youtube.com/watch?v=1w_H6uA3N-g",
+  "title": "I Use Claude to Edit Videos: Here's My Exact Process",
+  "date_ingested": "2026-06-18",
+  "topics": [
+    "ai-video-editing"
+  ],
+  "word_count": 4428,
+  "key_points": [
+    "The creator went viral on Twitter by sharing a clipping tool that turns long-form content into short-form content, built in one hour using Claude",
+    "The creator's video on Remotion for generating motion graphics with Claude reached 20,000 views",
+    "Credit given to creator Renee for introducing the workflow of editing YouTube videos using Claude",
+    "Step one uses a custom skill that removes silences, repetitions, mistakes, and filler words while preserving laughter for comedic effect",
+    "The skill uses Whisper to analyze transcripts and FFmpeg to look at video frames to decide what to cut",
+    "A 7-minute video took 3 minutes to process and was reduced by 1.5 minutes after the rough cut",
+    "Users can customize the cutting style by giving Claude a reference video of their manual editing style",
+    "Step two demonstrates extracting images from Google Slides PDFs and overlaying them at specific timestamps based on transcript analysis",
+    "The creator built a Slack bot that saves screenshots and assets to a finder folder that Claude can access during editing",
+    "Step three shows adding sound effects (Duolingo correct/wrong sounds) at specific moments based on transcript content",
+    "Memes can be saved via the Slack bot (example: confused math lady meme) and Claude corrected timestamp from 1:50 to 1:46 based on detecting when the subject was most confused",
+    "Claude can add zooms using cinematic terms like Ken Burns effect or harsh zoom, and can describe effects from reference videos",
+    "The Clipify skill for turning long-form to short-form content received 300 stars on GitHub and eliminates the need for tools like Opus Clip",
+    "Clipify offers options for caption format, split screen faces, or zoom-in on active speaker for vertical video output",
+    "Tella has an MCP (Model Context Protocol) that allows Claude to perform actions directly reflected in the Tella editor",
+    "Tella MCP tools include: list videos, upload clips, cut clips, get frames for thumbnails, remove filler words, and add B-roll layouts",
+    "Remotion integration generates motion graphics as MP4 B-roll that gets uploaded directly to Tella",
+    "The workflow can connect to tools like Eleven Labs for narration and Seedance for AI-generated B-roll",
+    "The MCP can extract frames from videos for YouTube thumbnails, selecting for criteria like eyes pointing forward and animated expressions"
+  ],
+  "summary": "The video presents an end-to-end workflow for editing videos using Claude, credited to creator Renee who originally introduced this approach. The creator demonstrates that agentic video editing is already functional, citing their viral Twitter clipping tool built in one hour and a Remotion video at 20,000 views as evidence.\n\nStep one covers making a rough cut using a custom skill that removes silences, repetitions, mistakes, and filler words while preserving laughter. The skill uses Whisper for transcript analysis and FFmpeg for frame analysis. A 7-minute raw recording was processed in 3 minutes and reduced by 1.5 minutes. Users can customize the cutting aggressiveness by providing reference videos of their own editing style or adjusting prompts.\n\nStep two demonstrates overlaying images at specific timestamps. The creator extracts images from a Google Slides PDF, and Claude maps 20 photo moments to the correct timestamps based on transcript analysis. A Slack bot the creator built saves screenshots and assets to a finder folder that Claude can access. Step three covers adding sound effects like Duolingo correct/wrong sounds at moments identified through transcript content. Memes saved via the Slack bot can be inserted at specific timestamps, and Claude autonomously corrected a requested 1:50 timestamp to 1:46 after detecting where the subject appeared most confused.\n\nThe video shows adding zooms using cinematic terms like Ken Burns effect or harsh zoom, with Claude providing a list of zoom timestamps. The Clipify skill, which has 300 GitHub stars, converts long-form to short-form content with options for caption formatting and speaker zoom, eliminating the need for tools like Opus Clip.\n\nThe final section demonstrates Tella's MCP integration, which allows Claude to directly control the Tella editor. MCP tools include listing videos, uploading clips, cutting, extracting thumbnail frames, removing filler words, and adding B-roll layouts. The creator shows generating motion graphics in Remotion that upload directly as B-roll to Tella. Additional integrations mentioned include Eleven Labs for narration and Seedance for AI B-roll generation. The MCP can also extract frames for thumbnails based on criteria like forward-facing eyes and animated expressions."
+}

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "total_sources": 20,
+  "total_sources": 23,
   "sources": [
     {
       "id": "3fca9459",
@@ -290,6 +290,48 @@
       ],
       "word_count": 4366,
       "summary_file": "entries/c044e55e-how-i-make-100kmonth-using-claude-c.json",
+      "status": "ok"
+    },
+    {
+      "id": "7bb4287c",
+      "type": "youtube",
+      "url": "https://www.youtube.com/watch?v=1w_H6uA3N-g",
+      "title": "I Use Claude to Edit Videos: Here's My Exact Process",
+      "author": "",
+      "date_ingested": "2026-06-18",
+      "topics": [
+        "ai-video-editing"
+      ],
+      "word_count": 4428,
+      "summary_file": "entries/7bb4287c-i-use-claude-to-edit-videos-heres-m.json",
+      "status": "ok"
+    },
+    {
+      "id": "ddb6c9b1",
+      "type": "youtube",
+      "url": "https://www.youtube.com/watch?v=ZNbgOhxhzXg",
+      "title": "Claude Just Destroyed Every Video Editing Tool",
+      "author": "",
+      "date_ingested": "2026-06-18",
+      "topics": [
+        "ai-video-editing"
+      ],
+      "word_count": 7626,
+      "summary_file": "entries/ddb6c9b1-claude-just-destroyed-every-video-e.json",
+      "status": "ok"
+    },
+    {
+      "id": "1cb20edd",
+      "type": "youtube",
+      "url": "https://www.youtube.com/watch?v=OjRiJRItPrY",
+      "title": "How I Fully Automated My Video Editing with Claude Code (No Hype)",
+      "author": "",
+      "date_ingested": "2026-06-18",
+      "topics": [
+        "ai-video-editing"
+      ],
+      "word_count": 3726,
+      "summary_file": "entries/1cb20edd-how-i-fully-automated-my-video-edit.json",
       "status": "ok"
     }
   ]

@@ -1,0 +1,33 @@
+{
+  "id": "1cb20edd",
+  "type": "youtube",
+  "url": "https://www.youtube.com/watch?v=OjRiJRItPrY",
+  "title": "How I Fully Automated My Video Editing with Claude Code (No Hype)",
+  "date_ingested": "2026-06-18",
+  "topics": [
+    "ai-video-editing"
+  ],
+  "word_count": 3726,
+  "key_points": [
+    "Creator grew channel to 550k followers across YouTube, Instagram, and TikTok starting in 2018, but gave up due to editing time",
+    "In 2018, using Adobe Premiere Pro and After Effects, a 5-minute video took 6-8 hours to edit manually",
+    "Claude Code was used to install tools that replace manual repetitive video editing tasks: removing filler words, removing silence, enhancing audio quality, adding animated captions, b-roll, sound effects, zoom effects, and animated overlays",
+    "Remotion is a free tool but creator found results 'pretty crappy' and slow, even after trying tutorials from other creators",
+    "Creator suggests using external template sites to copy animation links and have Claude Code use Remotion to rebuild similar animations",
+    "Example project: uploaded 12-minute video, edited down to 8-9 minutes, removed filler words, added overlays with b-roll pulled via Pexels API key",
+    "Cost breakdown per video using Claude Code: Claude AI via Open Writer API, FFmpeg (free), Whisper (free), Pexels API (free), Remotion (free) — total approximately 4 cents for videos under 10 minutes, approximately 20 cents for 60-minute videos",
+    "Creator provides a Notion document with tool details, installation instructions, input/output folder structure, and an MD file serving as memory/instructions for Claude Code",
+    "Creator switched to Descript due to frustration with Remotion's speed and animation quality on their laptop",
+    "Descript's AI agent is called Underlord, which can be connected to Claude Code via API, but creator stopped doing this because it consumed Claude Code credits for the same result as using Underlord directly in Descript",
+    "Descript workflow: Edit for clarity (moderate intensity preferred over low or heavy), shorten word gaps (changed 4-second gaps to 3 seconds), remove filler words with 'avoid harsh cuts' option, remove retakes, enable Studio Sound for audio enhancement",
+    "Example edit: 17-minute raw video reduced to 14 minutes after Descript AI edits",
+    "Descript advantage over Claude Code: word-based transcript view shows exactly what was edited, whereas Claude Code output requires watching the entire video to see changes",
+    "Descript layout feature allows adding side-by-side screen shares with animated face bubbles, which creator says used to require significant manual effort",
+    "Descript exports directly to YouTube, important for creator's 256GB laptop storage limitation",
+    "Creator uses OBS for screen recording, had Claude Code configure OBS setup including hotkeys for scene switching (phone, intro, screen share scenes)",
+    "Claude Code analyzed another creator's video setup dimensions and recreated it, adding round corners and shadow filters to screen share via OBS filters",
+    "Background image sourced from Canva, creator uses black screen background because it stands out better and is easier on the eyes",
+    "Creator mentions Synthesia 2.0 as a realistic AI video generator for those who don't want to show their face, to be covered in future video"
+  ],
+  "summary": "The video opens with the creator explaining their content creation history, having grown to 550k followers across YouTube, Instagram, and TikTok since 2018, but ultimately giving up because video editing was too time-consuming. Back then, using Adobe Premiere Pro and After Effects, editing a 5-minute video took 6-8 hours. The creator frames this as motivation for finding AI-powered solutions in 2026.\n\nThe creator describes attempting to use Claude Code with Remotion to automate video editing tasks including removing filler words and silence, enhancing audio, adding animated captions, b-roll, sound effects, zoom effects, and animated overlays. They explicitly state that Remotion results were 'pretty crappy' and slow, even after watching tutorials. They suggest a workaround of copying animation links from template sites and having Claude Code rebuild them in Remotion, but emphasize this approach isn't perfected yet. They demonstrate an example where Claude Code edited a 12-minute video down to 8-9 minutes using Pexels API for b-roll.\n\nThe cost breakdown is detailed: using Claude AI via Open Writer API, FFmpeg (free), Whisper (free), Pexels API (free), and Remotion (free), the total cost per video was approximately 4 cents for videos under 10 minutes and approximately 20 cents for 60-minute videos. The creator offers a Notion document containing tool specifications, installation instructions, folder structure for input/output, and an MD file with instructions for Claude Code.\n\nThe creator then explains switching to Descript due to frustration with Remotion. They describe Descript's AI agent Underlord, noting that connecting it to Claude Code via API wastes credits since Underlord does the same work directly in Descript. The demonstrated Descript workflow includes: edit for clarity at moderate intensity, shorten word gaps from 4 seconds to 3 seconds, remove filler words while avoiding harsh cuts, remove retakes, and enable Studio Sound for audio enhancement. An example shows a 17-minute raw video reduced to 14 minutes. The creator highlights that Descript's transcript-based view shows exactly what was edited, unlike Claude Code where you must watch the entire output.\n\nAdditional Descript features demonstrated include the layout tool for side-by-side screen shares with animated face bubbles, built-in B-roll and music libraries, and direct YouTube export which is critical for their 256GB laptop. The creator then shows their OBS setup, explaining that Claude Code configured scene switching hotkeys for phone, intro, and screen share scenes. Claude Code also analyzed another creator's video dimensions to recreate a similar setup and added round corners and shadow filters to the screen share through OBS. The background is a black image from Canva. The video concludes with a mention of Synthesia 2.0 as an upcoming topic for creators who don't want to show their face."
+}

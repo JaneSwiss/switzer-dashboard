@@ -3,8 +3,23 @@
 *A living file. Update it at the end of any session where we build/change something
 meaningful on this agent — overwrite stale sections, don't just append.*
 
-**Last updated:** 2026-06-10 (second session — added AI topic, ingested 10 AI/Claude videos,
-built AI card in dashboard)
+**Last updated:** 2026-06-10 (third session — fixed report-generation prompt to match the
+approved conversational style permanently; added AI Video Editing topic, 3 sources, no
+dashboard card per Jane's request — files only)
+
+---
+
+## Important — report style is now fixed permanently
+
+`write_topic_report`'s prompt was rewritten this session to match the approved
+`pinterest-summary.md` style by default: conversational, organised by practical theme,
+explains HOW things work with real examples, Switzertemplates application woven in naturally
+(no separate "Implementation Suggestions" block), `max_tokens` raised to 6000. Every topic
+generated from now on comes out in this style automatically — no more manual rewrites needed.
+
+**Always pass `--topics <slug>` explicitly when ingesting** so Claude doesn't fall back to
+the nearest existing topic (e.g. `business-strategy`). If a new topic doesn't exist yet in
+`ALLOWED_TOPICS`/`TOPIC_LABELS`, add it to `nerd_agent.py` first, then ingest.
 
 ---
 
@@ -31,12 +46,30 @@ Commands: `learn`, `report`, `list`, `share` — see the module docstring for fu
 - `list`, `list --topic`, `list --id` — browse the knowledge base
 - `share` — write insight files to `context/` and refresh dashboard
 
-## Current knowledge base — 20 sources, 2 topics
+## Current knowledge base — 23 sources, 3 main topics
 
-| Topic | Sources | Insight file |
-|-------|---------|-------------|
-| Pinterest marketing | 10 | `context/nerd-insights/pinterest-marketing.md` |
-| AI tools & making money with AI | 10 | `context/nerd-insights/ai-tools.md` |
+| Topic | Sources | Insight file | Dashboard card? |
+|-------|---------|-------------|-----------------|
+| Pinterest marketing | 10 | `context/nerd-insights/pinterest-marketing.md` | Yes |
+| AI tools & making money with AI | 10 | `context/nerd-insights/ai-tools.md` | Yes |
+| AI video editing | 3 | `context/nerd-insights/ai-video-editing.md` | No — files only, Jane's call |
+
+### AI video editing sources (3)
+
+| # | Title | Entry ID |
+|---|---|---|
+| 1 | I Use Claude to Edit Videos: Here's My Exact Process | 7bb4287c |
+| 2 | Claude Just Destroyed Every Video Editing Tool | ddb6c9b1 |
+| 3 | How I Fully Automated My Video Editing with Claude Code (No Hype) | 1cb20edd |
+
+This topic is for Jane's personal account (JaneFitmind) — Instagram Reels (edited in CapCut)
+and YouTube vlogs. Checklist file: `context/nerd-insights/ai-video-editing-action-checklist.md`.
+Written specifically around her constraints: she edits in CapCut (none of the sources cover
+CapCut directly — they cover Descript, Remotion, Tella MCP) and she doesn't use a terminal
+(per [[feedback_no_terminal_commands]]). Checklist splits into "Track A" (things she does
+herself in plain Claude.ai chat — transcript-based clip-finding, zoom/SFX timing suggestions)
+and "Track B" (things she hands to the Claude Code agent directly — rough-cut automation,
+long-to-short clip generation — no terminal needed from her).
 
 ### Pinterest sources (10)
 

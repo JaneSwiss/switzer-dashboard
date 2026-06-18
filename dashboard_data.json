@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-06-09",
+  "last_updated": "2026-06-18",
   "etsy_agent": {
     "status": "active",
     "last_run": "2026-05-05",
@@ -2799,27 +2799,28 @@
   },
   "lead_gen_agent": {
     "status": "active",
-    "last_run": "2026-06-15",
+    "last_run": "2026-06-17",
     "stats": {
-      "total_leads": 1274,
-      "contactable": 573,
-      "messaged": 190,
+      "total_leads": 1971,
+      "contactable": 585,
+      "messaged": 480,
       "replied": 0,
       "sent_today": 14
     }
   },
   "nerd_agent": {
     "status": "active",
-    "last_run": "2026-06-10",
-    "total_sources_processed": 20,
+    "last_run": "2026-06-18",
+    "total_sources_processed": 23,
     "topics_covered": [
       "ai-tools",
+      "ai-video-editing",
       "business-strategy",
       "content-creation",
       "pinterest-marketing"
     ],
     "sources_by_type": {
-      "youtube": 19,
+      "youtube": 22,
       "article": 0,
       "email": 1
     },
@@ -2847,9 +2848,42 @@
         "key_points_captured": 184,
         "last_updated": "2026-06-10",
         "insight_file": "context/nerd-insights/ai-tools.md"
+      },
+      "ai-video-editing": {
+        "sources": 3,
+        "key_points_captured": 57,
+        "last_updated": "2026-06-18",
+        "insight_file": "context/nerd-insights/ai-video-editing.md"
       }
     },
     "recent_sources": [
+      {
+        "id": "7bb4287c",
+        "title": "I Use Claude to Edit Videos: Here's My Exact Process",
+        "type": "youtube",
+        "topics": [
+          "ai-video-editing"
+        ],
+        "date_ingested": "2026-06-18"
+      },
+      {
+        "id": "ddb6c9b1",
+        "title": "Claude Just Destroyed Every Video Editing Tool",
+        "type": "youtube",
+        "topics": [
+          "ai-video-editing"
+        ],
+        "date_ingested": "2026-06-18"
+      },
+      {
+        "id": "1cb20edd",
+        "title": "How I Fully Automated My Video Editing with Claude Code (No Hype)",
+        "type": "youtube",
+        "topics": [
+          "ai-video-editing"
+        ],
+        "date_ingested": "2026-06-18"
+      },
       {
         "id": "ce754acb",
         "title": "Why You Must Stop Selling Your Time for Money",
@@ -2907,33 +2941,6 @@
       {
         "id": "840cae84",
         "title": "Learn 97% of Claude in Under 16 Minutes",
-        "type": "youtube",
-        "topics": [
-          "ai-tools"
-        ],
-        "date_ingested": "2026-06-10"
-      },
-      {
-        "id": "5f676964",
-        "title": "How I'd Use Claude AI to Build a Premium Personal Brand (1-Person Business)",
-        "type": "youtube",
-        "topics": [
-          "ai-tools"
-        ],
-        "date_ingested": "2026-06-10"
-      },
-      {
-        "id": "2ff3dc02",
-        "title": "This AI Business Will Make You $1M (With Zero Employees)",
-        "type": "youtube",
-        "topics": [
-          "ai-tools"
-        ],
-        "date_ingested": "2026-06-10"
-      },
-      {
-        "id": "c044e55e",
-        "title": "How I Make $100k/month Using Claude Code (full guide)",
         "type": "youtube",
         "topics": [
           "ai-tools"

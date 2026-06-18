@@ -267,5 +267,32 @@
       "business-strategy",
       "content-creation"
     ]
+  },
+  {
+    "date": "2026-06-18",
+    "id": "7bb4287c",
+    "title": "I Use Claude to Edit Videos: Here's My Exact Process",
+    "type": "youtube",
+    "topics": [
+      "ai-video-editing"
+    ]
+  },
+  {
+    "date": "2026-06-18",
+    "id": "ddb6c9b1",
+    "title": "Claude Just Destroyed Every Video Editing Tool",
+    "type": "youtube",
+    "topics": [
+      "ai-video-editing"
+    ]
+  },
+  {
+    "date": "2026-06-18",
+    "id": "1cb20edd",
+    "title": "How I Fully Automated My Video Editing with Claude Code (No Hype)",
+    "type": "youtube",
+    "topics": [
+      "ai-video-editing"
+    ]
   }
 ]

@@ -1,0 +1,33 @@
+{
+  "id": "ddb6c9b1",
+  "type": "youtube",
+  "url": "https://www.youtube.com/watch?v=ZNbgOhxhzXg",
+  "title": "Claude Just Destroyed Every Video Editing Tool",
+  "date_ingested": "2026-06-18",
+  "topics": [
+    "ai-video-editing"
+  ],
+  "word_count": 7626,
+  "key_points": [
+    "Claude can be used for video editing including text on screen, subtitles, motion graphics, charts, and moving elements using natural language without coding knowledge",
+    "A 23-second animated clip that would take approximately 2 hours to edit manually (or 30-45 minutes for expert editors) can be created using Claude",
+    "Two methods are presented: Claude Design (web app) and HyperFrames (described as a better version of Remotion, more setup but more powerful)",
+    "HyperFrames can create audio-reactive animations, terminal-style animations, chromatic radial splits, karaoke-style subtitles synced to voice, and 3D UI reveals",
+    "HyperFrames workflow goes from HTML to browser to FFmpeg to MP4",
+    "Claude Design cannot read, listen to, or transcribe video content - you must manually provide transcripts with timestamps for syncing animations",
+    "Claude Design exports as standalone HTML which can then be rendered to MP4 through Claude Code using a handoff command",
+    "To export from Claude Design without MP4 export: either screen record full screen, or use Claude Code's handoff feature to render as MP4",
+    "Setting up HyperFrames requires Claude Code (can use VS Code or Claude desktop app), and involves cloning the official HeyGen HyperFrames GitHub repo",
+    "The presenter's workflow includes using a JSON file with word-for-word transcription and timestamps extracted from video assets",
+    "For transcription, you can use local Python Whisper (uses RAM) or OpenAI's Whisper API with an API key",
+    "HyperFrames has built-in catalog elements including macOS notifications, Reddit postcards, app showcase animations, and various transitions",
+    "The presenter rendered over 60 videos in one day while iterating on different methods",
+    "One video editing session used approximately 263k tokens out of 1 million context, prompting a session clear and handoff message to reduce token usage",
+    "The full project (one video from start to finish with revisions) consumed approximately 10% of a 5-hour limit on the $200/month max Claude plan",
+    "Raw footage should be manually edited to remove mistakes and dead space before processing, as the AI is not great at interpreting retakes",
+    "A ClickUp product demo attempt required 5 prompt iterations and still produced output that lost energy and taste compared to human editing",
+    "The presenter emphasizes that people with existing editing skills and creative intuition will be able to use these tools to 10x productivity, while those without taste may get mediocre outputs",
+    "The presenter's Claude Code project includes custom skills and design docs that improve with each iteration"
+  ],
+  "summary": "The video demonstrates how Claude can function as a complete video editing system for creating text overlays, subtitles, motion graphics, and animations using natural language prompts without coding knowledge. The presenter notes that a 23-second animated intro clip would take approximately 2 hours to edit manually, while expert editors might complete it in 30-45 minutes.\n\nTwo methods are covered: Claude Design and HyperFrames. Claude Design is a web app that can create animated content but has a key limitation - it cannot read, listen to, or transcribe video content, so users must provide transcripts with timestamps for animation syncing. To export from Claude Design, users either screen record the full-screen preview or use the handoff to Claude Code feature which copies a command to render the HTML as MP4. The presenter demonstrates creating a promotional video by dropping in standalone HTML from a website and prompting for motion graphics animations.\n\nHyperFrames is presented as a more powerful option requiring Claude Code setup through VS Code or the Claude desktop app. The workflow involves cloning the official HeyGen HyperFrames GitHub repo and having Claude analyze it to build skills and knowledge. HyperFrames features include audio-reactive animations, terminal-style effects, chromatic radial splits, karaoke-style subtitles, 3D UI reveals, and a catalog of pre-built elements like macOS notifications and Reddit postcards. The HTML-to-browser-to-FFmpeg-to-MP4 pipeline is explained.\n\nThe presenter walks through a live edit session with a 37-second video clip, showing how Claude Code analyzes video frames, requests transcription (using either local Whisper or OpenAI's Whisper API), creates a scene-by-scene plan, and generates HTML-based animations. Multiple revision rounds are demonstrated, with feedback given naturally as if speaking to a human editor about specific timestamps and issues like blurred text and cropped elements. The session consumed 263k tokens initially, prompting a session clear with a handoff message before continuing revisions.\n\nCost and performance considerations are addressed: the complete project used approximately 10% of the 5-hour limit on the $200/month max Claude plan. Rendering multiple videos simultaneously impacts CPU and RAM significantly. The presenter rendered over 60 test videos in one day while iterating. Raw footage should be pre-edited to remove mistakes and dead space since the AI struggles with interpreting retakes. A ClickUp product demo attempt required 5 iterations and still produced output lacking the energy of human editing, illustrating that users with existing creative intuition will achieve better results than those without developed taste."
+}
