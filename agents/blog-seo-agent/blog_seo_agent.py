@@ -685,15 +685,18 @@ FORMATTING RULES - apply these exactly:
 
 Title: Write in ALL CAPS literally. Example: HOW TO BUILD A BRAND THAT CONVERTS
 
-Section headings: Write in SENTENCE CASE — capitalize only the first word and any
-proper nouns (Pinterest, Wix, Canva, Etsy, Instagram, Google, etc.). Every other word
-stays lowercase. Mark each heading by starting its line with "### " so it can be
-detected and converted to a proper heading. Put a blank line before and after.
-RIGHT example: ### Why most business plans end up in a drawer
-WRONG (do not do this — every word capitalized): ### Why Most Business Plans End Up In A Drawer
-WRONG (do not do this either — full caps): ### WHY MOST BUSINESS PLANS END UP IN A DRAWER
-This sentence-case rule applies to EVERY section heading in the post, including the
-FAQ heading. Only the main title (above) is written in ALL CAPS — nothing else is.
+Section headings: Write in ALL CAPS literally, same as the title. Mark each heading
+by starting its line with "### " so it can be detected and converted to a proper
+heading. Put a blank line before and after.
+RIGHT example: ### WHY MOST BUSINESS PLANS END UP IN A DRAWER
+WRONG (do not do this — Title Case, only first letter of each word capitalized):
+### Why Most Business Plans End Up In A Drawer
+This ALL CAPS rule applies to the title and EVERY section heading, including the
+FAQ heading. Body text — every sentence, every paragraph — is the opposite: never
+ALL CAPS, never Title Case. Capitalize only the first word of each sentence and
+proper nouns (Pinterest, Wix, Canva, Etsy, Instagram, Google, etc). This distinction
+matters: headings are always ALL CAPS, body text is always plain sentence case —
+never mix the two up.
 
 Emphasis:
 - Use **bold** for important statements the reader must not miss
@@ -714,7 +717,7 @@ Never at the start of a heading. Never forced.
 CTAs: wrap the linked product or action phrase in **bold**
 
 Do not use em dashes.
-Write headings in sentence case, each starting with "### " — see FORMATTING RULES above.
+Write headings in ALL CAPS, each starting with "### " — see FORMATTING RULES above.
 
 Structure:
 - Introduction (150-200 words): the FIRST 1-2 sentences must give a direct, clear answer
@@ -734,7 +737,7 @@ Structure:
   (from Google PAA and Reddit) — not invented. Use only questions that genuinely fit
   the post. Reword naturally if needed. Each answer is 2-4 sentences, specific and useful.
   Format: question as *italic text* on its own line, answer as a normal paragraph below it.
-  Section heading: "### Frequently asked questions" (sentence case, same as other headings).
+  Section heading: "### FREQUENTLY ASKED QUESTIONS" (ALL CAPS, same as other headings).
 - Conclusion (150-200 words): no "In conclusion". Must include the exact keyword.
   Ends with a final CTA to a relevant product or the Etsy shop.
 
@@ -785,10 +788,16 @@ CTA MAPPING — apply the correct CTA based on the post topic:
   → CTA to https://www.switzertemplates.com/business-template-bundles
 
 CROSSLINKING — REQUIRED:
-Naturally link to 2-3 of the following published pages within the body where genuinely relevant.
-Only link where it adds real value to the reader — never force it.
-Use the exact URL. Anchor text should be a natural phrase in the sentence, not the page title verbatim.
-Format: <a href="URL">anchor text</a>
+These are the pages currently live on switzertemplates.com. If 2 or more of them are
+genuinely relevant to this post's topic, you MUST link to at least 2 of them (up to 3)
+somewhere in the body — this is not optional when relevant candidates exist.
+"Relevant" means a reader following the link would land on a page that meaningfully
+extends what they just read — not just any page that shares a keyword.
+Spread the links across different sections rather than clustering them in one paragraph.
+Anchor text must be a natural phrase in the sentence, not the page title verbatim.
+Use the exact URL. Format: <a href="URL">anchor text</a>
+If fewer than 2 of the pages below are genuinely relevant to this specific post, link
+to as many as genuinely fit (including zero) — never force a link to an unrelated page.
 
 {published_posts_list}
 
@@ -825,8 +834,9 @@ Include <a href> crosslinks inline where relevant.
 Include [DALLE: ...] prompts inline where a screenshot would help.
 Start with the title in ALL CAPS on the first line.
 Use markdown bold (**), bold italic (***), and italic (*) exactly as specified.
-Write section headings in sentence case, each starting with "### ", on their own
-line with a blank line before and after. Only the title is ALL CAPS — nothing else.
+Write section headings in ALL CAPS, each starting with "### ", on their own line
+with a blank line before and after. Body text is always plain sentence case —
+never ALL CAPS, never Title Case.
 """
 
 
@@ -1993,12 +2003,13 @@ The post is about: {slug.replace("-", " ")}
 
 FORMATTING RULES TO APPLY:
 
-- Section headings: rewrite every heading in sentence case — capitalize only the
-  first word and any proper nouns (Pinterest, Wix, Canva, Etsy, Instagram, etc.).
+- Section headings: rewrite every heading in ALL CAPS literally, same as the title.
   Example: "What Branding Means For Small Business" becomes
-  "What branding means for small business" (never every word capitalized, never ALL CAPS).
+  "WHAT BRANDING MEANS FOR SMALL BUSINESS" (never Title Case — every letter capital,
+  not just the first letter of each word).
   Mark each heading by starting its line with "### ", on its own line, with a
   blank line before and after it.
+  Body text stays in plain sentence case — never ALL CAPS, never Title Case.
 
 - Use **bold** for important statements the reader must not miss
 
