@@ -114,9 +114,11 @@ def load_next_keyword() -> Optional[dict]:
         return None
 
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+    posts_dir = ROOT / "posts"
     written_slugs = (
         {p.stem for p in OUTPUT_DIR.glob("*.txt")}
         | {p.stem.replace("-v2", "") for p in OUTPUT_DIR.glob("*.html")}
+        | ({p.stem for p in posts_dir.glob("*.html")} if posts_dir.exists() else set())
         | {"canva-branding-kit", "starting-a-business-plan-template"}
     )
 
@@ -483,51 +485,70 @@ def _build_competitor_summary(competitors: "list[dict]") -> str:
 
 def get_existing_post_angles(keyword: str) -> str:
     """
-    Find already-written posts on the same topic and extract their title +
-    opening paragraph so the new post can take a genuinely different angle.
+    Find already-written posts on the same topic and extract their title,
+    opening paragraph, and section headings so the new post can take a
+    genuinely different angle and cover different ground.
     Matches on shared content pillar words (e.g. 'pinterest', 'coaching', 'branding').
+    Scans both OUTPUT_DIR (current pipeline output) and the root posts/ directory
+    (the actual published archive) — checking only one of these misses most posts.
     Returns a formatted string for the prompt, or empty string if nothing relevant found.
     """
-    if not OUTPUT_DIR.exists():
+    search_dirs = [d for d in (OUTPUT_DIR, ROOT / "posts") if d.exists()]
+    if not search_dirs:
         return ""
 
     # Determine topic words from the keyword
     topic_words = {w.lower() for w in keyword.split() if len(w) > 3}
     topic_words -= {"with", "from", "your", "that", "this", "have", "will", "make"}
 
+    seen_slugs = set()
     angles = []
-    for html_path in OUTPUT_DIR.glob("*.html"):
-        slug = html_path.stem
-        slug_words = set(slug.replace("-", " ").split())
-        # Skip if no overlap with topic words
-        if not topic_words & slug_words:
-            continue
-        try:
-            from bs4 import BeautifulSoup as _BS
-            soup = _BS(html_path.read_text(encoding="utf-8"), "html.parser")
-            for el in soup.find_all("div", class_="image-prompts"):
-                el.decompose()
-            h1 = soup.find("h1")
-            title = h1.get_text(strip=True) if h1 else slug.replace("-", " ")
-            # Get first meaningful paragraph
-            paras = [p.get_text(strip=True) for p in soup.find_all("p") if len(p.get_text(strip=True)) > 60]
-            opening = paras[0][:300] if paras else ""
-            if title and opening:
-                angles.append(f'- Post: "{title}"\n  Opening: "{opening}"')
-        except Exception:
-            continue
+    for directory in search_dirs:
+        for html_path in directory.glob("*.html"):
+            slug = html_path.stem
+            if slug in seen_slugs:
+                continue
+            slug_words = set(slug.replace("-", " ").split())
+            # Skip if no overlap with topic words
+            if not topic_words & slug_words:
+                continue
+            seen_slugs.add(slug)
+            try:
+                from bs4 import BeautifulSoup as _BS
+                soup = _BS(html_path.read_text(encoding="utf-8"), "html.parser")
+                for el in soup.find_all("div", class_="image-prompts"):
+                    el.decompose()
+                h1 = soup.find("h1")
+                title = h1.get_text(strip=True) if h1 else slug.replace("-", " ")
+                # Get first meaningful paragraph
+                paras = [p.get_text(strip=True) for p in soup.find_all("p") if len(p.get_text(strip=True)) > 60]
+                opening = paras[0][:300] if paras else ""
+                # Section headings (h3) so the new post can cover different subtopics,
+                # not just open differently
+                headings = [h.get_text(strip=True) for h in soup.find_all("h3")][:8]
+                if title and opening:
+                    entry = f'- Post: "{title}"\n  Opening: "{opening}"'
+                    if headings:
+                        entry += f"\n  Sections covered: {', '.join(headings)}"
+                    angles.append(entry)
+            except Exception:
+                continue
 
     if not angles:
         return ""
 
     return (
-        "PREVIOUSLY WRITTEN POSTS ON THIS TOPIC — avoid repeating their angles, hooks, comparisons, or structure:\n\n"
+        "PREVIOUSLY WRITTEN POSTS ON THIS TOPIC — avoid repeating their angles, hooks, "
+        "comparisons, structure, or section topics:\n\n"
         + "\n\n".join(angles)
         + "\n\nFor every item above: your post must open with a COMPLETELY DIFFERENT hook, "
-        "use different examples, and avoid the same comparisons. "
-        "If a previous post opens by comparing Pinterest to Instagram, do NOT use that comparison. "
+        "use different examples, avoid the same comparisons, and cover DIFFERENT subtopics "
+        "in the body sections than the ones already listed above. "
         "If a previous post leads with an income statistic, lead with something else entirely. "
-        "The reader may have read all previous posts — make this one feel fresh."
+        "Find an angle or subset of the topic the previous posts haven't covered yet — "
+        "a different use case, a different stage of the reader's journey, a more specific "
+        "audience, or a more advanced/beginner take. "
+        "The reader may have read all previous posts — make this one teach them something new."
     )
 
 
@@ -664,9 +685,15 @@ FORMATTING RULES - apply these exactly:
 
 Title: Write in ALL CAPS literally. Example: HOW TO BUILD A BRAND THAT CONVERTS
 
-Section headings: Write in ALL CAPS literally on their own line with a blank line
-before and after. Example: WHY MOST BUSINESS PLANS END UP IN A DRAWER
-Do NOT use ## or any markdown header symbols. Just the heading in capitals.
+Section headings: Write in SENTENCE CASE — capitalize only the first word and any
+proper nouns (Pinterest, Wix, Canva, Etsy, Instagram, Google, etc.). Every other word
+stays lowercase. Mark each heading by starting its line with "### " so it can be
+detected and converted to a proper heading. Put a blank line before and after.
+RIGHT example: ### Why most business plans end up in a drawer
+WRONG (do not do this — every word capitalized): ### Why Most Business Plans End Up In A Drawer
+WRONG (do not do this either — full caps): ### WHY MOST BUSINESS PLANS END UP IN A DRAWER
+This sentence-case rule applies to EVERY section heading in the post, including the
+FAQ heading. Only the main title (above) is written in ALL CAPS — nothing else is.
 
 Emphasis:
 - Use **bold** for important statements the reader must not miss
@@ -686,8 +713,8 @@ Never at the start of a heading. Never forced.
 
 CTAs: wrap the linked product or action phrase in **bold**
 
-Do not use em dashes. Do not use markdown headers (##).
-Write headings as plain ALL CAPS text on their own line.
+Do not use em dashes.
+Write headings in sentence case, each starting with "### " — see FORMATTING RULES above.
 
 Structure:
 - Introduction (150-200 words): the FIRST 1-2 sentences must give a direct, clear answer
@@ -707,7 +734,7 @@ Structure:
   (from Google PAA and Reddit) — not invented. Use only questions that genuinely fit
   the post. Reword naturally if needed. Each answer is 2-4 sentences, specific and useful.
   Format: question as *italic text* on its own line, answer as a normal paragraph below it.
-  Section heading: FREQUENTLY ASKED QUESTIONS (in ALL CAPS, same as other headings).
+  Section heading: "### Frequently asked questions" (sentence case, same as other headings).
 - Conclusion (150-200 words): no "In conclusion". Must include the exact keyword.
   Ends with a final CTA to a relevant product or the Etsy shop.
 
@@ -727,6 +754,12 @@ NON-NEGOTIABLE VOICE RULES:
 - No rhetorical question-then-answer patterns.
 - No "In today's post..." or "Let's talk about..." or "Let's dive in" openers.
 - No announcing what you are about to teach — just teach it.
+- NEVER open a post by comparing Pinterest to Instagram (or to any other platform).
+  This comparison has been overused across previous posts and is permanently banned
+  as an opening hook, regardless of whether this is the first post on the topic.
+  Open with the keyword's actual subject instead — a direct answer, a specific
+  problem, a concrete number, or a real scenario. Save platform comparisons (if
+  ever genuinely useful) for deep in the body, never the opening.
 - Every sentence earns its place. Cut anything that does not add value.
 - Light warmth and a small aside are welcome when they land naturally — never in CTAs or product mentions.
 - Product mentions feel like recommendations, not pitches.
@@ -792,7 +825,8 @@ Include <a href> crosslinks inline where relevant.
 Include [DALLE: ...] prompts inline where a screenshot would help.
 Start with the title in ALL CAPS on the first line.
 Use markdown bold (**), bold italic (***), and italic (*) exactly as specified.
-Write section headings in ALL CAPS on their own line with a blank line before and after.
+Write section headings in sentence case, each starting with "### ", on their own
+line with a blank line before and after. Only the title is ALL CAPS — nothing else.
 """
 
 
@@ -1534,18 +1568,16 @@ def _assemble_html(title: str, post_html: str, image_prompts: str, image_paths: 
 
     content = post_html
 
-    # Convert ALL CAPS lines that are headings to h3
+    # Convert "### Heading" marker lines to h3 — using an explicit marker instead of
+    # an ALL-CAPS heuristic keeps heading detection correct regardless of letter case,
+    # so headings can be written in sentence case without breaking HTML structure.
     lines = content.split('\n')
     processed = []
     for line in lines:
         stripped = line.strip()
-        # Detect ALL CAPS heading lines (not inside tags, not empty, mostly uppercase)
-        if (stripped and
-            not stripped.startswith('<') and
-            len(stripped) > 3 and
-            sum(1 for c in stripped if c.isupper()) / max(sum(1 for c in stripped if c.isalpha()), 1) > 0.8 and
-            not stripped.startswith('http')):
-            processed.append(f'<h3>{stripped}</h3>')
+        if stripped.startswith('### '):
+            heading_text = stripped[4:].strip()
+            processed.append(f'<h3>{heading_text}</h3>')
         else:
             processed.append(line)
     content = '\n'.join(processed)
@@ -1631,9 +1663,18 @@ def save_output(keyword_row: dict, post_html: str, image_prompts: str, image_pat
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
     LOGS_DIR.mkdir(parents=True, exist_ok=True)
 
-    # extract title from the <h1> tag for the HTML <title> element
-    title_match = re.search(r"<h1[^>]*>(.*?)</h1>", post_html, re.IGNORECASE)
-    title = title_match.group(1) if title_match else keyword_row["_keyword"]
+    # Title is always the first non-empty line of the model's output (the prompt
+    # instructs the title to lead the post). Extracting it this way — rather than
+    # depending on Claude having wrapped it in a literal <h1> tag — means title
+    # casing always reflects exactly what was written, with no silent fallback
+    # to the raw keyword string.
+    first_line = next((l.strip() for l in post_html.split("\n") if l.strip()), "")
+    title = re.sub(r"^<h1[^>]*>|</h1>$|^#+\s*", "", first_line, flags=re.IGNORECASE).strip()
+    if not title:
+        title = keyword_row["_keyword"]
+    # The title line is consumed here — strip it so it isn't duplicated as a
+    # paragraph in the assembled body, which already renders it via <h1>.
+    post_html = post_html.split("\n", 1)[1] if "\n" in post_html else ""
 
     slug     = keyword_row["_slug"]
     filename = f"{slug}.html"
@@ -1952,11 +1993,12 @@ The post is about: {slug.replace("-", " ")}
 
 FORMATTING RULES TO APPLY:
 
-- Section headings: rewrite every heading in ALL CAPS letters literally.
-  Example: "What branding means for small business" becomes
-  "WHAT BRANDING MEANS FOR SMALL BUSINESS".
-  No markdown symbols. Just the heading text written entirely in capital
-  letters on its own line, with a blank line before and after it.
+- Section headings: rewrite every heading in sentence case — capitalize only the
+  first word and any proper nouns (Pinterest, Wix, Canva, Etsy, Instagram, etc.).
+  Example: "What Branding Means For Small Business" becomes
+  "What branding means for small business" (never every word capitalized, never ALL CAPS).
+  Mark each heading by starting its line with "### ", on its own line, with a
+  blank line before and after it.
 
 - Use **bold** for important statements the reader must not miss
 

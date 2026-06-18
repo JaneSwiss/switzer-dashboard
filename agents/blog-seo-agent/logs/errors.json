@@ -430,5 +430,11 @@
     "stage": "banned_words",
     "keyword": "pinterest for small business",
     "error": "Banned words remain after revision: ['landscape']"
+  },
+  {
+    "date": "2026-06-18",
+    "stage": "banned_words",
+    "keyword": "how to delete a board on pinterest",
+    "error": "Banned words remain after revision: ['landscape']"
   }
 ]
