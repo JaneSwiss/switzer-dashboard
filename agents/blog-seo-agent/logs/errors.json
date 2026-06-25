@@ -460,5 +460,23 @@
     "stage": "banned_words",
     "keyword": "pinterest tips for beginners",
     "error": "Banned words remain after revision: ['landscape']"
+  },
+  {
+    "date": "2026-06-25",
+    "stage": "banned_words",
+    "keyword": "shopify themes",
+    "error": "Banned words remain after revision: ['discover']"
+  },
+  {
+    "date": "2026-06-25",
+    "stage": "serp_fetch",
+    "keyword": "online store for small business tips examples guide",
+    "error": "HTTPSConnectionPool(host='api.valueserp.com', port=443): Read timed out. (read timeout=20)"
+  },
+  {
+    "date": "2026-06-25",
+    "stage": "research_synthesis",
+    "keyword": "online store for small business",
+    "error": "Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}, 'request_id': 'req_011CcPfWQacJFhVoJgP34njG'}"
   }
 ]
