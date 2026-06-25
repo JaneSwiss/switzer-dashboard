@@ -478,5 +478,95 @@
     "stage": "research_synthesis",
     "keyword": "online store for small business",
     "error": "Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}, 'request_id': 'req_011CcPfWQacJFhVoJgP34njG'}"
+  },
+  {
+    "date": "2026-06-25",
+    "stage": "serp_fetch",
+    "keyword": "online store for small business",
+    "error": "HTTPSConnectionPool(host='api.valueserp.com', port=443): Read timed out. (read timeout=20)"
+  },
+  {
+    "date": "2026-06-25",
+    "stage": "serp_fetch",
+    "keyword": "online store for small business statistics data 2025 2026",
+    "error": "HTTPSConnectionPool(host='api.valueserp.com', port=443): Read timed out. (read timeout=20)"
+  },
+  {
+    "date": "2026-06-25",
+    "stage": "reddit_questions",
+    "keyword": "online store for small business",
+    "error": "HTTPSConnectionPool(host='api.valueserp.com', port=443): Read timed out. (read timeout=20)"
+  },
+  {
+    "date": "2026-06-25",
+    "stage": "serp_fetch",
+    "keyword": "shopify store template tips examples guide",
+    "error": "HTTPSConnectionPool(host='api.valueserp.com', port=443): Read timed out. (read timeout=20)"
+  },
+  {
+    "date": "2026-06-25",
+    "stage": "paa_fetch",
+    "keyword": "shopify store template",
+    "error": "HTTPSConnectionPool(host='api.valueserp.com', port=443): Read timed out. (read timeout=20)"
+  },
+  {
+    "date": "2026-06-25",
+    "stage": "banned_words",
+    "keyword": "shopify store template",
+    "error": "Banned words remain after revision: ['discover']"
+  },
+  {
+    "date": "2026-06-25",
+    "stage": "serp_fetch",
+    "keyword": "shopify theme store",
+    "error": "HTTPSConnectionPool(host='api.valueserp.com', port=443): Read timed out. (read timeout=20)"
+  },
+  {
+    "date": "2026-06-25",
+    "stage": "serp_fetch",
+    "keyword": "shopify theme store statistics data 2025 2026",
+    "error": "HTTPSConnectionPool(host='api.valueserp.com', port=443): Read timed out. (read timeout=20)"
+  },
+  {
+    "date": "2026-06-25",
+    "stage": "serp_fetch",
+    "keyword": "shopify theme store tips examples guide",
+    "error": "HTTPSConnectionPool(host='api.valueserp.com', port=443): Read timed out. (read timeout=20)"
+  },
+  {
+    "date": "2026-06-25",
+    "stage": "paa_fetch",
+    "keyword": "shopify theme store",
+    "error": "HTTPSConnectionPool(host='api.valueserp.com', port=443): Read timed out. (read timeout=20)"
+  },
+  {
+    "date": "2026-06-25",
+    "stage": "reddit_questions",
+    "keyword": "shopify theme store",
+    "error": "HTTPSConnectionPool(host='api.valueserp.com', port=443): Read timed out. (read timeout=20)"
+  },
+  {
+    "date": "2026-06-25",
+    "stage": "serp_fetch",
+    "keyword": "how to set up shopify store statistics data 2025 2026",
+    "error": "HTTPSConnectionPool(host='api.valueserp.com', port=443): Read timed out. (read timeout=20)"
+  },
+  {
+    "date": "2026-06-25",
+    "stage": "serp_fetch",
+    "keyword": "how to set up shopify store tips examples guide",
+    "error": "HTTPSConnectionPool(host='api.valueserp.com', port=443): Read timed out. (read timeout=20)"
+  },
+  {
+    "date": "2026-06-25",
+    "stage": "paa_fetch",
+    "keyword": "how to set up shopify store",
+    "error": "HTTPSConnectionPool(host='api.valueserp.com', port=443): Read timed out. (read timeout=20)"
+  },
+  {
+    "date": "2026-06-25",
+    "stage": "reddit_questions",
+    "keyword": "how to set up shopify store",
+    "error": "HTTPSConnectionPool(host='api.valueserp.com', port=443): Read timed out. (read timeout=20)"
   }
 ]
