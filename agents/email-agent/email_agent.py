@@ -223,6 +223,69 @@ The scarcity is real — write it that way."""
     return call_claude(client, prompt, max_tokens=1400)
 
 
+CASE_STUDY_FACTS = """
+CLIENT (do not name them — refer to as "a client" or describe what they sell):
+Handcrafted custom drinkware and personalised gifts — mugs, tumblers, coasters,
+cutting boards — made in-house for businesses and everyday customers.
+
+STARTING POINT:
+- No Pinterest account at all
+- No real-life product photos — nothing to show what they actually made
+
+WHAT JANE DELIVERED:
+
+1. Keyword research — found their core keywords pull 169,000+ monthly Pinterest
+   searches. Grouped into 7 categories (personalised gifts, unique gifts, cute gifts,
+   tumblers, coffee mugs, cutting boards, coasters), each mapped to a board name with
+   buyer-intent scoring, delivered as a full spreadsheet broken down by keyword group.
+
+2. A full written audit/report covering: competitor analysis on 5 accounts in their
+   niche, 2026 colour palette and design trend research specific to gifting, a
+   complete board structure plan (board names, descriptions, keyword targeting, minimum
+   pin counts), and a pinning frequency/growth plan.
+
+3. Over 20 lifestyle-style product photos created from scratch — since the client had
+   none. The kind of photography people normally pay UGC creators or photographers
+   hundreds of dollars to produce.
+
+4. A handful of TikTok-style short videos to give the content movement, not just
+   static images.
+
+ANGLE: This is a behind-the-scenes look at what "done-for-you" actually includes —
+research depth + strategy + real content creation, not just advice. No fabricated
+results/numbers (no claimed sales or traffic figures) — stick to describing the
+actual deliverables, since outcome data isn't available yet.
+"""
+
+
+def write_case_study(client: anthropic.Anthropic, ctx: dict) -> str:
+    prompt = f"""{system_block(ctx)}
+
+TASK: Write a case-study email for the full Switzertemplates list, showcasing the depth
+of Jane's Pinterest services through a real (anonymised) client example — to softly pitch
+Pinterest services through demonstrated value, not a hard sell.
+
+{CASE_STUDY_FACTS}
+
+Structure:
+1. Open by setting the scene — a real client, starting with nothing (no account, no photos)
+2. Walk through the research depth — the keyword volume, the groups, the spreadsheet
+3. Mention the written report/audit — competitor analysis, trend research, board structure
+4. The bigger reveal: the client had no product photos, so Jane created 20+ lifestyle
+   photos and some TikTok-style videos — make the cost contrast explicit (UGC creators
+   and photographers normally charge hundreds of dollars for this)
+5. Close with what this demonstrates — done-for-you means research AND content, not
+   just strategy advice — then a soft CTA to Pinterest services
+
+Requirements:
+- 220-320 words body
+- Do not invent results, sales figures, or traffic numbers — only describe what was built
+- One CTA to {PRODUCT_URLS['pinterest-services']}
+- Tone: behind-the-scenes, transparent, slightly proud of the thoroughness — not boastful"""
+
+    return call_claude(client, prompt, max_tokens=1400)
+
+
 def write_pinterest_newsletter(client: anthropic.Anthropic, ctx: dict) -> str:
     prompt = f"""{system_block(ctx)}
 
@@ -531,6 +594,8 @@ def main():
                        help="Write a Pinterest services email with genuine scarcity (5 spots)")
     group.add_argument("--pinterest-newsletter", action="store_true",
                        help="Write a value-led Pinterest newsletter for the full list (freebie hook, soft pitch)")
+    group.add_argument("--case-study", action="store_true",
+                       help="Write a case-study email showcasing a real client's Pinterest setup")
     group.add_argument("--blog-post", metavar="SLUG",
                        help="Write an email promoting a blog post by slug")
     group.add_argument("--product", metavar="NAME",
@@ -566,6 +631,10 @@ def main():
     elif getattr(args, "pinterest_newsletter", False):
         email_type = "newsletter-pinterest-freebie"
         content = write_pinterest_newsletter(client, ctx)
+
+    elif getattr(args, "case_study", False):
+        email_type = "case-study-pinterest"
+        content = write_case_study(client, ctx)
 
     elif args.blog_post:
         email_type = f"blog-{args.blog_post}"
