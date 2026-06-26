@@ -11,37 +11,29 @@ PREVIEW TEXT: A behind-the-scenes look at a recent Pinterest project - from zero
 
 BODY:
 
-A client came to me recently selling handcrafted drinkware and personalised gifts - tumblers, mugs, cutting boards, that sort of thing.
+A client came to me a few months ago. They make handcrafted drinkware and personalised gifts - mugs, tumblers, coasters, cutting boards, all made in-house. The kind of product that sells itself once people actually see it.
 
-Starting point: no Pinterest account. No product photos. Nothing.
+The problem was, nobody could see it. No Pinterest account. No lifestyle photos. No video content at all. Just a genuinely good product with nowhere to be discovered.
 
-Here's what I actually delivered.
+So we started where every project like this should start: research.
 
-**The research**
+I don't guess at keywords. I use paid analytics tools to pull actual search data before I commit to any strategy - what people are searching, how often, and how close they are to buying. For this client, their core product terms were pulling over 169,000 monthly searches on Pinterest alone. I grouped those into seven categories, each mapped to a specific board with its own buyer-intent score, so we knew exactly where the highest-value traffic was sitting before a single pin went up.
 
-I found their core keywords pull 169,000+ monthly searches on Pinterest. Grouped them into 7 categories (personalised gifts, unique gifts, tumblers, coffee mugs, and more), each mapped to a board name with buyer-intent scoring.
+From there, I worked through five competitor accounts in their niche. Not for inspiration - to see what was already working, what they were missing, and where there was real room to stand out.
 
-Delivered as a full spreadsheet. Not a list of suggestions. A system.
+Everything from that stage - the keyword research, the competitor breakdown, the 2026 colour and design trends specific to their niche, the full board structure - went into a custom landing page built for their business specifically. A complete audit and strategy report they could read, reference, and come back to.
 
-**The strategy**
+That was stage one.
 
-A written audit covering competitor analysis on 5 accounts in their niche, 2026 colour and design trends specific to gifting, a complete board structure plan, and a pinning frequency roadmap.
+Stage two was the part that actually surprised them: content.
 
-**The part that surprised my client**
+They had no lifestyle photos to pin. None. So I created over 20 from scratch - the kind of photography people normally pay UGC creators or photographers hundreds of dollars to produce. I added a handful of TikTok-style videos on top, so the content had movement, not just static images.
 
-No lifestyle product photos existed. None.
-
-So I created over 20 from scratch - the kind of photography people normally pay UGC creators or photographers hundreds of dollars to produce. Plus a handful of TikTok-style videos to give the content movement.
-
-My client didn't just get a Pinterest strategy. They got an entire content library ready to pin.
+By the end, they didn't just have a strategy sitting in a document. They had an entire content library, built specifically for their products and the keywords we'd already proven people were searching for.
 
 This is what I mean when I say done-for-you.
 
-Not advice. Not a PDF of tips.
-
-Research, strategy, and real content - built for your business, ready to use.
-
-If you've been curious about what working together on Pinterest actually involves, this is it.
+If you want to see what this could look like for your business, take a look at what's included.
 
 Xo Jane
 
@@ -53,8 +45,8 @@ CTA button label: See Pinterest services
 CTA link: https://pinterest.switzertemplates.com
 
 NOTE: Once you share the spreadsheet/report screenshots, consider embedding 1-2 directly
-in the email body under "The research" and "The strategy" sections - seeing the actual
-deliverable will land harder than the description alone.
+in the email body around the "custom landing page" line - seeing the actual deliverable
+will land harder than the description alone.
 
 ---
 
