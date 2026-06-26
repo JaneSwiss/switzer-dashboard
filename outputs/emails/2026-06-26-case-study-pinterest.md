@@ -1,9 +1,9 @@
 SUBJECT LINE OPTIONS (pick one):
 
-A: Case study: My client had zero product photos
-B: Case study: From nothing to a full Pinterest system
-C: Case study: 169K monthly searches, zero photos to show for it
-D: Case study: What I actually built for a Pinterest client
+A: Case study: What I built for an ecommerce brand with zero product photos
+B: Case study: What I actually built for a handmade gifts business with no Pinterest
+C: Case study: What I built for a drinkware brand starting from absolute zero
+D: Case study: What I built for an ecommerce shop with nothing to show for it
 
 PREVIEW TEXT: A behind-the-scenes look at a recent Pinterest project - from zero to fully loaded.
 
@@ -60,16 +60,16 @@ deliverable will land harder than the description alone.
 
 SUBJECT LINE NOTES:
 
-A - "Case study: My client had zero product photos"
-Specific, creates an immediate "what happened next?" curiosity gap. The case study
-label signals proof, not a pitch.
+A - "Case study: What I built for an ecommerce brand with zero product photos" (recommended)
+Specific niche + the most surprising fact upfront. The contradiction (ecommerce brand,
+no photos) is what pulls the open - not just a description of the topic.
 
-B - "Case study: From nothing to a full Pinterest system"
-Transformation framing - "nothing" to "system" tells the whole arc in five words.
+B - "Case study: What I actually built for a handmade gifts business with no Pinterest"
+Keeps the "actually built" phrasing, adds niche and starting point in one line.
 
-C - "Case study: 169K monthly searches, zero photos to show for it"
-Leads with a concrete number against a surprising gap - strong demand, nothing built
-to capture it yet. Most specific of the four.
+C - "Case study: What I built for a drinkware brand starting from absolute zero"
+Punchiest of the four - "absolute zero" carries the weight without listing specifics.
 
-D - "Case study: What I actually built for a Pinterest client"
-Plainest option but promises real specifics over vague advice. Safest choice.
+D - "Case study: What I built for an ecommerce shop with nothing to show for it"
+More dramatic framing - implies wasted potential, relatable to anyone with an
+underused Pinterest account.
