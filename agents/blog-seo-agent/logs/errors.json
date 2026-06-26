@@ -568,5 +568,41 @@
     "stage": "reddit_questions",
     "keyword": "how to set up shopify store",
     "error": "HTTPSConnectionPool(host='api.valueserp.com', port=443): Read timed out. (read timeout=20)"
+  },
+  {
+    "date": "2026-06-26",
+    "stage": "serp_fetch",
+    "keyword": "shopify vs wix for ecommerce",
+    "error": "HTTPSConnectionPool(host='api.valueserp.com', port=443): Read timed out. (read timeout=20)"
+  },
+  {
+    "date": "2026-06-26",
+    "stage": "reddit_questions",
+    "keyword": "shopify vs wix for ecommerce",
+    "error": "500 Server Error: Internal Server Error for url: https://api.valueserp.com/search?api_key=F9007DD2BF7D48FBA413D431EC1EA9E8&q=shopify+vs+wix+for+ecommerce+site%3Areddit.com&gl=us&hl=en&num=8"
+  },
+  {
+    "date": "2026-06-26",
+    "stage": "serp_fetch",
+    "keyword": "shopify seo checklist",
+    "error": "HTTPSConnectionPool(host='api.valueserp.com', port=443): Read timed out. (read timeout=20)"
+  },
+  {
+    "date": "2026-06-26",
+    "stage": "serp_fetch",
+    "keyword": "shopify seo checklist tips examples guide",
+    "error": "HTTPSConnectionPool(host='api.valueserp.com', port=443): Read timed out. (read timeout=20)"
+  },
+  {
+    "date": "2026-06-26",
+    "stage": "serp_fetch",
+    "keyword": "how to choose a shopify theme tips examples guide",
+    "error": "HTTPSConnectionPool(host='api.valueserp.com', port=443): Read timed out. (read timeout=20)"
+  },
+  {
+    "date": "2026-06-26",
+    "stage": "banned_words",
+    "keyword": "shopify vs etsy",
+    "error": "Banned words remain after revision: ['discover']"
   }
 ]

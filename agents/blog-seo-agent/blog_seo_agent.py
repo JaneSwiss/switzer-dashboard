@@ -1437,9 +1437,12 @@ def extract_faq_schema(post_text: str) -> str:
     """
     import json as _json
 
-    # Locate the FAQ section — everything between the heading and the next ALL-CAPS heading or end
+    # Locate the FAQ section — everything between the heading and the next heading or end.
+    # Headings are marked with "### " (see _assemble_html) — must match that, not just
+    # bare ALL-CAPS lines, otherwise this lookahead never fires and the last FAQ answer
+    # swallows the entire next section's heading + text.
     faq_match = re.search(
-        r'FREQUENTLY ASKED QUESTIONS[^\n]*\n(.*?)(?=\n[A-Z][A-Z\s,]{3,}\n|\Z)',
+        r'FREQUENTLY ASKED QUESTIONS[^\n]*\n(.*?)(?=\n#{1,6}\s|\n[A-Z][A-Z\s,]{3,}\n|\Z)',
         post_text,
         re.DOTALL,
     )
