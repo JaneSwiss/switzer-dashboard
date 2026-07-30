@@ -12,6 +12,7 @@ import csv
 import json
 import os
 import re
+import sys
 import time
 from datetime import date
 from pathlib import Path
@@ -21,8 +22,9 @@ import anthropic
 import requests
 from bs4 import BeautifulSoup
 from dotenv import load_dotenv
-from google import genai
-from google.genai import types as genai_types
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "lib"))
+from openai_images import generate_image_bytes
 
 
 # ── paths ─────────────────────────────────────────────────────────────────────
@@ -42,7 +44,6 @@ load_dotenv(ROOT / ".env")
 
 ANTHROPIC_API_KEY   = os.getenv("ANTHROPIC_API_KEY")
 VALUESERP_API_KEY   = os.getenv("VALUESERP_API_KEY")
-GOOGLE_API_KEY      = os.getenv("NANO_BANANA_API_KEY")
 BING_API_KEY        = os.getenv("BING_API_KEY", "")
 INDEXNOW_KEY        = os.getenv("INDEXNOW_KEY", "")
 BLOG_BASE_URL       = os.getenv("BLOG_BASE_URL", "https://www.switzertemplates.com/blog")
@@ -774,18 +775,19 @@ Also never use: "You've got this", "Level up", "Exciting news!", "Have you ever 
 
 ---
 
-CTA MAPPING — apply the correct CTA based on the post topic:
+CTA MAPPING — apply the correct CTA based on the post topic. Use the exact URLs below,
+including the tracking parameters on the end — do not shorten or drop them:
 - Post about Pinterest (marketing, strategy, services, management, agency, scheduling, analytics, growth, affiliate):
-  → Mid-post CTA AND conclusion CTA must both link to https://pinterest.switzertemplates.com/
+  → Mid-post CTA AND conclusion CTA must both link to https://pinterest.switzertemplates.com/?utm_source=blog&utm_medium=content&utm_campaign={keyword_row['_slug']}
   → Present it as Jane's done-for-you Pinterest marketing service ($699 strategy / $1,299 full setup)
 - Post about Wix websites or website templates:
-  → CTA to https://www.switzertemplates.com/premade-wix-website-templates-for-sale
+  → CTA to https://www.switzertemplates.com/premade-wix-website-templates-for-sale?utm_source=blog&utm_medium=content&utm_campaign={keyword_row['_slug']}
 - Post about branding or branding kits:
-  → CTA to https://www.switzertemplates.com/branding-packages
+  → CTA to https://www.switzertemplates.com/branding-packages?utm_source=blog&utm_medium=content&utm_campaign={keyword_row['_slug']}
 - Post about business bundles or complete online presence:
-  → CTA to https://www.switzertemplates.com/business-template-bundles
+  → CTA to https://www.switzertemplates.com/business-template-bundles?utm_source=blog&utm_medium=content&utm_campaign={keyword_row['_slug']}
 - Post about coaching business (not specifically Pinterest):
-  → CTA to https://www.switzertemplates.com/business-template-bundles
+  → CTA to https://www.switzertemplates.com/business-template-bundles?utm_source=blog&utm_medium=content&utm_campaign={keyword_row['_slug']}
 
 CROSSLINKING — REQUIRED:
 These are the pages currently live on switzertemplates.com. If 2 or more of them are
@@ -819,7 +821,8 @@ Rules for DALL-E prompts:
   3. Specific data or content shown (e.g. "Impressions: 847,293 with upward blue trend line", "showing 3 pin templates in vertical format", "a scheduled queue with 7 pins for the week")
   4. Layout details (e.g. "left sidebar navigation, main content area with grid", "top toolbar, canvas in center, layers panel on right")
   5. Format: "Landscape 16:9, high resolution, realistic flat UI design"
-- Minimum 2, maximum 5 DALL-E prompts per post
+- Aim for 4-5 DALL-E prompts per post (minimum 2 if the topic genuinely doesn't support
+  more) — every important step or concept mentioned should get a real illustration
 - Each prompt must directly illustrate what is being described in that specific paragraph or section — not a generic image. A reader looking at the prompt should immediately understand which part of the post it belongs to.
 - BAD example (too vague): [DALLE: A screenshot of Pinterest showing pins]
 - GOOD example: [DALLE: A realistic mockup screenshot of the Pinterest analytics dashboard. Pinterest red (#e60023) top navigation bar, white background. Main stats panel shows: Impressions 847,293 with an upward trending blue line graph, Engagements 12,847, Outbound clicks 4,521, all in large bold numbers. Left sidebar shows navigation: Overview, Audience insights, Video, Conversion insights. Data is clearly readable. Landscape 16:9, flat modern UI design.]
@@ -1339,94 +1342,125 @@ def generate_image_prompts(keyword: str, post_html: str) -> str:
     return response.content[0].text.strip()
 
 
-def generate_images_from_prompts(prompt_text: str, slug: str) -> "list[str]":
+def generate_images_from_prompts(prompt_text: str, slug: str) -> "tuple[list[str], float]":
     """
-    Parse 5 photo prompts from the image prompt text and generate images via Gemini Imagen.
-    Prompts 1-4 are landscape 16:9. Prompt 5 (Pinterest pin) is portrait 9:16.
-    Prompt 6 (infographic) is text-only reference and is never generated here.
-    Saves .jpg files to output/images/ and returns relative paths for HTML embedding.
+    Parse 3 cover-image prompts from the image prompt text and generate them via OpenAI.
+    These are candidates Jane picks a Wix cover image from herself — not embedded inline.
+    All 3 are landscape 16:9. (Prompts 4-5 from IMAGE_PROMPT_SYSTEM's output, if present,
+    are intentionally unused — pin images now come from a separate pipeline entirely.)
+    Saves .jpg files to posts/images/{slug}/cover-N.jpg and returns relative paths for
+    HTML embedding (GitHub-Pages-facing copy only) plus a running cost estimate.
     Fails gracefully — any failed image is skipped, the post still saves.
     """
-    IMAGE_OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+    slug_dir = IMAGE_OUTPUT_DIR / slug
+    slug_dir.mkdir(parents=True, exist_ok=True)
 
-    # (label, aspect_ratio, filename_suffix)
-    # suffix None → numbered: {slug}-image-{n}.jpg
-    # suffix string → {slug}-{suffix}.jpg
     PHOTO_CONFIGS = [
-        ("PROMPT 1 - GENERAL LIFESTYLE:",            "16:9", None),
-        ("PROMPT 2 - TOPIC SPECIFIC (props/objects):","16:9", None),
-        ("PROMPT 3 - TOPIC SPECIFIC (person + action):","16:9", None),
-        ("PROMPT 4 - TOPIC FOCUS:",                  "16:9", None),
-        ("PROMPT 5 - PINTEREST PIN:",                "9:16", "pinterest"),
+        ("PROMPT 1 - GENERAL LIFESTYLE:",             "16:9"),
+        ("PROMPT 2 - TOPIC SPECIFIC (props/objects):","16:9"),
+        ("PROMPT 3 - TOPIC SPECIFIC (person + action):","16:9"),
     ]
 
     # Extract each prompt text by finding its label and slicing to the next label
     parsed = []
-    for label, aspect, suffix in PHOTO_CONFIGS:
+    for label, aspect in PHOTO_CONFIGS:
         start = prompt_text.find(label)
         if start == -1:
-            parsed.append((None, aspect, suffix))
+            parsed.append((None, aspect))
             continue
         start += len(label)
         next_label = prompt_text.find("PROMPT", start)
         chunk = prompt_text[start:next_label].strip() if next_label != -1 else prompt_text[start:].strip()
-        parsed.append((chunk if chunk else None, aspect, suffix))
+        parsed.append((chunk if chunk else None, aspect))
 
-    if not any(p for p, _, _ in parsed):
+    if not any(p for p, _ in parsed):
         log_error("image_generation", slug, "No photo prompts found in prompt text")
-        print("  No photo prompts parsed - skipping image generation.")
-        return []
+        print("  No photo prompts parsed - skipping cover image generation.")
+        return [], 0.0
 
     image_paths = []
-    landscape_count = 0  # counter for numbered landscape images
+    total_cost = 0.0
+    total = sum(1 for p, _ in parsed if p)
 
-    try:
-        client = genai.Client(api_key=GOOGLE_API_KEY)
-        total = sum(1 for p, _, _ in parsed if p)
+    for idx, (prompt, aspect) in enumerate(parsed, 1):
+        if not prompt:
+            print(f"  Cover image {idx}: no prompt found, skipping")
+            continue
 
-        for idx, (prompt, aspect, suffix) in enumerate(parsed, 1):
-            if not prompt:
-                print(f"  Image {idx}: no prompt found, skipping")
-                continue
+        print(f"  Generating cover image {idx} ({aspect})... [{idx}/{total}]")
 
-            label_short = "Pinterest pin" if suffix == "pinterest" else f"image {idx}"
-            print(f"  Generating {label_short} ({aspect})... [{idx}/{total}]")
+        try:
+            image_bytes, cost = generate_image_bytes(prompt, aspect_ratio=aspect, quality="high")
+            img_filename = f"cover-{idx}.jpg"
+            img_path = slug_dir / img_filename
+            with open(img_path, "wb") as f:
+                f.write(image_bytes)
+            image_paths.append(f"images/{slug}/{img_filename}")
+            total_cost += cost
+            print(f"  Saved: {img_filename}")
+        except Exception as e:
+            print(f"  Cover image {idx} failed: {e}")
+            log_error("image_generation", slug, f"Cover prompt {idx}: {str(e)}")
+            continue
 
-            try:
-                response = client.models.generate_images(
-                    model="imagen-4.0-generate-001",
-                    prompt=prompt,
-                    config=genai_types.GenerateImagesConfig(
-                        number_of_images=1,
-                        aspect_ratio=aspect,
-                        output_mime_type="image/jpeg",
-                    ),
-                )
-                if response.generated_images:
-                    if suffix:
-                        img_filename = f"{slug}-{suffix}.jpg"
-                    else:
-                        landscape_count += 1
-                        img_filename = f"{slug}-image-{landscape_count}.jpg"
-                    img_path = IMAGE_OUTPUT_DIR / img_filename
-                    with open(img_path, "wb") as f:
-                        f.write(response.generated_images[0].image.image_bytes)
-                    image_paths.append(f"images/{img_filename}")
-                    print(f"  Saved: {img_filename}")
-                else:
-                    print(f"  {label_short}: no image returned, skipping")
-                    log_error("image_generation", slug, f"No image returned for prompt {idx}")
-            except Exception as e:
-                print(f"  {label_short} failed: {e}")
-                log_error("image_generation", slug, f"Prompt {idx}: {str(e)}")
-                continue
+    return image_paths, total_cost
 
-    except Exception as e:
-        log_error("image_generation", slug, f"Gemini client init failed: {str(e)}")
-        print(f"  Image generation failed entirely: {e} - post will save without images.")
-        return []
 
-    return image_paths
+def generate_inline_images(post_html: str, slug: str) -> "tuple[str, list[str], float]":
+    """
+    Find every [DALLE: prompt] marker Claude embedded inline while writing the post
+    (illustrating specific steps/sections — UI mockups, tool walkthroughs), generate a
+    real image for each via OpenAI, save it to posts/images/{slug}/inline-N.jpg, and
+    replace the marker in place with a real <img> tag.
+
+    Called right after write_blog_post() returns, before anything else touches the text —
+    by the time _assemble_html() runs, there are no [DALLE: ...] markers left to convert
+    into visible prompt-text boxes.
+
+    Returns (updated_post_html, image_paths, total_cost). Fails gracefully per-marker —
+    a failed image just leaves that [DALLE: ...] marker in place rather than losing the
+    whole post (falls through to the existing dalle_block() text-box rendering as a
+    visible fallback, rather than silently vanishing).
+    """
+    slug_dir = IMAGE_OUTPUT_DIR / slug
+    slug_dir.mkdir(parents=True, exist_ok=True)
+
+    matches = list(re.finditer(r"\[DALLE:(.*?)\]", post_html, flags=re.DOTALL))
+    if not matches:
+        return post_html, [], 0.0
+
+    image_paths = []
+    total_cost = 0.0
+    result_parts = []
+    last_end = 0
+
+    for idx, m in enumerate(matches, 1):
+        prompt = m.group(1).strip()
+        print(f"  Generating inline image {idx} ({len(matches)} total)...")
+
+        result_parts.append(post_html[last_end:m.start()])
+        last_end = m.end()
+
+        try:
+            image_bytes, cost = generate_image_bytes(prompt, aspect_ratio="16:9", quality="low")
+            img_filename = f"inline-{idx}.jpg"
+            img_path = slug_dir / img_filename
+            with open(img_path, "wb") as f:
+                f.write(image_bytes)
+            rel_path = f"images/{slug}/{img_filename}"
+            image_paths.append(rel_path)
+            total_cost += cost
+            result_parts.append(
+                f'<img src="{rel_path}" alt="" style="width:100%;margin:1.5rem 0;border-radius:4px;display:block;">'
+            )
+            print(f"  Saved: {img_filename}")
+        except Exception as e:
+            print(f"  Inline image {idx} failed: {e} — leaving prompt text as fallback")
+            log_error("image_generation", slug, f"Inline prompt {idx}: {str(e)}")
+            result_parts.append(m.group(0))  # keep the original [DALLE: ...] marker
+
+    result_parts.append(post_html[last_end:])
+    return "".join(result_parts), image_paths, total_cost
 
 
 def extract_faq_schema(post_text: str) -> str:
@@ -1664,7 +1698,7 @@ def _assemble_html(title: str, post_html: str, image_prompts: str, image_paths: 
 <hr>
 <p class="closing-note">Let me know in the comments below if you want me to cover any branding or marketing topics in more depth, and I'll make sure to create a blog post about it in the future.</p>
 <div class="image-prompts">
-<div class="image-prompts-title">Image Prompts for Nano Banana Pro</div>
+<div class="image-prompts-title">Cover image prompts (OpenAI)</div>
 {safe_prompts}
 </div>
 </div>
@@ -1905,7 +1939,19 @@ def run(force_keyword: str = None):
     except Exception as e:
         log_error("blog_writer", keyword, str(e))
         print(f"  Blog post writing failed: {e}")
-        return
+        return None
+
+    total_image_cost = 0.0
+
+    print("  Generating inline section images...")
+    try:
+        post_html, inline_image_paths, inline_cost = generate_inline_images(post_html, keyword_row["_slug"])
+        total_image_cost += inline_cost
+        if inline_image_paths:
+            print(f"  {len(inline_image_paths)} inline image(s) generated successfully.")
+    except Exception as e:
+        log_error("image_generation", keyword, str(e))
+        print(f"  Inline image generation failed: {e} - continuing with prompt text as fallback.")
 
     print("  Generating image prompts...")
     try:
@@ -1915,17 +1961,21 @@ def run(force_keyword: str = None):
         print(f"  Image prompt generation failed: {e} — saving post without prompts.")
         image_prompts = "(Image prompt generation failed.)"
 
-    print("\n[4/5] Generating images via Gemini API...")
+    print("\n[4/5] Generating cover images via OpenAI...")
     image_paths = []
     try:
-        image_paths = generate_images_from_prompts(image_prompts, keyword_row["_slug"])
+        image_paths, cover_cost = generate_images_from_prompts(image_prompts, keyword_row["_slug"])
+        total_image_cost += cover_cost
         if image_paths:
-            print(f"  {len(image_paths)} image(s) generated successfully.")
+            print(f"  {len(image_paths)} cover image(s) generated successfully.")
         else:
-            print(f"  No images generated - post will save without images.")
+            print(f"  No cover images generated - post will save without them.")
     except Exception as e:
         log_error("image_generation", keyword, str(e))
-        print(f"  Image generation failed: {e} - continuing without images.")
+        print(f"  Cover image generation failed: {e} - continuing without them.")
+
+    if total_image_cost:
+        print(f"  Estimated image cost this post: ${total_image_cost:.2f}")
 
     # module 4
     print("\n[5/5] Saving output...")
@@ -1934,7 +1984,7 @@ def run(force_keyword: str = None):
     except Exception as e:
         log_error("output", keyword, str(e))
         print(f"  Output save failed: {e}")
-        return
+        return None
 
     plain_text = re.sub(r"<[^>]+>", " ", post_html)
     word_count = len(plain_text.split())
@@ -1945,8 +1995,10 @@ def run(force_keyword: str = None):
     print(f"  Words    : {word_count:,}")
     print(f"{'=' * 50}\n")
 
-    # Push to GitHub so dashboard updates automatically
+    # Push to GitHub so dashboard updates automatically, and so the per-post image
+    # folder is actually reachable at the link the GM hands Jane later.
     print("\n  Pushing to GitHub...")
+    push_ok = False
     try:
         import subprocess
         subprocess.run(["git", "add", "-A"], cwd=ROOT, check=True)
@@ -1954,11 +2006,20 @@ def run(force_keyword: str = None):
         subprocess.run(["git", "pull", "--rebase", "origin", "main"], cwd=ROOT, check=True)
         subprocess.run(["git", "push", "origin", "main"], cwd=ROOT, check=True)
         print("  GitHub updated successfully.")
+        push_ok = True
     except subprocess.CalledProcessError as e:
         print(f"  GitHub push failed: {e} - post saved locally, push manually if needed.")
         log_error("git_push", keyword, str(e))
 
     submit_for_indexing(keyword_row["_slug"], keyword)
+
+    return {
+        "filename": filename,
+        "slug": keyword_row["_slug"],
+        "keyword": keyword,
+        "image_cost": total_image_cost,
+        "push_ok": push_ok,
+    }
 
 
 def reformat_existing_post(slug: str) -> None:

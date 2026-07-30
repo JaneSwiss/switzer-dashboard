@@ -13,6 +13,7 @@ import re
 import json
 import anthropic
 from pathlib import Path
+from urllib.parse import urlsplit, urlunsplit, parse_qsl, urlencode
 
 
 PROJECT_ROOT = Path(__file__).parent.parent.parent
@@ -40,10 +41,11 @@ _PM_SPLIT: dict[int, tuple[int, int]] = {
 
 def _load_context() -> dict[str, str]:
     files = {
-        "expert":   "pinterest-expert.md",
-        "products": "product-catalog.md",
-        "audience": "target-audience.md",
-        "voice":    "brand-voice.md",
+        "expert":       "pinterest-expert.md",
+        "products":     "product-catalog.md",
+        "audience":     "target-audience.md",
+        "voice":        "brand-voice.md",
+        "visual_style": "pin-visual-style.md",
     }
     return {
         key: (CONTEXT_DIR / fname).read_text()
@@ -78,6 +80,14 @@ TARGET AUDIENCE
 BRAND VOICE RULES
 ═══════════════════════════════════════════════════════════════
 {ctx["voice"][:800]}
+
+═══════════════════════════════════════════════════════════════
+PROVEN VISUAL STYLE (write design_brief to match this, not a generic scene)
+═══════════════════════════════════════════════════════════════
+{ctx["visual_style"][:1500] if ctx["visual_style"] else
+ "(No reference style analyzed yet — write design_brief per the mood/scene rotation "
+ "rules above. Run skills/pinterest-agent/analyze_reference_pins.py after adding "
+ "examples to context/top-performing-pins/ to unlock this section.)"}
 
 ═══════════════════════════════════════════════════════════════
 PRODUCT URL MAPPING (populate destination_url from this exactly)
@@ -225,6 +235,26 @@ def _stream_call(client: anthropic.Anthropic, system: str,
     return _parse(raw)
 
 
+def _slugify(text: str) -> str:
+    text = text.lower().strip()
+    text = re.sub(r"[^\w\s-]", "", text)
+    text = re.sub(r"[\s_]+", "-", text)
+    text = re.sub(r"-+", "-", text)
+    return text.strip("-")
+
+
+def _add_utm(url: str, campaign: str) -> str:
+    """Appends utm_source=pinterest&utm_medium=social&utm_campaign={campaign} to a
+    destination URL — applied here, once, guaranteed, rather than trusting Claude to
+    add it correctly in its own generated output."""
+    parts = urlsplit(url)
+    query = dict(parse_qsl(parts.query))
+    query["utm_source"] = "pinterest"
+    query["utm_medium"] = "social"
+    query["utm_campaign"] = campaign
+    return urlunsplit(parts._replace(query=urlencode(query)))
+
+
 def _parse(raw: str) -> list[dict]:
     raw = re.sub(r"^```(?:json)?\s*", "", raw.strip())
     raw = re.sub(r"\s*```$", "", raw)
@@ -263,6 +293,10 @@ def _parse(raw: str) -> list[dict]:
                 if not v.get("destination_url"):
                     maps_to = t.get("maps_to_product", "")
                     v["destination_url"] = PRODUCT_URLS.get(maps_to, "https://www.switzertemplates.com")
+                # Tag every destination URL for attribution, regardless of whether it
+                # came from Claude directly or the fallback above — guaranteed, not
+                # left to the model to remember.
+                v["destination_url"] = _add_utm(v["destination_url"], _slugify(t["keyword"]))
                 clean_vars.append(v)
         if not clean_vars:
             continue

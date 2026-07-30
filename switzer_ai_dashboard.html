@@ -146,6 +146,7 @@
 
 <!-- OVERVIEW -->
 <div class="tab-panel active" id="panel-overview">
+  <div id="gm-waiting-card"></div>
   <div class="stat-grid">
     <div class="stat-card"><p class="stat-label">Etsy Expert</p><div style="display:flex;align-items:center;gap:6px;margin-bottom:4px;"><span class="status-dot" style="background:var(--teal-mid);"></span><p class="stat-val" style="margin:0;">Active</p></div><p class="stat-sub" id="ov-etsy-run">—</p></div>
     <div class="stat-card"><p class="stat-label">Blog SEO</p><div style="display:flex;align-items:center;gap:6px;margin-bottom:4px;"><span class="status-dot" style="background:var(--teal-mid);"></span><p class="stat-val" style="margin:0;">Active</p></div><p class="stat-sub" id="ov-blog-run">—</p></div>
@@ -594,6 +595,30 @@ function csvBanner(id, lastRun, nextRun) {
   else if(days<=4)  { cls='warning'; icon='ti-alert-circle';   title=`Etsy agent runs in ${days} days — get your Everbee CSV ready`; }
   else              { cls='ok';      icon='ti-calendar-check'; title=`Etsy agent runs in ${days} days — all good`; }
   el.innerHTML=`<div class="csv-banner ${cls}"><i class="ti ${icon}"></i><div><p class="csv-title">${title}</p><p class="csv-sub">Next run: ${nextRun||'TBD'} · Last run: ${lastRun||'not yet'}</p></div></div>`;
+}
+
+// General Manager — "waiting on you" card
+function renderGeneralManager(){
+  const el = document.getElementById('gm-waiting-card'); if(!el) return;
+  const gm = DATA.general_manager || {};
+  if(!gm.awaiting_reply){ el.innerHTML=''; return; }
+
+  const candidates = gm.candidates || [];
+  const list = candidates.map(c =>
+    `<li><strong>${c.keyword}</strong> — ${c.reasoning||''}</li>`
+  ).join('');
+
+  el.innerHTML = `<div class="csv-banner warning" style="align-items:flex-start;">
+    <i class="ti ti-mail-question"></i>
+    <div style="flex:1;">
+      <p class="csv-title">General Manager is waiting on you — this week's recommendation is ready</p>
+      <ul style="margin:8px 0 8px 18px;font-size:13px;color:var(--text2);line-height:1.6;">${list}</ul>
+      <a href="${gm.issue_url||'#'}" target="_blank" rel="noopener"
+         style="display:inline-block;font-size:13px;font-weight:600;color:var(--amber-text);text-decoration:underline;">
+        Review and reply on GitHub →
+      </a>
+    </div>
+  </div>`;
 }
 
 // Overview
@@ -1122,7 +1147,7 @@ async function loadDashboard(){
     }
     return;
   }
-  renderOverview(); renderWins(); renderEtsy(); renderSprint(); renderBlog(); renderKeywords(); renderRepurposer(); renderEmail(); renderPinterest(); renderNerd();
+  renderGeneralManager(); renderOverview(); renderWins(); renderEtsy(); renderSprint(); renderBlog(); renderKeywords(); renderRepurposer(); renderEmail(); renderPinterest(); renderNerd();
 }
 if (checkToken()) loadDashboard();
 </script>

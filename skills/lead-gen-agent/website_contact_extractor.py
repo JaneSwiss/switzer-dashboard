@@ -15,6 +15,7 @@ import time
 from pathlib import Path
 from urllib.parse import urljoin, urlparse
 
+import requests as _requests
 from bs4 import BeautifulSoup
 
 sys.path.insert(0, str(Path(__file__).parent))
@@ -125,6 +126,70 @@ def _base_url(url: str) -> str:
     return f"{p.scheme}://{p.netloc}"
 
 
+# ── Lightweight pre-extraction check ─────────────────────────────────────────
+# Direct (non-proxy) GET of just the homepage <head> — reads first 4 KB only.
+# Filters out obvious directory/aggregator sites before spending Apify quota.
+# Always fails OPEN: if the site blocks plain requests, Apify handles it.
+
+_LIGHTWEIGHT_UA = (
+    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
+    "AppleWebKit/537.36 (KHTML, like Gecko) "
+    "Chrome/120.0.0.0 Safari/537.36"
+)
+
+_DIRECTORY_META_SIGNALS = {
+    "find a ", "find the best", "find your",
+    "browse our directory", "directory of",
+    "therapists near", "coaches near", "practitioners near",
+    "find a therapist", "find a coach", "find a nutritionist",
+    "near me", "near you",
+    "view all therapists", "view all coaches",
+    "our network of", "search for a ",
+    "join our directory", "list your practice", "list your business",
+    "browse profiles", "compare therapists", "compare coaches",
+}
+
+
+def _passes_lightweight_check(url: str) -> bool:
+    """
+    Fetch only the first 4 KB of the homepage (no proxy) and check <title> /
+    <meta description> for directory signals. Returns False if clearly a
+    directory — skip Apify entirely. Returns True on any error (fail open).
+    """
+    try:
+        resp = _requests.get(
+            url,
+            headers={"User-Agent": _LIGHTWEIGHT_UA, "Accept": "text/html"},
+            timeout=6,
+            stream=True,
+        )
+        chunk = b""
+        for c in resp.iter_content(chunk_size=4096):
+            chunk = c
+            break
+        resp.close()
+        content = chunk.decode("utf-8", errors="ignore")
+    except Exception:
+        return True  # blocked or unreachable — let Apify decide
+
+    title_m = re.search(r"<title[^>]*>(.*?)</title>", content, re.I | re.S)
+    title = re.sub(r"<[^>]+>", "", title_m.group(1)).strip().lower() if title_m else ""
+
+    # Try both attribute orderings for <meta name="description" content="...">
+    desc_m = re.search(
+        r'<meta\s+name=["\']description["\']\s+content=["\'](.*?)["\']', content, re.I
+    ) or re.search(
+        r'<meta\s+content=["\'](.*?)["\']\s+name=["\']description["\']', content, re.I
+    )
+    desc = desc_m.group(1).strip().lower() if desc_m else ""
+
+    combined = title + " " + desc
+    if any(sig in combined for sig in _DIRECTORY_META_SIGNALS):
+        return False
+
+    return True
+
+
 def process_lead(lead: dict) -> dict:
     """
     Fetch a lead's website and extract contact info.
@@ -145,6 +210,12 @@ def process_lead(lead: dict) -> dict:
 
     updates = {}
     base = _base_url(website)
+
+    # Lightweight check: direct GET of just the <head> — no proxy, ~4 KB.
+    # Catches directory/aggregator sites before burning Apify quota on them.
+    if not _passes_lightweight_check(base):
+        print(f"    → skip: lightweight check flagged as directory/aggregator", file=sys.stderr)
+        return {"status": "dead", "notes": "pre-check: directory or aggregator"}
 
     # Pages to try in order: homepage, then common contact paths
     pages_to_try = [website] + [base + path for path in CONTACT_PATH_HINTS]

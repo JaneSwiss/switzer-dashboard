@@ -18,6 +18,7 @@ Also required:
 import os
 import sys
 import json
+import argparse
 import traceback
 from datetime import date
 from pathlib import Path
@@ -86,47 +87,38 @@ def _update_dashboard(sent_today: int):
 
 
 def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--skip-emails", action="store_true", help="Skip email draft generation and sending (forms only)")
+    args = parser.parse_args()
+
     _log("═" * 60)
-    _log("Daily lead gen run starting")
+    _log("Daily lead gen run starting" + (" [emails skipped]" if args.skip_emails else ""))
     _log("═" * 60)
 
     sent_today = 0
 
-    # ── Step 1: Find new Etsy leads ───────────────────────────────────────────
-    _section("Etsy Lead Finder")
-    try:
-        import etsy_lead_finder
-        etsy_lead_finder.run()
-    except Exception:
-        _log("[error] Etsy Lead Finder failed:")
-        traceback.print_exc()
+    # ── Step 1 (disabled): Etsy Lead Finder — Apify Etsy actor broken ──────────
 
-    # ── Step 2: Find new Instagram leads ─────────────────────────────────────
-    _section("Instagram Lead Finder")
-    try:
-        import instagram_lead_finder
-        instagram_lead_finder.run()
-    except Exception:
-        _log("[error] Instagram Lead Finder failed:")
-        traceback.print_exc()
-
-    # ── Step 3: Find new web / service-business leads ────────────────────────
+    # ── Step 2: Find new web / service-business leads ────────────────────────
     _section("Web Search Finder")
     try:
         import web_search_finder
-        web_search_finder.run()
+        # 5 regular service (snippet emails) + 5 ecommerce + 65 intitle:contact = 75 queries total
+        # intitle:contact returns the /contact page URL directly — skips extraction entirely
+        # Directories (PT/Houzz/WW/Noomii) all blocked or JS-rendered — disabled 2026-06-16
+        web_search_finder.run(service_sample=5, ecommerce_sample=5, intitle_sample=65)
     except Exception:
         _log("[error] Web Search Finder failed:")
         traceback.print_exc()
 
-    # ── Step 4: Scrape websites for contact emails ───────────────────────────
-    _section("Website Contact Extractor")
-    try:
-        import website_contact_extractor
-        website_contact_extractor.run()
-    except Exception:
-        _log("[error] Website Contact Extractor failed:")
-        traceback.print_exc()
+    # ── Step 3 (disabled): Directory Harvester ───────────────────────────────
+    # PT/Houzz/WeddingWire/Noomii all blocked or JS-rendered — 0 leads on first run 2026-06-16.
+    # intitle:contact search is the better approach for finding form-ready leads.
+
+    # ── Step 4 (disabled): Website Contact Extractor ────────────────────────
+    # intitle:contact gives us contact URLs directly — extraction is slow, costly,
+    # and lower quality by comparison. Re-enable when needed for other lead sources.
+    _log("Website Contact Extractor skipped (disabled — intitle:contact handles volume)")
 
     # ── Step 5: Hunter.io enrichment (only if enabled) ───────────────────────
     if os.getenv("HUNTER_ENRICHER_ENABLED", "false").lower() == "true":
@@ -141,24 +133,59 @@ def main():
         _log("Email Enricher skipped (set HUNTER_ENRICHER_ENABLED=true to enable)")
 
     # ── Step 6: Generate outreach drafts ─────────────────────────────────────
-    _section("Outreach Generator")
+    _section("Outreach Generator — email")
+    if args.skip_emails:
+        _log("Email drafts skipped (--skip-emails)")
+    else:
+        try:
+            import outreach_generator
+            outreach_generator.run(limit=15, only_type="email")
+        except Exception:
+            _log("[error] Outreach Generator (email) failed:")
+            traceback.print_exc()
+
+    _section("Outreach Generator — contact forms")
     try:
-        import outreach_generator
-        outreach_generator.run(limit=30)
+        outreach_generator.run(limit=150, only_type="contact-form")
     except Exception:
-        _log("[error] Outreach Generator failed:")
+        _log("[error] Outreach Generator (contact-form) failed:")
         traceback.print_exc()
 
     # ── Step 7: Send emails ───────────────────────────────────────────────────
     _section("Email Sender")
+    if args.skip_emails:
+        _log("Email sending skipped (--skip-emails)")
+    else:
+        try:
+            import email_sender
+            sent_today = email_sender.run(daily_limit=15)
+        except Exception:
+            _log("[error] Email Sender failed:")
+            traceback.print_exc()
+
+    # ── Step 8: Preview planned form submissions — Jane reviews before sending ─
+    _section("Contact Form Preview (review before submitting)")
     try:
-        import email_sender
-        sent_today = email_sender.run(daily_limit=15)
+        import contact_form_sender
+        from pathlib import Path as _Path
+        planned = contact_form_sender.get_leads_for_contact_form(daily_limit=160)
+        preview_path = PROJECT_ROOT / "outputs" / "leads" / f"planned-forms-{date.today().isoformat()}.txt"
+        lines = [f"Planned form submissions — {date.today().isoformat()}", f"Total: {len(planned)}", ""]
+        for i, lead in enumerate(planned, 1):
+            domain = lead.get("website", "").replace("https://", "").replace("http://", "").rstrip("/")
+            url    = lead.get("contact_page_url", "")
+            niche  = lead.get("product_type", "")
+            lines.append(f"{i:3}.  {domain}  |  {niche}  |  {url}")
+        preview_path.write_text("\n".join(lines), encoding="utf-8")
+        _log(f"Preview saved → {preview_path.name}  ({len(planned)} leads)")
+        _log("Review the list, then tell me 'submit' to run the form sender.")
+        for line in lines:
+            _log(line)
     except Exception:
-        _log("[error] Email Sender failed:")
+        _log("[error] Contact Form Preview failed:")
         traceback.print_exc()
 
-    # ── Step 8: Update dashboard ──────────────────────────────────────────────
+    # ── Step 9: Update dashboard ──────────────────────────────────────────────
     _section("Dashboard Update")
     _update_dashboard(sent_today)
 

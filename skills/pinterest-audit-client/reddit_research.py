@@ -94,9 +94,10 @@ def search_bing(query: str, api_key: str, count: int = 10) -> list[dict]:
         return []
 
 
-def collect_questions(niche: str, products: str) -> list[dict]:
+def collect_questions(niche: str, products: str, subreddits: list[str] | None = None) -> list[dict]:
     """Collect buying-intent questions via Reddit free API, with paid API fallback."""
     all_results = []
+    subreddits = subreddits or BUYING_SUBREDDITS
 
     # Step 1 — Reddit free API across targeted subreddits
     # Extract 2-3 short keyword phrases from the niche
@@ -104,7 +105,7 @@ def collect_questions(niche: str, products: str) -> list[dict]:
     short_query = " ".join(keywords[:3])
 
     print("  Searching Reddit (free API)...")
-    for sub in BUYING_SUBREDDITS:
+    for sub in subreddits:
         results = search_reddit_free(short_query, subreddit=sub, limit=5)
         all_results.extend(results)
         time.sleep(0.5)   # polite delay — Reddit rate limit is generous but respect it
@@ -113,19 +114,22 @@ def collect_questions(niche: str, products: str) -> list[dict]:
     general = search_reddit_free(f"{short_query} recommendation OR suggest OR buy", limit=10)
     all_results.extend(general)
 
-    # Step 2 — Paid fallback only if Reddit returned very little
-    if len(all_results) < 5:
+    # Step 2 — Paid fallback whenever Reddit's free API didn't return enough to work with
+    if len(all_results) < 15:
         valueserp_key = os.getenv("VALUESERP_API_KEY", "")
         bing_key = os.getenv("BING_API_KEY", "")
         queries = [
             f'site:reddit.com "{short_query}" buy recommend',
+            f'site:reddit.com "{short_query}" advice OR help OR struggling',
+            f'site:reddit.com "{short_query}" how to',
             f'site:quora.com "{short_query}"',
+            f'site:quora.com "{short_query}" how do I',
         ]
         for query in queries:
             if valueserp_key:
-                all_results.extend(search_valueserp(query, valueserp_key, num=8))
+                all_results.extend(search_valueserp(query, valueserp_key, num=10))
             elif bing_key:
-                all_results.extend(search_bing(query, bing_key, count=8))
+                all_results.extend(search_bing(query, bing_key, count=10))
 
     # Deduplicate by URL
     seen: set = set()
@@ -181,10 +185,10 @@ Return ONLY valid JSON."""
         return []
 
 
-def run_reddit_research(niche: str, products: str) -> list[dict]:
+def run_reddit_research(niche: str, products: str, subreddits: list[str] | None = None) -> list[dict]:
     print("\n[4/9] Reddit & Quora Question Research")
 
-    raw = collect_questions(niche, products)
+    raw = collect_questions(niche, products, subreddits)
     print(f"  Found {len(raw)} raw threads")
 
     if not raw:

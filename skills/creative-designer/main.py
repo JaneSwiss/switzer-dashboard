@@ -388,11 +388,16 @@ def main():
     )
     parser.add_argument(
         "--skip-images", action="store_true",
-        help="Skip Gemini image generation (use placeholder backgrounds)"
+        help="Skip OpenAI image generation (use placeholder backgrounds)"
     )
     parser.add_argument(
         "--skip-tailwind", action="store_true",
         help="Skip Tailwind submission (write queue file only)"
+    )
+    parser.add_argument(
+        "--auto-approve", action="store_true",
+        help="Skip browser review — treat all generated pins as approved. For unattended "
+             "runs only; Tailwind still creates drafts, nothing gets published."
     )
     args = parser.parse_args()
 
@@ -425,8 +430,12 @@ def main():
                 pins.append((pin_dir, copy_data, image_path))
         print(f"  {len(pins)} pins loaded from session.")
 
-        # Go straight to browser review
-        approved = browser_approval(session_dir, pins)
+        # Go straight to browser review (or skip it entirely for unattended runs)
+        if args.auto_approve:
+            print("  --auto-approve set — treating all pins as approved, skipping browser review.")
+            approved = [(i, p) for i, p in enumerate(pins, 1)]
+        else:
+            approved = browser_approval(session_dir, pins)
         if not approved:
             print("\nNo pins approved. Review complete.")
             print(f"All pins saved to: {session_dir}")
@@ -597,8 +606,12 @@ def main():
     # Clean up temp dir
     shutil.rmtree(tmp_dir, ignore_errors=True)
 
-    # Step 3: Browser review + approval
-    approved = browser_approval(session_dir, pins)
+    # Step 3: Browser review + approval (or skip it entirely for unattended runs)
+    if args.auto_approve:
+        print("\n--auto-approve set — treating all pins as approved, skipping browser review.")
+        approved = [(i, p) for i, p in enumerate(pins, 1)]
+    else:
+        approved = browser_approval(session_dir, pins)
 
     if not approved:
         print("\nNo pins approved. Review complete.")

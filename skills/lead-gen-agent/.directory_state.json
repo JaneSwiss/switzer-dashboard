@@ -1,0 +1,30 @@
+{
+  "pt_therapists": {
+    "processed": [
+      "https://www.psychologytoday.com/us/therapists/wa/seattle?page=0",
+      "https://www.psychologytoday.com/us/therapists/wa/seattle?page=1",
+      "https://www.psychologytoday.com/us/therapists/or/portland?page=0"
+    ]
+  },
+  "houzz_interior": {
+    "processed": [
+      "https://www.houzz.com/professionals/interior-designer/c/Seattle--WA/",
+      "https://www.houzz.com/professionals/interior-designer/c/Portland--OR/",
+      "https://www.houzz.com/professionals/interior-designer/c/Denver--CO/"
+    ]
+  },
+  "ww_vendors": {
+    "processed": [
+      "https://www.weddingwire.com/wedding-photographers/seattle--c_220003/",
+      "https://www.weddingwire.com/wedding-photographers/portland--c_220003/",
+      "https://www.weddingwire.com/wedding-photographers/denver--c_220003/"
+    ]
+  },
+  "noomii_coaches": {
+    "processed": [
+      "https://www.noomii.com/list/life-coaches/seattle-washington",
+      "https://www.noomii.com/list/life-coaches/portland-oregon",
+      "https://www.noomii.com/list/life-coaches/denver-colorado"
+    ]
+  }
+}

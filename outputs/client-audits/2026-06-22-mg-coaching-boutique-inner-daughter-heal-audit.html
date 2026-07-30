@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Pinterest audit — inner daughter healing coaching for women — mother wound recovery, narcissistic and toxic mother relationships, eldest daughter syndrome, generational trauma, with focus on women 50+ and Black mother-daughter dynamics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+<style>
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #faf7f3;
+  --surface: #fff;
+  --surface2: #f0ebe2;
+  --border: #e4dbd0;
+  --border2: #d6ccc0;
+  --text: #2b2520;
+  --text2: #7a6458;
+  --text3: #c9b8a8;
+  --accent: #b09478;
+  --gold: #c9a87c;
+  --dark-banner: #2b2520;
+  --serif: 'Instrument Serif', Georgia, serif;
+  --sans: 'DM Sans', -apple-system, sans-serif;
+  --radius: 10px;
+  --radius-sm: 6px;
+}
+body {
+  font-family: var(--sans);
+  font-weight: 300;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  font-size: 14px;
+  line-height: 1.6;
+}
+.wrapper {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 5rem;
+}
+/* body has no top padding — header is full-width above wrapper */
+body > .wrapper { padding-top: 2rem; }
+
+/* ── Header (full-width, matches onboarding page exactly) ───────── */
+.header {
+  text-align: center;
+  padding: 3.5rem 1.5rem 2rem;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 0;
+  background: var(--bg);
+}
+.header-label {
+  font-size: 11px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--text2);
+  margin: 0 auto 14px;
+  font-family: var(--sans);
+  font-weight: 300;
+  text-align: center;
+  max-width: none;
+}
+.header h1 {
+  font-family: var(--serif);
+  font-size: clamp(28px, 5vw, 42px);
+  font-weight: normal;
+  color: var(--text);
+  line-height: 1.2;
+  margin-bottom: 12px;
+  text-align: center;
+}
+.header-date {
+  font-size: 13px;
+  color: var(--text3);
+  font-family: var(--sans);
+  font-weight: 300;
+  text-align: center;
+  max-width: none;
+  margin: 0 auto;
+}
+
+/* ── Cards ──────────────────────────────────────────────────────── */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 1rem;
+}
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+}
+.card-title {
+  font-family: var(--serif);
+  font-size: 24px;
+  font-weight: normal;
+  color: var(--text);
+}
+.section-num {
+  font-size: 10px;
+  color: #fff;
+  letter-spacing: .08em;
+  background: #5c3d2e;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-weight: 400;
+  white-space: nowrap;
+}
+
+/* ── Stat grid ──────────────────────────────────────────────────── */
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 200px));
+  justify-content: start;
+  gap: 10px;
+  margin: 1rem 0 0.5rem;
+}
+.stat-card {
+  background: var(--surface2);
+  border-radius: var(--radius-sm);
+  padding: 14px 12px;
+}
+.stat-label {
+  font-size: 12px;
+  color: var(--text);
+  letter-spacing: 0;
+  text-transform: none;
+  margin-top: 6px;
+  font-weight: 300;
+  line-height: 1.4;
+}
+.stat-val {
+  font-family: var(--serif);
+  font-size: 32px;
+  color: var(--text);
+  margin-bottom: 0;
+  line-height: 1.1;
+}
+.stat-sub {
+  font-size: 11px;
+  color: var(--text3);
+  line-height: 1.4;
+}
+
+/* ── Keyword pills ──────────────────────────────────────────────── */
+.pill-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 4px 0;
+}
+.pill {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 5px 14px;
+  font-size: 13px;
+  color: var(--text2);
+  white-space: nowrap;
+  font-weight: 400;
+}
+
+/* ── Tables ─────────────────────────────────────────────────────── */
+.table-wrap { overflow-x: auto; margin: 0.75rem 0; }
+table { width: 100%; border-collapse: collapse; }
+th {
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--text3);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  padding: 0 10px 10px;
+  text-align: left;
+  border-bottom: 1px solid var(--border2);
+  white-space: nowrap;
+  font-family: var(--sans);
+}
+td {
+  padding: 10px;
+  font-size: 15px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+  color: var(--text);
+  line-height: 1.5;
+  font-weight: 300;
+}
+tr:last-child td { border-bottom: none; }
+tbody tr:hover { background: var(--surface2); }
+
+/* ── Sub-section (h3) ───────────────────────────────────────────── */
+.subsection {
+  margin-top: 1.25rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--border);
+}
+.card-header + .subsection,
+.card-header + .strategy-step { border-top: none; }
+.subsection-title {
+  font-family: var(--serif);
+  font-size: 19px;
+  font-weight: normal;
+  color: var(--text);
+  margin-bottom: 0.75rem;
+}
+
+/* ── H4 / bold labels ───────────────────────────────────────────── */
+.field-label {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text2);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  margin: 1rem 0 4px;
+  font-family: var(--sans);
+}
+
+/* ── Body text ──────────────────────────────────────────────────── */
+p {
+  font-size: 15px;
+  color: var(--text2);
+  line-height: 1.65;
+  margin-bottom: 0.75rem;
+  max-width: 720px;
+  font-weight: 300;
+}
+p:last-child { margin-bottom: 0; }
+ul, ol { padding-left: 20px; margin-bottom: 0.75rem; }
+li {
+  font-size: 15px;
+  color: var(--text2);
+  line-height: 1.6;
+  margin-bottom: 4px;
+  font-weight: 300;
+}
+a { color: var(--accent); }
+strong { color: var(--text); font-weight: 500; }
+em { color: var(--text2); }
+
+/* ── Italic meta / source note ──────────────────────────────────── */
+.meta-note {
+  font-size: 11px;
+  color: var(--text3);
+  font-style: italic;
+  margin-bottom: 0.75rem;
+}
+
+/* ── Trend cards (Design Style Trends) ─────────────────────────── */
+.trend-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 12px;
+  margin: 0.75rem 0;
+}
+.trend-card {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px 14px;
+}
+.trend-card-num {
+  font-size: 10px;
+  color: var(--text3);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  font-family: var(--sans);
+  font-weight: 400;
+  margin-bottom: 6px;
+}
+.trend-card-name {
+  font-family: var(--serif);
+  font-size: 16px;
+  font-weight: normal;
+  color: var(--text);
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+.trend-card-desc {
+  font-size: 12px;
+  color: var(--text2);
+  line-height: 1.6;
+  font-weight: 300;
+}
+.trend-card-desc em {
+  color: var(--accent);
+  font-style: italic;
+  display: block;
+  margin-top: 6px;
+}
+
+/* ── Strategy card (section 7) ───────────────────────────────────── */
+.strategy-card {
+  border: 1px solid var(--border2);
+  overflow: hidden;
+  padding: 0;
+}
+.strategy-card .card-header {
+  background: var(--dark-banner);
+  margin: 0;
+  padding: 1.5rem 1.75rem 1.25rem;
+  border-bottom: none;
+  border-radius: 0;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+.strategy-card .card-header::after {
+  flex: 0 0 100%;
+  content: '';
+  display: block;
+  width: 36px;
+  height: 3px;
+  background: var(--gold);
+  border-radius: 2px;
+  margin-top: 10px;
+  opacity: 0.8;
+}
+.strategy-card .card-title { color: #f8f5f2; font-size: 24px; }
+.strategy-card .section-num { background: var(--gold); color: #2b2520; }
+
+/* ── Personal recommendations ────────────────────────────────────── */
+.rec-list { display: flex; flex-direction: column; gap: 6px; margin-top: 0.5rem; }
+.rec-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 15px;
+  color: var(--text2);
+  line-height: 1.6;
+  font-weight: 300;
+  font-style: italic;
+}
+.rec-pin { flex-shrink: 0; font-size: 16px; line-height: 1.45; }
+.strategy-step {
+  display: grid;
+  grid-template-columns: 26px 1fr;
+  gap: 1rem;
+  padding: 1.25rem 1.75rem;
+  border-top: 1px solid var(--border);
+  align-items: start;
+}
+.strategy-step-num {
+  font-size: 15px;
+  color: var(--accent);
+  line-height: 1.3;
+  padding-top: 1px;
+  text-align: center;
+}
+.strategy-step-title {
+  font-family: var(--serif);
+  font-size: 19px;
+  color: var(--text);
+  font-weight: normal;
+  margin-bottom: 0.6rem;
+}
+.strategy-step-body { font-size: 15px; color: var(--text2); line-height: 1.7; font-weight: 300; }
+.strategy-step-body p { margin-bottom: 0.5rem; max-width: none; color: var(--text2); font-size: 15px; font-weight: 300; }
+.strategy-step-body p:last-child { margin-bottom: 0; }
+.strategy-step-body ul, .strategy-step-body ol { padding-left: 18px; margin: 0.25rem 0; }
+.strategy-step-body li { color: var(--text2); font-size: 15px; line-height: 1.6; margin-bottom: 3px; font-weight: 300; }
+.strategy-step-body strong { color: var(--text); font-weight: 500; }
+.strategy-step-body .table-wrap { margin: 0.5rem 0; }
+
+/* ── Colour swatch ──────────────────────────────────────────────── */
+.swatch {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border-radius: 3px;
+  border: 1px solid var(--border2);
+  vertical-align: middle;
+  margin-right: 5px;
+}
+
+/* ── HR ─────────────────────────────────────────────────────────── */
+hr { display: none; }
+
+/* ── CSV download buttons ────────────────────────────────────────── */
+.csv-download-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 0.75rem;
+}
+.csv-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: #5c3d2e;
+  border: 1px solid #5c3d2e;
+  border-radius: 6px;
+  padding: 7px 14px;
+  font-size: 12px;
+  font-family: var(--sans);
+  font-weight: 400;
+  color: #fff;
+  text-decoration: none;
+  letter-spacing: .01em;
+  transition: background 0.12s, border-color 0.12s;
+}
+.csv-btn:hover { background: #4a3025; border-color: #4a3025; color: #fff; }
+.csv-btn svg { flex-shrink: 0; stroke: #fff; }
+
+/* ── Actionable Spreadsheet section ─────────────────────────────── */
+.spreadsheet-card {
+  border: 1.5px solid #34a853;
+  background: #fff;
+  text-align: center;
+  padding: 2.5rem 1.5rem 2rem;
+  margin-top: 1.5rem;
+}
+.canva-card { border-color: #29ABE2; margin-top: 0.75rem; }
+.canva-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: #29ABE2;
+  color: #fff;
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 500;
+  padding: 14px 28px;
+  border-radius: 8px;
+  text-decoration: none;
+  letter-spacing: .01em;
+  transition: background 0.15s, box-shadow 0.15s;
+  box-shadow: 0 2px 8px rgba(41,171,226,0.3);
+}
+.canva-btn:hover { background: #1e96cf; box-shadow: 0 4px 14px rgba(41,171,226,0.4); }
+.canva-btn svg { flex-shrink: 0; }
+.spreadsheet-card .card-header { display: none; }
+.spreadsheet-eyebrow {
+  font-size: 11px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--text2);
+  font-weight: 300;
+  margin-bottom: 14px;
+}
+.spreadsheet-title {
+  font-family: var(--serif);
+  font-size: clamp(22px, 4vw, 32px);
+  font-weight: normal;
+  color: var(--text);
+  margin-bottom: 10px;
+  line-height: 1.2;
+}
+.spreadsheet-desc {
+  font-size: 13px;
+  color: var(--text2);
+  font-weight: 300;
+  max-width: 480px;
+  margin: 0 auto 2rem;
+  line-height: 1.65;
+}
+.sheets-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: #34a853;
+  color: #fff;
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 500;
+  padding: 14px 28px;
+  border-radius: 8px;
+  text-decoration: none;
+  letter-spacing: .01em;
+  transition: background 0.15s, box-shadow 0.15s;
+  box-shadow: 0 2px 8px rgba(52,168,83,0.25);
+}
+.sheets-btn:hover { background: #2d9248; box-shadow: 0 4px 14px rgba(52,168,83,0.35); }
+.sheets-btn svg { flex-shrink: 0; }
+.spreadsheet-note {
+  font-size: 13px;
+  color: var(--text3);
+  margin-top: 1rem;
+  font-weight: 300;
+  max-width: none;
+}
+
+</style>
+</head>
+<body>
+<div class="header">
+  <p class="header-label">Switzertemplates Pinterest Services</p>
+  <h1>MG Coaching Boutique Audit</h1>
+  <p class="header-date">2026-06-22</p>
+</div>
+<div class="wrapper">
+<div class="card">
+<div class="card-header"><div class="card-title">Pinterest niche overview</div><span class="section-num">01</span></div>
+<p>Pinterest can work as a traffic machine for coaches and mental health specialists for a few reasons.</p>
+<p>First, women can use Pinterest privately — without comments, likes, or followers attached to what they search for. That's exactly why mental health, self-help, and emotional healing content can perform so well on the platform.</p>
+<p>The demand is already there, and it's measurable. The keywords mapped for you in this report alone generate over 68,000 searches per month, and several of them (including "dysfunctional family," "eldest daughter syndrome," and "mom issues") sit in the thousands-per-month range, with very few accounts speaking to them directly with real authority.</p>
+<div class="stat-grid">
+<div class="stat-card"><div class="stat-val">619M+</div><div class="stat-label">Monthly active Pinterest users worldwide</div></div>
+<div class="stat-card"><div class="stat-val">68K+</div><div class="stat-label">Combined monthly Pinterest searches across your top keywords</div></div>
+</div>
+</div>
+<div class="card">
+<div class="card-header"><div class="card-title">Trending keywords in your niche</div><span class="section-num">02</span></div>
+<p class="meta-note">Based on Google monthly search volume + Pinterest commercial intent scoring</p>
+<div class="pill-grid"><span class="pill">dysfunctional family</span><span class="pill">eldest daughter syndrome</span><span class="pill">mom issues</span><span class="pill">mommy issues</span><span class="pill">toxic mother</span><span class="pill">mother wound</span><span class="pill">dysfunctional family therapy</span><span class="pill">inner child healing</span><span class="pill">childhood emotional neglect</span><span class="pill">toxic mom narcissistic mother</span><span class="pill">mother wound healing</span><span class="pill">toxic mother quotes daughters</span><span class="pill">mother wound quotes</span><span class="pill">daughter of narcissistic mother quotes</span><span class="pill">narcissistic behavior mother</span></div>
+</div>
+<div class="card">
+<div class="card-header"><div class="card-title">Keyword groups</div><span class="section-num">03</span></div>
+<div class="subsection"><div class="subsection-title">Group 1: mother wound healing</div>
+<div class="table-wrap"><table><thead><tr>
+<th>Keyword</th>
+<th>Buyer Intent</th>
+</tr></thead><tbody>
+<tr><td>mother wound</td><td>Medium — broad awareness search that draws in women just beginning to name their pain, making them prime candidates for nurturing into coaching discovery.</td></tr>
+<tr><td>mother wound healing</td><td>High — the word "healing" signals a woman who has moved past awareness into actively seeking a solution, closely mirroring the transformation a coaching package promises.</td></tr>
+<tr><td>mother wound quotes</td><td>Low — primarily an emotional validation search, though it can surface the client's content to women in early stages of resonance who may later convert.</td></tr>
+<tr><td>mother wound healing journal prompts</td><td>High — a woman searching for structured healing tools is ready to invest in guided support, making her a strong candidate for both a coaching package and a future workbook or journal product.</td></tr>
+<tr><td>mother wound journal prompts</td><td>Medium — indicates willingness to do active inner work but stops short of explicitly seeking healing, suggesting she may need one more touchpoint before booking a service.</td></tr>
+</tbody></table></div>
+</div>
+<div class="subsection"><div class="subsection-title">Group 2: narcissistic mother</div>
+<div class="table-wrap"><table><thead><tr>
+<th>Keyword</th>
+<th>Buyer Intent</th>
+</tr></thead><tbody>
+<tr><td>toxic mom narcissistic mother</td><td>Medium — searchers are in active pain and validating their experience, making them warm prospects who may be ready to explore coaching once they see it offered as a solution.</td></tr>
+<tr><td>daughter of narcissistic mother quotes</td><td>Low — quote-seeking behavior signals emotional resonance and early-stage awareness, but the intent is comfort rather than taking action toward healing support.</td></tr>
+<tr><td>narcissistic behavior mother</td><td>Medium — women researching specific behaviors are deepening their understanding of their wound, placing them closer to recognizing they need professional guidance.</td></tr>
+<tr><td>how to deal with a narcissistic mother</td><td>High — the "how to" framing signals solution-seeking intent, making these searchers prime candidates for coaching positioned as structured, expert-led support.</td></tr>
+<tr><td>signs of a narcissistic mother</td><td>Low — diagnostic curiosity suggests early awareness and self-education, not yet readiness to invest in a coaching package or service.</td></tr>
+</tbody></table></div>
+</div>
+<div class="subsection"><div class="subsection-title">Group 3: toxic mother & daughter relationship</div>
+<div class="table-wrap"><table><thead><tr>
+<th>Keyword</th>
+<th>Buyer Intent</th>
+</tr></thead><tbody>
+<tr><td>toxic mother</td><td>Low — broad awareness search likely in early emotional recognition stages, not yet solution-seeking.</td></tr>
+<tr><td>toxic mother quotes daughters</td><td>Low — searchers are seeking validation and emotional resonance, not actively looking for coaching or products.</td></tr>
+<tr><td>toxic mother daughter relationship</td><td>Medium — signals personal connection to the dynamic and growing awareness that may lead to seeking support.</td></tr>
+<tr><td>toxic mother daughter relationship quotes</td><td>Medium — women processing their specific relationship may be closer to seeking healing resources like workbooks or coaching.</td></tr>
+<tr><td>how to deal with a toxic mother</td><td>High — action-oriented phrasing signals readiness to find solutions, making this audience primed for coaching services or guided programs.</td></tr>
+</tbody></table></div>
+</div>
+<div class="subsection"><div class="subsection-title">Group 4: dysfunctional family</div>
+<div class="table-wrap"><table><thead><tr>
+<th>Keyword</th>
+<th>Buyer Intent</th>
+</tr></thead><tbody>
+<tr><td>dysfunctional family</td><td>Low — broad awareness search with no clear action signal, likely in early research or emotional processing stage rather than ready to invest in coaching.</td></tr>
+<tr><td>dysfunctional family therapy</td><td>Medium — signals active help-seeking behavior and willingness to invest in professional support, though the therapy framing may indicate openness to coaching as an alternative solution.</td></tr>
+<tr><td>dysfunctional family roles</td><td>Low — primarily educational curiosity about family systems, but can attract women beginning to name their mother wound experience who are not yet ready to purchase.</td></tr>
+<tr><td>dysfunctional family dynamics</td><td>Low — a research-oriented search that suggests pattern recognition and early self-awareness, valuable for nurturing but not yet close to a coaching commitment.</td></tr>
+<tr><td>healing from dysfunctional family</td><td>High — the healing framing signals that this searcher has moved past awareness into active recovery mode, making them a strong candidate for inner daughter healing coaching or a workbook purchase.</td></tr>
+</tbody></table></div>
+</div>
+<div class="subsection"><div class="subsection-title">Group 5: eldest daughter syndrome</div>
+<div class="table-wrap"><table><thead><tr>
+<th>Keyword</th>
+<th>Buyer Intent</th>
+</tr></thead><tbody>
+<tr><td>eldest daughter syndrome</td><td>Medium — searchers are likely in early awareness/validation mode recognizing their experience, making them warm leads who may convert to coaching after deeper content nurtures their trust.</td></tr>
+<tr><td>eldest daughter trauma</td><td>High — the word "trauma" signals a searcher who has moved beyond curiosity into acknowledging pain, making them significantly more likely to seek structured support like one-on-one coaching or a workbook.</td></tr>
+</tbody></table></div>
+</div>
+<div class="subsection"><div class="subsection-title">Group 6: mother-daughter therapy</div>
+<div class="table-wrap"><table><thead><tr>
+<th>Keyword</th>
+<th>Buyer Intent</th>
+</tr></thead><tbody>
+<tr><td>mother daughter therapy activities</td><td>Medium — women researching structured ways to heal the mother-daughter relationship are open to guided support, making them warm prospects for couples coaching sessions or a future workbook.</td></tr>
+<tr><td>mother daughter therapy worksheets</td><td>High — searching for a specific therapeutic tool signals readiness to take active steps toward healing, positioning this as a strong entry point for a paid workbook, journal, or coaching intake.</td></tr>
+</tbody></table></div>
+</div>
+<div class="subsection"><div class="subsection-title">Group 7: reparenting</div>
+<div class="table-wrap"><table><thead><tr>
+<th>Keyword</th>
+<th>Buyer Intent</th>
+</tr></thead><tbody>
+<tr><td>reparenting your inner child</td><td>Medium — searchers are actively exploring inner child healing concepts and likely researching coaches or resources to guide them through the process.</td></tr>
+<tr><td>reparenting yourself</td><td>Medium — this self-directed phrasing signals someone beginning their healing journey who may be open to coaching support once they understand the depth of the work involved.</td></tr>
+<tr><td>reparenting yourself quotes</td><td>Low — motivational quote seekers are in early emotional awareness mode, not yet in a decision-making mindset, but can be nurtured toward coaching through resonant, niche-specific content.</td></tr>
+<tr><td>reparenting journal prompts</td><td>High — searching for specific tools signals readiness to do active inner work, making this audience primed for a guided journal product or a coaching package that includes structured exercises.</td></tr>
+<tr><td>reparenting yourself journal</td><td>High — this product-specific search indicates clear purchase intent, directly aligning with the client's future workbook and journal offerings for mother wound recovery.</td></tr>
+</tbody></table></div>
+<p>Extra keywords to consider:</p>
+<ul><li>mom issues / mommy issues</li><li>generational trauma healing</li><li>childhood emotional neglect</li><li>adult daughter wound</li></ul>
+</div>
+<div class="subsection"><div class="subsection-title">Download detailed spreadsheet for each keyword group:</div>
+<div class="csv-download-row">
+<p><a href="mother-wound.csv" download class="csv-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Mother wound healing</a></p>
+<p><a href="narcissistic-mother.csv" download class="csv-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Narcissistic mother</a></p>
+<p><a href="toxic-mother-interests.csv" download class="csv-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Toxic mother & daughter relationship</a></p>
+<p><a href="dysfunctional-family.csv" download class="csv-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Dysfunctional family</a></p>
+<p><a href="reparenting-interests.csv" download class="csv-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Reparenting</a></p>
+</div>
+</div>
+</div>
+<div class="card">
+<div class="card-header"><div class="card-title">What buyers are asking (Reddit & Quora)</div><span class="section-num">04</span></div>
+<div class="table-wrap"><table><thead><tr>
+<th>#</th>
+<th>Thread</th>
+<th>Pinterest content angle</th>
+</tr></thead><tbody>
+<tr><td>1</td><td><a href="https://www.reddit.com/r/scorpiomoon/comments/1mrlpkz/healing_the_mother_wound_what_helped_you_most/" target="_blank" rel="noopener">Healing the Mother Wound; What Helped You Most?</a></td><td>This thread reveals women actively seeking structured, proven methods for mother wound healing and are open to multiple modalities. Pin angle: 'The 5 things that actually help you heal the mother wound (and what to try first)' — leading into a free discovery call or coaching intake.</td></tr>
+<tr><td>2</td><td><a href="https://www.reddit.com/r/emotionalneglect/comments/1mg64wr/i_38f_realized_that_i_am_a_product_of_childhood/" target="_blank" rel="noopener">I (38F) realized that I am a product of childhood emotional neglect</a></td><td>This thread shows women at the exact moment of awakening to their wound — a high-intent buying moment driven by emotional pain and desire for change. Pin angle: 'If you just realized your mother's emotional neglect is still running your life, read this' — leading into a coaching package landing page.</td></tr>
+<tr><td>3</td><td><a href="https://www.reddit.com/r/emotionalneglect/comments/1rusa1d/can_anyone_recommend_inner_child_healing/" target="_blank" rel="noopener">Can anyone recommend inner child healing practices that ...</a></td><td>Buyers here are actively seeking guided support because DIY healing feels too intense — exactly the gap a coach fills. Pin angle: 'Why inner child healing can feel overwhelming (and how guided coaching changes that)' — leading to a coaching discovery call.</td></tr>
+<tr><td>4</td><td><a href="https://www.reddit.com/r/CPTSD/comments/1nsme38/how_are_you_supposed_to_tend_to_your_inner_child/" target="_blank" rel="noopener">How are you supposed to tend to your inner child when ...</a></td><td>This thread surfaces deep frustration with vague or inaccessible inner child advice, signaling readiness for a real guide or coach. Pin angle: 'Still don't know how to actually heal your inner child? Here's what no one tells you' — bridging to a coaching intake or free resource download.</td></tr>
+<tr><td>5</td><td><a href="https://www.reddit.com/r/Mommit/comments/1n8nzc0/no_one_told_me_parenthood_is_all_about_healing/" target="_blank" rel="noopener">No one told me parenthood is all about healing your inner child</a></td><td>This thread speaks directly to women motivated by both personal healing and protecting their children — a powerful dual driver for purchasing. Pin angle: 'Breaking the cycle starts with you: how mothers heal the wound before it reaches the next generation' — connecting to the generational trauma coaching angle.</td></tr>
+<tr><td>6</td><td><a href="https://www.reddit.com/r/InternalFamilySystems/comments/1qhwfm6/comforting_inner_child/" target="_blank" rel="noopener">Comforting inner child : r/InternalFamilySystems</a></td><td>The thread confirms that women seek embodied, relational healing support rather than solo exercises — validating the value of one-on-one coaching. Pin angle: 'What it really feels like to be guided through inner child reparenting (real women share)' — leading to coaching testimonials and a booking page.</td></tr>
+<tr><td>7</td><td><a href="https://www.quora.com/How-do-I-heal-from-deep-seated-childhood-unworthiness-and-the-feeling-that-I-ve-failed-my-younger-self" target="_blank" rel="noopener">How to heal from deep-seated childhood unworthiness and the feeling that I've failed my younger self</a></td><td>This question reflects core pain points around shame and self-betrayal that are highly specific to the mother wound and eldest daughter experience. Pin angle: 'Dear younger me: how Black women are finally healing the unworthiness their mothers couldn't fix' — leading into coaching or a future workbook.</td></tr>
+<tr><td>8</td><td><a href="https://www.quora.com/How-do-you-start-a-journey-of-healing-when-you-feel-broken-inside" target="_blank" rel="noopener">How to start a journey of healing when you feel broken inside</a></td><td>Women 50+ who are just beginning to name their pain and look for a starting point are a prime audience who need structured, compassionate guidance. Pin angle: 'You're not too broken and it's not too late: a first step for women ready to heal the mother wound at 50+' — linking to a coaching discovery call or lead magnet.</td></tr>
+<tr><td>9</td><td><a href="https://www.quora.com/Whats-the-best-way-to-move-forward-and-find-peace-after-my-daughter-s-choices-left-me-feeling-heartbroken" target="_blank" rel="noopener">What's the best way to move forward and find peace after my daughter's choices left me feeling heartbroken</a></td><td>This thread surfaces the mother's perspective on estrangement, which maps directly to the mother-daughter couples coaching offering. Pin angle: 'When your daughter pulls away: what mothers need to hear about healing the rift (and how coaching can help)' — leading to the mother-daughter couples sessions page.</td></tr>
+<tr><td>10</td><td><a href="https://www.reddit.com/r/Mommit/comments/1p37ofn/i_think_my_daughter_is_healing_parts_of_me_i/" target="_blank" rel="noopener">I think my daughter is healing parts of me I didn't even know were broken</a></td><td>This thread captures the intergenerational mirror moment where women realize their mother wound is surfacing through their own parenting — a powerful entry point. Pin angle: 'What your relationship with your daughter is really trying to heal in you' — bridging to both individual coaching and mother-daughter couples sessions.</td></tr>
+</tbody></table></div>
+</div>
+<div class="card">
+<div class="card-header"><div class="card-title">Visual trends on Pinterest</div><span class="section-num">05</span></div>
+<div class="subsection"><div class="subsection-title">2026 colour palette</div>
+<div class="table-wrap"><table><thead><tr>
+<th>Colour Name</th>
+<th>Hex (estimate)</th>
+<th>Mood/Feeling</th>
+<th>Use in Pins</th>
+</tr></thead><tbody>
+<tr><td>Aged Terracotta</td><td><span class="swatch" style="background:#C4714F;"></span>#C4714F</td><td>Grounded, ancestral, warm</td><td>Background wash on coaching package pins</td></tr>
+<tr><td>Deep Plum</td><td><span class="swatch" style="background:#5C2D5E;"></span>#5C2D5E</td><td>Dignity, grief, transformation</td><td>Text overlay blocks and border accents</td></tr>
+<tr><td>Soft Ochre</td><td><span class="swatch" style="background:#E2A84B;"></span>#E2A84B</td><td>Reclamation, golden era, joy</td><td>Pull quotes and highlight callouts</td></tr>
+<tr><td>Dusty Rose Blush</td><td><span class="swatch" style="background:#D4A09A;"></span>#D4A09A</td><td>Tenderness, inner child, softness</td><td>Workbook and journal cover mockup pins</td></tr>
+<tr><td>Sage Mist</td><td><span class="swatch" style="background:#A3B89A;"></span>#A3B89A</td><td>Healing, breath, release</td><td>Background tones for longer-form text pins</td></tr>
+<tr><td>Warm Ivory</td><td><span class="swatch" style="background:#F5EDE0;"></span>#F5EDE0</td><td>Safety, clarity, space</td><td>Clean base for testimonial and coaching offer pins</td></tr>
+</tbody></table></div>
+<p>Lean into terracotta, plum, and ochre as your core trio — this palette signals cultural richness and emotional depth without infantilising the healing journey, which is critical for resonating with women 50+ and Black mother-daughter audiences who respond to dignity over pastels.</p>
+</div>
+<div class="subsection"><div class="subsection-title">2026 design style trends</div>
+<div class="trend-grid">
+<div class="trend-card"><div class="trend-card-num">Trend 01</div><div class="trend-card-name">Archival editorial</div><div class="trend-card-desc">Vintage-inspired typography meets documentary-style photography — think typewriter fonts, aged paper textures, and unposed portraiture. <em>Apply to one-on-one coaching pins: pair a sepia-toned image of a woman alone in reflection with a bold serif headline like "She raised you. She also wounded you."</em></div></div>
+<div class="trend-card"><div class="trend-card-num">Trend 02</div><div class="trend-card-name">Sacred minimalism</div><div class="trend-card-desc">Intentional white (or ivory) space, a single symbolic object, and one grounding statement — no clutter, no stock-photo smiles. <em>Apply to your coaching package pins: a single empty chair or closed door, paired with one line like "you don't have to carry this alone" — let the image hold the weight instead of crowding it with text.</em></div></div>
+<div class="trend-card"><div class="trend-card-num">Trend 03</div><div class="trend-card-name">Infographics</div><div class="trend-card-desc">Infographics are one of the strongest-performing formats on Pinterest right now, and they fit your niche especially well — structured, scannable, list-based graphics consistently outperform single-image pins in trauma and healing content because they give the saver something concrete to act on. <em>Apply this to checklist-style pins like "5 signs you're carrying the mother wound" or "What eldest daughter syndrome looks like at every age" — a clean numbered list on a simple background, easy to screenshot and save, and a natural lead-in to a coaching discovery call.</em></div></div>
+<div class="trend-card"><div class="trend-card-num">Trend 04</div><div class="trend-card-name">Text-forward story tiles</div><div class="trend-card-desc">The pin IS the message — bold statement typography fills the frame with minimal imagery, formatted like a journal page or therapy note. <em>Apply to eldest daughter syndrome and mother wound awareness pins: use a structured list or fragment poem that stops the scroll and drives saves from women who feel seen.</em></div></div>
+</div>
+</div>
+</div>
+<div class="card">
+<div class="card-header"><div class="card-title">Competitor analysis</div><span class="section-num">06</span></div>
+<p>Use these accounts for general inspo, board analysis, recent pin analysis, for following their followers etc. Worth noting: very few accounts on Pinterest are built specifically around the mother wound / inner daughter healing niche at any real scale — most content in this space sits inside broader personal-growth or trauma-recovery accounts. That's a sign of genuine white space, not a sign the audience isn't there.</p>
+<div class="table-wrap"><table><thead><tr>
+<th>Account</th>
+<th>Followers</th>
+<th>Boards</th>
+<th>Last Active</th>
+<th>Bio</th>
+</tr></thead><tbody>
+<tr><td><a href="https://www.pinterest.com/ineffableliving/" target="_blank" rel="noopener">@ineffableliving</a></td><td>20.7K</td><td>8</td><td>2026-06-21</td><td>Codependency & mental health blog sharing evidence-based, actionable worksheets to help you heal and build emotional resilience</td></tr>
+<tr><td><a href="https://www.pinterest.com/lisaaromano/" target="_blank" rel="noopener">@lisaaromano</a></td><td>47K</td><td>8</td><td>2026-06-18</td><td>Lisa A. Romano, Certified Life Coach and Author, creator of resources on codependency and narcissistic abuse recovery</td></tr>
+<tr><td><a href="https://www.pinterest.com/themotherwoundproject/" target="_blank" rel="noopener">@themotherwoundproject</a></td><td>1K</td><td>5</td><td>2026-06-21</td><td>We help you heal your mother wound. Learn more at motherwoundproject.com</td></tr>
+</tbody></table></div>
+<div class="subsection"><div class="subsection-title">@Ineffableliving — 20.7k followers</div>
+<p>Ineffable Living is a broader mental health and codependency blog, not specific to mother wound work, but it's a strong reference for how to turn psychoeducation into Pinterest content at scale. Boards like <em>Therapy tools</em>, <em>Boundaries in relationships</em>, <em>Shame resilience: how to deal with guilt, shame</em>, and <em>People pleasing syndrome: stop people pleasing</em> show a worksheet-and-resource-led strategy — practical, downloadable tools rather than just quotes — which is a strong model for your future workbook and journal products.</p>
+</div>
+<div class="subsection"><div class="subsection-title">@Lisaaromano — 47k followers</div>
+<p>Lisa A. Romano is a certified life coach and bestselling author built directly around narcissistic abuse and codependency recovery — the closest real competitor at meaningful scale. Her boards (<em>Narcissistic abuse</em>, <em>Narcissistic mothers narcissistic abuse recovery</em>, <em>Codependency codependent relationships</em>, <em>Lisa A Romano journaling prompts</em>) show a content strategy split between awareness/education and her own branded resources, with a dedicated journaling board that maps closely to your planned workbook and journal products.</p>
+</div>
+<div class="subsection"><div class="subsection-title">@Themotherwoundproject — 1k followers</div>
+<p>The Mother Wound Project offers mother wound healing resources through motherwoundproject.com. Their board structure moves readers through a clear emotional journey — from broad healing content and quote-based relatability (<em>Healing the mother wound</em>, <em>Mother wound quotes</em>) into heavier psychological territory (<em>Trauma</em>), then toward action steps like boundary-setting and relationship decisions (<em>Boundaries</em>, <em>Going no contact</em>). Small audience, but the most topically precise match found.</p>
+</div>
+</div>
+<div class="card strategy-card">
+<div class="card-header"><div class="card-title">Pinterest strategy & growth plan</div><span class="section-num">07</span></div>
+<div class="strategy-step"><div class="strategy-step-num">✓</div><div class="strategy-step-content"><div class="strategy-step-title">Pinning frequency & timing</div><div class="strategy-step-body"><p>As you haven't been pinning on this account for a while, I would start slow — <strong>1–3 fresh pins per day</strong> and hold that pace for the first 30–60 days. At this stage, the majority of your daily pins should be <strong>repins from other accounts</strong> in aligned niches — mental health, trauma recovery, self-help for women, generational healing.</p><p>Once the account is active and indexed (typically 60–90 days in), scale to <strong>3–10 pins per day</strong>, or higher if you have a substantial library of original blog posts and unique URLs to draw from. A realistic, sustainable target for an established account is <strong>10–15 pins per day</strong> — not 40+. The <strong>absolute hard limit is 50 pins in any single day</strong>, on any account, at any stage. Consistency at a moderate volume will always outperform irregular high-volume bursts. Pinterest rewards accounts that show up daily, not accounts that flood the feed once a week.</p></div></div></div>
+<div class="strategy-step"><div class="strategy-step-num">✓</div><div class="strategy-step-content"><div class="strategy-step-title">What makes pins get clicks</div><div class="strategy-step-body"><p><strong>1. Lead with the wound, not the solution.</strong> Titles and text overlays that name the exact pain — <em>"When your mother was the source of the wound"</em> or <em>"What no one tells you about toxic mother relationships"</em> — convert significantly better than solution-forward titles in this niche. Your audience is in recognition mode before she's in solution mode.</p><p><strong>2. Use red, purple, or pink tones.</strong> Pinterest data consistently shows that pins using <strong>red, purple, and pink colour palettes</strong> outperform other colour schemes across the platform. For this niche, deep plum, rose, and warm terracotta also carry emotional resonance that aligns with healing and femininity — lean into this deliberately, not incidentally. I've also included a colour palette that works the best for every main keyword in the Google Sheet doc.</p><p><strong>3. Keep text overlays short and specific.</strong> No more than 6–8 words on the pin image itself. The overlay is a hook, not a summary. <em>"Eldest daughter syndrome doesn't end at 50"</em> outperforms <em>"Healing your inner daughter from childhood trauma and toxic family patterns."</em></p><p><strong>4. Use faces and warmth for the women 50+ and Black mother-daughter audience.</strong> Images featuring women who visually reflect your target audience — mature, Black women, images suggesting emotional weight or quiet strength — create immediate identification. Abstract graphics alone underperform when the niche is this personal.</p></div></div></div>
+<div class="strategy-step"><div class="strategy-step-num">✓</div><div class="strategy-step-content"><div class="strategy-step-title">Keyword strategy</div><div class="strategy-step-body"><p>Pinterest operates as a <strong>visual search engine</strong>, which means keywords are not optional — they are the primary discovery mechanism. Place your target keywords in four locations: the <strong>pin title</strong> (100-character limit, front-load the most important keyword), the <strong>pin description</strong> (500-character limit, weave in 2–3 keywords naturally), the <strong>alt text</strong> field, and the <strong>board name and board description</strong> where the pin is saved. Board names like "Mother wound healing" or "Toxic mother relationships" carry direct ranking weight — vague board names like "Coaching tips" do not.</p><p>Every pin description should follow this <strong>3-sentence structure</strong>: (1) a hook or clear benefit statement that speaks to the reader's pain or desire; (2) what's inside — what she'll learn, feel, or get from clicking; (3) a direct call to action. Applied to this niche, an example using the client's keywords:</p><p>> <em>If you're navigating a toxic mother relationship, you already know the exhaustion of carrying wounds that were never yours to hold — and the confusion of loving someone who hurt you.</em> <em>This guide walks through the emotional patterns behind childhood emotional neglect and how mother wound healing can begin at any age, including after 50.</em> <em>Save this pin and follow the link to book a free discovery call.</em></p><p>For keyword research, use <strong>Pinterest Trends</strong> to identify rising search volume in this niche, <strong>Pinterest's autocomplete and guided search</strong> (type a seed keyword into the search bar and capture every suggested phrase), and <strong>Pinterest Ads Manager keyword targeting</strong> to surface related terms with search volume data. Build a master keyword list of 30–50 phrases before you begin pinning at scale.</p></div></div></div>
+<div class="strategy-step"><div class="strategy-step-num">✓</div><div class="strategy-step-content"><div class="strategy-step-title">What actually drives growth</div><div class="strategy-step-body"><p>In the <strong>first 90 days</strong>, the priority is not virality — it is account credibility and signal. Pinterest's algorithm evaluates new accounts by looking at whether the account behaves like a real, engaged user. This means pinning consistently at the right frequency, saving relevant content from other creators, and <strong>following at least 10+ accounts in aligned niches</strong> — trauma recovery coaches, therapists, Black women wellness creators, inner child healing educators, generational trauma educators. This following activity builds topical signal and increases the chance your content surfaces in related feeds. During this period, organise your boards with keyword-rich names before you begin pinning heavily, so every pin you save lands in a board that reinforces its topic.</p><p>From <strong>months 3–6</strong>, the lever that matters most is <strong>Saves</strong> — not impressions, not clicks. Pinterest's ranking algorithm weights Saves above almost every other engagement signal because a Save indicates a user found the content valuable enough to return to. This means your content strategy should optimise for saveability: educational content, validating content ("you are not alone in this"), and list-format carousels consistently out-save inspirational quotes in this niche. Track your Save rate per pin in Pinterest Analytics weekly, identify your top-saved content, and systematically create more of it. Traffic and lead generation follow Save momentum — they are the outcome of getting the save signal right first.</p></div></div></div>
+<div class="strategy-step"><div class="strategy-step-num">✓</div><div class="strategy-step-content"><div class="strategy-step-title">Board structure recommendations</div><div class="strategy-step-body"><div class="table-wrap"><table><thead><tr>
+<th>Board Name</th>
+<th>Description</th>
+<th>Keywords</th>
+<th>Min Pins</th>
+<th>Pin Types</th>
+</tr></thead><tbody>
+<tr><td><strong>Mother wound healing</strong></td><td>Heal your mother wound and reclaim your identity. Resources, affirmations, and coaching for women ready to break free from painful mother-daughter patterns.</td><td>mother wound healing, mother wound, inner child healing</td><td>50</td><td>Educational graphics, affirmation pins, coaching service pins, blog post links</td></tr>
+<tr><td><strong>Toxic mother</strong></td><td>Recognising a toxic mother is the first step to healing. Explore signs, cycles, and recovery tools for daughters navigating difficult maternal relationships.</td><td>toxic mother, toxic mom narcissistic mother, mom issues</td><td>45</td><td>Quote graphics, educational carousels, repins from psychology accounts, coaching pins</td></tr>
+<tr><td><strong>Eldest daughter syndrome</strong></td><td>Eldest daughters carry invisible weight. Discover how eldest daughter syndrome shapes your identity, relationships, and emotional health — and how to heal.</td><td>eldest daughter syndrome, childhood emotional neglect, dysfunctional family</td><td>40</td><td>Infographics, personal story pins, educational posts, coaching offer pins</td></tr>
+<tr><td><strong>Dysfunctional family</strong></td><td>Growing up in a dysfunctional family leaves lasting marks. Find healing frameworks, boundary-setting tools, and coaching support for adult daughters.</td><td>dysfunctional family, dysfunctional family therapy, generational trauma</td><td>50</td><td>Educational graphics, therapy resource repins, blog links, service pins</td></tr>
+<tr><td><strong>Inner child healing</strong></td><td>Your inner child is still waiting to be seen. Guided practices, affirmations, and coaching resources to help women heal childhood wounds at any age.</td><td>inner child healing, childhood emotional neglect, mother wound</td><td>45</td><td>Affirmation pins, journaling prompt graphics, coaching pins, educational carousels</td></tr>
+<tr><td><strong>Toxic mother quotes daughters</strong></td><td>Words that finally say what you felt but couldn't name. Healing quotes for daughters of toxic and narcissistic mothers — save these for the hard days.</td><td>toxic mother quotes daughters, mommy issues, mom issues</td><td>60</td><td>Quote graphics, affirmation pins, repins, branded quote templates</td></tr>
+<tr><td><strong>Childhood emotional neglect</strong></td><td>Childhood emotional neglect is often invisible — but its impact is not. Resources and coaching for women healing from emotional wounds rooted in early family life.</td><td>childhood emotional neglect, dysfunctional family therapy, inner child healing</td><td>45</td><td>Educational infographics, carousel pins, coaching service pins, blog post links</td></tr>
+</tbody></table></div></div></div></div>
+</div>
+<div class="card">
+<div class="card-header"><div class="card-title">Personal recommendations</div><span class="section-num">08</span></div>
+<div class="rec-list">
+<div class="rec-item"><span class="rec-pin">📌</span><span><strong>Priority boards to build first:</strong> Mother wound healing → Toxic mother → Eldest daughter syndrome. These three align most directly with your top search volume keywords and client pain points.</span></div>
+<div class="rec-item"><span class="rec-pin">📌</span><span><strong>Black mother-daughter dynamics & women 50+:</strong> Weave this audience directly into your pin descriptions and on-pin text rather than in board names — Pinterest's algorithm reads pin descriptions heavily, so phrases like "healing for Black women," "mother wound healing for women over 50," and "generational trauma in Black families" should appear consistently across your pins on every board.</span></div>
+<div class="rec-item"><span class="rec-pin">📌</span><span><strong>Try to avoid creating any boards or pins irrelevant to the business</strong> (you can either use other personal accounts for this, or create a secret board) so that it doesn't affect account ranking.</span></div>
+<div class="rec-item"><span class="rec-pin">📌</span><span>Some terms people are searching can be used as <strong>blog post ideas</strong>. Some of them: "what is the mother wound", "how to heal the mother wound", "healing from a narcissistic mother", "recovering from a narcissistic mother", "how to deal with a toxic mother". It would be great if you can write blog posts for each of these keywords as Pinterest favors pins that lead to posts covering the search terms in detail.</span></div>
+</div>
+</div>
+<div class="card spreadsheet-card">
+  <div class="spreadsheet-title">Your actionable GoogleSheet</div>
+  <p class="spreadsheet-desc"><strong>Make sure you make your own copy. Go to File → Make a copy</strong></p>
+  <a href="https://docs.google.com/spreadsheets/d/1rYhYVH4f5iUYHyznrJLTgZ_TVoFpEFkl93q_CerlqtM/edit?usp=sharing" target="_blank" class="sheets-btn">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect x="4" y="1" width="16" height="22" rx="2" fill="white" opacity="0.15"/>
+  <path d="M14 1H4C2.9 1 2 1.9 2 3V21C2 22.1 2.9 23 4 23H20C21.1 23 22 22.1 22 21V9L14 1Z" fill="white"/>
+  <path d="M14 1V9H22L14 1Z" fill="rgba(255,255,255,0.6)"/>
+  <rect x="6" y="13" width="12" height="1.5" rx="0.75" fill="#34a853"/>
+  <rect x="6" y="16" width="8" height="1.5" rx="0.75" fill="#34a853"/>
+  <rect x="6" y="10" width="12" height="1.5" rx="0.75" fill="#34a853"/>
+</svg>
+    Open the file
+  </a>
+</div>
+<div class="card spreadsheet-card canva-card">
+  <div class="spreadsheet-title">50 pin templates for Canva</div>
+  <p class="spreadsheet-desc">Ready-to-edit pin templates built for Pinterest. Customise with your photos and texts.</p>
+  <a href="https://canva.link/m2e5ijvciokujgo" target="_blank" class="canva-btn">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="12" cy="12" r="10" fill="white" opacity="0.9"/>
+  <path d="M15.5 8.5C15.5 8.5 14.5 7 12 7C9 7 7 9.5 7 12C7 14.5 9 17 12 17C14.5 17 15.5 15.5 15.5 15.5" stroke="rgba(123,97,255,0.9)" stroke-width="2" stroke-linecap="round"/>
+  <circle cx="12" cy="12" r="2.5" fill="rgba(123,97,255,0.9)"/>
+</svg>
+    50 pin templates for Canva
+  </a>
+</div>
+</div>
+</body>
+</html>

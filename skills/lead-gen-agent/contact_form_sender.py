@@ -41,6 +41,42 @@ _MESSAGE_HINTS = {"message", "your-message", "msg", "comment", "comments", "body
                   "content", "enquiry", "inquiry", "description", "text"}
 _SUBJECT_HINTS = {"subject", "your-subject", "topic"}
 
+# Booking-only embed signatures — calendar/scheduling tools with no message field.
+# Guaranteed failures; bail immediately rather than wasting 45 seconds.
+_BOOKING_ONLY_SIGNALS = (
+    "calendly.com/",
+    "acuityscheduling.com",
+    "booklikeaboss.com",
+    "simplybook.me",
+    "square.site/appointments",
+    "setmore.com",
+    "appointlet.com",
+    "youcanbook.me",
+)
+
+
+def _is_booking_only_page(source: str) -> bool:
+    low = source.lower()
+    return any(sig in low for sig in _BOOKING_ONLY_SIGNALS)
+
+
+def _fill(el, value: str) -> bool:
+    """Fill an input element; falls back to JS dispatch for framework-managed fields."""
+    try:
+        el.fill(value)
+        return True
+    except Exception:
+        try:
+            el.evaluate(
+                "(el, v) => { el.value = v; "
+                "el.dispatchEvent(new Event('input', {bubbles:true})); "
+                "el.dispatchEvent(new Event('change', {bubbles:true})); }",
+                value,
+            )
+            return True
+        except Exception:
+            return False
+
 
 def _load_draft(lead_id: str) -> str:
     """Return body text from a contact-form draft, or '' if not found."""
@@ -73,22 +109,19 @@ def _field_combined(inp) -> tuple[str, str]:
     return combined, itype
 
 
-def _submit_form(page, body: str) -> str:
+def _try_fill_frame(ctx, body: str, timeout: int = 8000) -> str:
     """
-    Find and fill the contact form on the current page, then submit.
+    Try to find and fill a contact form in a Playwright page or frame context.
 
-    Returns:
-      "success"     — form found, filled, and submitted
-      "no-form"     — no usable form on the page (Type 1 — not worth manual attempt)
-      "fill-failed" — form found but couldn't be filled/submitted (Type 2 — worth manual attempt)
+    Returns "success", "fill-failed", or "no-form".
+    Does NOT print the final "no form" message — caller decides what to log.
     """
     try:
-        page.wait_for_selector("form", state="attached", timeout=12000)
+        ctx.wait_for_selector("form", state="attached", timeout=timeout)
     except Exception:
-        print("    [form] No <form> element found on page", file=sys.stderr)
         return "no-form"
 
-    forms = page.query_selector_all("form")
+    forms = ctx.query_selector_all("form")
     if not forms:
         return "no-form"
 
@@ -109,7 +142,6 @@ def _submit_form(page, body: str) -> str:
             best_form  = form
 
     if not best_form or best_score < 1:
-        print(f"    [form] Best score was {best_score} — no suitable contact form found", file=sys.stderr)
         return "no-form"
 
     filled_message = False
@@ -117,9 +149,7 @@ def _submit_form(page, body: str) -> str:
     for inp in inputs:
         combined, itype = _field_combined(inp)
 
-        if itype in ("submit", "button", "hidden", "checkbox", "radio"):
-            continue
-        if itype == "file":
+        if itype in ("submit", "button", "hidden", "checkbox", "radio", "file"):
             continue
 
         tag = "INPUT"
@@ -127,22 +157,6 @@ def _submit_form(page, body: str) -> str:
             tag = inp.evaluate("el => el.tagName")
         except Exception:
             pass
-
-        def _fill(el, value):
-            try:
-                el.fill(value)
-                return True
-            except Exception:
-                try:
-                    el.evaluate(
-                        "(el, v) => { el.value = v; "
-                        "el.dispatchEvent(new Event('input', {bubbles:true})); "
-                        "el.dispatchEvent(new Event('change', {bubbles:true})); }",
-                        value,
-                    )
-                    return True
-                except Exception:
-                    return False
 
         if any(h in combined for h in _NAME_HINTS) and not filled_message:
             if not any(h in combined for h in _MESSAGE_HINTS):
@@ -168,7 +182,6 @@ def _submit_form(page, body: str) -> str:
                 pass
 
     if not filled_message:
-        print("    [form] Form found but could not fill message field", file=sys.stderr)
         return "fill-failed"
 
     try:
@@ -185,6 +198,36 @@ def _submit_form(page, body: str) -> str:
 
     time.sleep(2)
     return "success"
+
+
+def _submit_form(page, body: str) -> str:
+    """
+    Find and fill the contact form on the current page, then submit.
+    Tries the main page first, then falls back to iframes (HoneyBook, JotForm, Dubsado, etc.).
+
+    Returns:
+      "success"     — form found, filled, and submitted
+      "no-form"     — no usable form anywhere on the page (Type 1)
+      "fill-failed" — form found but couldn't fill message field (Type 2)
+    """
+    # Try main page
+    result = _try_fill_frame(page, body, timeout=12000)
+    if result != "no-form":
+        return result
+
+    # Main page had no form — try iframes (HoneyBook, JotForm, Dubsado, Typeform, etc.)
+    frames = page.frames[1:]  # frames[0] is the main page
+    for frame in frames:
+        try:
+            result = _try_fill_frame(frame, body, timeout=5000)
+            if result != "no-form":
+                print("    [form] Form found in iframe", file=sys.stderr)
+                return result
+        except Exception:
+            continue
+
+    print("    [form] No <form> element found on page or in iframes", file=sys.stderr)
+    return "no-form"
 
 
 def _is_bad_contact_domain(url: str) -> bool:
@@ -308,9 +351,27 @@ def run(daily_limit: int = 20, dry_run: bool = False):
             try:
                 page = context.new_page()
                 page.goto(url, timeout=20000, wait_until="domcontentloaded")
-                # Wait for JS to finish rendering forms (Wix, Squarespace, etc.)
+                # Wait for JS to finish rendering forms
                 try:
                     page.wait_for_load_state("networkidle", timeout=8000)
+                except Exception:
+                    pass
+                # Bail early on booking-only pages — no message field, guaranteed failure
+                try:
+                    if _is_booking_only_page(page.content()):
+                        print("    [skip] Booking-only embed (Calendly/Acuity/etc.)", file=sys.stderr)
+                        page.close()
+                        result = "no-form"
+                        existing_notes = lead.get("notes") or ""
+                        if "form-failed" not in existing_notes:
+                            update_lead(lead_id, {"notes": (existing_notes + " form-failed").strip()})
+                        print(f"    ✗ No form found", file=sys.stderr)
+                        continue
+                except Exception:
+                    pass
+                # Wait for textarea or email input to appear (catches late-mounting JS forms)
+                try:
+                    page.wait_for_selector("textarea, input[type='email']", timeout=5000)
                 except Exception:
                     pass
                 result = _submit_form(page, body)

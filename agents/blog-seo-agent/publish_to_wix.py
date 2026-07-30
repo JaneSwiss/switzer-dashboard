@@ -49,18 +49,25 @@ def _headers() -> dict:
 
 
 def find_html_file(slug: str) -> Path:
-    for directory in (OUTPUT_DIR, POSTS_DIR):
+    # POSTS_DIR (the current, actively-written location) is checked first — OUTPUT_DIR
+    # is a legacy folder that, for a handful of older slugs, still holds a stale copy.
+    for directory in (POSTS_DIR, OUTPUT_DIR):
         candidate = directory / f"{slug}.html"
         if candidate.exists():
             return candidate
     raise FileNotFoundError(
-        f"No HTML file found for slug '{slug}' in {OUTPUT_DIR} or {POSTS_DIR}"
+        f"No HTML file found for slug '{slug}' in {POSTS_DIR} or {OUTPUT_DIR}"
     )
 
 
 def extract_post_content(html_path: Path) -> "tuple[str, str]":
-    """Returns (title, body_html) — body_html excludes the debug image-prompts
-    block and the closing comment-prompt note, which aren't real post content."""
+    """Returns (title, body_html), Wix-ready:
+    - the debug image-prompts block and the closing comment-prompt note are dropped
+    - the 3 cover-image candidates are dropped entirely — Jane sets the actual Wix
+      cover image herself from the folder linked in the completion email
+    - each inline section image gets replaced with a short, clean placeholder naming
+      the exact file to drop in, since local image paths mean nothing to Wix's servers
+    """
     raw = html_path.read_text(encoding="utf-8")
     soup = BeautifulSoup(raw, "html.parser")
 
@@ -83,10 +90,46 @@ def extract_post_content(html_path: Path) -> "tuple[str, str]":
     if h1:
         h1.decompose()
 
+    _strip_images_for_wix(post_div, soup)
+
     _insert_spacer_paragraphs(post_div, soup)
 
     body_html = "".join(str(child) for child in post_div.children).strip()
     return title, body_html
+
+
+def _strip_images_for_wix(post_div, soup: BeautifulSoup) -> None:
+    """Local image paths (images/{slug}/cover-N.jpg, inline-N.jpg) mean nothing on
+    Wix's servers — there's no local filesystem for them to resolve against. Cover
+    images are dropped outright (Jane picks + sets one herself, from the folder
+    linked in the completion email). Inline images become a short placeholder
+    naming the exact file, so the manual drop-in is fast and unambiguous."""
+    # Cover images share one wrapper div — collect the unique parents first and
+    # decompose each once, rather than decomposing mid-iteration (which would leave
+    # later img tags in that same now-destroyed div dangling).
+    cover_parents = []
+    for img in post_div.find_all("img"):
+        if "/cover-" in img.get("src", ""):
+            parent = img.find_parent("div")
+            target = parent if parent is not None else img
+            if target not in cover_parents:
+                cover_parents.append(target)
+    for parent in cover_parents:
+        parent.decompose()
+
+    # Remaining images (inline section illustrations) each become a short placeholder.
+    for img in post_div.find_all("img"):
+        src = img.get("src", "")
+        if "/inline-" not in src:
+            continue
+        filename = src.rsplit("/", 1)[-1]
+        placeholder = soup.new_tag(
+            "p",
+            attrs={"style": "background:#f7f5f2;border-radius:4px;padding:0.75rem 1rem;"
+                            "color:#8d6e63;font-style:italic;"},
+        )
+        placeholder.string = f"[Insert {filename} here — folder linked in this week's completion email]"
+        img.replace_with(placeholder)
 
 
 def _insert_spacer_paragraphs(post_div, soup: BeautifulSoup) -> None:

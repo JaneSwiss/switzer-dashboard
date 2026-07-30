@@ -93,9 +93,9 @@ For each group output EXACTLY this format — the ### heading immediately follow
 
 ### Group N: [Group Name]
 
-| Keyword | Monthly Volume | Board Name | Pins/Week | Buyer Intent |
-|---------|---------------|------------|-----------|--------------|
-| keyword | X,XXX | Board Name | X | High/Medium/Low — one-sentence reason |
+| Keyword | Buyer Intent |
+|---------|--------------|
+| keyword | High/Medium/Low — one-sentence reason |
 
 Do NOT add any intro paragraph, summary paragraph, or text between the heading and the table. Do NOT add any closing paragraph or summary after the last table. Lead with the highest-volume group. No preamble before the first group."""
 
@@ -108,7 +108,71 @@ Do NOT add any intro paragraph, summary paragraph, or text between the heading a
     raw = msg.content[0].text
     # Strip any intro text before the first ### Group
     raw = re.sub(r'^.*?(### Group)', r'\1', raw, count=1, flags=re.DOTALL)
-    return f"## Keyword Groups\n\n{raw}"
+    return f"## Keyword groups\n\n{raw}"
+
+
+def build_keyword_groups_fixed(groups: list[dict], niche: str, products: str) -> str:
+    """
+    Same output shape as build_keyword_clusters, but groups are predefined
+    (group name + exact keyword list + optional csv filename) instead of
+    left to Claude to cluster. Use when the client's keyword groups are
+    already decided (e.g. matched to prepared CSV exports).
+
+    groups: [{"name": str, "keywords": [{"keyword": str, "volume": int}], "csv": str | None}]
+    """
+    client = anthropic.Anthropic(api_key=os.getenv("ANTHROPIC_API_KEY"))
+
+    lines = ["## Keyword groups\n"]
+    csv_groups = []
+
+    for i, g in enumerate(groups, 1):
+        kw_list = [{"keyword": k["keyword"], "volume": k.get("volume", 0)} for k in g["keywords"]]
+
+        prompt = f"""You are a Pinterest SEO strategist writing buyer-intent reasoning for one keyword group in a client audit.
+
+Client niche: {niche}
+Client products/services: {products}
+Group: {g['name']}
+
+Keywords in this group:
+{json.dumps(kw_list, indent=2)}
+
+For each keyword, output one table row. Output ONLY the table, no heading, no intro, no summary:
+
+| Keyword | Buyer Intent |
+|---------|--------------|
+| keyword | High/Medium/Low — one-sentence reason |
+
+Buyer Intent = High/Medium/Low based on how close this search is to booking a coaching service or buying a product, plus a one-sentence reason specific to this niche."""
+
+        msg = client.messages.create(
+            model="claude-sonnet-4-6",
+            max_tokens=900,
+            messages=[{"role": "user", "content": prompt}],
+        )
+        table = msg.content[0].text.strip()
+        table = re.sub(r'^.*?(\|\s*Keyword)', r'\1', table, count=1, flags=re.DOTALL)
+
+        lines.append(f"### Group {i}: {g['name']}\n")
+        lines.append(table)
+        lines.append("")
+
+        if g.get("csv"):
+            csv_groups.append((g["name"], g["csv"]))
+
+    if csv_groups:
+        lines.append("### Download detailed spreadsheet for each keyword group:\n")
+        lines.append('<div class="csv-download-row">')
+        for name, csv_file in csv_groups:
+            lines.append(
+                f'<a href="{csv_file}" download class="csv-btn">'
+                f'<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">'
+                f'<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/>'
+                f'<line x1="12" y1="15" x2="12" y2="3"/></svg>{name}</a>'
+            )
+        lines.append("</div>")
+
+    return "\n".join(lines)
 
 
 # ── Section 4: Reddit & Quora ──────────────────────────────────────────────────
@@ -119,17 +183,28 @@ def build_reddit(questions: list[dict]) -> str:
         lines.append("*No Reddit/Quora data retrieved — check API keys.*\n")
         return "\n".join(lines)
 
-    lines.append("| # | Buyer Question | Suggestions |")
-    lines.append("|---|----------------|-------------|")
+    lines.append("| # | Thread | Pinterest content angle |")
+    lines.append("|---|--------|--------------------------|")
 
     for i, q in enumerate(questions[:10], 1):
-        buyer_q = (q.get("buyer_question") or q.get("title") or "—").replace("|", "—")
+        # Link text must be the real thread title — never the reframed buyer_question,
+        # since that text gets shown as if it were the actual clickable thread title.
+        real_title = (q.get("title") or q.get("buyer_question") or "—").replace("|", "—")
         suggestions = (q.get("suggestions") or q.get("why_it_buys") or "—").replace("|", "—")
         url = q.get("url") or ""
-        q_text = f"[{buyer_q}]({url})" if url else buyer_q
+        q_text = f"[{real_title}]({url})" if url else real_title
         lines.append(f"| {i} | {q_text} | {suggestions} |")
 
     return "\n".join(lines)
+
+
+def _sentence_case_phrase(text: str) -> str:
+    """Capitalise only the first word of a phrase — used to normalise
+    Title Case board names (real scraped data or hand-written text)."""
+    if not text:
+        return text
+    words = text.split()
+    return " ".join(w if i == 0 else w.lower() for i, w in enumerate(words))
 
 
 # ── Sections 5 & 6: Trends (passed through from trend_research) ──────────────
@@ -139,6 +214,7 @@ def build_reddit(questions: list[dict]) -> str:
 def build_competitors(competitors: list[dict], niche: str, products: str) -> str:
     client = anthropic.Anthropic(api_key=os.getenv("ANTHROPIC_API_KEY"))
     lines = ["## Competitor Analysis\n"]
+    lines.append("Use these accounts for general inspo, board analysis, recent pin analysis, for following their followers etc.\n")
 
     if not competitors:
         lines.append("*No competitors passed the activity + follower filter. Add competitor handles manually via --competitors.*\n")
@@ -158,11 +234,12 @@ def build_competitors(competitors: list[dict], niche: str, products: str) -> str
 
     # Per-competitor analysis
     for c in competitors:
+        boards_sc = [{**b, "name": _sentence_case_phrase(b.get("name", ""))} for b in c.get("boards", [])[:6]]
         comp_data = {
             "username": c["username"],
             "followers": c.get("followers"),
             "bio": c.get("bio"),
-            "boards": c.get("boards", [])[:6],
+            "boards": boards_sc,
         }
 
         prompt = f"""Write a sharp competitor snapshot for this Pinterest account. Client niche: {niche}. Client sells: {products}.
@@ -170,11 +247,9 @@ def build_competitors(competitors: list[dict], niche: str, products: str) -> str
 Account data:
 {json.dumps(comp_data, indent=2)}
 
-Two short paragraphs only:
-1. What they sell and how their board structure reflects their strategy (reference actual board names).
-2. One specific gap or weakness the client can exploit.
+One short paragraph only: what they sell and how their board structure reflects their content strategy (reference actual board names exactly as given — sentence case, do not re-capitalise them). Write it as general inspiration/observation, not as a competitive weakness to exploit.
 
-Under 100 words total. Be specific. No filler."""
+Under 60 words. Be specific. No filler. When you reference board names, use sentence case (only first word capitalised) — do not write them in Title Case even if you'd naturally capitalise each word."""
 
         msg = client.messages.create(
             model="claude-sonnet-4-6",
@@ -244,17 +319,17 @@ Top keywords: {kw_list}
 Create exactly 7 Pinterest boards.
 
 BOARD NAMING RULE — THIS IS NON-NEGOTIABLE:
-The board name must be taken DIRECTLY from the keyword list above. Copy the keyword as-is and capitalise each word. Do NOT rephrase, do NOT add adjectives, do NOT get creative.
+The board name must be taken DIRECTLY from the keyword list above. Copy the keyword as-is in sentence case — capitalise ONLY the first word and genuine proper nouns (Pinterest, Etsy, Wix, etc). Do NOT capitalise every word. Do NOT rephrase, do NOT add adjectives, do NOT get creative.
 
-CORRECT: keyword is "premade Wix websites" → board name is "Premade Wix Websites"
-CORRECT: keyword is "branding templates for small business" → board name is "Branding Templates for Small Business"
-WRONG: keyword is "premade Wix websites" → board name is "Beautiful Website Templates for Entrepreneurs"
-WRONG: keyword is "branding kits" → board name is "Branding Tips for Female Entrepreneurs"
+CORRECT: keyword is "premade Wix websites" → board name is "Premade Wix websites"
+CORRECT: keyword is "branding templates for small business" → board name is "Branding templates for small business"
+WRONG: keyword is "premade Wix websites" → board name is "Premade Wix Websites" (do not capitalise every word)
+WRONG: keyword is "branding kits" → board name is "Branding Tips for Female Entrepreneurs" (do not invent a new phrase)
 
 Every board name must be a verbatim keyword from the list. If you need more boards than keywords, use close variants of the keywords (e.g. plural/singular, add "ideas" or "inspiration" to the end). Never invent a name that does not start from the keyword.
 
 For each board:
-- Board name (verbatim keyword from list, title-cased, under 50 characters, no hashtags)
+- Board name (verbatim keyword from list, sentence case as described above, under 50 characters, no hashtags)
 - Board description (150–200 characters, keyword-rich, written as a helpful sentence for the viewer)
 - Top 3 keywords this board targets
 - Recommended number of pins before the board is considered "established"
@@ -263,7 +338,9 @@ For each board:
 Format as a markdown table:
 
 | Board Name | Description | Keywords | Min Pins | Pin Types |
-|------------|-------------|----------|----------|-----------|"""
+|------------|-------------|----------|----------|-----------|
+
+Return ONLY the table. Do not add a title, intro, closing summary, or any extra section (e.g. no "Quick-Reference Notes" or "Implementation Notes") after the table."""
 
     msg = client.messages.create(
         model="claude-sonnet-4-6",
@@ -284,6 +361,8 @@ def assemble_report(
     trend_content: dict,
     niche_overview: dict,
     run_date: str,
+    competitors: list[dict] | None = None,
+    keyword_groups_override: str | None = None,
 ) -> str:
     print("\n[9/9] Assembling Report")
 
@@ -306,7 +385,10 @@ def assemble_report(
 
     # 3. Keyword Clusters
     print("  Section 3 — Keyword Clusters...")
-    sections.append(build_keyword_clusters(keywords, niche, products))
+    if keyword_groups_override:
+        sections.append(keyword_groups_override)
+    else:
+        sections.append(build_keyword_clusters(keywords, niche, products))
     sections.append("\n---\n")
 
     # 4. Reddit & Quora
@@ -324,11 +406,20 @@ def assemble_report(
         sections.append(colour_trend)
     sections.append("\n---\n")
 
+    # 6. Competitor Analysis
+    if competitors:
+        print("  Section 6 — Competitor Analysis...")
+        sections.append(build_competitors(competitors, niche, products))
+        sections.append("\n---\n")
+
     # 7. Pinterest Strategy & Growth Plan (includes board structure)
     print("  Section 7 — Pinterest Strategy & Growth Plan...")
     strategy = trend_content.get("strategy", "").strip()
+    # Strip any leading H1 title Claude adds (redundant with the card's own "Pinterest Strategy & Growth Plan" heading)
+    strategy = re.sub(r'^#\s+[^\n]*\n', '', strategy)
     # Convert any ## sub-headings inside the strategy to ### so they stay inside one card
     strategy = re.sub(r'\n## ', '\n### ', strategy)
+    strategy = re.sub(r'^## ', '### ', strategy)
     # Strip any Claude-generated intro subsection (e.g. "Paid Audit Deliverable" header)
     strategy = re.sub(
         r'### [^\n]*(?:deliverable|audit)[^\n]*\n(?:(?!### ).)*',
@@ -337,6 +428,10 @@ def assemble_report(
     board = build_board_structure(keywords, niche, products)
     # Strip the "board names are the keywords" closing sentence Claude sometimes adds
     board = re.sub(r'Board names[^\n]*keywords themselves[^\n]*\n?', '', board, flags=re.IGNORECASE)
+    # Strip any leading H1 title Claude adds (redundant with the "Board structure recommendations" heading below)
+    board = re.sub(r'^#\s+[^\n]*\n', '', board.strip())
+    # Downgrade any ## or ### sub-headings inside the board section so they stay inside the strategy card
+    board = re.sub(r'\n#{2,3}\s+', '\n#### ', board)
     if strategy:
         combined = f"{strategy}\n\n### Board structure recommendations\n\n{board}"
         sections.append(f"## Pinterest Strategy & Growth Plan\n\n{combined}")

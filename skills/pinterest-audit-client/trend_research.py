@@ -98,20 +98,34 @@ Write an actionable Pinterest strategy guide for this client. Be concise — 2-3
 
 IMPORTANT: Do NOT use the term "Idea Pins" anywhere — Pinterest discontinued this format. Use "video pins", "standard pins", or "carousel pins" instead.
 
+IMPORTANT: Whenever you give an example of a board name, pin title, or keyword phrase, write it in sentence case — capitalise ONLY the first word and genuine proper nouns (Pinterest, Etsy, etc). Example: write "Mother wound healing" not "Mother Wound Healing". Never capitalise every word.
+
+MANDATORY FACTS — these are confirmed rules from Pinterest strategy guides. Use them exactly, do not contradict them, work them into the relevant sections below:
+- New accounts: post 1 to 3 fresh pins daily. Do not over-post — this can trigger spam filters and restrict reach. At this stage, pin mostly repins from other accounts, not original content — only post your own pins if they are purely educational/informational or link to your own website or another outside resource.
+- Growing & established accounts: scale to 3 to 10 pins daily, more if you have a large library of unique links and blog posts to share.
+- Absolute hard limit: never save or post more than 50 pins in a single day on any account — this risks the account being flagged for spam.
+- A consistent realistic target for an established account is 10-15 pins per day, not 40+.
+- TOBI pins (text-overlay image pins — a clear headline/text overlaid on a photo or graphic) are currently the best-performing pin format.
+- Pins using red, purple, or pink tones tend to outperform other colour palettes.
+- The two ranking factors that matter most: Saves and Keywords (in title, description, board name).
+- Every pin description should follow a 3-sentence structure: (1) hook/benefit, (2) what's inside or how it helps, (3) clear call to action.
+- Recommended keyword research tools: Pinterest Trends, Pinterest Search (autocomplete/guided search), Pinterest Ads Manager keyword targeting. Do not mention PinClicks or any other third-party tool.
+- Recommend following at least 10+ relevant accounts in the niche to build signal and discovery.
+
 ### Pinning frequency & timing
-Specific numbers: daily pin count, best days/times. Why consistency beats volume. Keep to 2 paragraphs.
+Specific numbers: daily pin count by account stage (new vs. growing/established), the 50-pin hard limit. Why consistency beats volume. Keep to 2 paragraphs.
 
 ### Pin format mix
-What formats perform in 2026 for this niche specifically: static, video, carousels. Rough % split. 2 paragraphs max.
+What formats perform in 2026 for this niche specifically: static, video, carousels, TOBI pins. Rough % split. 2 paragraphs max.
 
 ### What makes pins get clicks
-3-4 concrete rules for this niche: title structure, text overlay, image composition, hooks. Short and specific.
+3-4 concrete rules for this niche: title structure, text overlay, image composition, hooks, colour palette. Short and specific.
 
 ### Keyword strategy
-Where keywords go (title, description, alt text, board name). Character limits. One example using this client's keywords.
+Where keywords go (title, description, alt text, board name). Character limits. The 3-sentence description structure. One example using this client's keywords. Mention the recommended keyword research tools.
 
 ### What actually drives growth
-The honest 90-day focus vs. 3-6 month focus. What moves the needle for a new account in this niche. 2 paragraphs.
+The honest 90-day focus vs. 3-6 month focus. What moves the needle for a new account in this niche. Mention following 10+ relevant accounts. 2 paragraphs.
 
 Keep it tight. Expert tone. Paid deliverable, not a blog post."""
 

@@ -3,12 +3,16 @@ from __future__ import annotations
 import os
 import io
 import re
+import sys
 import math
 import tempfile
 from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont, ImageOps
 
 from font_manager import setup_fonts, load_font, load_variable_font
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "lib"))
+from openai_images import generate_image_bytes
 
 
 # ── Constants ─────────────────────────────────────────────────────────────────
@@ -115,7 +119,7 @@ _VAR_SCENE_FALLBACK = {"a": "hands_only", "b": "person", "c": "person",
 
 LAYOUTS = {
     "A": {
-        "gemini_instruction": (
+        "image_instruction": (
             "The human subject is positioned on the left third of the frame only, facing slightly "
             "right toward the center. The right two-thirds of the frame is a clean, softly blurred "
             "or plain background — completely empty of any subject, hands, or props. Do not place "
@@ -126,7 +130,7 @@ LAYOUTS = {
         "safe_zone":  (500, 0, 1000, 1500),
     },
     "B": {
-        "gemini_instruction": (
+        "image_instruction": (
             "The human subject is positioned on the right third of the frame only, facing slightly "
             "left toward the center. The left two-thirds of the frame is a clean, softly blurred "
             "or plain background — completely empty of any subject, hands, or props. Do not place "
@@ -137,7 +141,7 @@ LAYOUTS = {
         "safe_zone":  (0, 0, 500, 1500),
     },
     "C": {
-        "gemini_instruction": (
+        "image_instruction": (
             "Strict 90-degree overhead top-down flat lay. Styled objects arranged around the outer "
             "edges and corners of the frame only. The center of the frame is intentionally left as "
             "clean empty surface — no objects, no props in the center. No person, no hands."
@@ -147,7 +151,7 @@ LAYOUTS = {
         "safe_zone":  (200, 400, 800, 1100),
     },
     "D": {
-        "gemini_instruction": (
+        "image_instruction": (
             "Wide medium shot of a fully styled workspace or interior. The upper third of the frame "
             "is a clean wall with minimal detail — empty enough for a text overlay. Rich environmental "
             "detail fills the lower two-thirds of the frame. No person."
@@ -158,9 +162,9 @@ LAYOUTS = {
     },
 }
 
-# ── Gemini image generation ────────────────────────────────────────────────────
+# ── OpenAI image generation ────────────────────────────────────────────────────
 
-def _build_gemini_prompt(variation_letter: str = "a",
+def _build_image_prompt(variation_letter: str = "a",
                           scene_type: str = "",
                           layout: str = "C",
                           retry_prefix: str = "") -> str:
@@ -172,7 +176,7 @@ def _build_gemini_prompt(variation_letter: str = "a",
     hint         = _SCENE_HINTS.get(variation_letter.lower(), _SCENE_HINTS["a"])
     st           = scene_type or _VAR_SCENE_FALLBACK.get(variation_letter.lower(), "person")
     framing      = _SCENE_FRAMING.get(st, "")
-    layout_instr = LAYOUTS.get(layout.upper(), LAYOUTS["C"])["gemini_instruction"]
+    layout_instr = LAYOUTS.get(layout.upper(), LAYOUTS["C"])["image_instruction"]
     prompt = (
         f"{layout_instr} "
         f"{hint} "
@@ -187,56 +191,14 @@ def _build_gemini_prompt(variation_letter: str = "a",
     return (retry_prefix + prompt) if retry_prefix else prompt
 
 
-def _generate_background_gemini(variation_letter: str = "a",
+def _generate_background_openai(variation_letter: str = "a",
                                   scene_type: str = "",
                                   layout: str = "C",
                                   retry_prefix: str = "") -> Image.Image:
-    api_key = os.getenv("GOOGLE_API_KEY")
-    if not api_key:
-        raise RuntimeError("GOOGLE_API_KEY not set in environment.")
-
-    from google import genai
-    from google.genai import types
-    import base64
-
-    client   = genai.Client(api_key=api_key)
-    prompt   = _build_gemini_prompt(variation_letter, scene_type, layout, retry_prefix)
-    last_err = None
-
-    for model in ("imagen-4.0-generate-001", "imagen-4.0-fast-generate-001"):
-        try:
-            response = client.models.generate_images(
-                model=model,
-                prompt=prompt,
-                config=types.GenerateImagesConfig(
-                    number_of_images=1,
-                    aspect_ratio="9:16",
-                    output_mime_type="image/jpeg",
-                ),
-            )
-            if response.generated_images:
-                img_bytes = response.generated_images[0].image.image_bytes
-                return Image.open(io.BytesIO(img_bytes)).convert("RGB")
-        except Exception as e:
-            last_err = e
-
-    for model in ("gemini-2.5-flash-image", "gemini-3.1-flash-image-preview", "gemini-3-pro-image-preview"):
-        try:
-            response = client.models.generate_content(
-                model=model,
-                contents=prompt,
-                config=types.GenerateContentConfig(response_modalities=["IMAGE"]),
-            )
-            for part in response.candidates[0].content.parts:
-                if hasattr(part, "inline_data") and part.inline_data:
-                    raw = part.inline_data.data
-                    if isinstance(raw, str):
-                        raw = base64.b64decode(raw)
-                    return Image.open(io.BytesIO(raw)).convert("RGB")
-        except Exception as e:
-            last_err = e
-
-    raise RuntimeError(f"Gemini image generation failed: {last_err}")
+    prompt = _build_image_prompt(variation_letter, scene_type, layout, retry_prefix)
+    image_bytes, cost = generate_image_bytes(prompt, aspect_ratio="9:16", quality="high")
+    print(f"    (pin background — est. ${cost:.2f})")
+    return Image.open(io.BytesIO(image_bytes)).convert("RGB")
 
 
 def _generate_background_with_retry(variation_letter: str = "a",
@@ -249,11 +211,11 @@ def _generate_background_with_retry(variation_letter: str = "a",
         if attempt > 0:
             print(f"    Retrying ({attempt + 1}/{MAX_ATTEMPTS})...")
         try:
-            return _generate_background_gemini(variation_letter, scene_type, layout, prefix)
+            return _generate_background_openai(variation_letter, scene_type, layout, prefix)
         except Exception as e:
             last_err = e
             print(f"    Attempt {attempt + 1} failed: {e}")
-    raise RuntimeError(f"All {MAX_ATTEMPTS} Gemini attempts failed: {last_err}")
+    raise RuntimeError(f"All {MAX_ATTEMPTS} OpenAI image attempts failed: {last_err}")
 
 
 

@@ -50,38 +50,47 @@ def research_niche_overview(niche: str, products: str, keywords: list[dict]) -> 
 
     sources_text = "\n\n".join(f"SOURCE: {k}\n{v}" for k, v in sources.items() if v)
 
-    prompt = f"""You are a Pinterest marketing consultant writing the opening section of a paid client audit.
+    prompt = f"""You are a Pinterest marketing consultant writing the opening section of a paid client audit. The audit is written TO the client directly — always address them as "you", never as "the client", "she", or "her".
 
 Client niche: {niche}
 Client products: {products}
 Primary keyword: {top_keyword}
 Combined monthly search volume across top keywords: {total_volume:,}
 
-Web context about Pinterest (use specific stats where available):
+Known current platform fact (use this, do not use an older/outdated MAU figure): Pinterest had roughly 619 million global monthly active users as of late 2025/early 2026 — use this as the basis for any "monthly active users" stat, not an older figure like 2024's ~500M.
+
+Web context about Pinterest (use specific stats where available, but prefer the platform fact above for MAU):
 {sources_text}
+
+CRITICAL RULE — DO NOT VIOLATE: Every number you produce in this entire response must be real and verifiable — either the platform fact given above, the real combined search volume given above, or a real published stat that actually appears in the web context below. NEVER invent a plausible-sounding estimate (e.g. "estimated accounts in this niche", "estimated revenue potential") and present it as a stat. If you don't have a real number for something, leave it out entirely — do not fill the gap with a guess.
+
+ALSO CRITICAL: Do not compare Pinterest to Instagram, TikTok, Facebook, Amazon, or any other named platform anywhere in this response. Describe what Pinterest does on its own terms only.
 
 Write TWO things:
 
 ---
-PART 1: KEY STATS (4–5 stats as JSON)
+PART 1: KEY STATS (2–3 stats as JSON)
 
-Return a JSON array of 4–5 impactful stats specific to this niche on Pinterest. Mix platform-level stats (e.g. monthly active users, purchase intent %) with niche-specific estimates. Use real Pinterest published figures where available. Each stat should be a punchy number with a short label.
+Return a JSON array of 2–3 stats, using ONLY real numbers: the MAU fact above, the real combined search volume above, and (only if it is genuinely present in the web context, not invented) one additional real published Pinterest platform stat. It is better to return 2 honest stats than to pad to 4 with an invented one.
 
 Format EXACTLY as:
 [
-  {{"value": "875M", "label": "Monthly active Pinterest users"}},
-  {{"value": "97%", "label": "Top searches are unbranded (no specific brand)"}},
-  {{"value": "X,XXX", "label": "Estimated accounts targeting this niche"}},
-  {{"value": "XXK+", "label": "Monthly Pinterest searches for {top_keyword}"}},
-  {{"value": "$XX–$XXM", "label": "Est. annual revenue in niche (digital products)"}}
+  {{"value": "619M+", "label": "Monthly active Pinterest users"}},
+  {{"value": "XXK+", "label": "Monthly Pinterest searches for {top_keyword}"}}
 ]
 
-Be specific. Use real numbers where possible, estimates with ranges otherwise. Return ONLY the JSON array for PART 1.
+Return ONLY the JSON array for PART 1.
 
 ---
-PART 2: WHY PINTEREST (1–2 sentences only)
+PART 2: WHY PINTEREST (2–3 short paragraphs)
 
-One sharp sentence on why Pinterest is the right platform for this exact client — reference a specific user behaviour or stat that matches this niche. Then one sentence on the specific opportunity this creates for the client's products.
+Write directly to the client in second person. The very first word must be "You". This needs to be a real, fact-grounded case for why Pinterest specifically suits this niche. Cover:
+
+1. Women can search Pinterest privately — without comments, likes, or followers attached to what they search for. Explain why that matters for this specific niche.
+2. The real combined search volume number given above as proof the demand already exists, naming 2-3 of the actual highest-volume keywords from this niche.
+3. If you can confidently name a REAL, currently active account or creator who has built a genuine audience/business on Pinterest in this niche or an adjacent one, use them as a concrete proof point. Only use a real name you are confident about — never invent one.
+
+Write in simple, conversational, human language — not robotic or corporate. No jargon, no buzzwords like "leverage" or "synergy". Talk like a sharp friend explaining a real opportunity, using specifics, not generic marketing language.
 
 Format: Return PART 1 JSON then PART 2 text, separated by "---PART2---". No other formatting."""
 

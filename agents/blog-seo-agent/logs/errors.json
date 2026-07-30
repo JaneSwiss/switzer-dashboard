@@ -604,5 +604,107 @@
     "stage": "banned_words",
     "keyword": "shopify vs etsy",
     "error": "Banned words remain after revision: ['discover']"
+  },
+  {
+    "date": "2026-07-30",
+    "stage": "serp_fetch",
+    "keyword": "pinterest seo tips examples guide",
+    "error": "HTTPSConnectionPool(host='api.valueserp.com', port=443): Read timed out. (read timeout=20)"
+  },
+  {
+    "date": "2026-07-30",
+    "stage": "blog_writer",
+    "keyword": "pinterest seo",
+    "error": "Error code: 500 - {'type': 'error', 'error': {'type': 'api_error', 'message': 'Internal server error'}, 'request_id': 'req_011CdXpa5a28zHdD2t8FNsRm'}"
+  },
+  {
+    "date": "2026-07-30",
+    "stage": "research_synthesis",
+    "keyword": "pinterest seo",
+    "error": "Error code: 529 - {'type': 'error', 'error': {'type': 'overloaded_error', 'message': 'Overloaded'}, 'request_id': 'req_011CdY1kZVMYCNjVoubwzKmr'}"
+  },
+  {
+    "date": "2026-07-30",
+    "stage": "blog_writer",
+    "keyword": "pinterest seo",
+    "error": "Error code: 529 - {'type': 'error', 'error': {'type': 'overloaded_error', 'message': 'Overloaded'}, 'request_id': 'req_011CdY1m1mAHA14Cb2vGHjLs'}"
+  },
+  {
+    "date": "2026-07-30",
+    "stage": "paa_fetch",
+    "keyword": "pinterest seo",
+    "error": "HTTPSConnectionPool(host='api.valueserp.com', port=443): Read timed out. (read timeout=20)"
+  },
+  {
+    "date": "2026-07-30",
+    "stage": "reddit_questions",
+    "keyword": "pinterest seo",
+    "error": "HTTPSConnectionPool(host='api.valueserp.com', port=443): Read timed out. (read timeout=20)"
+  },
+  {
+    "date": "2026-07-30",
+    "stage": "research_synthesis",
+    "keyword": "pinterest seo",
+    "error": "Error code: 529 - {'type': 'error', 'error': {'type': 'overloaded_error', 'message': 'Overloaded'}, 'request_id': 'req_011CdY1uYs9r5pBxa8ZsXWzG'}"
+  },
+  {
+    "date": "2026-07-30",
+    "stage": "image_generation",
+    "keyword": "pinterest-seo",
+    "error": "Inline prompt 1: Error code: 400 - {'error': {'message': \"Unknown parameter: 'response_format'.\", 'type': 'invalid_request_error', 'param': 'response_format', 'code': 'unknown_parameter'}}"
+  },
+  {
+    "date": "2026-07-30",
+    "stage": "image_generation",
+    "keyword": "pinterest-seo",
+    "error": "Inline prompt 2: Error code: 400 - {'error': {'message': \"Unknown parameter: 'response_format'.\", 'type': 'invalid_request_error', 'param': 'response_format', 'code': 'unknown_parameter'}}"
+  },
+  {
+    "date": "2026-07-30",
+    "stage": "image_generation",
+    "keyword": "pinterest-seo",
+    "error": "Inline prompt 3: Error code: 400 - {'error': {'message': \"Unknown parameter: 'response_format'.\", 'type': 'invalid_request_error', 'param': 'response_format', 'code': 'unknown_parameter'}}"
+  },
+  {
+    "date": "2026-07-30",
+    "stage": "image_generation",
+    "keyword": "pinterest-seo",
+    "error": "Inline prompt 4: Error code: 400 - {'error': {'message': \"Unknown parameter: 'response_format'.\", 'type': 'invalid_request_error', 'param': 'response_format', 'code': 'unknown_parameter'}}"
+  },
+  {
+    "date": "2026-07-30",
+    "stage": "image_generation",
+    "keyword": "pinterest-seo",
+    "error": "Inline prompt 5: Error code: 400 - {'error': {'message': \"Unknown parameter: 'response_format'.\", 'type': 'invalid_request_error', 'param': 'response_format', 'code': 'unknown_parameter'}}"
+  },
+  {
+    "date": "2026-07-30",
+    "stage": "image_generation",
+    "keyword": "pinterest-seo",
+    "error": "Inline prompt 6: Error code: 400 - {'error': {'message': \"Unknown parameter: 'response_format'.\", 'type': 'invalid_request_error', 'param': 'response_format', 'code': 'unknown_parameter'}}"
+  },
+  {
+    "date": "2026-07-30",
+    "stage": "image_generation",
+    "keyword": "pinterest-seo",
+    "error": "Inline prompt 7: Error code: 400 - {'error': {'message': \"Unknown parameter: 'response_format'.\", 'type': 'invalid_request_error', 'param': 'response_format', 'code': 'unknown_parameter'}}"
+  },
+  {
+    "date": "2026-07-30",
+    "stage": "image_generation",
+    "keyword": "pinterest-seo",
+    "error": "Cover prompt 1: Error code: 400 - {'error': {'message': \"Unknown parameter: 'response_format'.\", 'type': 'invalid_request_error', 'param': 'response_format', 'code': 'unknown_parameter'}}"
+  },
+  {
+    "date": "2026-07-30",
+    "stage": "image_generation",
+    "keyword": "pinterest-seo",
+    "error": "Cover prompt 2: Error code: 400 - {'error': {'message': \"Unknown parameter: 'response_format'.\", 'type': 'invalid_request_error', 'param': 'response_format', 'code': 'unknown_parameter'}}"
+  },
+  {
+    "date": "2026-07-30",
+    "stage": "image_generation",
+    "keyword": "pinterest-seo",
+    "error": "Cover prompt 3: Error code: 400 - {'error': {'message': \"Unknown parameter: 'response_format'.\", 'type': 'invalid_request_error', 'param': 'response_format', 'code': 'unknown_parameter'}}"
   }
 ]

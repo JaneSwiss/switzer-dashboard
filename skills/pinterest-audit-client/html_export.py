@@ -118,7 +118,8 @@ body > .wrapper { padding-top: 2rem; }
 /* ── Stat grid ──────────────────────────────────────────────────── */
 .stat-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(120px, 200px));
+  justify-content: start;
   gap: 10px;
   margin: 1rem 0 0.5rem;
 }
@@ -497,13 +498,17 @@ def _sentence_case(text: str) -> str:
     words = text.split()
     result = []
     for i, word in enumerate(words):
-        clean = re.sub(r"[^a-zA-Z]", "", word).lower()
-        if clean in _PROPER_NOUNS:
-            result.append(word[0].upper() + word[1:].lower() if len(word) > 1 else word.upper())
-        elif i == 0:
-            result.append(word[0].upper() + word[1:].lower() if len(word) > 1 else word.upper())
+        m = re.match(r"^([^a-zA-Z]*)([a-zA-Z]+(?:['-][a-zA-Z]+)*)([^a-zA-Z]*)$", word)
+        if not m:
+            result.append(word)
+            continue
+        prefix, core, suffix = m.groups()
+        clean = core.lower()
+        if clean in _PROPER_NOUNS or i == 0:
+            cased = core[0].upper() + core[1:].lower() if len(core) > 1 else core.upper()
         else:
-            result.append(word.lower())
+            cased = core.lower()
+        result.append(prefix + cased + suffix)
     return " ".join(result)
 
 
@@ -593,7 +598,7 @@ _CANVA_ICON = """<svg width="22" height="22" viewBox="0 0 24 24" fill="none" xml
 </svg>"""
 
 
-def md_to_html(md: str, title: str, run_date: str, products: str, client_name: str = "", spreadsheet_url: str = "") -> str:
+def md_to_html(md: str, title: str, run_date: str, products: str, client_name: str = "", spreadsheet_url: str = "", canva_url: str = "https://canva.link/5mazrd595nv86lj") -> str:
     lines = md.splitlines()
     parts = []
 
@@ -902,7 +907,7 @@ def md_to_html(md: str, title: str, run_date: str, products: str, client_name: s
 <div class="card spreadsheet-card canva-card">
   <div class="spreadsheet-title">50 pin templates for Canva</div>
   <p class="spreadsheet-desc">Ready-to-edit pin templates built for Pinterest. Customise with your photos and texts.</p>
-  <a href="https://canva.link/5mazrd595nv86lj" target="_blank" class="canva-btn">
+  <a href="{canva_url}" target="_blank" class="canva-btn">
     {_CANVA_ICON}
     50 pin templates for Canva
   </a>
@@ -940,7 +945,7 @@ def md_to_html(md: str, title: str, run_date: str, products: str, client_name: s
 </html>"""
 
 
-def save_html(md_path: str, client_name: str = "", spreadsheet_url: str = "") -> str:
+def save_html(md_path: str, client_name: str = "", spreadsheet_url: str = "", canva_url: str = "https://canva.link/5mazrd595nv86lj") -> str:
     md_path = Path(md_path)
     content = md_path.read_text(encoding="utf-8")
 
@@ -953,7 +958,7 @@ def save_html(md_path: str, client_name: str = "", spreadsheet_url: str = "") ->
     products_match = re.search(r"\*\*Products/Services:\*\* (.+)$", content, re.MULTILINE)
     products = products_match.group(1).strip() if products_match else ""
 
-    html = md_to_html(content, title, run_date, products, client_name=client_name, spreadsheet_url=spreadsheet_url)
+    html = md_to_html(content, title, run_date, products, client_name=client_name, spreadsheet_url=spreadsheet_url, canva_url=canva_url)
 
     html_path = md_path.with_suffix(".html")
     html_path.write_text(html, encoding="utf-8")
