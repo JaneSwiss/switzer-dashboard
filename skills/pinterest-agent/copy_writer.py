@@ -82,12 +82,13 @@ BRAND VOICE RULES
 {ctx["voice"][:800]}
 
 ═══════════════════════════════════════════════════════════════
-PROVEN VISUAL STYLE (write design_brief to match this, not a generic scene)
+PIN FORMAT: NUMBERED-LIST INFOGRAPHIC (not a photo pin)
 ═══════════════════════════════════════════════════════════════
-{ctx["visual_style"][:1500] if ctx["visual_style"] else
- "(No reference style analyzed yet — write design_brief per the mood/scene rotation "
- "rules above. Run skills/pinterest-agent/analyze_reference_pins.py after adding "
- "examples to context/top-performing-pins/ to unlock this section.)"}
+Every pin is a numbered-list infographic — generated whole by an image model, text
+baked directly into the image. This is Jane's own proven top-performing format:
+eyebrow label -> big serif headline -> numbered icon list -> bottom URL bar -> tagline.
+There is no background photo and no separate design_brief — the substance of the
+pin IS the list of real, specific, actionable items about the keyword.
 
 ═══════════════════════════════════════════════════════════════
 PRODUCT URL MAPPING (populate destination_url from this exactly)
@@ -102,13 +103,16 @@ Educational pins           → https://www.switzertemplates.com/blog
 ═══════════════════════════════════════════════════════════════
 MANDATORY QUALITY CHECKS (run on every variation before outputting)
 ═══════════════════════════════════════════════════════════════
-1. Is pin_headline a short punchy magazine-cover line (5-12 words, NOT keyword-first, NOT the seo_title)?
+1. Is pin_headline short and big-text-friendly (2-5 words — this is rendered LARGE on the
+   image, not a full sentence, NOT the seo_title)?
 1b. Does seo_title have the keyword in the first 4 words?
 2. Does the keyword appear in the first sentence of the description?
 3. Is the CTA appropriate for this keyword type — product keyword or educational keyword?
 4. Does destination_url match the product being promoted?
-5. Design brief: describes a lifestyle/editorial scene with a real person — never a product or device screen?
-5b. highlight_words: 1-2 words only, carries real emotional or commercial weight, not a filler word?
+5. pin_items: are all items real, specific, and actionable — not vague filler ("do X" not
+   "think about X")? Would a reader who only sees the image (never clicks) walk away having
+   actually learned something?
+5b. accent_word: exactly one word from pin_headline, carries real weight, not a filler word?
 6. Title under 100 characters?
 7. Title makes a specific promise — not a generic label?
 8. CTAs rotating — no two consecutive variations use the same CTA?
@@ -137,16 +141,29 @@ Each element:
     "blog_post_needed": <true|false>,
     "brief_for_blog_agent": "<if needed: 2-sentence brief>"
   }},
+  "pin_items": [
+    {{
+      "title": "<ALL CAPS, 2-5 words, a specific real step or fact — e.g. 'THINK SEARCH, NOT SOCIAL'>",
+      "description": "<one line, 8-14 words, plain and concrete — no fluff, no filler>",
+      "icon": "<a short, simple, literal visual concept for a thin line-art icon — e.g. 'a magnifying glass over a search bar'. Must be renderable as a single simple icon, not a scene.>"
+    }}
+    // 4 to 6 items total, shared by all 5 variations below (this is the real, factual
+    // substance of the topic — the actual steps/tips/facts the reader learns from the
+    // pin image itself). Never generic ("be consistent") — always specific and actionable,
+    // grounded in real knowledge about the keyword's topic.
+  ],
   "variations": [
     {{
       "id": "<topic_id><a-e>",
       "type": "<PRODUCT|EDUCATIONAL>",
-      "pin_headline": "<5-12 words. Text displayed ON the pin image. Short, punchy, human — like a magazine cover line. Must stop the scroll and make the reader feel seen or curious. NOT keyword-first, NOT SEO copy. Emotional and direct. Examples: 'Your brand is saying things you didn't intend', 'The website that works while you sleep', 'What clients notice before they read a word', 'This is why browsers don't become buyers'. Never generic. Never the SEO title.>",
+      "eyebrow": "<ALL CAPS, 1-4 words, small label above the headline — e.g. 'HOW TO USE', 'THE COMPLETE GUIDE TO', 'STOP DOING THIS'>",
+      "pin_headline": "<2-5 words. The BIG headline text on the pin image — short and punchy enough to render large, like a magazine cover word or two. NOT a sentence. NOT the seo_title. Examples: 'Pinterest SEO', 'Free Business Tools', 'Client-Ready Websites'.>",
+      "accent_word": "<exactly one word from pin_headline to render in an italic accent color — the word that carries the most weight.>",
+      "subtitle_bar": "<one line, 6-12 words, sits in a colored bar directly under the headline — supporting/benefit framing, e.g. '6 Steps to Get Your Pins Found in Search'.>",
+      "tagline": "<one short italic line under the bottom bar, 4-10 words — e.g. 'More Pinterest tips for small business owners', or a soft product nudge for PRODUCT-type variations.>",
       "category_label": "<ALL CAPS, max 20 chars>",
       "seo_title": "<keyword in first 4 words, 50-100 chars, sentence case, benefit-led or action-led. This is Pinterest metadata only — never appears on the pin image itself. Example: 'Coach websites that win clients before the first call'>",
       "seo_description": "<keyword in first sentence, 150-300 chars, CTA at end>",
-      "design_brief": "<50+ words. Start with the MOOD keyword. Then write a specific, cinematic scene for Gemini to generate. CRITICAL: the 5 briefs in a topic must be visually distinct — different subject, angle, props and composition every time. Rotate through these scene types: a woman working at a desk, a close-up of hands holding coffee or writing, an overhead flat lay of a workspace, a woman walking or standing outdoors in a professional setting, a woman seated reading or thinking. Always business-adjacent. Never two similar compositions in the same topic. Never reference a screen or device showing content. MOOD per variation letter: a=BRIGHT AIRY WHITE (pure white/cream, bright daylight, ultra-clean), b=WARM DARK MOODY (espresso browns, dramatic low light, dark warm shadows), c=BEIGE NEUTRAL (sandy beige/ivory, warm afternoon light, soft matte), d=COOL GREY (cool grey, overcast light, polished, no warmth), e=EARTHY BROWN (rich wood/brown tones, amber lamp light). State the mood in the first line of the brief.>",
-      "highlight_words": ["<1-2 words from the pin_headline that carry the most emotional or commercial weight. Chosen deliberately — the word/s the audience will feel or act on. Never a conjunction, preposition, article, or filler word. Examples: in 'Your website should win clients before you even speak to them' → ['win'] or ['win', 'clients']. In 'The gap between looking established and looking DIY is smaller than you think' → ['established']. In 'Wix website template to look professional and attract more clients' → ['professional', 'clients']. Always an array even if only 1 word.>"],
       "destination_url": "<exact URL from the product URL mapping above>"
     }}
   ]
@@ -190,29 +207,21 @@ KEYWORDS TO PROCESS (topic_id, keyword, funnel stage, variation split):
 {chr(10).join(kw_lines)}
 
 Rules:
-- pin_headline is the text ON the pin image — short, punchy, magazine cover line. NOT
-  keyword-first. NOT the SEO title. Make the reader feel seen or curious. 5-12 words.
+- pin_items (topic-level, shared by all 5 variations): 4-6 real, specific, actionable
+  items about the keyword's topic — the actual substance a reader learns from the pin
+  image. Never generic. Each needs a short ALL CAPS title, a one-line description, and a
+  simple literal icon concept.
+- pin_headline is the BIG text on the pin image — 2-5 words, not a sentence. NOT
+  keyword-first. NOT the SEO title.
+- eyebrow, subtitle_bar, tagline, accent_word: vary the wording across all 5 variations
+  in a topic so the 5 pins don't read identically, even though they share the same
+  pin_items. No two variations should use the same eyebrow or subtitle_bar phrasing.
 - seo_title is Pinterest metadata — keyword in first 4 words, benefit-led, sentence case.
   Completely different from pin_headline.
 - Keyword must appear in first sentence of every seo_description
 - Rotate CTAs — no two consecutive variations in the same topic use the same CTA
 - Use CTAs from the expert document only (no "Shop at switzertemplates.com" — too corporate)
 - Populate destination_url from the URL mapping — never leave it null
-- Design brief must describe a lifestyle or editorial scene with a real person (woman at a desk,
-  in a coffee shop, close-up of hands on a keyboard, woman reviewing documents, professional
-  woman in neutral clothing). Warm earthy tones, soft moody lighting. Never reference a product,
-  laptop screen, tablet screen, or any device showing content. The scene sets a mood — it does
-  not show the product.
-- highlight_words: choose 1-2 words from the headline that carry the most emotional or
-  commercial weight — the word/s the audience will feel or respond to. Never a conjunction,
-  preposition, article, or filler. Always an array. Chosen deliberately, not randomly.
-- design_brief: write 5 visually distinct scenes — different subject, angle, composition
-  and setting in every brief. CRITICAL: never two similar scenes in the same topic.
-  Rotate through: woman at a desk, close-up of hands/coffee/notebook, overhead flat lay,
-  woman walking or standing in an outdoor or architectural setting, portrait of woman
-  thinking or reading. Always business-adjacent. Never reference a screen showing content.
-  Mood per variation (state in first line of brief):
-  a=BRIGHT AIRY WHITE  b=WARM DARK MOODY  c=BEIGE NEUTRAL  d=COOL GREY  e=EARTHY BROWN
 - Title structures must vary across the 5 variations — no two the same
 - Run all 10 quality checks before outputting each variation
 
@@ -279,13 +288,19 @@ def _parse(raw: str) -> list[dict]:
 
     required_topic = {"topic_id", "keyword", "variations"}
     required_var   = {"id", "type", "pin_headline", "seo_title",
-                      "seo_description", "design_brief", "destination_url"}
+                      "seo_description", "destination_url"}
     valid = []
     for t in topics:
         if not isinstance(t, dict) or required_topic - set(t.keys()):
             continue
         # topic name is always the keyword — enforce
         t["topic"] = t["keyword"].strip().title()
+        # pin_items is the substance of the infographic — required to render anything.
+        # Missing/empty is a real gap, not silently droppable, but shouldn't kill the
+        # whole topic either — downstream image generation fails per-pin and is logged.
+        if not t.get("pin_items"):
+            print(f"  Warning: '{t['keyword']}' has no pin_items — pins for this topic will fail to render.")
+            t["pin_items"] = []
         clean_vars = []
         for v in t.get("variations", []):
             if isinstance(v, dict) and not (required_var - set(v.keys())):
@@ -297,6 +312,9 @@ def _parse(raw: str) -> list[dict]:
                 # came from Claude directly or the fallback above — guaranteed, not
                 # left to the model to remember.
                 v["destination_url"] = _add_utm(v["destination_url"], _slugify(t["keyword"]))
+                # pin_items lives on the topic, not the variation — copy it down so
+                # each variation's copy_data is self-contained for the image generator.
+                v["pin_items"] = t["pin_items"]
                 clean_vars.append(v)
         if not clean_vars:
             continue

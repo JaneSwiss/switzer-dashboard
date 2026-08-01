@@ -536,11 +536,14 @@ def main():
                     "type":            v.get("type", ""),
                     "maps_to_product": maps_to,
                     "category_label":  v.get("category_label", "SMALL BIZ"),
+                    "eyebrow":         v.get("eyebrow", ""),
                     "pin_headline":    v.get("pin_headline", ""),
-                    "highlight_words": v.get("highlight_words", []),
+                    "accent_word":     v.get("accent_word", ""),
+                    "subtitle_bar":    v.get("subtitle_bar", ""),
+                    "tagline":         v.get("tagline", ""),
+                    "pin_items":       v.get("pin_items", topic.get("pin_items", [])),
                     "seo_title":       v.get("seo_title", v.get("pin_headline", "")),
                     "seo_description": v.get("seo_description", ""),
-                    "photo_concept":   v.get("design_brief", ""),
                     "destination_url": v.get("destination_url", ""),
                 })
         topics = [c["topic"] for c in preloaded_copy]

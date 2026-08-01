@@ -102,13 +102,11 @@ def generate_image_bytes(
         size=_resolve_size(aspect_ratio),
         quality=resolved_quality,
         output_format=output_format,
-        response_format="b64_json",
         n=1,
     )
 
-    # Defensive: request b64_json explicitly, but fall back to fetching a url if that's
-    # what actually comes back — gpt-image-2 is new enough that this hasn't been verified
-    # against a real API key yet (see build notes / Verification step in the plan).
+    # gpt-image-2 doesn't accept response_format — it always returns b64_json.
+    # Kept the url fallback anyway in case that ever changes.
     result = response.data[0]
     if getattr(result, "b64_json", None):
         raw_bytes = base64.b64decode(result.b64_json)

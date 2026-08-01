@@ -470,7 +470,10 @@
       "Bash(cp ~/Downloads/switzertemplates-aae7c57210b7.json ~/.config/switzertemplates/gsc-service-account.json)",
       "Bash(chmod 600 ~/.config/switzertemplates/gsc-service-account.json)",
       "Read(//Users/janeair/.config/**)",
-      "Bash(/usr/bin/python3 /private/tmp/claude-501/-Users-janeair-Documents-AI-switzertemplates/27df57c9-8273-4ca4-8dd6-61f3a2c1deed/scratchpad/run_e2e_test.py)"
+      "Bash(/usr/bin/python3 /private/tmp/claude-501/-Users-janeair-Documents-AI-switzertemplates/27df57c9-8273-4ca4-8dd6-61f3a2c1deed/scratchpad/run_e2e_test.py)",
+      "Bash(/usr/bin/python3 /private/tmp/claude-501/-Users-janeair-Documents-AI-switzertemplates/27df57c9-8273-4ca4-8dd6-61f3a2c1deed/scratchpad/test_infographic_pin.py)",
+      "Bash(/usr/bin/python3 main.py --from-topics-json /private/tmp/claude-501/-Users-janeair-Documents-AI-switzertemplates/27df57c9-8273-4ca4-8dd6-61f3a2c1deed/scratchpad/test_topics.json --auto-approve --skip-tailwind)",
+      "Bash(/usr/bin/python3 /private/tmp/claude-501/-Users-janeair-Documents-AI-switzertemplates/27df57c9-8273-4ca4-8dd6-61f3a2c1deed/scratchpad/redo_pinterest_seo.py)"
     ],
     "additionalDirectories": [
       "/Users/janeair/Documents/AI/switzertemplates/agents/blog-seo-agent/output",
