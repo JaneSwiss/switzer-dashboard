@@ -156,7 +156,16 @@ MANDATORY QUALITY CHECKS (run on every variation before outputting)
 9. No third-person brand references ("Our X" not "The Switzertemplates X")?
 10. Does each variation in the topic use a different TITLE ANGLE (benefit-led,
     problem-led, result-led, comparison-led, transformation-led) than the others?
-11. Does the pin make sense for someone who sees it 6 months from now?
+11. Is the tactic/keyword itself ever the verb's subject performing an action —
+    "Pinterest SEO built...", "Pinterest SEO turned...", "Pinterest SEO beats..."?
+    A tactic can't act. Either a person acts ("you learn...", "I turned...") or
+    it's a noun phrase being described ("the strategy that...", "the habit that...").
+    Check the Style reference section's examples in the expert document — copy
+    that grammatical pattern exactly, don't reinvent it.
+12. Does any title/description compare Pinterest to Instagram, TikTok, or any
+    other platform? Permanently banned, no exceptions — see "What this agent
+    must never do" in the expert document.
+13. Does the pin make sense for someone who sees it 6 months from now?
 
 If any check fails, rewrite before outputting. Do not output until all checks pass.
 
@@ -268,8 +277,14 @@ Rules:
 - WRITE seo_title FIRST, for every variation, before touching eyebrow/headline/
   subtitle_bar. Those three are DERIVED from seo_title, not invented separately.
   seo_title is a full sentence (8-15 words) that leads with an outcome or claim —
-  never a summary of what the post covers. See the Title principles in the expert
-  document for the exact pattern and examples.
+  never a summary of what the post covers. Study the "Style reference" section
+  in the expert document closely — copy that exact pattern, don't paraphrase it
+  from memory. In particular: the tactic/keyword is NEVER the verb's subject
+  ("Pinterest SEO built/turned/beats..." is always wrong) — a person acts, or
+  the tactic is described as a noun phrase ("the strategy that...").
+- NEVER compare Pinterest to Instagram, TikTok, or any other platform, in any
+  field. If using the comparison-led angle, compare two things from within the
+  topic itself, not platform vs. platform.
 - Each of the 5 variations uses a different title_angle (benefit-led, problem-led,
   result-led, comparison-led, transformation-led) — no two the same.
 - eyebrow + headline must reconstruct seo_title as one sentence when read together.

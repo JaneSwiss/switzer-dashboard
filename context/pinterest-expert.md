@@ -161,8 +161,16 @@ Rotate the ANGLE across the 5 variations for one topic — no two the same:
   "Why your pins aren't ranking even though you're using the right keywords"
 - Result/proof-led: a specific, sometimes surprising claim about what happens.
   "One Pinterest SEO habit that keeps your pins working for months, not days"
-- Comparison-led: "Why X beats Y for [outcome], every time"
-- Transformation-led: "How to turn [starting point] into [result]"
+- Comparison-led: compares two approaches, mindsets, or habits WITHIN the
+  topic itself — "Why X beats Y for [outcome]". X and Y must both be things
+  from the post's own content (e.g. two ranking factors, two habits, two
+  ways of doing the same task). NEVER Pinterest vs. Instagram/TikTok/any
+  other platform — that comparison is permanently banned, see the CTA/never
+  do sections below.
+- Transformation-led: "How to turn [starting point] into [result]" — the
+  READER does the turning ("how to turn X into Y", "turn your X into Y"),
+  never the tactic itself ("Pinterest SEO turned my X into Y" is wrong —
+  the tactic can't perform the action).
 
 Title structures to avoid:
 - Content-descriptor labels that summarize the post instead of promising
@@ -672,6 +680,16 @@ If any check fails, rewrite before outputting.
 - Use the same CTA twice in a row across variations
 - Write a title that does not contain the target keyword
 - Link a product pin to the wrong product URL
+- Write a title/headline where the tactic or keyword itself is the verb's
+  subject performing an action: "Pinterest SEO built...", "Pinterest SEO
+  turned...", "Pinterest SEO beats/fixes/solves...". A tactic can't act —
+  either a person acts ("you learn...", "I turned...") or the tactic is a
+  noun phrase being described ("the strategy that...", "the habit that...").
+- Compare Pinterest to Instagram, TikTok, or any other platform, anywhere
+  in a pin — this exact comparison is permanently banned in blog posts
+  too (see blog_seo_agent.py) for being overused across prior content.
+  A "comparison-led" title compares two approaches or mindsets within the
+  topic itself, never platform vs. platform.
 - Invent on-image design text (eyebrow/headline) that isn't derived from
   the approved seo_title, or use Title Case anywhere in any text field
 - Use the same layout structure (eyebrow+grid, headline-only, outline-list,
@@ -703,44 +721,69 @@ If any check fails, rewrite before outputting.
 
 ## Style reference — exact tone and format to match
 
-These are the benchmark examples for every pin written for Switzertemplates.
-Before outputting any variation, check it against these three. If it reads
-differently — more corporate, more padded, more inspirational — rewrite it.
+*(Rewritten August 2026. The previous version of this section pointed at
+three old benchmark examples that contradicted the title/CTA rules above —
+short titles, "no CTA" as the ideal. That was a real bug: this section is
+what generated copy actually gets checked against, so it was silently
+overriding the rules elsewhere in this document. Every example below is
+either Jane's own real reference material, or copy she personally reviewed
+and approved line-by-line in session. These are not paraphrases — copy
+this pattern, don't reinterpret it.)*
 
-**Example 1 — educational pin, no CTA, 2 hashtags:**
+Before outputting any variation, check it against the examples below. If it
+reads differently — more corporate, more padded, more inspirational, or if
+the tactic/keyword itself is doing the verb ("Pinterest SEO built...",
+"Pinterest SEO turned...", "Pinterest SEO beats...") instead of a person —
+rewrite it.
+
+**Jane's own reference examples (unedited, from her liked pins):**
+- "Pinterest marketing is the free traffic strategy your business is sleeping on"
+  — "Most business owners are pouring money into ads when pinterest marketing
+  could be doing the same job for free. Pinterest is a search engine, not a
+  social media platform - and that one shift changes everything. Learn more
+  on my blog."
+- "Why pinterest marketing beats Instagram for long-term traffic every single time"
+  — "Here's the truth nobody talks about. A post on Instagram is dead in 48
+  hours. A pin on Pinterest can drive traffic for years. If you're serious
+  about building something that compounds, pinterest marketing is where to
+  put your energy. Get more info on my blog."
+- "You don't need more followers - you need a better pinterest marketing strategy"
+  — "Follower count means almost nothing on Pinterest. What matters is
+  keywords, boards, and pins that show up in search. That's what a real
+  pinterest marketing strategy is built around."
+- "Business aesthetic for women ready to build something of their own"
+  — "If this business aesthetic is speaking to you, your next move is
+  figuring out where to start. The blog shares business tips and growth
+  strategies made for women ready to build. Start at switzertemplates.com!"
+
+**Copy Jane approved in this session (topic: pinterest seo), showing the
+correct eyebrow/headline derivation — study the split, not just the words:**
+- Title: "Learn Pinterest SEO the right way and get lots of traffic"
+  Eyebrow: LEARN PINTEREST SEO / Headline: The right way
+  CTA: "Learn more on my blog!"
+  (benefit-led — leads with the payoff, not a summary of the post)
+- Title: "Why your pins aren't ranking even though you're using the right keywords"
+  Eyebrow: WHY YOUR PINS AREN'T / Headline: Ranking
+  CTA: "Get the full picture at switzertemplates.com!"
+  (problem-led — names the frustration, no rhetorical question)
+- Title: "One Pinterest SEO habit that keeps your pins working for months, not days"
+  Eyebrow: THE HABIT THAT MAKES PINS WORK FOR / Headline: Months, not days
+  CTA: "Steal the exact system on my blog!"
+  (result-led — "the habit that..." is a noun phrase; the habit doesn't act, it's named)
+
+Note what none of these do: none use the tactic/keyword itself as the verb's
+subject. "You" learn it, "the habit" keeps things working (a noun phrase,
+not an agent performing an action), "the strategy" drove results. Never
+write "Pinterest SEO built/turned/beats/fixed [outcome]" — a tactic cannot
+perform an action, only a person using it can, or it can be described as a
+thing ("the strategy that...") rather than an actor.
+
+**Educational pin, no CTA, closes on value — a valid pattern when it earns it:**
 Title: What to post when you have no idea what to post (save this)
 Description: Every small business owner hits this wall. Use this simple
 framework to fill your calendar: a tip, a result, a product, a story,
 a repost, a question. Rotate through these six types and you'll never
 run out of ideas. #socialmediacontentideas #contentstrategytips
-
-What makes it work: opens by naming the real situation, moves immediately
-to the practical framework, closes on the benefit with no padding, no CTA needed.
-
-**Example 2 — product pin, soft close, 2 hashtags:**
-Title: How to look professional online without hiring a designer
-Description: You don't need a custom brand designer to look polished online.
-A premade branding kit gives you a professional color palette, fonts, and
-logo - already designed. Pair it with matching Canva templates and apply
-it consistently. Perfect for coaches and service providers.
-#premadebranding #smallbusinesstips
-
-What makes it work: opens by dismissing the obstacle, explains the mechanism
-(what the product gives you and how it works), closes simply on who it's for.
-No dramatic closer. No CTA — the close is enough.
-
-**Example 3 — educational pin, mechanism-first, 3 hashtags:**
-Title: The branding mistake most new business owners make
-Description: The most common branding mistake people make is they start with
-a logo and stop there. Without a color system, a type system, and consistent
-templates, your brand won't build recognition. Here's what a complete brand
-actually looks like - and how to get it without hiring a custom designer.
-#smallbusinessbranding #brandidentitytips #premadebranding
-
-What makes it work: names the mistake immediately, explains why it matters
-(the mechanism of brand recognition), closes by signalling what comes next
-without narrating the URL. The dash is used correctly — separating two
-genuinely distinct clauses.
 
 ---
 
