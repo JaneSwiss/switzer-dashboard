@@ -129,7 +129,6 @@ def _build_post_report(p: dict) -> dict:
         "wix_ok": p.get("wix_ok", False),
         "newsletter_url": f"{gh_base}/blob/main/outputs/repurposed/{slug}/email_hook.md" if p.get("newsletter_ok") else None,
         "carousel_url": f"{gh_base}/blob/main/outputs/repurposed/{slug}/instagram_carousel.md" if p.get("newsletter_ok") else None,
-        "pins_url": f"{gh_base}/blob/main/outputs/repurposed/{slug}/pins.json" if p.get("newsletter_ok") else None,
         "tailwind_url": "https://www.tailwindapp.com/app" if "submitted to Tailwind" in p.get("pin_message", "") else None,
         "image_cost": p.get("image_cost", 0.0),
         "errors": p.get("errors", []),

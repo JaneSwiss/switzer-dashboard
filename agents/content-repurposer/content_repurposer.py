@@ -2,9 +2,14 @@
 """
 Content Repurposer — Switzertemplates
 Takes a published blog post and turns it into:
-  a) 10 Pinterest pin copy sets (title + description + URL)
-  b) 1 email hook (subject line + preview text + body paragraph)
-  c) 1 Instagram carousel (cover title + 6 slides + caption)
+  a) 1 email hook (subject line + preview text + body paragraph)
+  b) 1 Instagram carousel (cover title + 6 slides + caption)
+
+(Pin copy used to be generated here too, but it was never connected to the real
+pin pipeline — agents/general-manager/pin_pipeline.py generates pins from the
+keyword directly and is what actually reaches Tailwind. Keeping a second,
+disconnected set of pin copy here just meant two different texts existed for
+the same post with no way to tell which one was real. Dropped.)
 
 Run:
   python3 agents/content-repurposer/content_repurposer.py --post <slug>
@@ -12,7 +17,6 @@ Run:
 """
 
 import argparse
-import json
 import os
 import re
 import sys
@@ -90,36 +94,7 @@ PRODUCT CONTEXT (reference naturally where relevant — never force it):
 
 ---
 
-GENERATE ALL THREE OUTPUTS NOW:
-
-=== OUTPUT A: PINTEREST PINS ===
-Generate exactly 10 Pinterest pin copy sets for this blog post.
-Each pin must target a different angle, keyword, or reader pain point.
-No two pins should have the same opening word or same hook.
-
-Rules:
-- Title: 50-80 characters, keyword-rich, benefit-led or problem-led
-- Description: 150-200 characters, connects the topic to a business outcome,
-  ends with a soft CTA ("Save this", "Read more at switzertemplates.com", etc.)
-- URL: always {post_url}
-- Vary the angles: some pins lead with a result, some with a problem,
-  some with a number, some with a direct question
-- CAPITALISATION: sentence case only. Capitalise the first word of the title and
-  proper nouns only (Canva, Wix, Instagram, Pinterest, Etsy, etc.).
-  Never capitalise every word. Wrong: "How To Build A Brand That Sells"
-  Correct: "How to build a brand that sells"
-- Never use banned words: certainly, delve, embark, discover, unlock, boost,
-  game-changer, groundbreaking, remarkable, skyrocket, harness, illuminate
-
-Format each pin EXACTLY like this (no deviations):
-PIN 1
-Title: [title text]
-Description: [description text]
-URL: {post_url}
-
-PIN 2
-Title: [title text]
-...and so on through PIN 10.
+GENERATE BOTH OUTPUTS NOW:
 
 === OUTPUT B: EMAIL HOOK ===
 Write a complete email section to promote this blog post to the email list.
@@ -172,22 +147,6 @@ CAPTION:
 HASHTAGS: [5 hashtags]"""
 
 
-def parse_pins(raw: str, post_url: str) -> list[dict]:
-    """Extract all 10 pin sets from the raw output."""
-    pins = []
-    pattern = re.compile(
-        r"PIN\s+\d+\s*\nTitle:\s*(.+?)\nDescription:\s*(.+?)\nURL:\s*(\S+)",
-        re.IGNORECASE | re.DOTALL,
-    )
-    for m in pattern.finditer(raw):
-        title = m.group(1).strip()
-        desc = m.group(2).strip()
-        url = m.group(3).strip() or post_url
-        if title and desc:
-            pins.append({"title": title, "description": desc, "url": url})
-    return pins
-
-
 def parse_email(raw: str) -> str:
     """Extract the email hook section."""
     match = re.search(r"=== OUTPUT B: EMAIL HOOK ===(.*?)(?:=== OUTPUT C|$)", raw, re.DOTALL)
@@ -200,13 +159,9 @@ def parse_carousel(raw: str) -> str:
     return match.group(1).strip() if match else ""
 
 
-def save_outputs(slug: str, pins: list, email_hook: str, carousel: str, post_url: str) -> None:
+def save_outputs(slug: str, email_hook: str, carousel: str) -> None:
     out = OUTPUT_DIR / slug
     out.mkdir(parents=True, exist_ok=True)
-
-    # pins.json
-    pins_data = {"slug": slug, "post_url": post_url, "pins": pins}
-    (out / "pins.json").write_text(json.dumps(pins_data, indent=2, ensure_ascii=False), encoding="utf-8")
 
     # email_hook.md
     (out / "email_hook.md").write_text(email_hook, encoding="utf-8")
@@ -215,7 +170,6 @@ def save_outputs(slug: str, pins: list, email_hook: str, carousel: str, post_url
     (out / "instagram_carousel.md").write_text(carousel, encoding="utf-8")
 
     print(f"  Saved: {out}/")
-    print(f"    pins.json         ({len(pins)} pins)")
     print(f"    email_hook.md")
     print(f"    instagram_carousel.md")
 
@@ -245,14 +199,10 @@ def repurpose(slug: str) -> bool:
     )
     raw = response.content[0].text.strip()
 
-    pins = parse_pins(raw, post_url)
     email_hook = parse_email(raw)
     carousel = parse_carousel(raw)
 
-    if len(pins) < 5:
-        print(f"  Warning: only {len(pins)} pins parsed (expected 10) — saving anyway")
-
-    save_outputs(slug, pins, email_hook, carousel, post_url)
+    save_outputs(slug, email_hook, carousel)
     return True
 
 
@@ -281,9 +231,9 @@ def main():
 
     done, failed = 0, 0
     for i, slug in enumerate(slugs, 1):
-        # Skip if already repurposed (all 3 files exist)
+        # Skip if already repurposed (both files exist)
         out = OUTPUT_DIR / slug
-        if (out / "pins.json").exists() and (out / "email_hook.md").exists() and (out / "instagram_carousel.md").exists():
+        if (out / "email_hook.md").exists() and (out / "instagram_carousel.md").exists():
             print(f"  [{i}/{len(slugs)}] Skipping {slug} (already done)")
             done += 1
             continue
