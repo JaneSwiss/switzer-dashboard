@@ -123,7 +123,7 @@ def _build_post_report(p: dict) -> dict:
         "slug": slug,
         "date": date.today().isoformat(),
         "blog_post_url": f"https://www.switzertemplates.com/post/{slug}",
-        "github_post_url": f"{gh_base}/blob/main/posts/{slug}.html",
+        "post_preview_url": f"https://janeswiss.github.io/switzer-dashboard/posts/{slug}.html" if p.get("push_ok") else None,
         "github_images_url": f"{gh_base}/tree/main/posts/images/{slug}" if p.get("push_ok") else None,
         "wix_drafts_url": f"https://manage.wix.com/dashboard/{site_id}/blog/posts" if site_id and p.get("wix_ok") else None,
         "wix_ok": p.get("wix_ok", False),

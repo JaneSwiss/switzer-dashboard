@@ -1141,10 +1141,10 @@ DRINKS — rotate, never repeat across the 5 prompts:
 
 SIGNATURE PROPS (use 1-2 per image, vary across ALL 5 images — never repeat the same prop twice in one post):
 TECH:
-- Apple MacBook Pro open on desk, screen showing blurred design or analytics
-- Apple iPhone 15 Pro in natural titanium, face down or screen lit with blurred content
+- Apple MacBook Pro open on desk, screen showing a crisp, legible design or analytics dashboard
+- Apple iPhone 15 Pro in natural titanium, face down or screen lit with crisp, legible content
 - Apple AirPods Max in silver resting beside the laptop
-- iPad Pro in a cream leather folio case, open with blurred content
+- iPad Pro in a cream leather folio case, open with crisp, legible content
 
 STATIONERY + BOOKS:
 - Productivity Planner by Intelligent Change — black linen hardcover, gold foil lettering
@@ -1190,18 +1190,17 @@ MUST use a bold outfit from the bold options list.
 Choose one environment from the full library above — any category.
 Choose one composition from the list above.
 State clearly: composition chosen, environment chosen, outfit chosen, drink chosen.
-End with: No text, no words, no writing, no labels, no readable typography anywhere
-in the image. Screens show only softly blurred UI — no readable text. No distorted AI
-text. No bright colours, no gradients, no studio lighting, no stock photography look,
-no digital sharpening. Landscape 16:9, high resolution.
+End with: No decorative signage or typography elsewhere in the scene. If a device screen
+is visible, it may show crisp, legible, realistic content — do not blur or obscure it.
+No distorted AI text, no garbled words. No bright colours, no gradients, no studio lighting,
+no stock photography look, no digital sharpening. Landscape 16:9, high resolution.
 
 PROMPT 2 - TOPIC SPECIFIC (props/objects, no person):
 Directly illustrates the post topic through objects and scene only — no person needed.
 Must be in a completely different environment category from Prompt 1.
-Screen content is allowed and encouraged — relevant blurred UI (Pinterest feed grid,
-Canva workspace, Etsy dashboard, website template editor) — blurred enough that no
-individual words are readable. No handwritten text visible anywhere.
-Any printed materials show only abstract marks, lines, or textures — no readable words.
+Screen content is allowed and encouraged — relevant, crisp, legible UI (Pinterest feed grid,
+Canva workspace, Etsy dashboard, website template editor), real and readable, not blurred.
+Printed materials may show real, legible text relevant to the topic.
 State clearly: composition chosen and environment chosen.
 End with: No distorted AI text, no garbled words, no bright colours,
 no gradients, no studio lighting. Landscape 16:9, high resolution.
@@ -1214,10 +1213,10 @@ MUST use a neutral outfit from the neutral options list.
 Must be in a completely different environment category from Prompts 1 and 2.
 Back or side profile only (for single woman). Faces never visible.
 State clearly: composition, environment, outfit, drink, and whether single woman or group.
-End with: No text, no words, no writing, no labels, no readable typography anywhere
-in the image. Screens show only softly blurred UI. No distorted AI text.
-No bright colours, no gradients, no studio lighting, no stock photography look,
-no digital sharpening. Landscape 16:9, high resolution.
+End with: No decorative signage or typography elsewhere in the scene. If a device screen
+is visible, it may show crisp, legible, realistic content — do not blur or obscure it.
+No distorted AI text, no garbled words. No bright colours, no gradients, no studio lighting,
+no stock photography look, no digital sharpening. Landscape 16:9, high resolution.
 
 PROMPT 4 - TOPIC FOCUS:
 This image must directly and literally illustrate what the blog post is about.
@@ -1225,11 +1224,10 @@ It must be completely different in type from Prompts 1, 2, and 3.
 Choose the image concept that makes the post topic immediately obvious to a viewer:
 
 - Post about a digital platform or tool (Pinterest, Instagram, Canva, Etsy, email marketing, AI):
-  Show an iMac, open MacBook, or phone with a relevant blurred interface on screen.
+  Show an iMac, open MacBook, or phone with a relevant, realistic interface on screen.
   The device is the hero of the image. Place it on a styled desk or surface.
-  Screen shows recognisable but unreadable UI — a Pinterest feed grid, Canva workspace,
-  dashboard analytics, or email inbox layout. Blurred enough that no individual words
-  are readable.
+  Screen shows a crisp, legible, realistic UI — a Pinterest feed grid, Canva workspace,
+  dashboard analytics, or email inbox layout — with real, readable text and numbers.
 
 - Post about business strategy, coaching, planning, or content:
   Show a flat lay of business tools directly relevant to the topic — open planner,
@@ -1248,9 +1246,10 @@ Choose the image concept that makes the post topic immediately obvious to a view
 No character required for this image. Focus entirely on the concept, tools, or environment.
 Choose a completely different setting and composition from Prompts 1, 2, and 3.
 Same warm editorial aesthetic — Kodak Portra 400, natural light, real and lived-in.
-End with: No text, no words, no writing, no labels, no readable typography anywhere
-in the image. Screens may show blurred UI but no readable words. No distorted AI text.
-No bright colours, no gradients, no studio lighting. Landscape 16:9, high resolution.
+End with: No decorative signage or typography elsewhere in the scene. If a device screen
+is visible, it may show crisp, legible, realistic content — do not blur or obscure it.
+No distorted AI text, no garbled words. No bright colours, no gradients, no studio lighting.
+Landscape 16:9, high resolution.
 
 PROMPT 5 - PINTEREST PIN:
 A portrait-format image designed specifically to be used as a Pinterest pin background.
