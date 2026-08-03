@@ -15,6 +15,7 @@ Run:
 from __future__ import annotations
 
 import json
+import os
 import subprocess
 import sys
 from datetime import date
@@ -110,6 +111,31 @@ def _produce_one_post(keyword: str) -> dict:
     return result
 
 
+def _build_post_report(p: dict) -> dict:
+    """Active-link report for one produced post — this is what the dashboard's
+    Overview tab renders so Jane can check every output of a run without digging
+    through logs or terminal output herself."""
+    slug = p["slug"]
+    site_id = os.getenv("WIX_SITE_ID", "")
+    gh_base = f"https://github.com/{GITHUB_REPO}"
+    return {
+        "keyword": p.get("keyword", slug),
+        "slug": slug,
+        "date": date.today().isoformat(),
+        "blog_post_url": f"https://www.switzertemplates.com/post/{slug}",
+        "github_post_url": f"{gh_base}/blob/main/posts/{slug}.html",
+        "github_images_url": f"{gh_base}/tree/main/posts/images/{slug}" if p.get("push_ok") else None,
+        "wix_drafts_url": f"https://manage.wix.com/dashboard/{site_id}/blog/posts" if site_id and p.get("wix_ok") else None,
+        "wix_ok": p.get("wix_ok", False),
+        "newsletter_url": f"{gh_base}/blob/main/outputs/repurposed/{slug}/email_hook.md" if p.get("newsletter_ok") else None,
+        "carousel_url": f"{gh_base}/blob/main/outputs/repurposed/{slug}/instagram_carousel.md" if p.get("newsletter_ok") else None,
+        "pins_url": f"{gh_base}/blob/main/outputs/repurposed/{slug}/pins.json" if p.get("newsletter_ok") else None,
+        "tailwind_url": "https://www.tailwindapp.com/app" if "submitted to Tailwind" in p.get("pin_message", "") else None,
+        "image_cost": p.get("image_cost", 0.0),
+        "errors": p.get("errors", []),
+    }
+
+
 def _update_dashboard(run_summary: "list[dict]") -> None:
     try:
         data = json.loads(DASHBOARD_FILE.read_text(encoding="utf-8")) if DASHBOARD_FILE.exists() else {}
@@ -121,6 +147,24 @@ def _update_dashboard(run_summary: "list[dict]") -> None:
         gm["failures"] = [
             {"keyword": p["keyword"], "errors": p["errors"]} for p in run_summary if p.get("errors")
         ]
+        gm["latest_run_posts"] = [_build_post_report(p) for p in run_summary if p.get("slug")]
+
+        # content_repurposer.repurpose() doesn't touch the dashboard itself — mirror
+        # any successfully repurposed post into the Repurposer tab's own list too,
+        # same shape every other entry there already uses.
+        rep = data.setdefault("repurposer", {})
+        rep_posts = rep.setdefault("posts", [])
+        existing_slugs = {p.get("slug") for p in rep_posts}
+        for p in run_summary:
+            if p.get("newsletter_ok") and p.get("slug") not in existing_slugs:
+                rep_posts.append({
+                    "slug": p["slug"],
+                    "title": p.get("title", p.get("keyword", p["slug"])),
+                    "pins_scheduled": False,
+                    "email_sent": False,
+                    "carousel_posted": False,
+                })
+
         data["last_updated"] = date.today().isoformat()
         DASHBOARD_FILE.write_text(json.dumps(data, indent=2, ensure_ascii=False), encoding="utf-8")
 

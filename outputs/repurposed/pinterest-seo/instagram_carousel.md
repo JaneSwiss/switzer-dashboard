@@ -1,28 +1,26 @@
-COVER: Pinterest isn't social media.
+COVER: Your pins aren't broken. Your strategy is.
 
-SLIDE 1: Pinterest is a search engine. That's why posting pretty images and hoping someone notices doesn't work. The algorithm shows pins based on search signals — signals you can control.
+SLIDE 1: Pinterest doesn't rank pins based on keywords alone. There are four factors the algorithm weighs — and most people only optimise for one of them.
 
-SLIDE 2: A single well-optimized pin can drive traffic to your website for months. I've seen pins work for two or three years. Meanwhile, your Instagram post is dead in 48 hours.
+SLIDE 2: Factor one: domain quality. Pinterest tracks what happens after someone clicks your pin. A slow site or mismatched content? That hurts your ranking.
 
-SLIDE 3: Pinterest users are 7x more likely to say it influences their purchase decisions than any other platform. These aren't people scrolling to pass time. They're searching for solutions.
+SLIDE 3: Factor two: pin quality. Saves, clicks, closeups, and time spent viewing. Early engagement tells Pinterest your pin is worth showing to more people.
 
-SLIDE 4: The algorithm looks at four things: domain quality, keyword matching, engagement signals, and freshness. Understanding these is the difference between visibility and invisibility.
+SLIDE 4: Factor three: pinner quality. Your account history matters. Sporadic posting and low engagement make it harder to rank — even with perfect keywords.
 
-SLIDE 5: Keywords go in specific places: your profile, board titles, board descriptions, pin titles, and pin descriptions. Get the placement right and Pinterest knows exactly who to show your content to.
+SLIDE 5: Factor four: topic relevance. This is where keywords come in. Your pin title, description, board name, and image text all need to align with what people search.
 
-SLIDE 6: This isn't a one-time setup. Pinterest rewards accounts that stay active with fresh content and consistent pinning. But once the foundation is right, it becomes one of the most reliable traffic sources for small businesses.
+SLIDE 6: The accounts driving real traffic aren't just adding keywords. They're building a consistent presence with content that actually delivers. That's the full picture.
 
 CAPTION:
-Most coaches treat Pinterest like Instagram — post something pretty and hope for the best.
+I've watched people create gorgeous pins that get 12 views. And simple, keyword-focused pins that drive traffic for years.
 
-Then they wonder why their pins disappear while competitors seem to show up everywhere.
+The difference isn't talent or time. It's knowing what Pinterest actually rewards.
 
-The difference is understanding that Pinterest functions as a search engine. People are actively typing in what they need and the algorithm decides which pins to show based on specific signals.
+There are four ranking factors — and most guides only talk about one of them. So you stuff your description with keywords, post it, and wonder why nothing happens.
 
-Signals you can control.
+The full breakdown is on the blog. It covers all four factors, the free keyword research method Pinterest hands you in the search bar, and the board structure that helps your content get found.
 
-When you optimize for search instead of engagement, your content keeps working long after you've moved on. One pin. Months of traffic. No daily posting required.
+Link in bio if you want the complete guide.
 
-I broke down exactly how Pinterest SEO works in 2026 — link in bio if you want the full guide.
-
-HASHTAGS: #pinterestmarketing #pinterestseo #smallbusinessmarketing #coachingbusiness #serviceprovider
+HASHTAGS: #pinterestmarketing #pinterestseo #smallbusinesstips #onlinebusinessgrowth #serviceprovidertips

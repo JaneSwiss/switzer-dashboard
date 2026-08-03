@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-06-26",
+  "last_updated": "2026-08-03",
   "etsy_agent": {
     "status": "active",
     "last_run": "2026-05-05",
@@ -2871,6 +2871,13 @@
         "pins_scheduled": false,
         "email_sent": false,
         "carousel_posted": false
+      },
+      {
+        "slug": "pinterest-seo",
+        "title": "Pinterest SEO: How to Get Your Pins Ranking and Driving Traffic to Your Business",
+        "pins_scheduled": false,
+        "email_sent": false,
+        "carousel_posted": false
       }
     ]
   },
@@ -3088,6 +3095,35 @@
           "ai-tools"
         ],
         "date_ingested": "2026-06-10"
+      }
+    ]
+  },
+  "general_manager": {
+    "status": "active",
+    "last_run": "2026-08-03",
+    "next_run": "2026-08-10",
+    "awaiting_reply": false,
+    "candidates": [],
+    "issue_url": "",
+    "failures": [],
+    "latest_run_posts": [
+      {
+        "keyword": "pinterest seo",
+        "slug": "pinterest-seo",
+        "date": "2026-08-03",
+        "blog_post_url": "https://www.switzertemplates.com/post/pinterest-seo",
+        "github_post_url": "https://github.com/JaneSwiss/switzer-dashboard/blob/main/posts/pinterest-seo.html",
+        "github_images_url": "https://github.com/JaneSwiss/switzer-dashboard/tree/main/posts/images/pinterest-seo",
+        "wix_drafts_url": "https://manage.wix.com/dashboard/5da8c553-1983-4b5f-935f-6fb32d2bd299/blog/posts",
+        "wix_ok": true,
+        "newsletter_url": "https://github.com/JaneSwiss/switzer-dashboard/blob/main/outputs/repurposed/pinterest-seo/email_hook.md",
+        "carousel_url": "https://github.com/JaneSwiss/switzer-dashboard/blob/main/outputs/repurposed/pinterest-seo/instagram_carousel.md",
+        "pins_url": "https://github.com/JaneSwiss/switzer-dashboard/blob/main/outputs/repurposed/pinterest-seo/pins.json",
+        "tailwind_url": "https://www.tailwindapp.com/app",
+        "pins_generated": 5,
+        "image_cost": 0.67,
+        "pin_cost_estimate": 0.95,
+        "errors": []
       }
     ]
   }

@@ -1,21 +1,24 @@
-SUBJECT LINE: Your pins keep disappearing. Here's why.
-SUBJECT LINE B: Pinterest isn't social media (and that changes everything)
-PREVIEW TEXT: One pin can drive traffic for months — if you do this.
-
+SUBJECT LINE: Your pins deserve more than 12 views
+SUBJECT LINE B: Pinterest is ranking you on 4 things
+PREVIEW TEXT: Most people only optimise for one of them.
 BODY:
-You post a pin. It looks great. You check back a week later and… nothing. No clicks. No saves. No traffic. Meanwhile, someone else's pin for the exact same topic shows up every time you search.
+You made the pin. You wrote a keyword-stuffed description. You posted it and… nothing.
 
-The difference isn't luck. It's not even follower count.
+A handful of impressions. Maybe a few clicks. Then silence.
 
-It's that Pinterest is a search engine, not a social media platform — and most coaches and service providers are using it completely wrong.
+Meanwhile, someone else posts a pin that looks half as polished — and it drives traffic for months.
 
-When you optimize for search instead of hoping for engagement, a single pin can drive traffic to your website for months without you touching it again. I've seen pins work for two or three years.
+The difference isn't design skills or posting frequency. It's understanding what Pinterest actually uses to decide what gets seen.
 
-I just published a complete guide breaking down exactly how Pinterest SEO works in 2026 — the four factors the algorithm actually uses, where to put your keywords, and the foundational setup most people skip entirely.
+Spoiler: it's not just keywords.
 
-If your Pinterest has been stuck or you've been treating it like Instagram, this will change how you approach it.
+Pinterest ranks your content on four factors — domain quality, pin quality, pinner quality, and topic relevance. Most business owners only focus on that last one. Which means they're doing 25% of the work and wondering why results are at 25% too.
 
-Read the full guide here: https://www.switzertemplates.com/post/pinterest-seo
+I wrote a full breakdown of each factor, how to improve them, and the free keyword research method Pinterest literally hands you in the search bar.
+
+If your pins have been underperforming, this will show you exactly what to fix.
+
+**[Read the full Pinterest SEO guide here](https://www.switzertemplates.com/post/pinterest-seo)**
 
 Xo Jane
 
