@@ -129,7 +129,7 @@ def _build_review_html(pins: list[tuple], generated: str) -> str:
     for i, (pin_dir, copy_data, _) in enumerate(pins, 1):
         folder = pin_dir.name
         topic   = copy_data.get("topic", "")
-        headline = copy_data.get("pin_headline", "")
+        headline = copy_data.get("headline", "")
         label   = copy_data.get("category_label", "")
         title   = copy_data.get("seo_title", "")
         desc    = copy_data.get("seo_description", "")
@@ -343,7 +343,7 @@ def _make_placeholder(copy_data: dict, tmp_dir: Path, fonts: dict) -> Path:
         draw.line([(0, y), (1000, y)], fill=(r, g, b))
 
     font = load_font(fonts.get("serif"), 52)
-    draw.text((70, 600), copy_data.get("pin_headline", ""), font=font, fill=(255, 255, 255))
+    draw.text((70, 600), copy_data.get("headline", ""), font=font, fill=(255, 255, 255))
 
     slug = copy_data.get("topic", "pin")[:20].replace(" ", "-")
     path = tmp_dir / f"placeholder_{slug}.png"
@@ -537,12 +537,12 @@ def main():
                     "maps_to_product": maps_to,
                     "category_label":  v.get("category_label", "SMALL BIZ"),
                     "eyebrow":         v.get("eyebrow", ""),
-                    "pin_headline":    v.get("pin_headline", ""),
-                    "accent_word":     v.get("accent_word", ""),
+                    "headline":        v.get("headline", ""),
                     "subtitle_bar":    v.get("subtitle_bar", ""),
                     "tagline":         v.get("tagline", ""),
+                    "cta":             v.get("cta", ""),
                     "pin_items":       v.get("pin_items", topic.get("pin_items", [])),
-                    "seo_title":       v.get("seo_title", v.get("pin_headline", "")),
+                    "seo_title":       v.get("seo_title", v.get("headline", "")),
                     "seo_description": v.get("seo_description", ""),
                     "destination_url": v.get("destination_url", ""),
                 })

@@ -7,7 +7,7 @@ from pathlib import Path
 from PIL import Image
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from infographic_pin_prompt import build_infographic_prompt
+from infographic_pin_prompt import build_infographic_prompt, LAYOUTS
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "lib"))
 from openai_images import generate_image_bytes
@@ -24,6 +24,12 @@ def generate_pin_image(copy_data: dict, context: dict, fonts: dict) -> Path:
     the model in one shot. See infographic_pin_prompt.py for the prompt design
     and MAX_ITEMS cap (reliability drops as text density rises past ~6 items).
 
+    Layout template and badge color offset are chosen here from the variation
+    letter (guaranteed rotation), not left for Claude to remember across 5
+    variations — same principle as the case-enforcement in copy_writer.py.
+    Copy (headline/eyebrow/subtitle) is never invented here — it's already
+    been written and approved by copy_writer.py; this only renders it.
+
     Replaces the old photo-background + Pillow-text-overlay approach entirely —
     `fonts`/`context` are accepted only for call-site signature compatibility
     with the rest of main.py (placeholder fallback still uses fonts).
@@ -34,21 +40,19 @@ def generate_pin_image(copy_data: dict, context: dict, fonts: dict) -> Path:
             f"No pin_items for '{copy_data.get('topic', '?')}' — cannot render infographic pin."
         )
 
-    # Rotate the badge color start point by variation letter (a=0, b=1, ...) — belt and
-    # braces alongside copy_writer's item_order variation, so even if two variations ever
-    # ended up with the same items, they wouldn't also render in the same colors.
     var_letter = (copy_data.get("variation_id") or "a")[-1:].lower()
-    color_offset = max(0, ord(var_letter) - ord("a")) if var_letter.isalpha() else 0
+    offset = max(0, ord(var_letter) - ord("a")) if var_letter.isalpha() else 0
+    layout = LAYOUTS[offset % len(LAYOUTS)]
 
     pin_data = {
-        "eyebrow": copy_data.get("eyebrow") or "SWITZERTEMPLATES",
-        "headline": copy_data.get("pin_headline", ""),
-        "accent_word": copy_data.get("accent_word", ""),
+        "eyebrow": copy_data.get("eyebrow", ""),
+        "headline": copy_data.get("headline", ""),
         "subtitle_bar": copy_data.get("subtitle_bar", ""),
         "items": items,
         "bottom_bar_text": "SWITZERTEMPLATES.COM",
         "tagline": copy_data.get("tagline") or "switzertemplates.com/blog",
-        "color_offset": color_offset,
+        "color_offset": offset,
+        "layout": layout,
     }
     prompt = build_infographic_prompt(pin_data)
 

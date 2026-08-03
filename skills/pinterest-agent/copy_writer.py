@@ -86,13 +86,23 @@ BRAND VOICE RULES
 {ctx["voice"][:800]}
 
 ═══════════════════════════════════════════════════════════════
-PIN FORMAT: NUMBERED-LIST INFOGRAPHIC (not a photo pin)
+PIN FORMAT: COPY FIRST, DESIGN TEXT DERIVED FROM COPY
 ═══════════════════════════════════════════════════════════════
-Every pin is a numbered-list infographic — generated whole by an image model, text
-baked directly into the image. This is Jane's own proven top-performing format:
-eyebrow label -> big serif headline -> numbered icon list -> bottom URL bar -> tagline.
-There is no background photo and no separate design_brief — the substance of the
-pin IS the list of real, specific, actionable items about the keyword.
+Every pin is a numbered-list infographic, generated whole by an image model,
+text baked directly into the image. But the ORDER of thinking matters:
+
+1. Write seo_title first — a real, full-sentence, outcome-led title (see the
+   Title principles in the expert document). This is the actual copy. Get it
+   right before touching anything else.
+2. Only then derive eyebrow + headline from that title — a visual split or
+   shortening of the SAME sentence, never a separately-invented label. If
+   eyebrow + headline don't reconstruct (or closely echo) the seo_title when
+   read together, that's a failure — go back and fix it.
+3. subtitle_bar is the same idea, in a fuller line.
+
+This is Jane's own proven top-performing format: eyebrow (optional) -> headline
+-> numbered icon list -> bottom bar -> tagline. There is no background photo —
+the substance of the pin IS the real copy, visually translated.
 
 When a REAL BLOG POST is supplied for a keyword below, every pin_item and every
 piece of copy for that topic must be grounded in what that post actually says —
@@ -115,29 +125,36 @@ Educational pins           → https://www.switzertemplates.com/blog
 ═══════════════════════════════════════════════════════════════
 MANDATORY QUALITY CHECKS (run on every variation before outputting)
 ═══════════════════════════════════════════════════════════════
-1. Is pin_headline short and big-text-friendly (2-5 words — this is rendered LARGE on the
-   image, not a full sentence, NOT the seo_title)?
+1. Is seo_title a full sentence (8-15 words), leading with an OUTCOME or CLAIM —
+   not a summary of what the post covers? "Domain quality matters for SEO" is a
+   content-descriptor and FAILS. "Learn Pinterest SEO the right way and get lots
+   of traffic" passes.
 1b. Does seo_title have the keyword in the first 4 words?
-2. Does the keyword appear in the first sentence of the description?
-3. Is the CTA appropriate for this keyword type — product keyword or educational keyword?
+1c. Check seo_title for internal contradiction — does it claim "not just X" while
+    X is itself something the pin covers? Rewrite if so.
+2. Do eyebrow + headline, read together, reconstruct or closely echo seo_title as
+   one sentence? If they read as two unrelated fragments, fix it.
+3. Is the CTA appropriate for this keyword type, and does it actually match
+   destination_url (never promise Etsy when the link goes to switzertemplates.com)?
    If PM=0 (variation_split is 0 PRODUCT + 5 EDUCATIONAL), do NOT invent a product
-   connection anywhere — no product mentions, no "shop my templates" CTAs. If there's
-   no real, natural connection between this keyword and a product, don't force one.
+   connection anywhere — no product mentions, no product CTAs.
 4. Does destination_url match the product being promoted?
 5. pin_items: are all items real, specific, and actionable, and grounded in the real post
    when one is supplied — not vague filler ("do X" not "think about X")? Would a reader
    who only sees the image (never clicks) walk away having actually learned something?
-5b. accent_word: exactly one word from pin_headline, carries real weight, not a filler word?
-5c. subtitle_bar: is it a genuine, specific hook — not a generic label like "tips to get
+5b. subtitle_bar: is it a genuine, specific hook — not a generic label like "tips to get
     found"? Could this exact line only apply to THIS post, not any post on the topic?
-5d. item_order: does every variation in this topic show a genuinely different subset/order
+5c. item_order: does every variation in this topic show a genuinely different subset/order
     of pin_items from every other variation? If two variations would render the identical
     list, fix it before outputting.
-6. Title under 100 characters?
-7. Title makes a specific promise — not a generic label?
-8. CTAs rotating — no two consecutive variations use the same CTA?
+6. Is seo_title under 100 characters?
+7. Does every field use sentence case (first word capitalised, rest lowercase except
+   proper nouns) or ALL CAPS (eyebrow only) — never Title Case anywhere, in any field?
+8. CTAs rotating — no two variations in the same topic use the same CTA?
 9. No third-person brand references ("Our X" not "The Switzertemplates X")?
-10. Does the pin make sense for someone who sees it 6 months from now?
+10. Does each variation in the topic use a different TITLE ANGLE (benefit-led,
+    problem-led, result-led, comparison-led, transformation-led) than the others?
+11. Does the pin make sense for someone who sees it 6 months from now?
 
 If any check fails, rewrite before outputting. Do not output until all checks pass.
 
@@ -178,15 +195,16 @@ Each element:
     {{
       "id": "<topic_id><a-e>",
       "type": "<PRODUCT|EDUCATIONAL>",
-      "eyebrow": "<ALL CAPS, 1-4 words, small label above the headline — e.g. 'HOW TO USE', 'THE COMPLETE GUIDE TO', 'STOP DOING THIS'>",
-      "pin_headline": "<2-5 words. The BIG headline text on the pin image — short and punchy enough to render large, like a magazine cover word or two. NOT a sentence. NOT the seo_title. Examples: 'Pinterest SEO', 'Free Business Tools', 'Client-Ready Websites'.>",
-      "accent_word": "<exactly one word from pin_headline to render in an italic accent color — the word that carries the most weight.>",
-      "subtitle_bar": "<one line, 6-12 words, sits in a colored bar directly under the headline. This is the real scroll-stopping hook, not a generic label — write it the way you'd write pin_headline in a normal (non-infographic) pin: specific, curiosity-driven or benefit-led, grounded in something the real post actually says. 'Pinterest ranks pins on four factors — not just keywords' beats 'Tips to get found in search'. Never two variations with the same angle.>",
+      "title_angle": "<one of: benefit-led | problem-led | result-led | comparison-led | transformation-led. Must differ from every other variation in this topic.>",
+      "seo_title": "<THE MASTER COPY. Full sentence, 8-15 words, keyword in first 4 words, sentence case. Leads with an outcome/claim, not a content summary. This is Pinterest metadata AND the source every design-text field below is derived from. Example: 'Learn Pinterest SEO the right way and get lots of traffic'.>",
+      "eyebrow": "<ALL CAPS. A lead-in fragment of seo_title — NOT the bare keyword, NOT a generic label. Read together with headline it must reconstruct seo_title as one sentence. Leave this as an empty string \"\" for some variations (real Pinterest pins mix eyebrow+headline with headline-only — don't use eyebrow on every single variation). Example: seo_title 'Learn Pinterest SEO the right way and get lots of traffic' -> eyebrow 'LEARN PINTEREST SEO'.>",
+      "headline": "<Sentence case. The remainder of seo_title after the eyebrow (or, when eyebrow is empty, the punchiest fragment of seo_title standing alone). Continuing the example above -> headline 'The right way'. When eyebrow is empty, headline might be the full claim shortened, e.g. 'Pins that actually rank'.>",
+      "subtitle_bar": "<one line, 6-14 words, sentence case, sits in a colored bar under the headline. The rest of seo_title's claim/context that didn't fit in eyebrow+headline — same sentence, not a new idea. Never a generic label like 'tips to get found'.>",
+      "cta": "<the exact CTA phrase, naming the destination directly per the CTA rules in the expert document — e.g. 'Learn more on my blog!', 'Read more at switzertemplates.com!'. Must be embedded verbatim at the end of seo_description too. Rotate — no two variations in this topic use the same cta.>",
       "item_order": [<4 to 6 integers — 1-based indices into the topic's pin_items array above, in the order to display them for THIS variation. Choose a genuinely different subset and/or order for each of the 5 variations — drop a different item each time, reorder, whatever it takes so no two variations show an identical list. This is what keeps the 5 pin images visually distinct instead of looking like re-labeled duplicates.>],
-      "tagline": "<one short italic line under the bottom bar, 4-10 words — e.g. 'More Pinterest tips for small business owners', or a soft product nudge for PRODUCT-type variations.>",
+      "tagline": "<one short line under the bottom bar, 4-10 words, sentence case — e.g. 'More Pinterest tips for small business owners', or a soft product nudge for PRODUCT-type variations.>",
       "category_label": "<ALL CAPS, max 20 chars>",
-      "seo_title": "<keyword in first 4 words, 50-100 chars, sentence case, benefit-led or action-led. This is Pinterest metadata only — never appears on the pin image itself. Example: 'Coach websites that win clients before the first call'>",
-      "seo_description": "<keyword in first sentence, 150-300 chars, CTA at end>",
+      "seo_description": "<keyword in first sentence, 150-300 chars, 2-4 punchy sentences naming a real specific/proof point, ends with the exact cta text above, then 2-3 hashtags>",
       "destination_url": "<exact URL from the product URL mapping above>"
     }}
   ]
@@ -246,6 +264,16 @@ KEYWORDS TO PROCESS (topic_id, keyword, funnel stage, variation split):
 {posts_section}
 
 Rules:
+- WRITE seo_title FIRST, for every variation, before touching eyebrow/headline/
+  subtitle_bar. Those three are DERIVED from seo_title, not invented separately.
+  seo_title is a full sentence (8-15 words) that leads with an outcome or claim —
+  never a summary of what the post covers. See the Title principles in the expert
+  document for the exact pattern and examples.
+- Each of the 5 variations uses a different title_angle (benefit-led, problem-led,
+  result-led, comparison-led, transformation-led) — no two the same.
+- eyebrow + headline must reconstruct seo_title as one sentence when read together.
+  Leave eyebrow as "" for 1-2 of the 5 variations — don't use the eyebrow+headline
+  shape on every single one, real pins mix headline-only in too.
 - pin_items (topic-level master list): 5-6 real, specific, actionable items about the
   keyword's topic, grounded in the real blog post above when one is supplied for that
   topic_id — the actual substance a reader learns from the pin image. Never generic.
@@ -254,22 +282,15 @@ Rules:
   indices) from that topic's pin_items. No two variations in a topic may use the same
   subset in the same order — vary which item is dropped and how they're ordered so the
   5 pin images are genuinely different, not just re-labeled duplicates.
-- pin_headline is the BIG text on the pin image — 2-5 words, not a sentence. NOT
-  keyword-first. NOT the SEO title.
-- subtitle_bar carries the real hook — specific, grounded in the post, not a generic
-  label. Vary the angle across all 5 variations (result-led, problem-led, number-led,
-  question-led — like a real direct-response headline, not filler).
-- eyebrow, tagline, accent_word: also vary the wording across all 5 variations so the 5
-  pins don't read identically. No two variations should use the same eyebrow phrasing.
+- cta: write the exact phrase per the CTA rules in the expert document — it names the
+  destination directly ("Learn more on my blog!", "at switzertemplates.com!"). Embed
+  it verbatim at the end of seo_description. Rotate — no two variations share one.
 - If variation_split is "0 PRODUCT + 5 EDUCATIONAL", every variation must be EDUCATIONAL —
   do not invent a product tie-in that isn't real.
-- seo_title is Pinterest metadata — keyword in first 4 words, benefit-led, sentence case.
-  Completely different from pin_headline.
 - Keyword must appear in first sentence of every seo_description
-- Rotate CTAs — no two consecutive variations in the same topic use the same CTA
-- Use CTAs from the expert document only (no "Shop at switzertemplates.com" — too corporate)
 - Populate destination_url from the URL mapping — never leave it null
-- Title structures must vary across the 5 variations — no two the same
+- Sentence case everywhere except eyebrow (ALL CAPS) and category_label (ALL CAPS) —
+  never Title Case in any field, anywhere.
 - Run all quality checks before outputting each variation
 
 Return ONLY a JSON array of {len(batch)} objects. No markdown. Start [ end ].{avoid}"""
@@ -297,6 +318,50 @@ def _slugify(text: str) -> str:
     text = re.sub(r"[\s_]+", "-", text)
     text = re.sub(r"-+", "-", text)
     return text.strip("-")
+
+
+_PROPER_NOUNS = {
+    "pinterest", "etsy", "instagram", "canva", "wix", "google", "seo",
+    "tiktok", "facebook", "shopify", "flodesk", "tailwind",
+}
+
+
+def _enforce_case(text: str, upper: bool = False) -> str:
+    """
+    Guarantees sentence case (or ALL CAPS) regardless of what Claude actually
+    returns — Title Case ("Pins That Actually Rank") is a hard rule violation,
+    not a style preference, so it's fixed here programmatically rather than
+    trusted to the model. Same principle as the UTM tagging below.
+    """
+    if not text:
+        return text
+    if upper:
+        return text.upper()
+    words = text.split(" ")
+    fixed = []
+    for i, word in enumerate(words):
+        prefix, core, suffix = "", word, ""
+        while core and not core[0].isalpha():
+            prefix += core[0]
+            core = core[1:]
+        while core and not core[-1].isalpha():
+            suffix = core[-1] + suffix
+            core = core[:-1]
+        if not core:
+            fixed.append(word)
+            continue
+        lower_core = core.lower()
+        if lower_core == "i":
+            # standalone pronoun "I" is always capitalized, any position
+            new_core = "I"
+        elif lower_core in _PROPER_NOUNS:
+            new_core = core.upper() if lower_core == "seo" else core[0].upper() + core[1:].lower()
+        elif i == 0:
+            new_core = core[0].upper() + core[1:].lower()
+        else:
+            new_core = core.lower()
+        fixed.append(prefix + new_core + suffix)
+    return " ".join(fixed)
 
 
 def _add_utm(url: str, campaign: str) -> str:
@@ -334,8 +399,8 @@ def _parse(raw: str) -> list[dict]:
             raise RuntimeError(f"Could not parse Claude response: {e}\n{raw[:300]}")
 
     required_topic = {"topic_id", "keyword", "variations"}
-    required_var   = {"id", "type", "pin_headline", "seo_title",
-                      "seo_description", "destination_url"}
+    required_var   = {"id", "type", "seo_title", "headline",
+                      "seo_description", "destination_url", "cta"}
     valid = []
     for t in topics:
         if not isinstance(t, dict) or required_topic - set(t.keys()):
@@ -348,6 +413,10 @@ def _parse(raw: str) -> list[dict]:
         if not t.get("pin_items"):
             print(f"  Warning: '{t['keyword']}' has no pin_items — pins for this topic will fail to render.")
             t["pin_items"] = []
+        for item in t["pin_items"]:
+            if isinstance(item, dict):
+                item["title"] = _enforce_case(item.get("title", ""), upper=True)
+                item["description"] = _enforce_case(item.get("description", ""))
         clean_vars = []
         for v in t.get("variations", []):
             if isinstance(v, dict) and not (required_var - set(v.keys())):
@@ -375,6 +444,15 @@ def _parse(raw: str) -> list[dict]:
                         if 0 <= i < len(t["pin_items"]):
                             selected.append(t["pin_items"][i])
                 v["pin_items"] = selected or t["pin_items"]
+                # Hard rule: sentence case or ALL CAPS, never Title Case — guaranteed
+                # here regardless of what Claude actually returned.
+                v["seo_title"]    = _enforce_case(v.get("seo_title", ""))
+                v["eyebrow"]      = _enforce_case(v.get("eyebrow", ""), upper=True)
+                v["headline"]     = _enforce_case(v.get("headline", ""))
+                v["subtitle_bar"] = _enforce_case(v.get("subtitle_bar", ""))
+                v["tagline"]      = _enforce_case(v.get("tagline", ""))
+                v["cta"]          = _enforce_case(v.get("cta", ""))
+                v["category_label"] = _enforce_case(v.get("category_label", ""), upper=True)
                 clean_vars.append(v)
         if not clean_vars:
             continue

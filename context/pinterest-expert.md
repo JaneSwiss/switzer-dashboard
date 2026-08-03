@@ -129,44 +129,44 @@ The title is the most important copy element on a pin. Pinterest
 displays it below the image in search results. It determines whether
 someone clicks or keeps scrolling.
 
+*(Updated August 2026 — Jane reviewed real generated pins against the old
+rules below and rejected them: they read as dry content-descriptors, not
+titles that spark curiosity. She supplied a fresh reference set —
+context/top-performing-pins from her own liked examples — and the rules
+below replace the old primary/secondary title styles entirely.)*
+
 Principles:
-- Lead with the keyword (first 4 words)
-- Make a specific promise or observation, not a generic label
+- Lead with the keyword, ideally in the first 4 words
+- Full sentence, 8-15 words. NOT a 2-5 word label. A title that could be
+  a bare noun phrase ("Domain Quality", "Pin Compounding") has failed —
+  it describes what the post covers instead of promising what the reader gets.
+- Make a specific, sometimes contrarian promise or claim — not a summary
+  of the post's structure. Lead with the outcome (traffic, clients, time
+  saved), not the mechanism. Wrong: "Pinterest SEO comes down to four
+  ranking factors" (describes content). Right: "Learn Pinterest SEO the
+  right way and get lots of traffic" (promises a result).
+- Sentence case only - capital letter at the start of the title, not
+  every word. Never Title Case. "Get more clients using Wix templates" —
+  never "Get More Clients Using Wix Templates".
 - Keep it under 100 characters
-- Sentence case only - capital letter at the start of the title, not every word
+- Check for internal logic before finalizing: if the title claims "not
+  just X" while X is itself one of the things the post/pin covers, that's
+  a contradiction — rewrite it.
 - Write for the person who will see it 6 months from now, not today
-- The best Pinterest titles make the searcher feel like the pin was
-  made specifically for them
 
-Primary title style - Jane's action-led, direct format (use this most):
-These come from Jane's actual top pins. Lead with action or outcome.
-- "Start your business faster with [keyword]"
-- "Save time using [keyword] for your [context]"
-- "Get more clients using [keyword]"
-- "Look professional online with [keyword]"
-- "[Keyword] - look professional and attract more clients"
-
-Examples:
-"Start your coaching business with a premade Wix website"
-"Save time using business coach templates for your content"
-"Get more clients using a professional Wix website for coaches"
-"Branding kit for coaches - look professional and attract more clients"
-
-Secondary title style - keyword-that-outcome (use occasionally to test variety):
-- "[Keyword] that [specific outcome]"
-
-Examples:
-"Coach websites that convert - built on Wix, no coding needed"
-"Instagram templates that make your feed look intentional"
-"Branding kit that makes your business look established from day one"
-
-Other approved structures (use sparingly):
-- "A [keyword] ready to [specific action] in [time frame]"
-  Example: "A branding kit ready to use across every platform today"
-- "For [audience]: [keyword] that [solves their problem]"
-  Example: "For coaches: a Wix website that wins clients before they reach out"
+Rotate the ANGLE across the 5 variations for one topic — no two the same:
+- Benefit-led: promises the outcome directly.
+  "Learn Pinterest SEO the right way and get lots of traffic"
+- Problem/myth-led: names a frustration or busts an assumption.
+  "Why your pins aren't ranking even though you're using the right keywords"
+- Result/proof-led: a specific, sometimes surprising claim about what happens.
+  "One Pinterest SEO habit that keeps your pins working for months, not days"
+- Comparison-led: "Why X beats Y for [outcome], every time"
+- Transformation-led: "How to turn [starting point] into [result]"
 
 Title structures to avoid:
+- Content-descriptor labels that summarize the post instead of promising
+  a result: "Pinterest SEO ranking factors explained"
 - Generic labels: "Branding kit for small business" - no promise, no pull
 - Hypey claims: "The ultimate branding kit" - not credible
 - Question as a hook: "Need a branding kit?" - weak on Pinterest
@@ -242,26 +242,36 @@ Canva templates across posts, stories, and carousels - ready to customise
 and post so your content looks consistent every week. Click to browse!
 #instagramtemplates #canvatemplates #smallbusinesstips"
 
-### Pin headline vs SEO title — two different fields
+### Pin design text is DERIVED from the copy — never written separately
 
-Every pin has two text fields that serve different purposes. Never write
-the same text for both.
+*(Updated August 2026.)* Copy comes first. `seo_title` is written and
+approved against the Title principles above. Only then does the on-image
+design text get built — as a direct visual split or shortening of that
+same title, never a separate, independently-invented headline. If the
+design text and the title feel like they're about two different things,
+that's a bug.
 
-**pin_headline** (text displayed ON the pin image — stops the scroll):
-- A frustration, realisation, or ambition — not a product pitch
-- 5-15 words, all lowercase
-- Should feel like a thought, not an ad
-- Examples:
-  "your brand tells clients if you're worth hiring before you say a word"
-  "a scattered brand is costing you clients before they even reach out"
-  "your website is working for you 24/7 - or it isn't"
-  "the gap between looking established and looking DIY is smaller than you think"
-
-**seo_title** (the Pinterest metadata title — what ranks in search):
+**seo_title** (the Pinterest metadata title — what ranks in search, and
+the source the design text is derived from):
 - Keyword in the first 4 words
-- Action-led or benefit-led (use the primary title style above)
+- Full-sentence, outcome-led (use the Title principles above)
 - 50-100 characters, sentence case
-- This is what the algorithm indexes and what searchers read in results
+
+**On-image design text** — derived from seo_title, in one of two shapes:
+- **eyebrow + headline**: split the title into a small lead-in fragment
+  (rendered ALL CAPS) and a punchier remainder (rendered sentence case,
+  large). Read together they must reconstruct the title as one continuous
+  sentence. Title: "Learn Pinterest SEO the right way and get lots of
+  traffic" → eyebrow "LEARN PINTEREST SEO", headline "The right way".
+  Wrong: eyebrow is just the bare keyword ("PINTEREST SEO") paired with
+  an unrelated headline fragment — that doesn't read as one sentence and
+  is repetitive with the keyword already being in the eyebrow.
+- **headline only**: no eyebrow — the punchiest fragment of the title
+  stands alone, larger. Use this for some variations, not all of them —
+  real Pinterest pins mix both shapes; using the same shape for every
+  pin in a topic is part of why pins in a batch look repetitive.
+- Both shapes: sentence case only, never Title Case. Never lowercase-only
+  either — eyebrow is ALL CAPS, headline/subtitle are sentence case.
 
 ---
 
@@ -293,53 +303,69 @@ These apply to every title, description, and headline written for Switzertemplat
 
 ---
 
-### Design brief principles
+### Design principles — numbered-list infographic format
 
-The image is what stops the scroll. On Pinterest, text-overlay pins
-perform significantly better than pure lifestyle photography for
-digital product businesses. The image needs to communicate the product
-or the idea before the person reads a single word.
+*(Rewritten August 2026 — superseded the old photo-mockup design brief
+system below when pins moved to a single whole-image generation via
+OpenAI. Grounded in Jane's actual top-performing pins in
+agents/general-manager/switzertemplates-pins/.)*
 
-What works for Switzertemplates specifically:
-- Device mockups (laptop, phone, tablet) showing the actual product
-  in use outperform styled flat lays for product pins
-- For educational pins, a bold single-line text overlay on a clean
-  background outperforms cluttered informational graphics
-- Warm editorial tones (cream, terracotta, sage, dusty pink, warm
-  white) match the audience aesthetic and the brand
-- Text overlays should be large enough to read in a thumbnail
-- The pin ratio is 2:3 (1000x1500px) - content in the top two thirds,
-  branding in the bottom third
-- Category label top-left, watermark bottom-right (switzertemplates.com)
+Every pin is a numbered-list infographic, generated whole in one image
+call — text baked in, not composited after. The image is a direct visual
+translation of the already-approved copy (see "Pin design text is
+DERIVED from the copy" above) — never a separately-invented brief.
 
-Design brief specificity rules:
-- Name the device: "laptop", "phone", "tablet" not "device"
-- Name the surface: "warm linen", "marble", "oak desk" not "surface"
-- Name the tone: "cream and terracotta" not "warm tones"
-- Name the light: "soft natural light from the left" not "good lighting"
-- Name the text position: "text overlay space in the upper-left third"
-- A vague brief produces a generic image. Every brief must be
-  specific enough that two different designers would produce similar results.
+What Jane's real top pins have in common:
+- Warm off-white/cream background, generous whitespace
+- Elegant serif display headline, often mixing upright + italic for one
+  accent word or phrase
+- Earthy rotating palette across numbered badges/accents — terracotta,
+  chocolate brown, sage green, dusty rose, warm taupe, muted navy — not
+  just one or two colors repeated
+- Thin hairline dividers, small sparkle/botanical line-art accents
+- Bottom bar: SWITZERTEMPLATES.COM
+
+What genuinely varies between Jane's real pins (this is the range to
+rotate across the 5 variations in a topic — not one template with colors
+swapped):
+- Eyebrow + headline vs. headline-only (no small label above it)
+- Numbered icon grid (2-column) vs. single-column outline-number list
+  with a thin vertical divider vs. plain colored-block list with no icons
+- Some pins mix a mockup/lifestyle photo with a bold text stack instead
+  of a numbered list at all
+Pick a genuinely different structure for each variation, not just a
+different accent color on the same structure — two pins in a topic
+looking near-identical is a real risk for Pinterest treating them as
+duplicate/spam content, not just a design nitpick.
 
 ---
 
 ## CTA rules
 
-CTAs must rotate across pins so no two consecutive pins use the same one.
-Using no CTA at all is a valid option — rotate it in occasionally so
-descriptions don't feel formulaic.
+*(Updated August 2026 — the previous version of this section banned
+CTAs that name the destination. Jane's actual reference examples all do
+exactly that, repeatedly, and she confirmed this is what she wants. That
+rule was wrong and is replaced below.)*
 
-Approved CTAs (rotate through these for both product and educational pins):
-- "Click to browse!"
-- "Grab it in my Etsy store!"
-- "Have a browse!"
-- "Check it out -->"
-- "Click to have a look -->"
+CTA is its own field, distinct from the rest of the description, and
+must rotate — no two variations in a topic use the same one. Using no
+CTA at all (close on the value statement instead) is still valid — rotate
+it in occasionally.
+
+CTAs should directly name where the pin goes — this is the approved
+pattern, drawn from Jane's real liked examples:
+- "Learn more on my blog!"
+- "Get more info on my blog!"
+- "Get the full breakdown on my blog!"
+- "Read more at switzertemplates.com!"
+- "Start at switzertemplates.com!"
+- "Find it all at switzertemplates.com!"
+- "Steal the exact system on my blog!"
 - (no CTA — close on the value statement, then hashtags)
 
 CTA formatting rules (non-negotiable):
 - Every CTA starts with a capital letter
-- Every CTA ends with either ! or --> — never a full stop
+- Every CTA ends with ! — never a full stop, never -->
 - Never end a description with a plain sentence that sounds like a CTA but has no punctuation
 
 Never use:
@@ -349,10 +375,9 @@ Never use:
 - "Shop now" - too pushy
 - "Download now" - wrong product type
 - "Get yours today" - too salesy
-- "Full guide on the blog" or any variation — the URL already signals where they're going
-- Any phrasing that narrates the link destination: "Read the full breakdown on the blog",
-  "Full breakdown on the blog", "Get the full guide on the blog" — all banned
-  The description should close on the value, not on a redundant direction-pointer.
+- "Grab it in my Etsy store!" — Switzertemplates' product URLs on file all
+  point to switzertemplates.com, never an actual Etsy link. Don't promise
+  Etsy in the CTA when the destination_url goes to the website.
 
 ---
 
@@ -558,8 +583,11 @@ For PM=1 (audience keyword with product modifier — e.g. "branding for coaches"
 - Educational pins lead with the problem, product pins lead with
   the solution
 
-For PM=0 (awareness / minimal product signal):
-- 1 product pin + 4 educational pins
+For PM=0 (no real product match):
+- 0 product pins + 5 educational pins. Do not invent a product tie-in
+  that isn't real — a forced product pitch on an unrelated keyword reads
+  as an unconvincing, off-topic ad (confirmed the hard way: a "pinterest
+  seo" pin pitching Instagram templates).
 
 Across the full 5 variations per topic:
 - No two variations can use the same CTA
@@ -597,13 +625,22 @@ Before finalising any topic or pin variation, the agent must verify:
 2. Does the keyword appear in the first sentence of the description?
 3. Is the CTA from the approved list, and rotating across variations?
 4. Does the destination URL match the product being promoted?
-5. Is the design brief specific enough? (device named, surface named,
-   colour tones named, text position named)
-6. Is the seo_title under 100 characters?
-7. Does the seo_title make a specific promise, not a generic label?
-8. Is the seo_title in sentence case (first word only capitalised)?
-9. Does the seo_title use the primary action-led format unless intentionally testing variety?
-10. Is the pin_headline different from the seo_title — a hook or observation, not a product title?
+5. Is the on-image design text (eyebrow/headline) a real derivation of
+   seo_title, not a separately-invented label? Read together, do
+   eyebrow + headline reconstruct the title as one sentence?
+6. Is the seo_title under 100 characters, and 8-15 words (a full
+   sentence, not a 2-5 word label)?
+7. Does the seo_title lead with an outcome/benefit/claim, not a summary
+   of what the post covers?
+8. Is the seo_title in sentence case (first word only capitalised)? Is
+   the design text sentence case (headline/subtitle) or ALL CAPS
+   (eyebrow) — never Title Case anywhere?
+9. Does this variation's title use a different angle (benefit/problem/
+   proof/comparison/transformation) than the other variations in the
+   same topic?
+10. Does the CTA name the destination directly (per the CTA rules above),
+    and does it actually match where destination_url points (no "Etsy"
+    CTA on a switzertemplates.com link)?
 11. Are there any em dashes ( — ) in any field? Replace with a regular dash ( - ).
 12. Does the description repeat the title word-for-word? Rewrite if so.
 13. Does the description explain the mechanism (how the product works),
@@ -627,7 +664,10 @@ If any check fails, rewrite before outputting.
 - Use the same CTA twice in a row across variations
 - Write a title that does not contain the target keyword
 - Link a product pin to the wrong product URL
-- Write a generic design brief (no device, no surface, no colour tones)
+- Invent on-image design text (eyebrow/headline) that isn't derived from
+  the approved seo_title, or use Title Case anywhere in any text field
+- Use the same layout structure (eyebrow+grid, headline-only, outline-list,
+  etc.) for every variation in a topic — real structural variety is required
 - Use em dashes ( — ) — use a regular dash ( - ) instead
 - Use title case — sentence case only (first word capitalised only)
 - Use a rhetorical question-then-answer structure
@@ -696,7 +736,8 @@ genuinely distinct clauses.
 
 ---
 
-*Last updated: April 2026*
+*Last updated: August 2026 — title/CTA/design sections rewritten against
+Jane's real reference examples (see agents/general-manager/switzertemplates-pins/)*
 *Update when: new products launch, Pinterest API returns new top-performer
 patterns, or seasonal strategy shifts.*
 
