@@ -101,8 +101,10 @@ text baked directly into the image. But the ORDER of thinking matters:
 3. subtitle_bar is the same idea, in a fuller line.
 
 This is Jane's own proven top-performing format: eyebrow (optional) -> headline
--> numbered icon list -> bottom bar -> tagline. There is no background photo —
-the substance of the pin IS the real copy, visually translated.
+-> numbered icon list -> bottom bar. Nothing renders below the bottom bar, and
+no decorative leaf/floral/sparkle accents or divider lines anywhere — those read
+as generic AI-image-gen filler, not a custom design. There is no background
+photo — the substance of the pin IS the real copy, visually translated.
 
 When a REAL BLOG POST is supplied for a keyword below, every pin_item and every
 piece of copy for that topic must be grounded in what that post actually says —
@@ -202,7 +204,6 @@ Each element:
       "subtitle_bar": "<one line, 6-14 words, sentence case, sits in a colored bar under the headline. The rest of seo_title's claim/context that didn't fit in eyebrow+headline — same sentence, not a new idea. Never a generic label like 'tips to get found'.>",
       "cta": "<the exact CTA phrase, naming the destination directly per the CTA rules in the expert document — e.g. 'Learn more on my blog!', 'Read more at switzertemplates.com!'. Must be embedded verbatim at the end of seo_description too. Rotate — no two variations in this topic use the same cta.>",
       "item_order": [<4 to 6 integers — 1-based indices into the topic's pin_items array above, in the order to display them for THIS variation. Choose a genuinely different subset and/or order for each of the 5 variations — drop a different item each time, reorder, whatever it takes so no two variations show an identical list. This is what keeps the 5 pin images visually distinct instead of looking like re-labeled duplicates.>],
-      "tagline": "<one short line under the bottom bar, 4-10 words, sentence case — e.g. 'More Pinterest tips for small business owners', or a soft product nudge for PRODUCT-type variations.>",
       "category_label": "<ALL CAPS, max 20 chars>",
       "seo_description": "<keyword in first sentence, 150-300 chars, 2-4 punchy sentences naming a real specific/proof point, ends with the exact cta text above, then 2-3 hashtags>",
       "destination_url": "<exact URL from the product URL mapping above>"
@@ -320,10 +321,16 @@ def _slugify(text: str) -> str:
     return text.strip("-")
 
 
+# Names/brands — rendered as Capitalized (first letter up, rest as given).
 _PROPER_NOUNS = {
-    "pinterest", "etsy", "instagram", "canva", "wix", "google", "seo",
+    "pinterest", "etsy", "instagram", "canva", "wix", "google",
     "tiktok", "facebook", "shopify", "flodesk", "tailwind",
+    "jane", "switzertemplates",
 }
+
+# Acronyms — rendered FULL UPPERCASE wherever they appear, not just word 1.
+# Add to this list (not _PROPER_NOUNS) for any new all-caps abbreviation.
+_ACRONYMS = {"seo", "diy", "url", "cta", "faq", "ai", "pdf", "ugc", "roi"}
 
 
 def _enforce_case(text: str, upper: bool = False) -> str:
@@ -332,6 +339,12 @@ def _enforce_case(text: str, upper: bool = False) -> str:
     returns — Title Case ("Pins That Actually Rank") is a hard rule violation,
     not a style preference, so it's fixed here programmatically rather than
     trusted to the model. Same principle as the UTM tagging below.
+
+    Real names/brands and acronyms are preserved correctly wherever they fall
+    in the sentence — "I", "Jane", "Pinterest", "SEO" never get force-lowercased
+    just because they're not the first word. Anything NOT on these two lists
+    still gets lowercased (that's what actually fixes Title Case); if a new
+    name or acronym needs preserving, add it to the relevant set above.
     """
     if not text:
         return text
@@ -354,8 +367,10 @@ def _enforce_case(text: str, upper: bool = False) -> str:
         if lower_core == "i":
             # standalone pronoun "I" is always capitalized, any position
             new_core = "I"
+        elif lower_core in _ACRONYMS:
+            new_core = core.upper()
         elif lower_core in _PROPER_NOUNS:
-            new_core = core.upper() if lower_core == "seo" else core[0].upper() + core[1:].lower()
+            new_core = core[0].upper() + core[1:].lower()
         elif i == 0:
             new_core = core[0].upper() + core[1:].lower()
         else:
@@ -450,7 +465,6 @@ def _parse(raw: str) -> list[dict]:
                 v["eyebrow"]      = _enforce_case(v.get("eyebrow", ""), upper=True)
                 v["headline"]     = _enforce_case(v.get("headline", ""))
                 v["subtitle_bar"] = _enforce_case(v.get("subtitle_bar", ""))
-                v["tagline"]      = _enforce_case(v.get("tagline", ""))
                 v["cta"]          = _enforce_case(v.get("cta", ""))
                 v["category_label"] = _enforce_case(v.get("category_label", ""), upper=True)
                 clean_vars.append(v)

@@ -539,7 +539,6 @@ def main():
                     "eyebrow":         v.get("eyebrow", ""),
                     "headline":        v.get("headline", ""),
                     "subtitle_bar":    v.get("subtitle_bar", ""),
-                    "tagline":         v.get("tagline", ""),
                     "cta":             v.get("cta", ""),
                     "pin_items":       v.get("pin_items", topic.get("pin_items", [])),
                     "seo_title":       v.get("seo_title", v.get("headline", "")),

@@ -50,7 +50,6 @@ def generate_pin_image(copy_data: dict, context: dict, fonts: dict) -> Path:
         "subtitle_bar": copy_data.get("subtitle_bar", ""),
         "items": items,
         "bottom_bar_text": "SWITZERTEMPLATES.COM",
-        "tagline": copy_data.get("tagline") or "switzertemplates.com/blog",
         "color_offset": offset,
         "layout": layout,
     }

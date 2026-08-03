@@ -18,6 +18,11 @@ topic look structurally different, not just recolored:
 Copy comes first (see copy_writer.py) — this module only ever renders text
 that's already been written and approved; it never invents wording.
 
+No hairline dividers/rule lines, no ornamental frames, and no leaf/floral/sparkle
+decoration — these are gpt-image-2's default "elegant" fillers and they're exactly
+what makes a pin read as AI-generated rather than custom-designed. Structure comes
+from spacing and color, not drawn lines or botanical clip-art.
+
 gpt-image-2 renders short-to-medium text blocks reliably but accuracy drops as
 text density rises. Capped at 6 list items by design.
 """
@@ -50,9 +55,9 @@ LAYOUT, TOP TO BOTTOM:
 """
 
 _STYLE_FOOTER = """
-DECORATIVE DETAIL: A few small, subtle sparkle or thin line-art leaf/branch accents near the headline — minimal, not distracting.
-
 COLOR PALETTE: Warm off-white cream background, deep charcoal (#383838) and chocolate brown (#8d6e63) text, numbered badges/accents rotating through warm terracotta, chocolate brown, muted sage green, dusty rose, warm taupe, and muted navy — never just one or two colors repeated across the whole pin. No bright saturated colors, no neon, no pure black or pure white text blocks except inside the bottom bar.
+
+DO NOT INCLUDE, under any circumstances: no leaf, branch, botanical, or floral line-art anywhere in the image. No sparkle or star accent icons. No hairline divider rules or lines anywhere — separate elements with spacing alone, never a drawn line. No ornamental border or frame around the canvas edge. Nothing rendered below the bottom bar — the bottom bar is the last element in the image, full stop.
 
 Render every quoted text string exactly as written, correctly spelled, in the specified position. Do not add any additional text, labels, numbers, or words anywhere in the image beyond what is explicitly specified above."""
 
@@ -93,11 +98,10 @@ def _header_block(pin_data: dict) -> tuple[str, int]:
 
 def _footer_block(pin_data: dict, n: int) -> str:
     return (
-        f'{n}. At the very bottom of the canvas, a full-width solid deep charcoal or '
-        f'chocolate-brown horizontal bar containing centered bold letter-spaced white all-caps '
-        f'text rendered exactly as: "{pin_data["bottom_bar_text"]}"\n\n'
-        f'{n + 1}. Directly below that bar (still within the canvas), small centered italic '
-        f'muted brown-gray text rendered exactly as: "{pin_data["tagline"]}"'
+        f'{n}. At the very bottom of the canvas, the final element in the image: a full-width '
+        f'solid deep charcoal or chocolate-brown horizontal bar containing centered bold '
+        f'letter-spaced white all-caps text rendered exactly as: "{pin_data["bottom_bar_text"]}". '
+        f'Nothing appears below this bar.'
     )
 
 
@@ -116,8 +120,9 @@ def _icon_grid_body(items: list, color_offset: int, n: int) -> tuple[str, int]:
         )
     block = (
         f'{n}. A numbered list of {len(items)} items, arranged in a clean {columns}-column grid '
-        f'with thin hairline divider lines between items, reading order left-to-right then '
-        f'top-to-bottom:\n' + "\n".join(lines)
+        f'with generous spacing between items (no divider lines, no boxes around items — '
+        f'whitespace alone separates them), reading order left-to-right then top-to-bottom:\n'
+        + "\n".join(lines)
     )
     return block, n + 1
 
@@ -127,8 +132,8 @@ def _outline_list_body(items: list, color_offset: int, n: int) -> tuple[str, int
     for i, item in enumerate(items, start=1):
         lines.append(
             f'  {i}. A thin outline circle (no fill, charcoal stroke only, monochrome — no color) '
-            f'containing the numeral "{i}" in charcoal. Immediately to its right, a thin vertical '
-            f'hairline divider, then a small minimal single-line-weight outline icon depicting: '
+            f'containing the numeral "{i}" in charcoal. To its right (separated by spacing only, '
+            f'no divider line), a small minimal single-line-weight outline icon depicting: '
             f'{item["icon"]}. To the right of the icon, an elegant serif title in normal weight '
             f'(not bold, not all-caps), sentence case, rendered exactly as: "{item["title"]}", '
             f'with a smaller all-caps letter-spaced muted taupe subtext directly below it '
@@ -136,9 +141,9 @@ def _outline_list_body(items: list, color_offset: int, n: int) -> tuple[str, int
         )
     block = (
         f'{n}. A single-column numbered list of {len(items)} items stacked vertically, each row '
-        f'separated by a thin horizontal hairline rule. Monochrome numerals throughout — no '
-        f'colored badges here, elegance comes from typography and whitespace, not color:\n'
-        + "\n".join(lines)
+        f'separated from the next by generous vertical spacing alone — no rule lines, no boxes. '
+        f'Monochrome numerals throughout — no colored badges here, elegance comes from typography '
+        f'and whitespace, not color or line-work:\n' + "\n".join(lines)
     )
     return block, n + 1
 
@@ -176,7 +181,6 @@ def build_infographic_prompt(pin_data: dict) -> str:
         "subtitle_bar": "So you actually...",  # optional colored bar under headline
         "items": [{"title": ..., "description": ..., "icon": ...}, ...],  # 4-6 items
         "bottom_bar_text": "SWITZERTEMPLATES.COM",
-        "tagline": "More Pinterest tips for small business owners",
         "color_offset": 0,        # rotates badge color start point
         "layout": "icon_grid",    # one of LAYOUTS — which structural template to use
     }
@@ -187,11 +191,7 @@ def build_infographic_prompt(pin_data: dict) -> str:
     body_builder = _BODY_BUILDERS.get(layout, _icon_grid_body)
 
     header, next_num = _header_block(pin_data)
-    rule_line = (
-        f'{next_num}. A thin horizontal hairline rule or generous vertical whitespace separates '
-        f'the headline area from the list below.'
-    )
-    body, next_num = body_builder(items, color_offset, next_num + 1)
+    body, next_num = body_builder(items, color_offset, next_num)
     footer = _footer_block(pin_data, next_num)
 
-    return f"{_STYLE_HEADER}\n{header}\n\n{rule_line}\n\n{body}\n\n{footer}\n{_STYLE_FOOTER}"
+    return f"{_STYLE_HEADER}\n{header}\n\n{body}\n\n{footer}\n{_STYLE_FOOTER}"

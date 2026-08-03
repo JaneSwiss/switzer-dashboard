@@ -322,15 +322,23 @@ What Jane's real top pins have in common:
 - Earthy rotating palette across numbered badges/accents — terracotta,
   chocolate brown, sage green, dusty rose, warm taupe, muted navy — not
   just one or two colors repeated
-- Thin hairline dividers, small sparkle/botanical line-art accents
-- Bottom bar: SWITZERTEMPLATES.COM
+- Bottom bar: SWITZERTEMPLATES.COM, and nothing rendered below it
+
+*(Corrected August 2026 — an earlier version of this section listed
+"thin hairline dividers, small sparkle/botanical line-art accents" as
+part of the house style. Wrong — those are gpt-image-2's default
+"elegant" filler, not something in Jane's real reference pins, and they
+make a pin read as AI-generated rather than custom-designed. Never
+include leaf/floral/botanical decoration, sparkle/star accents, hairline
+divider rules, or an ornamental border frame. Structure comes from
+spacing and color, not drawn lines or decoration.)*
 
 What genuinely varies between Jane's real pins (this is the range to
 rotate across the 5 variations in a topic — not one template with colors
 swapped):
 - Eyebrow + headline vs. headline-only (no small label above it)
 - Numbered icon grid (2-column) vs. single-column outline-number list
-  with a thin vertical divider vs. plain colored-block list with no icons
+  vs. plain colored-block list with no icons
 - Some pins mix a mockup/lifestyle photo with a bold text stack instead
   of a numbered list at all
 Pick a genuinely different structure for each variation, not just a
