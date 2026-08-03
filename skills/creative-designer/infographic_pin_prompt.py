@@ -47,15 +47,19 @@ def build_infographic_prompt(pin_data: dict) -> str:
         ],
         "bottom_bar_text": "SWITZERTEMPLATES.COM/BLOG",
         "tagline": "More Pinterest tips for small business owners",
+        "color_offset": 0,   # optional — rotates the badge color start point so different
+                              # variations of the same topic don't render identical colors
+                              # even when they happen to share items
     }
     """
     items = pin_data["items"][:MAX_ITEMS]
     n = len(items)
     columns = 2 if n > 3 else 1
+    color_offset = pin_data.get("color_offset", 0)
 
     items_block_lines = []
     for i, item in enumerate(items, start=1):
-        color = _BADGE_COLOR_WORDS[(i - 1) % len(_BADGE_COLOR_WORDS)]
+        color = _BADGE_COLOR_WORDS[(i - 1 + color_offset) % len(_BADGE_COLOR_WORDS)]
         items_block_lines.append(
             f'  {i}. Small solid circle badge in {color} containing the white numeral "{i}". '
             f'Next to it, a minimal single-line-weight outline icon (thin stroke, no fill, no color '

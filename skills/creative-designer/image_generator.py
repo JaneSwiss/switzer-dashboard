@@ -34,6 +34,12 @@ def generate_pin_image(copy_data: dict, context: dict, fonts: dict) -> Path:
             f"No pin_items for '{copy_data.get('topic', '?')}' — cannot render infographic pin."
         )
 
+    # Rotate the badge color start point by variation letter (a=0, b=1, ...) — belt and
+    # braces alongside copy_writer's item_order variation, so even if two variations ever
+    # ended up with the same items, they wouldn't also render in the same colors.
+    var_letter = (copy_data.get("variation_id") or "a")[-1:].lower()
+    color_offset = max(0, ord(var_letter) - ord("a")) if var_letter.isalpha() else 0
+
     pin_data = {
         "eyebrow": copy_data.get("eyebrow") or "SWITZERTEMPLATES",
         "headline": copy_data.get("pin_headline", ""),
@@ -42,6 +48,7 @@ def generate_pin_image(copy_data: dict, context: dict, fonts: dict) -> Path:
         "items": items,
         "bottom_bar_text": "SWITZERTEMPLATES.COM",
         "tagline": copy_data.get("tagline") or "switzertemplates.com/blog",
+        "color_offset": color_offset,
     }
     prompt = build_infographic_prompt(pin_data)
 

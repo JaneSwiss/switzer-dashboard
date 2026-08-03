@@ -31,11 +31,15 @@ PRODUCT_URLS: dict[str, str] = {
 }
 
 # PM score → variation split (product pins, educational pins)
+# PM=0 means "no direct product match" — 0 product pins, not 1. Forcing a
+# product pin at PM=0 means Claude has to invent a connection that isn't
+# really there (e.g. pitching Instagram templates on a "pinterest seo" pin),
+# which reads as an unconvincing, off-topic pitch.
 _PM_SPLIT: dict[int, tuple[int, int]] = {
     3: (4, 1),
     2: (3, 2),
     1: (2, 3),
-    0: (1, 4),
+    0: (0, 5),
 }
 
 
@@ -90,6 +94,14 @@ eyebrow label -> big serif headline -> numbered icon list -> bottom URL bar -> t
 There is no background photo and no separate design_brief — the substance of the
 pin IS the list of real, specific, actionable items about the keyword.
 
+When a REAL BLOG POST is supplied for a keyword below, every pin_item and every
+piece of copy for that topic must be grounded in what that post actually says —
+its real specifics, numbers, and arguments — not generic advice reinvented from
+the keyword alone. This is the single biggest quality lever: copy that quotes or
+closely paraphrases something the post actually says reads as specific and useful;
+copy invented from a bare keyword reads as generic stock advice. When no post is
+supplied, write from real subject-matter knowledge, still avoiding generic filler.
+
 ═══════════════════════════════════════════════════════════════
 PRODUCT URL MAPPING (populate destination_url from this exactly)
 ═══════════════════════════════════════════════════════════════
@@ -108,18 +120,26 @@ MANDATORY QUALITY CHECKS (run on every variation before outputting)
 1b. Does seo_title have the keyword in the first 4 words?
 2. Does the keyword appear in the first sentence of the description?
 3. Is the CTA appropriate for this keyword type — product keyword or educational keyword?
+   If PM=0 (variation_split is 0 PRODUCT + 5 EDUCATIONAL), do NOT invent a product
+   connection anywhere — no product mentions, no "shop my templates" CTAs. If there's
+   no real, natural connection between this keyword and a product, don't force one.
 4. Does destination_url match the product being promoted?
-5. pin_items: are all items real, specific, and actionable — not vague filler ("do X" not
-   "think about X")? Would a reader who only sees the image (never clicks) walk away having
-   actually learned something?
+5. pin_items: are all items real, specific, and actionable, and grounded in the real post
+   when one is supplied — not vague filler ("do X" not "think about X")? Would a reader
+   who only sees the image (never clicks) walk away having actually learned something?
 5b. accent_word: exactly one word from pin_headline, carries real weight, not a filler word?
+5c. subtitle_bar: is it a genuine, specific hook — not a generic label like "tips to get
+    found"? Could this exact line only apply to THIS post, not any post on the topic?
+5d. item_order: does every variation in this topic show a genuinely different subset/order
+    of pin_items from every other variation? If two variations would render the identical
+    list, fix it before outputting.
 6. Title under 100 characters?
 7. Title makes a specific promise — not a generic label?
 8. CTAs rotating — no two consecutive variations use the same CTA?
 9. No third-person brand references ("Our X" not "The Switzertemplates X")?
 10. Does the pin make sense for someone who sees it 6 months from now?
 
-If any check fails, rewrite before outputting. Do not output until all 10 pass.
+If any check fails, rewrite before outputting. Do not output until all checks pass.
 
 ═══════════════════════════════════════════════════════════════
 OUTPUT FORMAT
@@ -147,10 +167,12 @@ Each element:
       "description": "<one line, 8-14 words, plain and concrete — no fluff, no filler>",
       "icon": "<a short, simple, literal visual concept for a thin line-art icon — e.g. 'a magnifying glass over a search bar'. Must be renderable as a single simple icon, not a scene.>"
     }}
-    // 4 to 6 items total, shared by all 5 variations below (this is the real, factual
-    // substance of the topic — the actual steps/tips/facts the reader learns from the
-    // pin image itself). Never generic ("be consistent") — always specific and actionable,
-    // grounded in real knowledge about the keyword's topic.
+    // 5 to 6 items total — the master list of real, factual substance for this topic,
+    // grounded in the real blog post when one is supplied above. Each of the 5
+    // variations below selects its own subset/order via item_order, so no two
+    // pins in a topic show the identical set of items in the identical order —
+    // that visual repetition reads as spam/duplicate content to Pinterest.
+    // Never generic ("be consistent") — always specific and actionable.
   ],
   "variations": [
     {{
@@ -159,7 +181,8 @@ Each element:
       "eyebrow": "<ALL CAPS, 1-4 words, small label above the headline — e.g. 'HOW TO USE', 'THE COMPLETE GUIDE TO', 'STOP DOING THIS'>",
       "pin_headline": "<2-5 words. The BIG headline text on the pin image — short and punchy enough to render large, like a magazine cover word or two. NOT a sentence. NOT the seo_title. Examples: 'Pinterest SEO', 'Free Business Tools', 'Client-Ready Websites'.>",
       "accent_word": "<exactly one word from pin_headline to render in an italic accent color — the word that carries the most weight.>",
-      "subtitle_bar": "<one line, 6-12 words, sits in a colored bar directly under the headline — supporting/benefit framing, e.g. '6 Steps to Get Your Pins Found in Search'.>",
+      "subtitle_bar": "<one line, 6-12 words, sits in a colored bar directly under the headline. This is the real scroll-stopping hook, not a generic label — write it the way you'd write pin_headline in a normal (non-infographic) pin: specific, curiosity-driven or benefit-led, grounded in something the real post actually says. 'Pinterest ranks pins on four factors — not just keywords' beats 'Tips to get found in search'. Never two variations with the same angle.>",
+      "item_order": [<4 to 6 integers — 1-based indices into the topic's pin_items array above, in the order to display them for THIS variation. Choose a genuinely different subset and/or order for each of the 5 variations — drop a different item each time, reorder, whatever it takes so no two variations show an identical list. This is what keeps the 5 pin images visually distinct instead of looking like re-labeled duplicates.>],
       "tagline": "<one short italic line under the bottom bar, 4-10 words — e.g. 'More Pinterest tips for small business owners', or a soft product nudge for PRODUCT-type variations.>",
       "category_label": "<ALL CAPS, max 20 chars>",
       "seo_title": "<keyword in first 4 words, 50-100 chars, sentence case, benefit-led or action-led. This is Pinterest metadata only — never appears on the pin image itself. Example: 'Coach websites that win clients before the first call'>",
@@ -177,17 +200,32 @@ def _build_user_prompt(
     avoid_keywords: list[str],
 ) -> str:
     kw_lines = []
+    post_blocks = []
     for i, k in enumerate(batch):
         pm        = k["product_match"]
         split     = _PM_SPLIT.get(pm, (2, 3))
         split_str = f"{split[0]} PRODUCT + {split[1]} EDUCATIONAL"
+        topic_id  = start_id + i
         kw_lines.append(
-            f"  topic_id={start_id + i}  "
+            f"  topic_id={topic_id}  "
             f"keyword=\"{k['keyword']}\"  "
             f"volume={k['volume']:,}  "
             f"PM={pm}  "
             f"maps_to=\"{k['maps_to_product']}\"  "
             f"variation_split=\"{split_str}\""
+        )
+        excerpt = (k.get("post_excerpt") or "").strip()
+        if excerpt:
+            post_blocks.append(
+                f"--- REAL BLOG POST for topic_id={topic_id} (\"{k['keyword']}\") ---\n"
+                f"{excerpt[:3000]}\n"
+            )
+
+    posts_section = ""
+    if post_blocks:
+        posts_section = (
+            "\n\nREAL BLOG POSTS — ground pin_items and subtitle_bar in these, use real "
+            "specifics from the text, don't reinvent generic advice:\n" + "\n".join(post_blocks)
         )
 
     avoid = ""
@@ -205,17 +243,26 @@ structure dominates the top performers, favour it in new pin titles.
 
 KEYWORDS TO PROCESS (topic_id, keyword, funnel stage, variation split):
 {chr(10).join(kw_lines)}
+{posts_section}
 
 Rules:
-- pin_items (topic-level, shared by all 5 variations): 4-6 real, specific, actionable
-  items about the keyword's topic — the actual substance a reader learns from the pin
-  image. Never generic. Each needs a short ALL CAPS title, a one-line description, and a
-  simple literal icon concept.
+- pin_items (topic-level master list): 5-6 real, specific, actionable items about the
+  keyword's topic, grounded in the real blog post above when one is supplied for that
+  topic_id — the actual substance a reader learns from the pin image. Never generic.
+  Each needs a short ALL CAPS title, a one-line description, and a simple literal icon.
+- item_order (per variation): each of the 5 variations picks its own subset/order (4-6
+  indices) from that topic's pin_items. No two variations in a topic may use the same
+  subset in the same order — vary which item is dropped and how they're ordered so the
+  5 pin images are genuinely different, not just re-labeled duplicates.
 - pin_headline is the BIG text on the pin image — 2-5 words, not a sentence. NOT
   keyword-first. NOT the SEO title.
-- eyebrow, subtitle_bar, tagline, accent_word: vary the wording across all 5 variations
-  in a topic so the 5 pins don't read identically, even though they share the same
-  pin_items. No two variations should use the same eyebrow or subtitle_bar phrasing.
+- subtitle_bar carries the real hook — specific, grounded in the post, not a generic
+  label. Vary the angle across all 5 variations (result-led, problem-led, number-led,
+  question-led — like a real direct-response headline, not filler).
+- eyebrow, tagline, accent_word: also vary the wording across all 5 variations so the 5
+  pins don't read identically. No two variations should use the same eyebrow phrasing.
+- If variation_split is "0 PRODUCT + 5 EDUCATIONAL", every variation must be EDUCATIONAL —
+  do not invent a product tie-in that isn't real.
 - seo_title is Pinterest metadata — keyword in first 4 words, benefit-led, sentence case.
   Completely different from pin_headline.
 - Keyword must appear in first sentence of every seo_description
@@ -223,7 +270,7 @@ Rules:
 - Use CTAs from the expert document only (no "Shop at switzertemplates.com" — too corporate)
 - Populate destination_url from the URL mapping — never leave it null
 - Title structures must vary across the 5 variations — no two the same
-- Run all 10 quality checks before outputting each variation
+- Run all quality checks before outputting each variation
 
 Return ONLY a JSON array of {len(batch)} objects. No markdown. Start [ end ].{avoid}"""
 
@@ -232,7 +279,7 @@ def _stream_call(client: anthropic.Anthropic, system: str,
                  user: str, max_tokens: int) -> list[dict]:
     raw = ""
     with client.messages.stream(
-        model="claude-sonnet-4-6",
+        model="claude-opus-4-5",
         max_tokens=max_tokens,
         system=system,
         messages=[{"role": "user", "content": user}],
@@ -312,9 +359,22 @@ def _parse(raw: str) -> list[dict]:
                 # came from Claude directly or the fallback above — guaranteed, not
                 # left to the model to remember.
                 v["destination_url"] = _add_utm(v["destination_url"], _slugify(t["keyword"]))
-                # pin_items lives on the topic, not the variation — copy it down so
-                # each variation's copy_data is self-contained for the image generator.
-                v["pin_items"] = t["pin_items"]
+                # Resolve this variation's item_order into an actual subset/order of the
+                # topic's master pin_items, so each variation's copy_data is self-contained
+                # for the image generator. Falls back to the full list in order if Claude
+                # omitted item_order or gave something unusable — still renders correctly,
+                # just without the intended per-variation visual variety.
+                order = v.get("item_order")
+                selected = []
+                if isinstance(order, list):
+                    for idx in order:
+                        try:
+                            i = int(idx) - 1
+                        except (TypeError, ValueError):
+                            continue
+                        if 0 <= i < len(t["pin_items"]):
+                            selected.append(t["pin_items"][i])
+                v["pin_items"] = selected or t["pin_items"]
                 clean_vars.append(v)
         if not clean_vars:
             continue

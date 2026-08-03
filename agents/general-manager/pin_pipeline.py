@@ -23,8 +23,30 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 PINTEREST_AGENT_DIR = ROOT / "skills" / "pinterest-agent"
+CONTENT_REPURPOSER_DIR = ROOT / "agents" / "content-repurposer"
 CREATIVE_DESIGNER_MAIN = ROOT / "skills" / "creative-designer" / "main.py"
 TOPICS_DIR = ROOT / "data" / "pinterest-agent"
+POSTS_DIR = ROOT / "posts"
+
+
+def _post_excerpt(slug: str) -> str:
+    """
+    Read the real blog post body for grounding pin copy, if it exists. Without
+    this, pin copy is generated from the bare keyword alone and reads generic —
+    reusing content_repurposer's own extraction so pin copy and the post agree
+    on what the post actually says, instead of inventing advice from scratch.
+    """
+    if not slug:
+        return ""
+    html_path = POSTS_DIR / f"{slug}.html"
+    if not html_path.exists():
+        return ""
+    try:
+        sys.path.insert(0, str(CONTENT_REPURPOSER_DIR))
+        import content_repurposer
+        return content_repurposer.extract_post_content(html_path)["body"]
+    except Exception:
+        return ""
 
 
 def generate_pins_for_keyword(keyword: str, volume: int = 0, slug: str = "") -> dict:
@@ -43,6 +65,7 @@ def generate_pins_for_keyword(keyword: str, volume: int = 0, slug: str = "") -> 
         "volume": volume,
         "product_match": product_match,
         "maps_to_product": maps_to_product,
+        "post_excerpt": _post_excerpt(slug),
     }]
 
     import copy_writer  # skills/pinterest-agent/copy_writer.py
