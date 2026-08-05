@@ -1,26 +1,26 @@
 COVER: Your pins aren't broken. Your strategy is.
 
-SLIDE 1: Pinterest doesn't rank pins based on keywords alone. There are four factors the algorithm weighs — and most people only optimise for one of them.
+SLIDE 1: Pinterest uses 4 ranking factors. Most people only optimise for one (keywords). That's why your pins aren't getting seen — you're missing three-quarters of the system.
 
-SLIDE 2: Factor one: domain quality. Pinterest tracks what happens after someone clicks your pin. A slow site or mismatched content? That hurts your ranking.
+SLIDE 2: Factor 1: domain quality. Pinterest tracks what happens after someone clicks your pin. If they bounce immediately? Pinterest stops showing it. A fast, well-designed website matters more than you think.
 
-SLIDE 3: Factor two: pin quality. Saves, clicks, closeups, and time spent viewing. Early engagement tells Pinterest your pin is worth showing to more people.
+SLIDE 3: Factor 2: pin quality. Saves, clicks, closeups, time spent viewing. Early engagement tells Pinterest to show your pin to more people. That first wave of interaction is everything.
 
-SLIDE 4: Factor three: pinner quality. Your account history matters. Sporadic posting and low engagement make it harder to rank — even with perfect keywords.
+SLIDE 4: Factor 3: pinner quality. Your account history counts. Sporadic posting and low engagement = harder to rank. Consistency builds trust with the algorithm over time.
 
-SLIDE 5: Factor four: topic relevance. This is where keywords come in. Your pin title, description, board name, and image text all need to align with what people search.
+SLIDE 5: Factor 4: topic relevance. This is the keyword piece everyone focuses on. Your pin title, description, board name, even the text on your image. Pinterest reads all of it.
 
-SLIDE 6: The accounts driving real traffic aren't just adding keywords. They're building a consistent presence with content that actually delivers. That's the full picture.
+SLIDE 6: Keyword stuffing won't save a slow website or an inconsistent account. The accounts driving real traffic? They're strong across all four factors. That's the difference.
 
 CAPTION:
-I've watched people create gorgeous pins that get 12 views. And simple, keyword-focused pins that drive traffic for years.
+I've seen beautiful pins get zero traction while simple, strategic ones drive traffic for years.
 
-The difference isn't talent or time. It's knowing what Pinterest actually rewards.
+The difference isn't design talent. It's understanding what Pinterest actually rewards.
 
-There are four ranking factors — and most guides only talk about one of them. So you stuff your description with keywords, post it, and wonder why nothing happens.
+Most guides tell you to add more keywords. But if your website is slow, your account's been dormant, or your pins don't get early engagement — keywords alone won't fix it.
 
-The full breakdown is on the blog. It covers all four factors, the free keyword research method Pinterest hands you in the search bar, and the board structure that helps your content get found.
+Pinterest weighs four factors equally. Nail one, ignore three, and you're leaving traffic on the table.
 
-Link in bio if you want the complete guide.
+I wrote a full breakdown of the system — including a free five-minute keyword research method Pinterest basically hands you. Link in bio if you want the complete guide.
 
-HASHTAGS: #pinterestmarketing #pinterestseo #smallbusinesstips #onlinebusinessgrowth #serviceprovidertips
+HASHTAGS: #pinterestmarketing #pinterestseo #smallbusinesstips #onlinebusinessgrowth #serviceprovider

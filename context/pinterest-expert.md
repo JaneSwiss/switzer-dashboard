@@ -311,48 +311,46 @@ These apply to every title, description, and headline written for Switzertemplat
 
 ---
 
-### Design principles — numbered-list infographic format
+### Design principles — reference-driven, not a fixed template
 
-*(Rewritten August 2026 — superseded the old photo-mockup design brief
-system below when pins moved to a single whole-image generation via
-OpenAI. Grounded in Jane's actual top-performing pins in
-agents/general-manager/switzertemplates-pins/.)*
+*(Rewritten again August 2026. Two earlier versions of this section both
+made the same mistake in opposite directions: over-fitting to 3 rigid
+structural templates with a mechanical, numbered, step-by-step spec for
+every element. That produced pins that were consistently narrower and
+more generic than Jane's real top performers, because a prescriptive
+spec leaves gpt-image-2 no room to actually design — and because 3 fixed
+templates is a much smaller range than what her real references show.
+The "no dividers, ever" rule from the previous version was also too
+absolute — some of her real proven pins use thin hairline rules, dotted
+lines, or a single tasteful decorative accent quite deliberately. What
+was actually wrong is unprompted, undirected AI filler (leaf sprigs,
+sparkle stars, ornamental frames gpt-image-2 adds on its own when given
+no concrete direction) — not every divider or accent, full stop.)*
 
-Every pin is a numbered-list infographic, generated whole in one image
-call — text baked in, not composited after. The image is a direct visual
-translation of the already-approved copy (see "Pin design text is
-DERIVED from the copy" above) — never a separately-invented brief.
+Every pin is generated whole in one OpenAI image call — text baked in,
+not composited after. The image is a direct visual translation of the
+already-approved copy (see "Pin design text is DERIVED from the copy"
+above) — never a separately-invented brief. The current mechanism:
 
-What Jane's real top pins have in common:
-- Warm off-white/cream background, generous whitespace
-- Elegant serif display headline, often mixing upright + italic for one
-  accent word or phrase
-- Earthy rotating palette across numbered badges/accents — terracotta,
-  chocolate brown, sage green, dusty rose, warm taupe, muted navy — not
-  just one or two colors repeated
-- Bottom bar: SWITZERTEMPLATES.COM, and nothing rendered below it
-
-*(Corrected August 2026 — an earlier version of this section listed
-"thin hairline dividers, small sparkle/botanical line-art accents" as
-part of the house style. Wrong — those are gpt-image-2's default
-"elegant" filler, not something in Jane's real reference pins, and they
-make a pin read as AI-generated rather than custom-designed. Never
-include leaf/floral/botanical decoration, sparkle/star accents, hairline
-divider rules, or an ornamental border frame. Structure comes from
-spacing and color, not drawn lines or decoration.)*
-
-What genuinely varies between Jane's real pins (this is the range to
-rotate across the 5 variations in a topic — not one template with colors
-swapped):
-- Eyebrow + headline vs. headline-only (no small label above it)
-- Numbered icon grid (2-column) vs. single-column outline-number list
-  vs. plain colored-block list with no icons
-- Some pins mix a mockup/lifestyle photo with a bold text stack instead
-  of a numbered list at all
-Pick a genuinely different structure for each variation, not just a
-different accent color on the same structure — two pins in a topic
-looking near-identical is a real risk for Pinterest treating them as
-duplicate/spam content, not just a design nitpick.
+- `context/pin-reference-styles.json` holds a loose, individually-written
+  style description for each of Jane's real reference pins in
+  `agents/general-manager/switzertemplates-pins/` — composition,
+  typography, icon style, color use, whatever dividers/accents that
+  specific pin actually has. Regenerate/extend it via
+  `skills/creative-designer/analyze_pin_references.py` whenever Jane
+  adds new reference pins.
+- Each pin generation picks ONE reference (rotating by variation, so 5
+  pins in a topic draw from genuinely different real references — grid,
+  sidebar rows, single-column list, checklist, photo overlay, etc.) and
+  is told to design a NEW pin inspired by it, not a mechanical copy —
+  real creative freedom over exact layout, icon rendering, and color
+  choices, constrained only by: the brand's warm earthy palette, exact
+  text accuracy for every quoted string, and nothing below the bottom
+  bar/watermark.
+- This means visual variety comes from the real diversity in Jane's own
+  proven pins, not from 3 synthetic templates recolored — a much wider
+  and more authentic range, and the actual fix for pins reading as
+  generic/AI-made.
 
 ---
 

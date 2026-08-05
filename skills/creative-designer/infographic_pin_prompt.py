@@ -1,197 +1,172 @@
 """
-Full-pin infographic prompt builder — generates the ENTIRE pin (headline, numbered
-list, icons, CTA bar, all text) in one OpenAI gpt-image-2 call, instead of the
-photo-background + Pillow-text-overlay approach in image_generator.py.
+Reference-driven pin prompt builder — generates the ENTIRE pin (headline, list,
+icons, CTA bar, all text) in one OpenAI gpt-image-2 call, instead of the old
+photo-background + Pillow-text-overlay approach.
 
-Grounded in Jane's real reference pins (agents/general-manager/switzertemplates-pins/),
-which span several genuinely different structures — not one template. Three are
-built here; image_generator.py rotates between them per variation so 5 pins in a
-topic look structurally different, not just recolored:
+Rewritten August 2026, several times. First rewrite: replaced 3 hard-coded
+structural templates with a loose per-pin STYLE REFERENCE pulled from Jane's
+real reference pins (context/pin-reference-styles.json) — creative freedom
+over layout instead of a mechanical spec. Second rewrite: CONTENT TO INCLUDE
+was still too specific — exact quoted eyebrow/headline/subtitle/item strings
+for gpt-image-2 to reproduce verbatim, just as constraining as the old rigid
+templates, only at the copy level. Fixed by only ever telling OpenAI what the
+pin is about and what the real points are — a summary, not a script.
 
-  icon_grid      — numbered circle badges + icon + bold title + description,
-                   2-column grid. (d4622a7f / 47e8a9b6 reference style)
-  outline_list   — single column, thin outline numerals (no color fill), elegant
-                   serif titles, sentence case. (c9cbe4df reference style)
-  colored_block  — flat colored rounded-rectangle blocks, numbered text only,
-                   no icons. (6a3e5ded reference style)
+Copy from copy_writer.py (seo_title, cta, seo_description) still drives the
+Tailwind pin title/description metadata — unaffected by this. What changed is
+only the text baked into the image pixels.
 
-Copy comes first (see copy_writer.py) — this module only ever renders text
-that's already been written and approved; it never invents wording.
+Third rewrite, after Jane ran the same idea through ChatGPT directly and
+compared it line-by-line against ours: the STYLE REFERENCE had become a long,
+mechanical, element-by-element paragraph (colors, icon style, decoration, all
+spelled out) — just as over-specified as the old templates, only in prose
+form. Confirmed via her own working prompt that a single terse structural
+line ("Infographics or a 3-column by 2-row grid of numbered tips.")
+outperforms it. Also, CONTENT TO INCLUDE had drifted into hedging language
+("for background... you don't need to use all of them") that gave the model
+permission to skip content, with no closing instruction telling it to
+actually illustrate the information. Fixed by matching her exact working
+structure: a short reference line, plain content with no hedging, and a bare
+closing directive ("Create a pin to illustrate this topic/information").
 
-No hairline dividers/rule lines, no ornamental frames, and no leaf/floral/sparkle
-decoration — these are gpt-image-2's default "elegant" fillers and they're exactly
-what makes a pin read as AI-generated rather than custom-designed. Structure comes
-from spacing and color, not drawn lines or botanical clip-art.
+Fourth pass: two more requests once that structure was confirmed working —
+(1) the brand color section was one fixed string every single time, so every
+pin on the account leaned the same colors. Fixed with _PALETTE_VARIANTS, a
+rotating "lead color" direction layered on top of the same base palette, so
+consecutive pins actually look different from each other. (2) all pins were
+infographics (a numbered list of points) — Jane wanted real type variety too,
+specifically some pins built around a real photo with just a short punchy
+title, matching her two photo reference pins (pin_type: "photo" in the JSON
+cache) rather than a list. image_generator.py now sends 3 of every 5 pins
+through the infographic pool and 2 through the photo pool; this module builds
+a completely different, shorter CONTENT TO INCLUDE for photo-type pins (no
+bullet list — a single hook to design a short title around).
 
-gpt-image-2 renders short-to-medium text blocks reliably but accuracy drops as
-text density rises. Capped at 6 list items by design.
+context/pin-reference-styles.json holds a short_description (what's actually
+sent to OpenAI), a fuller description (documentation only), and a pin_type
+("infographic" or "photo") per reference pin in
+agents/general-manager/switzertemplates-pins/ — regenerate/extend via
+skills/creative-designer/analyze_pin_references.py.
 """
 from __future__ import annotations
 
-# Rotating badge/accent colors — same warm-neutral palette already used
-# elsewhere in the pin system (image_generator.PIN_PALETTE), kept in sync
-# manually since this prompt describes colors in words, not swatches.
-_BADGE_COLOR_WORDS = [
-    "warm terracotta orange-brown",
-    "deep chocolate brown",
-    "muted sage green",
-    "dusty rose pink",
-    "warm taupe",
-    "deep charcoal navy",
-]
+import json
+from pathlib import Path
 
 MAX_ITEMS = 6
-LAYOUTS = ["icon_grid", "outline_list", "colored_block"]
+BOTTOM_BAR_TEXT = "SWITZERTEMPLATES.COM - grow your business online"
 
-_STYLE_HEADER = """Design a premium Pinterest marketing graphic — a vertical infographic pin, 1000x1500px, 2:3 portrait aspect ratio.
+_REFERENCE_FILE = Path(__file__).resolve().parents[2] / "context" / "pin-reference-styles.json"
 
-STYLE: Elegant editorial infographic design, quiet luxury aesthetic, generous whitespace, professional design-agency quality. NOT clip-art, NOT a cartoonish template, NOT a generic PowerPoint-style graphic. Think a boutique branding studio's Pinterest content.
-
-BACKGROUND: Solid warm off-white cream (#f8f5f2), clean and uncluttered.
-
-TYPOGRAPHY: Pair an elegant modern high-contrast serif (like Playfair Display) for the headline with a clean geometric sans-serif (like Montserrat) for labels and body text. All text must be spelled exactly as given below — no typos, no invented words, no extra text beyond what is specified.
-
-LAYOUT, TOP TO BOTTOM:
-"""
-
-_STYLE_FOOTER = """
-COLOR PALETTE: Warm off-white cream background, deep charcoal (#383838) and chocolate brown (#8d6e63) text, numbered badges/accents rotating through warm terracotta, chocolate brown, muted sage green, dusty rose, warm taupe, and muted navy — never just one or two colors repeated across the whole pin. No bright saturated colors, no neon, no pure black or pure white text blocks except inside the bottom bar.
-
-DO NOT INCLUDE, under any circumstances: no leaf, branch, botanical, or floral line-art anywhere in the image. No sparkle or star accent icons. No hairline divider rules or lines anywhere — separate elements with spacing alone, never a drawn line. No ornamental border or frame around the canvas edge. Nothing rendered below the bottom bar — the bottom bar is the last element in the image, full stop.
-
-Render every quoted text string exactly as written, correctly spelled, in the specified position. Do not add any additional text, labels, numbers, or words anywhere in the image beyond what is explicitly specified above."""
-
-
-def _header_block(pin_data: dict) -> tuple[str, int]:
-    """
-    Eyebrow (optional) + headline + optional subtitle bar. Eyebrow is skipped
-    entirely when empty — real pins mix eyebrow+headline with headline-only,
-    forcing an eyebrow onto every pin is part of what made batches feel repetitive.
-    Returns (block_text, next_step_number).
-    """
-    eyebrow = (pin_data.get("eyebrow") or "").strip()
-    headline = pin_data["headline"]
-    if eyebrow:
-        block = (
-            f'1. Centered, small, bold, letter-spaced all-caps label in deep charcoal, '
-            f'rendered exactly as: "{eyebrow}"\n\n'
-            f'2. Below it, a large bold serif headline, centered, in deep charcoal (#383838), '
-            f'rendered exactly as: "{headline}"'
-        )
-        next_num = 3
-    else:
-        block = (
-            f'1. A large bold serif headline, centered, in deep charcoal (#383838), rendered '
-            f'exactly as: "{headline}" — this is the dominant visual element at the top of the '
-            f'pin, larger than usual since there is no small label above it.'
-        )
-        next_num = 2
-
-    if pin_data.get("subtitle_bar"):
-        block += (
-            f'\n\nDirectly below the headline, a full-width horizontal rectangle bar in warm '
-            f'terracotta or chocolate brown, containing centered bold white all-caps text rendered '
-            f'exactly as: "{pin_data["subtitle_bar"]}".'
-        )
-    return block, next_num
+# Rotating "lead color" direction on top of the same base palette — without this,
+# _BRAND was one fixed string and every pin on the account leaned the same two or
+# three colors. Still entirely within the brand's earthy, muted family; only the
+# emphasis changes pin to pin.
+_PALETTE_VARIANTS = [
+    "For this pin specifically, lead with warm chocolate brown as the dominant accent color.",
+    "For this pin specifically, lead with deep charcoal as the dominant accent color.",
+    "For this pin specifically, lead with muted sage green as the dominant accent color.",
+    "For this pin specifically, lead with dusty rose as the dominant accent color.",
+    "For this pin specifically, lead with deep navy as the dominant accent color.",
+    "For this pin specifically, lead with warm terracotta as the dominant accent color.",
+    "For this pin specifically, lead with olive green as the dominant accent color.",
+    "For this pin specifically, lead with muted maroon as the dominant accent color.",
+]
 
 
-def _footer_block(pin_data: dict, n: int) -> str:
+def _load_references() -> list[dict]:
+    if not _REFERENCE_FILE.exists():
+        return []
+    try:
+        data = json.loads(_REFERENCE_FILE.read_text(encoding="utf-8"))
+    except (json.JSONDecodeError, OSError):
+        return []
+    return data.get("references", [])
+
+
+def pick_reference(offset: int, pin_type: str = "infographic") -> dict | None:
+    """Deterministic rotation through the cached reference pool, scoped to one pin_type."""
+    refs = [r for r in _load_references() if r.get("pin_type", "infographic") == pin_type]
+    if not refs:
+        return None
+    return refs[offset % len(refs)]
+
+
+def _brand_block(palette_offset: int) -> str:
+    variant = _PALETTE_VARIANTS[palette_offset % len(_PALETTE_VARIANTS)]
     return (
-        f'{n}. At the very bottom of the canvas, the final element in the image: a full-width '
-        f'solid deep charcoal or chocolate-brown horizontal bar containing centered bold '
-        f'letter-spaced white all-caps text rendered exactly as: "{pin_data["bottom_bar_text"]}". '
-        f'Nothing appears below this bar.'
+        f"BRAND: Switzertemplates — a premium, editorial, quiet-luxury small business "
+        f"brand. Warm neutral base: off-white cream (#f8f5f2), chocolate brown (#8d6e63), "
+        f"warm taupe (#bbb0aa), muted sand (#a5988e), charcoal (#383838), plus room for "
+        f"muted earthy accents (sage green, dusty rose, terracotta, deep navy, olive, "
+        f"muted maroon) — never bright, neon, or primary-colored. {variant}"
     )
 
 
-def _icon_grid_body(items: list, color_offset: int, n: int) -> tuple[str, int]:
-    columns = 2 if len(items) > 3 else 1
-    lines = []
-    for i, item in enumerate(items, start=1):
-        color = _BADGE_COLOR_WORDS[(i - 1 + color_offset) % len(_BADGE_COLOR_WORDS)]
-        lines.append(
-            f'  {i}. Small solid circle badge in {color} containing the white numeral "{i}". '
-            f'Next to it, a minimal single-line-weight outline icon (thin stroke, no fill, no '
-            f'color other than charcoal or {color}) depicting: {item["icon"]}. Below the icon, '
-            f'bold all-caps short title rendered exactly as: "{item["title"]}". Below the title, '
-            f'one line of smaller regular-weight muted brown-gray text rendered exactly as: '
-            f'"{item["description"]}".'
+def _guardrails() -> str:
+    return f"""GUARDRAILS:
+- Render every quoted text string exactly as written below, correctly spelled, in a \
+sensible position — no typos, no invented words, no extra text or labels beyond what \
+is specified.
+- No leaf, floral, botanical, sparkle, or star clip-art filler unless the reference \
+style description below explicitly mentions it — don't let generic "elegant" AI \
+decoration creep in on its own; if the reference is clean and undecorated, keep it \
+clean and undecorated.
+- Bottom bar, full-width, the last element in the image: "{BOTTOM_BAR_TEXT}\""""
+
+
+def _content_block(pin_data: dict) -> str:
+    if pin_data.get("pin_type") == "photo":
+        return (
+            f"This pin is about: {pin_data['topic_summary']}\n"
+            f"Design a short, punchy title from this — a few words to one short sentence, "
+            f"like a magazine cover line, not a list of points.\n"
+            f"Create a pin to illustrate this topic/information"
         )
-    block = (
-        f'{n}. A numbered list of {len(items)} items, arranged in a clean {columns}-column grid '
-        f'with generous spacing between items (no divider lines, no boxes around items — '
-        f'whitespace alone separates them), reading order left-to-right then top-to-bottom:\n'
-        + "\n".join(lines)
-    )
-    return block, n + 1
 
-
-def _outline_list_body(items: list, color_offset: int, n: int) -> tuple[str, int]:
-    lines = []
-    for i, item in enumerate(items, start=1):
-        lines.append(
-            f'  {i}. A thin outline circle (no fill, charcoal stroke only, monochrome — no color) '
-            f'containing the numeral "{i}" in charcoal. To its right (separated by spacing only, '
-            f'no divider line), a small minimal single-line-weight outline icon depicting: '
-            f'{item["icon"]}. To the right of the icon, an elegant serif title in normal weight '
-            f'(not bold, not all-caps), sentence case, rendered exactly as: "{item["title"]}", '
-            f'with a smaller all-caps letter-spaced muted taupe subtext directly below it '
-            f'rendered exactly as: "{item["description"]}".'
-        )
-    block = (
-        f'{n}. A single-column numbered list of {len(items)} items stacked vertically, each row '
-        f'separated from the next by generous vertical spacing alone — no rule lines, no boxes. '
-        f'Monochrome numerals throughout — no colored badges here, elegance comes from typography '
-        f'and whitespace, not color or line-work:\n' + "\n".join(lines)
-    )
-    return block, n + 1
-
-
-def _colored_block_body(items: list, color_offset: int, n: int) -> tuple[str, int]:
-    columns = 3 if len(items) >= 6 else 2
-    lines = []
-    for i, item in enumerate(items, start=1):
-        color = _BADGE_COLOR_WORDS[(i - 1 + color_offset) % len(_BADGE_COLOR_WORDS)]
-        lines.append(
-            f'  {i}. A solid filled rounded rectangle in {color}, containing left-aligned white '
-            f'or cream sans-serif text: the numeral "{i}." followed by the short phrase rendered '
-            f'exactly as: "{item["title"]}". Text only in this block — no icon.'
-        )
-    block = (
-        f'{n}. A clean grid of {len(items)} solid colored rounded-rectangle blocks, {columns} per '
-        f'row, each block a different color from the rotating palette, containing only numbered '
-        f'text (no icons, no separate description line below):\n' + "\n".join(lines)
-    )
-    return block, n + 1
-
-
-_BODY_BUILDERS = {
-    "icon_grid": _icon_grid_body,
-    "outline_list": _outline_list_body,
-    "colored_block": _colored_block_body,
-}
+    lines = [f"This pin is about: {pin_data['topic_summary']}"]
+    items = pin_data["items"][:MAX_ITEMS]
+    if items:
+        lines[0] += ":"
+        for item in items:
+            lines.append(f'- {item["title"]}: {item["description"]}')
+    lines.append("Create a pin to illustrate this topic/information")
+    return "\n".join(lines)
 
 
 def build_infographic_prompt(pin_data: dict) -> str:
     """
     pin_data = {
-        "eyebrow": "LEARN PINTEREST SEO",     # "" to omit — real pins mix both shapes
-        "headline": "The right way",           # sentence case, verbatim
-        "subtitle_bar": "So you actually...",  # optional colored bar under headline
-        "items": [{"title": ..., "description": ..., "icon": ...}, ...],  # 4-6 items
-        "bottom_bar_text": "SWITZERTEMPLATES.COM",
-        "color_offset": 0,        # rotates badge color start point
-        "layout": "icon_grid",    # one of LAYOUTS — which structural template to use
+        "topic_summary": "Learn Pinterest SEO the right way...",  # one-line framing, not quoted verbatim
+        "items": [{"title": ..., "description": ..., "icon": ...}, ...],  # 4-6 real points, informational
+        "pin_type": "infographic",   # or "photo" — picks the matching reference pool + content shape
+        "reference_offset": 0,       # rotates which real reference pin (within pin_type) drives this one
+        "palette_offset": 0,         # rotates which lead accent color this pin uses
     }
     """
-    items = pin_data["items"][:MAX_ITEMS]
-    color_offset = pin_data.get("color_offset", 0)
-    layout = pin_data.get("layout", "icon_grid")
-    body_builder = _BODY_BUILDERS.get(layout, _icon_grid_body)
+    pin_type = pin_data.get("pin_type", "infographic")
+    reference = pick_reference(pin_data.get("reference_offset", 0), pin_type)
+    if reference:
+        reference_block = (
+            f'STYLE REFERENCE (for creative direction — adapt naturally, do not copy '
+            f'mechanically or reproduce it literally):\n'
+            f'{reference["short_description"]}\n'
+            f'Exact layout details, icon choices, precise colors, and spacing are yours '
+            f'to design well — as long as the result feels like it belongs in the same '
+            f'premium, editorial family as this reference and stays within the brand '
+            f'palette below.'
+        )
+    else:
+        reference_block = (
+            "STYLE REFERENCE: none available — design a premium editorial pin in the "
+            "brand's quiet-luxury aesthetic, your own creative choice of layout."
+        )
 
-    header, next_num = _header_block(pin_data)
-    body, next_num = body_builder(items, color_offset, next_num)
-    footer = _footer_block(pin_data, next_num)
-
-    return f"{_STYLE_HEADER}\n{header}\n\n{body}\n\n{footer}\n{_STYLE_FOOTER}"
+    return (
+        f"Design a premium Pinterest marketing graphic — a vertical pin, 1000x1500px, "
+        f"2:3 portrait aspect ratio.\n\n"
+        f"{_brand_block(pin_data.get('palette_offset', 0))}\n\n"
+        f"{reference_block}\n\n"
+        f"CONTENT TO INCLUDE:\n{_content_block(pin_data)}\n\n"
+        f"{_guardrails()}"
+    )

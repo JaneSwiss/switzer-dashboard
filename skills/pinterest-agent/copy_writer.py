@@ -193,7 +193,7 @@ Each element:
     {{
       "title": "<ALL CAPS, 2-5 words, a specific real step or fact — e.g. 'THINK SEARCH, NOT SOCIAL'>",
       "description": "<one line, 8-14 words, plain and concrete — no fluff, no filler>",
-      "icon": "<a short, simple, literal visual concept for a thin line-art icon — e.g. 'a magnifying glass over a search bar'. Must be renderable as a single simple icon, not a scene.>"
+      "icon": "<a short, simple, literal visual concept the designer can use if useful — e.g. 'a magnifying glass over a search bar'. A single concrete object or action, not a scene. The image prompt decides the actual rendering style (line art, full-color illustration, or none) based on the reference pin for that variation — this is just a content idea, not a strict style instruction.>"
     }}
     // 5 to 6 items total — the master list of real, factual substance for this topic,
     // grounded in the real blog post when one is supplied above. Each of the 5

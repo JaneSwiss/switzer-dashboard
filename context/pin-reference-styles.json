@@ -1,0 +1,90 @@
+{
+  "_readme": "Per-image style descriptions of Jane's real proven-performing pins in agents/general-manager/switzertemplates-pins/. 'short_description' is what actually goes in the OpenAI prompt (see infographic_pin_prompt.py) — kept to one terse line, confirmed by Jane's own direct test against ChatGPT that a long, mechanical, element-by-element description produces worse results than a short structural cue with real creative freedom. 'description' is the fuller analysis, kept for documentation/future reference only, not sent to OpenAI. 'pin_type' is 'infographic' (numbered list of points) or 'photo' (a real photo as the main visual, one short punchy title, no list) — infographic_pin_prompt.py picks from the matching pool and builds different CONTENT TO INCLUDE for each. Regenerate/extend via skills/creative-designer/analyze_pin_references.py whenever Jane adds new reference pins to that folder; new 'photo' references currently need pin_type set by hand afterward.",
+  "references": [
+    {
+      "file": "d4622a7fcfed3b9316049161607b6636pin-design-example-.jpg",
+      "layout_family": "icon_grid_3x2",
+      "pin_type": "infographic",
+      "short_description": "Infographics or a 3-column by 2-row grid of numbered tips.",
+      "description": "A 3-column by 2-row grid of numbered tips. Each cell: a small peach circle badge with the number, a thin single-line hand-drawn icon below it (a search bar with a magnifying glass, a browser window, stacked cards), a tiny sage-green leaf sprig tucked beside a couple of the icons, a bold all-caps short title, and one line of muted brown-gray description text. At the top, a serif display headline across two size-contrasted lines with a soft peach highlight bar containing a bold all-caps subtitle. Thin hairline rules divide the grid cells vertically and horizontally. Solid dark bottom bar with centered white URL."
+    },
+    {
+      "file": "47e8a9b621ec9f75c67bb417bd8b2a52pin-design-example-.jpg",
+      "layout_family": "sidebar_numbered_rows",
+      "pin_type": "infographic",
+      "short_description": "Stacked full-width numbered rows, each row a different solid color.",
+      "description": "Full-width horizontal rows stacked vertically down the page. Each row opens with a bold solid-color block containing a large number, rotating through about five muted brand colors (maroon, sage, tan, plum, terracotta) as you move down. Each row also has a small circular icon badge, a bold all-caps mini-headline, 3-4 short bullet lines, and a small supporting graphic on the right (a form-field mockup, a profile card, a row of content-pillar icons, a small analytics chart). At the top, a serif display headline mixing a bold serif word with one word in flowing script, sitting above a soft peach pill-shaped label. Bottom bar color matches the row rotation."
+    },
+    {
+      "file": "c9cbe4df12c07e96b11e763bbd5108cfpin-design-example-.jpg",
+      "layout_family": "outline_list_icons",
+      "pin_type": "infographic",
+      "short_description": "A single-column numbered list with a small icon beside each item.",
+      "description": "An elegant serif headline at top mixing upright and italic serif words across three stacked lines, with a small letter-spaced all-caps subtitle beneath. Below it, a clean single-column numbered list: a thin-outline circle numeral, a small full-color flat illustration icon carrying its own color (a sleep mask with moon and stars, a pendant necklace, a candle and reed diffuser, a gua sha tool), a serif item title, and a small all-caps muted label underneath. Thin hairline rules separate each row. Generous whitespace, cream background, no color-blocked panels — the icons themselves carry the color. Small solid color bar at the very bottom with the URL."
+    },
+    {
+      "file": "6a3e5ded49490a31d2a2f6c382a1b097pin-design-example-.jpg",
+      "layout_family": "colored_block_grid",
+      "pin_type": "infographic",
+      "short_description": "A grid of solid-color numbered blocks, text only, no icons.",
+      "description": "An oversized serif numeral/word as the dominant headline element, paired with an italic serif phrase and a letter-spaced all-caps subtitle beneath, separated from the list below by one thin black rule line. Below that, a tight 3-column grid of solid-color rounded-rectangle blocks in genuinely varied colors (sage, warm gray-blue, terracotta, tan, deep maroon, forest green, charcoal) — no repeating pattern, each block simply a different color — containing left-aligned numbered plain text, no icons. Wide dark brown bottom bar with two centered lines of white text."
+    },
+    {
+      "file": "pin-design-example-photo.jpg",
+      "layout_family": "photo_lightbox_overlay",
+      "pin_type": "photo",
+      "short_description": "A lifestyle photo background with a lightbox-sign short title card overlaid.",
+      "description": "A full-bleed warm editorial lifestyle photograph (a well-dressed woman working at a desk) fills the entire pin as the background. A white marquee-lightbox-style sign is propped in the lower half of the frame, containing the headline in bold sans-serif across a few lines, with one word in a warm brown accent color. A small italic subtitle sits directly beneath the sign. Small white letter-spaced URL text sits at the very bottom, over the photo, no bar behind it."
+    },
+    {
+      "file": "489b45f0cba32b420bd17694f02ae846pin-design-example-.jpg",
+      "layout_family": "photo_mockup_with_cta",
+      "pin_type": "infographic",
+      "short_description": "A flatlay photo with a headline, a CTA button, and a device mockup below it.",
+      "description": "A soft blush-cream photographed flatlay background (desk, coffee cup, notebook, pen). A small pill-shaped label badge at the top, then a large serif headline across two lines with one word in italic serif, a short sans-serif supporting line beneath it, and a solid brown rounded-rectangle button-style CTA bar with bold white all-caps text. Below all of that, a photographed tablet propped on a stand displaying a grid of small pin thumbnail mockups. Soft blush bottom bar with dark text."
+    },
+    {
+      "file": "b7dd3e128e493bd1335cefadd257ffc0pin-design-example-.jpg",
+      "layout_family": "bold_list_bright",
+      "pin_type": "infographic",
+      "off_brand_colors": true,
+      "short_description": "A bold two-column numbered list with arrow-format copy (recolor into brand palette, this reference uses bright red/teal).",
+      "description": "STRUCTURE REFERENCE ONLY — colors are bright saturated red and teal (Impact-style bold font), not Switzertemplates' palette; recolor into the brand palette when using this one, never copy its literal colors. Structurally: a bold condensed sans headline with a dotted rule underline and a solid highlight-color box wrapping a phrase within it. Below, a two-column numbered list of colored circle numerals paired with arrow-format copy (\"you need X \\u2192 Y is free\"), each numeral a different bright color. Solid dark bottom bar."
+    },
+    {
+      "file": "ba5f670f8df3eba80123d3b20a40eea2pin-design-example-.jpg",
+      "layout_family": "elegant_two_col_list",
+      "pin_type": "infographic",
+      "short_description": "An elegant two-column numbered list with arrow-format copy.",
+      "description": "The on-brand execution of the same structure as the bright reference above. Serif headline mixing upright and italic words with a thin rule underline beneath one line. Below, a two-column numbered list: small solid-color circle numerals rotating through navy, olive, maroon and tan, each paired with arrow-format copy (\"you need X \\u2192 Y is free\"). Thin horizontal hairline rules separate rows, and a single thin vertical rule splits the two columns. Solid dark brown bottom bar."
+    },
+    {
+      "file": "pin-design-example-photo2.jpg",
+      "layout_family": "bold_block_over_photo",
+      "pin_type": "photo",
+      "short_description": "Bold short-title word-blocks stacked over a photo background.",
+      "description": "A sage-toned photographed desk flatlay (laptop, notebook, mug, dried grasses) as the full background. Stacked solid-white rectangle blocks, each containing one bold headline word or short phrase in black condensed sans, are layered down the middle of the frame. Script-style accent words in black sit between the blocks, unboxed, breaking up the rhythm. A solid black circle badge overlaps the lower photo area with a short bold callout in white. White bar at the very bottom with dark URL text."
+    },
+    {
+      "file": "d66bfcbc19b98b4bceb006e6498c7a1bpin-design-example-.jpg",
+      "layout_family": "checklist_dotted",
+      "pin_type": "infographic",
+      "short_description": "A two-column checklist with dotted rule accents.",
+      "description": "A serif display headline pairs a bold upright word with one word in loose flowing script, framed above and below by a dotted horizontal rule with a small ribbon/bow illustration accent in the top corner. Beneath a letter-spaced all-caps subtitle, a two-column checklist: each section has a small serif number, a bold all-caps mini-heading, and a few rows of an outline checkbox plus a short line of text. No color blocking — charcoal text, chocolate-brown accents, cream background throughout. Solid dark brown bottom bar."
+    },
+    {
+      "file": "d810a2013e889edfef5b4750c161d5bapin-design-example-.jpg",
+      "layout_family": "grid_3x3_icons",
+      "pin_type": "infographic",
+      "short_description": "A 3-by-3 grid of numbered panels, each with an icon.",
+      "description": "A 3-by-3 grid of numbered panels with alternating soft background shading (white / pale blue) creating a checkerboard rhythm — no drawn lines, the shading itself divides the cells. Each panel: a large two-digit navy number, a bold all-caps mini-title, a small full-color icon illustration with a soft drop shadow (a lightbulb, a magnifying glass, a clipboard with checklist, a hanging price tag, a document, a calculator, a logo tag, a phone, a megaphone), and 2-3 short bullet lines beneath. Serif display headline at top in navy with a small all-caps label above it. Solid navy bottom bar."
+    },
+    {
+      "file": "pinterest-for-etsy-sellers-2pin-design-example-.jpg",
+      "layout_family": "grid_2x3_panels",
+      "pin_type": "infographic",
+      "short_description": "A 2-column by 3-row grid of numbered panels, each with an icon.",
+      "description": "An oversized italic serif headline (one huge word) dominates the top third, paired with a bold all-caps subtitle sitting inside a solid dark banner beneath it, and a small circular logo badge in the top corner. Below that, a 2-column by 3-row grid of soft alternating background-color panels (blush, tan, cream), each containing a colored circle number badge (navy, tan, rust rotating), a flat line-art icon illustration, a bold all-caps mini-title, and a short description line. Solid dark bottom bar with the URL and a small italic tagline beneath it."
+    }
+  ]
+}

@@ -101,9 +101,14 @@ Write a complete email section to promote this blog post to the email list.
 The list is 21,000 warm past buyers. Open rate is 15% — subject lines must earn the open.
 
 Rules:
-- Subject line: under 50 characters, curiosity-driven or benefit-led, never generic
-- A/B subject line: a second option with a different angle
-- Preview text: under 90 characters, adds to the subject — never repeats it
+- Subject line: 3 variations, each under 50 characters, each a genuinely different
+  angle (e.g. curiosity-led, benefit-led, specific/number-led) — not 3 rephrasings
+  of the same idea. Every one must be catchy, make sense on its own, and be written
+  to earn a high open rate — never generic, never clickbait that the email doesn't
+  actually deliver on.
+- Description: exactly one, maximum 80 characters. This is the inbox preview text —
+  catchy, adds new information the subject line didn't already say, and makes sense
+  read together with whichever subject line Jane picks. Never repeats the subject line.
 - Body: 150-200 words. Opens with a specific relatable situation or frustration,
   not a greeting. Gets into the content fast. One clear CTA linking to the post.
 - Sign off: Xo Jane
@@ -111,9 +116,10 @@ Rules:
 - Never use: "I hope you're well", "exciting news", "just wanted to share"
 
 Format EXACTLY like this:
-SUBJECT LINE: [text]
+SUBJECT LINE A: [text]
 SUBJECT LINE B: [text]
-PREVIEW TEXT: [text]
+SUBJECT LINE C: [text]
+DESCRIPTION (max 80 characters): [text]
 BODY:
 [full email body]
 

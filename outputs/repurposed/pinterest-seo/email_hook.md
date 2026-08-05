@@ -1,24 +1,25 @@
-SUBJECT LINE: Your pins deserve more than 12 views
-SUBJECT LINE B: Pinterest is ranking you on 4 things
-PREVIEW TEXT: Most people only optimise for one of them.
+SUBJECT LINE A: Why your pins aren't getting clicks
+SUBJECT LINE B: The 4 ranking factors Pinterest won't tell you
+SUBJECT LINE C: 5-minute keyword research (free method)
+
+DESCRIPTION (max 80 characters): Most people only focus on one factor. Here's what actually works.
+
 BODY:
-You made the pin. You wrote a keyword-stuffed description. You posted it and… nothing.
+You've created beautiful pins. You've written keyword-rich descriptions. You've been consistent.
 
-A handful of impressions. Maybe a few clicks. Then silence.
+And still… crickets.
 
-Meanwhile, someone else posts a pin that looks half as polished — and it drives traffic for months.
+Here's the thing nobody tells you: Pinterest has four distinct ranking factors. Most business owners only focus on one of them (keywords). Which means three-quarters of the system is working against you without you even knowing it.
 
-The difference isn't design skills or posting frequency. It's understanding what Pinterest actually uses to decide what gets seen.
+I've watched this play out so many times. Gorgeous pins that never get seen. Meanwhile, someone else creates simple, strategic content that drives traffic for months — sometimes years — on autopilot.
 
-Spoiler: it's not just keywords.
+The difference isn't design skills or posting more often. It's understanding how Pinterest actually decides what to show.
 
-Pinterest ranks your content on four factors — domain quality, pin quality, pinner quality, and topic relevance. Most business owners only focus on that last one. Which means they're doing 25% of the work and wondering why results are at 25% too.
+I broke down the complete system in this guide — the four algorithm factors, a five-minute keyword research method Pinterest literally hands you for free, and the board structure that gets your content found.
 
-I wrote a full breakdown of each factor, how to improve them, and the free keyword research method Pinterest literally hands you in the search bar.
+If your pins aren't performing, this will show you exactly where to fix it.
 
-If your pins have been underperforming, this will show you exactly what to fix.
-
-**[Read the full Pinterest SEO guide here](https://www.switzertemplates.com/post/pinterest-seo)**
+[Read the full Pinterest SEO guide →](https://www.switzertemplates.com/post/pinterest-seo)
 
 Xo Jane
 
