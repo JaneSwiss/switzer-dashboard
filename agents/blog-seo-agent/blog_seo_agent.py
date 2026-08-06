@@ -424,7 +424,7 @@ def synthesize_research(
     client = anthropic.Anthropic(api_key=ANTHROPIC_API_KEY)
     competitor_summary = _build_competitor_summary(competitors)
 
-    research_prompt = f"""You are a content researcher for Switzertemplates, a digital product business for female small business owners, coaches, and service providers.
+    research_prompt = f"""You are a content researcher for Switzertemplates, a digital product business for female small business owners — service providers and coaches, but just as often product-based and ecommerce sellers. Let the keyword decide which of these this brief should speak to; don't default to coaching/service framing for topics that are naturally about products, ecommerce, or shipping.
 
 Keyword to write about: {keyword}
 Target post length: {target_words} words minimum
@@ -441,7 +441,7 @@ Create a research brief that the blog writer will use to write a post that is mo
 
 2. CURRENT DATA & STATS (2025-2026): Any specific numbers, percentages, or facts from the research above that belong in the post. Flag the source URL for each. If no concrete stats were found, say so — do not invent numbers.
 
-3. REAL EXAMPLES: Specific, relatable examples tailored to female small business owners, coaches, and service providers. Show what this looks like in practice.
+3. REAL EXAMPLES: Specific, relatable examples tailored to whichever small business owners this keyword is actually for — a Shopify/ecommerce keyword gets product-seller examples (inventory, shipping, checkout), a coaching/service keyword gets service-provider examples. Match the example to the topic, not a fixed default. Show what this looks like in practice.
 
 4. ACTIONABLE STEPS: A concrete step-by-step breakdown the reader can actually follow. Not theory — real actions.
 
@@ -674,7 +674,7 @@ If you reference a statistic or fact, make sure it reflects how these platforms 
 
 DEPTH AND VALUE REQUIREMENTS — CRITICAL:
 Every section must deliver real, specific value. No generic advice that could apply to any business or topic.
-- Include at least 2-3 concrete, real-world examples throughout the post (tailored to coaches, service providers, and small business owners)
+- Include at least 2-3 concrete, real-world examples throughout the post, tailored to whichever small business owners this specific keyword is actually for — don't default to coaches/service providers when the topic is naturally about product-based or ecommerce businesses (e.g. a Shopify vs Wix post should draw examples from both product sellers and service providers, not just one)
 - Include at least one actionable step-by-step breakdown in its own section
 - Use specific numbers, percentages, or data points where the research brief provides them
 - Call out at least one common mistake or misconception the reader is likely making right now

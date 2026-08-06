@@ -20,9 +20,10 @@ Everything is designed in one cohesive visual style so the brand,
 website, and landing page all look like they belong together.
 
 **Who it's for:**
-Coaches, consultants, service providers, and female small business owners
-who are starting out or rebranding and want a complete, professional
-online presence without piecing it together from multiple sources.
+Female small business owners who are starting out or rebranding and want
+a complete, professional online presence without piecing it together from
+multiple sources — coaches, consultants, and service providers, but just
+as much product-based and ecommerce sellers.
 
 **The core problem it solves:**
 Most business owners either spend months trying to figure out design
@@ -46,8 +47,8 @@ of Wix websites or branding kits - they already own the core components.
   builders available, no coding required
 - "Will it look generic?" - All designs are modern, editorial, and
   premium - hard to tell they're templates
-- "Is this for my niche?" - Works for any service-based business as
-  long as the customer likes the aesthetic
+- "Is this for my niche?" - Works for any service-based or product-based/
+  ecommerce business as long as the customer likes the aesthetic
 
 **How to talk about it:**
 Lead with the outcome (professional online presence fast), then explain
@@ -70,14 +71,15 @@ to match, for less than the cost of one hour with a freelance designer."
   appears in their Wix account exactly as shown in the live preview
 - All graphics, photos, blocks, and features come preinstalled -
   nothing is missing, nothing needs to be added separately
-- Modern, minimalist layout built for coaches, consultants, and
-  service-based or eCommerce businesses
+- Modern, minimalist layout built for coaches, consultants, service-based
+  businesses, and product-based/eCommerce businesses alike
 - Mobile-friendly design
 - All sections included: homepage, services/products, about, contact
 
 **Who it's for:**
-Small business owners and service providers who need a professional
-website fast and don't want to build one from scratch or pay agency prices.
+Small business owners — service providers and product/ecommerce sellers
+alike — who need a professional website fast and don't want to build one
+from scratch or pay agency prices.
 
 **The core problem it solves:**
 Having no website (or a website that looks amateur) costs potential

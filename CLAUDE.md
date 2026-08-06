@@ -15,9 +15,10 @@ Do not skip this file. Do not assume context. Always read this first.
 **Website:** https://www.switzertemplates.com
 
 Switzertemplates is a premium digital product business selling branding kits,
-premade Wix websites, and business bundles to female small business owners,
-coaches, and service providers. Products help customers look professional online
-fast — without hiring a designer or spending months figuring out tech.
+premade Wix websites, and business bundles to female small business owners —
+service providers and coaches, but also product-based and ecommerce sellers.
+Products help customers look professional online fast — without hiring a
+designer or spending months figuring out tech.
 
 Switzertemplates is a top 1% Etsy seller and Star Seller with 27,700+ sales
 and 2,800+ reviews. This credibility must be referenced in marketing copy.
@@ -26,9 +27,13 @@ and 2,800+ reviews. This credibility must be referenced in marketing copy.
 
 ## Target Customer
 
-Female small business owner, coach, or service provider who wants a polished,
-cohesive online brand that looks professional fast — without spending months
-figuring out design, tech, or marketing on her own.
+Female small business owner who wants a polished, cohesive online brand that
+looks professional fast — without spending months figuring out design, tech,
+or marketing on her own. This includes service providers and coaches, but
+just as much product-based and ecommerce sellers — don't default content or
+examples to coaching/service framing when the topic is naturally about
+selling products, shipping, inventory, or ecommerce platforms. Let the topic
+decide which of these her content should speak to.
 
 **Her pain points:**
 - Business looks inconsistent, amateur, or unfinished
@@ -43,7 +48,8 @@ figuring out design, tech, or marketing on her own.
 - Has a real online presence that attracts her ideal clients
 
 **Niches:** coaches, consultants, therapists, beauty specialists,
-wellness professionals, service-based businesses, online entrepreneurs
+wellness professionals, service-based businesses, online entrepreneurs,
+product-based sellers and ecommerce store owners
 
 ---
 
@@ -57,7 +63,8 @@ This is the highest-value offer — prioritise in email sequences and blog CTAs.
 
 ### 2. Premade Wix Websites — $64 USD
 Modern, minimalist, sales-ready websites for service-based and eCommerce businesses.
-Easy to customise. Built for coaches, consultants, and service providers.
+Easy to customise. Built for coaches, consultants, service providers, and
+product-based/ecommerce sellers alike.
 
 ### 3. Full Branding Kits — $38 USD
 1,000+ templates covering social media, ebooks, email marketing, business cards,

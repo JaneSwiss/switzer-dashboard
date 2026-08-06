@@ -1,18 +1,14 @@
 """
 Pin Pipeline — General Manager
 
-Connects a single blog-post keyword to the existing Pinterest pin generation pipeline:
-builds pin copy for that one keyword (reusing pinterest-agent's own scoring + copy_writer),
-writes it as a topics JSON, then invokes creative-designer to generate images and submit
-Tailwind drafts.
+Connects a single blog-post keyword to Pinterest pin generation. Rebuilt
+August 2026 to call agents/blog-seo-agent/pinterest-pins/ — a clean, dedicated
+build mirroring blog_seo_agent's proven pattern (grounded in the real post,
+hardcoded rules, one Claude call, then image generation) — instead of
+skills/pinterest-agent/copy_writer.py, which stayed on the old architecture.
 
-Runs creative-designer via subprocess, deliberately not an in-process import:
-skills/creative-designer/copy_writer.py and skills/pinterest-agent/copy_writer.py are two
-different files with the identical bare module name `copy_writer`, and both directories
-rely on sys.path.insert() + bare imports. If both trees ended up on sys.path in the same
-long-lived process (which building the topics JSON below requires), an in-process import
-of creative-designer's main() could silently resolve `import copy_writer` to the wrong
-module. Subprocess isolation sidesteps this entirely — each process gets a fresh sys.path.
+Runs pin_generator via subprocess, same isolation reasoning as before: keeps
+this process's sys.path clean regardless of what else GM has imported.
 """
 from __future__ import annotations
 
@@ -22,87 +18,46 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
-PINTEREST_AGENT_DIR = ROOT / "skills" / "pinterest-agent"
-CONTENT_REPURPOSER_DIR = ROOT / "agents" / "content-repurposer"
-CREATIVE_DESIGNER_MAIN = ROOT / "skills" / "creative-designer" / "main.py"
-TOPICS_DIR = ROOT / "data" / "pinterest-agent"
-POSTS_DIR = ROOT / "posts"
-
-
-def _post_excerpt(slug: str) -> str:
-    """
-    Read the real blog post body for grounding pin copy, if it exists. Without
-    this, pin copy is generated from the bare keyword alone and reads generic —
-    reusing content_repurposer's own extraction so pin copy and the post agree
-    on what the post actually says, instead of inventing advice from scratch.
-    """
-    if not slug:
-        return ""
-    html_path = POSTS_DIR / f"{slug}.html"
-    if not html_path.exists():
-        return ""
-    try:
-        sys.path.insert(0, str(CONTENT_REPURPOSER_DIR))
-        import content_repurposer
-        return content_repurposer.extract_post_content(html_path)["body"]
-    except Exception:
-        return ""
+PIN_GENERATOR = ROOT / "agents" / "blog-seo-agent" / "pinterest-pins" / "pin_generator.py"
 
 
 def generate_pins_for_keyword(keyword: str, volume: int = 0, slug: str = "") -> dict:
     """
-    Build pin copy for one keyword and hand it to creative-designer for image
-    generation + Tailwind draft submission. Returns a small result dict for the
-    caller's per-post reporting.
+    Write pin copy (grounded in the real post at posts/{slug}.html) and generate +
+    submit images to Tailwind. Returns a small result dict for the caller's per-post
+    reporting. `volume` kept in the signature for call-site compatibility — no longer
+    used (product-match scoring lived in the old pinterest-agent path).
     """
-    sys.path.insert(0, str(PINTEREST_AGENT_DIR))
-    from topic_selector import _score_product_match
-
-    product_match, maps_to_product = _score_product_match(keyword)
-
-    ranked = [{
-        "keyword": keyword,
-        "volume": volume,
-        "product_match": product_match,
-        "maps_to_product": maps_to_product,
-        "post_excerpt": _post_excerpt(slug),
-    }]
-
-    import copy_writer  # skills/pinterest-agent/copy_writer.py
-    topics = copy_writer.generate(ranked, analytics_context="", top_n=1, batch_size=1)
-
-    if not topics:
-        return {"success": False, "message": "No pin copy generated (empty result from copy_writer)"}
-
-    TOPICS_DIR.mkdir(parents=True, exist_ok=True)
-    topics_path = TOPICS_DIR / f"gm-topics-{slug or keyword}.json"
-    topics_path.write_text(json.dumps({"topics": topics}, indent=2, ensure_ascii=False), encoding="utf-8")
+    if not slug:
+        return {"success": False, "message": "generate_pins_for_keyword requires a slug (post must already be written)"}
 
     result = subprocess.run(
-        [
-            sys.executable,
-            str(CREATIVE_DESIGNER_MAIN),
-            "--from-topics-json", str(topics_path),
-            "--auto-approve",
-        ],
+        [sys.executable, str(PIN_GENERATOR), slug, keyword],
         cwd=ROOT,
         capture_output=True,
         text=True,
         timeout=900,
     )
 
-    pins_count = sum(len(t.get("variations", [])) for t in topics)
-
     if result.returncode != 0:
         return {
             "success": False,
-            "message": f"creative-designer exited {result.returncode}: {result.stderr[-500:]}",
-            "pins_attempted": pins_count,
+            "message": f"pin_generator exited {result.returncode}: {result.stderr[-500:]}",
         }
 
+    # pin_generator prints its result dict as the last line of stdout.
+    try:
+        last_line = [l for l in result.stdout.strip().splitlines() if l.strip()][-1]
+        summary = json.loads(result.stdout[result.stdout.index("{\n"):]) if "{\n" in result.stdout else json.loads(last_line)
+    except Exception:
+        summary = {}
+
+    tailwind_ok = sum(1 for t in summary.get("tailwind", []) if t.get("success"))
     return {
-        "success": True,
-        "message": f"{pins_count} pin(s) generated and submitted to Tailwind as drafts",
-        "pins_attempted": pins_count,
-        "topics_json": str(topics_path),
+        "success": summary.get("images_generated", 0) > 0,
+        "message": f"{summary.get('pins_written', 0)} pin(s) written, "
+                   f"{summary.get('images_generated', 0)} image(s) generated, "
+                   f"{tailwind_ok} submitted to Tailwind",
+        "pins_attempted": summary.get("pins_written", 0),
+        "images_generated": summary.get("images_generated", 0),
     }

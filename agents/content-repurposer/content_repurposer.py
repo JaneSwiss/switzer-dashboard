@@ -75,7 +75,9 @@ def build_prompt(post: dict, slug: str, brand_voice: str, product_catalog: str) 
 Your job: take one blog post and generate three types of content from it.
 All content must match Switzertemplates' brand voice: practical, human, benefit-led,
 short sentences, active voice, never robotic. Target audience: female small business
-owners, coaches, consultants, and service providers.
+owners — service providers and coaches, but just as often product-based and ecommerce
+sellers. Let the post's own topic decide which examples/framing fit, don't default to
+coaching/service framing for posts that are naturally about products or ecommerce.
 
 BLOG POST TITLE: {post['title']}
 BLOG POST URL: {post_url}
