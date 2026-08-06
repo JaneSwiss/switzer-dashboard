@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-08-03",
+  "last_updated": "2026-08-06",
   "etsy_agent": {
     "status": "active",
     "last_run": "2026-05-05",
@@ -2878,6 +2878,13 @@
         "pins_scheduled": false,
         "email_sent": false,
         "carousel_posted": false
+      },
+      {
+        "slug": "shopify-vs-wix-for-ecommerce",
+        "title": "Shopify vs Wix for ecommerce: which platform actually fits your business",
+        "pins_scheduled": true,
+        "email_sent": false,
+        "carousel_posted": false
       }
     ]
   },
@@ -3100,7 +3107,7 @@
   },
   "general_manager": {
     "status": "active",
-    "last_run": "2026-08-03",
+    "last_run": "2026-08-06",
     "next_run": "2026-08-10",
     "awaiting_reply": false,
     "candidates": [],
@@ -3123,6 +3130,21 @@
         "pin_cost_estimate": 0.95,
         "errors": [],
         "post_preview_url": "https://janeswiss.github.io/switzer-dashboard/posts/pinterest-seo.html"
+      },
+      {
+        "keyword": "shopify vs wix for ecommerce",
+        "slug": "shopify-vs-wix-for-ecommerce",
+        "date": "2026-08-06",
+        "blog_post_url": "https://www.switzertemplates.com/post/shopify-vs-wix-for-ecommerce",
+        "post_preview_url": "https://janeswiss.github.io/switzer-dashboard/posts/shopify-vs-wix-for-ecommerce.html",
+        "github_images_url": "https://github.com/JaneSwiss/switzer-dashboard/tree/main/posts/images/shopify-vs-wix-for-ecommerce",
+        "wix_drafts_url": "https://manage.wix.com/dashboard/5da8c553-1983-4b5f-935f-6fb32d2bd299/blog/posts",
+        "wix_ok": true,
+        "newsletter_url": "https://github.com/JaneSwiss/switzer-dashboard/blob/main/outputs/repurposed/shopify-vs-wix-for-ecommerce/email_hook.md",
+        "carousel_url": "https://github.com/JaneSwiss/switzer-dashboard/blob/main/outputs/repurposed/shopify-vs-wix-for-ecommerce/instagram_carousel.md",
+        "tailwind_url": "https://www.tailwindapp.com/dashboard/",
+        "image_cost": 1.6,
+        "errors": []
       }
     ]
   }
