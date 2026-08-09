@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-08-06",
+  "last_updated": "2026-08-09",
   "etsy_agent": {
     "status": "active",
     "last_run": "2026-05-05",
@@ -2885,6 +2885,13 @@
         "pins_scheduled": true,
         "email_sent": false,
         "carousel_posted": false
+      },
+      {
+        "slug": "how-to-set-up-shopify-store",
+        "title": "How To Set Up Shopify Store: The Complete Guide For Product Sellers In 2026",
+        "pins_scheduled": true,
+        "email_sent": false,
+        "carousel_posted": false
       }
     ]
   },
@@ -3145,6 +3152,24 @@
         "tailwind_url": "https://www.tailwindapp.com/dashboard/",
         "image_cost": 1.6,
         "errors": []
+      },
+      {
+        "keyword": "how to set up shopify store",
+        "slug": "how-to-set-up-shopify-store",
+        "date": "2026-08-09",
+        "blog_post_url": "https://www.switzertemplates.com/post/how-to-set-up-shopify-store",
+        "post_preview_url": "https://janeswiss.github.io/switzer-dashboard/posts/how-to-set-up-shopify-store.html",
+        "github_images_url": "https://github.com/JaneSwiss/switzer-dashboard/tree/main/posts/images/how-to-set-up-shopify-store",
+        "wix_drafts_url": "https://manage.wix.com/dashboard/5da8c553-1983-4b5f-935f-6fb32d2bd299/blog/posts",
+        "wix_ok": true,
+        "newsletter_url": "https://github.com/JaneSwiss/switzer-dashboard/blob/main/outputs/repurposed/how-to-set-up-shopify-store/email_hook.md",
+        "carousel_url": "https://github.com/JaneSwiss/switzer-dashboard/blob/main/outputs/repurposed/how-to-set-up-shopify-store/instagram_carousel.md",
+        "tailwind_url": "https://www.tailwindapp.com/dashboard/",
+        "pins_generated": 5,
+        "image_cost": 0.65,
+        "pin_cost_estimate": 0.95,
+        "errors": [],
+        "note": "Rewrite — original draft was biased toward coaches/service-based framing on a Shopify (ecommerce) topic. Wix draft updated in place, not duplicated."
       }
     ]
   }
