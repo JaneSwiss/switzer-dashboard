@@ -1,9 +1,10 @@
 # General Manager — STATUS
 
-Last updated: 2026-08-03 (Session 2 — first real end-to-end runs, found and fixed a
-pipeline-breaking bug, then did a full rebuild of the Pinterest pin copy + design system
-after Jane rejected the first real output on quality grounds. Read this before doing
-anything else with the General Manager.)
+Last updated: 2026-08-05 (Session 3 — Pinterest pin generation rebuilt a second time, this
+time as a clean, dedicated module modeled on Blog SEO Agent's proven pattern, replacing
+`skills/pinterest-agent/copy_writer.py` in the GM flow entirely. Also fixed a real
+audience-bias bug and closed a dashboard/Wix-sync gap. Read this before doing anything else
+with the General Manager.)
 
 ---
 
@@ -26,10 +27,19 @@ switzertemplates.com. Sales are the lagging indicator, not the tracked metric.
    approved/rejected/requested from free text. Only on a clear decision does it write
    posts, push Wix drafts, generate pins, draft the newsletter, and email a summary, then
    update `dashboard_data.json`'s `general_manager` section with active links to everything
-   produced (see "Dashboard report card" below).
+   produced (see "Dashboard report card" in Session 2 notes below).
 
 Hard constraint, unchanged: **everything lands as a draft** (Wix draft posts, Tailwind
 draft pins). Nothing ever publishes live automatically.
+
+**Important, session 3 finding, worth repeating every session**: manually testing pipeline
+pieces directly (calling `pin_generator.py`, `content_repurposer.py`, a backfill script,
+etc. straight from the shell instead of through `check_replies_and_execute.py`) produces
+real, correct output — but skips the *only* code path that pushes to GitHub and writes
+`dashboard_data.json`. This has now bitten twice (Session 2 Part B, and again in Session 3).
+**After any manual/direct test run, remember to commit+push and update the dashboard by
+hand**, or better, just re-run through the real orchestrator once things are confirmed
+working.
 
 ---
 
@@ -38,18 +48,26 @@ draft pins). Nothing ever publishes live automatically.
 Full architecture designed and built: 12 design decisions, all files listed below created,
 each piece unit-tested against real APIs individually, but no real end-to-end run yet and
 nothing committed to git. Full decision log and file-by-file build notes were in the
-previous version of this file — condensed here since Session 2 changed or superseded much
-of it; see git history (`git log -- agents/general-manager/STATUS.md`) for the original
-if the detail is ever needed.
+previous version of this file — condensed here since later sessions changed or superseded
+much of it; see git history (`git log -- agents/general-manager/STATUS.md`) for the
+original if the detail is ever needed.
 
 Key decisions that still hold: drafts-only autonomy, OpenAI for images (scoped to blog +
 pin generation only), GitHub Issues for the approval exchange, GA4/Search Console/Wix
 Analytics as data sources, Wix cover-image upload stays manual (Jane's choice), pin visual
-style should be reference-driven (this became the whole focus of Session 2).
+style should be reference-driven (became the whole focus of Sessions 2 and 3).
 
 ---
 
 ## SESSION 2 (2026-08-01 to 2026-08-03) — real testing, then a full pin-quality rebuild
+
+**Historical note (Session 3): the pin copy/design architecture built in this session's
+Part D — `skills/pinterest-agent/copy_writer.py` + `skills/creative-designer/
+infographic_pin_prompt.py` + `context/pinterest-expert.md` — is no longer what GM uses.**
+Session 3 replaced it entirely with a new, dedicated module (see below) after Jane rejected
+this architecture's real output a second time and asked for a clean rebuild instead of
+another patch. The detail below is kept for history/context — `copy_writer.py` and
+`pinterest-expert.md` are untouched, unused by GM, and Jane's call on what to do with them.
 
 ### Part A — first real end-to-end runs, found a pipeline-breaking bug
 
@@ -64,17 +82,6 @@ but `gpt-image-2` doesn't accept that parameter at all (it always returns b64_js
 default — unlike DALL-E 3). Fixed by removing the parameter. This meant the first real
 post published with **zero images** and the inline `[DALLE: ...]` markers fell back to
 visible placeholder text — the exact bug the whole image pipeline was built to prevent.
-Also discovered creative-designer falls back to a **blank placeholder background** (no
-real photo) when OpenAI generation fails, so the first batch of 5 Tailwind pin drafts from
-this run are unusable.
-
-Also discovered (not a bug, existing pre-Session-2 behavior): `blog_seo_agent.run()`'s own
-git commit+push step does `git add` broadly, not scoped to just the new post — it swept up
-**every uncommitted file in the repo** (including all of this session's General Manager
-build) into one commit titled "add post: pinterest seo" and pushed it to `origin/main`.
-Nothing was lost, just bundled under a misleading message. Worth knowing if a future commit
-message looks broader than expected — check `git show --stat` before assuming something's
-wrong.
 
 **Fixed and re-verified**: re-ran the same keyword after the `response_format` fix — real
 cover + inline images generated, Wix draft updated in place (not duplicated, using
@@ -83,209 +90,287 @@ holds.
 
 ### Part B — dashboard: GM report card on Overview tab
 
-Jane asked why the dashboard wasn't reflecting any of this — answer: the manual test
+Jane asked why the dashboard wasn't reflecting any of this — root cause: manual test
 scripts called pipeline stages directly instead of going through
-`check_replies_and_execute.py`'s `main()`, which is the only place that updates
-`dashboard_data.json`. Fixed properly (not just patched for one run):
-
-- `check_replies_and_execute.py`'s `_update_dashboard()` now builds a rich
-  `general_manager.latest_run_posts[]` array per post — active links to the live blog post,
-  a rendered post preview, the GitHub image folder, the Wix drafts list, the newsletter
-  draft, the IG carousel, and Tailwind — computed from real URL patterns (`WIX_SITE_ID`,
-  `GITHUB_REPO`, `BLOG_BASE_URL`), not guessed.
-- Also mirrors successfully-repurposed posts into `repurposer.posts[]`, since
-  `content_repurposer.py` never touched the dashboard itself either.
-- `switzer_ai_dashboard.html`: new `renderGeneralManagerReport()` renders this as a card on
-  the **Overview** tab (`#gm-report-card`), one row per post, color-coded link buttons
-  (teal/amber/coral/choc backgrounds, not plain outlined buttons). Header format: "General
-  Manager - run 3 Aug 2026" (`fmtGmDate()`). Removed the old Etsy/Blog/Pinterest/Pending/
-  Posts-this-month stat-grid cards from Overview per Jane's request — also had to remove
-  the now-dead `renderOverview()` function entirely (it was still being called from
-  `togglePub()` too — a second call site that would have thrown "not defined" if missed).
-- **Post preview link bug**: originally pointed at the GitHub *blob* URL (`github.com/.../
-  blob/main/posts/{slug}.html`), which renders as syntax-highlighted source code, not a
-  page. Fixed to use the GitHub Pages URL (`janeswiss.github.io/switzer-dashboard/posts/
-  {slug}.html`) — this convention already existed in `blog_seo_agent.py` (the `"url"` field
-  on every post entry uses exactly this pattern), I just hadn't reused it. Verified with
-  `curl` that it returns 200 and actually renders.
-- **Tailwind link**: `https://www.tailwindapp.com/dashboard/` (was a generic `/app` guess).
+`check_replies_and_execute.py`'s `main()`, the only place that updates
+`dashboard_data.json`. Fixed: `_update_dashboard()` now builds a rich
+`general_manager.latest_run_posts[]` array per post — active links to the live blog post, a
+rendered post preview (GitHub Pages URL, not the raw GitHub blob URL, which renders as
+source code), the GitHub image folder, Wix drafts, newsletter, IG carousel, Tailwind.
+`switzer_ai_dashboard.html` renders this as a card on the Overview tab.
 
 ### Part C — content_repurposer's pins.json removed entirely
 
-`content_repurposer.py` had its own, completely separate pin-copy generation (title +
-description + URL, no images, never wired to anything) alongside the real pin pipeline —
-two unrelated texts existed for the same post with no way to tell which was real. Jane
-asked "why do the Tailwind pins say something different from the Pin Copy button" — this
-was the answer. Removed `pins.json` generation from `content_repurposer.py` entirely
-(`parse_pins()` deleted, `save_outputs()` simplified, `--all` mode's completion check
-updated). It now only produces `email_hook.md` and `instagram_carousel.md`. Dashboard's
-"Pin copy" button removed accordingly.
+`content_repurposer.py` had its own, disconnected pin-copy generation (never wired to
+anything real) running alongside the actual pin pipeline — two different texts existed for
+the same post with no way to tell which was real. Removed entirely; `content_repurposer.py`
+now only produces `email_hook.md` and `instagram_carousel.md`.
 
-### Part D — full rebuild of Pinterest pin copy + design (the big one)
+### Part D — first full rebuild of Pinterest pin copy + design (superseded in Session 3)
 
-Jane reviewed real generated pins and rejected them hard: "rubbish", generic, forced
-product pitches, near-identical designs, boring/illogical eyebrow+headline pairing, Title
-Case where it shouldn't be. She then walked through her own reference material and iterated
-live with Claude on example pin copy until it was right. Everything below reflects that.
+Root causes found and fixed at the time (see git history for full detail): forced product
+pitches on 0-product-match keywords, identical `pin_items` across all 5 variations (a real
+Pinterest spam-detection risk), titles that discarded Jane's real "magazine cover line"
+style, a CTA promising an Etsy link that didn't exist, a **stale few-shot example section in
+`pinterest-expert.md`** that silently overrode every rule change made earlier the same
+session (concrete examples beat prose rules — this was the single biggest lesson of Session
+2 and it recurred in Session 3 in a different form), tactic-as-agent personification
+("Pinterest SEO built..."), an un-ported Instagram-comparison ban, decorative sparkle/leaf
+filler baked into every layout template. Resulted in 3 fixed layout templates
+(`icon_grid`/`outline_list`/`colored_block`) rotated by variation letter, `_enforce_case()`
+as a programmatic case backstop, copy-first/design-derived architecture.
 
-**Reference material Jane provided** (read these before touching pin copy/design again):
-- `agents/general-manager/switzertemplates-pins/` — 10 real pin design images spanning
-  genuinely different structures: numbered icon grid, elegant outline-number list, colored
-  block list, grouped checklist, bold text-stack, lifestyle/mockup lead-magnet. NOT one
-  style — the range itself is the point.
-- `agents/general-manager/switzertemplates-pins/titles-descriptions-CTAs/` — 4 screenshots,
-  10 title/description/CTA examples in Jane's actual liked voice.
+**Why this got replaced anyway**: even after all these fixes, Jane tested the same idea
+directly against ChatGPT and got visibly better results than the pipeline produced. Root
+cause (found in Session 3, see below): the prompt had drifted right back into being
+over-specified (long mechanical style descriptions, hedged/optional-sounding content
+instructions) — the same failure mode as the stale-examples bug, recurring in new form.
+That, plus a genuine root-cause discovery that pin copy was being generated from a
+**severely truncated post excerpt**, is what triggered the Session 3 rebuild.
 
-**Root causes found, in the order discovered:**
-1. `_PM_SPLIT` forced 1 product pin even at PM=0 ("no product match"), so an unrelated
-   keyword ("pinterest seo") got a forced, unconvincing pitch for Instagram templates.
-   Fixed: PM=0 → 0 product pins.
-2. All 5 variations under one topic shared identical `pin_items` (same list, same order,
-   badge colors tied to item position not variation) → visually near-duplicate pins, a real
-   Pinterest spam-detection risk, not just an aesthetic complaint.
-3. Titles (`pin_headline`) were redefined this session to be 2-5 word labels for image
-   legibility — but that discarded the "magazine cover line" curiosity-hook quality of
-   Jane's actual approved style, which was 5-15 word full sentences.
-4. CTA was a real, concrete bug: a pin's `seo_description` ended with "Grab it in my Etsy
-   store!" while `destination_url` pointed at the blog — `PRODUCT_URLS` never actually maps
-   anything to a real Etsy link, so that CTA (from the *old* approved-CTA list) was always
-   going to be a lie.
-5. `content_repurposer.py`'s separate (better-sounding) pin copy came from reading the
-   *actual blog post*, not just the keyword — `pinterest-agent/copy_writer.py` never saw
-   the post at all. It also used Opus; `copy_writer.py` used Sonnet.
-6. Biggest one, found last: `pinterest-expert.md` had a "Style reference — exact tone and
-   format to match" section that explicitly told Claude to check every variation against 3
-   **old** benchmark examples (short titles, "no CTA" as ideal) — which directly
-   contradicted the new rules written earlier the same session. Concrete examples pull
-   harder on model output than prose rules, so this section was silently overriding
-   everything above it. This is *the* answer to "why does it still sound generic after all
-   these rule changes" — the rules were right, the literal pattern-matching material was
-   still wrong.
-7. Titles were using the tactic as the verb's grammatical subject ("Pinterest SEO
-   built/turned/beats...") — a classic AI-writing tell. A tactic can't act; a person acts,
-   or the tactic is a noun phrase being described ("the strategy that...").
-8. A pin used a Pinterest-vs-Instagram comparison — already permanently banned in
-   `blog_seo_agent.py` ("overused across previous posts") for blog post openers, but never
-   ported to pin copy.
-9. `_enforce_case()` (the programmatic sentence-case/ALL-CAPS backstop) didn't special-case
-   the standalone pronoun "I", and had no path for real proper nouns beyond a fixed short
-   list — "while i sleep" shipped in one rendered pin before this was caught.
-10. Image prompts had "sparkle/leaf/botanical decorative accents" and hairline dividers
-    baked into every layout template — Jane identified these as gpt-image-2's default
-    "elegant" filler, not anything in her real reference pins, and exactly what makes an
-    image read as AI-generated instead of custom-designed. Also removed the `tagline`
-    element entirely — nothing renders below the bottom watermark bar now.
+---
 
-**Current architecture (copy first, design derived from copy — Jane's explicit instruction):**
-1. `pin_pipeline.py` reads the real post text (`_post_excerpt()`, reusing
-   `content_repurposer.extract_post_content()`) and passes it into `copy_writer.generate()`.
-2. `copy_writer.py` (now Opus, was Sonnet) writes `seo_title` FIRST for each of 5
-   variations — full sentence, 8-15 words, outcome-led, one of 5 rotating angles
-   (benefit/problem/result/comparison/transformation-led, comparison-led restricted to
-   comparing two things *within* the topic, never a platform). `cta` is now its own field,
-   names the destination directly, rotates.
-3. `eyebrow` + `headline` are DERIVED from `seo_title` — a visual split that must
-   reconstruct the title as one sentence when read together. `eyebrow` is genuinely left
-   empty on some variations (real pins mix eyebrow+headline with headline-only).
-4. `pin_items` (5-6 real facts, grounded in the post) live once per topic; each variation
-   picks its own subset/order via `item_order` so no two pins show an identical list.
-5. `_enforce_case()` guarantees sentence-case/ALL-CAPS programmatically (not just prompted)
-   — handles "I", a short proper-noun list (`_PROPER_NOUNS`: pinterest, etsy, instagram,
-   canva, wix, google, tiktok, facebook, shopify, flodesk, tailwind, jane,
-   switzertemplates) and a separate acronym list rendered full-uppercase (`_ACRONYMS`: seo,
-   diy, url, cta, faq, ai, pdf, ugc, roi).
-6. `infographic_pin_prompt.py` has **3 structurally distinct layout templates** —
-   `icon_grid` (numbered circle badges + icons, 2-column), `outline_list` (single column,
-   thin outline numerals, elegant serif, no color fill), `colored_block` (flat colored
-   rectangles, numbered text only, no icons) — rotated by variation letter in
-   `image_generator.py` (`LAYOUTS[letter_index % 3]`), plus a rotating badge-color offset.
-   No decoration, no dividers, no frames, nothing below the bottom bar.
-7. `pinterest-expert.md`'s "Style reference" section now contains real few-shot material:
-   Jane's actual liked examples verbatim, plus the specific pin copy she personally
-   reviewed and approved line-by-line in this session (not paraphrased). This is the
-   section Claude is told to literally pattern-match against.
+## SESSION 3 (2026-08-05) — pin generation rebuilt again, this time as a clean, dedicated module
 
-**Verified against 3 full real runs** (each showed Jane the actual rendered images before
-being called done): final run showed correct grammar (no personification), no platform
-comparison, no stray decoration, genuine layout/color variety across all 5 pins, titles
-matching the reference voice (e.g. "Domain quality beats keyword stuffing", "From
-guesswork to a system that ranks").
+### Part A — reference-driven image prompts, iterated live (now superseded, see Part B)
 
-**Files touched in Part D:**
+Before the full rebuild, spent significant time getting `skills/creative-designer/
+infographic_pin_prompt.py` to generate genuinely varied, non-generic pins by picking ONE
+real reference pin per generation (from `context/pin-reference-styles.json`, still live and
+reused in Part B) and giving OpenAI real creative freedom instead of a mechanical spec.
+Iterated through several real bugs, each found by generating and inspecting actual images:
+- Overly-long, mechanical `STYLE REFERENCE` text and hedged "you don't need to use all of
+  them" content language caused the model to render near-blank pins (a single line of
+  headline text on an empty gradient) — fixed by matching a working prompt Jane tested
+  directly against ChatGPT: terse structural reference line, unhedged content, a bare
+  closing directive ("Create a pin to illustrate this topic/information").
+- All pins leaned the same 2-3 colors — added `_PALETTE_VARIANTS`, a rotating "lead accent
+  color" line layered on the brand palette.
+- Jane asked for pin **type** variety too, not just layout — added a `pin_type` field
+  ("infographic" vs "photo") to `pin-reference-styles.json`, split 3-infographic/2-photo per
+  topic in `image_generator.py`. The 2 photo references
+  (`pin-design-example-photo.jpg`/`photo2.jpg`) are real files Jane renamed herself in
+  `agents/general-manager/switzertemplates-pins/` to flag them for this purpose.
+- Fixed a real cross-topic bug: reference/palette rotation was keyed only to variation
+  letter (a-e), so every topic on the account picked the exact same first-5 references in
+  the same order — added a topic-keyword hash so different posts draw from different points
+  in the pool too.
+
+This work is still in the codebase (`skills/creative-designer/infographic_pin_prompt.py`,
+`image_generator.py`, `analyze_pin_references.py`) but **is no longer what GM calls** — see
+Part B. It would still run if `skills/creative-designer/main.py` were invoked directly/
+manually, using `skills/pinterest-agent/copy_writer.py` for copy. Worth knowing this fork
+exists: two different copy-writing systems now live in the repo, only one is used by GM.
+
+### Part B — the real rebuild: `agents/blog-seo-agent/pinterest-pins/`
+
+Jane reviewed real pins from Part A's system and rejected them again — bad titles, cramped/
+distorted icons, duplicated content on two-column layouts. Working through *why*, live,
+surfaced the actual root cause: **`pin_pipeline.py` was grounding pin copy in a 4,000-
+character excerpt of the real blog post** (`content_repurposer.extract_post_content`,
+truncated). Confirmed directly: `shopify-vs-wix-for-ecommerce` is 2,928 words / 8 real
+sections; the 4,000-char cutoff landed 22% through the post, **before either of its two
+comparison sections** ("WHERE WIX WINS" / "WHERE SHOPIFY WINS"). Pin copy had been writing
+blind to most of what its own source post actually said — this, not prompt phrasing, is why
+items read as disconnected, invented filler.
+
+Jane's response: stop patching `copy_writer.py`/`pinterest-expert.md` (a system that had
+now needed 3 separate rewrites in two sessions, each new fix fighting the last one) and
+instead build pin generation fresh, mirroring `blog_seo_agent.py`'s proven pattern —
+hardcoded rules instead of a living context doc that keeps drifting, one well-grounded
+Claude call, real content, then a validation pass. New, self-contained module:
+
 ```
-context/pinterest-expert.md                    Heavily rewritten: Title principles, CTA
-                                                 rules, "Pin design text is DERIVED from
-                                                 copy" section (replaces old "pin_headline
-                                                 vs seo_title"), Design principles
-                                                 (infographic-era, replaces old photo-brief
-                                                 era text), Style reference (real few-shot
-                                                 examples), quality checks, "never do" list,
-                                                 PM=0 split note. All internally consistent
-                                                 now — check this file first before writing
-                                                 pin copy rules by hand elsewhere.
-skills/pinterest-agent/copy_writer.py           Model -> opus. New fields: title_angle,
-                                                 headline, cta, item_order. eyebrow can be
-                                                 empty. _enforce_case() + _PROPER_NOUNS +
-                                                 _ACRONYMS added. _PM_SPLIT[0] = (0,5).
-skills/creative-designer/infographic_pin_prompt.py   NEW (built then revised). 3 layout
-                                                 template builders + _header_block/
-                                                 _footer_block. No tagline, no decoration,
-                                                 no dividers.
-skills/creative-designer/image_generator.py     Rewritten: single OpenAI call per pin (no
-                                                 Pillow compositing), layout + color_offset
-                                                 chosen from variation letter.
-skills/creative-designer/main.py                preloaded_copy mapping updated for new
-                                                 field names (topics-JSON -> copy_data).
-agents/general-manager/pin_pipeline.py          Added _post_excerpt() for real-post
-                                                 grounding.
-agents/content-repurposer/content_repurposer.py pins.json generation removed entirely.
+agents/blog-seo-agent/pinterest-pins/
+  post_sections.py    Extracts the REAL, FULL post structure (every real <h3> section +
+                       its actual body text, no length cap) — replaces the 4000-char
+                       excerpt bug above at the root.
+  pin_writer.py        Hardcoded rules (not a living doc) + one Claude call per post,
+                       grounded in post_sections output, producing 5 variations. Includes
+                       real transcribed examples from Jane's own reference images
+                       (agents/general-manager/switzertemplates-pins/titles-descriptions-
+                       CTAs/ — these had never actually been read into text before this
+                       session, only sitting as unread images). Validation pass mirrors
+                       blog_seo_agent's check_banned_words: personification-pattern regex,
+                       near-duplicate-item check across variations, deterministic case
+                       enforcement (_enforce_case) — with one Claude revision retry if
+                       issues are found, same pattern as the banned-word retry.
+  pin_image_prompt.py  Builds the OpenAI prompt from validated copy only (never invents
+                       copy). Reuses context/pin-reference-styles.json directly (shared,
+                       still-live file, not part of what got replaced). 4 fixes baked in,
+                       all found from real bad output: (1) only the short, purpose-written
+                       image_headline/image_eyebrow are quoted exactly — pin_items are
+                       informational so there's room to fit them; (2) explicit permission to
+                       drop items / keep descriptions brief instead of cramming (this is what
+                       was distorting icons); (3) icons only where the reference style
+                       actually uses them; (4) never duplicate a point to fake a two-sided
+                       layout — this fixed the duplicate-content bug at its source, since
+                       genuinely two-sided posts (like the Wix/Shopify one) now produce
+                       genuinely paired items instead of forcing single facts into both
+                       columns.
+  pin_generator.py     Orchestrator, mirrors blog_seo_agent.run(): write → validate →
+                       generate 5 images (OpenAI) → upload (Cloudinary, reused from
+                       creative-designer) → submit to Tailwind (reused tailwind_client.py).
+                       CLI: `python3 pin_generator.py <slug> "<keyword>"`.
+```
+
+**Key design choice**: `image_headline` is a separate, deliberately SHORT field (a few
+words, close to the actual keyword — e.g. "Shopify vs Wix for ecommerce - an honest
+comparison") written by the copywriter itself, not invented by the image model from a long
+summary. This is what fixed the "long, dumb on-image titles" complaint — writing marketing
+copy is the copywriter's job; asking an image model to also invent headline text from a
+vague summary was the actual mistake, not something more prompt engineering on the image
+side could fix.
+
+`pin_pipeline.py` rewritten to call `pin_generator.py` via subprocess instead of
+`copy_writer.py` + `skills/creative-designer/main.py`. Old Pinterest Agent (`skills/
+pinterest-agent/` — `copy_writer.py`, `pinterest-expert.md`, `topic_selector.py`, the Canva
+image pipeline) is completely untouched and out of scope — Jane's explicit call on whether
+to keep or delete any of it later.
+
+**One implementation bug found and fixed during testing**: `_enforce_case(text, upper=True)`
+was keeping proper nouns capitalized-not-uppercase ("Wix BUILT-IN FEATURES" instead of "WIX
+BUILT-IN FEATURES") — proper nouns need to match the surrounding case, not always stay in
+Title case. Fixed; didn't end up visible in the test run shown to Jane (the pin with paired
+Wix/Shopify items happened to render as a photo-type pin, which skips the item list), but
+matters for future infographic-type comparison pins.
+
+**Verified with a real run** on `shopify-vs-wix-for-ecommerce`: 5 pins, grounded in the real
+post, natural coherent sentences (not disconnected nouns), one variation organically
+produced genuine paired Wix/Shopify content straight from the post's real comparison
+sections (no invented duplication), short keyword-forward titles matching Jane's own
+examples, no cramped/distorted icons, 3 infographic + 2 photo split. Jane confirmed: "these
+new ones look good."
+
+### Part C — backfilled the same post's missing images + newsletter upgrade
+
+`shopify-vs-wix-for-ecommerce` (written 2026-06-26, predates the current image pipeline)
+had zero images and had never been through pins/newsletter at all. Generated 3 fresh cover
++ 4 inline images (new Claude call inserts `[DALLE: ...]` markers into the *existing*
+already-written body without changing any wording, then renders them the normal way),
+reassembled via `blog_seo_agent._assemble_html()`, preserved the FAQ schema. Cost: $0.65
+images this post. Confirmed this generalizes — see "What's NOT yet done" for the other 12
+draft posts in the same situation.
+
+Newsletter (`content_repurposer.py`): Jane wanted 3 subject line variations (not 2) plus a
+single inbox description capped at 80 characters (was: 2 subject lines + ~90-char preview
+text, uncapped in practice). Prompt rewritten accordingly, verified both on pinterest-seo
+and shopify-vs-wix-for-ecommerce — real output landed at 64-65 characters, well inside the
+cap, each subject line a genuinely different angle.
+
+### Part D — fixed a real audience-bias bug: content defaulted to coaches/service only
+
+Jane, reviewing the Shopify-vs-Wix pins: "don't push the idea that I sell templates for
+coaches only... Shopify is not for coaches, it's mostly for ecommerce." Traced to hardcoded
+instructions in multiple places that forced every post's examples toward
+coaches/service-providers regardless of topic — a real bug for ecommerce-specific keywords
+like Shopify, where the natural audience is product sellers. Fixed everywhere it was
+actually driving generation (not just illustrative example text): `CLAUDE.md` (Business
+Overview, Target Customer, Niches, Wix Website product description — now explicitly
+"service providers and coaches, but also product-based and ecommerce sellers", topic
+decides framing), `blog_seo_agent.py` (3 hardcoded lines: research prompt, "REAL EXAMPLES"
+instruction, "DEPTH AND VALUE REQUIREMENTS"), `content_repurposer.py`,
+`pinterest-pins/pin_writer.py`, `context/product-catalog.md` (Bundle + Wix Website "who
+it's for" sections). Left untouched: `context/content-style-examples.md`'s illustrative
+"business coach templates" snippets (tone examples, not audience-restricting rules) and the
+out-of-scope `pinterest-expert.md`.
+
+### Part E — dashboard/Wix-sync gap (the "manual testing bypasses the orchestrator" bug, again)
+
+Jane asked why she didn't see the Shopify-vs-Wix update on the dashboard. Same root cause as
+Session 2 Part B, recurring because Session 3's work was done via direct one-off test
+scripts (proving out the new module), not through `check_replies_and_execute.py`. Fixed for
+this post specifically: (1) synced the Wix draft with the new backfilled content via
+`publish_to_wix.publish(slug, draft_id=...)` — it had gone stale, still showing the
+pre-backfill body; (2) committed and pushed everything (had been sitting local-only); (3)
+manually added a `general_manager.latest_run_posts[]` entry in the exact schema
+`_build_post_report()` produces, since the real orchestrator never ran. See the reminder at
+the top of this file — this needs to stop being a recurring surprise.
+
+**Files touched in Session 3** (beyond the new `pinterest-pins/` module and Part A's
+already-listed files):
+```
+CLAUDE.md                                Business Overview, Target Customer, Niches, Wix
+                                          Website product line broadened past coaches/
+                                          service-only.
+agents/blog-seo-agent/blog_seo_agent.py  3 hardcoded audience lines fixed (see Part D).
+agents/content-repurposer/content_repurposer.py   Newsletter prompt rewritten (3 subject
+                                          lines + 80-char description); audience line fixed.
+agents/general-manager/pin_pipeline.py   Rewritten to call the new pinterest-pins module.
+context/pin-reference-styles.json        pin_type field added ("infographic"/"photo") per
+                                          reference; short_description field added (terser
+                                          than the original long descriptions — confirmed
+                                          via Jane's direct ChatGPT test that long mechanical
+                                          descriptions underperform a short structural cue).
+context/product-catalog.md               Bundle + Wix Website "who it's for" broadened.
+posts/shopify-vs-wix-for-ecommerce.html  Backfilled with real images (see Part C).
+dashboard_data.json                      general_manager.latest_run_posts + repurposer.posts
+                                          entries added for shopify-vs-wix-for-ecommerce.
 ```
 
 ---
 
-## What's confirmed working (tested live, Session 2)
+## What's confirmed working (tested live)
 
-- Full pipeline for one real keyword, twice — first run caught the `response_format` bug,
-  second run confirmed the fix (real images, real Wix draft update, real Tailwind pins).
-- Dashboard Overview tab GM report card — real links, verified the GitHub Pages preview URL
-  actually resolves (curl 200).
-- Pin copy + design rebuild — 3 full runs, final one confirmed correct on every axis Jane
-  flagged (grammar, comparison ban, decoration, layout variety, color variety, case).
+- Full pipeline for real keywords, multiple times across Sessions 2 and 3 — images, Wix
+  draft updates, Tailwind pins, newsletter, all verified against actual rendered output, not
+  assumed.
+- Dashboard Overview tab GM report card — real links, verified.
+- **New Pinterest pin system** (`agents/blog-seo-agent/pinterest-pins/`) — grounded in real,
+  full post content; genuine coherent copy; short keyword-forward on-image titles; no
+  cramped icons; no duplicate-content-on-mismatched-layout bug; 3-infographic/2-photo split;
+  case enforcement bug found and fixed. Verified on `shopify-vs-wix-for-ecommerce`, confirmed
+  good by Jane.
+- Backfilling images + pins + newsletter for an already-written, pre-pipeline post — proven
+  once on `shopify-vs-wix-for-ecommerce`.
+- Audience framing now genuinely follows topic (ecommerce topics get product-seller
+  examples, not forced coaching framing).
 
 ## What's NOT yet done
 
-1. **Old broken Tailwind drafts need manual cleanup** — at least 2 batches of pins from
-   before the fixes (blank backgrounds from the response_format bug, then a
-   decent-but-generic batch from before the copy rebuild) are still sitting in Jane's
-   Tailwind queue. No safe API-verified way to delete them found — flagged for her to
-   delete by hand.
-2. **`agents/content-repurposer/switzertemplates-pins/` → `agents/general-manager/
-   switzertemplates-pins/` folder move is uncommitted** — shows as deleted+untracked in
-   `git status`. Jane moved it on disk; I haven't committed that change or been asked to.
-3. **The outer GM loop (`analyze_and_recommend.py` → GitHub issue → `check_replies_and_
-   execute.py`) hasn't been re-tested since the Part D pin rebuild** — the pieces should
-   still compose correctly (same `pin_pipeline.py` call), but only the inner pin-generation
-   step has been re-verified directly, not the full weekly-report → approval → execution
-   loop end to end.
+1. **12 more Wix drafts need the same backfill treatment.** Confirmed (Session 3) that all
+   13 posts in Jane's Wix Drafts tab already exist as fully-written posts in `posts/*.html`
+   — this isn't a writing task. Only `pinterest-seo` and (as of this session)
+   `shopify-vs-wix-for-ecommerce` have images/pins/newsletter. The other 11 — 5 more June
+   Shopify/ecommerce posts, 6 June Pinterest posts — have zero images, zero pins, zero
+   newsletter, and predate the current image pipeline: `how-to-set-up-shopify-store`,
+   `shopify-theme-store`, `shopify-store-template`, `how-to-choose-a-shopify-theme`,
+   `online-store-for-small-business`, `how-to-get-followers-on-pinterest`,
+   `pinterest-tips-for-beginners`, `how-to-start-a-pinterest-page`,
+   `pinterest-marketing-manager`, `how-to-create-pins-on-pinterest`,
+   `how-to-earn-money-from-pinterest`. Same pattern as Part C above, one at a time, each
+   confirmed with Jane before moving to the next — do NOT batch all 11 unattended.
+2. **Old broken Tailwind drafts need manual cleanup.** Several stale test batches now exist
+   across Sessions 2 and 3 (blank-background bug, pre-copy-rebuild generic batch, several
+   during-Session-3 iteration batches). No safe API-verified way to delete found — flagged
+   for Jane to clean up by hand in Tailwind directly.
+3. **The outer GM loop** (`analyze_and_recommend.py` → GitHub issue → `check_replies_and_
+   execute.py`) still hasn't been re-tested end to end since either pin rebuild. Only the
+   inner pin-generation step (now via the new module) has been directly re-verified.
 4. **launchd activation** — still not installed to `~/Library/LaunchAgents`. Explicitly a
    "do this last" step.
 5. **`POSTS_PER_WEEK`** — still defaults to 2, never explicitly confirmed with Jane.
-6. **CLAUDE.md updates** — Agent Directory / Skills Directory still don't mention
-   general-manager. Documentation debt, not functional debt.
-7. **`context/top-performing-pins/`** (the old, now-superseded reference folder path from
-   Session 1's decision 10) is empty and `analyze_reference_pins.py`/`pin-visual-style.md`
-   were never actually used — superseded by the real reference folders under
-   `agents/general-manager/switzertemplates-pins/` in Part D. Worth deciding whether to
-   delete the dead `analyze_reference_pins.py` script and its `context/pin-visual-style.md`
-   loading code in `copy_writer.py`, or leave it as inert dead code.
-8. Backfilling the 44 already-published posts with leaked `[DALLE: ...]` text — still
-   optional, still not done.
+6. **CLAUDE.md's Agent Directory / Skills Directory** still don't mention general-manager or
+   the new pinterest-pins module. Documentation debt, not functional debt.
+7. **Decide what to do with the now-doubly-superseded old Pinterest pin system**: `skills/
+   pinterest-agent/` (`copy_writer.py`, `pinterest-expert.md`, `topic_selector.py`,
+   `analyze_reference_pins.py`, the Canva image pipeline) and `skills/creative-designer/`'s
+   own copy/image path (`infographic_pin_prompt.py`, `image_generator.py`, `main.py`) are
+   both now unused by GM but still present and technically functional if run manually.
+   Explicitly Jane's call — she asked for the full picture of what each does before
+   deciding what to delete; that explanation happened this session but no deletion decision
+   was made yet.
+8. Backfilling the 44 already-published (non-draft) posts with leaked `[DALLE: ...]` text —
+   still optional, still not done. Separate from item 1 above (those are unpublished drafts
+   missing images entirely, not published posts with a text-leak bug).
 
 ## Immediate next step
 
-Jane's choice — options on the table: (a) re-run the full outer GM loop (recommend → GitHub
-issue → approve → execute) end to end now that pin quality is fixed, to confirm the whole
-system works together, not just the inner pin step; (b) clean up old Tailwind drafts and
-review the current pin batch manually first; (c) decide `POSTS_PER_WEEK` and activate
-launchd. Nothing should be assumed — ask before proceeding on any of these, per how this
-session has gone (Jane reviews and corrects before anything is declared done).
+Jane's choice. Most likely candidates given how this session went: (a) continue the Wix
+drafts backlog — pick the next post from item 1 above and run the same backfill+pins+
+newsletter treatment, confirming each one before moving to the next; (b) re-test the full
+outer GM loop now that pin generation is stable; (c) clean up stale Tailwind drafts and
+decide the old pin system's fate (item 7). Nothing should be assumed — ask before proceeding,
+per how both sessions have gone (Jane reviews and corrects before anything is declared done,
+and has twice now discovered gaps caused by manual testing bypassing the real dashboard/git
+update path — check that specifically after any hands-on testing).
