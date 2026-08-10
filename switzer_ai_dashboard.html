@@ -641,11 +641,23 @@ function renderGeneralManagerReport(){
     </a>`;
   };
 
-  const cards = posts.map(p => {
+  // Completed tasks sink to the bottom, original order preserved within each group.
+  const ordered = posts.map((p,i)=>({p,i})).sort((a,b)=>{
+    const da=!!a.p.completed, db=!!b.p.completed;
+    return da===db ? a.i-b.i : (da?1:-1);
+  });
+
+  const cards = ordered.map(({p,i}) => {
     const errBlock = (p.errors && p.errors.length)
       ? `<p style="font-size:12px;color:var(--red-mid);margin:6px 0 0;">⚠ ${p.errors.join(' · ')}</p>` : '';
-    return `<div style="padding:12px 0;border-top:1px solid var(--border2);">
-      <p style="font-size:13px;font-weight:600;margin:0 0 8px;">${p.keyword}</p>
+    const done = !!p.completed;
+    return `<div style="padding:12px 0;border-top:1px solid var(--border2);${done?'opacity:0.55;':''}">
+      <div style="display:flex;align-items:flex-start;gap:8px;margin:0 0 8px;">
+        <input type="checkbox" ${done?'checked':''} onchange="toggleGmPostDone(${i},this.checked)"
+          title="Mark this post's follow-up as done" aria-label="Mark ${p.keyword} as done"
+          style="width:16px;height:16px;margin-top:2px;cursor:pointer;accent-color:var(--choc);flex-shrink:0;">
+        <p style="font-size:13px;font-weight:600;margin:0;flex:1;${done?'text-decoration:line-through;color:var(--text3);':''}">${p.keyword}</p>
+      </div>
       <div>
         ${linkBtn(p.blog_post_url, 'Blog post (live)', 'ti-world', 'teal')}
         ${linkBtn(p.post_preview_url, 'Post preview', 'ti-file-text', 'amber')}
@@ -667,6 +679,14 @@ function renderGeneralManagerReport(){
     </div>
     ${cards}
   </div>`;
+}
+
+async function toggleGmPostDone(i, checked){
+  const posts = DATA.general_manager && DATA.general_manager.latest_run_posts;
+  if(!posts || !posts[i]) return;
+  posts[i].completed = checked;
+  renderGeneralManagerReport();
+  await saveData((checked?'Marked done: ':'Reopened: ') + posts[i].keyword);
 }
 
 // Wins — auto-generated from actual data

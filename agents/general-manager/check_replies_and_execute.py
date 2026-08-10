@@ -132,6 +132,7 @@ def _build_post_report(p: dict) -> dict:
         "tailwind_url": "https://www.tailwindapp.com/dashboard/" if "submitted to Tailwind" in p.get("pin_message", "") else None,
         "image_cost": p.get("image_cost", 0.0),
         "errors": p.get("errors", []),
+        "completed": False,
     }
 
 
