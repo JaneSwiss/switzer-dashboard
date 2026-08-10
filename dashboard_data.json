@@ -3143,7 +3143,8 @@
         "image_cost": 0.67,
         "pin_cost_estimate": 0.95,
         "errors": [],
-        "post_preview_url": "https://janeswiss.github.io/switzer-dashboard/posts/pinterest-seo.html"
+        "post_preview_url": "https://janeswiss.github.io/switzer-dashboard/posts/pinterest-seo.html",
+        "completed": true
       },
       {
         "keyword": "shopify vs wix for ecommerce",
