@@ -9,6 +9,7 @@ Run with:
 """
 
 import csv
+import hashlib
 import json
 import os
 import re
@@ -1320,16 +1321,94 @@ PROMPT 6 - INFOGRAPHIC:
 """
 
 
+# Composition options that include the woman character — excludes "Overhead flat lay",
+# which is explicitly a no-person composition (that's Prompt 2's territory).
+_PERSON_COMPOSITIONS = [
+    "From behind at a desk — seated, hair cascading down back, room stretching into background",
+    "Hands-only close-up — long gel nails in frame, rings and bracelets visible, mid-task action",
+    "Wide shot — woman very small in grand environment, architecture or landscape is the subject",
+    "Side profile — jaw and cheekbone edge visible, voluminous hair lit from window behind",
+    "Mid-action — woman leaning over desk or turning, hair caught in motion, candid energy",
+    "Over-shoulder — camera just behind her shoulder, nails visible on laptop or phone, work ahead",
+    "Low floor angle — shot from below desk level looking up slightly, legs and hem of outfit visible",
+    "Walking away — full rear view mid-stride through a beautiful space, coat hem or hair moving",
+    "Window silhouette — back of head against bright window, hair as silhouette with rim light on edges",
+    "Reclining — woman lying on sofa or bed, shot from above at angle, hair spread, book or phone in hand",
+    "Mirror reflection — woman seen in a decorative mirror, back to camera, reflection shows confidence not face",
+    "Staircase — woman on wide staircase from below, looking up at landing, architectural drama",
+    "Reading or writing — intense focus, face angled down, hair falling forward, pen or book in hand",
+    "Standing at window — full figure from behind at floor-to-ceiling window, city or garden outside",
+]
+
+_ENVIRONMENTS = [
+    "Bright home office with white arched window, sheer curtains moving in breeze, morning light flooding in",
+    "Cosy reading nook with built-in bookshelves floor to ceiling, warm amber lamp, velvet armchair",
+    "Bedroom with linen duvet, morning light casting long shadows across cream sheets",
+    "Kitchen island in white marble, pendant lights above, fresh flowers on the counter",
+    "Living room sofa in bouclé cream fabric, afternoon sun through plantation shutters, rug visible",
+    "Walk-in wardrobe or dressing room, full-length mirror, clothes visible in background, editorial mood",
+    "Bathroom vanity with travertine tiles, luxe products arranged neatly, soft diffused light",
+    "Modern co-working space with exposed ceiling beams, warm Edison pendants, brick wall",
+    "Minimalist photography studio, white curved cove backdrop, single beauty dish light from side",
+    "Boutique hotel suite sitting room, curved Art Deco armchair, dramatic drapes, evening lamp glow",
+    "Luxury brand showroom or concept store interior, editorial, objects on pedestals, gallery white walls",
+    "Dark moody office with floor-to-ceiling dark shelving, leather chair, warm amber lamp only light source",
+    "Mid-century modern workspace, walnut desk, pendant Arco lamp, minimal and warm",
+    "Glass-walled penthouse office, city blurred behind full-height windows, clean modern desk",
+    "Rooftop terrace with city skyline, golden hour light, terracotta pots, olive tree in planter",
+    "Stone courtyard in Mediterranean villa, bougainvillea blurred behind, dappled morning light",
+    "European cobblestone street, archway visible behind, woman captured mid-stride, golden light",
+    "Lush garden, hedgerow blurred background, wrought iron table, very soft diffused light",
+    "Beach-adjacent poolside at a luxury villa, sun lounger, blue water blurred behind, warm",
+    "Verdant hotel garden terrace, rattan furniture, greenery everywhere, warm dappled shade",
+    "City rooftop at dusk, string lights beginning to glow, warm purple-orange sky behind",
+    "Sleek all-white café with marble counter, minimalist pendant, single flower stem in vase",
+    "Parisian café with mirrored walls, rattan chairs, marble bistro table, warm afternoon light",
+    "Japanese-inspired café with pale timber, ceramic objects, stone surfaces, calm zen aesthetic",
+    "Luxury hotel lobby bar, dramatic high ceilings, low leather seating, soft indirect lighting",
+    "Rooftop café bar, city view behind, warm golden hour, elegant glassware on the table",
+    "Coastal café, light wood, linen napkins, sea light, relaxed editorial feel",
+]
+
+
+def _cover_assignment(keyword: str) -> dict:
+    """Deterministically assigns a composition + environment per woman-cover prompt from
+    the keyword, instead of leaving the choice to the model. Left free to choose, Claude
+    reliably defaults to 'from behind at a desk' regardless of the post topic — confirmed
+    across roughly half of all real published posts.
+
+    Uses independent chunks of an MD5 digest per axis (not a simple summed-character
+    hash) — two real keywords ("how to set up shopify store" / "pinterest seo") produced
+    an identical assignment under a plain sum, because their sums happened to differ by
+    an exact multiple of both list lengths. MD5 chunks don't share that structural risk."""
+    digest = hashlib.md5(keyword.strip().lower().encode()).hexdigest()
+    return {
+        "prompt1_composition": _PERSON_COMPOSITIONS[int(digest[0:8], 16) % len(_PERSON_COMPOSITIONS)],
+        "prompt1_environment": _ENVIRONMENTS[int(digest[8:16], 16) % len(_ENVIRONMENTS)],
+        "prompt3_composition": _PERSON_COMPOSITIONS[int(digest[16:24], 16) % len(_PERSON_COMPOSITIONS)],
+        "prompt3_environment": _ENVIRONMENTS[int(digest[24:32], 16) % len(_ENVIRONMENTS)],
+    }
+
+
 def generate_image_prompts(keyword: str, post_html: str) -> str:
     """Make a second Claude call to generate Nano Banana Pro image prompts for the post."""
     client = anthropic.Anthropic(api_key=ANTHROPIC_API_KEY)
     plain_text = re.sub(r"<[^>]+>", " ", post_html)
+    assignment = _cover_assignment(keyword)
 
     user_prompt = (
         f'Generate image prompts for a blog post about "{keyword}".\n\n'
         f"POST CONTENT:\n{plain_text[:3000]}\n\n"
         f"Read the post content carefully. Every prompt must be specific to this "
-        f"post's topic, audience, and message. Follow the output format exactly."
+        f"post's topic, audience, and message. Follow the output format exactly.\n\n"
+        f"COMPOSITION AND ENVIRONMENT ARE ASSIGNED, NOT YOUR CHOICE — this is what keeps "
+        f"cover images across different blog posts from all looking the same:\n"
+        f"- PROMPT 1 MUST use this composition: {assignment['prompt1_composition']}\n"
+        f"- PROMPT 1 MUST use this environment: {assignment['prompt1_environment']}\n"
+        f"- PROMPT 3 MUST use this composition: {assignment['prompt3_composition']}\n"
+        f"- PROMPT 3 MUST use this environment: {assignment['prompt3_environment']}\n"
+        f"Everything else — hair, outfit, drink, props, screen content, mood — is still "
+        f"yours to choose freely, grounded in the actual post content."
     )
 
     response = client.messages.create(
