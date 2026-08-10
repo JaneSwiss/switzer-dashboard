@@ -540,7 +540,8 @@
       "Read(//private/tmp/pristine_studio/config/**)",
       "Bash(diff /private/tmp/claude-501/-Users-janeair-Documents-AI-switzertemplates/72054767-867a-4e6a-ace7-4eda056b6083/scratchpad/theme-audit/champagne/assets/base.css /private/tmp/claude-501/-Users-janeair-Documents-AI-switzertemplates/72054767-867a-4e6a-ace7-4eda056b6083/scratchpad/theme-audit/studio/assets/base.css)",
       "Read(//tmp/**)",
-      "Bash(xargs -n1 basename)"
+      "Bash(xargs -n1 basename)",
+      "Bash(python3 -m py_compile agents/blog-seo-agent/blog_seo_agent.py)"
     ],
     "additionalDirectories": [
       "/Users/janeair/Documents/AI/switzertemplates/agents/blog-seo-agent/output",
