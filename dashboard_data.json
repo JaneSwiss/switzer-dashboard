@@ -3159,7 +3159,8 @@
         "carousel_url": "https://github.com/JaneSwiss/switzer-dashboard/blob/main/outputs/repurposed/shopify-vs-wix-for-ecommerce/instagram_carousel.md",
         "tailwind_url": "https://www.tailwindapp.com/dashboard/",
         "image_cost": 1.6,
-        "errors": []
+        "errors": [],
+        "completed": true
       },
       {
         "keyword": "how to set up shopify store",
