@@ -789,6 +789,11 @@ including the tracking parameters on the end — do not shorten or drop them:
   → CTA to https://www.switzertemplates.com/business-template-bundles?utm_source=blog&utm_medium=content&utm_campaign={keyword_row['_slug']}
 - Post about coaching business (not specifically Pinterest):
   → CTA to https://www.switzertemplates.com/business-template-bundles?utm_source=blog&utm_medium=content&utm_campaign={keyword_row['_slug']}
+- Post about Shopify or choosing an ecommerce platform/theme:
+  → No hyperlink CTA — this product has no live page yet. Instead, work in ONE natural,
+  soft sentence mentioning that Jane also designs premade Shopify themes built for
+  ecommerce sellers who want a professional store without building one from scratch.
+  Never state a price (it changes). Never invent or link to a URL for this product.
 
 CROSSLINKING — REQUIRED:
 These are the pages currently live on switzertemplates.com. If 2 or more of them are
@@ -1955,7 +1960,7 @@ def submit_for_indexing(slug: str, keyword: str) -> None:
 
 # ── module 6: run ──────────────────────────────────────────────────────────────
 
-def run(force_keyword: str = None):
+def run(force_keyword: str = None, angle_note: str = None):
     print("=" * 50)
     print("  Blog SEO Agent — Switzertemplates")
     print("=" * 50)
@@ -1986,6 +1991,8 @@ def run(force_keyword: str = None):
                             break
             except Exception:
                 pass
+            if angle_note:
+                keyword_row["Notes"] = angle_note
             print(f"  Forced keyword: {force_keyword}")
         else:
             keyword_row = load_next_keyword()

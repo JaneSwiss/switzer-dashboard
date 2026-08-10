@@ -205,7 +205,28 @@ templates are the fastest fix. Customise once, reuse every week."
 
 ---
 
-## Product 5: Design Vault membership
+## Product 5: Premade Shopify Themes
+
+**Status:** confirmed real product, no dedicated page on switzertemplates.com yet.
+**Do not state a price in copy — it changes.** Do not invent or link to a URL for this
+product until a real page exists.
+
+**What it is:**
+A premade Shopify theme, built for ecommerce/product sellers who want a professional,
+ready-to-launch store without building one from scratch or hiring a developer.
+
+**Who it's for:**
+Product-based and ecommerce sellers on Shopify specifically — not service providers
+or coaches (those get the Wix website instead).
+
+**How to talk about it:**
+Only ever a soft, one-sentence mention within relevant Shopify/ecommerce posts — never
+the main CTA, never a hyperlink until a real page exists. See CTA MAPPING in
+blog_seo_agent.py.
+
+---
+
+## Product 6: Design Vault membership
 
 **What it is:**
 A subscription giving members access to all branding products plus

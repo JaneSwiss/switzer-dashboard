@@ -706,5 +706,17 @@
     "stage": "image_generation",
     "keyword": "pinterest-seo",
     "error": "Cover prompt 3: Error code: 400 - {'error': {'message': \"Unknown parameter: 'response_format'.\", 'type': 'invalid_request_error', 'param': 'response_format', 'code': 'unknown_parameter'}}"
+  },
+  {
+    "date": "2026-08-10",
+    "stage": "serp_fetch",
+    "keyword": "shopify theme store statistics data 2025 2026",
+    "error": "HTTPSConnectionPool(host='api.valueserp.com', port=443): Read timed out. (read timeout=20)"
+  },
+  {
+    "date": "2026-08-10",
+    "stage": "image_generation",
+    "keyword": "shopify-theme-store",
+    "error": "Cover prompt 1: Error code: 400 - {'error': {'message': 'Your request was rejected by the safety system. If you believe this is an error, contact us at help.openai.com and include the request ID req_d4ef0fade1844861b40b55e34da4c917. safety_violations=[sexual].', 'type': 'image_generation_user_error', 'param': None, 'code': 'moderation_blocked', 'moderation_details': {'moderation_stage': 'output', 'categories': ['sexual']}}}"
   }
 ]
