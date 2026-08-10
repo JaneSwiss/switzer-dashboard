@@ -2,30 +2,30 @@
   {
     "id": "a",
     "title_angle": "benefit-led",
-    "seo_title": "How to pick the right Shopify theme for your product business",
-    "seo_description": "The Shopify theme store only has 268 themes - and two of them power 25% of all stores. Here's how to find one that actually fits your catalog size and brand. Learn more on my blog. #shopifythemestore #shopifythemes #ecommerce",
-    "image_headline": "Finding your Shopify theme",
-    "image_eyebrow": "THEME STORE GUIDE",
+    "seo_title": "How to choose a Shopify theme that actually converts for your store",
+    "seo_description": "Most sellers pick themes based on screenshots and regret it three months later. Your theme is infrastructure, not decoration - here's how to evaluate what actually matters for conversions. Learn more on my blog. #shopifythemestore #shopifytips #ecommercetips",
+    "image_headline": "Choosing a Shopify theme that converts",
+    "image_eyebrow": "SHOPIFY THEME STORE",
     "cta": "Learn more on my blog.",
     "pin_items": [
       {
-        "title": "KNOW YOUR CATALOG SIZE",
-        "description": "A 30-product handmade shop needs completely different features than a 500-sku retailer with advanced filtering.",
-        "icon": "numbered product grid with size indicator"
+        "title": "CATALOG SIZE RULE",
+        "description": "Under 30 products usually means free themes are enough - premium features go unused on small catalogs",
+        "icon": "numbered list with checkmarks"
       },
       {
-        "title": "TEST WITH YOUR REAL PRODUCTS",
-        "description": "Upload your actual photos and descriptions before committing - demo content always looks better than reality.",
-        "icon": "product photo being dragged into a theme preview"
+        "title": "MOBILE TEST FIRST",
+        "description": "Over 70% of traffic is mobile so test on your actual phone before you even look at desktop",
+        "icon": "smartphone with timer"
       },
       {
-        "title": "CHECK SPEED SCORES",
-        "description": "Mobile shoppers abandon slow sites fast, and a theme that looks gorgeous but takes 5 seconds to load will cost you sales.",
-        "icon": "speedometer with mobile phone"
+        "title": "SPEED AFFECTS REVENUE",
+        "description": "Demo scores aren't your scores - install and test with your real products before committing",
+        "icon": "speedometer gauge"
       },
       {
-        "title": "VERIFY APP COMPATIBILITY",
-        "description": "Email both the theme developer and your critical apps about conflicts before spending $350 on a theme that breaks everything.",
+        "title": "APP COMPATIBILITY CHECK",
+        "description": "List your essential apps first and verify they work with the theme before purchasing",
         "icon": "puzzle pieces connecting"
       }
     ],
@@ -36,31 +36,31 @@
   {
     "id": "b",
     "title_angle": "problem-led",
-    "seo_title": "Why most Shopify sellers regret their theme choice within 3 months",
-    "seo_description": "They browse by 'popular', pick something pretty, then realize their theme slows their mobile site or lacks features they need. Here's how to avoid that mistake. The full breakdown is on my blog - go check it out. #shopifythemestore #shopifytips #productbusiness",
-    "image_headline": "Shopify theme mistakes to avoid",
+    "seo_title": "Why your Shopify theme feels slow and clunky three months after launch",
+    "seo_description": "You picked a theme based on pretty screenshots. Now it's slow, your products don't display well, and you're paying for apps to fill gaps. Here's how to avoid that mistake. The full breakdown is on my blog - go check it out. #shopifythemestore #shopify #ecommerce",
+    "image_headline": "Why your Shopify theme stopped working",
     "image_eyebrow": "",
     "cta": "The full breakdown is on my blog - go check it out.",
     "pin_items": [
       {
-        "title": "SKIPPING THE REQUIREMENTS",
-        "description": "Most sellers browse randomly, get overwhelmed, and pick one that looks nice without knowing if it fits their actual needs.",
-        "icon": "checklist being ignored"
+        "title": "WRONG CATALOG FIT",
+        "description": "Buying premium when your catalog is too small means paying for features you'll never actually use",
+        "icon": "oversized box with tiny item"
       },
       {
-        "title": "IGNORING MOBILE SPEED",
-        "description": "A theme that loads in 1.5 seconds on desktop might take 5+ seconds on a smartphone - and that kills conversions.",
-        "icon": "slow-loading phone screen"
+        "title": "DESKTOP-FIRST MISTAKE",
+        "description": "Falling in love with the layout on desktop when most customers see you on mobile",
+        "icon": "desktop crossed out"
       },
       {
-        "title": "TRUSTING DEMO CONTENT",
-        "description": "Demo images always look perfect - your real products might break the layout or crop awkwardly in grid view.",
-        "icon": "broken image placeholder"
+        "title": "DEMO ISN'T REALITY",
+        "description": "Those polished demo photos and optimized images create an experience your real store won't match",
+        "icon": "two screens side by side"
       },
       {
-        "title": "BUYING LEGACY THEMES",
-        "description": "Any theme built before 2021 without updates is missing online store 2.0 features your competitors get automatically.",
-        "icon": "outdated calendar with X mark"
+        "title": "APP CONFLICTS HIDDEN",
+        "description": "Your reviews widget or subscription app breaks the layout after you've already customized everything",
+        "icon": "warning triangle"
       }
     ],
     "destination_url": "https://www.switzertemplates.com/post/shopify-theme-store?utm_source=pinterest&utm_medium=social&utm_campaign=shopify-theme-store",
@@ -70,36 +70,31 @@
   {
     "id": "c",
     "title_angle": "result-led",
-    "seo_title": "The systematic approach to choosing a Shopify theme that converts",
-    "seo_description": "Document your requirements first. Filter by catalog size. Test with your real products. This process prevents the expensive mistakes that turn a theme switch into a week-long headache. Get more info on my blog. #shopifythemestore #shopify #ecommercetips",
-    "image_headline": "Choosing your Shopify theme",
-    "image_eyebrow": "STEP BY STEP",
+    "seo_title": "The 10-minute mobile test that reveals if a Shopify theme will actually work",
+    "seo_description": "Before you spend $300 on a premium theme, run this quick test on your actual phone. If any step feels clunky on the demo, it'll be worse with your real content loaded. Get more info on my blog. #shopifythemestore #shopifytips #ecommercetips",
+    "image_headline": "The 10-minute mobile theme test",
+    "image_eyebrow": "BEFORE YOU BUY",
     "cta": "Get more info on my blog.",
     "pin_items": [
       {
-        "title": "DOCUMENT REQUIREMENTS FIRST",
-        "description": "Answer how many products you sell, what filtering you need, and which apps are critical before opening the theme store.",
-        "icon": "notebook with bullet points"
+        "title": "TIME THE LOAD",
+        "description": "Pull up a product page on your phone and time it - anything over 3 seconds is a problem",
+        "icon": "stopwatch"
       },
       {
-        "title": "USE FILTERS DELIBERATELY",
-        "description": "Start with catalog size - this alone eliminates themes designed for businesses completely unlike yours.",
-        "icon": "funnel filtering options"
+        "title": "TEST ADD TO CART",
+        "description": "Add a product and check if the whole process feels smooth without confusion",
+        "icon": "shopping cart with plus"
       },
       {
-        "title": "TEST YOUR ACTUAL CONTENT",
-        "description": "Upload your real product photos and descriptions to your 3-4 finalists, not the beautiful demo images.",
-        "icon": "product photos being uploaded"
+        "title": "TRY THE FILTERS",
+        "description": "Navigate to a collection and filter by size or color to see if it actually works",
+        "icon": "filter sliders"
       },
       {
-        "title": "VERIFY BEFORE PURCHASING",
-        "description": "Email theme and app developers about compatibility - do this before spending money, not after.",
-        "icon": "email with checkmark"
-      },
-      {
-        "title": "INSTALL ON DEV STORE",
-        "description": "Never install a new theme on your live store during business hours - test everything on a development store first.",
-        "icon": "testing environment with shield"
+        "title": "REACH CHECKOUT",
+        "description": "Attempt to get to checkout and note any friction that would make customers leave",
+        "icon": "checkout screen"
       }
     ],
     "destination_url": "https://www.switzertemplates.com/post/shopify-theme-store?utm_source=pinterest&utm_medium=social&utm_campaign=shopify-theme-store",
@@ -109,31 +104,31 @@
   {
     "id": "d",
     "title_angle": "comparison-led",
-    "seo_title": "Free vs premium Shopify themes - which one your product business needs",
-    "seo_description": "Free themes in 2026 include features that were premium-only three years ago. The gap has narrowed significantly - and for many sellers, free is genuinely enough. #shopifythemestore #shopifythemes #ecommercebusiness",
+    "seo_title": "Free vs premium Shopify themes - when the upgrade is actually worth it",
+    "seo_description": "Shopify's free themes now include features that used to cost $300. But premium themes still earn their price in specific situations. Here's exactly when to pay and when to save. #shopifythemestore #shopify #ecommercetips",
     "image_headline": "Free vs premium Shopify themes",
-    "image_eyebrow": "HONEST COMPARISON",
+    "image_eyebrow": "HONEST BREAKDOWN",
     "cta": "",
     "pin_items": [
       {
-        "title": "FREE THEMES NOW INCLUDE",
-        "description": "Flexible sections on every page, product recommendations, reviews integration, quick-buy, and color swatches - all standard.",
-        "icon": "checklist with checkmarks"
+        "title": "FREE IS ENOUGH WHEN",
+        "description": "You have under 50 products and need sticky headers, quick-add buttons, and filtering - all included now",
+        "icon": "checkmark in circle"
       },
       {
-        "title": "PREMIUM MAKES SENSE WHEN",
-        "description": "You have 200+ products needing advanced filtering, or your brand relies heavily on editorial storytelling layouts.",
-        "icon": "large catalog with filters"
+        "title": "PREMIUM EARNS IT WHEN",
+        "description": "You have 150+ products with complex variants that need advanced swatch displays and filtering",
+        "icon": "dollar sign with arrow up"
       },
       {
-        "title": "THE REAL CALCULATION",
-        "description": "Will premium features increase your conversion rate enough to pay back the $180-350 cost within 90 days?",
-        "icon": "calculator with dollar sign"
+        "title": "SKIP PREMIUM WHEN",
+        "description": "You're choosing based on aesthetics alone and a free theme would actually work equally well",
+        "icon": "X mark"
       },
       {
-        "title": "DAWN WORKS FOR MOST",
-        "description": "A handmade ceramics seller with 30 products doesn't need a $350 theme - that money is better spent on product photography.",
-        "icon": "camera with price tag"
+        "title": "REAL EXAMPLE",
+        "description": "A candle seller with 18 products spent $280 on features already available in dawn for free",
+        "icon": "candle with price tag"
       }
     ],
     "destination_url": "https://www.switzertemplates.com/post/shopify-theme-store?utm_source=pinterest&utm_medium=social&utm_campaign=shopify-theme-store",
@@ -143,31 +138,36 @@
   {
     "id": "e",
     "title_angle": "transformation-led",
-    "seo_title": "From theme overwhelm to confident choice - navigating the Shopify theme store",
-    "seo_description": "268 themes total. Two options power 25% of all stores. Your choice carries real weight - here's how to make it strategically instead of randomly browsing and hoping for the best. Learn more on my blog. #shopifythemestore #shopify #smallbusinesstips",
-    "image_headline": "Navigating the Shopify theme store",
-    "image_eyebrow": "PRODUCT BUSINESS GUIDE",
-    "cta": "Learn more on my blog.",
+    "seo_title": "From theme frustration to a Shopify store that actually converts",
+    "seo_description": "Stop picking themes based on screenshots and hoping for the best. This step-by-step evaluation process takes 2-3 hours and saves weeks of frustration from choosing wrong. Get in touch to learn more. #shopifythemestore #shopifytips #ecommerce",
+    "image_headline": "The right way to choose a Shopify theme",
+    "image_eyebrow": "STEP BY STEP",
+    "cta": "Get in touch to learn more.",
     "pin_items": [
       {
-        "title": "SMALLER THAN YOU THINK",
-        "description": "Only 268 curated themes exist - this is strategic quality control, not an endless marketplace.",
-        "icon": "small curated collection"
+        "title": "AUDIT NEEDS FIRST",
+        "description": "Write down your product count, must-have features, and visual style before you even start browsing",
+        "icon": "clipboard with checklist"
       },
       {
-        "title": "MATCH TO YOUR BUSINESS TYPE",
-        "description": "Low-sku artisan products need image-focused layouts; high-sku resellers need mega-menus and aggressive filtering.",
-        "icon": "business type icons"
+        "title": "FILTER STRATEGICALLY",
+        "description": "Use industry, catalog size, and feature filters to narrow down before aesthetics distract you",
+        "icon": "funnel with options"
       },
       {
-        "title": "OS 2.0 IS MANDATORY",
-        "description": "Any theme without online store 2.0 support means you miss every new Shopify feature your competitors get automatically.",
-        "icon": "modern vs outdated comparison"
+        "title": "READ CRITICAL REVIEWS",
+        "description": "Positive reviews tell you what works but 1-3 star reviews reveal what actually breaks",
+        "icon": "star rating with magnifier"
       },
       {
-        "title": "CUSTOMIZATION BEATS COST",
-        "description": "Dawn customized thoughtfully outperforms an expensive theme installed carelessly - it's about the work you put in.",
-        "icon": "paintbrush customizing a theme"
+        "title": "TEST WITH REAL CONTENT",
+        "description": "Install without publishing, add your actual products, and run pagespeed on the preview",
+        "icon": "laptop with product photos"
+      },
+      {
+        "title": "VERIFY BEFORE COMMITTING",
+        "description": "Confirm app compatibility and check support terms so you're not stuck when problems emerge",
+        "icon": "shield with checkmark"
       }
     ],
     "destination_url": "https://www.switzertemplates.com/post/shopify-theme-store?utm_source=pinterest&utm_medium=social&utm_campaign=shopify-theme-store",

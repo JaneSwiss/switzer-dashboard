@@ -1,22 +1,25 @@
-SUBJECT LINE A: Your Shopify theme is costing you sales
-SUBJECT LINE B: 268 themes. Here's how to actually pick one.
-SUBJECT LINE C: Why your store looks like everyone else's
+SUBJECT LINE A: Your theme is costing you sales
+SUBJECT LINE B: The 10-minute test before buying any theme
+SUBJECT LINE C: 22 products doesn't need a $320 theme
 
-DESCRIPTION (max 80 characters): Two themes power 25% of all Shopify stores. Yours might be one of them.
+DESCRIPTION (max 80 characters): Most sellers pick themes completely backwards. Here's what actually matters.
 
 BODY:
-You picked a Shopify theme three months ago. It looked great in the demo. Now your mobile site loads like it's 2015 and you're missing features you didn't know you needed.
+You found a gorgeous Shopify theme. The demo looked incredible. You paid the $300+, installed it, and felt proud of your new store.
 
-Sound familiar?
+Three months later? The site feels slow on mobile. Your products look awkward in the layout. You're paying for two apps to add features you assumed the theme included.
 
-Here's the thing most sellers don't realise: the Shopify theme store only has 268 themes total. That's not thousands — it's a curated selection where your choice actually matters.
+This happens constantly. And it's not because you picked a "bad" theme — it's because most of us evaluate themes based on how pretty the demo looks, not whether the theme actually fits our catalog size and feature needs.
 
-And two of those themes (Dawn and Trademark) power roughly one in four Shopify stores. If you installed either without serious customisation, your store looks nearly identical to your competitors.
+I wrote a full breakdown of how to choose a Shopify theme that actually converts. It covers:
 
-I wrote a full breakdown on how to evaluate themes before you commit — which filters actually matter, when free themes are genuinely enough, and how to avoid the expensive mistakes that turn a simple theme switch into a week-long headache.
+- The catalog size rule that changes which features matter
+- Why mobile testing should come first (not last)
+- When free themes are genuinely enough
+- The specific tests to run before you commit
 
-Worth a read before your next theme decision.
+If you sell physical products online, this decision shapes everything else.
 
-[Read the full guide here](https://www.switzertemplates.com/post/shopify-theme-store)
+[Read the full guide here →](https://www.switzertemplates.com/post/shopify-theme-store)
 
 Xo Jane
