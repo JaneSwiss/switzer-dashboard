@@ -3197,7 +3197,7 @@
         "image_cost": 1.11,
         "pin_cost_estimate": 1.9,
         "errors": [],
-        "completed": false,
+        "completed": true,
         "note": "Rewritten twice — first pass fixed coach/service bias but misread the keyword as Shopify's own theme marketplace; second pass reframed it as a genuine 'how to choose a Shopify theme' buying guide per Jane, with one soft no-price/no-link mention of her premade Shopify themes. Cover images preserved from the first pass (Jane approved them). Old pin drafts for this post's first two versions are still sitting in Tailwind — need manual cleanup."
       }
     ]
