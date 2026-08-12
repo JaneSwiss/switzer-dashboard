@@ -1491,22 +1491,22 @@ def generate_images_from_prompts(prompt_text: str, slug: str) -> "tuple[list[str
     slug_dir = IMAGE_OUTPUT_DIR / slug
     slug_dir.mkdir(parents=True, exist_ok=True)
 
-    PHOTO_CONFIGS = [
-        ("PROMPT 1 - GENERAL LIFESTYLE:",             "16:9"),
-        ("PROMPT 2 - TOPIC SPECIFIC (props/objects):","16:9"),
-        ("PROMPT 3 - TOPIC SPECIFIC (person + action):","16:9"),
-    ]
+    PHOTO_CONFIGS = [(1, "16:9"), (2, "16:9"), (3, "16:9")]
 
-    # Extract each prompt text by finding its label and slicing to the next label
+    # Match on "PROMPT N -...:" as a prefix rather than the full literal label text —
+    # Claude doesn't always reproduce the exact parenthetical wording from the output
+    # format spec (e.g. "(person):" instead of "(person + action):"), which silently
+    # dropped that prompt entirely under the old exact-string match. Confirmed on a
+    # real post (how-to-start-an-online-store) before this fix.
     parsed = []
-    for label, aspect in PHOTO_CONFIGS:
-        start = prompt_text.find(label)
-        if start == -1:
+    for n, aspect in PHOTO_CONFIGS:
+        label_match = re.search(rf"PROMPT {n} -[^\n:]*:", prompt_text)
+        if not label_match:
             parsed.append((None, aspect))
             continue
-        start += len(label)
-        next_label = prompt_text.find("PROMPT", start)
-        chunk = prompt_text[start:next_label].strip() if next_label != -1 else prompt_text[start:].strip()
+        start = label_match.end()
+        next_label = re.search(r"PROMPT \d", prompt_text[start:])
+        chunk = prompt_text[start:start + next_label.start()].strip() if next_label else prompt_text[start:].strip()
         parsed.append((chunk if chunk else None, aspect))
 
     if not any(p for p, _ in parsed):
