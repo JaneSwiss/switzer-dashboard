@@ -742,5 +742,35 @@
     "stage": "serp_fetch",
     "keyword": "online store for small business tips examples guide",
     "error": "HTTPSConnectionPool(host='api.valueserp.com', port=443): Read timed out. (read timeout=20)"
+  },
+  {
+    "date": "2026-08-12",
+    "stage": "image_generation",
+    "keyword": "how-to-start-an-online-store",
+    "error": "Inline prompt 1: Error code: 429 - {'error': {'message': 'You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.', 'type': 'insufficient_quota', 'param': None, 'code': 'credit_balance_exhausted'}}"
+  },
+  {
+    "date": "2026-08-12",
+    "stage": "image_generation",
+    "keyword": "how-to-start-an-online-store",
+    "error": "Inline prompt 2: Error code: 429 - {'error': {'message': 'You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.', 'type': 'insufficient_quota', 'param': None, 'code': 'credit_balance_exhausted'}}"
+  },
+  {
+    "date": "2026-08-12",
+    "stage": "image_generation",
+    "keyword": "how-to-start-an-online-store",
+    "error": "Inline prompt 3: Error code: 429 - {'error': {'message': 'You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.', 'type': 'insufficient_quota', 'param': None, 'code': 'credit_balance_exhausted'}}"
+  },
+  {
+    "date": "2026-08-12",
+    "stage": "image_generation",
+    "keyword": "how-to-start-an-online-store",
+    "error": "Cover prompt 1: Error code: 429 - {'error': {'message': 'You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.', 'type': 'insufficient_quota', 'param': None, 'code': 'credit_balance_exhausted'}}"
+  },
+  {
+    "date": "2026-08-12",
+    "stage": "image_generation",
+    "keyword": "how-to-start-an-online-store",
+    "error": "Cover prompt 2: Error code: 429 - {'error': {'message': 'You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.', 'type': 'insufficient_quota', 'param': None, 'code': 'credit_balance_exhausted'}}"
   }
 ]
