@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-08-11",
+  "last_updated": "2026-08-12",
   "etsy_agent": {
     "status": "active",
     "last_run": "2026-05-05",
@@ -2906,6 +2906,13 @@
         "pins_scheduled": true,
         "email_sent": false,
         "carousel_posted": false
+      },
+      {
+        "slug": "online-store-for-small-business",
+        "title": "Online Store For Small Business: How To Set Up A Shop That Actually Sells Your Products",
+        "pins_scheduled": true,
+        "email_sent": false,
+        "carousel_posted": false
       }
     ]
   },
@@ -3225,6 +3232,25 @@
         "errors": [],
         "completed": false,
         "note": "Rewrite — original draft title literally said 'FITS YOUR SERVICE-BASED BUSINESS'. Cover images generated in a second pass after an Anthropic credit outage interrupted the first run."
+      },
+      {
+        "keyword": "online store for small business",
+        "slug": "online-store-for-small-business",
+        "date": "2026-08-12",
+        "blog_post_url": "https://www.switzertemplates.com/post/online-store-for-small-business",
+        "post_preview_url": "https://janeswiss.github.io/switzer-dashboard/posts/online-store-for-small-business.html",
+        "github_images_url": "https://github.com/JaneSwiss/switzer-dashboard/tree/main/posts/images/online-store-for-small-business",
+        "wix_drafts_url": "https://manage.wix.com/dashboard/5da8c553-1983-4b5f-935f-6fb32d2bd299/blog/posts",
+        "wix_ok": true,
+        "newsletter_url": "https://github.com/JaneSwiss/switzer-dashboard/blob/main/outputs/repurposed/online-store-for-small-business/email_hook.md",
+        "carousel_url": "https://github.com/JaneSwiss/switzer-dashboard/blob/main/outputs/repurposed/online-store-for-small-business/instagram_carousel.md",
+        "tailwind_url": "https://www.tailwindapp.com/dashboard/",
+        "pins_generated": 5,
+        "image_cost": 0.65,
+        "pin_cost_estimate": 0.95,
+        "errors": [],
+        "completed": false,
+        "note": "Rewrite - fixed coach/service bias. Also first post through the extended cover-image fix: Prompt 2 (props shot) and activity-per-composition now assigned too, not just composition/environment - fixes the repeated MacBook+Planner and seated-typing default Jane flagged on the previous post."
       }
     ]
   }
