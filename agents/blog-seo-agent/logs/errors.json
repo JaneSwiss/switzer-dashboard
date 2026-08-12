@@ -736,5 +736,11 @@
     "stage": "image_generation",
     "keyword": "shopify-store-template",
     "error": "No photo prompts found in prompt text"
+  },
+  {
+    "date": "2026-08-12",
+    "stage": "serp_fetch",
+    "keyword": "online store for small business tips examples guide",
+    "error": "HTTPSConnectionPool(host='api.valueserp.com', port=443): Read timed out. (read timeout=20)"
   }
 ]

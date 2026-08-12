@@ -1328,21 +1328,25 @@ PROMPT 6 - INFOGRAPHIC:
 
 # Composition options that include the woman character — excludes "Overhead flat lay",
 # which is explicitly a no-person composition (that's Prompt 2's territory).
+# Every entry now bakes in a specific, non-laptop-default activity — composition alone
+# wasn't enough. Entries that left the activity open (e.g. old "Side profile") reliably
+# got filled in by Claude as "seated, typing on a laptop" regardless of what composition/
+# environment were assigned — confirmed on a real generated cover for shopify-store-template.
 _PERSON_COMPOSITIONS = [
-    "From behind at a desk — seated, hair cascading down back, room stretching into background",
-    "Hands-only close-up — long gel nails in frame, rings and bracelets visible, mid-task action",
-    "Wide shot — woman very small in grand environment, architecture or landscape is the subject",
-    "Side profile — jaw and cheekbone edge visible, voluminous hair lit from window behind",
-    "Mid-action — woman leaning over desk or turning, hair caught in motion, candid energy",
-    "Over-shoulder — camera just behind her shoulder, nails visible on laptop or phone, work ahead",
-    "Low floor angle — shot from below desk level looking up slightly, legs and hem of outfit visible",
+    "From behind at a desk — seated, hands resting on a closed notebook (no laptop), hair cascading down back, room stretching into background",
+    "Hands-only close-up — long gel nails in frame, holding or examining a small physical object relevant to the topic, not a device",
+    "Wide shot — woman very small in grand environment, architecture or landscape is the subject, no task visible",
+    "Side profile — jaw and cheekbone edge visible, holding a cup in both hands, looking toward the light, voluminous hair lit from window behind",
+    "Mid-action — woman turning or mid-stride, hair caught in motion, candid energy, no device visible",
+    "Over-shoulder — camera just behind her shoulder, scrolling on a phone held up at an angle, work ahead",
+    "Low floor angle — shot from below desk level looking up slightly, legs and hem of outfit visible, hand resting on desk edge",
     "Walking away — full rear view mid-stride through a beautiful space, coat hem or hair moving",
-    "Window silhouette — back of head against bright window, hair as silhouette with rim light on edges",
+    "Window silhouette — back of head against bright window, holding a warm drink, hair as silhouette with rim light on edges",
     "Reclining — woman lying on sofa or bed, shot from above at angle, hair spread, book or phone in hand",
     "Mirror reflection — woman seen in a decorative mirror, back to camera, reflection shows confidence not face",
-    "Staircase — woman on wide staircase from below, looking up at landing, architectural drama",
-    "Reading or writing — intense focus, face angled down, hair falling forward, pen or book in hand",
-    "Standing at window — full figure from behind at floor-to-ceiling window, city or garden outside",
+    "Staircase — woman on wide staircase from below, looking up at landing, architectural drama, no task visible",
+    "Reading or writing — intense focus, face angled down, hair falling forward, pen or book in hand, no laptop",
+    "Standing at window — full figure from behind at floor-to-ceiling window, city or garden outside, no task visible",
 ]
 
 _ENVIRONMENTS = [
@@ -1376,11 +1380,47 @@ _ENVIRONMENTS = [
 ]
 
 
+# Prompt 2 (no person, props/objects) was never covered by the fix above and kept
+# defaulting to "overhead flat lay" + MacBook + Productivity Planner on every single
+# post — confirmed on shopify-store-template's real generated prompt. Same root cause
+# (open choice, no cross-post memory), same fix: assign it instead of asking for it.
+_OBJECT_COMPOSITIONS = [
+    "Overhead flat lay on a textured surface, items arranged loosely",
+    "Straight-on flat lay shot at a slight angle, items arranged in a loose diagonal line",
+    "Close-up macro detail shot — one or two items filling most of the frame, shallow depth of field",
+    "Side-lit arrangement on a low shelf or ledge, objects catching directional light",
+    "Objects arranged on a windowsill, soft backlight from outside",
+    "Styled vignette in the corner of a desk, items loosely grouped, rest of desk softly blurred",
+]
+
+_HERO_PROPS = [
+    "Apple MacBook Pro open, screen showing a crisp, legible design or analytics dashboard",
+    "Apple iPhone 15 Pro in natural titanium, screen lit with crisp, legible content",
+    "iPad Pro in a cream leather folio case, open with crisp, legible content",
+]
+
+_ACCENT_PROPS = [
+    "Productivity Planner by Intelligent Change — black linen hardcover, gold foil lettering",
+    "Large format art or fashion coffee table book, cover partially visible",
+    "Open linen-covered notebook, blank pages, fine-tip pen lying across it",
+    "Stack of 3-4 hardcover books in neutral tones, spines aligned",
+    "Printed brand mood board showing colour swatches, editorial photos, type samples",
+    "Bouquet of white peonies or garden roses in a fluted glass vase",
+    "Single long-stem white orchid in a minimal ceramic vase",
+    "Small amber glass luxury perfume bottle with gold cap on marble surface",
+    "Designer sunglasses folded on the edge of the desk or chair arm",
+    "Tall pillar candle in a gold or concrete holder, unlit",
+    "Cluster of 3 varying height candles in linen-toned vessels",
+]
+
+
 def _cover_assignment(keyword: str) -> dict:
-    """Deterministically assigns a composition + environment per woman-cover prompt from
-    the keyword, instead of leaving the choice to the model. Left free to choose, Claude
-    reliably defaults to 'from behind at a desk' regardless of the post topic — confirmed
-    across roughly half of all real published posts.
+    """Deterministically assigns composition + environment (+ props for Prompt 2) per
+    cover prompt from the keyword, instead of leaving the choice to the model. Left free
+    to choose, Claude reliably defaults to the same handful of scenes regardless of post
+    topic — confirmed across roughly half of all real published posts for Prompts 1/3,
+    and on every single post for Prompt 2 (always 'overhead flat lay' + MacBook + the
+    same Productivity Planner).
 
     Uses independent chunks of an MD5 digest per axis (not a simple summed-character
     hash) — two real keywords ("how to set up shopify store" / "pinterest seo") produced
@@ -1392,6 +1432,10 @@ def _cover_assignment(keyword: str) -> dict:
         "prompt1_environment": _ENVIRONMENTS[int(digest[8:16], 16) % len(_ENVIRONMENTS)],
         "prompt3_composition": _PERSON_COMPOSITIONS[int(digest[16:24], 16) % len(_PERSON_COMPOSITIONS)],
         "prompt3_environment": _ENVIRONMENTS[int(digest[24:32], 16) % len(_ENVIRONMENTS)],
+        "prompt2_composition": _OBJECT_COMPOSITIONS[int(digest[0:8], 16) % len(_OBJECT_COMPOSITIONS)],
+        "prompt2_environment": _ENVIRONMENTS[int(digest[16:24], 16) % len(_ENVIRONMENTS)],
+        "prompt2_hero_prop": _HERO_PROPS[int(digest[24:32], 16) % len(_HERO_PROPS)],
+        "prompt2_accent_prop": _ACCENT_PROPS[int(digest[8:16], 16) % len(_ACCENT_PROPS)],
     }
 
 
@@ -1406,14 +1450,23 @@ def generate_image_prompts(keyword: str, post_html: str) -> str:
         f"POST CONTENT:\n{plain_text[:3000]}\n\n"
         f"Read the post content carefully. Every prompt must be specific to this "
         f"post's topic, audience, and message. Follow the output format exactly.\n\n"
-        f"COMPOSITION AND ENVIRONMENT ARE ASSIGNED, NOT YOUR CHOICE — this is what keeps "
-        f"cover images across different blog posts from all looking the same:\n"
+        f"COMPOSITION, ENVIRONMENT, AND KEY PROPS ARE ASSIGNED, NOT YOUR CHOICE — this is "
+        f"what keeps cover images across different blog posts from all looking the same:\n"
         f"- PROMPT 1 MUST use this composition: {assignment['prompt1_composition']}\n"
         f"- PROMPT 1 MUST use this environment: {assignment['prompt1_environment']}\n"
+        f"- PROMPT 2 MUST use this composition/layout: {assignment['prompt2_composition']}\n"
+        f"- PROMPT 2 MUST use this environment/surface: {assignment['prompt2_environment']}\n"
+        f"- PROMPT 2's hero prop (the topic-relevant screen content lives on this): {assignment['prompt2_hero_prop']}\n"
+        f"- PROMPT 2's one accent prop: {assignment['prompt2_accent_prop']}\n"
+        f"- PROMPT 2 must NOT include a Productivity Planner or MacBook unless it is the "
+        f"assigned hero/accent prop above — those two have appeared in nearly every post "
+        f"and must not become the default again.\n"
         f"- PROMPT 3 MUST use this composition: {assignment['prompt3_composition']}\n"
         f"- PROMPT 3 MUST use this environment: {assignment['prompt3_environment']}\n"
-        f"Everything else — hair, outfit, drink, props, screen content, mood — is still "
-        f"yours to choose freely, grounded in the actual post content."
+        f"Everything else — hair, outfit, drink, screen content, mood — is still yours to "
+        f"choose freely, grounded in the actual post content. Follow the assigned activity "
+        f"described within each composition exactly — do not substitute a laptop or add "
+        f"typing/desk work where the composition specifies something else."
     )
 
     response = client.messages.create(
