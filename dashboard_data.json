@@ -3248,7 +3248,7 @@
         "image_cost": 0.65,
         "pin_cost_estimate": 0.95,
         "errors": [],
-        "completed": false,
+        "completed": true,
         "note": "Rewrite — original draft title literally said 'FITS YOUR SERVICE-BASED BUSINESS'. Cover images generated in a second pass after an Anthropic credit outage interrupted the first run."
       },
       {
