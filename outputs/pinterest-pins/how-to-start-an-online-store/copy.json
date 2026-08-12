@@ -1,0 +1,172 @@
+[
+  {
+    "id": "a",
+    "title_angle": "benefit-led",
+    "seo_title": "How to start an online store that actually makes sales from day one",
+    "seo_description": "The platform that looks cheapest upfront often isn't cheapest when you run real numbers for your specific product and volume. Here's the math that matters before you launch. Learn more on my blog. #onlinestore #ecommerce #smallbusiness",
+    "image_headline": "How to start an online store that sells",
+    "image_eyebrow": "ECOMMERCE GUIDE",
+    "cta": "Learn more on my blog.",
+    "pin_items": [
+      {
+        "title": "PLATFORM FEE MATH",
+        "description": "The monthly fee isn't the real cost - it's transaction fees, apps, and shipping math that determine whether you actually profit.",
+        "icon": "calculator with dollar signs"
+      },
+      {
+        "title": "SHIPPING STRATEGY FIRST",
+        "description": "Decide on free shipping built into prices, calculated rates, or flat rate before you set any product prices.",
+        "icon": "shipping box with price tag"
+      },
+      {
+        "title": "PRODUCT PAGES THAT CONVERT",
+        "description": "5-6 images per product, descriptions that handle objections, and bullet points with exact specs reduce hesitation.",
+        "icon": "product page layout"
+      },
+      {
+        "title": "EMAIL CAPTURE DAY ONE",
+        "description": "Your first visitors probably won't buy - but a simple 10% off pop-up means you can market to them again.",
+        "icon": "email envelope with popup"
+      }
+    ],
+    "destination_url": "https://www.switzertemplates.com/post/how-to-start-an-online-store?utm_source=pinterest&utm_medium=social&utm_campaign=how-to-start-an-online-store",
+    "keyword": "how to start an online store",
+    "slug": "how-to-start-an-online-store"
+  },
+  {
+    "id": "b",
+    "title_angle": "problem-led",
+    "seo_title": "Why your online store gets traffic but no sales and how to fix it",
+    "seo_description": "Beautiful photos and a clean theme but zero conversions? The problem is almost never the design - it's product pages that don't answer objections and shipping costs that surprise at checkout. The full breakdown is on my blog - go check it out. #ecommercetips #onlineselling",
+    "image_headline": "Traffic but no sales? here's why",
+    "image_eyebrow": "",
+    "cta": "The full breakdown is on my blog - go check it out.",
+    "pin_items": [
+      {
+        "title": "CHECKOUT SURPRISE",
+        "description": "Customers abandon carts when shipping costs appear unexpectedly - build shipping into your prices or set clear expectations early.",
+        "icon": "shopping cart with warning"
+      },
+      {
+        "title": "WEAK PRODUCT PAGES",
+        "description": "Most descriptions list features when they should address the objections running through your customer's mind.",
+        "icon": "product page with question marks"
+      },
+      {
+        "title": "MOBILE FRICTION",
+        "description": "Over 60% of traffic comes from phones - if buttons aren't thumb-sized and checkout has too many steps, you're losing sales.",
+        "icon": "smartphone with X"
+      },
+      {
+        "title": "NO EMAIL CAPTURE",
+        "description": "Without collecting emails, you're paying to acquire each visitor once and never seeing most of them again.",
+        "icon": "visitor walking away"
+      }
+    ],
+    "destination_url": "https://www.switzertemplates.com/post/how-to-start-an-online-store?utm_source=pinterest&utm_medium=social&utm_campaign=how-to-start-an-online-store",
+    "keyword": "how to start an online store",
+    "slug": "how-to-start-an-online-store"
+  },
+  {
+    "id": "c",
+    "title_angle": "result-led",
+    "seo_title": "Launch your online store in one week with this exact sequence",
+    "seo_description": "Week 1: foundation and legal setup. Week 2: platform and shipping. Week 3: product pages. Week 4: testing and launch. This is the order that actually works. Get more info on my blog. #startonlinestore #ecommerce #smallbusinesstips",
+    "image_headline": "Launch your store in one week",
+    "image_eyebrow": "STEP BY STEP",
+    "cta": "Get more info on my blog.",
+    "pin_items": [
+      {
+        "title": "WEEK 1: FOUNDATION",
+        "description": "Calculate true product costs, set prices with real margins, get your ein, and grab your domain name.",
+        "icon": "foundation blocks"
+      },
+      {
+        "title": "WEEK 2: PLATFORM",
+        "description": "Connect your domain, set up payments, configure shipping zones and rates, add email capture.",
+        "icon": "platform setup screen"
+      },
+      {
+        "title": "WEEK 3: PRODUCTS",
+        "description": "Upload 4-6 photos per product, write objection-handling descriptions, add spec bullet points.",
+        "icon": "product grid"
+      },
+      {
+        "title": "WEEK 4: LAUNCH",
+        "description": "Add legal pages, test full checkout on your actual phone, announce to your list, and open for business.",
+        "icon": "rocket launch"
+      }
+    ],
+    "destination_url": "https://www.switzertemplates.com/post/how-to-start-an-online-store?utm_source=pinterest&utm_medium=social&utm_campaign=how-to-start-an-online-store",
+    "keyword": "how to start an online store",
+    "slug": "how-to-start-an-online-store"
+  },
+  {
+    "id": "d",
+    "title_angle": "comparison-led",
+    "seo_title": "Shopify vs square vs amazon - which platform actually costs less for your store",
+    "seo_description": "Everyone compares monthly fees but skips the transaction fee math. Here's what 200 sales actually costs you on each platform - the numbers might surprise you. #shopify #ecommerceplatform #onlinestore",
+    "image_headline": "The real cost of each platform",
+    "image_eyebrow": "PLATFORM COMPARISON",
+    "cta": "",
+    "pin_items": [
+      {
+        "title": "SHOPIFY BASIC",
+        "description": "$39/month plus 2.9% + $0.30 per sale - on 200 orders at $32 each, you're paying about $285/month total.",
+        "icon": "Shopify logo with calculator"
+      },
+      {
+        "title": "SQUARE ONLINE FREE",
+        "description": "No monthly fee but same transaction rates - you save $39 but lose abandoned cart recovery and advanced shipping.",
+        "icon": "Square logo with scale"
+      },
+      {
+        "title": "AMAZON SELLER",
+        "description": "$39.99/month plus 8-15% referral fees - that $32 product costs you $4.80 per sale, crushing your margins.",
+        "icon": "Amazon box with percentage"
+      },
+      {
+        "title": "WOOCOMMERCE 'FREE'",
+        "description": "The plugin costs nothing but hosting, security, and extensions easily reach $150-200/month for a functional store.",
+        "icon": "WordPress logo with hidden costs"
+      }
+    ],
+    "destination_url": "https://www.switzertemplates.com/post/how-to-start-an-online-store?utm_source=pinterest&utm_medium=social&utm_campaign=how-to-start-an-online-store",
+    "keyword": "how to start an online store",
+    "slug": "how-to-start-an-online-store"
+  },
+  {
+    "id": "e",
+    "title_angle": "transformation-led",
+    "seo_title": "From zero to selling - the online store setup most guides skip",
+    "seo_description": "Stop obsessing over branding before you have products listed. The sequence that matters: platform math, shipping strategy, converting product pages, then launch before you feel ready. Get in touch to learn more. #howtostartanonlinestore #ecommercebusiness",
+    "image_headline": "The setup most guides skip",
+    "image_eyebrow": "ONLINE STORE",
+    "cta": "Get in touch to learn more.",
+    "pin_items": [
+      {
+        "title": "KNOW YOUR NUMBERS",
+        "description": "Calculate cost of goods plus packaging plus shipping, then divide by 0.5 for minimum price with 50% margins.",
+        "icon": "pricing formula"
+      },
+      {
+        "title": "DIMENSIONAL WEIGHT TRAP",
+        "description": "A 1 lb pillow in a large box ships as 17 lbs - if you didn't account for this, you're losing money on every sale.",
+        "icon": "box with measuring tape"
+      },
+      {
+        "title": "HELD FUNDS REALITY",
+        "description": "New stores have 20-30% of funds held for 90+ days - plan cash flow around money you've earned but can't access yet.",
+        "icon": "locked money"
+      },
+      {
+        "title": "DONE BEATS PERFECT",
+        "description": "Launch with 15 products and phone photos - you learn more from 10 real sales than 10 weeks tweaking your about page.",
+        "icon": "checkmark over progress bar"
+      }
+    ],
+    "destination_url": "https://www.switzertemplates.com/post/how-to-start-an-online-store?utm_source=pinterest&utm_medium=social&utm_campaign=how-to-start-an-online-store",
+    "keyword": "how to start an online store",
+    "slug": "how-to-start-an-online-store"
+  }
+]
