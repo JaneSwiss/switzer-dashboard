@@ -10,21 +10,18 @@ Reuses context/pin-reference-styles.json (Jane's real reference pins, unrelated
 to the old skills/pinterest-agent system — this file lives in context/ as
 shared, neutral ground truth, not part of what got scrapped).
 
-Four fixes folded in directly, all found from real generated output today:
-1. Only image_headline/image_eyebrow are quoted exactly — pin items are
-   informational, not verbatim render targets, so the model has room to fit them.
-2. Explicit permission to drop items / keep descriptions brief rather than
-   cramming everything in — this is what was distorting icons before.
-3. Icons only where the reference style actually uses them.
-4. No duplicating a point to fake a two-sided layout when the content doesn't
-   genuinely have two sides — confirmed bug on shopify-vs-wix pins 1a/1b today.
+Content dictation removed by Jane's explicit direction: earlier versions fed OpenAI an
+exact eyebrow + a list of points to render, one per line. Jane's call — stop telling OpenAI
+what the eyebrow/points should be; give it the (now short, corrected) pin title and brand/
+style/guardrail context, and let it design the actual pin content itself. Only the headline
+and the bottom bar are still quoted exactly; everything else about what appears on the pin
+is OpenAI's own creative decision.
 """
 from __future__ import annotations
 
 import json
 from pathlib import Path
 
-MAX_ITEMS = 6
 BOTTOM_BAR_TEXT = "SWITZERTEMPLATES.COM - grow your business online"
 
 _REFERENCE_FILE = Path(__file__).resolve().parents[3] / "context" / "pin-reference-styles.json"
@@ -71,38 +68,13 @@ def _brand_block(palette_offset: int) -> str:
 
 def _guardrails() -> str:
     return f"""GUARDRAILS:
-- Render the quoted eyebrow/headline and bottom bar text exactly as written, correctly \
-spelled — no typos, no invented words.
-- Only add an icon per point if the reference style below actually uses icons — otherwise \
-keep it text-only, don't force icons in where they don't belong.
-- Show as many points as comfortably fit without crowding — 3-4 clean, spacious points \
-beats 5 cramped ones. It's fine to drop points or shorten descriptions for breathing room.
-- If the reference implies a two-sided/comparison layout: only use it if the points \
-genuinely split into two contrasting sides. Never print the same point on both sides to \
-fill space — use a single list instead if there's only one real point of contrast.
+- Render the quoted headline and bottom bar text exactly as written, correctly spelled — \
+no typos, no invented words.
+- Only use icons if the reference style below actually uses them — otherwise keep it \
+text-only, don't force icons in where they don't belong.
 - No leaf, floral, botanical, sparkle, or star clip-art filler unless the reference style \
 description explicitly mentions it.
 - Bottom bar, full-width, the last element in the image: "{BOTTOM_BAR_TEXT}\""""
-
-
-def _content_block(pin_data: dict) -> str:
-    lines = []
-    eyebrow = (pin_data.get("image_eyebrow") or "").strip()
-    if eyebrow:
-        lines.append(f'Eyebrow label above the headline — render exactly: "{eyebrow}"')
-    lines.append(f'Headline — render exactly: "{pin_data["image_headline"]}"')
-
-    items = pin_data.get("pin_items", [])[:MAX_ITEMS]
-    if items:
-        lines.append(
-            "\nPoints — render each title exactly as quoted, but the description text is "
-            "informational only: paraphrase it in your own words, as briefly as fits well:"
-        )
-        for item in items:
-            visual_hint = f' (visual idea if useful: {item["icon"]})' if item.get("icon") else ""
-            lines.append(f'- "{item["title"]}" — {item["description"]}{visual_hint}')
-
-    return "\n".join(lines)
 
 
 def build_pin_prompt(pin_data: dict) -> str:
@@ -134,14 +106,21 @@ def build_pin_prompt(pin_data: dict) -> str:
             "brand's quiet-luxury aesthetic, your own creative choice of layout."
         )
 
+    title = pin_data["image_headline"]
+
     if pin_type == "photo":
         content = (
-            f'Headline — render exactly: "{pin_data["image_headline"]}"\n'
+            f'Headline — render exactly: "{title}"\n'
             f'Design a photo-driven pin: a real photo as the main visual, with this short '
             f'headline as the dominant text — not a list, not an infographic.'
         )
     else:
-        content = _content_block(pin_data)
+        content = (
+            f'Headline — render exactly: "{title}"\n'
+            f'This pin is for a blog post about that exact topic. Decide the rest of the '
+            f'content yourself — what points, layout, and supporting text best sell this '
+            f'specific topic. Be genuinely specific to it, not generic filler.'
+        )
 
     return (
         f"Design a premium Pinterest marketing graphic — a vertical pin, 1000x1500px, "

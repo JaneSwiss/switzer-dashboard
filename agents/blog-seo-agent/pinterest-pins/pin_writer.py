@@ -108,15 +108,22 @@ TITLE ANGLES — the angle changes the FRAMING/HOOK around the anchored title (b
 problem-led, result-led, comparison-led, transformation-led: {", ".join(TITLE_ANGLES)}) —
 it never changes WHAT the headline is about. Angle changes tone, not topic.
 
-TWO DIFFERENT TITLE FIELDS — do not confuse these:
-- seo_title: a full, natural sentence (8-15 words) for Pinterest's own SEO/search — this is
-  what shows in the Pinterest feed and search results, not baked into the image. Still
-  anchored to POST TITLE/KEYWORD per the rule above.
-- image_headline: SHORT — a few words to one short phrase, close to the actual keyword, NOT
-  a full sentence, NOT a clever tagline. This is the text rendered directly on the pin design.
-  If image_eyebrow is used, the headline+eyebrow pair may split into "anchored title" +
-  "catchy subtitle/hook" (eyebrow or headline can carry the hook half) — but the post's real
-  identity (title/keyword) must still be legible in the pair, not just the hook.
+TITLE LENGTH — SHORT, always. Confirmed real failure: "Best ecommerce website design - what
+actually makes a Shopify store convert" — this is NOT acceptable, it's a mechanical
+"keyword + dash + rephrased clause" formula, not a real title. A title is one short, natural
+sentence or phrase — never keyword-phrase-then-dash-then-explanation stitched together.
+Good examples of the actual target length and style (these are the model to match, adapt the
+topic, not the exact wording): "Best ecommerce website design that converts", "Here's the
+best ecommerce website design for your store", "What the best ecommerce website design
+should have". Roughly 4-9 words. If a dash genuinely helps, use it sparingly — not as the
+default structure for every single variation.
+
+TWO DIFFERENT TITLE FIELDS — do not confuse these, but both follow the length/style rule above:
+- seo_title: a short, natural sentence for Pinterest's own SEO/search — what shows in the
+  Pinterest feed and search results, not baked into the image. Still anchored to POST
+  TITLE/KEYWORD per the rule above.
+- image_headline: even shorter than seo_title where possible — a few words to one short
+  phrase. This is the text rendered directly on the pin design.
   Good examples: {GOOD_IMAGE_HEADLINES}
   Bad examples — too long, reads like a sentence, never do this: {BAD_IMAGE_HEADLINES}
   Also bad — anchored to a sub-topic instead of the post itself, never do this: "Why your
