@@ -772,5 +772,11 @@
     "stage": "image_generation",
     "keyword": "how-to-start-an-online-store",
     "error": "Cover prompt 2: Error code: 429 - {'error': {'message': 'You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.', 'type': 'insufficient_quota', 'param': None, 'code': 'credit_balance_exhausted'}}"
+  },
+  {
+    "date": "2026-08-20",
+    "stage": "git_push",
+    "keyword": "best ecommerce website design",
+    "error": "Command '['git', 'pull', '--rebase', 'origin', 'main']' returned non-zero exit status 1."
   }
 ]
