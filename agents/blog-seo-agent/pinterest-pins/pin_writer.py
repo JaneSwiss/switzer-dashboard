@@ -108,6 +108,16 @@ TITLE ANGLES — the angle changes the FRAMING/HOOK around the anchored title (b
 problem-led, result-led, comparison-led, transformation-led: {", ".join(TITLE_ANGLES)}) —
 it never changes WHAT the headline is about. Angle changes tone, not topic.
 
+image_headline SPECIFICALLY must still contain a real topic word from POST TITLE/KEYWORD
+(e.g. "ecommerce", "Shopify", "website design", "Pinterest", "branding" — whatever the
+actual keyword is) — no exceptions, including for the transformation-led angle. Confirmed
+real failure: image_headline "From confusing to converting" for a post about ecommerce
+website design — short, punchy, zero topic words, and a Pinterest user has no way to tell
+what this pin is even for. Shortness never excuses dropping the topic word. A transformation
+angle can still be short AND anchored: "Ecommerce design: confusing to converting" or
+"From cluttered to converting - ecommerce design" both work; "From confusing to converting"
+alone does not.
+
 TITLE LENGTH — SHORT, always. Confirmed real failure: "Best ecommerce website design - what
 actually makes a Shopify store convert" — this is NOT acceptable, it's a mechanical
 "keyword + dash + rephrased clause" formula, not a real title. A title is one short, natural
