@@ -2,16 +2,16 @@
   {
     "id": "a",
     "title_angle": "benefit-led",
-    "seo_title": "The ecommerce website design elements that actually drive sales",
-    "seo_description": "Clear product photos, trust signals near the buy button, and guest checkout matter more than trendy layouts. Here's what the best ecommerce website design actually includes. Learn more on my blog. #ecommercedesign #shopifytips #onlinestore",
-    "image_headline": "Ecommerce design that actually converts",
-    "image_eyebrow": "SHOPIFY STORE TIPS",
+    "seo_title": "Best ecommerce website design - what actually makes a Shopify store convert",
+    "seo_description": "The stores making consistent sales aren't the prettiest ones - they're the clearest ones. Here's exactly what your Shopify store needs to turn visitors into buyers. Learn more on my blog. #ecommercedesign #shopifytips #ecommercewebsite",
+    "image_headline": "Best ecommerce website design - what actually converts",
+    "image_eyebrow": "SHOPIFY STORES",
     "cta": "Learn more on my blog.",
     "pin_items": [
       {
         "title": "PRODUCT PHOTOS FIRST",
         "description": "No amount of beautiful layout compensates for phone photos taken on your kitchen counter",
-        "icon": "camera with clean white backdrop"
+        "icon": "camera with product on clean background"
       },
       {
         "title": "TRUST SIGNALS VISIBLE",
@@ -21,11 +21,11 @@
       {
         "title": "GUEST CHECKOUT ON",
         "description": "Forcing account creation before purchase is the fastest way to lose sales",
-        "icon": "shopping cart with speed lines"
+        "icon": "shopping cart with open door"
       },
       {
         "title": "MOBILE EXPERIENCE",
-        "description": "Over half your traffic is coming from phones - test your entire purchase flow there",
+        "description": "Over half your traffic comes from phones - test your entire purchase flow there",
         "icon": "smartphone with tap gesture"
       }
     ],
@@ -36,31 +36,31 @@
   {
     "id": "b",
     "title_angle": "problem-led",
-    "seo_title": "Why your Shopify store loses sales before customers even reach checkout",
-    "seo_description": "Most store owners bury products below their brand story while visitors leave confused. Your homepage has one job - show people what you sell and make it obvious how to buy. The full breakdown is on my blog - go check it out. #shopifystore #ecommercewebsite #smallbusinesstips",
-    "image_headline": "Why your store loses sales before checkout",
-    "image_eyebrow": "",
+    "seo_title": "Why your Shopify store isn't converting - best ecommerce website design fixes",
+    "seo_description": "Most Shopify stores fail not because their products are bad, but because their website makes buying feel like work. Here's what's actually killing your conversions. The full breakdown is on my blog - go check it out. #shopifystore #ecommerceconversions #onlinestore",
+    "image_headline": "Best ecommerce website design - mistakes killing your sales",
+    "image_eyebrow": "SHOPIFY FIX",
     "cta": "The full breakdown is on my blog - go check it out.",
     "pin_items": [
       {
-        "title": "PRODUCTS BURIED",
-        "description": "New visitors don't care about your origin story yet - they care about whether you sell what they need",
-        "icon": "scroll with products hidden at bottom"
+        "title": "BURIED PRODUCTS",
+        "description": "Most store owners bury their products below their brand story - visitors leave before they see what you sell",
+        "icon": "homepage with text blocking products"
       },
       {
-        "title": "CONFUSING HOMEPAGE",
-        "description": "If your above-the-fold screenshot doesn't include actual products or a clear path to them, you're losing sales",
-        "icon": "question mark over homepage"
+        "title": "HIDDEN SHIPPING COSTS",
+        "description": "The number one reason for cart abandonment is unexpected costs at checkout",
+        "icon": "receipt with surprise total"
       },
       {
-        "title": "WRONG HIERARCHY",
-        "description": "A handmade seller with beautiful pieces lost customers because her homepage opened with three paragraphs about her story",
-        "icon": "inverted pyramid"
-      },
-      {
-        "title": "SLOW CHECKOUT",
+        "title": "SLOW LOAD TIMES",
         "description": "Every additional second of load time reduces conversions by approximately 7%",
-        "icon": "timer with warning"
+        "icon": "loading spinner"
+      },
+      {
+        "title": "TOO MANY FORM FIELDS",
+        "description": "Every additional checkout field reduces completion rates - cut everything non-essential",
+        "icon": "long form being shortened"
       }
     ],
     "destination_url": "https://www.switzertemplates.com/post/best-ecommerce-website-design?utm_source=pinterest&utm_medium=social&utm_campaign=best-ecommerce-website-design",
@@ -70,31 +70,31 @@
   {
     "id": "c",
     "title_angle": "result-led",
-    "seo_title": "A skincare brand changed one homepage element and conversions jumped",
-    "seo_description": "They swapped a dreamy brand video for a simple grid of their three bestselling products with shop now buttons. Visitors finally knew what the store actually sold. Get more info on my blog. #ecommercedesign #shopifyconversions #productbusiness",
-    "image_headline": "The homepage change that increased conversions",
-    "image_eyebrow": "REAL EXAMPLE",
+    "seo_title": "The ecommerce website design that actually drives Shopify sales",
+    "seo_description": "A skincare brand changed their homepage from a dreamy brand video to a simple product grid - conversions jumped because visitors finally knew what they sold. Here's the structure that works. Get more info on my blog. #ecommercewebsitedesign #shopifysales #productbusiness",
+    "image_headline": "Ecommerce website design for real sales",
+    "image_eyebrow": "BEST PRACTICES",
     "cta": "Get more info on my blog.",
     "pin_items": [
       {
-        "title": "SHOW BESTSELLERS FIRST",
-        "description": "Hero image featuring your bestselling product, not a lifestyle photo without context",
-        "icon": "star product in spotlight"
-      },
-      {
-        "title": "ONE CLEAR CTA",
-        "description": "A single call-to-action button that takes visitors to shop - no competing options",
-        "icon": "button with arrow"
-      },
-      {
-        "title": "CUSTOMER LANGUAGE",
-        "description": "Navigation should mirror how your customers think, not how you organize inventory internally",
-        "icon": "speech bubble with shopping terms"
-      },
-      {
-        "title": "THREE-SECOND TEST",
+        "title": "3-SECOND CLARITY",
         "description": "A first-time visitor should know exactly what you sell within three seconds of landing",
-        "icon": "stopwatch showing 3"
+        "icon": "stopwatch with checkmark"
+      },
+      {
+        "title": "SLIDE-OUT CART",
+        "description": "A smooth side panel lets customers see their cart without leaving the page and keeps them in buying mode",
+        "icon": "side drawer sliding open"
+      },
+      {
+        "title": "SHIPPING PROGRESS BAR",
+        "description": "Showing customers how close they are to free shipping encourages adding one more item",
+        "icon": "progress bar almost full"
+      },
+      {
+        "title": "60-SECOND CHECKOUT",
+        "description": "Checkout should take under a minute - no account creation, no hunting for information",
+        "icon": "fast checkout flow"
       }
     ],
     "destination_url": "https://www.switzertemplates.com/post/best-ecommerce-website-design?utm_source=pinterest&utm_medium=social&utm_campaign=best-ecommerce-website-design",
@@ -104,31 +104,31 @@
   {
     "id": "d",
     "title_angle": "comparison-led",
-    "seo_title": "The difference between Shopify stores that sell and stores that struggle",
-    "seo_description": "It's not about having the trendiest design. The stores making consistent sales aren't the prettiest ones - they're the clearest ones. Here's what actually separates them. Learn more on my blog. #shopifytips #ecommercetips #onlinebusiness",
-    "image_headline": "Stores that sell vs stores that struggle",
-    "image_eyebrow": "THE REAL DIFFERENCE",
-    "cta": "Learn more on my blog.",
+    "seo_title": "Pretty vs clear - what actually makes the best ecommerce website design",
+    "seo_description": "The stores making consistent sales aren't the prettiest ones - they're the clearest ones. Here's the difference between award-winning design and design that actually sells products. #ecommercedesign #shopifydesign #smallbusinesstips",
+    "image_headline": "Best ecommerce website design - pretty vs profitable",
+    "image_eyebrow": "",
+    "cta": "",
     "pin_items": [
       {
-        "title": "CLARITY OVER BEAUTY",
-        "description": "The stores making consistent sales aren't the prettiest - they're the ones where visitors know what you sell in three seconds",
-        "icon": "magnifying glass over simple layout"
+        "title": "SKIP THE ANIMATIONS",
+        "description": "Forget custom animations and parallax scrolling - focus on removing friction from the buying process",
+        "icon": "crossed out sparkle effects"
       },
       {
-        "title": "STRUCTURE THAT SCALES",
-        "description": "Proper collections and logical categories that make sense when you have 50 items, not just 10",
-        "icon": "organized grid expanding"
+        "title": "SELL, DON'T DESCRIBE",
+        "description": "Product descriptions should tell customers why they want it, not just what it is",
+        "icon": "product tag with benefits"
       },
       {
-        "title": "SLIDE-OUT CART",
-        "description": "A smooth side panel keeps customers in buying mode without losing their place on the page",
-        "icon": "drawer sliding open"
+        "title": "CUSTOMER LANGUAGE",
+        "description": "Navigation should mirror how your customers think, not how you organize inventory",
+        "icon": "menu with simple labels"
       },
       {
-        "title": "SHIPPING PROGRESS BAR",
-        "description": "Showing 'you're $23 away from free shipping' encourages adding one more item",
-        "icon": "progress bar almost full"
+        "title": "CONSISTENCY WINS",
+        "description": "A professional store doesn't need to be elaborate - it needs to be clear and consistent",
+        "icon": "matching product photos in grid"
       }
     ],
     "destination_url": "https://www.switzertemplates.com/post/best-ecommerce-website-design?utm_source=pinterest&utm_medium=social&utm_campaign=best-ecommerce-website-design",
@@ -138,20 +138,20 @@
   {
     "id": "e",
     "title_angle": "transformation-led",
-    "seo_title": "How to audit your ecommerce store design in 20 minutes",
-    "seo_description": "You don't need to hire an agency to know if your store design is working. Five simple tests that show you exactly what's costing you sales - and what to fix first. #ecommerceaudit #shopifystore #smallbusinessowner",
-    "image_headline": "Audit your store design in 20 minutes",
-    "image_eyebrow": "DIY CHECKLIST",
-    "cta": "",
+    "seo_title": "Audit your Shopify store in 20 minutes - best ecommerce website design checklist",
+    "seo_description": "You don't need to hire an agency to know if your store design is working. Here's exactly what to check and fix to turn your Shopify store into one that actually converts. Get in touch to learn more. #shopifyaudit #ecommercetips #shopifyhelp",
+    "image_headline": "Best ecommerce website design - the 20-minute audit",
+    "image_eyebrow": "SHOPIFY CHECKLIST",
+    "cta": "Get in touch to learn more.",
     "pin_items": [
       {
         "title": "5-SECOND TEST",
-        "description": "Show your homepage to three people - if they can't say what you sell, your hierarchy is wrong",
-        "icon": "three people with thought bubbles"
+        "description": "Show your homepage to three people and ask what you sell - if they can't answer, your hierarchy is wrong",
+        "icon": "three people looking at screen"
       },
       {
         "title": "MOBILE WALKTHROUGH",
-        "description": "Go from homepage to checkout on your phone and time every friction point",
+        "description": "Go from homepage to checkout on your phone and note every friction point",
         "icon": "finger tapping phone screen"
       },
       {

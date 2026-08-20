@@ -90,16 +90,38 @@ real proper nouns (Pinterest, Etsy, Instagram, Wix, Shopify, Canva, Google, Jane
 Switzertemplates), and acronyms (SEO, DIY, URL, CTA, FAQ) always stay capitalized regardless
 of position.
 
-TITLE ANGLES — rotate a genuinely different angle across the 5 variations, not the same
-angle reworded 5 times: {", ".join(TITLE_ANGLES)}.
+TITLE ANCHOR — NON-NEGOTIABLE: every one of the 5 headlines must be instantly recognizable
+as THIS post — a rephrasing of POST TITLE / KEYWORD, or POST TITLE (or a close variant of it)
+paired with a short catchy subtitle. NEVER build a headline around a random fact, anecdote,
+or sub-section pulled from partway through the post — confirmed real failure mode: for a
+post titled "Best Ecommerce Website Design: What Actually Makes A Shopify Store Convert",
+headlines like "Why your store loses sales before checkout" or "The homepage change that
+increased conversions" got written — both are real things the post discusses, but neither
+one tells a Pinterest user what post this actually is, and someone searching the actual
+keyword would never recognize this pin as an answer. A reader glancing at all 5 pins should
+immediately see they're all for the same post, just worded differently — exactly like:
+"Shopify vs Wix for ecommerce", "Which platform fits your business", "Shopify vs Wix - how
+to decide", "Wix vs Shopify for coaches", "Shopify or Wix for ecommerce" (5 real approved
+headlines for one post — every single one still says "Shopify vs Wix" or the equivalent).
+
+TITLE ANGLES — the angle changes the FRAMING/HOOK around the anchored title (benefit-led,
+problem-led, result-led, comparison-led, transformation-led: {", ".join(TITLE_ANGLES)}) —
+it never changes WHAT the headline is about. Angle changes tone, not topic.
 
 TWO DIFFERENT TITLE FIELDS — do not confuse these:
 - seo_title: a full, natural sentence (8-15 words) for Pinterest's own SEO/search — this is
-  what shows in the Pinterest feed and search results, not baked into the image.
+  what shows in the Pinterest feed and search results, not baked into the image. Still
+  anchored to POST TITLE/KEYWORD per the rule above.
 - image_headline: SHORT — a few words to one short phrase, close to the actual keyword, NOT
   a full sentence, NOT a clever tagline. This is the text rendered directly on the pin design.
+  If image_eyebrow is used, the headline+eyebrow pair may split into "anchored title" +
+  "catchy subtitle/hook" (eyebrow or headline can carry the hook half) — but the post's real
+  identity (title/keyword) must still be legible in the pair, not just the hook.
   Good examples: {GOOD_IMAGE_HEADLINES}
   Bad examples — too long, reads like a sentence, never do this: {BAD_IMAGE_HEADLINES}
+  Also bad — anchored to a sub-topic instead of the post itself, never do this: "Why your
+  store loses sales before checkout" or "The homepage change that increased conversions"
+  when the actual post title is about ecommerce website design broadly.
 
 PIN ITEMS — the real substance, grounded in the actual post sections given to you. Pull from
 what the post really argues, in the post's own real structure. If the post has genuinely
