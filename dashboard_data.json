@@ -3333,7 +3333,7 @@
         "image_cost": 0.65,
         "pin_cost_estimate": 0.95,
         "errors": [],
-        "completed": false,
+        "completed": true,
         "note": "Jane-specified brief: Shopify-focused, human/personal tone (not dry steps), covers 8 specific theme features (catalog, blog, categories, mega menu, slide-out cart, free shipping bar, cart upsell, mobile) with soft no-price/no-link mention of her premade Shopify themes. Real numbers: 1,300 Google vol / 229 Pinterest vol (Jane-provided). NEW Wix draft, not yet published. Note: title is 74 chars, over the ~60-char display limit flagged earlier this session - worth a shorter title if Jane wants to fix it before publishing."
       }
     ]
