@@ -1359,9 +1359,9 @@ _ENVIRONMENTS = [
     "Bathroom vanity with travertine tiles, luxe products arranged neatly, soft diffused light",
     "Modern co-working space with exposed ceiling beams, warm Edison pendants, brick wall",
     "Minimalist photography studio, white curved cove backdrop, single beauty dish light from side",
-    "Boutique hotel suite sitting room, curved Art Deco armchair, dramatic drapes, evening lamp glow",
+    "Boutique hotel suite sitting room, curved Art Deco armchair, dramatic drapes, warm lamp glow blended with soft daylight from a nearby window",
     "Luxury brand showroom or concept store interior, editorial, objects on pedestals, gallery white walls",
-    "Dark moody office with floor-to-ceiling dark shelving, leather chair, warm amber lamp only light source",
+    "Moody office with floor-to-ceiling dark shelving, leather chair, warm amber lamp plus soft window light so the space still reads clearly",
     "Mid-century modern workspace, walnut desk, pendant Arco lamp, minimal and warm",
     "Glass-walled penthouse office, city blurred behind full-height windows, clean modern desk",
     "Rooftop terrace with city skyline, golden hour light, terracotta pots, olive tree in planter",
@@ -1370,11 +1370,11 @@ _ENVIRONMENTS = [
     "Lush garden, hedgerow blurred background, wrought iron table, very soft diffused light",
     "Beach-adjacent poolside at a luxury villa, sun lounger, blue water blurred behind, warm",
     "Verdant hotel garden terrace, rattan furniture, greenery everywhere, warm dappled shade",
-    "City rooftop at dusk, string lights beginning to glow, warm purple-orange sky behind",
+    "City rooftop at golden hour (not dusk), warm sunlit sky, string lights visible but not yet the light source",
     "Sleek all-white café with marble counter, minimalist pendant, single flower stem in vase",
     "Parisian café with mirrored walls, rattan chairs, marble bistro table, warm afternoon light",
     "Japanese-inspired café with pale timber, ceramic objects, stone surfaces, calm zen aesthetic",
-    "Luxury hotel lobby bar, dramatic high ceilings, low leather seating, soft indirect lighting",
+    "Luxury hotel lobby bar, dramatic high ceilings, low leather seating, bright natural light from tall windows",
     "Rooftop café bar, city view behind, warm golden hour, elegant glassware on the table",
     "Coastal café, light wood, linen napkins, sea light, relaxed editorial feel",
 ]
@@ -1466,7 +1466,20 @@ def generate_image_prompts(keyword: str, post_html: str) -> str:
         f"Everything else — hair, outfit, drink, screen content, mood — is still yours to "
         f"choose freely, grounded in the actual post content. Follow the assigned activity "
         f"described within each composition exactly — do not substitute a laptop or add "
-        f"typing/desk work where the composition specifies something else."
+        f"typing/desk work where the composition specifies something else.\n\n"
+        f"TWO NON-NEGOTIABLE RULES FOR PROMPT 1 AND PROMPT 3, regardless of which composition "
+        f"was assigned above:\n"
+        f"1. TOPICAL ANCHOR — the scene must include at least one small, natural element that "
+        f"visibly connects to this specific post's topic: a phone/tablet screen showing "
+        f"something relevant, a printed page, a relevant product or object in hand or on a "
+        f"nearby surface. A composition like 'walking away' or 'wide shot' or 'staircase' can "
+        f"still include this — e.g. a phone held loosely in hand with a relevant screen visible, "
+        f"or a relevant object glimpsed on a table in frame. NEVER produce a pure mood/lifestyle "
+        f"shot with zero connection to the topic — that has happened before and is not allowed.\n"
+        f"2. BRIGHTNESS FLOOR — the scene must be clearly and evenly lit. A single warm lamp, "
+        f"dusk, or 'evening glow' as the only light source is too dark — confirmed unusable on a "
+        f"real generated cover. Combine any warm/moody lighting with genuine daylight or bright "
+        f"ambient light so the whole frame reads clearly, not just a small pool of light."
     )
 
     response = client.messages.create(
