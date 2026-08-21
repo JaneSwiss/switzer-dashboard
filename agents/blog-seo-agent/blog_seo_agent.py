@@ -1814,6 +1814,12 @@ def _assemble_html(title: str, post_html: str, image_prompts: str, image_paths: 
         )
     content = re.sub(r'\[DALLE:(.*?)\]', dalle_block, content, flags=re.DOTALL)
 
+    # Convert markdown links [text](url) to <a> — Claude is told to write raw <a> tags for
+    # crosslinks/CTAs, but occasionally writes markdown-style links instead. Without this,
+    # those render as literal visible "[text](url)" on the page - confirmed real bug on a
+    # real post's closing CTA. Runs before bold/italic so a bolded link's ** wrapper survives.
+    content = re.sub(r'\[([^\]]+)\]\((https?://[^\s)]+)\)', r'<a href="\2">\1</a>', content)
+
     # Convert markdown bold-italic ***text*** to <strong><em>
     content = re.sub(r'\*\*\*(.*?)\*\*\*', r'<strong><em>\1</em></strong>', content)
     # Convert markdown bold **text** to <strong>
