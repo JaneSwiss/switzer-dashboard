@@ -860,6 +860,23 @@ def check_banned_words(text: str) -> list[str]:
     return [w for w in BANNED_WORDS if w.lower() in lower]
 
 
+# Words banned from the TITLE specifically, not the whole post — fine in body prose
+# occasionally, but became an overused title formula with no cross-post memory to stop
+# it: confirmed "actually" in 15+ of ~47 real post titles, including every one written
+# in a single recent session ("...That Actually Converts", "...That Actually Sells Your
+# Products", "...That Actually Fits Your Business"). Same root cause class as the cover-
+# image repetition bug fixed earlier — each post is generated in isolation with no
+# awareness of what previous titles already used, so the model's single favorite
+# "sounds authentic" word keeps winning by default.
+BANNED_TITLE_WORDS = ["actually"]
+
+
+def check_banned_title_words(text: str) -> list[str]:
+    first_line = text.strip().split("\n", 1)[0]
+    lower = first_line.lower()
+    return [w for w in BANNED_TITLE_WORDS if w in lower]
+
+
 def write_blog_post(keyword_row: dict, competitors: list[dict]) -> str:
     """
     Research → synthesize → write → validate → (retry if needed).
@@ -997,11 +1014,25 @@ def write_blog_post(keyword_row: dict, competitors: list[dict]) -> str:
 
     # ── Step F: banned word check — revision pass if needed ──────────────────
     hits = check_banned_words(post_text)
-    if hits:
-        print(f"  Banned words found: {hits} - requesting revision...")
+    title_hits = check_banned_title_words(post_text)
+    if hits or title_hits:
+        pieces = []
+        if hits:
+            pieces.append(f"The blog post contains these banned words: {hits}.")
+        if title_hits:
+            pieces.append(
+                f"The TITLE (first line) uses {title_hits} — this exact word has become a "
+                f"tic repeated across dozens of other post titles on this site (e.g. every "
+                f"recent title ending in '...That Actually Converts', '...That Actually "
+                f"Sells Your Products') because nothing stops the same word choice recurring "
+                f"across separate posts. Rewrite the title without it or any equivalent "
+                f"filler-intensifier word — a direct, specific title needs no such word to "
+                f"prove itself genuine."
+            )
+        print(f"  Banned words found: {hits or ''}{' + title: ' + str(title_hits) if title_hits else ''} - requesting revision...")
         revision_prompt = (
-            f"The blog post contains these banned words: {hits}.\n"
-            f"Rewrite the affected sentences to remove every instance of those words entirely. "
+            " ".join(pieces) + "\n"
+            f"Rewrite the affected sentences/title to remove every instance entirely. "
             f"Do not replace them with synonyms from the banned list. "
             f"Return only the complete revised blog post - no preamble.\n\n"
             f"{post_text}"
@@ -1018,9 +1049,10 @@ def write_blog_post(keyword_row: dict, competitors: list[dict]) -> str:
         post_text = revised.content[0].text.strip()
 
         still_hit = check_banned_words(post_text)
-        if still_hit:
-            log_error("banned_words", keyword, f"Banned words remain after revision: {still_hit}")
-            print(f"  Banned words remain after revision: {still_hit} — logged and continuing.")
+        still_title_hit = check_banned_title_words(post_text)
+        if still_hit or still_title_hit:
+            log_error("banned_words", keyword, f"Banned words remain after revision: {still_hit} title: {still_title_hit}")
+            print(f"  Banned words remain after revision: {still_hit} title: {still_title_hit} — logged and continuing.")
 
     return post_text
 
