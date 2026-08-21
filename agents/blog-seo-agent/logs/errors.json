@@ -778,5 +778,11 @@
     "stage": "git_push",
     "keyword": "best ecommerce website design",
     "error": "Command '['git', 'pull', '--rebase', 'origin', 'main']' returned non-zero exit status 1."
+  },
+  {
+    "date": "2026-08-21",
+    "stage": "serp_fetch",
+    "keyword": "best shopify themes 2026 statistics data 2025 2026",
+    "error": "HTTPSConnectionPool(host='api.valueserp.com', port=443): Read timed out. (read timeout=20)"
   }
 ]

@@ -205,24 +205,45 @@ templates are the fastest fix. Customise once, reuse every week."
 
 ---
 
-## Product 5: Premade Shopify Themes
+## Product 5: Premade Shopify Themes — from $110 USD
 
-**Status:** confirmed real product, no dedicated page on switzertemplates.com yet.
-**Do not state a price in copy — it changes.** Do not invent or link to a URL for this
-product until a real page exists.
+**Page:** https://www.switzertemplates.com/shopify-theme-templates
+**Do not state the exact price in copy — it changes.** Fine to say "affordable" /
+"budget-friendly" generically.
 
 **What it is:**
-A premade Shopify theme, built for ecommerce/product sellers who want a professional,
-ready-to-launch store without building one from scratch or hiring a developer.
+A premade Shopify theme — a full luxury ecommerce website design done for you, not just a
+basic theme framework. 4 color variants (Black&Gold, Burgundy, Chocolate, Champagne), each
+identical in features, different palette. Includes: the theme file ready to upload to
+Shopify, an install/edit guide, and a PDF with editable Canva logo/banner links. Free
+installation available on request after purchase.
+
+**Real features (all included, confirmed from the actual product listing — safe to state
+these as fact):**
+- Product catalog, blog, and clear categories/collections
+- Mega Menu — full dropdown to showcase collections, or a simple dropdown if preferred
+- Slide-Out Cart Drawer — view cart without leaving the page
+- Free Shipping Progress Bar — automatically shows shoppers how close they are to free shipping
+- Cart Upsell Suggestions — related product recommendations inside the cart
+- Fully mobile-optimized on every device
+
+**Real constraints (don't contradict these):**
+- Shopify only — will not work on Wix, Squarespace, WordPress, Showit, etc.
+- Hosting and domain are not included (buyer chooses/pays separately)
+- Digital product — all sales final, no refunds/exchanges
+- "Designed by SwitzerTemplates" footer credit must stay on the live site
+- Personal/single-business license — VAs/social media managers can use it for clients but
+  must repurchase per client
 
 **Who it's for:**
 Product-based and ecommerce sellers on Shopify specifically — not service providers
 or coaches (those get the Wix website instead).
 
 **How to talk about it:**
-Only ever a soft, one-sentence mention within relevant Shopify/ecommerce posts — never
-the main CTA, never a hyperlink until a real page exists. See CTA MAPPING in
-blog_seo_agent.py.
+Default: a soft, one-sentence mention within relevant Shopify/ecommerce posts, linking to
+the real page above. For a post specifically about choosing/comparing Shopify themes, it's
+fine to lead with the case for these themes more directly — Jane's call per post, not a
+blanket default. See CTA MAPPING in blog_seo_agent.py.
 
 ---
 

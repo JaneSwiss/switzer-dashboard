@@ -790,10 +790,11 @@ including the tracking parameters on the end — do not shorten or drop them:
 - Post about coaching business (not specifically Pinterest):
   → CTA to https://www.switzertemplates.com/business-template-bundles?utm_source=blog&utm_medium=content&utm_campaign={keyword_row['_slug']}
 - Post about Shopify or choosing an ecommerce platform/theme:
-  → No hyperlink CTA — this product has no live page yet. Instead, work in ONE natural,
-  soft sentence mentioning that Jane also designs premade Shopify themes built for
-  ecommerce sellers who want a professional store without building one from scratch.
-  Never state a price (it changes). Never invent or link to a URL for this product.
+  → CTA to https://www.switzertemplates.com/shopify-theme-templates?utm_source=blog&utm_medium=content&utm_campaign={keyword_row['_slug']}
+  Present as Jane's premade Shopify themes — full luxury ecommerce website designs done
+  for you, not just a basic framework, with a mega menu, slide-out cart drawer, free
+  shipping progress bar, and cart upsell suggestions built in. Never state the exact price
+  (it changes) — "affordable"/"budget-friendly" is fine.
 
 CROSSLINKING — REQUIRED:
 These are the pages currently live on switzertemplates.com. If 2 or more of them are
