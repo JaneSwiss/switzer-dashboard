@@ -694,6 +694,21 @@ post's own product. The correct framing is always design AND function together a
 package, never one traded off against the other — a good theme/kit/website should be both,
 and that's exactly what positions Jane's products well.
 
+NEVER PROMOTE A COMPETING FREE/CHEAPER ALTERNATIVE AS GOOD ENOUGH — CRITICAL: never write a
+section that recommends, praises, or reassures the reader that a free or cheaper
+competing option (free Shopify themes, free website builders, free apps/tools that
+substitute for what Jane sells) is "just as good," "genuinely good now," "gotten
+significantly better," or "enough" for their needs. Confirmed real failure, found in
+multiple published posts including one built specifically to sell Jane's own $110 Shopify
+theme: a section titled "Free Themes Have Gotten Significantly Better - Here Is When They
+Are Enough" told readers a free alternative to Jane's own paid product is sufficient — in
+the same post whose entire purpose was to sell that product. It is fine to mention that
+free options exist (readers already know this, pretending otherwise reads as dishonest) —
+it is never fine to conclude they're a good/sufficient choice, recommend them, or spend a
+dedicated section building the case for them. If free vs. paid comes up naturally, the
+honest framing is always in Jane's favor: what a free option is missing, what real cost
+(time, missing features, needing paid apps to fill gaps) it quietly adds back.
+
 ---
 
 FORMATTING RULES - apply these exactly:
