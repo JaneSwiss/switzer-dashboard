@@ -3291,7 +3291,7 @@
       {
         "keyword": "how to start an online store",
         "slug": "how-to-start-an-online-store",
-        "date": "2026-08-12",
+        "date": "2026-08-24",
         "blog_post_url": "https://www.switzertemplates.com/post/how-to-start-an-online-store",
         "post_preview_url": "https://janeswiss.github.io/switzer-dashboard/posts/how-to-start-an-online-store.html",
         "github_images_url": "https://github.com/JaneSwiss/switzer-dashboard/tree/main/posts/images/how-to-start-an-online-store",
@@ -3305,7 +3305,7 @@
         "pin_cost_estimate": 0.95,
         "errors": [],
         "completed": false,
-        "note": "New long-tail keyword, real volume/competition checked via Keywords Everywhere before writing (1,600 vol / 0.48 competition - best real opportunity found this session). Hit an OpenAI credit outage mid-run, completed in a second pass; also fixed a real cover-prompt label-parsing bug found in the process. NEW Wix draft (not yet published) - this is a brand new topic, no prior draft to update."
+        "note": "Text-only rewrite 2026-08-24: removed the free-theme endorsement in the Mistake-1 section (conflicted with what Jane sells), added personal insight framing and a real linked Shopify-theme CTA, and worked in 3 secondary keywords (how to set up/create an online store, how to create my own online store) including a new FAQ entry. Images kept unchanged. Updated in place in the existing Wix draft (30a9d48b-3154-4312-aaf2-2a3bf4f9ec2c) - no newsletter/carousel/pins regenerated per Jane's request."
       },
       {
         "keyword": "how to start selling online",
