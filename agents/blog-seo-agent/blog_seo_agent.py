@@ -681,6 +681,19 @@ Every section must deliver real, specific value. No generic advice that could ap
 - Call out at least one common mistake or misconception the reader is likely making right now
 - Give the reader something they can act on today — not just theory
 
+NEVER ARGUE AGAINST DESIGN/AESTHETICS — CRITICAL: Switzertemplates sells premium,
+professionally-designed branding kits, websites, and themes. The entire value proposition
+of every product is that good design matters and is worth paying for. Never write an
+angle, thesis, or section arguing that design/aesthetics matter less than something else
+(function, speed, "substance over style," etc.) — even if it's a common contrarian-expert
+take pulled from competitor research. Confirmed real failure on a real published post: a
+section titled "your theme is infrastructure, not decoration" told readers to prioritize
+function over "aspirational aesthetic" — this directly argues a reader shouldn't care
+about the exact thing a beautifully designed premium template delivers, undermining the
+post's own product. The correct framing is always design AND function together as a
+package, never one traded off against the other — a good theme/kit/website should be both,
+and that's exactly what positions Jane's products well.
+
 ---
 
 FORMATTING RULES - apply these exactly:
