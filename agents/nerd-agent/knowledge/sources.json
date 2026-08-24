@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "total_sources": 28,
+  "total_sources": 29,
   "sources": [
     {
       "id": "3fca9459",
@@ -411,6 +411,22 @@
       ],
       "word_count": 2724,
       "summary_file": "entries/585710e9-i-studied-new-etsy-shops-making-big.json",
+      "status": "ok"
+    },
+    {
+      "id": "93401765",
+      "type": "youtube",
+      "url": "https://www.youtube.com/watch?v=k1UtWYPo2MU",
+      "title": "Etsy's biggest update in years!",
+      "author": "",
+      "date_ingested": "2026-08-25",
+      "topics": [
+        "etsy-seo",
+        "branding",
+        "business-strategy"
+      ],
+      "word_count": 1173,
+      "summary_file": "entries/93401765-etsys-biggest-update-in-years.json",
       "status": "ok"
     }
   ]

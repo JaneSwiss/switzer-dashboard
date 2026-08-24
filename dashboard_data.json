@@ -3031,7 +3031,7 @@
   "nerd_agent": {
     "status": "active",
     "last_run": "2026-08-25",
-    "total_sources_processed": 28,
+    "total_sources_processed": 29,
     "topics_covered": [
       "ai-tools",
       "ai-video-editing",
@@ -3044,7 +3044,7 @@
       "product-development"
     ],
     "sources_by_type": {
-      "youtube": 26,
+      "youtube": 27,
       "article": 0,
       "email": 2
     },
@@ -3062,8 +3062,8 @@
         "insight_file": "context/nerd-insights/content-creation.md"
       },
       "business-strategy": {
-        "sources": 4,
-        "key_points_captured": 75,
+        "sources": 5,
+        "key_points_captured": 92,
         "last_updated": "2026-08-25",
         "insight_file": "context/nerd-insights/business-strategy.md"
       },
@@ -3080,14 +3080,14 @@
         "insight_file": "context/nerd-insights/ai-video-editing.md"
       },
       "etsy-seo": {
-        "sources": 5,
-        "key_points_captured": 93,
+        "sources": 6,
+        "key_points_captured": 110,
         "last_updated": "2026-08-25",
         "insight_file": "context/nerd-insights/etsy-seo.md"
       },
       "branding": {
-        "sources": 1,
-        "key_points_captured": 20,
+        "sources": 2,
+        "key_points_captured": 37,
         "last_updated": "2026-08-25",
         "insight_file": "context/nerd-insights/branding.md"
       },
@@ -3160,6 +3160,17 @@
         "date_ingested": "2026-08-25"
       },
       {
+        "id": "93401765",
+        "title": "Etsy's biggest update in years!",
+        "type": "youtube",
+        "topics": [
+          "etsy-seo",
+          "branding",
+          "business-strategy"
+        ],
+        "date_ingested": "2026-08-25"
+      },
+      {
         "id": "7bb4287c",
         "title": "I Use Claude to Edit Videos: Here's My Exact Process",
         "type": "youtube",
@@ -3189,15 +3200,6 @@
       {
         "id": "ce754acb",
         "title": "Why You Must Stop Selling Your Time for Money",
-        "type": "youtube",
-        "topics": [
-          "ai-tools"
-        ],
-        "date_ingested": "2026-06-10"
-      },
-      {
-        "id": "339a5c3d",
-        "title": "How This Mom Makes $48K/Month With Claude",
         "type": "youtube",
         "topics": [
           "ai-tools"
