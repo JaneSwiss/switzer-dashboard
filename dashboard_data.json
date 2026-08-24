@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-08-21",
+  "last_updated": "2026-08-25",
   "etsy_agent": {
     "status": "active",
     "last_run": "2026-05-05",
@@ -3030,25 +3030,29 @@
   },
   "nerd_agent": {
     "status": "active",
-    "last_run": "2026-06-18",
-    "total_sources_processed": 23,
+    "last_run": "2026-08-25",
+    "total_sources_processed": 28,
     "topics_covered": [
       "ai-tools",
       "ai-video-editing",
+      "branding",
       "business-strategy",
       "content-creation",
-      "pinterest-marketing"
+      "email-marketing",
+      "etsy-seo",
+      "pinterest-marketing",
+      "product-development"
     ],
     "sources_by_type": {
-      "youtube": 22,
+      "youtube": 26,
       "article": 0,
-      "email": 1
+      "email": 2
     },
     "topics": {
       "pinterest-marketing": {
-        "sources": 10,
-        "key_points_captured": 182,
-        "last_updated": "2026-06-08",
+        "sources": 11,
+        "key_points_captured": 198,
+        "last_updated": "2026-08-25",
         "insight_file": "context/nerd-insights/pinterest-marketing.md"
       },
       "content-creation": {
@@ -3058,9 +3062,9 @@
         "insight_file": "context/nerd-insights/content-creation.md"
       },
       "business-strategy": {
-        "sources": 1,
-        "key_points_captured": 18,
-        "last_updated": "2026-06-08",
+        "sources": 4,
+        "key_points_captured": 75,
+        "last_updated": "2026-08-25",
         "insight_file": "context/nerd-insights/business-strategy.md"
       },
       "ai-tools": {
@@ -3074,9 +3078,87 @@
         "key_points_captured": 57,
         "last_updated": "2026-06-18",
         "insight_file": "context/nerd-insights/ai-video-editing.md"
+      },
+      "etsy-seo": {
+        "sources": 5,
+        "key_points_captured": 93,
+        "last_updated": "2026-08-25",
+        "insight_file": "context/nerd-insights/etsy-seo.md"
+      },
+      "branding": {
+        "sources": 1,
+        "key_points_captured": 20,
+        "last_updated": "2026-08-25",
+        "insight_file": "context/nerd-insights/branding.md"
+      },
+      "product-development": {
+        "sources": 3,
+        "key_points_captured": 56,
+        "last_updated": "2026-08-25",
+        "insight_file": "context/nerd-insights/product-development.md"
+      },
+      "email-marketing": {
+        "sources": 1,
+        "key_points_captured": 16,
+        "last_updated": "2026-08-25",
+        "insight_file": "context/nerd-insights/email-marketing.md"
       }
     },
     "recent_sources": [
+      {
+        "id": "6be442fe",
+        "title": "I Helped 60 Etsy Sellers BLOW UP Their Shops",
+        "type": "youtube",
+        "topics": [
+          "etsy-seo",
+          "branding",
+          "product-development"
+        ],
+        "date_ingested": "2026-08-25"
+      },
+      {
+        "id": "8bdbc92c",
+        "title": "I Studied NEW Etsy Shops, Here's How I Would Get Sales Fast",
+        "type": "youtube",
+        "topics": [
+          "etsy-seo",
+          "product-development",
+          "business-strategy"
+        ],
+        "date_ingested": "2026-08-25"
+      },
+      {
+        "id": "8f236a50",
+        "title": "FREE Ways To Boost Etsy Sales Online (FULL COURSE)",
+        "type": "youtube",
+        "topics": [
+          "etsy-seo",
+          "pinterest-marketing",
+          "email-marketing"
+        ],
+        "date_ingested": "2026-08-25"
+      },
+      {
+        "id": "3536914f",
+        "title": "Etsy 2026: What Actually Works — Algorithm, SEO & Sales Research",
+        "type": "email",
+        "topics": [
+          "etsy-seo",
+          "business-strategy"
+        ],
+        "date_ingested": "2026-08-25"
+      },
+      {
+        "id": "585710e9",
+        "title": "I Studied New Etsy Shops Making BIG Sales in 2026 — Here's What They're Doing",
+        "type": "youtube",
+        "topics": [
+          "etsy-seo",
+          "product-development",
+          "business-strategy"
+        ],
+        "date_ingested": "2026-08-25"
+      },
       {
         "id": "7bb4287c",
         "title": "I Use Claude to Edit Videos: Here's My Exact Process",
@@ -3116,51 +3198,6 @@
       {
         "id": "339a5c3d",
         "title": "How This Mom Makes $48K/Month With Claude",
-        "type": "youtube",
-        "topics": [
-          "ai-tools"
-        ],
-        "date_ingested": "2026-06-10"
-      },
-      {
-        "id": "68c04d3b",
-        "title": "I Asked Claude To Make Me as Much Money as Possible",
-        "type": "youtube",
-        "topics": [
-          "ai-tools"
-        ],
-        "date_ingested": "2026-06-10"
-      },
-      {
-        "id": "9247e0c2",
-        "title": "I Built My Entire Content Team Inside Claude (No Employees)",
-        "type": "youtube",
-        "topics": [
-          "ai-tools"
-        ],
-        "date_ingested": "2026-06-10"
-      },
-      {
-        "id": "620da512",
-        "title": "If You Want to Get Rich With AI, Build This One Agent First",
-        "type": "youtube",
-        "topics": [
-          "ai-tools"
-        ],
-        "date_ingested": "2026-06-10"
-      },
-      {
-        "id": "4b2421dc",
-        "title": "I built a complete “business operating system” using claude code",
-        "type": "youtube",
-        "topics": [
-          "ai-tools"
-        ],
-        "date_ingested": "2026-06-10"
-      },
-      {
-        "id": "840cae84",
-        "title": "Learn 97% of Claude in Under 16 Minutes",
         "type": "youtube",
         "topics": [
           "ai-tools"

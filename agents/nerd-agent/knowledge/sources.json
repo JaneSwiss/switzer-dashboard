@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "total_sources": 23,
+  "total_sources": 28,
   "sources": [
     {
       "id": "3fca9459",
@@ -332,6 +332,85 @@
       ],
       "word_count": 3726,
       "summary_file": "entries/1cb20edd-how-i-fully-automated-my-video-edit.json",
+      "status": "ok"
+    },
+    {
+      "id": "6be442fe",
+      "type": "youtube",
+      "url": "https://www.youtube.com/watch?v=hJJgHuN7aBo",
+      "title": "I Helped 60 Etsy Sellers BLOW UP Their Shops",
+      "author": "",
+      "date_ingested": "2026-08-25",
+      "topics": [
+        "etsy-seo",
+        "branding",
+        "product-development"
+      ],
+      "word_count": 3638,
+      "summary_file": "entries/6be442fe-i-helped-60-etsy-sellers-blow-up-th.json",
+      "status": "ok"
+    },
+    {
+      "id": "8bdbc92c",
+      "type": "youtube",
+      "url": "https://www.youtube.com/watch?v=cAaYhwpRZxg",
+      "title": "I Studied NEW Etsy Shops, Here's How I Would Get Sales Fast",
+      "author": "",
+      "date_ingested": "2026-08-25",
+      "topics": [
+        "etsy-seo",
+        "product-development",
+        "business-strategy"
+      ],
+      "word_count": 2021,
+      "summary_file": "entries/8bdbc92c-i-studied-new-etsy-shops-heres-how.json",
+      "status": "ok"
+    },
+    {
+      "id": "8f236a50",
+      "type": "youtube",
+      "url": "https://www.youtube.com/watch?v=NJhMS2stpBU",
+      "title": "FREE Ways To Boost Etsy Sales Online (FULL COURSE)",
+      "author": "",
+      "date_ingested": "2026-08-25",
+      "topics": [
+        "etsy-seo",
+        "pinterest-marketing",
+        "email-marketing"
+      ],
+      "word_count": 6248,
+      "summary_file": "entries/8f236a50-free-ways-to-boost-etsy-sales-onlin.json",
+      "status": "ok"
+    },
+    {
+      "id": "3536914f",
+      "type": "email",
+      "url": "text:Etsy 2026: What Actually Works — Algorithm, SEO & Sales Research:aee2717ad65a",
+      "title": "Etsy 2026: What Actually Works — Algorithm, SEO & Sales Research",
+      "author": "",
+      "date_ingested": "2026-08-25",
+      "topics": [
+        "etsy-seo",
+        "business-strategy"
+      ],
+      "word_count": 1426,
+      "summary_file": "entries/3536914f-etsy-2026-what-actually-works-algor.json",
+      "status": "ok"
+    },
+    {
+      "id": "585710e9",
+      "type": "youtube",
+      "url": "https://www.youtube.com/watch?v=lt0BG_bXf_o",
+      "title": "I Studied New Etsy Shops Making BIG Sales in 2026 — Here's What They're Doing",
+      "author": "",
+      "date_ingested": "2026-08-25",
+      "topics": [
+        "etsy-seo",
+        "product-development",
+        "business-strategy"
+      ],
+      "word_count": 2724,
+      "summary_file": "entries/585710e9-i-studied-new-etsy-shops-making-big.json",
       "status": "ok"
     }
   ]
