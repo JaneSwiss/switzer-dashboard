@@ -3411,6 +3411,25 @@
         "errors": [],
         "completed": true,
         "note": "Jane-specified: post leads with the case for her own premade Shopify themes (real product data pulled live from the Wix Stores API - 4 color variants, $110, mega menu/slide-out cart/free shipping bar/cart upsell/mobile optimized, confirmed accurate). CTA links to the real product page (switzertemplates.com/shopify-theme-templates) 3x with UTM tags. Newsletter/carousel/pins skipped per Jane - she does not want more pins right now. Also fixed a real bug found in this post: markdown-style [text](url) links were not being converted to real <a> tags by the assembler, so a CTA rendered as literal visible brackets - fixed both this post and the underlying converter for all future posts."
+      },
+      {
+        "keyword": "how to create a website on shopify",
+        "slug": "how-to-create-a-website-on-shopify",
+        "date": "2026-08-27",
+        "blog_post_url": "https://www.switzertemplates.com/post/how-to-create-a-website-on-shopify",
+        "post_preview_url": "https://janeswiss.github.io/switzer-dashboard/posts/how-to-create-a-website-on-shopify.html",
+        "github_images_url": "https://github.com/JaneSwiss/switzer-dashboard/tree/main/posts/images/how-to-create-a-website-on-shopify",
+        "wix_drafts_url": "https://manage.wix.com/dashboard/5da8c553-1983-4b5f-935f-6fb32d2bd299/blog/posts",
+        "wix_ok": true,
+        "newsletter_url": null,
+        "carousel_url": null,
+        "tailwind_url": null,
+        "pins_generated": 0,
+        "image_cost": 0.67,
+        "pin_cost_estimate": 0,
+        "errors": [],
+        "completed": false,
+        "note": "New keyword from Jane's Keywords Everywhere export - primary \"how to create a website on shopify\" (320 vol, KD 54), with secondary variants (how to make/build a shopify website, how to build a shopify site) worked in via angle_note. Deliberately scoped as a hands-on build tutorial (sign up -> theme -> pages -> products -> payments -> launch) to avoid cannibalizing how-to-set-up-shopify-store (business/legal setup) and how-to-choose-a-shopify-theme / best-shopify-themes-2026 (theme buying guides). CTA links to the real Shopify theme product page 2x with UTM tags. Two manual fixes after generation: removed a stray leaked emoji from the closing CTA paragraph, and rewrote a section header that echoed the exact \"X, not a design decision\" framing Jane previously flagged as undermining her design-focused business - body copy itself was fine, but the header alone repeated the banned pattern almost verbatim so it was rewritten before publishing. NEW Wix draft, not yet published. Newsletter/carousel/pins skipped per Jane's request for this run."
       }
     ]
   }
