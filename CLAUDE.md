@@ -382,6 +382,28 @@ API key in `.env` as `ANTHROPIC_API_KEY`. Etsy key as `ETSY_API_KEY` (optional �
 
 ---
 
+### `skills/png-to-svg/`
+**What it does:** Traces a flat-color PNG (icon or line-art export from ChatGPT/DALL-E, etc.) into a clean, Canva-ready SVG. Not specific to Switzertemplates — general-purpose vectorizer, built for Jane's separate Canva Creator element uploads (see `!CANVA-CONTRIBUTOR` in her STOCKS folder).
+
+Fixes the two ways naive raster tracing goes wrong: faceted/rough curves (uses vtracer's proper bezier fitting — `colormode=binary hierarchical=cutout` on a hard-thresholded mask; other vtracer modes produce broken or solid-blob output for shapes with real holes) and uneven line thickness (shapes classified as true strokes — rings, ticks, thin lines — are skeletonized, smoothed, measured, and rebuilt as a mathematically constant-width ribbon; solid/hybrid fill shapes are left to vtracer's direct trace since skeletonizing a fill would collapse it).
+
+**Run:**
+- `python3 skills/png-to-svg/main.py path/to/icon.png` — writes only `icon.svg` next to it (no preview PNG by default — Jane doesn't want the extra file)
+- `python3 skills/png-to-svg/main.py path/to/icon.png --output path/to/icon.svg`
+- `python3 skills/png-to-svg/main.py path/to/icon.png --fill "#361a11"` — override auto-detected ink color
+- `python3 skills/png-to-svg/main.py path/to/icon.png --stroke-fill-ratio 0.45` — tune the stroke-vs-fill classification threshold if a shape gets misclassified
+- `python3 skills/png-to-svg/main.py path/to/icon.png --preview` — also render `icon_preview.png` for a quick look (opt-in only, e.g. when checking a new/unusual icon before trusting it)
+
+**Inputs:** A PNG with transparency, single ink color (line art / flat icon style).
+
+**Outputs:** `<name>.svg` only — cropped to the artwork's true bounds, scaled so the longer side is 500 units (Canva's SVG artboard spec, `--target-size` to change), single flat fill, no live strokes. Add `--preview` for a `<name>_preview.png` render too.
+
+**Notes:** Doesn't generate the required JPG preview file or embed its metadata (title/keywords) — that's a separate manual step per Canva's requirements (see the graphics-requirements screenshots in `!CANVA-CONTRIBUTOR`), since title/keywords are specific to each icon's content.
+
+**Additional requirements:** `pip3 install vtracer scikit-image shapely svgpathtools svglib pymupdf` (on top of base requirements; scipy/numpy/Pillow already covered).
+
+---
+
 ### `scheduler/`
 **What it does:** Runs continuously in the background. Every 14 days, sends a Mac desktop notification asking for a fresh Everbee export. When a new CSV appears in `data/everbee-etsy/`, automatically runs `report-generator` and sends a notification when the report is ready.
 
