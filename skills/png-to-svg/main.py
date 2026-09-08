@@ -168,9 +168,18 @@ def endpoint_taper_ratio(skel, dist):
     return float(min(ep_widths) / median_w)
 
 
-def reconstruct_stroke(comp_mask, smooth_px=4.0, width_percentile=50):
+def reconstruct_stroke(comp_mask, smooth_px=4.0, width_percentile=50, force_width=None):
     """comp_mask: boolean 2D array, one connected ink component.
-    Returns (shapely geometry in absolute x,y pixel coords, width) or None."""
+    Returns (shapely geometry in absolute x,y pixel coords, width) or None.
+
+    force_width overrides the auto-computed percentile width entirely. Needed
+    when a component's own width distribution is not a reliable estimate of
+    its intended width -- e.g. a component that fuses several genuinely
+    different-weight lines together (an icon's whole outline network, thin
+    accent line and thick body line all 8-connected at touch points), or one
+    with a real localized drawing defect (a stray thick blob dragging the
+    percentile up). Auto width_percentile is still the right default when a
+    component is a single clean stroke; force_width is for the exception."""
     skel = skeletonize(comp_mask)
     paths = order_skeleton(skel)
     if not paths:
@@ -180,7 +189,7 @@ def reconstruct_stroke(comp_mask, smooth_px=4.0, width_percentile=50):
     widths = dist[skel] * 2.0
     if len(widths) == 0:
         return None
-    width = float(np.percentile(widths, width_percentile))
+    width = float(force_width) if force_width is not None else float(np.percentile(widths, width_percentile))
 
     polys = []
     try:
@@ -293,7 +302,8 @@ def trace_png_to_svg(input_path, output_path=None, fill_hex=None,
                       target_size=500.0, stroke_fill_ratio=0.45,
                       alpha_thresh=128, white_cutoff=235, filter_speckle=4,
                       thick_fill_diameter=50.0, stroke_width_cv=0.2,
-                      endpoint_taper_min=0.4, verbose=True):
+                      endpoint_taper_min=0.4, force_stroke_width=None,
+                      splice_threshold=45, verbose=True):
     input_path = Path(input_path)
     if output_path is None:
         output_path = input_path.with_suffix(".svg")
@@ -406,7 +416,7 @@ def trace_png_to_svg(input_path, output_path=None, fill_hex=None,
             str(binary_png), str(vt_svg),
             colormode="binary", hierarchical="cutout", mode="spline",
             filter_speckle=filter_speckle, corner_threshold=55, length_threshold=3.5,
-            splice_threshold=45, path_precision=3,
+            splice_threshold=splice_threshold, path_precision=3,
         )
         tree = ET.parse(vt_svg)
         root = tree.getroot()
@@ -429,7 +439,7 @@ def trace_png_to_svg(input_path, output_path=None, fill_hex=None,
 
     for lbl in sorted(targets):
         comp = labeled == lbl
-        result = reconstruct_stroke(comp)
+        result = reconstruct_stroke(comp, force_width=force_stroke_width)
         if result is None:
             paths = vtrace_mask_to_paths(comp, f"s{lbl}")
             if paths:
@@ -508,6 +518,10 @@ def main():
                      help="a component only reconstructs as a stroke if its skeleton width is this uniform (std/mean of the distance-transform width along the skeleton) -- a real ring/tick mark measures ~0.05, a solid icon glyph (leaf, heart, star) misclassified by fill-ratio alone measures ~0.4+ since it has 2D bulk, not a constant width. Raise this if a legitimately wobbly hand-drawn stroke gets wrongly excluded (default 0.2)")
     ap.add_argument("--endpoint-taper-min", type=float, default=0.4,
                      help="a component only reconstructs as a stroke if every skeleton endpoint's width is at least this fraction of the shape's median width -- catches a pointed taper (a pine needle, a ribbon tail, a leaf point) that the aggregate width-CV check misses because the tapering tip is a tiny fraction of total skeleton pixels. Lower this if a legitimately blunt-ended stroke gets wrongly excluded (default 0.4)")
+    ap.add_argument("--splice-threshold", type=int, default=45,
+                     help="vtracer's angle threshold (degrees) for splicing nearby path segments together -- two genuinely separate, closely-parallel thin lines (a narrow gap between two curves) can get spliced into one shape, pinching the gap shut into a wedge, when it's set too high. Lower this (e.g. 10-20) if a narrow gap between two lines that should stay open collapses in the trace (default 45)")
+    ap.add_argument("--force-stroke-width", type=float, default=None,
+                     help="override the auto-computed width for every stroke-reconstructed component with this fixed value (px, native PNG resolution) instead of each component's own percentile width -- needed when a component's width distribution is not a reliable estimate of its intended width, e.g. it fuses several different-weight lines at touch points, or a real localized drawing defect (a stray thick blob) drags the percentile up. Usually paired with --stroke-width-cv/--endpoint-taper-min to pull the defective component into the stroke path first (default: auto per-component)")
     ap.add_argument("--preview", action="store_true",
                      help="also render a PNG preview alongside the SVG (off by default)")
     args = ap.parse_args()
@@ -517,7 +531,8 @@ def main():
         target_size=args.target_size, stroke_fill_ratio=args.stroke_fill_ratio,
         white_cutoff=args.white_cutoff, filter_speckle=args.filter_speckle,
         thick_fill_diameter=args.thick_fill_diameter, stroke_width_cv=args.stroke_width_cv,
-        endpoint_taper_min=args.endpoint_taper_min,
+        endpoint_taper_min=args.endpoint_taper_min, force_stroke_width=args.force_stroke_width,
+        splice_threshold=args.splice_threshold,
     )
     if args.preview:
         preview = render_preview(out)
