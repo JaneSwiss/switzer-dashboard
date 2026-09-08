@@ -48,7 +48,15 @@ import vtracer
 
 def order_skeleton(skel):
     """Walk an 8-connected 1px skeleton into ordered (row,col) paths.
-    Returns None if the skeleton has a branch point (not a simple path/loop)."""
+
+    Branch points (degree >= 3) used to abort the whole component back to
+    vtracer's direct trace -- but vtracer's bezier fit bulges into a fat
+    blob right at a T/Y junction (two thin strokes meeting at an angle),
+    since it's smoothing a contour that has to wrap around the branch.
+    Instead: split the skeleton into edges between "nodes" (endpoints and
+    branch points) and walk each edge separately. Each segment then gets
+    reconstructed as its own constant-width ribbon and they naturally meet
+    cleanly at the shared node point, instead of one blobby fill."""
     ys, xs = np.where(skel)
     pts = set(zip(ys.tolist(), xs.tolist()))
     if not pts:
@@ -61,44 +69,48 @@ def order_skeleton(skel):
                 if (dy or dx) and (y + dy, x + dx) in pts]
 
     deg = {p: len(neighbors(p)) for p in pts}
-    if any(d >= 3 for d in deg.values()):
-        return None  # branch point -> not a simple stroke, caller falls back
+    nodes = {p for p, d in deg.items() if d != 2}
 
-    endpoints = [p for p, d in deg.items() if d == 1]
-    visited = set()
-    paths = []
-
-    def walk(start, first_next):
-        path = [start, first_next]
-        visited.add(start)
-        visited.add(first_next)
-        prev, cur = start, first_next
-        while True:
-            nbrs = [q for q in neighbors(cur) if q != prev]
-            nbrs = [q for q in nbrs if q not in visited or q == path[0]]
-            if not nbrs:
-                break
-            nxt = nbrs[0]
-            path.append(nxt)
-            if nxt == path[0]:
-                break
-            visited.add(nxt)
-            prev, cur = cur, nxt
-        return path
-
-    if endpoints:
-        for e in endpoints:
-            if e in visited:
-                continue
-            nbrs = [q for q in neighbors(e) if q not in visited]
-            if nbrs:
-                paths.append(walk(e, nbrs[0]))
-    else:
+    if not nodes:
+        # pure simple closed loop -- no endpoints or branch points
         start = next(iter(pts))
         nbrs = neighbors(start)
         if len(nbrs) != 2:
             return None
-        paths.append(walk(start, nbrs[0]))
+        path = [start, nbrs[0]]
+        prev, cur = start, nbrs[0]
+        while cur != start:
+            nxts = [q for q in neighbors(cur) if q != prev]
+            if not nxts:
+                break
+            nxt = nxts[0]
+            path.append(nxt)
+            prev, cur = cur, nxt
+        return [path]
+
+    visited_steps = set()
+    paths = []
+    for node in nodes:
+        for nb in neighbors(node):
+            step = frozenset((node, nb))
+            if step in visited_steps:
+                continue
+            visited_steps.add(step)
+            path = [node, nb]
+            prev, cur = node, nb
+            while cur not in nodes:
+                nxts = [q for q in neighbors(cur) if q != prev]
+                if not nxts:
+                    break
+                nxt = nxts[0]
+                s2 = frozenset((cur, nxt))
+                if s2 in visited_steps:
+                    break
+                visited_steps.add(s2)
+                path.append(nxt)
+                prev, cur = cur, nxt
+            if len(path) >= 2:
+                paths.append(path)
 
     return paths
 
@@ -117,6 +129,43 @@ def smooth_polyline(pts, smooth_px=4.0, n_out=200, closed=False):
         return np.stack([xs, ys], axis=1)
     except Exception:
         return np.stack([x, y], axis=1)
+
+
+def endpoint_taper_ratio(skel, dist):
+    """Ratio of the thinnest skeleton endpoint's width to the shape's
+    median width; 1.0 if the skeleton has no free endpoints (a closed loop).
+
+    A genuine constant-width stroke (a ring, a tick, a bracket) stays
+    roughly the same width along its whole length, including at any free
+    ends. An organic tapering shape (a pine needle, a ribbon tail, a leaf
+    point) necessarily narrows to near-zero at its tip -- but that tip is
+    a tiny fraction of the skeleton's total pixel count, so the width-CV
+    gate (aggregated over every skeleton pixel) can stay well under
+    threshold even when a shape tapers sharply at its ends: the bulk
+    "body" width dominates the statistic and the tip barely moves it.
+    Checking width specifically at the endpoints catches what the
+    aggregate CV misses."""
+    ys, xs = np.where(skel)
+    pts = set(zip(ys.tolist(), xs.tolist()))
+    if not pts:
+        return 1.0
+
+    def neighbors(p):
+        y, x = p
+        return [(y + dy, x + dx)
+                for dy in (-1, 0, 1) for dx in (-1, 0, 1)
+                if (dy or dx) and (y + dy, x + dx) in pts]
+
+    deg = {p: len(neighbors(p)) for p in pts}
+    endpoints = [p for p, d in deg.items() if d == 1]
+    if not endpoints:
+        return 1.0
+    widths = dist[skel] * 2
+    median_w = np.median(widths)
+    if median_w <= 0:
+        return 1.0
+    ep_widths = [dist[p] * 2 for p in endpoints]
+    return float(min(ep_widths) / median_w)
 
 
 def reconstruct_stroke(comp_mask, smooth_px=4.0, width_percentile=50):
@@ -243,7 +292,8 @@ def ink_mask(arr, alpha_thresh=128, white_cutoff=235):
 def trace_png_to_svg(input_path, output_path=None, fill_hex=None,
                       target_size=500.0, stroke_fill_ratio=0.45,
                       alpha_thresh=128, white_cutoff=235, filter_speckle=4,
-                      verbose=True):
+                      thick_fill_diameter=50.0, stroke_width_cv=0.2,
+                      endpoint_taper_min=0.4, verbose=True):
     input_path = Path(input_path)
     if output_path is None:
         output_path = input_path.with_suffix(".svg")
@@ -257,150 +307,142 @@ def trace_png_to_svg(input_path, output_path=None, fill_hex=None,
 
     arr = np.array(im)
     mask = ink_mask(arr, alpha_thresh, white_cutoff)
-    binary = np.full((*mask.shape, 3), 255, dtype=np.uint8)
-    binary[mask] = ink_rgb
-    binary_png = output_path.with_name(output_path.stem + "_binary_tmp.png")
-    Image.fromarray(binary, "RGB").save(binary_png)
 
     labeled, n = ndimage.label(mask, structure=np.ones((3, 3)))
     if verbose:
         print(f"{n} connected ink shape(s)")
 
-    # classify each component: low fill-ratio (relative to its own bbox) = stroke
+    # classify each component: low fill-ratio (relative to its own bbox) = stroke,
+    # UNLESS the component also contains a genuinely thick solid sub-region
+    # (a filled area sharing the exact same ink color as the outline it's
+    # bordered by -- e.g. packed coffee grounds, a solid handle -- so it's
+    # 8-connected into the same component as the surrounding thin outline).
+    # Skeletonizing a component like that collapses the solid part down to
+    # a thin ribbon at the reconstructed stroke width, which is wrong -- so
+    # any component with a thick core goes to the direct vtracer fill trace
+    # instead, even if its overall bbox fill-ratio reads as "thin." Direct
+    # trace has proven to faithfully reproduce mixed thin-outline + solid-
+    # fill content (it traces the actual silhouette, no skeleton collapse);
+    # the only cost is losing the constant-width guarantee on that
+    # component's thin parts.
+    # A third check, alongside the two above: bbox fill-ratio alone also
+    # misfires on small solid icon glyphs (a leaf, a heart, a star, a house
+    # pictogram) -- any shape with sharp pointed extremities wastes a lot of
+    # its own bounding box, so it can read as "thin" by fill-ratio even
+    # though it's a genuine 2D blob, not a ribbon. Skeletonizing a blob like
+    # that produces a branching skeleton with wildly uneven local width
+    # (wide through the belly, tapering to nothing at each point), and
+    # reinflating it at one uniform width mangles the shape completely --
+    # unlike a true stroke (a ring, a tick mark), whose skeleton has a
+    # consistent width along its whole length. Measured on this project's
+    # icons: a real ring/stroke has width coefficient-of-variation (std/mean
+    # of the distance-transform width sampled along the skeleton) around
+    # 0.05; a solid glyph misclassified as a stroke measured 0.42. Gate on
+    # this directly instead of guessing more diameter thresholds.
+    # A fourth check, alongside the three above: width-CV is an average over
+    # every skeleton pixel, so it can stay low even when a shape tapers
+    # sharply at its own free ends (a pine needle, a ribbon tail, a leaf
+    # point fused into a larger connected illustration) -- the tapering tip
+    # is a tiny fraction of total skeleton pixels and barely moves the
+    # aggregate statistic. Found on `advent-calendar.png`: the pine
+    # needles + bow + roofline were all one 8,407-pixel connected
+    # component with a CV of just 0.15 (comfortably under the 0.2 gate)
+    # even though several endpoints tapered to 2-8px against a 17.9px
+    # median -- reconstructing it at one constant (median) width blunted
+    # every pointed tip into a rounded blob and fattened every thin
+    # segment, which read as "worse, less elegant than the source" even
+    # though nothing was mangled outright. See endpoint_taper_ratio().
     fill_ratios = {}
+    max_thickness = {}
+    width_cv = {}
+    taper_ratio = {}
     for lbl in range(1, n + 1):
         comp = labeled == lbl
         ys, xs = np.where(comp)
         h, w = ys.max() - ys.min() + 1, xs.max() - xs.min() + 1
         fill_ratios[lbl] = comp.sum() / (h * w)
-    targets = {lbl for lbl, fr in fill_ratios.items() if fr < stroke_fill_ratio}
+        max_thickness[lbl] = ndimage.distance_transform_edt(comp).max() * 2
+        if fill_ratios[lbl] < stroke_fill_ratio and max_thickness[lbl] < thick_fill_diameter:
+            skel = skeletonize(comp)
+            dist = ndimage.distance_transform_edt(comp)
+            widths = dist[skel] * 2
+            width_cv[lbl] = widths.std() / widths.mean() if widths.mean() > 0 else 0.0
+            taper_ratio[lbl] = endpoint_taper_ratio(skel, dist)
+    targets = {lbl for lbl, fr in fill_ratios.items()
+               if fr < stroke_fill_ratio and max_thickness[lbl] < thick_fill_diameter
+               and width_cv.get(lbl, 0.0) < stroke_width_cv
+               and taper_ratio.get(lbl, 1.0) >= endpoint_taper_min}
     if verbose:
         print(f"reconstructing as constant-width strokes: {sorted(targets) or 'none'}")
 
-    # vtracer direct trace (true binary hole handling) for the fallback/fill shapes
-    vt_svg = output_path.with_name(output_path.stem + "_vtrace_tmp.svg")
-    vtracer.convert_image_to_svg_py(
-        str(binary_png), str(vt_svg),
-        colormode="binary", hierarchical="cutout", mode="spline",
-        filter_speckle=filter_speckle, corner_threshold=55, length_threshold=3.5,
-        splice_threshold=45, path_precision=3,
-    )
-
-    import xml.etree.ElementTree as ET
-    tree = ET.parse(vt_svg)
-    root = tree.getroot()
-    ns = {'svg': 'http://www.w3.org/2000/svg'}
     from svgpathtools import parse_path
-    from shapely.geometry import Polygon as ShapelyPolygon
+    import xml.etree.ElementTree as ET
+    tmp_files = []
 
-    def path_to_shapely(abs_d):
-        """Sample a (possibly multi-subpath) bezier path into a shapely
-        polygon, exterior + holes, for a reliable interior point."""
-        try:
-            p = parse_path(abs_d)
-        except Exception:
-            return None
-        rings = []
-        for sub in p.continuous_subpaths():
-            pts = []
-            for seg in sub:
-                pts.append((seg.start.real, seg.start.imag))
-                n_samples = 1 if type(seg).__name__ == 'Line' else 8
-                for i in range(1, n_samples):
-                    c = seg.point(i / n_samples)
-                    pts.append((c.real, c.imag))
-            if len(pts) >= 3:
-                rings.append(pts)
-        if not rings:
-            return None
-        areas = [abs(ShapelyPolygon(r).area) for r in rings]
-        ext = rings[areas.index(max(areas))]
-        holes = [r for r, a in zip(rings, areas) if r is not ext]
-        try:
-            return ShapelyPolygon(ext, holes)
-        except Exception:
-            return ShapelyPolygon(ext)
+    def vtrace_mask_to_paths(mask_bool, tag):
+        """Run vtracer on just this sub-mask and return every resulting path
+        verbatim (transform baked in), with no attempt to attribute paths
+        back to individual scipy labels.
 
-    def label_at(cx, cy, search_radius=25):
-        yi, xi = int(round(cy)), int(round(cx))
-        h, w = labeled.shape
-        for r in range(search_radius):
-            for dy in range(-r, r + 1):
-                for dx in range(-r, r + 1):
-                    y, x = yi + dy, xi + dx
-                    if 0 <= y < h and 0 <= x < w and labeled[y, x] != 0:
-                        return int(labeled[y, x])
-        return None
-
-    shape_by_label = {}
-    unmatched = []
-    for p in root.findall('.//svg:path', ns):
-        d = p.get('d')
-        tf = p.get('transform', '')
-        m = re.match(r'translate\(([-\d.]+),\s*([-\d.]+)\)', tf)
-        tx, ty = (float(m.group(1)), float(m.group(2))) if m else (0.0, 0.0)
-        abs_d = apply_transform(d, tx, ty, 1.0)
-
-        poly = path_to_shapely(abs_d)
-        lbl = None
-        if poly is not None and not poly.is_empty:
-            try:
-                rp = poly.representative_point()
-                lbl = label_at(rp.x, rp.y)
-            except Exception:
-                lbl = None
-        if lbl is None:
-            unmatched.append(abs_d)
-        else:
-            shape_by_label[lbl] = abs_d
-
-    missing = [lbl for lbl in range(1, n + 1) if lbl not in shape_by_label]
-    if missing and unmatched:
-        # last resort: pair any remaining unmatched shapes with any remaining
-        # unfilled labels by nearest centroid, so nothing silently vanishes
-        centroids = ndimage.center_of_mass(mask, labeled, missing)
-        for abs_d in unmatched:
-            try:
-                bx = parse_path(abs_d).bbox()
-            except Exception:
-                continue  # degenerate/empty path (can happen at very low filter_speckle) -- skip it
-            cx, cy = (bx[0] + bx[1]) / 2, (bx[2] + bx[3]) / 2
-            best, bestd = None, 1e18
-            for lbl, (ry, rx) in zip(missing, centroids):
-                if lbl in shape_by_label:
-                    continue
-                d2 = (rx - cx) ** 2 + (ry - cy) ** 2
-                if d2 < bestd:
-                    bestd, best = d2, lbl
-            if best is not None:
-                shape_by_label[best] = abs_d
-    if verbose:
-        still_missing = [lbl for lbl in range(1, n + 1) if lbl not in shape_by_label]
-        if still_missing:
-            print(f"  warning: no traced shape found for label(s) {still_missing}")
+        Matching each vtracer <path> to "the" scipy label that produced it
+        (via representative_point -> nearest labeled pixel) used to be how
+        this worked, tracing the *whole* mask once. That silently drops
+        content whenever vtracer's own contour count for a region doesn't
+        match scipy's connected-component count 1:1 -- e.g. corner-touching
+        marks (dotted/stippled texture, hatching) that scipy's 8-connected
+        labeling treats as one component but vtracer traces as several
+        separate paths: only the last path checked for that label survived,
+        the rest vanished with a "no traced shape found" warning. Tracing
+        exactly the sub-mask we care about and keeping every path it
+        produces sidesteps the whole attribution problem.
+        """
+        binary = np.full((*mask_bool.shape, 3), 255, dtype=np.uint8)
+        binary[mask_bool] = ink_rgb
+        binary_png = output_path.with_name(f"{output_path.stem}_{tag}_tmp.png")
+        Image.fromarray(binary, "RGB").save(binary_png)
+        vt_svg = output_path.with_name(f"{output_path.stem}_{tag}_vtrace_tmp.svg")
+        tmp_files.extend([binary_png, vt_svg])
+        vtracer.convert_image_to_svg_py(
+            str(binary_png), str(vt_svg),
+            colormode="binary", hierarchical="cutout", mode="spline",
+            filter_speckle=filter_speckle, corner_threshold=55, length_threshold=3.5,
+            splice_threshold=45, path_precision=3,
+        )
+        tree = ET.parse(vt_svg)
+        root = tree.getroot()
+        ns = {'svg': 'http://www.w3.org/2000/svg'}
+        paths = []
+        for p in root.findall('.//svg:path', ns):
+            d = p.get('d')
+            tf = p.get('transform', '')
+            m = re.match(r'translate\(([-\d.]+),\s*([-\d.]+)\)', tf)
+            tx, ty = (float(m.group(1)), float(m.group(2))) if m else (0.0, 0.0)
+            paths.append(apply_transform(d, tx, ty, 1.0))
+        return paths
 
     final_ds = []
-    for lbl in range(1, n + 1):
-        if lbl in targets:
-            comp = labeled == lbl
-            result = reconstruct_stroke(comp)
-            if result is None:
-                if lbl in shape_by_label:
-                    if verbose:
-                        print(f"  shape {lbl}: not a simple stroke, using direct trace")
-                    final_ds.append(shape_by_label[lbl])
-                else:
-                    if verbose:
-                        print(f"  shape {lbl}: not a simple stroke and no traced fallback found — skipped")
-            else:
-                poly, width = result
+
+    fill_labels = [lbl for lbl in range(1, n + 1) if lbl not in targets]
+    if fill_labels:
+        fill_mask = np.isin(labeled, fill_labels)
+        final_ds.extend(vtrace_mask_to_paths(fill_mask, "fill"))
+
+    for lbl in sorted(targets):
+        comp = labeled == lbl
+        result = reconstruct_stroke(comp)
+        if result is None:
+            paths = vtrace_mask_to_paths(comp, f"s{lbl}")
+            if paths:
                 if verbose:
-                    print(f"  shape {lbl}: reconstructed at constant width {width:.2f}px")
-                final_ds.append(polygon_to_path_d(poly))
-        elif lbl in shape_by_label:
-            final_ds.append(shape_by_label[lbl])
-        elif verbose:
-            print(f"  shape {lbl}: no traced shape found — skipped")
+                    print(f"  shape {lbl}: not a simple stroke, using direct trace")
+                final_ds.extend(paths)
+            elif verbose:
+                print(f"  shape {lbl}: not a simple stroke and no traced fallback found — skipped")
+        else:
+            poly, width = result
+            if verbose:
+                print(f"  shape {lbl}: reconstructed at constant width {width:.2f}px")
+            final_ds.append(polygon_to_path_d(poly))
 
     allp = parse_path(" ".join(final_ds))
     xmin, xmax, ymin, ymax = allp.bbox()
@@ -418,10 +460,8 @@ def trace_png_to_svg(input_path, output_path=None, fill_hex=None,
     )
     output_path.write_text(svg_out)
 
-    binary_png.unlink(missing_ok=True)
-    vt_svg.unlink(missing_ok=True)
-    pdf_tmp = vt_svg.with_suffix(".pdf")
-    pdf_tmp.unlink(missing_ok=True)
+    for f in tmp_files:
+        f.unlink(missing_ok=True)
 
     if verbose:
         print(f"written: {output_path}  ({new_w:.0f}x{new_h:.0f})")
@@ -462,6 +502,12 @@ def main():
                      help="pixels with luminance >= this are treated as background, not ink, even if opaque -- excludes near-white shading/fill so it doesn't collapse into a solid block (default 235, 0-255 scale)")
     ap.add_argument("--filter-speckle", type=int, default=4,
                      help="vtracer's minimum shape size in pixels; small legitimate details (fine texture lines, tiny accent marks) can get dropped as noise -- lower this (e.g. 1-2) if the traced SVG is missing fine detail present in the PNG (default 4)")
+    ap.add_argument("--thick-fill-diameter", type=float, default=50.0,
+                     help="a connected ink component containing any point at least this many px thick (in the source PNG's native resolution) is traced directly instead of skeletonized, even if it also has thin outline parts -- catches solid fill/shading drawn in the same color as its outline (packed texture, a solid handle) so it doesn't get collapsed into a thin ribbon (default 50)")
+    ap.add_argument("--stroke-width-cv", type=float, default=0.2,
+                     help="a component only reconstructs as a stroke if its skeleton width is this uniform (std/mean of the distance-transform width along the skeleton) -- a real ring/tick mark measures ~0.05, a solid icon glyph (leaf, heart, star) misclassified by fill-ratio alone measures ~0.4+ since it has 2D bulk, not a constant width. Raise this if a legitimately wobbly hand-drawn stroke gets wrongly excluded (default 0.2)")
+    ap.add_argument("--endpoint-taper-min", type=float, default=0.4,
+                     help="a component only reconstructs as a stroke if every skeleton endpoint's width is at least this fraction of the shape's median width -- catches a pointed taper (a pine needle, a ribbon tail, a leaf point) that the aggregate width-CV check misses because the tapering tip is a tiny fraction of total skeleton pixels. Lower this if a legitimately blunt-ended stroke gets wrongly excluded (default 0.4)")
     ap.add_argument("--preview", action="store_true",
                      help="also render a PNG preview alongside the SVG (off by default)")
     args = ap.parse_args()
@@ -470,6 +516,8 @@ def main():
         args.input, args.output, fill_hex=args.fill,
         target_size=args.target_size, stroke_fill_ratio=args.stroke_fill_ratio,
         white_cutoff=args.white_cutoff, filter_speckle=args.filter_speckle,
+        thick_fill_diameter=args.thick_fill_diameter, stroke_width_cv=args.stroke_width_cv,
+        endpoint_taper_min=args.endpoint_taper_min,
     )
     if args.preview:
         preview = render_preview(out)
