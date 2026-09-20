@@ -868,5 +868,65 @@
     "stage": "image_generation",
     "keyword": "online-business-ideas-for-women",
     "error": "Cover prompt 1: Error code: 400 - {'error': {'message': 'Your request was rejected by the safety system. If you believe this is an error, contact us at help.openai.com and include the request ID req_a200e44a25434b1588074ad7f2c76a33. safety_violations=[sexual].', 'type': 'image_generation_user_error', 'param': None, 'code': 'moderation_blocked', 'moderation_details': {'moderation_stage': 'output', 'categories': ['sexual']}}}"
+  },
+  {
+    "date": "2026-09-20",
+    "stage": "serp_fetch",
+    "keyword": "side business ideas for women",
+    "error": "HTTPSConnectionPool(host='api.valueserp.com', port=443): Read timed out. (read timeout=20)"
+  },
+  {
+    "date": "2026-09-20",
+    "stage": "serp_fetch",
+    "keyword": "side business ideas for women statistics data 2025 2026",
+    "error": "HTTPSConnectionPool(host='api.valueserp.com', port=443): Read timed out. (read timeout=20)"
+  },
+  {
+    "date": "2026-09-20",
+    "stage": "paa_fetch",
+    "keyword": "side business ideas for women",
+    "error": "HTTPSConnectionPool(host='api.valueserp.com', port=443): Read timed out. (read timeout=20)"
+  },
+  {
+    "date": "2026-09-20",
+    "stage": "image_generation",
+    "keyword": "side-business-ideas-for-women",
+    "error": "Inline prompt 1: Error code: 429 - {'error': {'message': 'You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.', 'type': 'insufficient_quota', 'param': None, 'code': 'credit_balance_exhausted'}}"
+  },
+  {
+    "date": "2026-09-20",
+    "stage": "image_generation",
+    "keyword": "side-business-ideas-for-women",
+    "error": "Inline prompt 2: Error code: 429 - {'error': {'message': 'You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.', 'type': 'insufficient_quota', 'param': None, 'code': 'credit_balance_exhausted'}}"
+  },
+  {
+    "date": "2026-09-20",
+    "stage": "image_generation",
+    "keyword": "side-business-ideas-for-women",
+    "error": "Inline prompt 3: Error code: 429 - {'error': {'message': 'You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.', 'type': 'insufficient_quota', 'param': None, 'code': 'credit_balance_exhausted'}}"
+  },
+  {
+    "date": "2026-09-20",
+    "stage": "image_generation",
+    "keyword": "side-business-ideas-for-women",
+    "error": "Inline prompt 4: Error code: 429 - {'error': {'message': 'You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.', 'type': 'insufficient_quota', 'param': None, 'code': 'credit_balance_exhausted'}}"
+  },
+  {
+    "date": "2026-09-20",
+    "stage": "image_generation",
+    "keyword": "side-business-ideas-for-women",
+    "error": "Cover prompt 1: Error code: 429 - {'error': {'message': 'You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.', 'type': 'insufficient_quota', 'param': None, 'code': 'credit_balance_exhausted'}}"
+  },
+  {
+    "date": "2026-09-20",
+    "stage": "image_generation",
+    "keyword": "side-business-ideas-for-women",
+    "error": "Cover prompt 2: Error code: 429 - {'error': {'message': 'You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.', 'type': 'insufficient_quota', 'param': None, 'code': 'credit_balance_exhausted'}}"
+  },
+  {
+    "date": "2026-09-20",
+    "stage": "image_generation",
+    "keyword": "side-business-ideas-for-women",
+    "error": "Cover prompt 3: Error code: 429 - {'error': {'message': 'You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.', 'type': 'insufficient_quota', 'param': None, 'code': 'credit_balance_exhausted'}}"
   }
 ]
