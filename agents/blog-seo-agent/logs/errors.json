@@ -928,5 +928,83 @@
     "stage": "image_generation",
     "keyword": "side-business-ideas-for-women",
     "error": "Cover prompt 3: Error code: 429 - {'error': {'message': 'You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.', 'type': 'insufficient_quota', 'param': None, 'code': 'credit_balance_exhausted'}}"
+  },
+  {
+    "date": "2026-09-20",
+    "stage": "serp_fetch",
+    "keyword": "unique business ideas for women",
+    "error": "HTTPSConnectionPool(host='api.valueserp.com', port=443): Read timed out. (read timeout=20)"
+  },
+  {
+    "date": "2026-09-20",
+    "stage": "serp_fetch",
+    "keyword": "unique business ideas for women tips examples guide",
+    "error": "HTTPSConnectionPool(host='api.valueserp.com', port=443): Read timed out. (read timeout=20)"
+  },
+  {
+    "date": "2026-09-20",
+    "stage": "paa_fetch",
+    "keyword": "unique business ideas for women",
+    "error": "HTTPSConnectionPool(host='api.valueserp.com', port=443): Read timed out. (read timeout=20)"
+  },
+  {
+    "date": "2026-09-20",
+    "stage": "reddit_questions",
+    "keyword": "unique business ideas for women",
+    "error": "HTTPSConnectionPool(host='api.valueserp.com', port=443): Read timed out. (read timeout=20)"
+  },
+  {
+    "date": "2026-09-20",
+    "stage": "banned_words",
+    "keyword": "unique business ideas for women",
+    "error": "Banned words remain after revision: ['discover'] title: []"
+  },
+  {
+    "date": "2026-09-20",
+    "stage": "image_generation",
+    "keyword": "unique-business-ideas-for-women",
+    "error": "Inline prompt 1: Error code: 429 - {'error': {'message': 'You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.', 'type': 'insufficient_quota', 'param': None, 'code': 'credit_balance_exhausted'}}"
+  },
+  {
+    "date": "2026-09-20",
+    "stage": "image_generation",
+    "keyword": "unique-business-ideas-for-women",
+    "error": "Inline prompt 2: Error code: 429 - {'error': {'message': 'You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.', 'type': 'insufficient_quota', 'param': None, 'code': 'credit_balance_exhausted'}}"
+  },
+  {
+    "date": "2026-09-20",
+    "stage": "image_generation",
+    "keyword": "unique-business-ideas-for-women",
+    "error": "Inline prompt 3: Error code: 429 - {'error': {'message': 'You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.', 'type': 'insufficient_quota', 'param': None, 'code': 'credit_balance_exhausted'}}"
+  },
+  {
+    "date": "2026-09-20",
+    "stage": "image_generation",
+    "keyword": "unique-business-ideas-for-women",
+    "error": "Inline prompt 4: Error code: 429 - {'error': {'message': 'You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.', 'type': 'insufficient_quota', 'param': None, 'code': 'credit_balance_exhausted'}}"
+  },
+  {
+    "date": "2026-09-20",
+    "stage": "image_generation",
+    "keyword": "unique-business-ideas-for-women",
+    "error": "Inline prompt 5: Error code: 429 - {'error': {'message': 'You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.', 'type': 'insufficient_quota', 'param': None, 'code': 'credit_balance_exhausted'}}"
+  },
+  {
+    "date": "2026-09-20",
+    "stage": "image_generation",
+    "keyword": "unique-business-ideas-for-women",
+    "error": "Cover prompt 1: Error code: 429 - {'error': {'message': 'You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.', 'type': 'insufficient_quota', 'param': None, 'code': 'credit_balance_exhausted'}}"
+  },
+  {
+    "date": "2026-09-20",
+    "stage": "image_generation",
+    "keyword": "unique-business-ideas-for-women",
+    "error": "Cover prompt 2: Error code: 429 - {'error': {'message': 'You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.', 'type': 'insufficient_quota', 'param': None, 'code': 'credit_balance_exhausted'}}"
+  },
+  {
+    "date": "2026-09-20",
+    "stage": "image_generation",
+    "keyword": "unique-business-ideas-for-women",
+    "error": "Cover prompt 3: Error code: 429 - {'error': {'message': 'You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.', 'type': 'insufficient_quota', 'param': None, 'code': 'credit_balance_exhausted'}}"
   }
 ]
