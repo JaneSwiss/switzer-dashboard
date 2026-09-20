@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-08-25",
+  "last_updated": "2026-09-20",
   "etsy_agent": {
     "status": "active",
     "last_run": "2026-05-05",
@@ -627,6 +627,15 @@
         "date": "2026-08-27",
         "url": "https://janeswiss.github.io/switzer-dashboard/posts/how-to-create-a-website-on-shopify.html",
         "source": ""
+      },
+      {
+        "title": "SMALL BUSINESS IDEAS FOR WOMEN: 12 OPTIONS WITH REAL EARNING POTENTIAL IN 2026",
+        "keyword": "small business ideas for women",
+        "written": true,
+        "published": false,
+        "date": "2026-09-20",
+        "url": "https://janeswiss.github.io/switzer-dashboard/posts/small-business-ideas-for-women.html",
+        "source": "Pinclicks (Marsha research)"
       }
     ],
     "pending_tasks": [
@@ -2542,6 +2551,102 @@
       "pinterest_clicks_proven": 0,
       "pinterest_vol": 0,
       "source": ""
+    },
+    {
+      "keyword": "small business ideas for women",
+      "monthly_search_vol": "",
+      "competition": "0.3",
+      "trend_pct": "0",
+      "content_pillar": "Business Ideas",
+      "maps_to_product": "Wix Websites + 3-in-1 Bundle",
+      "priority_tier": "P1 - Build first",
+      "score": "92",
+      "pinterest_clicks_proven": "0",
+      "pinterest_vol": "17095"
+    },
+    {
+      "keyword": "home business ideas for women",
+      "monthly_search_vol": "",
+      "competition": "0.3",
+      "trend_pct": "0",
+      "content_pillar": "Business Ideas",
+      "maps_to_product": "Wix Websites + 3-in-1 Bundle",
+      "priority_tier": "P1 - Build first",
+      "score": "88",
+      "pinterest_clicks_proven": "0",
+      "pinterest_vol": "6700"
+    },
+    {
+      "keyword": "online business ideas for women",
+      "monthly_search_vol": "",
+      "competition": "0.3",
+      "trend_pct": "0",
+      "content_pillar": "Business Ideas",
+      "maps_to_product": "Wix Websites + 3-in-1 Bundle",
+      "priority_tier": "P1 - Build first",
+      "score": "85",
+      "pinterest_clicks_proven": "0",
+      "pinterest_vol": "4010"
+    },
+    {
+      "keyword": "side business ideas for women",
+      "monthly_search_vol": "",
+      "competition": "0.3",
+      "trend_pct": "0",
+      "content_pillar": "Business Ideas",
+      "maps_to_product": "Wix Websites + 3-in-1 Bundle",
+      "priority_tier": "P1 - Build first",
+      "score": "82",
+      "pinterest_clicks_proven": "0",
+      "pinterest_vol": "3005"
+    },
+    {
+      "keyword": "unique business ideas for women",
+      "monthly_search_vol": "",
+      "competition": "0.3",
+      "trend_pct": "0",
+      "content_pillar": "Business Ideas",
+      "maps_to_product": "Wix Websites + 3-in-1 Bundle",
+      "priority_tier": "P1 - Build first",
+      "score": "80",
+      "pinterest_clicks_proven": "0",
+      "pinterest_vol": "2431"
+    },
+    {
+      "keyword": "how to sell clothes online",
+      "monthly_search_vol": "4400",
+      "competition": "0.4",
+      "trend_pct": "0",
+      "content_pillar": "Selling Online",
+      "maps_to_product": "Shopify Themes",
+      "priority_tier": "P1 - Build first",
+      "score": "87",
+      "pinterest_clicks_proven": "0",
+      "pinterest_vol": "1544"
+    },
+    {
+      "keyword": "what to sell online",
+      "monthly_search_vol": "1300",
+      "competition": "0.4",
+      "trend_pct": "0",
+      "content_pillar": "Selling Online",
+      "maps_to_product": "Shopify Themes + Wix Websites",
+      "priority_tier": "P1 - Build first",
+      "score": "84",
+      "pinterest_clicks_proven": "0",
+      "pinterest_vol": "1984"
+    },
+    {
+      "keyword": "how to start an online boutique",
+      "monthly_search_vol": "1600",
+      "competition": "0.45",
+      "trend_pct": "0",
+      "content_pillar": "Selling Online",
+      "maps_to_product": "Shopify Themes",
+      "priority_tier": "P1 - Build first",
+      "score": "78",
+      "pinterest_clicks_proven": "0",
+      "pinterest_vol": "548"
     }
   ],
   "pinterest_agent": {

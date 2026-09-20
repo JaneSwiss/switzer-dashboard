@@ -784,5 +784,11 @@
     "stage": "serp_fetch",
     "keyword": "best shopify themes 2026 statistics data 2025 2026",
     "error": "HTTPSConnectionPool(host='api.valueserp.com', port=443): Read timed out. (read timeout=20)"
+  },
+  {
+    "date": "2026-09-20",
+    "stage": "serp_fetch",
+    "keyword": "small business ideas for women",
+    "error": "HTTPSConnectionPool(host='api.valueserp.com', port=443): Read timed out. (read timeout=20)"
   }
 ]
