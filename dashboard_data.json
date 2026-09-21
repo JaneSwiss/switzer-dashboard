@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-09-20",
+  "last_updated": "2026-09-21",
   "etsy_agent": {
     "status": "active",
     "last_run": "2026-05-05",
@@ -167,7 +167,7 @@
   },
   "blog_seo_agent": {
     "status": "active",
-    "last_run": "2026-05-06",
+    "last_run": "2026-09-21",
     "posts": [
       {
         "title": "Canva branding kit: how to build a professional brand on a budget",
