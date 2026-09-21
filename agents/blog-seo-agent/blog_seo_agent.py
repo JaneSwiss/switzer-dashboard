@@ -831,8 +831,21 @@ somewhere in the body — this is not optional when relevant candidates exist.
 "Relevant" means a reader following the link would land on a page that meaningfully
 extends what they just read — not just any page that shares a keyword.
 Spread the links across different sections rather than clustering them in one paragraph.
-Anchor text must be a natural phrase in the sentence, not the page title verbatim.
-Use the exact URL. Format: <a href="URL">anchor text</a>
+
+FORMAT: Use exactly this format for every crosslink:
+  <strong>anchor text [URL]</strong>
+
+Each crosslink MUST appear as a complete standalone sentence — never inserted inside an
+existing sentence or list item. Write a new sentence or short paragraph that introduces
+the link naturally. Good examples:
+  <p>For a full breakdown of each option, <strong>side business ideas for women [https://...]</strong> covers lower-commitment paths you can run alongside a job.</p>
+  <p>If you are still deciding on a niche, <strong>small business ideas for women [https://...]</strong> compares 12 specific options with startup costs and earning potential.</p>
+
+BAD examples (never do this):
+  earnings range $500-3,000/month <strong>side business ideas for women [URL]</strong>, $5,000+
+  build revenue faster than <strong>online business ideas for women [URL]</strong>es.
+  she can coach <strong>small business ideas for women [URL]</strong>s on hiring.
+
 If fewer than 2 of the pages below are genuinely relevant to this specific post, link
 to as many as genuinely fit (including zero) — never force a link to an unrelated page.
 
@@ -868,7 +881,7 @@ OUTPUT FORMAT:
 
 Return ONLY the blog post as plain text using the FORMATTING RULES above.
 No preamble. No "Here is the post:". No meta-commentary at the start or end.
-Include <a href> crosslinks inline where relevant.
+Include crosslinks in <strong>anchor text [URL]</strong> format as standalone sentences where relevant — never mid-sentence.
 Include [DALLE: ...] prompts inline where a screenshot would help.
 Start with the title in ALL CAPS on the first line.
 Use markdown bold (**), bold italic (***), and italic (*) exactly as specified.
@@ -1871,11 +1884,17 @@ def _assemble_html(title: str, post_html: str, image_prompts: str, image_paths: 
         )
     content = re.sub(r'\[DALLE:(.*?)\]', dalle_block, content, flags=re.DOTALL)
 
-    # Convert markdown links [text](url) to <a> — Claude is told to write raw <a> tags for
-    # crosslinks/CTAs, but occasionally writes markdown-style links instead. Without this,
-    # those render as literal visible "[text](url)" on the page - confirmed real bug on a
-    # real post's closing CTA. Runs before bold/italic so a bolded link's ** wrapper survives.
-    content = re.sub(r'\[([^\]]+)\]\((https?://[^\s)]+)\)', r'<a href="\2">\1</a>', content)
+    # Convert markdown links [text](url) to bold+URL format — Wix strips <a href> tags so
+    # crosslinks must be visible as <strong>text [url]</strong> for Jane to add manually.
+    content = re.sub(r'\[([^\]]+)\]\((https?://[^\s)]+)\)', r'<strong>\1 [\2]</strong>', content)
+
+    # Convert any remaining <a href="..."> crosslinks to bold+URL format (handles cases where
+    # the model writes raw <a> tags despite the prompt instruction).
+    def a_to_bold(m):
+        href = m.group(1)
+        text = re.sub(r'<[^>]+>', '', m.group(2)).strip()
+        return f'<strong>{text} [{href}]</strong>'
+    content = re.sub(r'<a\s+href="([^"]+)"[^>]*>(.*?)</a>', a_to_bold, content, flags=re.DOTALL)
 
     # Convert markdown bold-italic ***text*** to <strong><em>
     content = re.sub(r'\*\*\*(.*?)\*\*\*', r'<strong><em>\1</em></strong>', content)
