@@ -955,33 +955,30 @@ def write_blog_post(keyword_row: dict, competitors: list[dict]) -> str:
         angle_count = existing_angles.count("- Post:")
         print(f"  Found {angle_count} existing post(s) on similar topic — will avoid repeating their angles.")
 
-    # Scrape live blog for published post URLs — always current, no manual maintenance
+    # Build crosslink list from dashboard_data.json — covers all posts (published + drafts)
     published_posts_list = ""
     try:
-        print("  Fetching live blog posts for crosslinking...")
-        blog_resp = requests.get(
-            "https://www.switzertemplates.com/blog",
-            headers=FETCH_HEADERS,
-            timeout=15,
-        )
-        if blog_resp.status_code == 200:
-            from bs4 import BeautifulSoup as _BS
-            blog_soup = _BS(blog_resp.text, "html.parser")
-            live_posts = []
-            for a in blog_soup.find_all("a", href=True):
-                href = a["href"]
-                if "/post/" in href:
-                    full_url = href if href.startswith("http") else f"https://www.switzertemplates.com{href}"
-                    title = a.get_text(strip=True)
-                    if full_url not in [p["url"] for p in live_posts] and title:
-                        live_posts.append({"title": title, "url": full_url})
-            if live_posts:
-                published_posts_list = "\n".join(
-                    f'- {p["title"]} → {p["url"]}' for p in live_posts
-                )
-                print(f"  Found {len(live_posts)} published posts for crosslinking.")
+        import json as _json
+        dashboard_path = ROOT / "dashboard_data.json"
+        dashboard = _json.loads(dashboard_path.read_text(encoding="utf-8"))
+        posts_in_dashboard = dashboard.get("blog_seo_agent", {}).get("posts", [])
+        live_posts = []
+        for p in posts_in_dashboard:
+            kw = p.get("keyword", "")
+            title = p.get("title", "") or kw.title()
+            if not kw:
+                continue
+            slug = kw.lower().replace(" ", "-").replace("'", "").replace(",", "")
+            url = f"https://www.switzertemplates.com/post/{slug}"
+            if title and url not in [x["url"] for x in live_posts]:
+                live_posts.append({"title": title, "url": url})
+        if live_posts:
+            published_posts_list = "\n".join(
+                f'- {p["title"]} → {p["url"]}' for p in live_posts
+            )
+            print(f"  Found {len(live_posts)} posts for crosslinking (from dashboard).")
     except Exception as e:
-        # Fall back to static file if scrape fails
+        # Fall back to static file if dashboard read fails
         try:
             import json as _json
             if PUBLISHED_POSTS_FILE.exists():
@@ -989,7 +986,7 @@ def write_blog_post(keyword_row: dict, competitors: list[dict]) -> str:
                 published_posts_list = "\n".join(
                     f'- {p["title"]} → {p["url"]}' for p in posts
                 )
-                print(f"  Live scrape failed ({e}), using static fallback list.")
+                print(f"  Dashboard read failed ({e}), using static fallback list.")
         except Exception:
             pass
 
