@@ -1903,6 +1903,10 @@ def _assemble_html(title: str, post_html: str, image_prompts: str, image_paths: 
     # Convert markdown italic *text* to <em>
     content = re.sub(r'\*(.*?)\*', r'<em>\1</em>', content)
 
+    # Collapse double-nested <strong> tags produced when the model writes **[text](url)**
+    # (link conversion runs first, then bold conversion wraps the result again).
+    content = re.sub(r'<strong><strong>(.*?)</strong></strong>', r'<strong>\1</strong>', content, flags=re.DOTALL)
+
     safe_prompts = image_prompts.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
 
     # Build image block
