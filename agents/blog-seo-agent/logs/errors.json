@@ -1366,5 +1366,47 @@
     "stage": "image_generation",
     "keyword": "online-coaching-business",
     "error": "Cover prompt 3: Error code: 429 - {'error': {'message': 'You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.', 'type': 'insufficient_quota', 'param': None, 'code': 'credit_balance_exhausted'}}"
+  },
+  {
+    "date": "2026-09-30",
+    "stage": "image_generation",
+    "keyword": "online-coaching-business",
+    "error": "Inline prompt 1: Error code: 429 - {'error': {'message': 'You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.', 'type': 'insufficient_quota', 'param': None, 'code': 'credit_balance_exhausted'}}"
+  },
+  {
+    "date": "2026-09-30",
+    "stage": "image_generation",
+    "keyword": "online-coaching-business",
+    "error": "Inline prompt 2: Error code: 429 - {'error': {'message': 'You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.', 'type': 'insufficient_quota', 'param': None, 'code': 'credit_balance_exhausted'}}"
+  },
+  {
+    "date": "2026-09-30",
+    "stage": "image_generation",
+    "keyword": "online-coaching-business",
+    "error": "Inline prompt 3: Error code: 429 - {'error': {'message': 'You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.', 'type': 'insufficient_quota', 'param': None, 'code': 'credit_balance_exhausted'}}"
+  },
+  {
+    "date": "2026-09-30",
+    "stage": "image_generation",
+    "keyword": "online-coaching-business",
+    "error": "Inline prompt 4: Error code: 429 - {'error': {'message': 'You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.', 'type': 'insufficient_quota', 'param': None, 'code': 'credit_balance_exhausted'}}"
+  },
+  {
+    "date": "2026-09-30",
+    "stage": "image_generation",
+    "keyword": "online-coaching-business",
+    "error": "Cover prompt 1: Error code: 429 - {'error': {'message': 'You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.', 'type': 'insufficient_quota', 'param': None, 'code': 'credit_balance_exhausted'}}"
+  },
+  {
+    "date": "2026-09-30",
+    "stage": "image_generation",
+    "keyword": "online-coaching-business",
+    "error": "Cover prompt 2: Error code: 429 - {'error': {'message': 'You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.', 'type': 'insufficient_quota', 'param': None, 'code': 'credit_balance_exhausted'}}"
+  },
+  {
+    "date": "2026-09-30",
+    "stage": "image_generation",
+    "keyword": "online-coaching-business",
+    "error": "Cover prompt 3: Error code: 429 - {'error': {'message': 'You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.', 'type': 'insufficient_quota', 'param': None, 'code': 'credit_balance_exhausted'}}"
   }
 ]
