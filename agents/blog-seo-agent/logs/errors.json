@@ -1216,5 +1216,71 @@
     "stage": "image_generation",
     "keyword": "shopify-website-design-templates",
     "error": "Cover prompt 3: Error code: 429 - {'error': {'message': 'You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.', 'type': 'insufficient_quota', 'param': None, 'code': 'credit_balance_exhausted'}}"
+  },
+  {
+    "date": "2026-09-30",
+    "stage": "serp_fetch",
+    "keyword": "pinterest marketing strategy statistics data 2025 2026",
+    "error": "HTTPSConnectionPool(host='api.valueserp.com', port=443): Read timed out. (read timeout=20)"
+  },
+  {
+    "date": "2026-09-30",
+    "stage": "serp_fetch",
+    "keyword": "pinterest marketing strategy tips examples guide",
+    "error": "HTTPSConnectionPool(host='api.valueserp.com', port=443): Read timed out. (read timeout=20)"
+  },
+  {
+    "date": "2026-09-30",
+    "stage": "reddit_questions",
+    "keyword": "pinterest marketing strategy",
+    "error": "HTTPSConnectionPool(host='api.valueserp.com', port=443): Read timed out. (read timeout=20)"
+  },
+  {
+    "date": "2026-09-30",
+    "stage": "banned_words",
+    "keyword": "pinterest marketing strategy",
+    "error": "Banned words remain after revision: ['landscape'] title: []"
+  },
+  {
+    "date": "2026-09-30",
+    "stage": "image_generation",
+    "keyword": "pinterest-marketing-strategy",
+    "error": "Inline prompt 1: Error code: 429 - {'error': {'message': 'You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.', 'type': 'insufficient_quota', 'param': None, 'code': 'credit_balance_exhausted'}}"
+  },
+  {
+    "date": "2026-09-30",
+    "stage": "image_generation",
+    "keyword": "pinterest-marketing-strategy",
+    "error": "Inline prompt 2: Error code: 429 - {'error': {'message': 'You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.', 'type': 'insufficient_quota', 'param': None, 'code': 'credit_balance_exhausted'}}"
+  },
+  {
+    "date": "2026-09-30",
+    "stage": "image_generation",
+    "keyword": "pinterest-marketing-strategy",
+    "error": "Inline prompt 3: Error code: 429 - {'error': {'message': 'You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.', 'type': 'insufficient_quota', 'param': None, 'code': 'credit_balance_exhausted'}}"
+  },
+  {
+    "date": "2026-09-30",
+    "stage": "image_generation",
+    "keyword": "pinterest-marketing-strategy",
+    "error": "Inline prompt 4: Error code: 429 - {'error': {'message': 'You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.', 'type': 'insufficient_quota', 'param': None, 'code': 'credit_balance_exhausted'}}"
+  },
+  {
+    "date": "2026-09-30",
+    "stage": "image_generation",
+    "keyword": "pinterest-marketing-strategy",
+    "error": "Cover prompt 1: Error code: 429 - {'error': {'message': 'You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.', 'type': 'insufficient_quota', 'param': None, 'code': 'credit_balance_exhausted'}}"
+  },
+  {
+    "date": "2026-09-30",
+    "stage": "image_generation",
+    "keyword": "pinterest-marketing-strategy",
+    "error": "Cover prompt 2: Error code: 429 - {'error': {'message': 'You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.', 'type': 'insufficient_quota', 'param': None, 'code': 'credit_balance_exhausted'}}"
+  },
+  {
+    "date": "2026-09-30",
+    "stage": "image_generation",
+    "keyword": "pinterest-marketing-strategy",
+    "error": "Cover prompt 3: Error code: 429 - {'error': {'message': 'You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.', 'type': 'insufficient_quota', 'param': None, 'code': 'credit_balance_exhausted'}}"
   }
 ]

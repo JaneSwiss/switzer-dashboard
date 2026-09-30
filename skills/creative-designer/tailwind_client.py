@@ -4,10 +4,20 @@ import csv
 import os
 import json
 import requests
+from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
+from typing import Iterator
+
+try:
+    from zoneinfo import ZoneInfo
+except ImportError:
+    from backports.zoneinfo import ZoneInfo  # type: ignore
 
 
 BASE_URL = "https://api-v1.tailwind.ai/v1"
+
+_SYDNEY = ZoneInfo("Australia/Sydney")
+_SLOT_HOURS = [9, 13, 17, 20]  # 9am, 1pm, 5pm, 8pm Sydney time
 
 
 def _headers() -> dict:
@@ -72,6 +82,51 @@ def _resolve_board_id(account_id: str) -> str:
     )
 
 
+def _slot_sequence(after_utc: datetime) -> Iterator[datetime]:
+    """Yield future UTC datetimes, one per slot, cycling through _SLOT_HOURS in Sydney time."""
+    current_date = after_utc.astimezone(_SYDNEY).date()
+    while True:
+        for hour in _SLOT_HOURS:
+            slot_syd = datetime(
+                current_date.year, current_date.month, current_date.day,
+                hour, 0, 0, tzinfo=_SYDNEY,
+            )
+            slot_utc = slot_syd.astimezone(timezone.utc)
+            if slot_utc > after_utc:
+                yield slot_utc
+        current_date += timedelta(days=1)
+
+
+def _schedule_start(account_id: str) -> datetime:
+    """Return UTC datetime to begin scheduling from — after the latest already-scheduled post."""
+    now_utc = datetime.now(timezone.utc)
+    try:
+        resp = requests.get(
+            f"{BASE_URL}/accounts/{account_id}/posts",
+            headers=_headers(),
+            params={"status": "scheduled", "limit": 200},
+            timeout=10,
+        )
+        if resp.status_code == 200:
+            posts = resp.json().get("data", {}).get("posts", [])
+            latest = now_utc
+            for p in posts:
+                for key in ("sendAt", "send_at", "scheduledAt", "scheduled_at"):
+                    raw = p.get(key)
+                    if raw:
+                        try:
+                            dt = datetime.fromisoformat(str(raw).replace("Z", "+00:00"))
+                            if dt > latest:
+                                latest = dt
+                        except ValueError:
+                            pass
+                        break
+            return latest
+    except Exception:
+        pass
+    return now_utc
+
+
 def list_boards() -> list[dict]:
     """
     Utility — returns all own (non-collaborator) boards, sorted by name.
@@ -83,14 +138,18 @@ def list_boards() -> list[dict]:
     return sorted(own, key=lambda b: b.get("name", "").lower())
 
 
-def submit_to_tailwind(approved_pins: list[dict]) -> list[dict]:
+def submit_to_tailwind(approved_pins: list[dict], schedule: bool = True) -> list[dict]:
     """
-    Create a Tailwind draft for each approved pin via POST /accounts/{id}/posts.
+    Submit approved pins to Tailwind via POST /accounts/{id}/posts.
 
-    Omits sendAt so pins land as drafts — schedule them inside Tailwind.
+    When schedule=True (default), each pin is assigned a future sendAt timestamp:
+    slots at 9am / 1pm / 5pm / 8pm Sydney time, starting after the latest already-
+    scheduled post, one pin per slot. Pins go live automatically — no manual scheduling.
+
+    When schedule=False, omits sendAt and pins land as unscheduled drafts.
+
     Requires TAILWIND_API_KEY. Uses TAILWIND_BOARD_ID or resolves from TAILWIND_BOARD_NAME.
-
-    Returns list of {"index", "success", "message", "mode"} dicts.
+    Returns list of {"index", "success", "message", "mode", "send_at"} dicts.
     """
     results = []
 
@@ -111,6 +170,9 @@ def submit_to_tailwind(approved_pins: list[dict]) -> list[dict]:
              "message": str(e), "mode": "queue"}
             for p in approved_pins
         ]
+
+    # Build slot iterator starting after the last already-scheduled post
+    slots = _slot_sequence(_schedule_start(account_id)) if schedule else None
 
     for pin in approved_pins:
         idx = pin.get("index", "?")
@@ -136,7 +198,12 @@ def submit_to_tailwind(approved_pins: list[dict]) -> list[dict]:
         }
         if board_id:
             payload["boardId"] = board_id
-        # sendAt intentionally omitted → draft
+
+        send_at_str = None
+        if slots is not None:
+            slot_utc = next(slots)
+            send_at_str = slot_utc.strftime("%Y-%m-%dT%H:%M:%SZ")
+            payload["sendAt"] = send_at_str
 
         try:
             resp = requests.post(
@@ -147,10 +214,16 @@ def submit_to_tailwind(approved_pins: list[dict]) -> list[dict]:
             )
             if resp.status_code in (200, 201):
                 post_id = resp.json().get("data", {}).get("post", {}).get("id", "?")
+                mode = "scheduled" if send_at_str else "draft"
+                msg = (
+                    f"Scheduled for {send_at_str} (post ID: {post_id})"
+                    if send_at_str
+                    else f"Draft created (post ID: {post_id})"
+                )
                 results.append({
                     "index": idx, "success": True,
-                    "message": f"Draft created in Tailwind (post ID: {post_id})",
-                    "mode": "api",
+                    "message": msg, "mode": mode,
+                    "send_at": send_at_str,
                 })
             else:
                 results.append({
