@@ -1408,5 +1408,71 @@
     "stage": "image_generation",
     "keyword": "online-coaching-business",
     "error": "Cover prompt 3: Error code: 429 - {'error': {'message': 'You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.', 'type': 'insufficient_quota', 'param': None, 'code': 'credit_balance_exhausted'}}"
+  },
+  {
+    "date": "2026-09-30",
+    "stage": "serp_fetch",
+    "keyword": "selling on pinterest",
+    "error": "HTTPSConnectionPool(host='api.valueserp.com', port=443): Read timed out. (read timeout=20)"
+  },
+  {
+    "date": "2026-09-30",
+    "stage": "serp_fetch",
+    "keyword": "selling on pinterest statistics data 2025 2026",
+    "error": "HTTPSConnectionPool(host='api.valueserp.com', port=443): Read timed out. (read timeout=20)"
+  },
+  {
+    "date": "2026-09-30",
+    "stage": "serp_fetch",
+    "keyword": "selling on pinterest tips examples guide",
+    "error": "HTTPSConnectionPool(host='api.valueserp.com', port=443): Read timed out. (read timeout=20)"
+  },
+  {
+    "date": "2026-09-30",
+    "stage": "reddit_questions",
+    "keyword": "selling on pinterest",
+    "error": "HTTPSConnectionPool(host='api.valueserp.com', port=443): Read timed out. (read timeout=20)"
+  },
+  {
+    "date": "2026-09-30",
+    "stage": "image_generation",
+    "keyword": "selling-on-pinterest",
+    "error": "Inline prompt 1: Error code: 429 - {'error': {'message': 'You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.', 'type': 'insufficient_quota', 'param': None, 'code': 'credit_balance_exhausted'}}"
+  },
+  {
+    "date": "2026-09-30",
+    "stage": "image_generation",
+    "keyword": "selling-on-pinterest",
+    "error": "Inline prompt 2: Error code: 429 - {'error': {'message': 'You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.', 'type': 'insufficient_quota', 'param': None, 'code': 'credit_balance_exhausted'}}"
+  },
+  {
+    "date": "2026-09-30",
+    "stage": "image_generation",
+    "keyword": "selling-on-pinterest",
+    "error": "Inline prompt 3: Error code: 429 - {'error': {'message': 'You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.', 'type': 'insufficient_quota', 'param': None, 'code': 'credit_balance_exhausted'}}"
+  },
+  {
+    "date": "2026-09-30",
+    "stage": "image_generation",
+    "keyword": "selling-on-pinterest",
+    "error": "Inline prompt 4: Error code: 429 - {'error': {'message': 'You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.', 'type': 'insufficient_quota', 'param': None, 'code': 'credit_balance_exhausted'}}"
+  },
+  {
+    "date": "2026-09-30",
+    "stage": "image_generation",
+    "keyword": "selling-on-pinterest",
+    "error": "Cover prompt 1: Error code: 429 - {'error': {'message': 'You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.', 'type': 'insufficient_quota', 'param': None, 'code': 'credit_balance_exhausted'}}"
+  },
+  {
+    "date": "2026-09-30",
+    "stage": "image_generation",
+    "keyword": "selling-on-pinterest",
+    "error": "Cover prompt 2: Error code: 429 - {'error': {'message': 'You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.', 'type': 'insufficient_quota', 'param': None, 'code': 'credit_balance_exhausted'}}"
+  },
+  {
+    "date": "2026-09-30",
+    "stage": "image_generation",
+    "keyword": "selling-on-pinterest",
+    "error": "Cover prompt 3: Error code: 429 - {'error': {'message': 'You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.', 'type': 'insufficient_quota', 'param': None, 'code': 'credit_balance_exhausted'}}"
   }
 ]
