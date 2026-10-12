@@ -20,6 +20,7 @@ One-time setup (add to .env):
 
 import os
 import sys
+import time
 from pathlib import Path
 
 import requests
@@ -199,6 +200,64 @@ def convert_html_to_ricos(body_html: str) -> dict:
     return {**(document_meta or {}), "nodes": merged_nodes}
 
 
+GH_IMAGES_BASE = "https://janeswiss.github.io/switzer-dashboard/posts/images"
+
+
+def import_cover_to_wix(cover_url: str, display_name: str) -> "dict | None":
+    """Import an external cover image URL into Wix Media Manager.
+    Returns {id, url} on success, None on failure."""
+    resp = requests.post(
+        f"{WIX_API_BASE}/site-media/v1/files/import",
+        headers=_headers(),
+        json={
+            "url": cover_url,
+            "mimeType": "image/jpeg",
+            "displayName": display_name,
+            "parentFolderId": "visitor-uploads",
+        },
+        timeout=30,
+    )
+    if not resp.ok:
+        print(f"  Cover import failed {resp.status_code}: {resp.text[:200]}")
+        return None
+    f = resp.json().get("file", {})
+    # Poll until READY (usually instant, max 10s)
+    file_id = f.get("id")
+    for _ in range(5):
+        if f.get("operationStatus") == "READY":
+            break
+        time.sleep(2)
+        sr = requests.get(f"{WIX_API_BASE}/site-media/v1/files/{file_id}", headers=_headers(), timeout=15)
+        f = sr.json().get("file", {})
+    return {"id": file_id, "url": f.get("url", "")}
+
+
+def set_cover_image(draft_id: str, slug: str, cover_filename: str = "cover-1.jpg") -> bool:
+    """Import a cover image from GitHub Pages and set it as the draft post cover image."""
+    cover_url = f"{GH_IMAGES_BASE}/{slug}/{cover_filename}"
+    display_name = f"{slug}-cover.jpg"
+    print(f"  Importing cover image for {slug}...")
+    media = import_cover_to_wix(cover_url, display_name)
+    if not media or not media.get("id"):
+        print(f"  Could not import cover image — skipping.")
+        return False
+    resp = requests.patch(
+        f"{WIX_API_BASE}/blog/v3/draft-posts/{draft_id}",
+        headers=_headers(),
+        json={"draftPost": {"id": draft_id, "media": {
+            "custom": True,
+            "wixMedia": {"image": {"id": media["id"], "url": media["url"]}},
+        }}},
+        timeout=30,
+    )
+    if not resp.ok:
+        print(f"  Cover image PATCH failed {resp.status_code}: {resp.text[:200]}")
+        return False
+    displayed = resp.json().get("draftPost", {}).get("media", {}).get("displayed", False)
+    print(f"  Cover image set — displayed={displayed}")
+    return True
+
+
 def create_draft_post(title: str, rich_content: dict) -> dict:
     payload = {
         "draftPost": {
@@ -256,6 +315,14 @@ def publish(slug: str, draft_id: str = None) -> None:
         result = create_draft_post(title, rich_content)
         draft_id = result.get("draftPost", {}).get("id", "unknown")
         print(f"\nDraft created: {draft_id}")
+
+    img_dir = ROOT / "posts" / "images" / slug
+    covers = sorted(img_dir.glob("cover-*.jpg")) if img_dir.exists() else []
+    if covers:
+        set_cover_image(draft_id, slug, cover_filename=covers[0].name)
+    else:
+        print("  No cover image found — skipping cover.")
+
     print(f"Open your Wix Blog dashboard > Drafts to review and publish '{title}'.")
 
 
