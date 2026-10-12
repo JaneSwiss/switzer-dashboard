@@ -808,7 +808,7 @@ CTA MAPPING — apply the correct CTA based on the post topic. Use the exact URL
 including the tracking parameters on the end — do not shorten or drop them:
 - Post about Pinterest (marketing, strategy, services, management, agency, scheduling, analytics, growth, affiliate):
   → Mid-post CTA AND conclusion CTA must both link to https://pinterest.switzertemplates.com/?utm_source=blog&utm_medium=content&utm_campaign={keyword_row['_slug']}
-  → Present it as Jane's done-for-you Pinterest marketing service ($699 strategy / $1,299 full setup)
+  → Present it as a done-for-you Pinterest marketing service ($699 strategy / $1,299 full setup)
 - Post about Wix websites or website templates:
   → CTA to https://www.switzertemplates.com/premade-wix-website-templates-for-sale?utm_source=blog&utm_medium=content&utm_campaign={keyword_row['_slug']}
 - Post about branding or branding kits:
@@ -819,10 +819,10 @@ including the tracking parameters on the end — do not shorten or drop them:
   → CTA to https://www.switzertemplates.com/business-template-bundles?utm_source=blog&utm_medium=content&utm_campaign={keyword_row['_slug']}
 - Post about Shopify or choosing an ecommerce platform/theme:
   → CTA to https://www.switzertemplates.com/shopify-theme-templates?utm_source=blog&utm_medium=content&utm_campaign={keyword_row['_slug']}
-  Present as Jane's premade Shopify themes — full luxury ecommerce website designs done
-  for you, not just a basic framework, with a mega menu, slide-out cart drawer, free
-  shipping progress bar, and cart upsell suggestions built in. Never state the exact price
-  (it changes) — "affordable"/"budget-friendly" is fine.
+  Present as premade Shopify themes — full luxury ecommerce website designs, not just a
+  basic framework, with a mega menu, slide-out cart drawer, free shipping progress bar,
+  and cart upsell suggestions built in. Never state the exact price (it changes) —
+  "affordable"/"budget-friendly" is fine.
 
 CROSSLINKING — REQUIRED:
 These are the pages currently live on switzertemplates.com. If 2 or more of them are
@@ -1675,9 +1675,9 @@ def generate_inline_images(post_html: str, slug: str) -> "tuple[str, list[str], 
             )
             print(f"  Saved: {img_filename}")
         except Exception as e:
-            print(f"  Inline image {idx} failed: {e} — leaving prompt text as fallback")
+            print(f"  Inline image {idx} failed: {e} — removing placeholder")
             log_error("image_generation", slug, f"Inline prompt {idx}: {str(e)}")
-            result_parts.append(m.group(0))  # keep the original [DALLE: ...] marker
+            result_parts.append("")  # drop silently — a missing image is better than prompt text in the post
 
     result_parts.append(post_html[last_end:])
     return "".join(result_parts), image_paths, total_cost
@@ -1872,17 +1872,9 @@ def _assemble_html(title: str, post_html: str, image_prompts: str, image_paths: 
                     wrapped.append(f'<p>{sub}</p>')
     content = '\n'.join(wrapped)
 
-    # Convert [DALLE: ...] blocks into styled prompt cards
-    def dalle_block(m):
-        prompt_text = m.group(1).strip().replace('<','&lt;').replace('>','&gt;')
-        return (
-            '<div style="background:#f0f4ff;border:1.5px solid #c5d3f5;border-radius:8px;'
-            'padding:1rem 1.25rem;margin:1.5rem 0;font-family:\'Courier New\',monospace;font-size:12px;line-height:1.6;color:#333;">'
-            '<p style="font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;'
-            'color:#6b7bb5;margin:0 0 0.5rem;font-family:Arial,sans-serif;">DALL-E / ChatGPT image prompt</p>'
-            f'<p style="margin:0;">{prompt_text}</p></div>'
-        )
-    content = re.sub(r'\[DALLE:(.*?)\]', dalle_block, content, flags=re.DOTALL)
+    # Remove any [DALLE: ...] markers that inline image generation didn't replace —
+    # silently drop them; a missing image is better than prompt text showing in the post.
+    content = re.sub(r'\[DALLE:.*?\]', '', content, flags=re.DOTALL)
 
     # Convert markdown links [text](url) to bold+URL format — Wix strips <a href> tags so
     # crosslinks must be visible as <strong>text [url]</strong> for Jane to add manually.
