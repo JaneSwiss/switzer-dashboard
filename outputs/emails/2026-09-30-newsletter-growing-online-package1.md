@@ -11,15 +11,13 @@ PREVIEW TEXT: Four fixes you can make this week, plus the one that pays off all 
 
 BODY:
 
-Growing a business online can feel like a lot of work for not much back.
+There's probably a marketing job on your to-do list that's been sitting there since the start of the year. Maybe it's sorting out your website, starting an email list or finally doing something with Pinterest. It keeps getting pushed back because there's always something more urgent, and it's hard to tell which of those jobs would actually bring in more sales.
 
-You post, you update the website, you try whatever everyone says is working right now, and the sales still come in unevenly. Some weeks are great, then it goes quiet and you're not quite sure why.
-
-Usually there are a few small gaps quietly leaking traffic and sales, and they're easy to miss when you're the one running everything. Here are four that come up again and again, with a fix for each one you can do this week.
+So with a few months of 2026 left, here are four small fixes worth doing first. You can do each one this week, and together they close the gaps that quietly leak traffic and sales.
 
 **1. Your words don't match what your customers search for**
 
-It's easy to describe your business as "elevated brand design" when your customer is typing "branding kit for my candle business". If the words don't match, they won't find you. And if they do, it won't feel like it's for them.
+It's easy to describe what you do in your own words. A nutritionist might write "holistic wellness support" while the people they want to help are typing "how to stop sugar cravings". A skincare brand might talk about "clean, results-driven formulas" while its customers search "moisturiser for sensitive skin". If the words don't match, people won't find you. And if they do, it won't feel like it's for them.
 
 The fix: go through your reviews, DMs and customer emails and copy out the exact phrases people use to describe their problem or what they bought. Use those phrases in your product titles, page headings and pin titles.
 
@@ -27,23 +25,25 @@ The fix: go through your reviews, DMs and customer emails and copy out the exact
 
 Open your website stats (Wix, Shopify and Squarespace all show this) and find your three most-visited pages. Often at least one of them is a blog post or an about page that simply ends. People read it, like it and leave.
 
-The fix: add one clear next step to the bottom of each page - a product link, a free download or a booking button, whichever fits what that reader wants next.
+The fix: add one clear next step to the bottom of each page - a product link, a booking button or an email sign-up form. If you're not sure which, go with the sign-up form.
+
+Most people aren't ready to buy the first time they find you, and an email list is how you stay in touch until they are. Every subscriber is someone you can reach again with a new product, an open spot in your calendar or a seasonal offer, and because they've already shown interest in what you do, it's one of the most reliable ways to grow. (You're reading this because you're on mine.)
+
+To get people signing up, give them a good reason, like a beginner's yoga guide from a yoga teacher, 10% off a first order from a candle shop or a free budgeting workbook from a money coach. If you're starting from scratch, [how to start and grow an email list for free](https://www.switzertemplates.com/post/how-to-start-email-list-for-free) walks you through the setup, and [10 lead magnet ideas to grow your email list](https://www.switzertemplates.com/post/lead-magnet-ideas-to-grow-email-list) will help you choose your freebie.
 
 **3. Your seasonal content goes up too late**
 
 People on Pinterest plan ahead. They search for gift ideas, new-year goals and fresh starts weeks before they need them, so content that goes up the week of shows up after most people have already started looking.
 
-The fix: Christmas is less than three months away, so if you sell products, your gift content should be going up now. If you sell services, new-year content (planning, a fresh look for the business, getting organised for 2027) isn't far behind. As a rule, get seasonal pins live at least 6-8 weeks before the date.
+The fix: Christmas is less than three months away, so if you sell products, your gift content should be going up now. If you sell services, new-year content (goal setting, healthy habits, getting organised for 2027) isn't far behind. As a rule, get seasonal pins live at least 6-8 weeks before the date.
 
-**4. You're guessing what to create**
+**4. You haven't given Pinterest a proper go yet**
 
-This one wastes the most time. You make something, it doesn't land, and you can't tell whether it was the topic, the design or the timing.
+Pinterest is a visual search engine. People go there to plan things (a kitchen makeover, a wedding, a new skincare routine, a healthier new year) and they type in exactly what they're looking for. When your pin matches that search, it can send them straight to your website or shop.
 
-The fix: search your main keyword on Pinterest and study the top 10 pins. What do the images look like? What does the text on the pin promise? Where do they link to? Whatever they have in common is your brief for the next pin you make.
+More people are using it than ever. In August, Pinterest reported a record 640 million monthly active users, up 11% on last year and its 11th quarter in a row of double-digit growth.
 
----
-
-That last fix works, but doing it properly takes hours. One keyword is a good start. Doing it for every keyword in your niche, plus your competitors, plus the gaps nobody is filling yet, is a proper research project - and it's the part most business owners never get to.
+The tricky part is knowing what to pin. That comes down to research: which keywords people in your niche are searching for, which pins already rank for them, what your competitors are doing and where the gaps are. Doing that properly takes hours, and it's the part most business owners never get to.
 
 It's exactly what I do in Package 1.
 
@@ -75,6 +75,15 @@ Segment: Full list (21,000 subscribers)
 CTA button label: See what's in Package 1
 CTA link: https://pinterest.switzertemplates.com/#pricing
 
+IN-TEXT LINKS (fix 2) - hyperlink these phrases in Flodesk:
+- "how to start and grow an email list for free" -> https://www.switzertemplates.com/post/how-to-start-email-list-for-free
+- "10 lead magnet ideas to grow your email list" -> https://www.switzertemplates.com/post/lead-magnet-ideas-to-grow-email-list
+
+STAT SOURCE (fix 4): 640 million MAUs, +11% year over year, 11th consecutive quarter of
+double-digit user growth - Pinterest Q2 2026 results press release, 4 August 2026
+(https://www.sec.gov/Archives/edgar/data/0001506293/000150629326000102/q2-26xpressrelease.htm).
+If Q3 2026 results are out before you send (usually early November), update the number.
+
 TIMING: Fix 3 mentions Christmas being "less than three months away" - send by mid-October
 so that line stays accurate.
 
@@ -85,16 +94,16 @@ in the email, change the price line to "Package 1 is $699 (usually $949)...".
 
 SUBJECT LINE NOTES:
 
-A - "Growing online feels harder than it should" (recommended)
-Names the feeling the whole email is about. Warm, relatable, doesn't read as a sales email -
-fits a value-first newsletter to a list of past buyers.
+A - "Growing online feels harder than it should"
+Warm and relatable, doesn't read as a sales email. Written for the earlier intro - less of a
+match now that the email opens on the to-do list.
 
 B - "4 small fixes for a business that feels stuck"
 Promises something concrete and quick. Best if you want the practical tips to pull the open.
 
-C - "What to fix before 2027 (while there's time)"
-Leans into the before-2027 angle and gives a light sense of timing without fake urgency.
-Good A/B test against A.
+C - "What to fix before 2027 (while there's time)" (recommended)
+Matches the intro (the to-do list and "a few months of 2026 left") and the before-2027 pitch,
+so the email delivers exactly what the subject promises. Light timing, no fake urgency.
 
 D - "Why your hard work isn't turning into sales"
 The most direct pain point. Slightly sharper - works well for anyone who feels busy but stuck.

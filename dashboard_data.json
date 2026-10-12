@@ -735,6 +735,15 @@
         "date": "2026-09-30",
         "url": "https://janeswiss.github.io/switzer-dashboard/posts/selling-on-pinterest.html",
         "source": "Jane uploaded"
+      },
+      {
+        "title": "COACHING WEBSITE DESIGN: THE COMPLETE GUIDE TO TURNING VISITORS INTO BOOKED CLIENTS",
+        "keyword": "coaching website design",
+        "written": true,
+        "published": false,
+        "date": "2026-10-12",
+        "url": "https://janeswiss.github.io/switzer-dashboard/posts/coaching-website-design.html",
+        "source": "Jane uploaded"
       }
     ],
     "pending_tasks": [
@@ -3173,7 +3182,7 @@
     ]
   },
   "email_agent": {
-    "last_run": "2026-05-26",
+    "last_run": "2026-09-30",
     "research_done": true,
     "principles_file": "context/email-copywriting-principles.md",
     "emails": [
@@ -3227,6 +3236,13 @@
         "date_written": "2026-06-26",
         "filename": "2026-06-26-case-study-pinterest.md",
         "sent": true
+      },
+      {
+        "type": "Newsletter - growing online struggles + tips (soft Package 1 pitch)",
+        "subject": "Growing online feels harder than it should",
+        "date_written": "2026-09-30",
+        "filename": "2026-09-30-newsletter-growing-online-package1.md",
+        "sent": false
       }
     ]
   },
