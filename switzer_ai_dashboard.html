@@ -237,8 +237,8 @@
     </div>
     <p style="font-size:13px;color:var(--text2);margin-bottom:1rem;">Agent wrote = drafted by Blog SEO agent. Published by you = tick when you publish to Wix. Syncs across all devices.</p>
     <div class="table-wrap"><table>
-      <thead><tr><th style="min-width:200px;">Post title</th><th>Target keyword</th><th class="c">Agent wrote</th><th class="c">Published by you</th><th class="c">Date</th><th class="c">Status</th><th class="c">Source</th></tr></thead>
-      <tbody id="blog-tbody"><tr><td colspan="7" class="empty">Loading...</td></tr></tbody>
+      <thead><tr><th style="min-width:200px;">Post title</th><th>Target keyword</th><th class="c">Agent wrote</th><th class="c">Published by you</th><th class="c">Date</th><th class="c">Status</th><th class="c">Source</th><th class="c">Wix draft</th><th class="c">Images</th></tr></thead>
+      <tbody id="blog-tbody"><tr><td colspan="9" class="empty">Loading...</td></tr></tbody>
     </table></div>
   </div>
   <div class="card">
@@ -987,7 +987,7 @@ function renderBlog(){
   const pub=allPosts.filter(p=>p.published).length, draft=allPosts.filter(p=>p.written&&!p.published).length;
   document.getElementById('blog-badge').textContent=`${pub} published · ${draft} ready`;
   const tbody=document.getElementById('blog-tbody'); tbody.innerHTML='';
-  if(!allPosts.length){ tbody.innerHTML='<tr><td colspan="7" class="empty">No posts yet.</td></tr>'; renderBlogPagination(0,0); return; }
+  if(!allPosts.length){ tbody.innerHTML='<tr><td colspan="9" class="empty">No posts yet.</td></tr>'; renderBlogPagination(0,0); return; }
   // Sort newest first by date so new posts always appear on page 1
   const posts=[...allPosts].sort((a,b)=>(b.date||'').localeCompare(a.date||''));
   const totalPages=Math.ceil(posts.length/BLOG_PER_PAGE);
@@ -1006,7 +1006,13 @@ function renderBlog(){
     const titleHtml=post.url
       ?`<a href="${post.url}" target="_blank" style="${titleStyle}">${post.title}<i class="ti ti-external-link" style="font-size:11px;margin-left:4px;vertical-align:1px;opacity:0.5;"></i></a>`
       :`<span style="${titleStyle}">${post.title}</span>`;
-    tr.innerHTML=`<td>${titleHtml}</td><td style="font-size:12px;color:var(--text2);">${post.keyword||'—'}</td><td class="c"><span class="badge" style="background:${wBg};color:${wCol};">${post.written?'Done':'Pending'}</span></td><td class="c"><input type="checkbox" ${post.published?'checked':''} ${!post.written?'disabled':''} onchange="togglePub(${i},this.checked)" /></td><td class="c" style="font-size:12px;color:var(--text3);">${post.date||'—'}</td><td class="c"><span class="badge" style="background:${sBg};color:${sCol};">${status}</span></td><td class="c">${srcHtml}</td>`;
+    const wixCell=post.wix_draft_id
+      ?`<a href="https://manage.wix.com/dashboard/blog/posts" target="_blank" title="Draft ID: ${post.wix_draft_id}" style="display:inline-flex;align-items:center;gap:3px;font-size:11px;font-weight:600;color:var(--choc);text-decoration:none;border:1px solid var(--choc);border-radius:4px;padding:3px 7px;white-space:nowrap;"><i class="ti ti-edit" style="font-size:11px;"></i>Draft</a>`
+      :`<span style="color:var(--text3);font-size:12px;">—</span>`;
+    const imgCell=post.images_url
+      ?`<a href="${post.images_url}" target="_blank" style="display:inline-flex;align-items:center;gap:3px;font-size:11px;font-weight:600;color:var(--teal-text);text-decoration:none;border:1px solid var(--teal-mid);border-radius:4px;padding:3px 7px;white-space:nowrap;"><i class="ti ti-photo" style="font-size:11px;"></i>Images</a>`
+      :`<span style="color:var(--text3);font-size:12px;">—</span>`;
+    tr.innerHTML=`<td>${titleHtml}</td><td style="font-size:12px;color:var(--text2);">${post.keyword||'—'}</td><td class="c"><span class="badge" style="background:${wBg};color:${wCol};">${post.written?'Done':'Pending'}</span></td><td class="c"><input type="checkbox" ${post.published?'checked':''} ${!post.written?'disabled':''} onchange="togglePub(${i},this.checked)" /></td><td class="c" style="font-size:12px;color:var(--text3);">${post.date||'—'}</td><td class="c"><span class="badge" style="background:${sBg};color:${sCol};">${status}</span></td><td class="c">${srcHtml}</td><td class="c">${wixCell}</td><td class="c">${imgCell}</td>`;
     tbody.appendChild(tr);
   });
   renderBlogPagination(posts.length, totalPages);
