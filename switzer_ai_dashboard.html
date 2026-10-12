@@ -1006,8 +1006,9 @@ function renderBlog(){
     const titleHtml=post.url
       ?`<a href="${post.url}" target="_blank" style="${titleStyle}">${post.title}<i class="ti ti-external-link" style="font-size:11px;margin-left:4px;vertical-align:1px;opacity:0.5;"></i></a>`
       :`<span style="${titleStyle}">${post.title}</span>`;
+    const WIX_SITE='5da8c553-1983-4b5f-935f-6fb32d2bd299';
     const wixCell=post.wix_draft_id
-      ?`<a href="https://manage.wix.com/dashboard/blog/posts" target="_blank" title="Draft ID: ${post.wix_draft_id}" style="display:inline-flex;align-items:center;gap:3px;font-size:11px;font-weight:600;color:var(--choc);text-decoration:none;border:1px solid var(--choc);border-radius:4px;padding:3px 7px;white-space:nowrap;"><i class="ti ti-edit" style="font-size:11px;"></i>Draft</a>`
+      ?`<a href="https://manage.wix.com/dashboard/${WIX_SITE}/blog/posts/${post.wix_draft_id}/edit" target="_blank" style="display:inline-flex;align-items:center;gap:3px;font-size:11px;font-weight:600;color:var(--choc);text-decoration:none;border:1px solid var(--choc);border-radius:4px;padding:3px 7px;white-space:nowrap;"><i class="ti ti-edit" style="font-size:11px;"></i>Edit draft</a>`
       :`<span style="color:var(--text3);font-size:12px;">—</span>`;
     const imgCell=post.images_url
       ?`<a href="${post.images_url}" target="_blank" style="display:inline-flex;align-items:center;gap:3px;font-size:11px;font-weight:600;color:var(--teal-text);text-decoration:none;border:1px solid var(--teal-mid);border-radius:4px;padding:3px 7px;white-space:nowrap;"><i class="ti ti-photo" style="font-size:11px;"></i>Images</a>`
